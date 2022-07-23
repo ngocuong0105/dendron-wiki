@@ -106,3 +106,19 @@ publishing:
         editViewMode: tree
     enablePrettyLinks: true
     theme: dark
+site:
+    copyAssets: true
+    siteHierarchies:
+        - root
+    siteRootDir: docs
+    siteUrl: 'https://ngocuong0105.github.io'
+    assetsPrefix: /dendron-wiki
+    usePrettyRefs: true
+    title: Dendron
+    description: Personal knowledge space
+    siteLastModified: true
+    gh_edit_branch: main
+    duplicateNoteBehavior:
+        action: useVault
+        payload:
+            - vault
