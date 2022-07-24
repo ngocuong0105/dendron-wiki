@@ -24,6 +24,8 @@ I manged to be in top 2% with 2000+ rating, but in codeforces I would be blown o
 # Plans for the future
 Ideally I would become a descent competitive programmer by 1-2 years. Need to:
 - do more leetcode competitions
+- learn more advanced topics in CLRS
+- take the MIT advance courses for algorithms and data structures
 - learn C++
 - start codeforces
 - join Google/Facebook coding jams
