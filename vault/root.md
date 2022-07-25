@@ -1,10 +1,7 @@
 ---
 id: wn8PE1RhG0znK1alrGFYv
 title: Root
-desc: ''
-updated: 1658753294863
+desc: 'Jivota e bolka i zadachi...'
+updated: 1658754525754
 created: 1631901573363
 ---
-# Jivota e bolka i zadachi...
-
-[[engineering]],[[interviews]],[[math]]
