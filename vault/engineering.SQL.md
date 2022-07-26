@@ -2,20 +2,20 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1658838012642
+updated: 1658838831781
 created: 1658698294975
 ---
 
 Most of my SQL knowledge is from [Stanford lectures](https://www.youtube.com/watch?v=Yceqbp_DKbA&list=PL9ysvtVnryGpnIj9rcIqNDxakUn6v72Hm&index=103) + leetcode.
 # Keywords
-relational algebra, relational data model, relational database, DBMS (database management system), PostgreSQL, MySQL, declarative, power of set theory, projection, persistent data (outlives program), schema (type) vs data(variables), DDL (data definition language) used to set up schema, DML (data manipulation language = query language), database = set of named relations, relation = table, columns = attributes of relation, rows = tuple, schema = structural description of relations in database, ACID properties, select = project operator, cross product, join, inner, outer, left, right, union, join = cross product + where, CTE = common table expression, subquery, normalization, denormalization, sharding, shards
+relational algebra, relational data model, relational database, DBMS (database management system), PostgreSQL, MySQL, declarative, power of set theory, projection, persistent data (outlives program), schema (type) vs data(variables), DDL (data definition language) used to set up schema, DML (data manipulation language = query language), database = set of named relations, relation = table, columns = attributes of relation, rows = tuple, schema = structural description of relations in database, ACID properties, select = project operator, cross product, join, inner, outer, left, right, union, join = cross product + where, CTE = common table expression, subquery, normalization, denormalization, sharding, shards, transactions
 
 - SQL is declarative - you say "what" you want but not how you want it
 
 # Code snippets
 
 - join
-```
+```sql
 select *
 from table1 t1
 left join table2 t2
@@ -27,7 +27,7 @@ left join t2 using(product_id)
 ```
 
 - no full outer join in MySQL. Emulate it by:
-```
+```sql
 SELECT * FROM t1
 LEFT JOIN t2 ON t1.id = t2.id
 UNION
@@ -42,7 +42,7 @@ join on t1.id = t2.id-1
 - **join is just a cross product with where statements**
 
 - conditional statement case when else end
-```
+```sql
 select
 (case
     when condition1 then result1
@@ -54,13 +54,13 @@ from table
 ```
 
 - if conditional statement
-```
+```sql
 select if(condition, true_val, false_val) as field
 from table
 ```
 
 - least, greatest to take min,max of a row [leetcode](https://leetcode.com/problems/number-of-calls-between-two-persons/)
-```
+```sql
 select least(from_id,to_id) as person1, greatest(from_id,to_id) as person2,
         count(*) as call_count, sum(duration) as total_duration
 from calls
@@ -72,7 +72,7 @@ group by person1,person2
 - window question [leetcode](https://leetcode.com/problems/biggest-window-between-visits/)
 
 - date operations
-```
+```sql
 select datediff(date1,date2) as diff,
         month(date1) as month,
         date_add('2018-05-01',INTERVAL 1 DAY) as next_day,
@@ -85,14 +85,14 @@ select datediff(date1,date2) as diff,
 ```
 
 - subquery in select statement example [leetcode](https://leetcode.com/problems/percentage-of-users-attended-a-contest/)
-```
+```sql
 select contest_id, round(count(*)/(select count(*) from users)*100,2) as percentage
 from register
 group by contest_id
 order by percentage desc, contest_id asc
 ```
 - where clauses
-```
+```sql
 where field in ('string', 'string1')
 where a = 6 or a = 9
 where low < a and a < high
@@ -107,29 +107,29 @@ MySQL uses three-valued logic -- TRUE, FALSE and UNKNOWN. Anything compared to N
 
 - filling in null values - use the IS operator
 
-```
+```sql
 case
 when field is null then 0 # field = 0 would not work
 else field end
 ```
 
-```
+```sql
 IFNULL(field, 0) AS field
 ```
 
 - delete
-```
+```sql
 DELETE FROM table_name WHERE condition;
 ```
 
 - substring
-```
+```sql
  SELECT SUBSTRING('SQL Tutorial', 1, 3) AS ExtractString;
 
 ```
 
 - union, union all
-```
+```sql
 t1
 union
 t2 # duplicates are removed
@@ -141,7 +141,7 @@ t2 # duplicates are stacked
 - with statement [leetcode](https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company/)
 Basic SQL cannot express unbounded computations. WITH construct is available in SQL without recursion. But this is the construct used to ADD recursion in SQL. CTE = common table expression. WITH is like a function in SQL
 
-```
+```sql
 with R1 as (query 1),
      R2 as (query 2),
      ...
@@ -151,7 +151,7 @@ with R1 as (query 1),
 ```
 
 - recursion
-```
+```sql
 WITH RECURSIVE cte_name AS (
     cte_query_definition (the anchor member)
  
@@ -169,14 +169,14 @@ FROM   cte_name;
 
 ![recursion.png](assets/images/recursion.png)
 - between
-```
+```sql
 SELECT column_name(s)
 FROM table_name
 WHERE column_name BETWEEN value1 AND value2;
 ```
 
 - functions in SQL [leetcode](https://leetcode.com/problems/nth-highest-salary/)
-```
+```sql
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
 BEGIN
   RETURN (
@@ -187,7 +187,7 @@ END
 ```
 
 -limit + offset [leetcode](https://leetcode.com/problems/nth-highest-salary/)
-```
+```sql
 SELECT
     column_list
 FROM
@@ -201,7 +201,7 @@ LIMIT row_count OFFSET offset;
 ```
 
 - rank in over(partition by)
-```
+```sql
 RANK ( ) OVER ( [ partition_by_clause ] order_by_clause )  
 
 ProductID   Name                   LocationID   Quantity Rank  
@@ -212,7 +212,7 @@ ProductID   Name                   LocationID   Quantity Rank
 496         Paint - Yellow         3            30       4
 ```
 - dense rank [leetcode](https://leetcode.com/problems/department-top-three-salaries/)
-```
+```sql
 DENSE_RANK ( ) OVER ( [ <partition_by_clause> ] < order_by_clause > )  
 ProductID   Name                               LocationID Quantity Rank  
 ----------- ---------------------------------- ---------- -------- -----  
@@ -223,31 +223,31 @@ ProductID   Name                               LocationID Quantity Rank
 ```
 
 - cumulative total
-```
+```sql
 SELECT Id, StudentName,  StudentAge,
 SUM (StudentAge) OVER (ORDER BY Id) AS RunningAgeTotal
 FROM Students
 ```
 
 - rolling sum/average
-```
+```sql
 select visited_on, 
             sum(amount) over(order by visited_on rows between 6 preceding and current row) as amount,
             avg(amount) over(order by visited_on rows between 6 preceding and current row) as average_amount
 from customer
 ```
 - lead, window function for value in the next row
-```
+```sql
 SELECT dept_id, last_name, salary,
 LEAD (salary,1) OVER (ORDER BY salary) AS next_highest_salary
 FROM employees;
 ```
 - index column
-```
+```sql
 CREATE INDEX [index name] ON [table name] ( [column name] )
 ```
 -transactions
-```
+```sql
 BEGIN TRANSACTION
 BEGIN TRY
 
@@ -289,7 +289,7 @@ each relation R is the result of its corresponding query. Final result of the ma
 assignment for the realtions
 
 We can specify recursive statements using the `Recursive` keyword after `With`
-```
+```sql
 WITH RECURSIVE cte_name AS (
     initial_query  -- anchor member
     UNION ALL
@@ -298,7 +298,7 @@ WITH RECURSIVE cte_name AS (
 SELECT * FROM cte_name;
 ```
 
-```
+```sql
 WITH RECURSIVE cte_count (n)
 AS (
       SELECT 1
@@ -314,7 +314,7 @@ FROM cte_count;
 
 
 - generate consecutive numbers
-```
+```sql
 WITH RECURSIVE seq AS (
     SELECT 0 AS value UNION ALL SELECT value + 1 FROM seq WHERE value < 100
     )
@@ -344,7 +344,7 @@ No indexes is **O(n)** time
 Many DBMS's build indexes automatically on `PRIMARY KEY` (and sometimes `UNIQUE`) attributes.
 
 Examples:
-```
+```sql
 select student_id
 from student
 where student_name = 'Kuny' and gpa > 3.9
@@ -353,7 +353,7 @@ where student_name = 'Kuny' and gpa > 3.9
 - index on gpa (tree-based)
 - index on (student_name,gpa)
 
-```
+```sql
 select s_name, c_name
 from student, apply
 where student.s_id = apply.s_id
@@ -368,7 +368,7 @@ Downsides of indexes:
 - index maintenance, can offset benefits. If we modify often the const of maintaining the indexes (re-initialization)
 can be quite expensive. If you do lots of writes and less reads better not use indexes.
 
-```
+```sql
 create index your_index_name on your_table_name(your_column_name) using HASH;
 or
 create index your_index_name on your_table_name(your_column_name) using BTREE;
@@ -381,7 +381,7 @@ and then read through the entire table to find the relevant rows.
 - index columns used in `WHERE` clauses
 
 
-###  Column Indexes
+**Column Indexes**
 The most common type of index involves a single column, storing copies of the values from that column in a data structure, allowing fast lookups for the rows with the corresponding column values. The B-tree data structure lets the index quickly find a specific value, a set of values, or a range of values, corresponding to operators such as` =, >, ≤, BETWEEN, IN,` and so on, in a `WHERE` clause.
 
 ## Database design
@@ -392,7 +392,7 @@ The most common type of index involves a single column, storing copies of the va
 **Final set of relations satisfies normal form** (normalization of a database) = no redundant data, updates are easier to be made.
 
 Denormalised database example:
-```
+```sql
 Apply(SSN, student_name, college_name, high_school, city, hobby)
 ```
 *Apply* is a table with all columns (ssn = social security number) stored in one place.
