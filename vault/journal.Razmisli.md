@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1658766105916
+updated: 1658784128921
 created: 1658754729845
 ---
 # Actions
@@ -36,4 +36,9 @@ Elon Musk: Argue from basic truths vs by analogy
 
 Questions you should always ask/think about.
 
+Talking with my father is super productive, I learn so much stuff about life. Topics on which I should focus:
+- economics/trade he has great intuition about these stuff
+- general life advices
+- how to talk with people
+- he is always interested in other people and naturally curious
 
