@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1658839372795
+updated: 1658839847294
 created: 1658698294975
 ---
 
@@ -11,6 +11,8 @@ Most of my SQL knowledge is from [Stanford lectures](https://www.youtube.com/wat
 relational algebra, relational data model, relational database, DBMS (database management system), PostgreSQL, MySQL, declarative, power of set theory, projection, persistent data (outlives program), schema (type) vs data(variables), DDL (data definition language) used to set up schema, DML (data manipulation language = query language), database = set of named relations, relation = table, columns = attributes of relation, rows = tuple, schema = structural description of relations in database, ACID properties, select = project operator, cross product, join, inner, outer, left, right, union, join = cross product + where, CTE = common table expression, subquery, normalization, denormalization, sharding, shards, transactions
 
 - SQL is declarative - you say "what" you want but not how you want it
+- SQL is not "Turing complete" = computationally universal (can do all stuff)
+- basic SQL cannot run unbounded computations (no for loops)
 
 # Code snippets
 
