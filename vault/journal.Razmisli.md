@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1658784128921
+updated: 1658868694307
 created: 1658754729845
 ---
 # Actions
@@ -19,19 +19,47 @@ What do I want to do with my life?
 make some good money.
 - Long term, accomplish dream to own business, entrepreneur, MORE money, takiva raboti.
 
+---
+
 What is my dream?
 - I am looking for concrete dream. I know I want to become entrepreneur (tech stuff/fintech probably), but am still searching
 for the product that I would be passionate about.
+
+---
 
 What are my passions?
 - I like solving problems, seeing the green light in coding problems makes me happy. I like maths and solving puzzle/competitive
 questions. ML is interesting too, though I have not been deep in that. Need to try out Kaggle seriously. "Mnogo zuburski otgovor".
 
+---
+
 What is love?
+
+---
 
 How to have meaningful and thoughtful discussions?
 
-Steve Jobs graduation speech
+---
+
+Steve Jobs graduation speech - [youtube](https://www.youtube.com/watch?v=UF8uR6Z6KLc&ab_channel=Stanford).
+His three stories:
+- Believe that the dots will connect
+
+He was adopted when he was born. Six month in college he had no idea what he was doing and did not see value in it. He decided to attend classes which he was interested in! He stayed in college, just did not study what he had to. Studied calligraphy and was super interested in it. At the time of the study he had no idea how it would help him. 10 years later it came back when designing Mac. Cannot connect the dots looking forward but it all comes back! You need to believe that the dots will connect!
+
+- Love and loss - Keep looking, don't settle
+
+He was fired when he was 30 from his own company. He decided to start over. "Being fired from Apple was one of the best things happened to me." Started his most creative years - founded Next, Pixel, found his wife. The only thing helped him go through this period was that he knew was he loved doing. "You have to believe in your work. In order to believe in your work, you need  to love it. Don't settle!"
+
+- Death - thinking about death makes you think 'I have noting to loose, follow your heart'
+
+"If you live each day as if it's your last, someday you will be right." Look in the mirror and ask yourself "If today is my last day would I do this today." Many 'no-s' in a row means you need to change something.
+Death is the destination we all share. Your time is limited, have the courage to follow your heart and intuition. They somehow know what you want to do - everything else is secondary.
+
+**Stay hungry, stay foolish!**
+
+---
+
 Elon Musk: Argue from basic truths vs by analogy
 
 Questions you should always ask/think about.
