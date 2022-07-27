@@ -2,7 +2,7 @@
 id: wq47kompa7e6bb61ovt4rug
 title: Negotiation
 desc: ''
-updated: 1658931297293
+updated: 1658958341918
 created: 1658763383237
 ---
 General tips:

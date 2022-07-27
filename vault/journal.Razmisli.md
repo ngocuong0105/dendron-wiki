@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1658868922469
+updated: 1658958316238
 created: 1658754729845
 ---
 # Actions
@@ -77,3 +77,26 @@ Talking with my father is super productive, I learn so much stuff about life. To
 ---
 
 Nai skupata taina na sveta
+
+---
+Oxford "Jivota e bolka i zadachi."
+
+I made lots of mistakes during my 4 years at uni. When I started I thought too much of myself and that I could do whatever I want. Didn't realize that the true work actually started then... I thought I did so much work at highschool and that success was 'v kurpa vurzano'. Kind of wasted first year completely and half of second year. Had some 'love' distractions which affected my study focus and was pretty bad. Basically these 'love' distractions distracted me for nearly 4 years... Super stupid from my side but well, that's it. Now in 2022 I am fully back. I think I got over the love distractions in 100% around March 2020 (covid started and was last year of uni). At that point in time I have 0 in-person and remote contact with the distraction. Felt good. Felt great.
+
+The fact that when talking about my Oxford experience I firstly start rambling about 'love' distractions proves I wasted a fair amount of time there. It is a pity to waste Oxford years like that but whatever.
+
+Main mistake I made during these 4 years is that I did not ave a clear and consistent study plan. I was mainly studying in Hilary and Trinity, skipped lots of classes and lectures and did not have a way to measure my progress. I did not track time/work done in almost any way. And then I got average grades and just complained..
+
+Another mistake is I had some bad influence from toxic people. Should avoid this toxicity as much as possible!
+
+Had a lot of procrastination too
+
+Main mistake is I did not have a plan. Cultural plan, Studying plan, How to live independently plan, healthy lifestyle plan.
+
+---
+
+SIG internship
+
+Malko me pobivat trupki kato se setq za tozi experience
+
+
