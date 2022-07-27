@@ -2,13 +2,13 @@
 id: wq47kompa7e6bb61ovt4rug
 title: Negotiation
 desc: ''
-updated: 1658906856814
+updated: 1658931297293
 created: 1658763383237
 ---
-General rules to follow:
+General tips:
 - when they give offer, thank and ask **straight away** whether it is negotiable - sets expectations that you need more.
 - use closing deal quickly to get raises, i.e. say I would stop interviewing if you offer x
-- always show interest in the company, pravene na nedostupen is 5th grade
+- always show interest in the company
 - competing offers always help...
 - you need to click with the recruiter
 - search for opportunities to have casual chats/laughs
@@ -44,26 +44,75 @@ They should not feel as if you are just using them to get counter offers
 - rate how challenging is the job
 - probability to get fired
 - opportunities for career switch if don't like it
-
+- free time to study on your own
 Bulgarian version for asking dad advice
-- заплата
-- развитие на технически умения
-- умни колеги
-- умни ментори
-- работа в екип
-- вероятност да остана +1 год
-- вероятност да остана +2 год
-- вероятност да остана +3 год
-- кариерно развитие след 1 год
-- кариерно развитие след 2 год
-- добавена стойност в CV
-- престиж в компания
-- престиж позиция
-- интересна работа свързана с мат
-- колко е трудна работата
-- вероятност да ме уволнят
-- възможности да сменя работата след това
 
+- заплата 90k
+- развитие на технически умения 8/10
+- умни колеги 8/10
+- умни ментори 7/10
+- работа в екип 8/10
+- вероятност да остана +1 год 80%
+- вероятност да остана +2 год 60%
+- вероятност да остана +3 год 40%
+- кариерно развитие след 1 год 7/10
+- кариерно развитие след 2 год 7/10
+- добавена стойност в CV 8/10
+- престиж в компания 5/10
+- престиж позиция 9/10
+- интересна работа свързана с математика 8/10
+- колко е трудна работата 8.5/10
+- вероятност да ме уволнят 35%
+- възможности да сменя работата след това 8/10
+- възможност да си прави домашно 4/10
+
+- заплата 115k
+- развитие на технически умения 7/10
+- умни колеги 6.5/10
+- умни ментори 7/10
+- работа в екип 5.5/10
+- вероятност да остана +1 год 80%
+- вероятност да остана +2 год 70%
+- вероятност да остана +3 год 30%
+- кариерно развитие след 1 год 5/10
+- кариерно развитие след 2 год 6/10
+- добавена стойност в CV 8/10
+- престиж в компания 8/10
+- престиж позиция 7/10
+- интересна работа свързана с математика 7/10
+- колко е трудна работата 7/10
+- вероятност да ме уволнят 15%
+- възможности да сменя работата след това 8/10
+- възможност да си прави домашно 8/10
+
+Comparison plot
+```python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+COMPANY_NAME_1 = 'Smarkets'
+COMPANY_NAME_2 = 'Yelp'
+VALS_ONE = [8,8,7,8,8,6,4,7,7,8,5,9,8,8.5,10-3.5,8,4]
+VALS_TWO = [7,6.5,7,5.5,8,7,3,5,6,8,8,7,7,7,10-1.5,8,8]
+
+fields = ['технически умения', 'умни колеги', 'умни ментори', 'работа в екип', 'вероятност да остана +1 год', 'вероятност да остана +2 год',
+'вероятност да остана +3 год', 'кариерно развитие след 1 год', 'кариерно развитие след 2 год', 'добавена стойност в CV',
+'престиж в компания', ' престиж позиция', 'интересна работа свързана с математика', 'колко е трудна работата',
+'вероятност да НЕ ме уволнят', 'възможности да сменя работата след това', 'възможност да си прави домашно']
+
+
+df = pd.DataFrame()
+df['fields'] = fields + fields
+df['company_name'] = [COMPANY_NAME_1] * len(fields) + [COMPANY_NAME_2] * len(fields)
+df['value'] = VALS_ONE + VALS_TWO
+
+sns.barplot(x = 'value', y = 'fields', hue= 'company_name', data = df, ci = None,  orient = 'h',)
+sns.set(rc={'figure.figsize':(11.7,8.27)})
+plt.show()
+
+print(df.groupby('company_name').describe())
+```
 
 
 ## Smarkets
