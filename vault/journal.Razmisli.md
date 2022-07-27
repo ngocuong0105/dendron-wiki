@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1658868694307
+updated: 1658868922469
 created: 1658754729845
 ---
 # Actions
@@ -30,6 +30,10 @@ for the product that I would be passionate about.
 What are my passions?
 - I like solving problems, seeing the green light in coding problems makes me happy. I like maths and solving puzzle/competitive
 questions. ML is interesting too, though I have not been deep in that. Need to try out Kaggle seriously. "Mnogo zuburski otgovor".
+
+---
+
+Jivota mi e bolka i zadachi
 
 ---
 
@@ -70,3 +74,6 @@ Talking with my father is super productive, I learn so much stuff about life. To
 - how to talk with people
 - he is always interested in other people and naturally curious
 
+---
+
+Nai skupata taina na sveta
