@@ -2,7 +2,7 @@
 id: wq47kompa7e6bb61ovt4rug
 title: Negotiation
 desc: ''
-updated: 1658990080673
+updated: 1659045841602
 created: 1658763383237
 ---
 General tips:
@@ -20,7 +20,13 @@ General tips:
 - set your goals - what you want...
 - **whenever you ask for increase you need to show interest in working for the company!**
 They should not feel as if you are just using them to get counter offers
+- **When you want something, you always have to propose something in return**
 
+Common tasks:
+- extend deadline = buys you negotiation time
+- create auction
+- click with recruiter, feel their vibe
+- find upper bound of their budget
 
 ## Evaluating offers framework
 - TC
@@ -108,6 +114,12 @@ week 4 - I showed counter offer, lets see how they respond
 
 They do not seem do be in a hurry so harder to close deal using the time argument. Now I got competing offer and will use that.
 
+week 4 They do not have more budget for this position. I have maxed out what they can give me
+
+Overall the negotiation went the best possible way. I could extend the deadline, found their max budget and could click with
+the recruiter and be on the same vibe.
+
+
 ## Yelp
 week 0 - asked for expectations
 
@@ -115,9 +127,15 @@ week 1- made me offer which is below my expectations by 10k. I asked if they can
 
 They gave me 1 week deadline, a bit pushy in my opinion. Not sure if they are in a hurry or not. They seem keen to hire me as gave me IC3 level.
 
-Tasks:
-- say what your numbers in base are for which you can settle straight away
+week 1 super small increase on salary, as I did not push for it and was not able to react straight away in the conversation.
+I was not clear in what I wanted.... Said that my TC expectation is 125 but di not say how exactly to reach that TC
+Should have said something like if you make my base x then I will sign the contract. I instead said something like if you could come closer to the 125 TC the I will be happy.
 
+When you want something, you always have to propose something in return! So basic advice...
+
+Summary: Made me good offer, but I am left with the feeling I did not optimize my negotiation process. I am not confident that I have maxed out their budget. Also problem was that I did not have good enough competing offer to show them. So it was a bit tricky to find their maximum.
+
+Clicking with the recruiter was a bit harder too. I could not 'feel' her vibe.
 
 ## Capital One
 week 1 made me offer. I asked for 20% bump and said would stop other interviews and they did offer me that bump. Closed deal.
