@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics
 desc: ''
-updated: 1658766129267
+updated: 1659165952547
 created: 1658766097444
 ---
 
@@ -20,11 +20,41 @@ the same. For sports cars market should be capitalism. P(rich person buys lambo)
 # BBR (bg bank za razvitie)
 Should that be privatized?
 
+
+# PP vs DB
+PP are a bit left populists (e.g 'Use right instruments' for left ideas). However, they have strong leadership. DB match
+my political views the best among all parties but have weak leadership. Hristo Ivanov is a good politician but his best role
+in a party is to be an advisor rather than leader. He is a bit 'filosof'. I am happy he recently proposed wide coalition between them and PP and all the right centrist 'city' parties/community.
+
+PP have shown several times that are good negotiators and able to group different peoples in one place. Is that true though?
+In the coalition of 4 parties BSP, PP, ITN, DB, BSP has been able to push for many of their leftist ideas. PP put a cap
+price on electricity in Jan 2022. THat's super weird move and I doubt they teach this stuff in Harvard Business School.
+
+DB has been quite consistent with their promises to the people (except being in coalition with BSP). They have pushed for
+justice reform, e-government, low taxes and fighting against corruption. I am pleased with what they've done. I hope
+PP would agree to have pre-election coalition with them.
+
+# Are BSP less corrupted as of 2022?
+
+It is very controversial to see PP, ITN and DB to agree to be in coalition with BSP. All these 3 parties have talked against
+BSP to some extend or another. Does that mean BSP are less corrupted now or political parties just need their votes and
+become corrupted as well? I think it is pretty hard to determine if a party is corrupted anyways. PP, ITN and DB do not
+most probably do not know if BSP is corrupted. They are for sure much less corrupted than 15 years ago when they were in
+power. What, I admire about BSP is that they have very consistent political views and have clearly identified them in the
+political and economical spectrum. I do not agree with their views but respect that they stay consistent. I am definitely not
+happy that they have seats in the government but what can we do?
+
+
 # When a company should go public?
 
 # Euro funds and government subsidiaries
 
 # Investing
+Look for opportunities when people are afraid to invest, do not invest when everybody is doing that. Now the stock markets have crashed by quite a bit (July 2022), I think I should put some money on this.
+
+Housing market is crazy, peak after peak. It feels it slows down a bit and we might reach a downturn. For my personal finances I would have enough money to get in the market after 2-3 years. Let's see if there is a downturn...
+
+
 
 # Fitness and health
 It is not expensive (time-wise and money-wise) to become nacepen. You basically pay fixed cost first 2 months to get nacepen,
