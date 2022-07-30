@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1658958316238
+updated: 1659166391210
 created: 1658754729845
 ---
 # Actions
@@ -99,4 +99,8 @@ SIG internship
 
 Malko me pobivat trupki kato se setq za tozi experience
 
+---
+**Fitness and health**
 
+It is not expensive (time-wise and money-wise) to become nacepen. You basically pay fixed cost first 2 months to get nacepen,
+then you need to pay small regular costs (2,3 times per week). Gym helps me to be more productive when working too. My most efficient work periods have always been when I go to gym regularly too. So it is worth it. Abs is all about diet.

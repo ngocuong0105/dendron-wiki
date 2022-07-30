@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics
 desc: ''
-updated: 1659165952547
+updated: 1659166372608
 created: 1658766097444
 ---
 
@@ -54,12 +54,6 @@ Look for opportunities when people are afraid to invest, do not invest when ever
 
 Housing market is crazy, peak after peak. It feels it slows down a bit and we might reach a downturn. For my personal finances I would have enough money to get in the market after 2-3 years. Let's see if there is a downturn...
 
-
-
-# Fitness and health
-It is not expensive (time-wise and money-wise) to become nacepen. You basically pay fixed cost first 2 months to get nacepen,
-then you need to pay small regular costs (2,3 times per week). Gym helps me to be more productive when working too. My most efficient
-work periods have always been when I go to gym regularly too. So it is worth it. Abs is all about diet.
 
 
 # Thoughts on diversity and inclusion
