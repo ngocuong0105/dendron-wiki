@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1658990873988
+updated: 1659171768358
 created: 1658695863781
 ---
 # Progress
@@ -36,3 +36,5 @@ Ideally I would become a descent competitive programmer by 1-2 years. Need to:
 
 
 # Cool problems
+
+[132 pattern](https://leetcode.com/problems/132-pattern/)
