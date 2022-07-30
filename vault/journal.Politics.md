@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics
 desc: ''
-updated: 1659166372608
+updated: 1659167354166
 created: 1658766097444
 ---
 
@@ -15,6 +15,25 @@ Import = stuff you buy. You want more sell than buy. If you currency is very exp
 Market demand should drive what type of market is better. Healthcare should be social, government should participate in that
 market because demand for health is distributed uniformly. Probability of rich and poor people get cancer is relatively
 the same. For sports cars market should be capitalism. P(rich person buys lambo) >> P(poor person buys lambo).
+
+
+Markets where there should be government intervention:
+- health
+- education?
+
+# What should governments do?
+
+- protect borders
+- enforce laws equally
+- create laws
+- make business environment better
+- take care of poorest people? Maybe with small amount of taxes.
+- justice system
+- infrastructure? Not sure about this one. Building towns and roads can be done by private sector I think.
+
+Should the government play any social part in people's life? The more responsibilities a government has, less freedom
+individual people have. Therefore I think government should not do social politics at all. Social politics is a fancy term for taking money from the ones who have money to the ones who do not have money. That is the core of social politics. Takes money from those who work giving it to those who don't.
+
 
 
 # BBR (bg bank za razvitie)
