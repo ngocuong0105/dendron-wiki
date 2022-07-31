@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics
 desc: ''
-updated: 1659167354166
+updated: 1659250895703
 created: 1658766097444
 ---
 
@@ -31,8 +31,21 @@ Markets where there should be government intervention:
 - justice system
 - infrastructure? Not sure about this one. Building towns and roads can be done by private sector I think.
 
-Should the government play any social part in people's life? The more responsibilities a government has, less freedom
-individual people have. Therefore I think government should not do social politics at all. Social politics is a fancy term for taking money from the ones who have money to the ones who do not have money. That is the core of social politics. Takes money from those who work giving it to those who don't.
+Should the government play any social part in people's life? The more responsibilities a government has, the less freedom
+individual people have. Therefore I think government should not do social politics at all. Social politics is a fancy term for taking money from the ones who have money to the ones who do not have money. That is the core of social politics. It takes money from those who work and gives it to those who don't.
+
+
+# Reform the justice system thoughts
+
+- from state to private prosecutors will lead to less corrupted prosecutors
+- judges have to be chosen by the state? The state enforces law after all. How to fix corrupted judges? Transparency. Live stream all judge decisions.
+- we need to give incentives for judges (chosen by the state) to give fair verdicts if high level politicians are being executed
+
+# Reform the pension scheme
+
+- receiving a pension should be **volunatary** act rather than mandatory one
+- if you want pension you pay national insurance taxes, if you don't you don't pay these
+- the pension system is broken because it has unlimited supply of income coming from regular insurance taxes. It does not need to be optimized and managed well because it cannot go bankrupt. The fear of failing and going bankrupt is what drives businesses and organizations to move forward. Death is inevitable in every meaningful life. We need to let the broken pension system to either die and build a new one or let it recover. But we need to put in on the free market with voluntary taxes. Then it will receive money only if it can assure the society that it will pay good pensions/provide good service for these taxes.
 
 
 
