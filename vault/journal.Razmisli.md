@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1659166391210
+updated: 1659274450424
 created: 1658754729845
 ---
 # Actions
@@ -10,6 +10,7 @@ These action items have arose after doing razmisli.
 - define clear dream
 - define passion which can bring value to other people (math/coding zadachi does not bring actual value).
 - find a product which you would be passionate about
+- occasionally check yourself where you are compared to others ('сверявай си часовника'), e.g. blind, forums, articles, friends and family. Don't fall in the trap of just working by yourself. Competition is what drives people and opportunities.
 
 # Razmisli
 
@@ -104,3 +105,11 @@ Malko me pobivat trupki kato se setq za tozi experience
 
 It is not expensive (time-wise and money-wise) to become nacepen. You basically pay fixed cost first 2 months to get nacepen,
 then you need to pay small regular costs (2,3 times per week). Gym helps me to be more productive when working too. My most efficient work periods have always been when I go to gym regularly too. So it is worth it. Abs is all about diet.
+
+---
+
+**TC statistics**
+
+[IFS article](https://ifs.org.uk/uploads/BN254-Characteristics-and-Incomes-Of-The-Top-1%25.pdf)
+
+To be in top 1% of taxpayers TC-wise you need 168,000 GBP per year.

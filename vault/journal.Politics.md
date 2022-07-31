@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics
 desc: ''
-updated: 1659250895703
+updated: 1659260872163
 created: 1658766097444
 ---
 
