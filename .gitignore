@@ -3,6 +3,5 @@ node_modules
 build
 .next
 .history
-docs
 .backup
 vault/journal.temporary.md
