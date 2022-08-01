@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1659274450424
+updated: 1659357288092
 created: 1658754729845
 ---
 # Actions
@@ -108,8 +108,3 @@ then you need to pay small regular costs (2,3 times per week). Gym helps me to b
 
 ---
 
-**TC statistics**
-
-[IFS article](https://ifs.org.uk/uploads/BN254-Characteristics-and-Incomes-Of-The-Top-1%25.pdf)
-
-To be in top 1% of taxpayers TC-wise you need 168,000 GBP per year.
