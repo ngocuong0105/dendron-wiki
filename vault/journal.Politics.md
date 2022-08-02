@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics
 desc: ''
-updated: 1659260872163
+updated: 1659426447881
 created: 1658766097444
 ---
 
@@ -33,6 +33,23 @@ Markets where there should be government intervention:
 
 Should the government play any social part in people's life? The more responsibilities a government has, the less freedom
 individual people have. Therefore I think government should not do social politics at all. Social politics is a fancy term for taking money from the ones who have money to the ones who do not have money. That is the core of social politics. It takes money from those who work and gives it to those who don't.
+
+# When a company should go public?
+
+# Euro funds and government subsidiaries
+
+# Investing
+Look for opportunities when people are afraid to invest, do not invest when everybody is doing that. Now the stock markets have crashed by quite a bit (July 2022), I think I should put some money on this.
+
+Housing market is crazy, peak after peak. It feels it slows down a bit and we might reach a downturn. For my personal finances I would have enough money to get in the market after 2-3 years. Let's see if there is a downturn...
+
+
+
+# Thoughts on diversity and inclusion
+
+
+# Should we support in-country made stuff?
+
 
 
 # Reform the justice system thoughts
@@ -76,19 +93,6 @@ power. What, I admire about BSP is that they have very consistent political view
 political and economical spectrum. I do not agree with their views but respect that they stay consistent. I am definitely not
 happy that they have seats in the government but what can we do?
 
+# Government 2nd Aug 2022.
 
-# When a company should go public?
-
-# Euro funds and government subsidiaries
-
-# Investing
-Look for opportunities when people are afraid to invest, do not invest when everybody is doing that. Now the stock markets have crashed by quite a bit (July 2022), I think I should put some money on this.
-
-Housing market is crazy, peak after peak. It feels it slows down a bit and we might reach a downturn. For my personal finances I would have enough money to get in the market after 2-3 years. Let's see if there is a downturn...
-
-
-
-# Thoughts on diversity and inclusion
-
-
-# Should we support in-country made stuff?
+New government by president Radev (3rd in the last year and a half). Tis one is a bit communist, pro-Russia and do not have all stars like Kiril and Asen. Seems not competent too. Radev made some really good moves with bringing Asen and Kiril and riding the protests wave in summer 2021. Now he seems to have deviated from this direction and is more pro-Russia. Like ITN it looks like everybody is fighting for themselves.
