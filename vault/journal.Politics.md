@@ -2,14 +2,46 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics
 desc: ''
-updated: 1659426447881
+updated: 1659612199548
 created: 1658766097444
 ---
 
 
 # Inflation
-Countries always want small inflation in their currency. Inflation -> more expert than import = good. Export = stuff you sell,
+When your money loose its value.
+
+Countries always want small inflation in their currency. Inflation -> more export than import = good. Export = stuff you sell,
 Import = stuff you buy. You want more sell than buy. If you currency is very expensive with no inflation, you will only import.
+
+# Recession
+Economic downturn. When businesses produce less, people buy less and money is staying in one place.
+#TODO difference between recession and inflation
+
+The year is 2022. 2 years after COVID. We enter recession??? Weird how during covid we thought it was a crisis and we
+were in recession. However the true recession comes now, with super high inflation (15% in UK/EU), and it comes after all
+governments printed a bunch of money to "help" people. Macro economics is super weird and I am not sure how to build
+intuition for that.
+
+# Events
+
+- US printed 2 trillion + dollars the most of all governments and the USD became more expensive. It became on par with the
+euro
+- When covid started stock market crashed but there was no big recession, compared to the one now in 2022.
+- now in 2022 stock market crashed even worse and there is big recession coming + inflation
+- in 2016/2017/2018 housing market was way cheaper than now and I was afraid to get into it (with parents money). Looking
+backwards that was a mistake. I don't know how but during this whole period of recession/pandemic/inflation housing market
+is still increasing
+- Apr 2022 Russia started War in Ukraine. Russia attacks in Europe, europe is weak, europe depends a lot on gas and petrol
+on Russia. Maybe this was indication you should buy dollars... 30% profit.
+- July 2022 Boris Johnson resigned. Liz Truss vs Sonak (communist dont know how got in Tori - said put max prices in
+supermarkets, ask the top 10% companies to increase their corporate taxes and things that is fair.)
+
+# Printing money
+In general, when governments print large amount of money it would be bad for you. This is a smooth way to steal from you.
+Indeed, the act of printing money benefits only those who would get large portions of the money. You are unlikely to be part
+of this portion, like most people. Therefore, printing money just makes the money you have less valuable and you should
+look for other places to store value.
+
 
 # Socialism vs Capitalism
 Market demand should drive what type of market is better. Healthcare should be social, government should participate in that
@@ -18,8 +50,9 @@ the same. For sports cars market should be capitalism. P(rich person buys lambo)
 
 
 Markets where there should be government intervention:
-- health
+- healthcare
 - education?
+- war weapons
 
 # What should governments do?
 
@@ -32,20 +65,42 @@ Markets where there should be government intervention:
 - infrastructure? Not sure about this one. Building towns and roads can be done by private sector I think.
 
 Should the government play any social part in people's life? The more responsibilities a government has, the less freedom
-individual people have. Therefore I think government should not do social politics at all. Social politics is a fancy term for taking money from the ones who have money to the ones who do not have money. That is the core of social politics. It takes money from those who work and gives it to those who don't.
+individual people have. Therefore I think government should not do social politics at all. Social politics is a fancy term
+for taking money from the ones who have money to the ones who do not have money. That is the core of social politics. It
+takes money from those who work and gives it to those who don't.
 
 # When a company should go public?
 
 # Euro funds and government subsidiaries
 
+Governments should not support businesses. During crisis, during economic upturn, whatever. Businesses should exist and make
+money only because their clients say so and buy their products  Euro fund, 'obshtestveni prouchki' is just a way for
+the government to give money to their friends and family.
+
+
 # Investing
-Look for opportunities when people are afraid to invest, do not invest when everybody is doing that. Now the stock markets have crashed by quite a bit (July 2022), I think I should put some money on this.
+In your end lifetime, when you compute total networth accumulated through all years, it is likely most of the money you make
+would be from investments rather than from your work. Always have this in mind.
 
-Housing market is crazy, peak after peak. It feels it slows down a bit and we might reach a downturn. For my personal finances I would have enough money to get in the market after 2-3 years. Let's see if there is a downturn...
+Look for opportunities when people are afraid to invest, do not invest when everybody is doing that. Now the stock markets
+have crashed by quite a bit (July 2022), I think I should put some money on this.
 
+Housing market is crazy, peak after peak. It feels it slows down a bit and we might reach a downturn. For my personal
+finances I would have enough money to get in the market after 2-3 years. Let's see if there is a downturn...
+
+
+
+# European green deal
+
+More bureucracy?
 
 
 # Thoughts on diversity and inclusion
+People from the PRIDE are super innocent. I support most of their positions. Rights to get married and in general they just
+want to be accepted by the community. If they get these thing our society would only be net happier. This does not make other
+people unhappy. Adoption is another topic though. The life of the adopted kids could get worse. Straight couples should have
+priority when adopting in societies where gay people are still not accepted.
+
 
 
 # Should we support in-country made stuff?
@@ -65,7 +120,6 @@ Housing market is crazy, peak after peak. It feels it slows down a bit and we mi
 - the pension system is broken because it has unlimited supply of income coming from regular insurance taxes. It does not need to be optimized and managed well because it cannot go bankrupt. The fear of failing and going bankrupt is what drives businesses and organizations to move forward. Death is inevitable in every meaningful life. We need to let the broken pension system to either die and build a new one or let it recover. But we need to put in on the free market with voluntary taxes. Then it will receive money only if it can assure the society that it will pay good pensions/provide good service for these taxes.
 
 
-
 # BBR (bg bank za razvitie)
 Should that be privatized?
 
@@ -73,7 +127,8 @@ Should that be privatized?
 # PP vs DB
 PP are a bit left populists (e.g 'Use right instruments' for left ideas). However, they have strong leadership. DB match
 my political views the best among all parties but have weak leadership. Hristo Ivanov is a good politician but his best role
-in a party is to be an advisor rather than leader. He is a bit 'filosof'. I am happy he recently proposed wide coalition between them and PP and all the right centrist 'city' parties/community.
+in a party is to be an advisor rather than leader. He is a bit 'filosof'. I am happy he recently proposed wide coalition
+between them and PP and all the right centrist 'city' parties/community.
 
 PP have shown several times that are good negotiators and able to group different peoples in one place. Is that true though?
 In the coalition of 4 parties BSP, PP, ITN, DB, BSP has been able to push for many of their leftist ideas. PP put a cap
@@ -95,4 +150,7 @@ happy that they have seats in the government but what can we do?
 
 # Government 2nd Aug 2022.
 
-New government by president Radev (3rd in the last year and a half). Tis one is a bit communist, pro-Russia and do not have all stars like Kiril and Asen. Seems not competent too. Radev made some really good moves with bringing Asen and Kiril and riding the protests wave in summer 2021. Now he seems to have deviated from this direction and is more pro-Russia. Like ITN it looks like everybody is fighting for themselves.
+New government by president Radev (3rd in the last year and a half). Tis one is a bit communist, pro-Russia and do not
+have all stars like Kiril and Asen. Seems not competent too. Radev made some really good moves with bringing Asen and Kiril
+and riding the protests wave in summer 2021. Now he seems to have deviated from this direction and is more pro-Russia.
+Like ITN it looks like everybody is fighting for themselves.

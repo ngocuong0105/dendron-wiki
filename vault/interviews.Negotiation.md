@@ -2,7 +2,7 @@
 id: wq47kompa7e6bb61ovt4rug
 title: Negotiation
 desc: ''
-updated: 1659045841602
+updated: 1659427394362
 created: 1658763383237
 ---
 General tips:
@@ -21,6 +21,8 @@ General tips:
 - **whenever you ask for increase you need to show interest in working for the company!**
 They should not feel as if you are just using them to get counter offers
 - **When you want something, you always have to propose something in return**
+- **When you say what your expectations are, this is the max you'd get. This is the first number in the deal and be careful when setting it**
+- The first number you give should be high but also justifiable!
 
 Common tasks:
 - extend deadline = buys you negotiation time
@@ -125,15 +127,19 @@ week 0 - asked for expectations
 
 week 1- made me offer which is below my expectations by 10k. I asked if they can make a raise
 
-They gave me 1 week deadline, a bit pushy in my opinion. Not sure if they are in a hurry or not. They seem keen to hire me as gave me IC3 level.
+They gave me 1 week deadline, a bit pushy in my opinion. Not sure if they are in a hurry or not. They seem keen to hire me
+as gave me IC3 level.
 
 week 1 super small increase on salary, as I did not push for it and was not able to react straight away in the conversation.
 I was not clear in what I wanted.... Said that my TC expectation is 125 but di not say how exactly to reach that TC
-Should have said something like if you make my base x then I will sign the contract. I instead said something like if you could come closer to the 125 TC the I will be happy.
+Should have said something like if you make my base x then I will sign the contract. I instead said something like if you
+could come closer to the 125 TC the I will be happy.
 
 When you want something, you always have to propose something in return! So basic advice...
 
-Summary: Made me good offer, but I am left with the feeling I did not optimize my negotiation process. I am not confident that I have maxed out their budget. Also problem was that I did not have good enough competing offer to show them. So it was a bit tricky to find their maximum.
+Summary: Made me good offer, but I am left with the feeling I did not optimize my negotiation process. I am not confident
+that I have maxed out their budget. Also problem was that I did not have good enough competing offer to show them. So
+it was a bit tricky to find their maximum.
 
 Clicking with the recruiter was a bit harder too. I could not 'feel' her vibe.
 

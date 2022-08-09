@@ -2,9 +2,25 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: Self Evaluation
 desc: ''
-updated: 1658764789069
+updated: 1659610162915
 created: 1658698186720
 ---
+
+Interviewing has different stages:
+1. Preparation for interviews (leetcode, system design, ml design, math, stats and probability problems)
+2. Prepare for behavior questions + leadership principles
+3. Prep good CV
+4. Apply at bunch of companies
+5. Arrange interviews
+6. Learn company specific stuff
+7. Do the interviews
+8. Offer Negotiation
+
+Steps 1-2 take most of the time and depends on your current interview prep state.
+
+Steps 3-8 take around 2-3 months
+
+
 # Capitalab
 - Position: Quant analyst
 - Time: June 2022
@@ -83,15 +99,18 @@ dashboards/segmentation fof google's users.
 
 # Yelp
 - Position: Data Scientist
-- Time: June 2022
+- Time: June 2022https://student.edocuments.ox.ac.uk/Registration
 - Reached Stage: Final Round
 - Process: Screen chat, Hackerrank (SQL + Python), Technical Screening (SQL + DataScience (A/B testing)), final interviews
 (Product interview, 1 presentation, 2 Data Science interviews, 1 HR/Leadership chat)
 - Mistakes: Look for keywords, retention, 2 things to measure in these places user experience and money. Key metrics (HEART)
-Presentation talked about ONE project, but could not say whats the final business impact. Overall the 2 Data Scince interviews
-went 50/50 the rest were excellent.
+Presentation talked about ONE project, but could not say whats the final business impact. Overall the 2 Data Science interviews
+went 50/50 the rest were excellent. Don't interrupt your interviewer! Felt a bit off after the negotiation process. They made
+me good deal and I was hoping to bump a bit more from it, but god bump just 5k. Final offer 120 gbp ~ 160 usd which is good.
+However, I felt I could do better and get more money.
 - Role/Company: Tech Stack: Python, some R, Tableau, AWS for compute and storage, SQL. Role is to work with Multi-local
 business (they would be your clients). Unique dataset with lots of interactions
+
 
 # Marshall Wace
 - Position: Data Engineer
@@ -136,6 +155,25 @@ I did not enjoy the experience either. Made mistake not to listen Arlo as I shou
 - Reached Stage: Final Stage
 - Process: Hackerrank, Technical(algo), Final rounds (presentation algo + math with QRs)
 - Mistakes: On the Hackerrank I was not concentrated and missed some parts even due to time pressure but still passed wtf
+
+
+# HRT
+- Position: Algo engineer
+- Time: June 2022
+- Reached Stage: Second stage
+- Process: Hackerrank, Technical (asked about a sde project, multiprocessing vs multithreading, + hard dp)
+- Mistakes: Could not solve DP
+
+Given an array of size n and and integer k. We partition the array in k subarrays (some can be empty). Compute each sum
+of the elements in each subarray s1, s2, ... sk. Take the max. Among all partitionings minimize the max value.
+
+# DE Shaw
+- Position software engineer ( the guy said could be 50/50 computer science vs maths)
+- Time June 2022
+- Reached Stage: Second
+- Process: Hackerrank, Technical in coder pad (gave calculator question + implement a queue with an array, table resizing...)
+- Mistakes: so far none?
+
 
 # Jane Street Internship
 - Position: Quant Trader
