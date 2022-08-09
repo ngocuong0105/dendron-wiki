@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: Self Evaluation
 desc: ''
-updated: 1659610162915
+updated: 1660040550228
 created: 1658698186720
 ---
 
@@ -99,7 +99,7 @@ dashboards/segmentation fof google's users.
 
 # Yelp
 - Position: Data Scientist
-- Time: June 2022https://student.edocuments.ox.ac.uk/Registration
+- Time: June 2022
 - Reached Stage: Final Round
 - Process: Screen chat, Hackerrank (SQL + Python), Technical Screening (SQL + DataScience (A/B testing)), final interviews
 (Product interview, 1 presentation, 2 Data Science interviews, 1 HR/Leadership chat)
