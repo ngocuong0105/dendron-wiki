@@ -2,20 +2,28 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics
 desc: ''
-updated: 1659612199548
+updated: 1660509016263
 created: 1658766097444
 ---
 
 
 # Inflation
-When your money loose its value.
+When your money loose its value. When money printing exceeds the speed of actual production.
+
+Small inflation is healthy. Low inflation (deflations) would make people keep their cash. If you could by something
+cheaper in the future then you would wait. Too high inflation leads to products becoming too expensive for people.
+
 
 Countries always want small inflation in their currency. Inflation -> more export than import = good. Export = stuff you sell,
 Import = stuff you buy. You want more sell than buy. If you currency is very expensive with no inflation, you will only import.
 
 # Recession
 Economic downturn. When businesses produce less, people buy less and money is staying in one place.
-#TODO difference between recession and inflation
+
+- recession = drop in economical activity and results in reduced GDP.
+- inflation = increase in price of products, money looses their power. Measured in CPI.
+
+Often low or too high inflation leads to recession.
 
 The year is 2022. 2 years after COVID. We enter recession??? Weird how during covid we thought it was a crisis and we
 were in recession. However the true recession comes now, with super high inflation (15% in UK/EU), and it comes after all
@@ -31,10 +39,16 @@ euro
 - in 2016/2017/2018 housing market was way cheaper than now and I was afraid to get into it (with parents money). Looking
 backwards that was a mistake. I don't know how but during this whole period of recession/pandemic/inflation housing market
 is still increasing
-- Apr 2022 Russia started War in Ukraine. Russia attacks in Europe, europe is weak, europe depends a lot on gas and petrol
+- 24 Feb 2022 Russia started War in Ukraine. Russia attacks in Europe, europe is weak, europe depends a lot on gas and petrol
 on Russia. Maybe this was indication you should buy dollars... 30% profit.
 - July 2022 Boris Johnson resigned. Liz Truss vs Sonak (communist dont know how got in Tori - said put max prices in
 supermarkets, ask the top 10% companies to increase their corporate taxes and things that is fair.)
+
+
+# Events in Bulgarian politics
+- 2nd Aug new slujebno pravitelstvo given by president Radev - a bit pro russia and wants to get deal with Gazprom
+- 7tth Aug DB wants to do pre election coalition with PP. PP said they will look in statistics and if they get more seats
+they will do the coalition
 
 # Printing money
 In general, when governments print large amount of money it would be bad for you. This is a smooth way to steal from you.
