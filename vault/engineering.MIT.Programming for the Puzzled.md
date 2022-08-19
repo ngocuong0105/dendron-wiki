@@ -2,7 +2,7 @@
 id: 2ic3ljkold03g223cujfbjz
 title: Programming for the Puzzled
 desc: ''
-updated: 1660925889968
+updated: 1660926370468
 created: 1660838449536
 ---
 # MIT 6.S095 - Programming for the Puzzled
@@ -27,7 +27,7 @@ an array of people with caps.
 
 Simple solution is just to count forward and backward intervals
 
-```[language=Python]
+```Python
 arr = ['F','B','F','F','B','F','F']
 
 def solve(arr):
@@ -45,7 +45,7 @@ def solve(arr):
 ---
 First person in line gives up what set of commands you will say to the people. For example if arr[0] = 'F', then you would say to all 'B-s' to flip their caps.
 
-```[language=Python]
+```Python
 
 def please_all_conform(arr):
     arr.append('END')
@@ -71,7 +71,7 @@ Closed intervals on the left and open on the right.
 
 Simple solution. Check all hours (starts and ends) and check how many intervals contain it. Depends on granularity of time
 
-```[language=Python]
+```Python
 def solve(intervals):
     start = min([intervals[i][0] for i in range(len(intervals))])
     end = max([intervals[i][1] for i in range(len(intervals))])
@@ -94,7 +94,7 @@ The only time the result could change is if a celebrity enters or leaves.
 
 Line sweep solution.  Relies on the fact that the result would change only when you reach an event.
 
-```[language=Python]
+```Python
 def solve(intervals):
     events = []
     for s,e in events:
