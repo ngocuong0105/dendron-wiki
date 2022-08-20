@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics
 desc: ''
-updated: 1660509016263
+updated: 1660926783898
 created: 1658766097444
 ---
 
@@ -32,6 +32,7 @@ intuition for that.
 
 # Events
 
+- Jan 2022, Meta stock price crashes 50%. 
 - US printed 2 trillion + dollars the most of all governments and the USD became more expensive. It became on par with the
 euro
 - When covid started stock market crashed but there was no big recession, compared to the one now in 2022.
@@ -49,6 +50,8 @@ supermarkets, ask the top 10% companies to increase their corporate taxes and th
 - 2nd Aug new slujebno pravitelstvo given by president Radev - a bit pro russia and wants to get deal with Gazprom
 - 7tth Aug DB wants to do pre election coalition with PP. PP said they will look in statistics and if they get more seats
 they will do the coalition
+-18 Aug PP and DB would not go to elections together
+- 18 Aug Slavi Trifonov did not declare his net worth in KPKOPNI
 
 # Printing money
 In general, when governments print large amount of money it would be bad for you. This is a smooth way to steal from you.
