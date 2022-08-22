@@ -2,7 +2,7 @@
 id: 2ic3ljkold03g223cujfbjz
 title: Programming for the Puzzled
 desc: ''
-updated: 1660926370468
+updated: 1661033911222
 created: 1660838449536
 ---
 # MIT 6.S095 - Programming for the Puzzled
@@ -110,3 +110,32 @@ def solve(intervals):
         res = max(res,curr)
     return res
 ```
+
+
+# Puzzle 3: You Can Read Minds
+
+Given a deck of 52 cards. William takes 5 cards at random and shows to Devas 4 of them. Devas uses an algorithm to determine the 5th card. He uses the info from the 4 cards he sees to guess the fifth card.
+
+
+Show 4 cards, 5th card could be 1 of 48.
+
+How many bits of information can 4 cards show? Use the order of the 4 cards gets you $4! = 24$. We have just 24 bits of information but have to encode 48. Ordering just uses the numbers on the cards, we need to use the suits.
+
+**Strategy:**
+First card will give away the suit. By pigeonhole principle out of 5 cards there would be 2 with the same suits. The other 3 cards would give away the distance from the first card thinking in circular/modular computation.
+
+**Example:** We pick King Diamond, A Diamond, 2 Spade, 3 Clubs, 5 Hearts.
+
+William will hide the Ace and present  K, 2, 3, 5.
+
+Devadas sees King of Diamond, hence the  hidden card is a diamond. 2,3,5 is the first permutation, hence the hidden card is 1 distance away from the Kind, that is and Ace.
+
+Why this strategy works? The first card is the pivot card giving away the suit, hence there are 12 cards remaining that could possibly be the hidden card. we have 3 cards left t encode the 12 cards. Because we measure distance only in clockwise direction we are covered.
+
+
+Is it possible to pick 4 random cards, hide one of it and encode it using the rest 3.
+
+[Article](https://codegolf.stackexchange.com/questions/165390/professor-at-mit-can-read-minds)
+
+
+

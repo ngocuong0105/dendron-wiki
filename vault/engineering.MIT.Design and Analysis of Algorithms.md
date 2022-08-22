@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1660995633843
+updated: 1661089207867
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -20,7 +20,7 @@ Lecture [videos](https://www.youtube.com/watch?v=2P-yW7LQr08&list=PLUl4u3cNGP631
 - Intractability (polynomial vs exponential time problems, approximation problems)
 - Synchronous, Asynchronous algos, Cryptography, Cache
 
-## Lecture 1. Interval Scheduling
+# Lecture 1. Interval Scheduling
 
 *Very similar problems can have very different complexity*. Wiki problem [definition](https://en.wikipedia.org/wiki/Interval_scheduling#Group_Interval_Scheduling_Decision).
 
@@ -84,3 +84,48 @@ $O(n^2), O(nlogn)$
 NP-complete problem. Generalization of the problem considers $k > 1$ machines/resources.Here the goal is to find $k$ compatible subsets whose union is the largest. First example had k = 1.
 
 In an upgraded version of the problem, the intervals are partitioned into groups. A subset of intervals is compatible if no two intervals overlap.
+
+# Lecture 2. Divide & Conquer: Convex Hull, Median Finding
+
+Divide and Conquer Paradigm: Given a problem of size $n$:
+1. Divide it into $a$ subproblems of size $n/b$ where $b > 1$ so that your subproblems have smaller size.
+2. Solve each subproblem recursively
+3. Combine solutions of subproblems into overall solution (this is where the smarts of the algo is).
+
+Run-time: $T(n) = aT(n/b) + MergeWork$. Often to compute $T(n)$ you can use **Master Theorem**.
+
+![master_theorem.png](assets/images/master_theorem.png)
+
+---
+
+**Convex Hull Problem**
+
+Given $n$ points in a plane $S = \{ (x_i,y_i) | i = 1, 2, ..., n\}$ assume no two have the same $x$ coordinate and no two have the same $y$ coordinate and no three line on the same line. The convex hull is the smallest polygon which contains all points in $S$.
+
+![convex_hull.png](assets/images/convex_hull.png)
+
+Simple algorithm:
+- For each pair of points draw a line.
+- This line separates the plane in two half-planes.
+- Check if all points lie in one side on the half-plane. If yes, this line is part of the convex hull (we call it a segment of the convex hull), otherwise it is not a segment.
+
+Run-time: $O(n^2)$ pairs of points, $O(n)$ to test $= O(n^3)$ runtime.
+
+Divide and Conquer algo:
+
+1. Sort the points by x coordinates.
+2. For input set $S$, divide into left half $A$ and right half $B$ by $x$ coordinates.
+3. Compute convex hull for $A$ and for $B$.
+4. Combine solutions.
+
+
+![merge_convex_hulls.png](assets/images/merge_convex_hulls.png)
+
+Find upper, and lower tangent using two finger and a string algorithm. Compute intercept of the vertical line and all $(a,b)$ points. Algo [demo](https://youtu.be/EzeYI7p9MjU?list=PLUl4u3cNGP6317WaSNfmCvGym2ucw3oGp&t=2161).
+
+
+---
+
+**Median Finding Algorithm**
+
+It is just quick-select algo. Randomized pivot point has $O(n)$ expected run time and $O(n^2)$ worse case. Smart pivot point is a deterministic algo (groups of 5 elements, median of medians)  has $O(n)$ worse case time.
