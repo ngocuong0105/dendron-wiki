@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1661088048226
+updated: 1661682740317
 created: 1658766702063
 ---
 
@@ -46,4 +46,12 @@ adj = defaultdict(list) # default dict takes a function
 for u,v in edges:
     adf[u].append(v)
 
+```
+
+
+```Python
+# Counter dict
+from collections import Counter
+arr = [1,2,3,1,2,4,4,2]
+c = Counter(arr)
 ```
