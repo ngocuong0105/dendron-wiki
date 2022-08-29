@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1659357288092
+updated: 1661773458798
 created: 1658754729845
 ---
 # Actions
@@ -108,3 +108,4 @@ then you need to pay small regular costs (2,3 times per week). Gym helps me to b
 
 ---
 
+I've lost motivation...

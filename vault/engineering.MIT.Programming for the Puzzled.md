@@ -2,7 +2,7 @@
 id: 2ic3ljkold03g223cujfbjz
 title: Programming for the Puzzled
 desc: ''
-updated: 1661701542849
+updated: 1661778352526
 created: 1660838449536
 ---
 # MIT 6.S095 - Programming for the Puzzled
@@ -367,4 +367,82 @@ def printYard(yard):
 
 printYard(tileMissingYard(3, 4, 6))
 printYard(tileMissingYard(4, 5, 7))
+```
+
+# Problem 8: You Won't Want to Play Sudoku Again. Recursive search
+
+**Problem** Given a sudoku grid, find a solution to it. [problem](https://leetcode.com/problems/sudoku-solver/)
+
+```Python
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        def get_empty(board):
+            for i,j in product(range(9),range(9)):
+                if board[i][j] == '.': return (i,j)
+            return -1,-1
+
+        def possible(i,j,board):
+            return set(list(map(str,range(1,10)))) - box(3*(i//3),3*(j//3)) - row(i) - col(j)
+
+        def box(i,j):
+            return set(board[i+di][j+dj] for di,dj in product(range(3),range(3)))
+
+        def row(i):
+            return set(board[i][j] for j in range(9))
+
+        def col(j):
+            return set(board[i][j] for i in range(9))
+
+        def solve():
+            i,j = get_empty(board)
+            if i == -1: return True
+            values = possible(i,j,board)
+            for val in values:
+                board[i][j] = val
+                if solve(): return True
+                board[i][j] = '.'
+            return False
+
+        solve()
+```
+Whenever you do a recursive search you need to clean what you did (line `board[i][j] ='.'`) - this we call **backtracking**.
+
+
+The above solution does not do any implications (row and column scans, boxes etc.) It is not the way you would solve sudoku in your head. The `poss()` function gives you potential values to fill in and you just do blind **guessing**. We want to integrate human approach in the algo - **implications!**
+
+```Python
+        def make_implications(board,i,j,e):
+            board[i][j] = e
+            impl = [(i,j)]
+            can_imply,start = False,True
+            while can_imply or start:
+                start,can_imply = False,False
+                for i,j in product(range(9),range(9)):
+                    if board[i][j] =='.':
+                        poss = possible(i,j,board)
+                        if len(poss)==1:
+                            x = poss.pop()
+                            impl.append((i,j))
+                            board[i][j] = x
+                            can_imply = True
+            return impl
+        
+        def undo_implications(board,impl):
+            for i,j in impl:
+                board[i][j] = '.'
+    
+        def solve():
+            i,j = get_empty(board)
+            if i == -1: return True
+            values = possible(i,j,board)
+            for val in values:
+                impl = make_implications(board,i,j,val)
+                if solve(): return True
+                undo_implications(board,impl)
+            return False
+        
+        solve()
 ```
