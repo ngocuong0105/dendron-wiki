@@ -2,7 +2,7 @@
 id: 2ic3ljkold03g223cujfbjz
 title: Programming for the Puzzled
 desc: ''
-updated: 1661778352526
+updated: 1661790213163
 created: 1660838449536
 ---
 # MIT 6.S095 - Programming for the Puzzled
@@ -445,4 +445,86 @@ The above solution does not do any implications (row and column scans, boxes etc
             return False
         
         solve()
+```
+
+# Problem 9: The Disorganized Handyman. Sorting
+
+**Problem** You have 100 unique nuts and 100 unique bolts, where each bolt has its own unique nut. All nuts and bolts are in a bag. Find all nut-bolt pairs.
+
+Allowed operation:
+- take one nut and take one bolt. If nut is bigger than bolt, then the bolt would go through the nut. If the bolt is bigger, then you cannot put the bolt in. IF nut fits the bolt then done!
+
+
+**Naive solution**. $O(n^2)$ using brute force.
+
+Can't compare the size of nuts to nuts. Can't compare the size of bolts to bolts.
+
+**Solution**. Divide and Conquer - Quick Sort pivoting idea.
+
+QuickSort and Merge sort are Divide and Conquer algorithms.
+
+MergeSort requires $O(n)$ space and $O(nlogn)$ runtime.
+
+Randomized QuickSort requires $O(1)$ space and $O(nlog)$ runtime on average. Worse xas is $O(n^2)$
+
+
+QuickSort can be done in-place, whereas MergeSort cannot.
+
+# Problem 10: A Weekend To Remember. Graph
+
+**Problem**. Nodes are friends. Edge between nodes implies a 'dislike' relation. Your job is to keep your friends happy. You organize 2 parties such that:
+- each friend comes to exactly one party
+- no pair of friends who dislike each other come to the same party
+
+This is **bipartite** matching problem. Purpose of this puzzle is to say if you can do that or not.
+
+Bipartite graphs are those which you can split in two groups of nodes and all edges have one end in one of the groups and the other edge in the other group.
+
+[Leetcode](https://leetcode.com/problems/is-graph-bipartite/)
+
+Bipartite graph = 2-colorable (color vertices such that no edge has two same color edges) =
+graph with no odd-cycles
+
+```Python
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+
+        def is_two_color(white,black):
+            for u in range(n):
+                for v in graph[u]:
+                    if u in white and v in white: return False
+                    if u in black and v in black: return False
+            return True
+        def colorize(s,is_black):
+            if is_black: black.add(s)
+            else: white.add(s)
+            visited[s] = True
+            for u in graph[s]:
+                if not visited[u]:
+                    colorize(u,1-is_black)
+        n = len(graph)
+        visited,black,white = [False]*n,set(),set()
+        for s in range(n):
+            if not visited[s]:
+                colorize(s,True)
+        return is_two_color(white,black)
+
+```
+
+*Never depend of order of keys in a dictionary. Different looping through the same dictionary may give different order.*
+
+# Problem 11: Memory Serves You Well. Dynamic Programming
+
+**Problem.** Given array of coins, pick coins to maximize total value subject to constraint:
+- if you pick a coin you cannot pick the next one. [Leetcode](https://leetcode.com/problems/house-robber/)
+
+```Python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        @cache
+        def dp(i,can_rob):
+            if i == len(nums): return 0
+            if not can_rob: return dp(i+1,True)
+            return max(dp(i+1,False)+nums[i],dp(i+1,True))
+        return dp(0,True)
 ```
