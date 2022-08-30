@@ -1,8 +1,8 @@
 ---
 id: uy9u1co5ih1fokind8tg0eq
-title: Politics
+title: Politics  Economics
 desc: ''
-updated: 1660926783898
+updated: 1661807684795
 created: 1658766097444
 ---
 
@@ -16,6 +16,12 @@ cheaper in the future then you would wait. Too high inflation leads to products 
 
 Countries always want small inflation in their currency. Inflation -> more export than import = good. Export = stuff you sell,
 Import = stuff you buy. You want more sell than buy. If you currency is very expensive with no inflation, you will only import.
+
+Inflation is a way government to take money from its citizens without them realizing it. A way to put money in the people who hold assets. Inflation comes from printing money and whoever gets this money becomes richer (usually government people).
+
+In inflation everything becomes more expensive. Often people do not save cash, but rather buy mortgage. Money looses its value.
+
+In period of deflation, or when money has lots of value, then go and invest and buy stuff.
 
 # Recession
 Economic downturn. When businesses produce less, people buy less and money is staying in one place.
@@ -32,7 +38,7 @@ intuition for that.
 
 # Events
 
-- Jan 2022, Meta stock price crashes 50%. 
+- Jan 2022, Meta stock price crashes 50%.
 - US printed 2 trillion + dollars the most of all governments and the USD became more expensive. It became on par with the
 euro
 - When covid started stock market crashed but there was no big recession, compared to the one now in 2022.

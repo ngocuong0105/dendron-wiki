@@ -2,14 +2,14 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1661773382808
+updated: 1661843515752
 created: 1658766702063
 ---
 
 Should add some tricky algos/data structures here.
 
 **Buzz words**
-BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal, Palindrome algo, Manacher
+BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal, Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls
 
 See dbabichev link for [patterns](https://flykiller.github.io/coding%20ideas/).
 
@@ -61,7 +61,7 @@ c = Counter(arr)
 
 # Algos
 
-- Manacher, [problem](https://leetcode.com/problems/longest-palindromic-substring/)
+- Manacher, [p1](https://leetcode.com/problems/longest-palindromic-substring/), [p2](https://leetcode.com/problems/shortest-palindrome/)
 ```Python
 # O(n**2)
 class Solution:
@@ -95,4 +95,18 @@ class Solution:
         i = P.index(l)
         return s[(i-l)//2:(i+l)//2]
 
+```
+
+- rotate image, (p1)[https://leetcode.com/problems/rotate-image/]
+- 90 degree rotation = flip + transpose
+```Python
+def rotate(matrix):
+    matrix.reverse()
+    return list(zip(*matrix))
+
+def rotate_inplace(matrix):
+    matrix.reverse()
+    for i in range(len(matrix)):
+        for j in range(i):
+            matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
 ```
