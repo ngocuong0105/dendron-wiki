@@ -2,14 +2,14 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1661843515752
+updated: 1662015704150
 created: 1658766702063
 ---
 
 Should add some tricky algos/data structures here.
 
 **Buzz words**
-BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal, Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls
+BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal, Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls, BFS, DFS
 
 See dbabichev link for [patterns](https://flykiller.github.io/coding%20ideas/).
 
@@ -97,7 +97,7 @@ class Solution:
 
 ```
 
-- rotate image, (p1)[https://leetcode.com/problems/rotate-image/]
+- rotate image, [p1](https://leetcode.com/problems/rotate-image/)
 - 90 degree rotation = flip + transpose
 ```Python
 def rotate(matrix):
@@ -110,3 +110,6 @@ def rotate_inplace(matrix):
         for j in range(i):
             matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
 ```
+
+
+- guess the algo, [p1](https://leetcode.com/problems/shortest-path-with-alternating-colors/)
