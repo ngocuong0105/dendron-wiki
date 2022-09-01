@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1662015704150
+updated: 1662029101964
 created: 1658766702063
 ---
 
@@ -57,6 +57,25 @@ for u,v in edges:
 from collections import Counter
 arr = [1,2,3,1,2,4,4,2]
 c = Counter(arr)
+```
+
+- [Toeplitz Matrix](https://leetcode.com/problems/toeplitz-matrix/), diagonals have constant values
+```Python
+class Solution:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        for i in range(len(matrix)-1):
+            for j in range(len(matrix[0])-1):
+                if matrix[i][j] != matrix[i+1][j+1]: return False
+        return True
+    
+class Solution:
+    def isToeplitzMatrix(self, m: List[List[int]]) -> bool:
+        return all(m[i][j] == m[i+1][j+1] for i,j in product(range(len(m)-1),range(len(m[0])-1)))
+
+class Solution:
+    def isToeplitzMatrix(self, m: List[List[int]]) -> bool:
+        return all(r1[:-1] == r2[1:] for r1,r2 in zip(m,m[1:]))
+
 ```
 
 # Algos

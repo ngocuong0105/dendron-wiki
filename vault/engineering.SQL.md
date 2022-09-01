@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1658839847294
+updated: 1662038692195
 created: 1658698294975
 ---
 
@@ -78,7 +78,7 @@ group by person1,person2
 select datediff(date1,date2) as diff,
         month(date1) as month,
         date_add('2018-05-01',INTERVAL 1 DAY) as next_day,
-        dayofweek('2007-02-03') as day_of_week # 1 to 7
+        dayofweek('2007-02-03') as day_of_week # 1 to 7 (1 and 7 are weekend)
         dayofyear('2007-02-03') as day_of_week,
         to_days('2008-01-01') as date_number,
         date_format(date,'%d/%m/%Y') as formatted_date,
@@ -156,7 +156,7 @@ with R1 as (query 1),
 ```sql
 WITH RECURSIVE cte_name AS (
     cte_query_definition (the anchor member)
- 
+
     UNION ALL
  
     cte_query_definition (the recursive member) # often need where statement to stop
@@ -432,3 +432,4 @@ Decide how to normalize your database by looking for:
 [1613](https://leetcode.com/problems/find-the-missing-ids/)
 [569](https://leetcode.com/problems/median-employee-salary/)
 [608](https://leetcode.com/problems/tree-node/submissions/)
+[2308](https://leetcode.com/problems/arrange-table-by-gender/)
