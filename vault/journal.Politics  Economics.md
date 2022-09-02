@@ -2,11 +2,14 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics  Economics
 desc: ''
-updated: 1661807684795
+updated: 1662150625872
 created: 1658766097444
 ---
 
 
+
+**Всяко преразпределение на богатство от страна на държава е начин да се вземат пари от работещи хора и да се дадат на неработещи/по-малко работещи хора.
+**
 # Inflation
 When your money loose its value. When money printing exceeds the speed of actual production.
 

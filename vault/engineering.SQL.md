@@ -2,11 +2,11 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1662038692195
+updated: 1662116717270
 created: 1658698294975
 ---
 
-Most of my SQL knowledge is from [Stanford lectures](https://www.youtube.com/watch?v=Yceqbp_DKbA&list=PL9ysvtVnryGpnIj9rcIqNDxakUn6v72Hm&index=103) + leetcode.
+Most notes here are from [Stanford lectures](https://www.youtube.com/watch?v=Yceqbp_DKbA&list=PL9ysvtVnryGpnIj9rcIqNDxakUn6v72Hm&index=103) and leetcode.
 # Buzzwords
 relational algebra, relational data model, relational database, DBMS (database management system), PostgreSQL, MySQL, declarative, power of set theory, projection, persistent data (outlives program), schema (type) vs data(variables), DDL (data definition language) used to set up schema, DML (data manipulation language = query language), database = set of named relations, relation = table, columns = attributes of relation, rows = tuple, schema = structural description of relations in database, ACID properties, select = project operator, cross product, join, inner, outer, left, right, union, join = cross product + where, CTE = common table expression, subquery, normalization, denormalization, sharding, shards, transactions
 
@@ -177,6 +177,7 @@ FROM table_name
 WHERE column_name BETWEEN value1 AND value2;
 ```
 
+
 - functions in SQL [leetcode](https://leetcode.com/problems/nth-highest-salary/)
 ```sql
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
@@ -238,12 +239,34 @@ select visited_on,
             avg(amount) over(order by visited_on rows between 6 preceding and current row) as average_amount
 from customer
 ```
+
+- window functions
+    - sum, avg, first, lead, lag, rank, dense_rank
+
+- lag window function
+
+```sql
+select *, lag(purchase_date) over(partition by user_id order by purchase_date) as previous_date
+from purchases
+```
+
 - lead, window function for value in the next row
 ```sql
 SELECT dept_id, last_name, salary,
 LEAD (salary,1) OVER (ORDER BY salary) AS next_highest_salary
 FROM employees;
 ```
+
+
+- CAST to datatypes
+```sql
+-- For Sql server
+SELECT CAST(25.65 AS int);
+/*
+CAST(<value_to_cast> AS <data_type_to_cast_to>)
+*/
+``
+
 - index column
 ```sql
 CREATE INDEX [index name] ON [table name] ( [column name] )
@@ -433,3 +456,4 @@ Decide how to normalize your database by looking for:
 [569](https://leetcode.com/problems/median-employee-salary/)
 [608](https://leetcode.com/problems/tree-node/submissions/)
 [2308](https://leetcode.com/problems/arrange-table-by-gender/)
+[2228](https://leetcode.com/problems/users-with-two-purchases-within-seven-days/)

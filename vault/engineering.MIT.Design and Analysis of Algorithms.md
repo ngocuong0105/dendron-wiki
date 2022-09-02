@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1661978188784
+updated: 1662135489696
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -216,3 +216,29 @@ To get **collapsing** set $X$:
 [dbabichev](https://flykiller.github.io/patterns/number%20theory) FFT implementation.
 
 `np.convolve` is much slower as it does not use FFT. `scipy` has convolve function and uses FFT.
+
+# Lecture 4. Divide & Conquer: van Emde Boas Trees
+
+Emde Boas Tree.
+
+**Goal**: Maintain $n$ elements among $\{ 0, 1, ... u-1\}$ subject to insert, delete, successor (given a value I want to know the next greater value in the set). We know how to do all these in $O(logn)$ time using balance BST-s (AVL, Red-Black). Emde Boas Trees can doo these in $O(loglog[u] )$ which is an exponential improvement.
+
+**Intuition:** Binary search on the levels of the tree where the number of levels is $log(u)$
+
+First attempt to store an array of size $n$ with elements among the set $\{ 0, 1, ... u-1\}$:
+
+![bit_vec.png](assets/images/bit_vec.png)
+
+Insert and Delete are constant, Successor is linear.
+
+Second attempt:
+
+![clusters.png](assets/images/clusters.png)
+
+Think each cluster as a binary tree built bottom up using the OR operation. All roots of the different clusters will be a 'summary' vector. As this vector will tell you if there is a one in each of the clusters.
+
+Insert is constant - need to change the value in the clusters and mark in the summary vector.
+
+Successor is:
+
+![successor.png](assets/images/successor.png)
