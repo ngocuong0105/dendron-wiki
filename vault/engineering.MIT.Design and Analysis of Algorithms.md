@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662220991461
+updated: 1662221023181
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -258,4 +258,4 @@ We have not yet improved the runtime complexity. Van Emde Boas is to create clus
 ![emde_recurse.png](assets/images/emde_recurse.png)
 
 
-Code implementation details look at the lecture and your notes [here]()
+Code implementation details look at the lecture and your notes [here](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/lecture4_emde_boas.pdf).
