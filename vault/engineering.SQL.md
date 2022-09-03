@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1662116717270
+updated: 1662202618382
 created: 1658698294975
 ---
 
@@ -257,6 +257,7 @@ LEAD (salary,1) OVER (ORDER BY salary) AS next_highest_salary
 FROM employees;
 ```
 
+- to get island values (group of equal consecutive values in a column) use rank- rank trick, [leetcode](https://leetcode.com/problems/longest-winning-streak/)
 
 - CAST to datatypes
 ```sql

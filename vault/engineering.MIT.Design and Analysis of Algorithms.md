@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662135489696
+updated: 1662220991461
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -225,6 +225,12 @@ Emde Boas Tree.
 
 **Intuition:** Binary search on the levels of the tree where the number of levels is $log(u)$
 
+Can we do better than $O(log(n)))$ and does not depend on the universe of numbers $\{ 0, 1, ... u-1\}$? **No.**
+
+In each of previous tree data structures, where we do stuff dynamically, at least one important operation took $O(log(n)))$ time, either worst case or amortized. In fact, because each of these data structures bases its decisions on comparing keys, the $O(nlog(n)))$ lower bound for sorting tells us that at least one operation will have to take $O(log(n)))$ time. Why? If we could perform both the INSERT and EXTRACT-MIN
+operations in o.lg n/ time, then we could sort $n$ keys in $o(nlog(n)))$ time by first performing $n$ INSERT operations, followed by $n$ EXTRACT-MIN operations.
+
+
 First attempt to store an array of size $n$ with elements among the set $\{ 0, 1, ... u-1\}$:
 
 ![bit_vec.png](assets/images/bit_vec.png)
@@ -232,6 +238,9 @@ First attempt to store an array of size $n$ with elements among the set $\{ 0, 1
 Insert and Delete are constant, Successor is linear.
 
 Second attempt:
+
+![tree_emde.png](assets/images/tree_emde.png)
+
 
 ![clusters.png](assets/images/clusters.png)
 
@@ -242,3 +251,11 @@ Insert is constant - need to change the value in the clusters and mark in the su
 Successor is:
 
 ![successor.png](assets/images/successor.png)
+
+
+We have not yet improved the runtime complexity. Van Emde Boas is to create clusters which are recursive and depend on other clusters.
+
+![emde_recurse.png](assets/images/emde_recurse.png)
+
+
+Code implementation details look at the lecture and your notes [here]()
