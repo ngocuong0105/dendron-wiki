@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662225015416
+updated: 1662225275068
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -310,3 +310,5 @@ To prove this is indeed $O(1)$ amortized you need the Potential method.
 **Potential method**
 
 Define a *potential (energy) function* $\Phi$ which maps each data structure $D_i$ to a nonnegative integer. Check CLRS for more details and proof of Table doubling and halving is $O(1)$.
+
+## Lecture 6:
