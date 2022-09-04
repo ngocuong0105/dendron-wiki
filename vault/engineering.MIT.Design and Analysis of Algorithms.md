@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662225275068
+updated: 1662292331893
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -311,4 +311,50 @@ To prove this is indeed $O(1)$ amortized you need the Potential method.
 
 Define a *potential (energy) function* $\Phi$ which maps each data structure $D_i$ to a nonnegative integer. Check CLRS for more details and proof of Table doubling and halving is $O(1)$.
 
-## Lecture 6:
+## Lecture 6: Randomized Algorithms
+
+Randomized algorithm is one that generates a random number $r$ and makes decisions on $r$'s value.
+
+On same input and on different execution randomized algos may:
+- run a different number of steps
+- produce different output
+
+Two types of random algos:
+- Monte Carlo - runs in polynomial time always output is correct with **high probability**
+- Las Vegas - runs in **expected** polynomial time output is always correct
+
+**Monte Carlo = probably correct**
+**Las Vegas = probably fast**
+
+Monte Carlo is for estimation stuff to get almost correct values.
+
+Las Vegas example is quick sort - $O(nlog(n))$ expected time. 'Almost sorted' does not make sense.
+
+
+**Problem. Matrix Product Checker**
+
+Given $nx$n$ matrices $A, B, C$ the goal is to check if $A$ x $B=C$. We use randomized algo so that we do not checkout the full multiplication.
+
+**Freivalds' algorithm**
+
+Procedure:
+
+1. Generate an $n × 1$ random $0/1$ vector $r$ .
+2. Compute $P = A × (Br) - Cr$
+3. Output "Yes" if $P = ( 0 , 0 , … , 0 )$; "No," otherwise.
+
+
+If $A × B = C$ , then the algorithm always returns "Yes". If $A × B \neq C$ then the probability that the algorithm returns "Yes" is less than or equal to one half.
+
+By iterating the algorithm $k$ times and returning "Yes" only if all iterations yield "Yes", a runtime of $O(k n^2)$ and error probability of $<= 1/2^k$ is achieved.
+
+*Proof that $P($false negatives$) \leq 1/2$*. Idea is for every bad $r$ which does not catch that $AB - C \neq 0$ we create a good $r$ and have 1-1 mapping. See your [notes](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Design%20and%20Analysis%20of%20Algorithms%20MIT.pdf).
+
+
+**Paranoid Quick Sort**
+
+![paranoid_quick_sort.png](assets/images/paranoid_quick_sort.png)
+
+![paranoid_qs_analysis.png](assets/images/paranoid_qs_analysis.png)
+
+Paranoid Quick sort is probably fast with expected running time $O(nlog(n))$.
