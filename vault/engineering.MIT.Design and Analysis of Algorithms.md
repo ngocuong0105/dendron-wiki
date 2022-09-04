@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662292331893
+updated: 1662310881440
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -13,7 +13,7 @@ Lecture [videos](https://www.youtube.com/watch?v=2P-yW7LQr08&list=PLUl4u3cNGP631
 
 
 **Overview of course:**
-- Divide and Conquer (Merge Sort classic example, Fast Fourier transform, algorithm for convex hull)
+- Divide and Conquer (Merge Sort classic example, Fast Fourier transform, algorithm for convex hull, van Emde Boas trees)
 - Optimization (greedy (Dijkstra), dynamic programming, shortest paths)
 - Network Flow (network, capacities, max flow - min cut problem)
 - Linear Programming
@@ -260,7 +260,7 @@ We have not yet improved the runtime complexity. Van Emde Boas is to create clus
 
 Code implementation details look at the lecture and your notes [here](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/lecture4_emde_boas.pdf).
 
-## Lecture 5: Amortization
+# Lecture 5: Amortization
 
 So far learning fancy cool data structures. This lecture is on fancy cool techniques of computing complexity of data structures.
 
@@ -311,7 +311,7 @@ To prove this is indeed $O(1)$ amortized you need the Potential method.
 
 Define a *potential (energy) function* $\Phi$ which maps each data structure $D_i$ to a nonnegative integer. Check CLRS for more details and proof of Table doubling and halving is $O(1)$.
 
-## Lecture 6: Randomized Algorithms
+# Lecture 6: Randomized Algorithms
 
 Randomized algorithm is one that generates a random number $r$ and makes decisions on $r$'s value.
 
@@ -358,3 +358,5 @@ By iterating the algorithm $k$ times and returning "Yes" only if all iterations 
 ![paranoid_qs_analysis.png](assets/images/paranoid_qs_analysis.png)
 
 Paranoid Quick sort is probably fast with expected running time $O(nlog(n))$.
+
+# Lecture 7 Randomization: Skip Lists
