@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1662202618382
+updated: 1662299567791
 created: 1658698294975
 ---
 
@@ -458,3 +458,4 @@ Decide how to normalize your database by looking for:
 [608](https://leetcode.com/problems/tree-node/submissions/)
 [2308](https://leetcode.com/problems/arrange-table-by-gender/)
 [2228](https://leetcode.com/problems/users-with-two-purchases-within-seven-days/)
+[1285](https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/submissions/)
