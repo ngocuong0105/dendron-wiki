@@ -468,4 +468,4 @@ Idea: Use 2-level hashing.
 
 ![2-level-hashing.png](assets/images/2-level-hashing.png)
 
-Instead of second level with linked lists we add hash table. Better read the maths why this works in notes and CLRS.
+in
