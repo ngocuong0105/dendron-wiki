@@ -2,7 +2,7 @@
 id: 2ic3ljkold03g223cujfbjz
 title: Programming for the Puzzled
 desc: ''
-updated: 1661790213163
+updated: 1662363410028
 created: 1660838449536
 ---
 # MIT 6.S095 - Programming for the Puzzled
@@ -480,6 +480,7 @@ This is **bipartite** matching problem. Purpose of this puzzle is to say if you 
 
 Bipartite graphs are those which you can split in two groups of nodes and all edges have one end in one of the groups and the other edge in the other group.
 
+[Leetcode](https://leetcode.com/problems/possible-bipartition/)
 [Leetcode](https://leetcode.com/problems/is-graph-bipartite/)
 
 Bipartite graph = 2-colorable (color vertices such that no edge has two same color edges) =
