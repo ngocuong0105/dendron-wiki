@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662321482404
+updated: 1662471838649
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -14,6 +14,7 @@ Lecture [videos](https://www.youtube.com/watch?v=2P-yW7LQr08&list=PLUl4u3cNGP631
 
 **Overview of course:**
 - Divide and Conquer (Merge Sort classic example, Fast Fourier transform, algorithm for convex hull, van Emde Boas trees)
+- Amortized analysis, random algos, quick select,quick sort skip lists, perfect and universal hashing
 - Optimization (greedy (Dijkstra), dynamic programming, shortest paths)
 - Network Flow (network, capacities, max flow - min cut problem)
 - Linear Programming
@@ -360,3 +361,111 @@ By iterating the algorithm $k$ times and returning "Yes" only if all iterations 
 Paranoid Quick sort is probably fast with expected running time $O(nlog(n))$.
 
 # Lecture 7 Randomization: Skip Lists
+
+ A skip list a **probabilistic** data structure that allows $O(log(n))$ search, insert, delete within a set of $n$ elements. It maintains a linked list hierarchy of subsequences with each successive subsequence skipping over fewer elements than the previous one. In the example below we insert 80.
+
+Comparing with treap and red-black tree which has the same function and performance, the code length of Skiplist can be comparatively short and the idea behind Skiplists is just simple linked lists.
+
+ ![skip_list.png](assets/images/skip_list.gif)
+
+Design a skip list, [leetcode](https://leetcode.com/problems/design-skiplist/).
+
+**Motivation for skip lists.**
+
+Step 1. Linked list - search is $O(n)$
+
+Step 2. Sorted Linked list - search is still $O(n)$
+
+Step 3. Two sorted Linked list, where the second one is a subsequence (express line) and skips elements.
+
+Step 4. Add $log(n)$ layers of linked lists
+
+![skip_list_motivation.png](assets/images/skip_list_motivation.png)
+
+
+- Insert is randomized using a fair coin
+- Search and Delete are deterministic
+
+
+**Why skip lists are good?**
+
+**Warm-up Lemma,** The number of levels in $n-$element skip list is $O(log(n))$ with high probability, that is as $n$ grows we the probability converges to 1. This is stronger than having expected running times stuff where you have no guarantees of how likely the worst case is.
+
+With this lemma we can say thing like:
+- number of levels in the skip list is at most $2log(n)$ with $90\%$ probability
+- at most $4log(n)$ with $99.9\%$ probability etc
+
+**Proof.**
+$P(>= clog(n) levels) = P($some element got $>=clog(n)$ promotions $) = (1/2)^{clog(n)} \leq \dfrac{n}{n^c} = \dfrac{1}{n^{c-1}}$
+
+
+**Search**
+
+Theorem.  Any search in $n$-element skip list costs $O(log(n))$
+
+Steps:
+1. We track the search moves **backwards**
+2. Backwards search makes up and left moves each with probability 1/2
+3. Number of ups is less than number of levels  $\leq c(log(n))$ with high probability
+4. The BUM: Total number of moves = number of coin flips until you get $c(log(n))$ heads (up moves)
+
+Claim: Number of coin flips until we see $c(log(n))$ heads is $O(log(n))$ with high probability.
+
+We need to proof that for to see $clog(n)$ heads, there exist a constant $d$ such that if $Y$ is a random vairable counting the number of heads after $dlog(n)$ coin flips then $P(Y < clog(n)) = \dfrac{1}{n^{\alpha}}$. Idea is to use [Chernoff bound](https://en.wikipedia.org/wiki/Chernoff_boundhttps://en.wikipedia.org/wiki/Chernoff_bound).
+
+# Lecture 8: Randomization: Universal & Perfect Hashing
+
+**Buzz words:** Hashing with chaining, open addressing, load factor $n/m$, Simple Uniform Hashing assumption, Hash functions, linear probing, quadratic probing, universal hashing, perfect hashing
+
+**Dictionary problem.** Abstract Data Type (Math definition, interface):
+- maintain a dynamic set of items
+- each item has a key, item is a key value pair
+- insert(item)
+- delete(item)
+- search(key)
+
+Goal is to run all 3 operations in $O(1)$ expected time (amortized).
+
+In MIT 6.001- [[engineering.MIT.Introduction to algorithms]] you saw hashing with chaining and open addressing. you proved that the insert, delete and search take $O(1+\dfrac{n}{m})$, where n is the number of elements you have in the table and m is the number of slots (table size, number of buckets). So as long as you chose $m = O(n)$ (you can keep that dynamically using  table doubling and shrinking) you would have $O(1)$ operations.
+
+However, you **assumed** that you have **simple uniform hashing**. That is your keys are mapped at each slot of the table with probability $O(\dfrac{1}{m})$ So you had to choose a smart hashing function that would map your keys uniformly. However you want, a hashing function that work work well no matter what the keys are. That is in the worst case scenario for the keys you still want $O(1)$ operations. Our analysis in MIT 6.001 considered average case scenario, where for random keys we would have simple uniform hashing.
+
+Want to avoid the assumption that the keys are random.
+
+**Universal Hashing**
+
+Works for dynamic sets - allows insert and delete
+- choose $h$ randomly from a hash family $H$.
+- assume $H$ ti be universal hash family:
+  - for all keys $k,k'$: $P(h(k)=h(k')) \leq \dfrac{1}{m}$, probability over choosing $h$.
+
+You can prove using indicator variables that $E($number of keys hashing to the same place as $k_i) \leq 1+n/m$
+
+*Dot product hash family*
+- assume $m$ m is prime
+- assume $u = m^r$ for integer $r$
+- view key $k$ in base $m$, $k = (k_0,k_1, .. k_{r-1})$
+- for a key $a = (a_0, .. a_{r-1})$ define $h_a(k) = (a \times k) \mod m$ (dot product)
+
+$H = \{h_a| a \in 0...u-1\}$. To choose random $h_a$ choose a random $a$.
+
+Another universal hashing family:
+
+
+![universal_hashing.png](assets/images/universal_hashing.png)
+
+We achieved $O(1)$ expected time for all operations.
+
+**Perfect Hashing**
+
+This works for static keys and support search only. It is perfect hashing because it achieves $O(1)$ search worst case, that is keys are stored perfectly with no collisions.
+
+- polynomial build time with high probability
+- worst case $O(1)$ run time
+- worst case memory $O(n)$
+
+Idea: Use 2-level hashing.
+
+![2-level-hashing.png](assets/images/2-level-hashing.png)
+
+Instead of second level with linked lists we add hash table. Better read the maths why this works in notes and CLRS.
