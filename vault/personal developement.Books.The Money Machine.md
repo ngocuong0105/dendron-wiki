@@ -2,7 +2,7 @@
 id: ut3njqkrs23e6cmfbb8vkvx
 title: The Money Machine
 desc: ''
-updated: 1662237819027
+updated: 1662495403747
 created: 1659356533923
 ---
 
@@ -77,3 +77,27 @@ If company goes south, lenders and bondholders come first and then equity invest
 - **Leverage** gives the investor an opportunity for a large profit with a small stake.
 
 Liquidity range: The range of financial assets extends from cash to long-term loans.
+
+# The International Financial Revolution
+
+Old system - Bretton Woods had fixed exchange rates with strict controls on capital flows. This system went down in 1970s. Sterling was moved to floating point with the US dollar.
+
+Floating exchange rates added risks for companies trading worldwide. This was opportunity for financial companies to mitigate foreign-exchange rate.
+
+There are 3 elements of monetary policy:
+- exchange rates
+- interest rates
+- capital controls
+
+Under Bretton Woods system, countries controlled their exchange rates and capital flows.
+
+
+*The absence of takeovers meant there was no market discipline on poor companies to perform well.*
+
+
+The free-market model: lower taxes, reduced government deficits and open capital markets.
+
+**Globalization**
+
+What is globalization? It is one of those terms that is often used, but more rarely defined. Broadly
+speaking, it is a trend whereby trade, investment and culture have become ever more international.
