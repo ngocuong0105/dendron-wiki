@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662585052939
+updated: 1662646237987
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -535,3 +535,82 @@ Space complexity is $O(n lg n)$. The primary subtree is $O(n)$. Each point is du
 Range trees are used in database searches. For example if you have 4 columns in a database and you do searches like col1 should be inside one interval col2 in another interval, etc. range trees would allow fast queries. This is called indexing in database columns.
 
 
+# Lecture 10: Dynamic Programming. Advanced DP
+
+We consider 3 problems:
+
+- longest palindromic subsequence
+- optimal binary search tree
+- alternating coin game
+
+**DP steps**:
+1. Determine Subspace of problems
+2. Define Recursive relation based on optimal solutions of subproblem
+3. Compute value of an optimal solution (bottom-up, top down)
+4. Construct optimal solution from computed information (typically involves some backtracing)
+
+**Longest Palindromic Sequence**
+Given a string $s$ find the longest subsequence which is a palindrome (not necessarily contiguous).
+
+*Solution*
+```python
+# O(n**2)
+def solve(s):
+    @cache
+    def dp(i,j):
+      if i == j: return 1
+      elif  i > j: return 0
+      if s[i] == s[j]: return 2 + dp(i+1,j-1)
+      return max(dp(i+1,j),dp(i,j-1))
+```
+
+Run time = Number of subproblems * Time per subproblem (assumes lookup is $O(1)$)
+
+If you use arrays for lookup you would have constant access, in hash tables you get it constant amortized (collisions).
+
+
+**Optimal Binary Search Trees**
+
+Given keys $K_1, K_2 ... K_n$, where $K_1 < .. < K_n$ WLOG $K_i = i$. There are many different BST-s with these set of keys.
+We assign weights for each of these keys $W_1,W_2 ... W_n$. You can think that the weights are probabilities of searching each of the keys (search probabilities). Find/construct a BST that minimizes:
+
+$\sum W \times ($ depth $(K_i)  + 1)$.
+
+The root has depth 0. Application: needs a structure which would minimize the expected search cost.
+
+
+![optimal_bst.png](assets/images/optimal_bst.png)
+
+
+Before doing DP, try greedy!
+
+We choose the root $K_r$ to be the key with largest weight. Then you know which nodes are on the left and which on the right. Continue do greedy approach in recursive fashion. But this does not work:
+
+![optimal_bst_greedy.png](assets/images/optimal_bst_greedy.png)
+
+
+**DP solution**
+
+Subproblem space $e(i,j) =$ cost of optimal BST on $K_i, K_{i+1} ... K_j$
+
+![optimal_bst_dp.png](assets/images/optimal_bst_dp.png)
+
+
+**Alternating Coin Gamse**
+
+Row of $n$ coins of values $V_1, ... , V_n$, where $n$ is even. In each turn, a player selects either the first or last coin from the row, removes it, and receives the value of the coin
+
+The first player never looses (win or equal)! He can make it so that he pick all values on odd indices or on even indices, depending which sum gives the larger sum.
+
+
+How to maximize the amount of money won assuming you move first?
+
+Subproblem space: $V(i,j)$ is the max value we can definitely win if it is *our* turn and only conis $V_i .. V_j$
+
+
+![coin_game.png](assets/images/coin_game.png)
+
+[leetcode](https://leetcode.com/problems/stone-game-ii/)
+
+
+# Lecture 11. Dynamic Programming. All-Pairs Shortest Paths
