@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1662630736041
+updated: 1662634407869
 created: 1658698294975
 ---
 
@@ -261,6 +261,21 @@ ROLLBACK
 END CATCH
 ```
 
+## SQL CTE
+
+CTE = Common Table Expression. These are temporary tables which act as variable that you can use through your code.
+[Example problem](https://leetcode.com/problems/change-null-values-in-a-table-to-the-previous-value/submissions/)
+
+```sql
+with cte as (select *,rank() over(order by money) as r from t),
+     cte2 as (select *,min(r) as minn from cte2),
+     cte3 as (select student from cte2 where r = minn)
+select *
+from cte3
+```
+
+Avoid running lots of subqueries, joining, carrying tables around!
+
 
 ## SQL recursion
 Basic SQL cannot express unbounded computations.
@@ -465,3 +480,4 @@ Decide how to normalize your database by looking for:
 [2308](https://leetcode.com/problems/arrange-table-by-gender/)
 [2228](https://leetcode.com/problems/users-with-two-purchases-within-seven-days/)
 [1285](https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/submissions/)
+[1369](https://leetcode.com/problems/get-the-second-most-recent-activity/)
