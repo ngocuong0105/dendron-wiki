@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1662629043819
+updated: 1662654837556
 created: 1658766702063
 ---
 
@@ -84,6 +84,12 @@ class Solution:
 # [a,b], [x,y]
 def overlap(a,b,x,y):
     return a < y and x < b
+```
+- suffix and prefix sum
+```python
+from itertools import accumulate
+suff = list(accumulate(nums[::-1]))[::-1]
+pref = list(accumulate(nums))
 ```
 
 # Algos

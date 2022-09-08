@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662646237987
+updated: 1662669406404
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -610,7 +610,119 @@ Subproblem space: $V(i,j)$ is the max value we can definitely win if it is *our*
 
 ![coin_game.png](assets/images/coin_game.png)
 
-[leetcode](https://leetcode.com/problems/stone-game-ii/)
+[leetcode](https://leetcode.com/problems/stone-game/)
 
 
 # Lecture 11. Dynamic Programming. All-Pairs Shortest Paths
+
+Two types of shortest path problems:
+
+- single source (from one source $s$ find the shortest path to all vertices $v \in V$)
+- all pairs shortest path
+
+The problem with one source and one destination cannot be solved faster than the single source shortest path, so when you solve it you would use the single source shortest path solutions such as Dijkstra and Bellman Ford.
+
+![single_source.png](assets/images/single_source.png)
+
+Note that Dijkstra works only for non-negative weights. It is a type of **greedy algorithm**.
+
+Bellman Ford works for general graphs. It is a DP algo.
+
+
+**APSP = All pairs shortest path**
+
+One way to solve this problem is to run $V$ times Dijkstra or Bellman Ford.
+
+
+
+DP First attempt.
+
+If your subproblem space is $dp[u][v]$ that is shortest path from $u$ to $v$, then you would not have a DAG subproblem space! Enter an infinite recursion when trying to resolve your subproblems.
+
+Natural improvement of subspace is $dp[u][v][m] = $ weight of shortest path from $u$ to $v$ $\leq m $ edges.
+
+Below are the 5 steps of DP thinking from Eric:
+
+
+![dp_shortest_path_1.png](assets/images/dp_shortest_path_1.png)
+
+```python
+# Bottom-up via relaxation steps
+for m = 1 to n by 1
+  for u in V
+    for v in V
+      for x in V # this is the min step
+        if duv > dux + dxv # can put wxv too
+            duv = dux + dxv
+```
+
+Runtime is $O(V^4)$, which is the same as running $V$ time Bellman Ford.
+
+
+**Matrix Multiplication**
+
+Given $n \times n$ matrices $A$ and $B$ compute their product $C = A \times B$.
+
+- $O(n^3)$ standard algo
+- O(n^{2.807}) via Strassen
+
+Matrix multiplication is the same as the above recurrence relation
+
+$c_ij = \sum_k a_{ik} \dot b_{kj}$ is similar to $d_{uv} = min(d_ux + w(x,v))$ for $x \in V$
+
+Define the summation operand to be a min, and the multiplication operand to be $+$.
+
+We can **redefine** the DP problem using Matrix multiplication language.
+
+![matrix_mult_short_path.png](assets/images/matrix_mult_short_path.png)
+
+The shortest distance matrix we want to compute $D^m$ equals $W^m$ where the powers is defined in circle land.
+
+All pairs shortest path problem requires computing $W^n$ in circle land. Single matrix multiplication is $n^3$, hence total complexity is $O(V^4)$ - same algo as above just expressed in another language. However with matrix multiplication you can use **repeated squaring** trick and get running time $O(n^3lgn)$.
+
+
+**Floyd-Warshall**
+
+![floyd_warshall.png](assets/images/floyd_warshall.png)
+
+```python
+C = (w(u, v))
+for k = 1 to n by 1
+  for u in V
+    for v in V
+      if c uv > c uk + c kv
+        c uv = c uk + c kv
+
+```
+
+Run time $O(V^3)$
+
+**Jonhson's algorithm**
+
+Idea is to do graph re-weighting so that we have nonnegative weights and run Dijkstra. Shortest paths are preserved.
+
+
+![johnson.png](assets/images/johnson.png)
+
+*How to find a function* $h$?
+
+You want to find $h$ which satisfies $h(v) - h(u) \leq w(u,v)$ for all $(u,v) \in V$. This is called a **system of difference constraints**. 
+
+**Theorem.** If there is a negative-weight cycle, there there exist **no** solution to the above system.
+
+
+**Theorem.** If $(V, E, w)$ has no negative-weight cycle, then we can ﬁnd a solution to the difference constraints.
+
+**Proof by example.** Add new vertex (source) $s$ and connect it to any other vertex and add 0 weights. Compute single source shortest path from $s$ and get $dist[s][v]$ for every $v \in V$. This is your function $f$. Prooved by triangle inequality.
+
+**Time complexity**
+
+1. The first step involves running Bellman-Ford from s, which takes $O(V E)$ time. We also pay a pre-processing cost to re-weight all the edges $(O(E))$.
+
+2. We then run Dijkstra’s algorithm from each of the $V$ vertices in the graph; the
+total time complexity of this step is $O(V E + V 2 lg V )$
+
+3. We then need to re-weight the shortest paths for each pair; this takes $O(V^2)$ time.
+
+
+The total running time of this algorithm is $O(V E + V^2 lg V)$.
