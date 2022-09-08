@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1662615162785
+updated: 1662629043819
 created: 1658766702063
 ---
 
@@ -140,3 +140,5 @@ def rotate_inplace(matrix):
 
 
 - guess the algo, [p1](https://leetcode.com/problems/shortest-path-with-alternating-colors/)
+
+- sliding window with augmented/additional data structure heap + queue, [p1](https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/)

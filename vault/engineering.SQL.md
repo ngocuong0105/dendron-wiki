@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1662299567791
+updated: 1662630736041
 created: 1658698294975
 ---
 
@@ -140,36 +140,7 @@ t1
 union all
 t2 # duplicates are stacked
 ```
-- with statement [leetcode](https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company/)
-Basic SQL cannot express unbounded computations. WITH construct is available in SQL without recursion. But this is the construct used to ADD recursion in SQL. CTE = common table expression. WITH is like a function in SQL
 
-```sql
-with R1 as (query 1),
-     R2 as (query 2),
-     ...
-     CTE as (query),
-     
- <query involving all R1, R2 ..Rn, CTE + other tables> # return this last query
-```
-
-- recursion
-```sql
-WITH RECURSIVE cte_name AS (
-    cte_query_definition (the anchor member)
-
-    UNION ALL
- 
-    cte_query_definition (the recursive member) # often need where statement to stop
-)
- 
- 
-SELECT *
-FROM   cte_name;
-```
-![recursion_query.png](assets/images/recursion_query.png)
-
-
-![recursion.png](assets/images/recursion.png)
 - between
 ```sql
 SELECT column_name(s)
@@ -325,12 +296,12 @@ SELECT * FROM cte_name;
 ```
 
 ```sql
-WITH RECURSIVE cte_count (n)
+WITH RECURSIVE cte_count
 AS (
-      SELECT 1
+      SELECT 1 as n-- BASE CASE
       UNION ALL # might enter infinite loop, careful
       SELECT n + 1
-      FROM cte_count
+      FROM cte_count -- Recursive call, should dependt on the relation itself CTE_COUNT!
       WHERE n < 3
     )
 SELECT n
@@ -347,6 +318,41 @@ WITH RECURSIVE seq AS (
 
 SELECT * FROM seq;
 ```
+
+
+- with statement [leetcode](https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company/)
+Basic SQL cannot express unbounded computations. WITH construct is available in SQL without recursion. But this is the construct used to ADD recursion in SQL. CTE = common table expression. WITH is like a function in SQL
+
+```sql
+with R1 as (query 1),
+     R2 as (query 2),
+     ...
+     CTE as (query),
+     
+ <query involving all R1, R2 ..Rn, CTE + other tables> # return this last query
+```
+
+- recursion
+```sql
+WITH RECURSIVE cte_name AS (
+    cte_query_definition (the anchor member)
+
+    UNION ALL
+
+    cte_query_definition (the recursive member) # often need where statement to stop
+)
+
+ 
+SELECT *
+FROM   cte_name;
+```
+![recursion_query.png](assets/images/recursion_query.png)
+
+
+![recursion.png](assets/images/recursion.png)
+
+- classic family tree recursion [problem](https://leetcode.com/problems/all-people-report-to-the-given-manager/)
+
 
 ## SQL indexing
 [Stanford Lecture](https://www.youtube.com/watch?v=Y7Qlc7f_u0o)
