@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662471838649
+updated: 1662585052939
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -468,4 +468,70 @@ Idea: Use 2-level hashing.
 
 ![2-level-hashing.png](assets/images/2-level-hashing.png)
 
-in
+
+# Lecture 9: Augmentation. Range Trees
+
+
+**Easy Tree Augmentation.**
+
+The goal here is to store $x.f$ at each node $x$, which is a function of the node, namely $f($subtree rooted at $x)$. If $x.f$ is computable **locally** from its children then updates take $O(h)$ runtime where h is the height of the tree. To update $x.f$, we need to walk up the tree to the root.
+
+**Order-statistic trees.**
+
+ADT (interface of the data structure):
+- insert(x), delete(x), successor(x)
+- rank(x)
+- select(i): find me the element of rank i
+
+Want all of these in $O(log(n))$
+
+
+We can implement the above ADT using easy tree augmentation on AVL trees (or 2-3 trees or any balance BST) to store subtree size: $f($subtree$)$ = $#$ of nodes in it.
+
+![rank_select.png](assets/images/rank_select.png)
+
+NB: Need to choose augmentation functions which can be maintained easier such as subtree size. Above we could thing to store the rank of each node (rank and select would be very easy). However if you insert elements it would be $O(n)$, e.g. if you insert a minimum element you need to update all node ranks.
+
+
+#TODO Finger Search Trees (this is tree augmentation on 2-3 threes)
+
+
+**Range Trees**
+
+Solves the problem orthogonal range search.
+
+Suppose we have $n$ points in a $d$-dimension space. We would like a data structure that supports range query on these points: ﬁnd all the points in a give axis-aligned box. An axis-aligned box is simply an interval in 1D, a rectangle in 2D, and a cube in 3D.
+
+Goal is to run in $O(log^d(n) + ($ output size $))$.
+
+NB: Our data structure would be static and support only search points in box query.
+
+**1D case**
+
+We have array `[a_1,a_2...a_n]` and for a query `search(x,y)` we want to output all numbers in the array which are in the interval `[x,y)`. Simple solution is to use sorted array and then do binary searches in $O(log(n))$.
+
+Sorted arrays are inefficient for insertion and deletion. For a dynamic data structure that supports range queries such as AVL, Red-Black trees.
+
+However, neither of the above approaches generalizes to high dimensions.
+
+**1D range trees**
+
+![range_tree.png](assets/images/range_tree.png)
+
+That is like doing rightful rank for node $a$ and left rank for node $b$.
+
+**Analysis.** $O(lg n)$ to implicitly represent the answer (showing just the roots). $O(lg n + k)$ to output all k answers. $O(lg n)$ to report k via subtree size augmentation.
+
+![range_tree_pic.png](assets/images/range_tree_pic.png)
+
+**2D range trees**
+
+Create a 1D range tree on the x coordinates. Do a search to find $O(lg(n))$ nodes which satisfy the interval provided by the $x$ coordinate. **Data Augmentation**: for each of these trees we store another range tree on the y coordinate. So we have dictionary with keys being the nodes of the first range tree, and values is range tree by the y coordinate. There is lots of data duplication. Then you do a little search on the $y-coordinate range tree$. Run time $O(log^2(n))$
+
+Space complexity is $O(n lg n)$. The primary subtree is $O(n)$. Each point is dupli­cated up to $O(lg n)$ times in secondary subtrees, one per ancestor.
+
+*Aside*
+
+Range trees are used in database searches. For example if you have 4 columns in a database and you do searches like col1 should be inside one interval col2 in another interval, etc. range trees would allow fast queries. This is called indexing in database columns.
+
+

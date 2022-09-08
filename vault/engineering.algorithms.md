@@ -2,14 +2,14 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1662190336377
+updated: 1662615162785
 created: 1658766702063
 ---
 
 Should add some tricky algos/data structures here.
 
 **Buzz words**
-BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal, Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls, BFS, DFS
+BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal [inorder](https://leetcode.com/problems/binary-tree-inorder-traversal/), Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls, BFS, DFS
 
 See dbabichev link for [patterns](https://flykiller.github.io/coding%20ideas/).
 
