@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662669406404
+updated: 1662743569718
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -726,3 +726,77 @@ total time complexity of this step is $O(V E + V 2 lg V )$
 
 
 The total running time of this algorithm is $O(V E + V^2 lg V)$.
+
+# Lecture 12: Greedy Algorithms. Minimum Spanning Tree
+
+- Prim's algorithm
+- Kruskal's algorithm
+
+Recall that a greedy algorithm repeatedly makes a locally best choice or decision, but ignores the effects of the future.
+
+**Minimum spanning tree problem.**
+
+A *spanning tree* of a graph $G$ is a subset of the edges of $G$ that form a tree and include all vertices of $G$. Given an undirected graph $G = (V, E)$ and edge weights $W : E → R$, find a spanning tree $T$ of minimum weight sum $\sum w(e)$. We take some edges of the graph, hit all vertices and minimize the weight sum.
+
+
+**Properties of a greedy algorithm:**
+
+- Optimal Substructure: the optimal solution to a problem incorporates the optimal solution to subproblem(s)
+- Greedy choice property: locally optimal choices lead to a globally optimal solution
+
+In DP you would do guessing, unlike greedy where you are greedy and take the best local option.
+
+**Lemma 1.** If $T'$ is a minimum spanning tree of $G/e$, then $T' \cup {e}$ is an MST of $G$.
+
+*Contract edge $e$ - idea*. This is to combine two nodes into one and solve the smaller problem.
+
+![edge_contraction.png](assets/images/edge_contraction.png)
+
+The statement can be used as the basis for a dynamic programming algorithm, in which we guess an edge that belongs to the MST, retract the edge, and recurse. At the end, we decontract the edge and add e to the MST. The lemma proves correctness of the algo but it would be exponential. At each step you guess one random edge of all possible edges.
+
+**We need an intelligent way to choose edge $e$**.
+
+
+**Lemma 2** (Greedy-Choice Property for MST). For any **cut** $(S, V \ S)$ in a graph $G = (V, E, w)$, any least-weight crossing edge $e = {u, v}$ with $u \in S$ and $v \in S$ is in some MST of $G$.
+
+**This lema is your golden ticket to use greedy algo.**
+
+
+**Prim's algorithm**
+
+It is Dijkstra like.
+
+Idea is to start with one vertex $s$. This is your initial cut $s$ vs the rest.
+
+```Python
+def dist(a,b):
+    return abs(a[0]-b[0]) + abs(a[1]-b[1])
+h = [(0,0)] # dist,s
+edges = {s:float('inf') for s in range(len(points))}
+edges[0] = 0
+parent = {}
+visited = set() # keeps track of your cut, in Dijkstra you do not need that
+while h:
+    d,s = heappop(h)
+    visited.add(s)
+    for u in range(len(points)):
+        if u not in visited and dist(points[u],points[s]) < edges[u]:
+            edges[u] = dist(points[u],points[s])
+            parent[u] = s
+            heappush(h,(edges[u],u))
+# edges has the weights of the MST tree
+```
+![run_time_prim.png](assets/images/run_time_prim.png)
+
+Runtime just like Dijkstra.   
+
+**Kruskal's Algoritm**
+
+Kruskal constructs an MST by taking the globally lowest-weight edge and contracting it.
+
+```
+sort the edges in nondecreasing weights
+for edge in edges:
+     add edges consecutively to the DSU in this order (keep tree)
+```
+![runtime_kruskal.png](assets/images/runtime_kruskal.png)
