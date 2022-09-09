@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1662654837556
+updated: 1662718938181
 created: 1658766702063
 ---
 
@@ -148,3 +148,25 @@ def rotate_inplace(matrix):
 - guess the algo, [p1](https://leetcode.com/problems/shortest-path-with-alternating-colors/)
 
 - sliding window with augmented/additional data structure heap + queue, [p1](https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/)
+
+- monotonic queue, [p1](https://leetcode.com/problems/constrained-subsequence-sum/)
+
+```python
+
+class Monoqueue(collections.deque):
+    def enqueue(self, val):
+        count = 1 # counts the number of elements which value is greater or equal than
+        while self and self[-1][0] < val:
+            count += self.pop()[1]
+        self.append([val, count])
+
+    def dequeue(self):
+        ans = self.max()
+        self[0][1] == 1
+        if self[0][1] =S= 0:
+            self.popleft()
+        return ans
+
+    def max(self):
+        return self[0][0] if self else 0
+```
