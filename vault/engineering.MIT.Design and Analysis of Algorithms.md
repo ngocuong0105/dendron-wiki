@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662743569718
+updated: 1662794834446
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -34,6 +34,8 @@ NP-complete are the hardest problems in NP. Solve a NP-complete in polynomial ti
 ---
 
 Given an array of intervals `[(s1,f1), (s2,f2) ... ]` - left closed, right opened. Select the maximum number of non-overlapping intervals.
+This problem should not be confused with meeting rooms [problem](https://leetcode.com/problems/meeting-rooms-ii/) where we find minimum
+conference rooms needed (time with max overlap). The latter is line sweep.
 
 **Claim** We can solve this problem using a greedy algorithm.
 
@@ -788,7 +790,7 @@ while h:
 ```
 ![run_time_prim.png](assets/images/run_time_prim.png)
 
-Runtime just like Dijkstra.   
+Runtime just like Dijkstra.
 
 **Kruskal's Algoritm**
 
