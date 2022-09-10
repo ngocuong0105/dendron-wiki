@@ -2,7 +2,7 @@
 id: 2ic3ljkold03g223cujfbjz
 title: Programming for the Puzzled
 desc: ''
-updated: 1662363410028
+updated: 1662802719838
 created: 1660838449536
 ---
 # MIT 6.S095 - Programming for the Puzzled
@@ -109,8 +109,17 @@ def solve(intervals):
             curr -= 1
         res = max(res,curr)
     return res
+# trick
+def solve(intervals):
+    events = []
+    for s,e in events:
+        events.append((s,1))
+        events.append((e,-1))
+    events.sort()
+    return max(accumulate([p for _p in events]))
 ```
 
+[problem](https://leetcode.com/problems/meeting-rooms-ii/)
 
 # Puzzle 3: You Can Read Minds. Encoding Information
 
