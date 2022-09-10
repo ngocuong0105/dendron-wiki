@@ -2,7 +2,7 @@
 id: ut3njqkrs23e6cmfbb8vkvx
 title: The Money Machine
 desc: ''
-updated: 1662582765624
+updated: 1662759532515
 created: 1659356533923
 ---
 
@@ -101,3 +101,57 @@ The free-market model: lower taxes, reduced government deficits and open capital
 
 What is globalization? It is one of those terms that is often used, but more rarely defined. Broadly
 speaking, it is a trend whereby trade, investment and culture have become ever more international.
+
+
+# Money and Interest Rates
+
+## Money
+
+There are a variety of functions which money serves:
+
+- measure of value
+- store of value (can be saved until needed)
+
+Creditors will accept money as a future payment, confident that its value will remain stable in the meantime.
+
+
+Barter system (goat for cow) -> Gold and Silver -> Paper money.
+
+Why change from gold to paper money?
+
+- Supplies of gold and silver were outstripped by the demands of society.
+- Bad money drives out good. People with pure gold would strip it out a bit. Only worst coins circulated.
+
+## Banknotes and Cheques
+
+Banknotes were, in origin, claims on gold and silver.
+
+Now money depends on the confidence of its users in the strength of the economy.
+
+Banknotes, Cheques, Cash, Credit and Debit cards. The system depends on the confidence of all those concerned.
+
+Bank accounts are therefore money in the same sense as notes and coins are, since they can be used instantly to purchase goods.
+
+
+## Defining money supply
+
+Level of inflation are closely related to the rate of increase of the money supply.
+
+narrow money = notes and coins in circulation with the public
+
+broad money,known as M4 = consists of lending by UK banks and building societies to the private sector.
+
+## Interest rates
+
+**Interest rate is essentially the price of money**
+
+The price is paid by the borrower in return for the use of the lender ’s money. The lender is compensated for not having the use of his money.
+
+- simple
+- compound
+
+## Yield
+
+When dealing with a bond or with a share, it is more important to talk of the yield than merely of the interest rate or dividend.
+
+The interest rate or dividend, expressed as a percentage of the price of the asset, is the yield
