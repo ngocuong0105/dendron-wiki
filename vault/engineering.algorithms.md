@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1662718938181
+updated: 1662888374211
 created: 1658766702063
 ---
 
@@ -10,6 +10,7 @@ Should add some tricky algos/data structures here.
 
 **Buzz words**
 BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal [inorder](https://leetcode.com/problems/binary-tree-inorder-traversal/), Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls, BFS, DFS
+[TSP](https://leetcode.com/problems/find-the-shortest-superstring/)
 
 See dbabichev link for [patterns](https://flykiller.github.io/coding%20ideas/).
 
@@ -147,6 +148,8 @@ def rotate_inplace(matrix):
 
 - guess the algo, [p1](https://leetcode.com/problems/shortest-path-with-alternating-colors/)
 
+- BFS with smart states [p1](https://leetcode.com/problems/shortest-path-visiting-all-nodes/)
+
 - sliding window with augmented/additional data structure heap + queue, [p1](https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/)
 
 - monotonic queue, [p1](https://leetcode.com/problems/constrained-subsequence-sum/)
@@ -170,3 +173,6 @@ class Monoqueue(collections.deque):
     def max(self):
         return self[0][0] if self else 0
 ```
+
+- kth element in sorted matrix [p](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/), check
+[paper](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/X%2BY.pdf)
