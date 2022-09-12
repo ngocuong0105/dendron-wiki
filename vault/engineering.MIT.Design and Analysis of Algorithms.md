@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662794834446
+updated: 1662893999354
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -802,3 +802,103 @@ for edge in edges:
      add edges consecutively to the DSU in this order (keep tree)
 ```
 ![runtime_kruskal.png](assets/images/runtime_kruskal.png)
+
+# Lecture 13: Incremental Improvement. Max Flow, Min Cut
+
+All about **Ford-Fulkerson** max-flow algorithm and Max Flow - Min Cut Theorem.
+
+## Flow network
+
+Definition. A flow network is a directed graph $G = (V, E)$ with two distinguished vertices: a source $s$ and a sink $t$. Each edge $(u, v) \in E$ has a nonnegative capacity $c(u, v)$. If $(u, v) ∉ E$,
+then $c(u, v) = 0$.
+
+
+![flow_network.png](assets/images/flow_network.png)
+
+**Maximum-flow problem** Given a flow network $G$, fund a flow of maximum vale on $G$ = max flow rate you can send from source to the sink.
+
+**Net Flow**
+
+A net flow on $G$ is a function $f: V \times V -> R$ satisfying:
+- capacity constraint: for all $u,v \in V$: $f(u,v) \leq c(u,v)$
+- skew symmetry: for all $u,v \in V: f(u,v) = -f(v,u)$
+- flow conservation: for all $u \in V - \{s, t\}$: $\sum f(u,v) = 0$
+
+**Definition** The **value** of a flow $f$, denoted by $|f|$ is given by $|f| = \sum_{v \in V} f(s,v) = f(s,V)$
+
+We use *implicit* summation notation. Example for writing flow conservation:
+
+$f(u,V) = 0$ for all $u \in V - \{s,t\}$.
+
+**Theorem** The value of a flow satisfies: $|f| = f(V,t)$, what goes out of the source equals what enters the sink.
+**Proof.**
+
+$|f| = f(s,V) = f(V,V) - f(V-s,V) = 0 + f(V,V-s) = f(V,t) + f(V,V-s-t) = f(V,t)$ (last step by conservation law)
+
+
+**Cuts**
+
+Definition. A cut $(S, T)$ of a flow network $G = (V, E)$ is a partition of $V$ such that $s ∈ S$ and $t ∈ T$. If $f$ is a flow on $G$, then the flow across the cut is $f(S, T)$.
+
+![cut.png](assets/images/cut.png)
+
+**Lemma** For any flow and any cut $(S,T)$ we have $|f| = f(S,T)$
+**Proof**  $f(S,T) = f(S,V) - f(S,S) = f(S,V) = f(s,V) + f(S-s,V) = f(s,V) = |f|$
+
+You've got a flow, the flow of the value is the flow value of the cut, as long as you have the source in one place of the cut and the sink on the other part of the cut.
+
+
+Note $f(S-s,V) = 0$ because $S$ does not contain $t$ and we use flow conservation.
+
+**Definition** The capacity of a cut $(S,T)$ is $c(S,T)$
+
+![capacity_cut.png](assets/images/capacity_cut.png)
+
+Upper bound on the maximum flow value:
+**Theorem**. The value of any flow is bounded above by the capacity of any cut.
+
+Residual network points you where in the network you have free capacities to put flow through. It has the same vertices as the original graph but different edges.
+
+![residual_network.png](assets/images/residual_network.png)
+
+Last two lines above say that your residual network might introduce extra edges which are not in the original network. Residual networks depend on the flow $f$.
+
+![residual_network_example.png](assets/images/residual_network_example.png)
+
+**Definition** Any path from $s$ to $t$ in $G_f$ is an augmenting path in $G$ with respect to $f$. If you have an augmenting path your flow $f$ is not a maximum flow. The flow value can be increased along an augmenting path $p$ by $c_f(p) = min(c_f(u,v)) $ for $(u,v) \in p$
+
+Your augmenting path tells you which edges in the original graph $G$ with your flow $f$ how you change the values on the augmenting path.
+![augmenting_path.png](assets/images/augmenting_path.png)
+
+
+
+# Lecture 14: Incremental Improvement. Matching
+**Max-flow, min-cut theorem**
+
+Theorem. The following are equivalent:
+1. $|f| = c(S, T)$ for some cut $(S, T)$.
+2. f is a maximum flow.
+3. f admits no augmenting paths.
+
+Ford-Fulkerson max-flow algo.
+
+```
+initialize f(u,v) = 9 for all u,v in V
+while an augmenting path in G wrt f exists:
+  do augment f by c_f(p)
+```
+
+To prove correctness of Ford-Fulkerson we need to prove that 3 implies 2.
+
+We will rove the theorem by proving 3 implies 1, 1 implies 2 and 2 implies 3.
+
+**1 implies 2**. $|f| \leq c(S,T)$ for any cut. The assumption that $|f| = c(S,T)$ shows $f$ is a maximum flow as it cannot be increased.
+
+**2 implies 3**. If there was an augmenting path then the flow value could be increased, hence contradicts that $f$ is a maximum flow.
+
+**1 implies 3** [proof](https://youtu.be/8C_T4iTzPCU?list=PLUl4u3cNGP6317WaSNfmCvGym2ucw3oGp&t=1496)
+
+
+Ford Fulkerson depends a lot on which augmenting paths you choose every time. Depending on the the order of your Edges, the DFS would choose different augmenting paths. Some of them would have residual flows which are super small and on each augmentation you would add very small flow.
+
+If you do BFS augmenting path search (assuming each edge is of weight 1)  then augmentation is proven to be $O(VE)$, hence the final run time of the algo is O(VE(V+E))

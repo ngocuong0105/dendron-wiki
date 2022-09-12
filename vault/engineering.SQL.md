@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1662634407869
+updated: 1662820581944
 created: 1658698294975
 ---
 
@@ -238,6 +238,8 @@ SELECT CAST(25.65 AS int);
 CAST(<value_to_cast> AS <data_type_to_cast_to>)
 */
 ``
+
+- pivot table with group_concat
 
 - index column
 ```sql
