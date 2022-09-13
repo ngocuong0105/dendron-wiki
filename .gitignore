@@ -1,4 +1,4 @@
-node_modules
+git config --global user.emailnode_modules
 .dendron.*
 build
 docs
