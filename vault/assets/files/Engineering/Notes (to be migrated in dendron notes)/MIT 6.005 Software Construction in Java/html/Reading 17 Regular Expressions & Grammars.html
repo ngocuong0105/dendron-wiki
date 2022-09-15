@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)https://ocw.mit.edu/ans7870/6/6.005/s16/classes/17-regex-grammars/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+   <title>
+    Reading 17: Regular Expressions &amp; Grammars
+   </title>
+   <link href="./Reading 17 Regular Expressions &amp; Grammars_files/handout-style.css" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+   
+  
+ </head>
+ <body>
+  <header>
+   <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/">
+    6.005 — Software Construction on MIT OpenCourseWare
+   </a>
+   |
+   <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-005-software-construction-spring-2016/">
+    OCW 6.005 Homepage
+   </a>
+   <div>
+    Spring 2016
+   </div>
+  </header>
+  <nav class="table-of-contents col-sm-2">
+   <ul class="nav">
+    <li class="active">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/17-regex-grammars/#reading_17_regular_expressions_grammars">
+      Reading 17: Regular Expressions &amp; Grammars
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/17-regex-grammars/#introduction">
+      Introduction
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/17-regex-grammars/#grammars">
+      Grammars
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/17-regex-grammars/#regular_expressions">
+      Regular Expressions
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/17-regex-grammars/#summary">
+      Summary
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="container-fluid">
+   <h1 class="handout-title col-sm-8 col-sm-offset-2" id="reading_17_regular_expressions_grammars">
+    Reading 17: Regular Expressions &amp; Grammars
+   </h1>
+   <div data-outline="reading_17_regular_expressions_grammars">
+    <div class="markdown col-sm-8 col-sm-offset-2 converted">
+     <h4>
+      Software in 6.005
+     </h4>
+     <table class="table table-striped no-markdown">
+      <tbody>
+       <tr>
+        <th width="33%">
+         Safe from bugs
+        </th>
+        <th>
+         Easy to understand
+        </th>
+        <th>
+         Ready for change
+        </th>
+       </tr>
+       <tr>
+        <td>
+         Correct today and correct in the unknown future.
+        </td>
+        <td>
+         Communicating clearly with future programmers, including future you.
+        </td>
+        <td>
+         Designed to accommodate change without rewriting.
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <h4>
+      Objectives
+     </h4>
+     <p>
+      After today’s class, you should:
+     </p>
+     <ul>
+      <li>
+       Understand the ideas of grammar productions and regular expression operators
+      </li>
+      <li>
+       Be able to read a grammar or regular expression and determine whether it matches a sequence of characters
+      </li>
+      <li>
+       Be able to write a grammar or regular expression to match a set of  character sequences and parse them into a data structure
+      </li>
+     </ul>
+     <h2 id="introduction">
+      Introduction
+     </h2>
+     <div data-outline="introduction">
+      <p>
+       Today’s reading introduces several ideas:
+      </p>
+      <ul>
+       <li>
+        grammars, with productions, nonterminals, terminals, and operators
+       </li>
+       <li>
+        regular expressions
+       </li>
+       <li>
+        parser generators
+       </li>
+      </ul>
+      <p>
+       Some program modules take input or produce output in the form of a sequence of bytes or a sequence of characters, which is called a
+       <em>
+        string
+       </em>
+       when it’s simply stored in memory, or a
+       <em>
+        stream
+       </em>
+       when it flows into or out of a module.  In today’s reading, we talk about how to write a specification for such a sequence.  Concretely, a sequence of bytes or characters might be:
+      </p>
+      <ul>
+       <li>
+        A file on disk, in which case the specification is called the
+        <em>
+         file format
+        </em>
+       </li>
+       <li>
+        Messages sent over a network, in which case the specification is a
+        <em>
+         wire protocol
+        </em>
+       </li>
+       <li>
+        A command typed by the user on the console, in which case the specification is a
+        <em>
+         command line interface
+        </em>
+       </li>
+       <li>
+        A string stored in memory
+       </li>
+      </ul>
+      <p>
+       For these kinds of sequences, we introduce the notion of a
+       <em>
+        grammar
+       </em>
+       , which allows us not only to distinguish between legal and illegal sequences, but also to parse a sequence into a data structure that a program can work with.  The data structure produced from a grammar will often be a recursive data type like we talked about in the
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/16-recursive-data-types/">
+        recursive data type reading
+       </a>
+       .
+      </p>
+      <p>
+       We also talk about a specialized form of a grammar called a
+       <em>
+        regular expression
+       </em>
+       .  In addition to being used for specification and parsing, regular expressions are a widely-used tool for many string-processing tasks that need to disassemble a string, extract information from it, or transform it.
+      </p>
+      <p>
+       The next reading will talk about parser generators, a kind of tool that translate a grammar automatically into a parser for that grammar.
+      </p>
+     </div>
+     <h2 id="grammars">
+      Grammars
+     </h2>
+     <div data-outline="grammars">
+      <p>
+       To describe a sequence of symbols, whether they are bytes, characters, or some other kind of symbol drawn from a fixed set, we use a compact representation called a
+       <em>
+        grammar
+       </em>
+       .
+      </p>
+      <p>
+       A
+       <em>
+        grammar
+       </em>
+       defines a set of sentences, where each
+       <em>
+        sentence
+       </em>
+       is a sequence of symbols.  For example, our grammar for URLs will specify the set of sentences that are legal URLs in the HTTP protocol.
+      </p>
+      <p>
+       The symbols in a sentence are called
+       <em>
+        terminals
+       </em>
+       (or tokens).
+       <br>
+        They’re called terminals because they are the leaves of a tree that represents the structure of the sentence.
+They don’t have any children, and can’t be expanded any further.
+We generally write terminals in quotes, like
+        <code>
+         'http'
+        </code>
+        or
+        <code>
+         ':'
+        </code>
+        .
+       <br>
+      </p>
+      <p>
+       A grammar is described by a set of
+       <em>
+        productions
+       </em>
+       , where each production defines a
+       <em>
+        nonterminal
+       </em>
+       .
+You can think of a nonterminal like a variable that stands for a set of sentences, and the production as the definition of that variable in terms of other variables (nonterminals), operators, and constants (terminals).
+Nonterminals are internal nodes of the tree representing a sentence.
+      </p>
+      <p>
+       A production in a grammar has the form
+      </p>
+      <blockquote>
+       <p>
+        nonterminal ::= expression of terminals, nonterminals, and operators
+       </p>
+      </blockquote>
+      <p>
+       In 6.005, we will name nonterminals using lowercase identifiers, like
+       <code>
+        x
+       </code>
+       or
+       <code>
+        y
+       </code>
+       or
+       <code>
+        url
+       </code>
+       .
+      </p>
+      <p>
+       One of the nonterminals of the grammar is designated as the
+       <em>
+        root
+       </em>
+       .
+The set of sentences that the grammar recognizes are the ones that match the root nonterminal.
+This nonterminal is often called
+       <code>
+        root
+       </code>
+       or
+       <code>
+        start
+       </code>
+       , but in the grammars below we will typically choose more memorable names like
+       <code>
+        url
+       </code>
+       ,
+       <code>
+        html
+       </code>
+       , and
+       <code>
+        markdown
+       </code>
+       .
+      </p>
+      <h3 id="grammar_operators">
+       Grammar Operators
+      </h3>
+      <div data-outline="grammar_operators">
+       <p>
+        The three most important operators in a production expression are:
+       </p>
+       <ul>
+        <li>
+         concatenation
+        </li>
+       </ul>
+       <pre style="position: relative;"><code class="language-java hljs">x ::= y z     an x is a y followed by a z </code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <ul>
+        <li>
+         repetition
+        </li>
+       </ul>
+       <pre style="position: relative;"><code class="language-java hljs">x ::= y*      an x is zero or more y </code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <ul>
+        <li>
+         union (also called alternation)
+        </li>
+       </ul>
+       <pre style="position: relative;"><code class="language-java hljs">x ::= y | z     an x is a y or a z </code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        You can also use additional operators which are just syntactic sugar (i.e., they’re equivalent to combinations of the big three operators):
+       </p>
+       <ul>
+        <li>
+         option (0 or 1 occurrence)
+        </li>
+       </ul>
+       <pre style="position: relative;"><code class="language-java hljs">x ::=  y?      an x is a y or is the empty sentence</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <ul>
+        <li>
+         1+ repetition (1 or more occurrences)
+        </li>
+       </ul>
+       <pre style="position: relative;"><code class="language-java hljs">x ::= y+       <span class="hljs-function">an x is one or more <span class="hljs-title">y</span>
+               <span class="hljs-params">(equivalent to  x ::= y y* )</span></span></code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <ul>
+        <li>
+         character classes
+        </li>
+       </ul>
+       <pre style="position: relative;"><code class="language-java hljs">x ::= [abc]  is equivalent to  x ::= <span class="hljs-string">'a'</span> | <span class="hljs-string">'b'</span> | <span class="hljs-string">'c'</span> 
+
+x ::= [^b]   is equivalent to  x ::= <span class="hljs-string">'a'</span> | <span class="hljs-string">'c'</span> | <span class="hljs-string">'d'</span> | <span class="hljs-string">'e'</span> | <span class="hljs-string">'f'</span> 
+                                         | ... (all other characters)</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        By convention, the operators
+        <code>
+         *
+        </code>
+        ,
+        <code>
+         ?
+        </code>
+        , and
+        <code>
+         +
+        </code>
+        have highest precedence, which means they are applied first.  Alternation
+        <code>
+         |
+        </code>
+        has lowest precedence, which means it is applied last.  Parentheses can be used to override this precedence, so that a sequence or alternation can be repeated:
+       </p>
+       <ul>
+        <li>
+         grouping using parentheses
+        </li>
+       </ul>
+       <pre style="position: relative;"><code class="language-java hljs">x ::=  (y z | a b)*   an x is zero or more y-z or a-b pairs</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      </div>
+      <h3 id="example_url">
+       Example: URL
+      </h3>
+      <div data-outline="example_url">
+       <p>
+        Suppose we want to write a grammar that represents URLs.  Let’s build up a grammar gradually by starting with simple examples and extending the grammar as we go.
+       </p>
+       <p>
+        Here’s a simple URL:
+       </p>
+       <pre style="position: relative;"><code class="language-python hljs">http://mit.edu/</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        A grammar that represents the set of sentences containing
+        <em>
+         only this URL
+        </em>
+        would look like:
+       </p>
+       <pre style="position: relative;"><code class="language-python hljs">url ::= <span class="hljs-string">'http://mit.edu/'</span></code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        But let’s generalize it to capture other domains, as well:
+       </p>
+       <pre style="position: relative;"><code class="language-python hljs">http://stanford.edu/
+http://google.com/</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        We can write this as one line, like this:
+       </p>
+       <div class="panel panel-figure pull-right pull-margin">
+        <img alt="the parse tree produced by parsing &#39;http://mit.edu&#39; with the one-line URL grammar" src="./Reading 17 Regular Expressions &amp; Grammars_files/url-simple.png" width="200px">
+       </div>
+       <pre style="position: relative;"><code class="language-python hljs">url ::= <span class="hljs-string">'http://'</span> [a-z]+ <span class="hljs-string">'.'</span> [a-z]+  <span class="hljs-string">'/'</span></code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        This grammar represents the set of all URLs that consist of just a two-part hostname, where each part of the hostname consists of 1 or more letters.  So
+        <code>
+         http://mit.edu/
+        </code>
+        and
+        <code>
+         http://yahoo.com/
+        </code>
+        would match, but not
+        <code>
+         http://ou812.com/
+        </code>
+        .  Since it has only one nonterminal, a
+        <em>
+         parse tree
+        </em>
+        for this URL grammar would look like the picture on the right.
+       </p>
+       <div class="clearfix">
+       </div>
+       <p>
+        In this one-line form, with a single nonterminal whose production uses only operators and terminals, a grammar is called a
+        <em>
+         regular expression
+        </em>
+        (more about that later).  But it will be easier to understand if we name the parts using new nonterminals:
+       </p>
+       <div class="panel panel-figure pull-right pull-margin">
+        <img alt="the parse tree produced by parsing &#39;http://mit.edu&#39; with a grammar with url, hostname, and word nonterminals" src="./Reading 17 Regular Expressions &amp; Grammars_files/url-with-hostname.png" width="250px">
+       </div>
+       <pre style="position: relative;"><code class="language-python hljs">url ::= <span class="hljs-string">'http://'</span> hostname <span class="hljs-string">'/'</span>
+hostname ::= word <span class="hljs-string">'.'</span> word
+word ::= [a-z]+</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        The parse tree for this grammar is now shown at right.  The tree has more structure now.  The leaves of the tree are the parts of the string that have been parsed.  If we concatenated the leaves together, we would recover the original string.  The
+        <code>
+         hostname
+        </code>
+        and
+        <code>
+         word
+        </code>
+        nonterminals are labeling nodes of the tree whose subtrees match those rules in the grammar.  Notice that the immediate children of a nonterminal node like
+        <code>
+         hostname
+        </code>
+        follow the pattern of the
+        <code>
+         hostname
+        </code>
+        rule,
+        <code>
+         word '.' word
+        </code>
+        .
+       </p>
+       <div class="clearfix">
+       </div>
+       <p>
+        How else do we need to generalize?  Hostnames can have more than two components, and there can be an optional port number:
+       </p>
+       <pre style="position: relative;"><code class="language-python hljs">http://didit.csail.mit.edu:<span class="hljs-number">4949</span>/</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        To handle this kind of string, the grammar is now:
+       </p>
+       <div class="panel panel-figure pull-right pull-margin">
+        <img alt="the parse tree produced by parsing &#39;http://mit.edu&#39; with a grammar with a recursive hostname rule" src="./Reading 17 Regular Expressions &amp; Grammars_files/url-with-recursive-hostname.png" width="300px">
+       </div>
+       <pre style="position: relative;"><code class="language-python hljs">url ::= <span class="hljs-string">'http://'</span> hostname (<span class="hljs-string">':'</span> port)? <span class="hljs-string">'/'</span> 
+hostname ::= word <span class="hljs-string">'.'</span> hostname | word <span class="hljs-string">'.'</span> word
+port ::= [<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+
+word ::= [a-z]+</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        <em>
+         Notice how hostname is now defined recursively in terms of itself.
+        </em>
+        Which part of the hostname definition is the base case, and which part is the recursive step?  What kinds of hostnames are allowed?
+       </p>
+       <p>
+        Using the repetition operator, we could also write hostname like this:
+       </p>
+       <pre style="position: relative;"><code class="language-python hljs">hostname ::= (word <span class="hljs-string">'.'</span>)+ word</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        Another thing to observe is that this grammar allows port numbers that are not technically legal, since port numbers can only range from 0 to 65535. We could write a more complex definition of port that would allow only these integers, but that’s not typically done in a grammar.  Instead, the constraint 0 &lt;= port &lt;= 65535 would be specified alongside the grammar.
+       </p>
+       <p>
+        There are more things we should do to go farther:
+       </p>
+       <ul>
+        <li>
+         generalizing
+         <code>
+          http
+         </code>
+         to support the additional protocols that URLs can have
+        </li>
+        <li>
+         generalizing the
+         <code>
+          /
+         </code>
+         at the end to a slash-separated path
+        </li>
+        <li>
+         allowing hostnames with the full set of legal characters instead of just a-z
+        </li>
+       </ul>
+      </div>
+      <h3 id="example_markdown_and_html">
+       Example: Markdown and HTML
+      </h3>
+      <div data-outline="example_markdown_and_html">
+       <p>
+        Now let’s look at grammars for some file formats.  We’ll be using two different markup languages that represent typographic style in text.  Here they are:
+       </p>
+       <h4>
+        Markdown
+       </h4>
+       <pre style="position: relative;"><code class="language-java hljs">This is _italic_.</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <h4>
+        HTML
+       </h4>
+       <pre style="position: relative;"><code class="language-java hljs">Here is an &lt;i&gt;italic&lt;/i&gt; word.</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        For simplicity, our example HTML and Markdown grammars will only specify italics, but other text styles are of course possible.
+       </p>
+       <p>
+        Here’s the grammar for our simplified version of Markdown:
+       </p>
+       <div class="panel panel-figure pull-right pull-margin">
+        <img alt="a parse tree produced by the Markdown grammar" src="./Reading 17 Regular Expressions &amp; Grammars_files/markdown.png" width="300px">
+       </div>
+       <pre style="position: relative;"><code class="hljs makefile">markdown ::=  ( normal | italic ) *
+italic ::= '_' normal '_'
+normal ::= text
+text ::= [^_]*</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <div class="clearfix">
+       </div>
+       <p>
+        Here’s the grammar for our simplified version of HTML:
+       </p>
+       <div class="panel panel-figure pull-right pull-margin">
+        <img alt="a parse tree produced by the HTML grammar" src="./Reading 17 Regular Expressions &amp; Grammars_files/html.png" width="350px">
+       </div>
+       <pre style="position: relative;"><code class="hljs makefile">html ::=  ( normal | italic ) *
+italic ::= '&lt;i&gt;' html '&lt;/i&gt;'
+normal ::= text
+text ::= [^&lt;&gt;]*</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <div class="clearfix">
+       </div>
+      </div>
+     </div>
+     <h2 id="regular_expressions">
+      Regular Expressions
+     </h2>
+     <div data-outline="regular_expressions">
+      <p>
+       A
+       <em>
+        regular
+       </em>
+       grammar has a special property: by substituting every nonterminal (except the root one) with its righthand side, you can reduce it down to a single production for the root, with only terminals and operators on the right-hand side.
+      </p>
+      <p>
+       Our URL grammar was regular.  By replacing nonterminals with their productions, it can be reduced to a single expression:
+      </p>
+      <pre style="position: relative;"><code class="language-python hljs">url ::= <span class="hljs-string">'http://'</span> ([a-z]+ <span class="hljs-string">'.'</span>)+ [a-z]+ (<span class="hljs-string">':'</span> [<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+)? <span class="hljs-string">'/'</span> </code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       The Markdown grammar is also regular:
+      </p>
+      <pre style="position: relative;"><code class="language-python hljs">markdown ::= ([^_]* | <span class="hljs-string">'_'</span> [^_]* <span class="hljs-string">'_'</span> )*</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       But our HTML grammar can’t be reduced completely.  By substituting righthand sides for nonterminals, you can eventually reduce it to something like this:
+      </p>
+      <pre style="position: relative;"><code class="hljs xml">html ::=  ( [^<span class="hljs-tag">&lt;&gt;</span>]* | '<span class="hljs-tag">&lt;<span class="hljs-name">i</span>&gt;</span>' html '<span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>' ) *</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       …but the recursive use of
+       <code>
+        html
+       </code>
+       on the righthand side can’t be eliminated, and can’t be simply replaced by a repetition operator either.  So the HTML grammar is not regular.
+      </p>
+      <p>
+       The reduced expression of terminals and operators can be written in an even more compact form, called a
+       <em>
+        regular expression
+       </em>
+       .  A regular expression does away with the quotes around the terminals, and the spaces between terminals and operators, so that it consists just of terminal characters, parentheses for grouping, and operator characters.
+For example, the regular expression for our
+       <code>
+        markdown
+       </code>
+       format is just
+      </p>
+      <pre style="position: relative;"><code class="language-python hljs">([^_]*|_[^_]*_)*</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       Regular expressions are also called
+       <em>
+        regexes
+       </em>
+       for short.
+A regex is far less readable than the original grammar, because it lacks the nonterminal names that documented the meaning of each subexpression.
+But a regex is fast to implement, and there are libraries in many programming languages that support regular expressions.
+      </p>
+      <p>
+       The regex syntax commonly implemented in programming language libraries has a few more special operators, in addition to the ones we used above in grammars.
+Here’s are some common useful ones:
+      </p>
+      <pre style="position: relative;"><code class="language-python hljs">.       any single character
+
+\d      any digit, same <span class="hljs-keyword">as</span> [<span class="hljs-number">0</span><span class="hljs-number">-9</span>]
+\s      any whitespace character, including space, tab, newline
+\w      any word character, including letters <span class="hljs-keyword">and</span> digits
+
+\., \(, \), \*, \+, ...
+        escapes an operator <span class="hljs-keyword">or</span> special character so that it matches literally</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       Using backslashes is important whenever there are terminal characters that would be confused with special characters.  Because our
+       <code>
+        url
+       </code>
+       regular expression has
+       <code>
+        .
+       </code>
+       in it as a terminal, we need to use a backslash to escape it:
+      </p>
+      <pre style="position: relative;"><code class="language-python hljs">http://([a-z]+\.)+[a-z]+(:[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+)/</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <h3 id="using_regular_expressions_in_java">
+       Using regular expressions in Java
+      </h3>
+      <div data-outline="using_regular_expressions_in_java">
+       <p>
+        Regular expressions (“regexes”) are widely used in programming, and you should have them in your toolbox.
+       </p>
+       <p>
+        In Java, you can use regexes for manipulating strings (see
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#split-java.lang.String-">
+         <code>
+          String.split
+         </code>
+        </a>
+        ,
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#matches-java.lang.String-">
+         <code>
+          String.matches
+         </code>
+        </a>
+        ,
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">
+         <code>
+          java.util.regex.Pattern
+         </code>
+        </a>
+        ).  They’re built-in as a first-class feature of modern scripting languages like Python, Ruby, and Javascript, and you can use them in many text editors for find and replace.  Regular expressions are your friend!  Most of the time.  Here are some examples.
+       </p>
+       <p>
+        Replace all runs of spaces with a single space:
+       </p>
+       <pre style="position: relative;"><code class="language-java hljs">String singleSpacedString = string.replaceAll(<span class="hljs-string">" +"</span>, <span class="hljs-string">" "</span>);</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        Match a URL:
+       </p>
+       <pre style="position: relative;"><code class="language-java hljs">Pattern regex = Pattern.compile(<span class="hljs-string">"http://([a-z]+\\.)+[a-z]+(:[0-9]+)?/"</span>);
+Matcher m = regex.matcher(string);
+<span class="hljs-keyword">if</span> (m.matches()) {
+    <span class="hljs-comment">// then string is a url</span>
+}</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        Extract part of an HTML tag:
+       </p>
+       <pre style="position: relative;"><code class="language-java hljs">Pattern regex = Pattern.compile(<span class="hljs-string">"&lt;a href=['\"]([^']*)['\"]&gt;"</span>);
+Matcher m = regex.matcher(string);
+<span class="hljs-keyword">if</span> (m.matches()) {
+    String url = m.group(<span class="hljs-number">1</span>); 
+    <span class="hljs-comment">// Matcher.group(n) returns the nth parenthesized part of the regex</span>
+}</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        Notice the backslashes in the URL and HTML tag examples.
+In the URL example, we want to match a literal period
+        <code>
+         .
+        </code>
+        , so we have to first escape it as
+        <code>
+         \.
+        </code>
+        to protect it from being interpreted as the regex match-any-character operator, and then we have to further escape it as
+        <code>
+         \\.
+        </code>
+        to protect the backslash from being interpreted as a Java string escape character.
+In the HTML example, we have to escape the quote mark
+        <code>
+         "
+        </code>
+        as
+        <code>
+         \"
+        </code>
+        to keep it from ending the string.
+The frequency of backslash escapes makes regexes still less readable.
+       </p>
+      </div>
+      <h3 id="context-free_grammars">
+       Context-Free Grammars
+      </h3>
+      <div data-outline="context-free_grammars">
+       <p>
+        In general, a language that can be expressed with our system of grammars is called context-free.  Not all context-free languages are also regular; that is, some grammars can’t be reduced to single nonrecursive productions.  Our HTML grammar is context-free but not regular.
+       </p>
+       <p>
+        The grammars for most programming languages are also context-free.  In general, any language with nested structure (like nesting parentheses or braces) is context-free but not regular.  That description applies to the Java grammar, shown here in part:
+       </p>
+       <pre style="position: relative;"><code class="hljs nginx"><span class="hljs-attribute">statement</span> ::= 
+  <span class="hljs-string">'{'</span> statement* <span class="hljs-string">'}'</span>
+| <span class="hljs-string">'if'</span> <span class="hljs-string">'('</span> expression <span class="hljs-string">')'</span> statement (<span class="hljs-string">'else'</span> statement)?
+| <span class="hljs-string">'for'</span> <span class="hljs-string">'('</span> forinit? <span class="hljs-string">';'</span> expression? <span class="hljs-string">';'</span> forupdate? <span class="hljs-string">')'</span> statement
+| <span class="hljs-string">'while'</span> <span class="hljs-string">'('</span> expression <span class="hljs-string">')'</span> statement
+| <span class="hljs-string">'do'</span> statement <span class="hljs-string">'while'</span> <span class="hljs-string">'('</span> expression <span class="hljs-string">')'</span> <span class="hljs-string">';'</span>
+| <span class="hljs-string">'try'</span> <span class="hljs-string">'{'</span> statement* <span class="hljs-string">'}'</span> ( catches | catches? <span class="hljs-string">'finally'</span> <span class="hljs-string">'{'</span> statement* <span class="hljs-string">'}'</span> )
+| <span class="hljs-string">'switch'</span> <span class="hljs-string">'('</span> expression <span class="hljs-string">')'</span> <span class="hljs-string">'{'</span> switchgroups <span class="hljs-string">'}'</span>
+| <span class="hljs-string">'synchronized'</span> <span class="hljs-string">'('</span> expression <span class="hljs-string">')'</span> <span class="hljs-string">'{'</span> statement* <span class="hljs-string">'}'</span>
+| <span class="hljs-string">'return'</span> expression? <span class="hljs-string">';'</span>
+| <span class="hljs-string">'throw'</span> expression <span class="hljs-string">';'</span> 
+| <span class="hljs-string">'break'</span> identifier? <span class="hljs-string">';'</span>
+| <span class="hljs-string">'continue'</span> identifier? <span class="hljs-string">';'</span>
+| expression <span class="hljs-string">';'</span> 
+| identifier <span class="hljs-string">':'</span> statement
+| <span class="hljs-string">';'</span></code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      </div>
+     </div>
+     <h2 id="summary">
+      Summary
+     </h2>
+     <div data-outline="summary">
+      <p>
+       Machine-processed textual languages are ubiquitous in computer science.  Grammars are the most popular formalism for describing such languages, and regular expressions are an important subclass of grammars that can be expressed without recursion.
+      </p>
+      <p>
+       The topics of today’s reading connect to our three properties of good software as follows:
+      </p>
+      <ul>
+       <li>
+        <p>
+         <strong>
+          Safe from bugs.
+         </strong>
+         Grammars and regular expressions are declarative specifications for strings and streams, which can be used directly by libraries and tools.   These specifications are often simpler, more direct, and less likely to be buggy then parsing code written by hand.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Easy to understand.
+         </strong>
+         A grammar captures the shape of a sequence in a form that is easier to understand than hand-written parsing code.  Regular expressions, alas, are often not easy to understand, because they are a one-line reduced form of what might have been a more understandable regular grammar.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Ready for change.
+         </strong>
+         A grammar can be easily edited, but regular expressions, unfortunately, are much harder to change, because a complex regular expression is cryptic and hard to understand.
+        </p>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </main>
+  <script src="./Reading 17 Regular Expressions &amp; Grammars_files/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 17 Regular Expressions &amp; Grammars_files/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 17 Regular Expressions &amp; Grammars_files/handout-run.js" type="text/javascript">
+  </script>
+ 
+
+<!-- Handout delivered Wed Mar 16 2016 13:18:17 GMT-0400 (EDT) -->
+</body><auto-scroll></auto-scroll><div id="revolut-extension-root"></div></html>
