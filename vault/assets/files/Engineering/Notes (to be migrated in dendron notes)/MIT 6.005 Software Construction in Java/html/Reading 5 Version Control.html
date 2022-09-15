@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+   <title>
+    Reading 5: Version Control
+   </title>
+   <link href="./Reading 5 Version Control_files/handout-style.css" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+   
+  
+ </head>
+ <body>
+  <header>
+   <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/">
+    6.005 — Software Construction on MIT OpenCourseWare
+   </a>
+   |
+   <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-005-software-construction-spring-2016/">
+    OCW 6.005 Homepage
+   </a>
+   <div>
+    Spring 2016
+   </div>
+  </header>
+  <nav class="table-of-contents col-sm-2">
+   <ul class="nav">
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#reading_5_version_control">
+      Reading 5: Version Control
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#introduction">
+      Introduction
+     </a>
+    </li>
+    <li class="active">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#inventing_version_control">
+      Inventing version control
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#git">
+      Git
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#copy_an_object_graph_with_git_clone">
+      Copy an object graph with git clone
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#what_else_is_in_the_object_graph">
+      What else is in the object graph?
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#add_to_the_object_graph_with_git_commit">
+      Add to the object graph with git commit
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#send_receive_object_graphs_with_git_push_git_pull">
+      Send &amp; receive object graphs with git push &amp; git pull
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#merging">
+      Merging
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#why_do_commits_look_like_diffs">
+      Why do commits look like diffs?
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#version_control_and_the_big_three">
+      Version control and the big three
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="container-fluid">
+   <h1 class="handout-title col-sm-8 col-sm-offset-2" id="reading_5_version_control">
+    Reading 5: Version Control
+   </h1>
+   <div data-outline="reading_5_version_control">
+    <div class="markdown col-sm-8 col-sm-offset-2 converted">
+     <h4>
+      Software in 6.005
+     </h4>
+     <table class="table table-striped no-markdown">
+      <tbody>
+       <tr>
+        <th width="33%">
+         Safe from bugs
+        </th>
+        <th>
+         Easy to understand
+        </th>
+        <th>
+         Ready for change
+        </th>
+       </tr>
+       <tr>
+        <td>
+         Correct today and correct in the unknown future.
+        </td>
+        <td>
+         Communicating clearly with future programmers, including future you.
+        </td>
+        <td>
+         Designed to accommodate change without rewriting.
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <h4>
+      Objectives
+     </h4>
+     <ul>
+      <li>
+       Know what version control is and why we use it
+      </li>
+      <li>
+       Understand how Git stores version history as a graph
+      </li>
+      <li>
+       Practice reading, creating, and using version history
+      </li>
+     </ul>
+     <h2 id="introduction">
+      Introduction
+     </h2>
+     <div data-outline="introduction">
+      <p>
+       <a href="https://en.wikipedia.org/wiki/Revision_control">
+        Version control systems
+       </a>
+       are essential tools of the software engineering world.
+More or less every project — serious or hobby, open source or proprietary — uses version control.
+Without version control, coordinating a team of programmers all editing the same project’s code will reach pull-out-your-hair levels of aggravation.
+      </p>
+      <h3 id="version_control_systems_youve_already_used">
+       Version control systems you’ve already used
+      </h3>
+      <div data-outline="version_control_systems_youve_already_used">
+       <ul>
+        <li>
+         Dropbox
+        </li>
+        <li>
+         <a href="https://en.wikipedia.org/wiki/Undo">
+          Undo/redo buffer
+         </a>
+        </li>
+        <li>
+         Keeping multiple copies of files with version numbers
+        </li>
+       </ul>
+       <table class="no-markdown" style="text-align: center">
+        <tbody>
+         <tr>
+          <td>
+           <img src="./Reading 5 Version Control_files/doc.png" width="90">
+          </td>
+          <td>
+           <img src="./Reading 5 Version Control_files/doc.png" width="90">
+          </td>
+          <td>
+           <img src="./Reading 5 Version Control_files/doc.png" width="90">
+          </td>
+          <td>
+           <img src="./Reading 5 Version Control_files/doc.png" width="90">
+          </td>
+          <td style="position: relative; top: 1em;">
+           <img src="./Reading 5 Version Control_files/doc.png" width="90">
+          </td>
+          <td style="position: relative; top: 2em; left: -0.5em;">
+           <img src="./Reading 5 Version Control_files/doc.png" width="90">
+          </td>
+         </tr>
+         <tr>
+          <td>
+           Project Report
+          </td>
+          <td>
+           Project Report v2
+          </td>
+          <td>
+           Project Report v3
+          </td>
+          <td>
+           Project Report final
+          </td>
+          <td style="position: relative; top: 1em;">
+           Project Report final-v2
+          </td>
+          <td style="position: relative; top: 2em; left: -0.5em;">
+           Project Report final-v2-fix-part-5
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+     <h2 id="inventing_version_control">
+      Inventing version control
+     </h2>
+     <div data-outline="inventing_version_control">
+      <p>
+       Suppose
+       <a href="https://en.wikipedia.org/wiki/Alice_and_Bob">
+        Alice
+       </a>
+       is working on a problem set by herself.
+      </p>
+      <div class="panel panel-default panel-figure pull-right pull-margin no-markdown">
+       <div class="panel-body text-center">
+        <table class="table table-condensed table-figure">
+         <tbody>
+          <tr>
+           <td class="text-danger">
+            <br>
+             <span class="glyphicon glyphicon-user">
+             </span>
+             <br>
+              Alice
+             <br>
+            <br>
+           </td>
+           <td class="text-danger">
+            Version 1
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.java
+             <br>
+            <br>
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <p>
+       She starts with one file
+       <code>
+        Hello.java
+       </code>
+       in her pset, which she works on for several days.
+      </p>
+      <p>
+       At the last minute before she needs to hand in her pset to be graded, she realizes she has made a change that breaks everything.
+If only she could go back in time and retrieve a past version!
+      </p>
+      <p>
+       A simple discipline of saving backup files would get the job done.
+      </p>
+      <div class="panel panel-default panel-figure pull-right pull-margin no-markdown">
+       <div class="panel-body text-center">
+        <table class="table table-condensed table-figure">
+         <tbody>
+          <tr>
+           <td class="text-danger">
+            <br>
+             <span class="glyphicon glyphicon-user">
+             </span>
+             <br>
+              Alice
+             <br>
+            <br>
+           </td>
+           <td class="text-danger">
+            Version 1
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.1.java
+             <br>
+            <br>
+           </td>
+           <td class="text-danger">
+            Version 2
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.2.java
+             <br>
+            <br>
+           </td>
+           <td class="text-danger">
+            Version 3
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.java
+             <br>
+            <br>
+           </td>
+           <td>
+            <br>
+             <span class="glyphicon glyphicon-arrow-left">
+             </span>
+             HEAD
+            <br>
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <p>
+       Alice uses her judgment to decide when she has reached some milestone that justifies saving the code.
+She saves the versions of
+       <code>
+        Hello.java
+       </code>
+       as
+       <code>
+        Hello.1.java
+       </code>
+       ,
+       <code>
+        Hello.2.java
+       </code>
+       , and
+       <code>
+        Hello.java
+       </code>
+       .
+She follows the convention that the most recent version is just
+       <code>
+        Hello.java
+       </code>
+       to avoid confusing Eclipse.
+We will call the most recent version the
+       <em>
+        head
+       </em>
+       .
+      </p>
+      <span class="clearfix">
+      </span>
+      <p>
+       Now when Alice realizes that version 3 is fatally flawed, she can just copy version 2 back into the location for her current code.
+Disaster averted!
+But what if version 3 included some changes that were good and some that were bad?
+Alice can compare the files manually to find the changes, and sort them into good and bad changes.
+Then she can copy the good changes into version 2.
+      </p>
+      <p>
+       This is a lot of work, and it’s easy for the human eye to miss changes.
+Luckily, there are standard software tools for comparing text; in the UNIX world, one such tool is
+       <a href="https://en.wikipedia.org/wiki/Diff">
+        <code>
+         diff
+        </code>
+       </a>
+       .
+A better version control system will make diffs easy to generate.
+      </p>
+      <div class="panel panel-default panel-figure pull-right pull-margin no-markdown">
+       <div class="panel-body text-center">
+        <table class="table table-condensed table-figure">
+         <tbody>
+          <tr>
+           <td class="text-muted">
+            <br>
+             <span class="glyphicon glyphicon-cloud">
+             </span>
+             <br>
+              Cloud
+             <br>
+            <br>
+           </td>
+           <td class="text-muted">
+            Version 1
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.1.java
+             <br>
+            <br>
+           </td>
+           <td class="text-muted">
+            Version 2
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.2.java
+             <br>
+            <br>
+           </td>
+           <td class="text-muted">
+            Version 3
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.java
+             <br>
+            <br>
+           </td>
+          </tr>
+          <tr>
+           <td>
+            <span class="glyphicon glyphicon-arrow-up">
+            </span>
+           </td>
+          </tr>
+          <tr>
+           <td class="text-danger">
+            <br>
+             <span class="glyphicon glyphicon-user">
+             </span>
+             <br>
+              Alice
+             <br>
+            <br>
+           </td>
+           <td class="text-danger">
+            Version 1
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.1.java
+             <br>
+            <br>
+           </td>
+           <td class="text-danger">
+            Version 2
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.2.java
+             <br>
+            <br>
+           </td>
+           <td class="text-danger">
+            Version 3
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.java
+             <br>
+            <br>
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <p>
+       Alice also wants to be prepared in case her laptop gets run over by a bus, so she saves a backup of her work in the cloud, uploading the contents of her working directory whenever she’s satisfied with its contents.
+      </p>
+      <p>
+       If her laptop is kicked into the Charles, Alice can retrieve the backup and resume work on the pset on a fresh machine, retaining the ability to time-travel back to old versions at will.
+      </p>
+      <span class="clearfix">
+      </span>
+      <p>
+       Furthermore, she can develop her pset on multiple machines, using the cloud provider as a common interchange point.
+Alice makes some changes on her laptop and uploads them to the cloud.
+Then she downloads onto her desktop machine at home, does some more work, and uploads the improved code (complete with old file versions) back to the cloud.
+      </p>
+      <div class="panel panel-default panel-figure pull-right pull-margin no-markdown">
+       <div class="panel-body text-center">
+        <table class="table table-condensed table-figure">
+         <tbody>
+          <tr>
+           <td colspan="2">
+           </td>
+           <td class="text-muted">
+            <span class="glyphicon glyphicon-cloud">
+            </span>
+            <br>
+             Cloud
+            <br>
+           </td>
+          </tr>
+          <tr>
+           <td>
+           </td>
+           <td colspan="3">
+            <span class="glyphicon glyphicon-arrow-up">
+            </span>
+            <span class="glyphicon glyphicon-arrow-down">
+            </span>
+            <span class="glyphicon glyphicon-arrow-up">
+            </span>
+            <span class="glyphicon glyphicon-arrow-down">
+            </span>
+           </td>
+           <td>
+           </td>
+          </tr>
+          <tr>
+           <td class="text-danger">
+            Version 5L
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.java
+             <br>
+            <br>
+           </td>
+           <td class="text-danger">
+            <span class="glyphicon glyphicon-user">
+            </span>
+            <br>
+             Alice on
+             <br>
+              laptop
+             <br>
+            <br>
+           </td>
+           <td>
+           </td>
+           <td class="text-danger">
+            <span class="glyphicon glyphicon-user">
+            </span>
+            <br>
+             Alice on
+             <br>
+              desktop
+             <br>
+            <br>
+           </td>
+           <td class="text-danger">
+            Version 5D
+            <br>
+             <span class="glyphicon glyphicon-file">
+             </span>
+             <br>
+              Hello.java
+             <br>
+            <br>
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <p>
+       If Alice isn’t careful, though, she can run into trouble with this approach.
+Imagine that she starts editing
+       <code>
+        Hello.java
+       </code>
+       to create “version 5” on her laptop.
+Then she gets distracted and forgets about her changes.
+Later, she starts working on a new “version 5” on her desktop machine, including
+       <em>
+        different
+       </em>
+       improvements.
+We’ll call these versions “5L” and “5D,” for “laptop” and “desktop.”
+      </p>
+      <p>
+       When it comes time to upload changes to the cloud, there is an opportunity for a mishap!
+Alice might copy all her local files into the cloud, causing it to contain version 5D only.  Later Alice syncs from the cloud to her laptop, potentially overwriting version 5L, losing the worthwhile changes.
+What Alice really wants here is a
+       <em>
+        merge
+       </em>
+       , to create a new version based on the two version 5’s.
+      </p>
+      <p>
+       At this point, considering just the scenario of one programmer working alone, we already have a list of operations that should be supported by a version control scheme:
+      </p>
+      <ul>
+       <li>
+        <em>
+         reverting
+        </em>
+        to a past version
+       </li>
+       <li>
+        <em>
+         comparing
+        </em>
+        two different versions
+       </li>
+       <li>
+        <em>
+         pushing
+        </em>
+        full version history to another location
+       </li>
+       <li>
+        <em>
+         pulling
+        </em>
+        history back from that location
+       </li>
+       <li>
+        <em>
+         merging
+        </em>
+        versions that are offshoots of the same earlier version
+       </li>
+      </ul>
+      <h3 id="multiple_developers">
+       Multiple developers
+      </h3>
+      <div data-outline="multiple_developers">
+       <p>
+        Now let’s add into the picture Bob, another developer.
+The picture isn’t too different from what we were just thinking about.
+       </p>
+       <div class="panel panel-default panel-figure pull-right pull-margin no-markdown">
+        <div class="panel-body text-center">
+         <table class="table table-condensed table-figure">
+          <tbody>
+           <tr>
+            <td colspan="3">
+            </td>
+            <td class="text-muted">
+             <span class="glyphicon glyphicon-cloud">
+             </span>
+             <br>
+              Cloud
+             <br>
+            </td>
+           </tr>
+           <tr>
+            <td colspan="2">
+            </td>
+            <td colspan="3">
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="text-danger">
+             Version 5A
+             <br>
+              <span class="glyphicon glyphicon-file">
+              </span>
+              <br>
+               Hello.java
+              <br>
+             <br>
+            </td>
+            <td class="text-danger">
+             Version 5A
+             <br>
+              <span class="glyphicon glyphicon-file">
+              </span>
+              <br>
+               Greet.java
+              <br>
+             <br>
+            </td>
+            <td class="text-danger">
+             <br>
+              <span class="glyphicon glyphicon-user">
+              </span>
+              <br>
+               Alice
+              <br>
+             <br>
+            </td>
+            <td>
+            </td>
+            <td class="text-warning">
+             <br>
+              <span class="glyphicon glyphicon-user">
+              </span>
+              <br>
+               Bob
+              <br>
+             <br>
+            </td>
+            <td class="text-warning">
+             Version 5B
+             <br>
+              <span class="glyphicon glyphicon-file">
+              </span>
+              <br>
+               Hello.java
+              <br>
+             <br>
+            </td>
+            <td class="text-warning">
+             Version 5B
+             <br>
+              <span class="glyphicon glyphicon-file">
+              </span>
+              <br>
+               Greet.java
+              <br>
+             <br>
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+       <p>
+        Alice and Bob here are like the two Alices working on different computers.
+They no longer share a brain, which makes it even more important to follow a strict discipline in pushing to and pulling from the shared cloud server.
+The two programmers must coordinate on a scheme for coming up with version numbers.
+Ideally, the scheme allows us to assign clear names to
+        <em>
+         whole sets of files
+        </em>
+        , not just individual files.
+(Files depend on other files, so thinking about them in isolation allows inconsistencies.)
+       </p>
+       <p>
+        Merely uploading new source files is not a very good way to communicate to others the high-level idea of a set of changes.
+So let’s add a log that records for each version
+        <em>
+         who
+        </em>
+        wrote it,
+        <em>
+         when
+        </em>
+        it was finalized, and
+        <em>
+         what
+        </em>
+        the changes were, in the form of a short human-authored message.
+       </p>
+       <div class="panel panel-default panel-figure pull-right pull-margin no-markdown">
+        <div class="panel-body text-center">
+         <table class="table table-condensed table-figure">
+          <tbody>
+           <tr>
+            <td colspan="4">
+            </td>
+            <td class="text-muted">
+             <span class="glyphicon glyphicon-cloud">
+             </span>
+             <br>
+              Cloud
+             <br>
+            </td>
+           </tr>
+           <tr>
+            <td colspan="3">
+            </td>
+            <td colspan="3">
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="text-left text-info">
+             <span class="glyphicon glyphicon-pencil">
+             </span>
+             Log:
+             <br>
+              1: Alice, 7pm, ...
+              <br>
+               ...
+               <br>
+                4: Bob, 8pm, ...
+                <br>
+                 5A: Alice, 9pm, ...
+                <br>
+               <br>
+              <br>
+             <br>
+            </td>
+            <td class="text-danger">
+             Ver. 5A
+             <br>
+              <span class="glyphicon glyphicon-file">
+              </span>
+              <br>
+               Hello.java
+              <br>
+             <br>
+            </td>
+            <td class="text-danger">
+             Ver. 5A
+             <br>
+              <span class="glyphicon glyphicon-file">
+              </span>
+              <br>
+               Greet.java
+              <br>
+             <br>
+            </td>
+            <td class="text-danger">
+             <br>
+              <span class="glyphicon glyphicon-user">
+              </span>
+              <br>
+               Alice
+              <br>
+             <br>
+            </td>
+            <td>
+            </td>
+            <td class="text-warning">
+             <br>
+              <span class="glyphicon glyphicon-user">
+              </span>
+              <br>
+               Bob
+              <br>
+             <br>
+            </td>
+            <td class="text-warning">
+             Ver. 5B
+             <br>
+              <span class="glyphicon glyphicon-file">
+              </span>
+              <br>
+               Hello.java
+              <br>
+             <br>
+            </td>
+            <td class="text-warning">
+             Ver. 5B
+             <br>
+              <span class="glyphicon glyphicon-file">
+              </span>
+              <br>
+               Greet.java
+              <br>
+             <br>
+            </td>
+            <td class="text-left text-info">
+             <span class="glyphicon glyphicon-pencil">
+             </span>
+             Log:
+             <br>
+              1: Alice, 7pm, ...
+              <br>
+               ...
+               <br>
+                4: Bob, 8pm, ...
+                <br>
+                 5B: Bob, 9pm, ...
+                <br>
+               <br>
+              <br>
+             <br>
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+       <span class="clearfix">
+       </span>
+       <p>
+        Pushing another version now gets a bit more complicated, as we need to merge the logs.
+This is easier to do than for Java files, since logs have a simpler structure – but without tool support, Alice and Bob will need to do it manually!
+We also want to enforce consistency between the logs and the actual sets of available files: for each log entry, it should be easy to extract the complete set of files that were current at the time the entry was made.
+       </p>
+       <p>
+        But with logs, all sorts of useful operations are enabled.
+We can look at the log for just a particular file: a view of the log restricted to those changes that involved modifying some file.
+We can also use the log to figure out which change contributed each line of code, or, even better, which person contributed each line, so we know who to complain to when the code doesn’t work.
+This sort of operation would be tedious to do manually; the automated operation in version control systems is called
+        <em>
+         annotate
+        </em>
+        (or, unfortunately,
+        <em>
+         blame
+        </em>
+        ).
+       </p>
+      </div>
+      <h3 id="multiple_branches">
+       Multiple branches
+      </h3>
+      <div data-outline="multiple_branches">
+       <p>
+        It sometimes makes sense for a subset of the developers to go off and work on a
+        <em>
+         branch
+        </em>
+        , a parallel code universe for, say, experimenting with a new feature.
+The other developers don’t want to pull in the new feature until it is done, even if several coordinated versions are created in the meantime.
+Even a single developer can find it useful to create a branch, for the same reasons that Alice was originally using the cloud server despite working alone.
+       </p>
+       <p>
+        In general, it will be useful to have many shared places for exchanging project state.
+There may be multiple branch locations at once, each shared by several programmers.
+With the right set-up, any programmer can pull from or push to any location, creating serious flexibility in cooperation patterns.
+       </p>
+      </div>
+      <h3 id="the_shocking_conclusion">
+       The shocking conclusion
+      </h3>
+      <div data-outline="the_shocking_conclusion">
+       <p>
+        Of course, it turns out we haven’t invented anything here:
+        <a href="https://git-scm.com/">
+         Git
+        </a>
+        does all these things for you, and so do many other version control systems.
+       </p>
+      </div>
+      <h3 id="distributed_vs_centralized">
+       Distributed vs. centralized
+      </h3>
+      <div data-outline="distributed_vs_centralized">
+       <div class="panel panel-default panel-figure pull-left no-markdown">
+        <div class="panel-body text-center">
+         <table class="table table-condensed table-figure">
+          <tbody>
+           <tr>
+            <td class="text-info">
+             Dan
+             <span class="glyphicon glyphicon-user">
+             </span>
+            </td>
+            <td>
+            </td>
+            <td class="text-success">
+             <span class="glyphicon glyphicon-user">
+             </span>
+             Carol
+            </td>
+           </tr>
+           <tr>
+            <td colspan="3">
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="text-muted" colspan="3">
+             <span class="glyphicon glyphicon-cloud">
+             </span>
+             Cloud
+            </td>
+           </tr>
+           <tr>
+            <td colspan="3">
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="text-danger">
+             Alice
+             <span class="glyphicon glyphicon-user">
+             </span>
+            </td>
+            <td>
+             <span class="glyphicon glyphicon-arrow-right" style="color:white;opacity:0;">
+             </span>
+            </td>
+            <td class="text-warning">
+             <span class="glyphicon glyphicon-user">
+             </span>
+             Bob
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+       <p>
+        Traditional
+        <em>
+         centralized
+        </em>
+        version control systems like CVS and
+        <a href="https://subversion.apache.org/">
+         Subversion
+        </a>
+        do a subset of the things we’ve imagined above.
+They support a collaboration graph – who’s sharing what changes with whom – with one master server and copies that only communicate with the master.
+       </p>
+       <p>
+        In a centralized system, everyone must share their work to and from the master repository.
+Changes are safely stored
+        <em>
+         in version control
+        </em>
+        if they are
+        <em>
+         in the master repository
+        </em>
+        , because that’s the only repository.
+       </p>
+       <span class="clearfix">
+       </span>
+       <div class="panel panel-default panel-figure pull-left no-markdown">
+        <div class="panel-body text-center">
+         <table class="table table-condensed table-figure">
+          <tbody>
+           <tr>
+            <td class="text-info">
+             Dan
+             <span class="glyphicon glyphicon-user">
+             </span>
+            </td>
+            <td style="line-height:0">
+             <span class="glyphicon glyphicon-arrow-right" style="line-height:.5">
+             </span>
+             <br>
+              <span class="glyphicon glyphicon-arrow-left">
+              </span>
+             <br>
+            </td>
+            <td class="text-success">
+             <span class="glyphicon glyphicon-user">
+             </span>
+             Carol
+            </td>
+           </tr>
+           <tr>
+            <td colspan="3">
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="text-muted" colspan="3">
+             <span class="glyphicon glyphicon-cloud">
+             </span>
+             Cloud
+            </td>
+           </tr>
+           <tr>
+            <td colspan="3">
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+             <span class="glyphicon glyphicon-arrow-up">
+             </span>
+             <span class="glyphicon glyphicon-arrow-down">
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="text-danger">
+             Alice
+             <span class="glyphicon glyphicon-user">
+             </span>
+            </td>
+            <td style="line-height:0">
+             <span class="glyphicon glyphicon-arrow-right" style="line-height:.5">
+             </span>
+             <br>
+              <span class="glyphicon glyphicon-arrow-left">
+              </span>
+             <br>
+            </td>
+            <td class="text-warning">
+             <span class="glyphicon glyphicon-user">
+             </span>
+             Bob
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+       <p>
+        In contrast,
+        <em>
+         distributed
+        </em>
+        version control systems like
+        <a href="https://git-scm.com/">
+         Git
+        </a>
+        and
+        <a href="https://www.mercurial-scm.org/">
+         Mercurial
+        </a>
+        allow all sorts of different collaboration graphs, where teams and subsets of teams can experiment easily with alternate versions of code and history, merging versions together as they are determined to be good ideas.
+       </p>
+       <p>
+        In a distributed system, all repositories are created equal, and it’s up to users to assign them different roles.
+Different users might share their work to and from different repos, and the team must decide what it means for a change to be
+        <em>
+         in version control
+        </em>
+        .
+If the change is stored in just a single programmer’s repo, do they still need to share it with a designated collaborator or specific server before the rest of the team considers it official?
+       </p>
+      </div>
+      <h3 id="version_control_terminology">
+       Version control terminology
+      </h3>
+      <div data-outline="version_control_terminology">
+       <ul>
+        <li>
+         <strong>
+          Repository
+         </strong>
+         : a local or remote store of the versions in our project
+        </li>
+        <li>
+         <strong>
+          Working copy
+         </strong>
+         : a local, editable copy of our project that we can work on
+        </li>
+        <li>
+         <strong>
+          File
+         </strong>
+         : a single file in our project
+        </li>
+        <li>
+         <strong>
+          Version
+         </strong>
+         or
+         <strong>
+          revision
+         </strong>
+         : a record of the contents of our project at a point in time
+        </li>
+        <li>
+         <strong>
+          Change
+         </strong>
+         or
+         <strong>
+          diff
+         </strong>
+         : the difference between two versions
+        </li>
+        <li>
+         <strong>
+          Head
+         </strong>
+         : the current version
+        </li>
+       </ul>
+      </div>
+      <h3 id="features_of_a_version_control_system">
+       Features of a version control system
+      </h3>
+      <div data-outline="features_of_a_version_control_system">
+       <ul>
+        <li>
+         <strong>
+          Reliable
+         </strong>
+         : keep versions around for as long as we need them; allow backups
+        </li>
+        <li>
+         <strong>
+          Multiple files
+         </strong>
+         : track versions of a project, not single files
+        </li>
+        <li>
+         <strong>
+          Meaningful versions
+         </strong>
+         : what were the changes, why where they made?
+        </li>
+        <li>
+         <strong>
+          Revert
+         </strong>
+         : restore old versions, in whole or in part
+        </li>
+        <li>
+         <strong>
+          Compare versions
+         </strong>
+        </li>
+        <li>
+         <strong>
+          Review history
+         </strong>
+         : for the whole project or individual files
+        </li>
+        <li>
+         <strong>
+          Not just for code
+         </strong>
+         : prose, images, …
+        </li>
+       </ul>
+       <p>
+        It should
+        <strong>
+         allow multiple people to work together
+        </strong>
+        :
+       </p>
+       <ul>
+        <li>
+         <strong>
+          Merge
+         </strong>
+         : combine versions that diverged from a common previous version
+        </li>
+        <li>
+         <strong>
+          Track responsibility
+         </strong>
+         : who made that change, who touched that line of code?
+        </li>
+        <li>
+         <strong>
+          Work in parallel
+         </strong>
+         : allow one programmer to work on their own for a while (without giving up version control)
+        </li>
+        <li>
+         <strong>
+          Work-in-progress
+         </strong>
+         : allow multiple programmers to share unfinished work (without disrupting others, without giving up version control)
+        </li>
+       </ul>
+      </div>
+     </div>
+     <h2 id="git">
+      Git
+     </h2>
+     <div data-outline="git">
+      <div class="panel panel-figure pull-right pull-margin">
+       <img src="./Reading 5 Version Control_files/sourcetree.png" width="400">
+      </div>
+      <p>
+       The version control system we’ll use in 6.005 is
+       <a href="https://git-scm.com/">
+        Git
+       </a>
+       .
+It’s powerful and worth learning.
+But Git’s user interface can be terribly frustrating.
+What is Git’s user interface?
+      </p>
+      <ul>
+       <li>
+        <p>
+         <strong>
+          In 6.005, we will use Git on the command line.
+         </strong>
+         The command line is a fact of life, ubiquitous because it is so powerful.
+        </p>
+       </li>
+       <li>
+        <p>
+         The command line can make it very difficult to see what is going on in your repositories.
+You may find
+         <a href="https://www.sourcetreeapp.com/">
+          SourceTree
+         </a>
+         (shown on the right) for Mac &amp; Windows useful.
+On any platform,
+         <a href="https://git-scm.com/docs/gitk">
+          gitk
+         </a>
+         can give you a basic Git GUI.
+Ask Google for other suggestions.
+        </p>
+       </li>
+      </ul>
+      <span class="clearfix">
+      </span>
+      <p>
+       An important note about tools for Git:
+      </p>
+      <ul>
+       <li>
+        <p>
+         Eclipse has built-in support for Git.
+If you follow the
+         <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/psets/ps0/">
+          problem set instructions
+         </a>
+         , Eclipse will know your project is in Git and will show you helpful icons.
+We do not recommend using the Eclipse Git UI to make changes, commit, etc., and course staff may not be able to help you with problems.
+        </p>
+       </li>
+       <li>
+        <p>
+         <a href="https://github.com/">
+          GitHub
+         </a>
+         makes desktop apps for Mac and Windows.
+Because the GitHub app changes how some Git operations work, if you use the GitHub app, course staff will not be able to help you.
+        </p>
+       </li>
+      </ul>
+      <h3 id="getting_started_with_git">
+       Getting started with Git
+      </h3>
+      <div data-outline="getting_started_with_git">
+       <p>
+        On the
+        <a href="https://git-scm.com/">
+         Git
+        </a>
+        website, you can find two particularly useful resources:
+       </p>
+       <ul>
+        <li>
+         <a href="https://git-scm.com/book">
+          <em>
+           Pro Git
+          </em>
+         </a>
+         documents everything you might need to know about Git.
+        </li>
+        <li>
+         The
+         <a href="https://git-scm.com/docs">
+          Git command reference
+         </a>
+         can help with the syntax of Git commands.
+        </li>
+       </ul>
+       <div class="handout-solo alert alert-warning">
+        <p>
+         You’ve already completed
+         <strong>
+          <a class="alert-link" href="https://ocw.mit.edu/ans7870/6/6.005/s16/psets/ps0/#clone">
+           PS0
+          </a>
+         </strong>
+         and the
+         <strong>
+          <a class="alert-link" href="https://ocw.mit.edu/ans7870/6/6.005/s16/getting-started/#git">
+           Getting Started intro to Git
+          </a>
+         </strong>
+         .
+        </p>
+       </div>
+      </div>
+      <h3 id="the_git_object_graph">
+       The Git object graph
+      </h3>
+      <div data-outline="the_git_object_graph">
+       <div class="handout-solo alert alert-warning">
+        <p>
+         Read:
+         <a class="alert-link" href="https://git-scm.com/book/en/v2/Getting-Started-Git-Basics">
+          <em>
+           Pro Git
+          </em>
+          1.3: Git Basics
+         </a>
+        </p>
+       </div>
+       <p>
+        That reading introduces the three pieces of a Git repo:
+        <code>
+         .git
+        </code>
+        directory, working directory, and staging area.
+       </p>
+       <p>
+        All of the operations we do with Git — clone, add, commit, push, log, merge, … — are operations on a graph data structure that stores all of the versions of files in our project, and all the log entries describing those changes.
+The
+        <strong>
+         Git object graph
+        </strong>
+        is stored in the
+        <code>
+         .git
+        </code>
+        directory of your local repository.
+Another copy of the graph, e.g. for PS0, is on Athena in:
+        <br>
+         <code>
+          /mit/6.005/git/sp16/psets/ps0/[your username].git
+         </code>
+        <br>
+       </p>
+      </div>
+     </div>
+     <h2 id="copy_an_object_graph_with_git_clone">
+      Copy an object graph with
+      <code>
+       git clone
+      </code>
+     </h2>
+     <div data-outline="copy_an_object_graph_with_git_clone">
+      <p>
+       How do you get the object graph from Athena to your local machine in order to start working on the problem set?
+       <strong>
+        <code>
+         git clone
+        </code>
+       </strong>
+       copies the graph.
+      </p>
+      <p>
+       Suppose your username is
+       <code>
+        bitdiddle
+       </code>
+       :
+      </p>
+      <div class="panel panel-default">
+       <div class="panel-heading">
+        <p>
+         <code>
+          git clone ssh://.../psets/ps0/bitdiddle.git ps0
+         </code>
+        </p>
+       </div>
+       <div class="panel-body" id="hello-git-clone">
+        <p>
+         Hover or tap on each step to update the diagram below:
+        </p>
+        <ol>
+         <li class="highlighted">
+          Create an empty local directory
+          <code>
+           ps0
+          </code>
+          , and
+          <code>
+           ps0/.git
+          </code>
+          .
+         </li>
+         <li>
+          Copy the object graph from
+          <code>
+           ssh://.../psets/ps0/bitdiddle.git
+          </code>
+          into
+          <code>
+           ps0/.git
+          </code>
+          .
+         </li>
+         <li>
+          <strong>
+           Check out
+          </strong>
+          the current version of the
+          <strong>
+           <code>
+            master
+           </code>
+           branch
+          </strong>
+          .
+         </li>
+        </ol>
+        <p>
+         Diagram for highlighted step:
+        </p>
+        <div class="hover-figure no-markdown" data-attr="src" data-selector="#hello-git-clone li" data-target="img" data-template="figures/hello-git-clone-{index}.png">
+         <img src="./Reading 5 Version Control_files/hello-git-clone-0.png" style="max-width:543px">
+        </div>
+       </div>
+      </div>
+      <p>
+       We still haven’t explained what’s in the object graph.
+But before we do that, let’s understand step 3 of
+       <code>
+        git clone
+       </code>
+       : check out the current version of the
+       <code>
+        master
+       </code>
+       branch.
+      </p>
+      <p>
+       The object graph is stored on disk in a convenient and efficient structure for performing Git operations, but not in a format we can easily use.
+In
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#inventing_version_control">
+        Alice’s invented version control scheme
+       </a>
+       , the current version of
+       <code>
+        Hello.java
+       </code>
+       was just called
+       <code>
+        Hello.java
+       </code>
+       because she needed to be able to edit it normally.
+In Git, we obtain normal copies of our files by
+       <em>
+        checking them out
+       </em>
+       from the object graph.
+These are the files we see and edit in Eclipse.
+      </p>
+      <p>
+       We also decided above that it might be useful to support
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#multiple_branches">
+        multiple
+        <em>
+         branches
+        </em>
+        in the version history
+       </a>
+       .
+Multiple branches are essential for large teams working on long-term projects.
+To keep things simple in 6.005, we will not use branches and we don’t recommend that you create any.
+Every Git repo comes with a default branch called
+       <code>
+        master
+       </code>
+       , and all of our work will be on the
+       <code>
+        master
+       </code>
+       branch.
+      </p>
+      <p>
+       So step 2 of
+       <code>
+        git clone
+       </code>
+       gets us an object graph, and step 3 gets us a
+       <strong>
+        working directory
+       </strong>
+       full of files we can edit, starting from the current version of the project.
+      </p>
+      <p>
+       Let’s finally dive into that object graph!
+      </p>
+      <div class="handout-solo alert alert-warning">
+       <p>
+        Clone an example repo:
+        <strong>
+         <code>
+          https://github.com/mit6005/sp16-ex05-hello-git.git
+         </code>
+        </strong>
+       </p>
+       <p>
+        Using commands from
+        <a class="alert-link" href="https://ocw.mit.edu/ans7870/6/6.005/s16/getting-started/#git">
+         Getting Started
+        </a>
+        or
+        <a class="alert-link" href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History">
+         <em>
+          Pro Git
+         </em>
+         2.3: Viewing the Commit History
+        </a>
+        , or by using a tool like SourceTree, explain the history of this little project to yourself.
+       </p>
+      </div>
+      <p>
+       Here’s the output of
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/getting-started/#config-git">
+        <code>
+         git lol
+        </code>
+       </a>
+       for this example repository:
+      </p>
+      <pre class="terminal-dark no-markdown" style="position: relative;">* <span class="yellow ">b0b54b3</span><span class="yellow "> (</span><span class="cyan bold ">HEAD</span><span class="yellow ">, </span><span class="red bold ">origin/master</span><span class="yellow ">, </span><span class="red bold ">origin/HEAD</span><span class="yellow ">, </span><span class="green bold ">master</span><span class="yellow ">)</span> Greeting in Java
+*   <span class="yellow ">3e62e60</span> Merge
+<span class="green ">|</span><span class="yellow ">\</span>  
+<span class="green ">|</span> * <span class="yellow ">6400936</span> Greeting in Scheme
+* <span class="yellow ">|</span> <span class="yellow ">82e049e</span> Greeting in Ruby
+<span class="yellow ">|</span><span class="yellow ">/</span>  
+* <span class="yellow ">1255f4e</span> Change the greeting
+* <span class="yellow ">41c4b8f</span> Initial commit
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       The history of a Git project is a
+       <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">
+        <strong>
+         directed acyclic graph
+        </strong>
+       </a>
+       (DAG).
+The history graph is the backbone of the full object graph stored in
+       <code>
+        .git
+       </code>
+       , so let’s focus on it for a minute.
+      </p>
+      <div class="panel panel-figure pull-left">
+       <img src="./Reading 5 Version Control_files/hello-git-history.png" width="196">
+      </div>
+      <p>
+       Each node in the history graph is a
+       <strong>
+        commit
+       </strong>
+       a.k.a.
+       <strong>
+        version
+       </strong>
+       a.k.a.
+       <strong>
+        revision
+       </strong>
+       of the project: a complete snapshot of all the files in the project at that point in time.
+You may recall from our
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/getting-started/#getting_the_history_of_the_repository">
+        earlier reading
+       </a>
+       that each commit is identified by a unique ID, displayed as a hexadecimal number.
+      </p>
+      <p>
+       Except for the initial commit, each commit has a pointer to its
+       <strong>
+        parent
+       </strong>
+       commit.
+For example, commit
+       <code>
+        1255f4e
+       </code>
+       has parent
+       <code>
+        41c4b8f
+       </code>
+       : this means
+       <code>
+        41c4b8f
+       </code>
+       happened first, then
+       <code>
+        1255f4e
+       </code>
+       .
+      </p>
+      <p>
+       Some commits have the same parent: they are versions that diverged from a common previous version.
+And some commits have two parents: they are versions that tie divergent histories back together.
+      </p>
+      <p>
+       A branch — remember
+       <code>
+        master
+       </code>
+       will be our only branch for now — is just a name that points to a commit.
+      </p>
+      <p>
+       Finally, HEAD points to our current commit — almost.
+We also need to remember which branch we’re working on.
+So HEAD points to the current branch, which points to the current commit.
+      </p>
+      <div class="clearfix">
+      </div>
+      <p>
+       Check your understanding…
+      </p>
+     </div>
+     <h2 id="what_else_is_in_the_object_graph">
+      What else is in the object graph?
+     </h2>
+     <div data-outline="what_else_is_in_the_object_graph">
+      <p>
+       The history graph is the backbone of the full object graph.
+What else is in there?
+      </p>
+      <div class="panel panel-figure pull-left">
+       <img src="./Reading 5 Version Control_files/hello-git-history-trees.png" width="345">
+      </div>
+      <div class="pull-margin clearfix">
+       <p>
+        Each commit is a snapshot of our entire project, which Git represents with a
+        <strong>
+         tree
+        </strong>
+        node.
+For a project of any reasonable size, most of the files
+        <em>
+         won’t
+        </em>
+        change in any given revision.
+Storing redundant copies of the files would be wasteful, so Git doesn’t do that.
+       </p>
+       <p>
+        Instead, the Git object graph stores each version of an individual file
+        <em>
+         once
+        </em>
+        , and allows multiple commits to
+        <em>
+         share
+        </em>
+        that one copy.
+To the left is a more complete rendering of the Git object graph for our example.
+       </p>
+       <p>
+        Keep this picture in the back of your mind, because it’s a wonderful example of the sharing enabled by
+        <em>
+         immutable data types
+        </em>
+        , which we’re going to discuss a few classes from now.
+       </p>
+       <p>
+        Each commit also has log data — who, when, short log message, etc. — not shown in the diagram.
+       </p>
+      </div>
+     </div>
+     <h2 id="add_to_the_object_graph_with_git_commit">
+      Add to the object graph with
+      <code>
+       git commit
+      </code>
+     </h2>
+     <div data-outline="add_to_the_object_graph_with_git_commit">
+      <p>
+       How do we add new commits to the history graph?
+       <strong>
+        <code>
+         git commit
+        </code>
+       </strong>
+       creates a new commit.
+      </p>
+      <p>
+       In some alternate universe,
+       <code>
+        git commit
+       </code>
+       might create a new commit based on the current contents of your working directory.
+So if you edited
+       <code>
+        Hello.java
+       </code>
+       and then did
+       <code>
+        git commit
+       </code>
+       , the snapshot would include your changes.
+      </p>
+      <p>
+       We’re not in that universe; in our universe, Git uses that third and final piece of the repository: the
+       <strong>
+        staging area
+       </strong>
+       (a.k.a. the
+       <strong>
+        index
+       </strong>
+       , which is only a useful name to know because sometimes it shows up in documentation).
+      </p>
+      <p>
+       The staging area is like a proto-commit, a commit-in-progress.
+Here’s how we use the staging area and
+       <strong>
+        <code>
+         git add
+        </code>
+       </strong>
+       to build up a new snapshot, which we then cast in stone using
+       <strong>
+        <code>
+         git commit
+        </code>
+       </strong>
+       :
+      </p>
+      <div class="panel panel-default">
+       <div class="panel-heading">
+        <p>
+         Modify
+         <code>
+          hello.txt
+         </code>
+         ,
+         <code>
+          git add hello.txt
+         </code>
+         ,
+         <code>
+          git commit
+         </code>
+        </p>
+       </div>
+       <div class="panel-body" id="hello-git-commit">
+        <p>
+         Hover or tap on each step to update the diagram, and to see the output of
+         <code>
+          git status
+         </code>
+         at each step:
+        </p>
+        <ol>
+         <li class="highlighted">
+          If we haven’t made any changes yet, then the working directory, staging area, and HEAD commit are all identical.
+         </li>
+         <li>
+          Make a change to a file.
+For example, let’s edit
+          <code>
+           hello.txt
+          </code>
+          .
+          <br>
+           Other changes might be creating a new file, or deleting a file.
+          <br>
+         </li>
+         <li>
+          <strong>
+           Stage
+          </strong>
+          those changes using
+          <code>
+           git add
+          </code>
+          .
+         </li>
+         <li>
+          Create a new commit out of all the staged changes using
+          <code>
+           git commit
+          </code>
+          .
+         </li>
+        </ol>
+        <div class="hover-figure no-markdown" data-attr="src" data-selector="#hello-git-commit li" data-target="img" data-template="figures/hello-git-commit-{index}.png">
+         <img src="./Reading 5 Version Control_files/hello-git-commit-0.png" style="max-width:412px">
+        </div>
+        <div class="hover-figure no-markdown" data-pick=":nth-child({index})" data-selector="#hello-git-commit li" data-target="pre">
+         <pre class="terminal-dark" style="display: block; position: relative;"><span class="white ">$</span> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+nothing to commit, working directory clean
+
+
+
+
+
+
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+         <pre class="terminal-dark" style="display: none; position: relative;"><span class="white ">$</span> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+<span class="red ">    modified:   hello.txt</span>
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</file></file><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+         <pre class="terminal-dark" style="display: none; position: relative;"><span class="white ">$</span> git add hello.txt 
+<span class="white ">$</span> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+<span class="green ">    modified:   hello.txt</span>
+
+
+</file><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+         <pre class="terminal-dark" style="display: none; position: relative;"><span class="white ">$</span> git commit
+[master 8a8858a] Update the greeting again
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+<span class="white ">$</span> git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working directory clean
+
+
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+        </div>
+       </div>
+      </div>
+      <p>
+       Use
+       <strong>
+        <code>
+         git status
+        </code>
+       </strong>
+       frequently to keep track of whether you have no changes, unstaged changes, or staged changes; and whether you have new commits in your local repository that haven’t been pushed.
+      </p>
+      <h3 id="sequences_trees_and_graphs">
+       Sequences, trees, and graphs
+      </h3>
+      <div data-outline="sequences_trees_and_graphs">
+       <p>
+        When you’re working independently, on a single machine, the DAG of your version history will usually look like a sequence: commit 1 is the parent of commit 2 is the parent of commit 3…
+       </p>
+       <p>
+        There are three programmers involved in the history of our example repository.
+Two of them – Alyssa and Ben – made changes “at the same time.”
+In this case, “at the same time” doesn’t mean precisely contemporaneous.
+Instead, it means they made two different
+        <em>
+         new
+        </em>
+        versions based on the same
+        <em>
+         previous
+        </em>
+        version, just as
+        <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/05-version-control/#inventing_version_control">
+         Alice made version 5L and 5D on her laptop and desktop
+        </a>
+        .
+       </p>
+       <p>
+        When multiple commits share the same parent commit, our history DAG changes from a sequence to a tree: it branches apart.
+Notice that a branch in the history of the project doesn’t require anyone to create a new Git branch, merely that we start from the same commit and work in parallel on different copies of the repository:
+       </p>
+       <pre class="terminal-dark no-markdown" style="position: relative;"><span class="yellow ">⋮</span>
+*   <span class="yellow ">commit 82e049e248c63289b8a935ce71b130a74dc04152</span>
+<span class="yellow ">|</span>   Author: Ben Bitdiddle &lt;ben.bitdiddle@example.com&gt;
+<span class="yellow ">|</span>   Greeting in Ruby
+<span class="yellow ">|</span>     
+<span class="yellow ">|</span> * <span class="yellow ">commit 64009369c5ab93492931ad07962ee81bda921ded</span>
+<span class="yellow ">|</span><span class="yellow ">/</span>  Author: Alyssa P. Hacker &lt;alyssa.p.hacker@example.com&gt;
+<span class="yellow ">|</span>   Greeting in Scheme
+<span class="yellow ">|</span>  
+* <span class="yellow ">commit 1255f4e4a5836501c022deb337fda3f8800b02e4</span>
+<span class="yellow ">|</span> Author: Max Goldman &lt;maxg@mit.edu&gt;
+<span class="yellow ">|</span> Change the greeting
+<span class="yellow ">⋮</span>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        Finally, the history DAG changes from tree- to graph-shaped when the branching changes are merged together:
+       </p>
+       <pre class="terminal-dark no-markdown" style="position: relative;"><span class="green ">⋮</span>
+*   <span class="yellow ">commit 3e62e60a7b4a0c262cd8eb4308ac3e5a1e94d839</span>
+<span class="green ">|</span><span class="yellow ">\</span>  Author: Max Goldman &lt;maxg@mit.edu&gt;
+<span class="green ">|</span> <span class="yellow ">|</span> Merge
+<span class="green ">|</span> <span class="yellow ">|</span>   
+* <span class="yellow ">|</span> <span class="yellow ">commit 82e049e248c63289b8a935ce71b130a74dc04152</span>
+<span class="yellow ">|</span> <span class="yellow ">|</span> Author: Ben Bitdiddle &lt;ben.bitdiddle@example.com&gt;
+<span class="yellow ">|</span> <span class="yellow ">|</span> Greeting in Ruby
+<span class="yellow ">|</span> <span class="yellow ">|</span>   
+<span class="yellow ">|</span> * <span class="yellow ">commit 64009369c5ab93492931ad07962ee81bda921ded</span>
+<span class="yellow ">|</span><span class="yellow ">/</span>  Author: Alyssa P. Hacker &lt;alyssa.p.hacker@example.com&gt;
+<span class="yellow ">|</span>   Greeting in Scheme
+<span class="yellow ">|</span>  
+* <span class="yellow ">commit 1255f4e4a5836501c022deb337fda3f8800b02e4</span>
+<span class="yellow ">|</span> Author: Max Goldman &lt;maxg@mit.edu&gt;
+<span class="yellow ">|</span> Change the greeting
+<span class="yellow ">⋮</span>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        How is it that changes are merged together?
+First we’ll need to understand how history is shared between different users and repositories.
+       </p>
+      </div>
+     </div>
+     <h2 id="send_receive_object_graphs_with_git_push_git_pull">
+      Send &amp; receive object graphs with
+      <code>
+       git push
+      </code>
+      &amp;
+      <code>
+       git pull
+      </code>
+     </h2>
+     <div data-outline="send_receive_object_graphs_with_git_push_git_pull">
+      <p>
+       We can send new commits to a remote repository using
+       <strong>
+        <code>
+         git push
+        </code>
+       </strong>
+       :
+      </p>
+      <div class="panel panel-default">
+       <div class="panel-heading">
+        <p>
+         <code>
+          git push origin master
+         </code>
+        </p>
+       </div>
+       <div class="panel-body" id="hello-git-push">
+        <p>
+         Hover or tap on each step to update the diagram:
+        </p>
+        <ol>
+         <li class="highlighted">
+          When we clone a repository, we obtain a copy of the history graph.
+          <br>
+           Git remembers where we cloned from as a
+           <strong>
+            remote repository
+           </strong>
+           called
+           <strong>
+            <code>
+             origin
+            </code>
+           </strong>
+           .
+          <br>
+         </li>
+         <li>
+          Using
+          <code>
+           git commit
+          </code>
+          , we add new commits to the local history on the
+          <code>
+           master
+          </code>
+          branch.
+         </li>
+         <li>
+          To send those changes back to the
+          <code>
+           origin
+          </code>
+          remote, use
+          <code>
+           git push origin master
+          </code>
+          .
+         </li>
+        </ol>
+        <div class="hover-figure no-markdown" data-attr="src" data-selector="#hello-git-push li" data-target="img" data-template="figures/hello-git-push-{index}.png">
+         <img src="./Reading 5 Version Control_files/hello-git-push-0.png" style="max-width:623px">
+        </div>
+       </div>
+      </div>
+      <p>
+       And we receive new commits using
+       <strong>
+        <code>
+         git pull
+        </code>
+       </strong>
+       .
+Note that
+       <code>
+        git pull
+       </code>
+       , in addition to fetching new parts of the object graph, also updates the working copy by checking out the latest version (just like
+       <code>
+        git clone
+       </code>
+       checked out a working copy to start with).
+      </p>
+     </div>
+     <h2 id="merging">
+      Merging
+     </h2>
+     <div data-outline="merging">
+      <p>
+       Now, let’s examine what happens when changes occur in parallel:
+      </p>
+      <div class="panel panel-default">
+       <div class="panel-heading">
+        <p>
+         Create and commit
+         <code>
+          hello.scm
+         </code>
+         and
+         <code>
+          hello.rb
+         </code>
+         in parallel
+        </p>
+       </div>
+       <div class="panel-body" id="hello-git-merge">
+        <p>
+         Hover or tap on each step to update the diagram:
+        </p>
+        <ol>
+         <li class="highlighted">
+          Both Alyssa and Ben
+          <strong>
+           clone
+          </strong>
+          the repository with two commits (
+          <code>
+           41c4b8f
+          </code>
+          and
+          <code>
+           1255f4e
+          </code>
+          ).
+         </li>
+         <li>
+          Alyssa creates
+          <code>
+           hello.scm
+          </code>
+          and
+          <strong>
+           commits
+          </strong>
+          her change as
+          <code>
+           6400936
+          </code>
+          .
+         </li>
+         <li>
+          At the same time, Ben creates
+          <code>
+           hello.rb
+          </code>
+          and
+          <strong>
+           commits
+          </strong>
+          his change as
+          <code>
+           82e049e
+          </code>
+          .
+          <br>
+           At this point, both of their changes only exist in their local repositories.
+In each repo,
+           <code>
+            master
+           </code>
+           now points to a different commit.
+          <br>
+         </li>
+         <li>
+          Let’s suppose Alyssa is the first to
+          <strong>
+           push
+          </strong>
+          her change up to Athena.
+         </li>
+         <li>
+          What happens if Ben tries to push now?
+The push will be rejected: if the server updates
+          <code>
+           master
+          </code>
+          to point to Ben’s commit, Alyssa’s commit will disappear from the project history!
+         </li>
+         <li>
+          Ben must
+          <strong>
+           merge
+          </strong>
+          his changes with Alyssa’s.
+          <br>
+           To perform the merge, he
+           <strong>
+            pulls
+           </strong>
+           her commit from Athena, which does two things:
+           <br>
+            (a) Downloads new commits into Ben’s repository’s object graph
+           <br>
+          <br>
+         </li>
+         <li>
+          (b) Merges Ben’s history with Alyssa’s, creating a new commit (
+          <code>
+           3e62e60
+          </code>
+          ) that joins together the disparate histories.
+This commit is a snapshot like any other: a snapshot of the repository with both of their changes applied.
+         </li>
+         <li>
+          Now Ben can
+          <code>
+           git push
+          </code>
+          , because no history will go missing when he does.
+         </li>
+         <li>
+          And Alyssa can
+          <code>
+           git pull
+          </code>
+          to obtain Ben’s work.
+         </li>
+        </ol>
+        <div class="hover-figure no-markdown" data-attr="src" data-selector="#hello-git-merge li" data-target="img" data-template="figures/hello-git-merge-{index}.png">
+         <img src="./Reading 5 Version Control_files/hello-git-merge-0.png" style="max-width:567px">
+        </div>
+       </div>
+      </div>
+      <p>
+       In this example, Git was able to merge Alyssa’s and Ben’s changes automatically, because they each modified different files.
+If both of them had edited the
+       <em>
+        same parts of the same files
+       </em>
+       , Git would report a
+       <strong>
+        merge conflict
+       </strong>
+       .
+Ben would have to manually weave their changes together before committing the merge.
+All of this is discussed in the
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/getting-started/#merges">
+        Getting Started section on merges, merging, and merge conflicts
+       </a>
+       .
+      </p>
+     </div>
+     <h2 id="why_do_commits_look_like_diffs">
+      Why do commits look like diffs?
+     </h2>
+     <div data-outline="why_do_commits_look_like_diffs">
+      <p>
+       We’ve defined a commit as a snapshot of our entire project, but if you ask Git, it doesn’t seem to see things that way:
+      </p>
+      <pre class="terminal-dark no-markdown" style="position: relative;"><span class="white ">$</span> git show 1255f4e
+<span class="yellow ">commit 1255f4e4a5836501c022deb337fda3f8800b02e4</span>
+Author: Max Goldman &lt;maxg@mit.edu&gt;
+Date:   Mon Sep 14 14:58:40 2015 -0400
+
+    Change the greeting
+
+<span class="bold ">diff --git a/hello.txt b/hello.txt</span>
+<span class="bold ">index c1106ab..3462165 100644</span>
+<span class="bold ">--- a/hello.txt</span>
+<span class="bold ">+++ b/hello.txt</span>
+<span class="cyan ">@@ -1 +1 @@</span>
+<span class="red ">-Hello, version control!</span>
+<span class="green ">+</span><span class="green ">Hello again, version control!</span>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       Git is assuming that most of our project does not change in any given commit, so showing only the differences will be more useful.
+Almost all the time, that’s true.
+      </p>
+      <p>
+       But we can ask Git to show us what was in the repo at a particular commit:
+      </p>
+      <pre class="terminal-dark no-markdown" style="position: relative;"><span class="white ">$</span> git show 3e62e60:
+<span class="yellow ">tree 3e62e60:</span>
+
+hello.rb
+hello.scm
+hello.txt
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       Yes, the addition of a
+       <code>
+        :
+       </code>
+       completely changes the meaning of that command.
+      </p>
+      <p>
+       We can also see what was in a particular file in that commit:
+      </p>
+      <pre class="terminal-dark no-markdown" style="position: relative;"><span class="white ">$</span> git show 3e62e60:hello.scm
+(display "Hello, version control!")
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       This is one of the simplest ways you can use Git to recover from a disaster: ask it to
+       <code>
+        git show
+       </code>
+       you the contents of a now-broken file at some earlier version when the file was OK.
+      </p>
+      <p>
+       We’ll practice some disaster recovery commands in class.
+      </p>
+     </div>
+     <h2 id="version_control_and_the_big_three">
+      Version control and the big three
+     </h2>
+     <div data-outline="version_control_and_the_big_three">
+      <p>
+       How does version control relate to the three big ideas of 6.005?
+      </p>
+      <dl>
+       <dt>
+        Safe from bugs
+       </dt>
+       <dd>
+        find when and where something broke
+        <br>
+         look for other, similar mistakes
+         <br>
+          gain confidence that code hasn’t changed accidentally
+         <br>
+        <br>
+       </dd>
+       <dt>
+        Easy to understand
+       </dt>
+       <dd>
+        why was a change made?
+        <br>
+         what else was changed at the same time?
+         <br>
+          who can I ask about this code?
+         <br>
+        <br>
+       </dd>
+       <dt>
+        Ready for change
+       </dt>
+       <dd>
+        all about managing and organizing changes
+        <br>
+         accept and integrate changes from other developers
+         <br>
+          isolate speculative work on branches
+         <br>
+        <br>
+       </dd>
+      </dl>
+     </div>
+    </div>
+   </div>
+  </main>
+  <script src="./Reading 5 Version Control_files/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 5 Version Control_files/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 5 Version Control_files/handout-run.js" type="text/javascript">
+  </script>
+ 
+
+<!-- Handout delivered Tue Feb 16 2016 15:22:50 GMT-0500 (EST) -->
+</body><auto-scroll></auto-scroll><div id="revolut-extension-root"></div></html>

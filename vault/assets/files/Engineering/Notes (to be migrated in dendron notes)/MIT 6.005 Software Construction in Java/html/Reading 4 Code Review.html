@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+   <title>
+    Reading 4: Code Review
+   </title>
+   <link href="./Reading 4 Code Review_files/handout-style.css" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+   
+  
+ </head>
+ <body>
+  <header>
+   <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/">
+    6.005 — Software Construction on MIT OpenCourseWare
+   </a>
+   |
+   <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-005-software-construction-spring-2016/">
+    OCW 6.005 Homepage
+   </a>
+   <div>
+    Spring 2016
+   </div>
+  </header>
+  <nav class="table-of-contents col-sm-2">
+   <ul class="nav">
+    <li class="active">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#reading_4_code_review">
+      Reading 4: Code Review
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#code_review">
+      Code Review
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#dayOfYear">
+      Smelly Example #1
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#dont_repeat_yourself">
+      Don’t Repeat Yourself
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#comments_where_needed">
+      Comments Where Needed
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#fail_fast">
+      Fail Fast
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#avoid_magic_numbers">
+      Avoid Magic Numbers
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#one_purpose_for_each_variable">
+      One Purpose For Each Variable
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#leap">
+      Smelly Example #2
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#use_good_names">
+      Use Good Names
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#use_whitespace_to_help_the_reader">
+      Use Whitespace to Help the Reader
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#countLongWords">
+      Smelly Example #3
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#dont_use_global_variables">
+      Don’t Use Global Variables
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#methods_should_return_results_not_print_them">
+      Methods Should Return Results, not Print Them
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#summary">
+      Summary
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="container-fluid">
+   <h1 class="handout-title col-sm-8 col-sm-offset-2" id="reading_4_code_review">
+    Reading 4: Code Review
+   </h1>
+   <div data-outline="reading_4_code_review">
+    <div class="markdown col-sm-8 col-sm-offset-2 converted">
+     <h4>
+      Software in 6.005
+     </h4>
+     <table class="table table-striped no-markdown">
+      <tbody>
+       <tr>
+        <th width="33%">
+         Safe from bugs
+        </th>
+        <th>
+         Easy to understand
+        </th>
+        <th>
+         Ready for change
+        </th>
+       </tr>
+       <tr>
+        <td>
+         Correct today and correct in the unknown future.
+        </td>
+        <td>
+         Communicating clearly with future programmers, including future you.
+        </td>
+        <td>
+         Designed to accommodate change without rewriting.
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <h4>
+      Objectives for Today’s Class
+     </h4>
+     <p>
+      In today’s class, we will practice:
+     </p>
+     <ul>
+      <li>
+       code review: reading and discussing code written by somebody else
+      </li>
+      <li>
+       general principles of good coding: things you can look for in every code review, regardless of programming language or program purpose
+      </li>
+     </ul>
+     <h2 id="code_review">
+      Code Review
+     </h2>
+     <div data-outline="code_review">
+      <p>
+       Code review is careful, systematic study of source code by people who are not the original author of the code.  It’s analogous to proofreading a term paper.
+      </p>
+      <p>
+       Code review really has two purposes:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Improving the code.
+        </strong>
+        Finding bugs, anticipating possible bugs, checking the clarity of the code, and checking for consistency with the project’s style standards.
+       </li>
+       <li>
+        <strong>
+         Improving the programmer.
+        </strong>
+        Code review is an important way that programmers learn and teach each other, about new language features, changes in the design of the project or its coding standards, and new techniques.
+In open source projects, particularly, much conversation happens in the context of code reviews.
+       </li>
+      </ul>
+      <p>
+       Code review is widely practiced in open source projects like Apache and
+       <a href="https://blog.humphd.org/vocamus-1569/?p=1569">
+        Mozilla
+       </a>
+       .
+Code review is also widely practiced in industry.
+At Google, you can’t push any code into the main repository until another engineer has signed off on it in a code review.
+      </p>
+      <p>
+       In 6.005, we’ll do code review on problem sets, as described in the
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/general/code-review.html">
+        Code Reviewing document
+       </a>
+       on the course website.
+      </p>
+      <h3 id="style_standards">
+       Style Standards
+      </h3>
+      <div data-outline="style_standards">
+       <p>
+        Most companies and large projects have coding style standards (for example,
+        <a href="https://google.github.io/styleguide/javaguide.html">
+         Google Java Style
+        </a>
+        ).
+These can get pretty detailed, even to the point of specifying whitespace (how deep to indent) and where curly braces and parentheses should go.
+These kinds of questions often lead to
+        <a href="https://www.outpost9.com/reference/jargon/jargon_23.html#TAG897">
+         holy wars
+        </a>
+        since they end up being a matter of taste and style.
+       </p>
+       <p>
+        For Java, there’s a general
+        <a href="https://www.oracle.com/technetwork/java/javase/documentation/codeconvtoc-136057.html">
+         style guide
+        </a>
+        (unfortunately not updated for the latest versions of Java).
+Some of its advice gets very specific:
+       </p>
+       <ul>
+        <li>
+         The opening brace should be at the end of the line that begins the compound statement; the closing brace should begin a line and be indented to the beginning of the compound statement.
+        </li>
+       </ul>
+       <p>
+        In 6.005, we have no official style guide of this sort.
+We’re not going to tell you where to put your curly braces.
+That’s a personal decision that each programmer should make.
+It’s important to be self-consistent, however, and it’s
+        <em>
+         very
+        </em>
+        important to follow the conventions of the project you’re working on.
+If you’re the programmer who reformats every module you touch to match your personal style, your teammates will hate you, and rightly so.
+Be a team player.
+       </p>
+       <p>
+        But there are some rules that are quite sensible and target our big three properties, in a stronger way than placing curly braces.
+The rest of this reading talks about some of these rules, at least the ones that are relevant at this point in the course, where we’re mostly talking about writing basic Java.
+These are some things you should start to look for when you’re code reviewing other students, and when you’re looking at your own code for improvement.
+Don’t consider it an exhaustive list of code style guidelines, however.
+Over the course of the semester, we’ll talk about a lot more things — specifications, abstract data types with representation invariants, concurrency and thread safety — which will then become fodder for code review.
+       </p>
+      </div>
+     </div>
+     <h2 id="dayOfYear">
+      Smelly Example #1
+     </h2>
+     <div data-outline="dayOfYear">
+      <p>
+       Programmers often describe bad code as having a “bad smell” that needs to be removed.  “Code hygiene” is another word for this.  Let’s start with some smelly code.
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">dayOfYear</span><span class="hljs-params">(<span class="hljs-keyword">int</span> month, <span class="hljs-keyword">int</span> dayOfMonth, <span class="hljs-keyword">int</span> year)</span> </span>{
+    <span class="hljs-keyword">if</span> (month == <span class="hljs-number">2</span>) {
+        dayOfMonth += <span class="hljs-number">31</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">3</span>) {
+        dayOfMonth += <span class="hljs-number">59</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">4</span>) {
+        dayOfMonth += <span class="hljs-number">90</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">5</span>) {
+        dayOfMonth += <span class="hljs-number">31</span> + <span class="hljs-number">28</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">6</span>) {
+        dayOfMonth += <span class="hljs-number">31</span> + <span class="hljs-number">28</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">7</span>) {
+        dayOfMonth += <span class="hljs-number">31</span> + <span class="hljs-number">28</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">8</span>) {
+        dayOfMonth += <span class="hljs-number">31</span> + <span class="hljs-number">28</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">9</span>) {
+        dayOfMonth += <span class="hljs-number">31</span> + <span class="hljs-number">28</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">31</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">10</span>) {
+        dayOfMonth += <span class="hljs-number">31</span> + <span class="hljs-number">28</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">11</span>) {
+        dayOfMonth += <span class="hljs-number">31</span> + <span class="hljs-number">28</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month == <span class="hljs-number">12</span>) {
+        dayOfMonth += <span class="hljs-number">31</span> + <span class="hljs-number">28</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">31</span> + <span class="hljs-number">30</span> + <span class="hljs-number">31</span> + <span class="hljs-number">31</span>;
+    }
+    <span class="hljs-keyword">return</span> dayOfMonth;
+}</code></pre>
+      <p>
+       The next few sections and exercises will pick out the particular smells in this code example.
+      </p>
+     </div>
+     <h2 id="dont_repeat_yourself">
+      Don’t Repeat Yourself
+     </h2>
+     <div data-outline="dont_repeat_yourself">
+      <p>
+       Duplicated code is a risk to safety.  If you have identical or very similar code in two places, then the fundamental risk is that there’s a bug in both copies, and some maintainer fixes the bug in one place but not the other.
+      </p>
+      <p>
+       Avoid duplication like you’d avoid crossing the street without looking.  Copy-and-paste is an enormously tempting programming tool, and you should feel a frisson of danger run down your spine every time you use it.  The longer the block you’re copying, the riskier it is.
+      </p>
+      <p>
+       <a href="https://en.wikipedia.org/wiki/Don&#39;t_repeat_yourself">
+        Don’t Repeat Yourself
+       </a>
+       , or DRY for short, has become a programmer’s mantra.
+      </p>
+      <p>
+       The
+       <code>
+        dayOfYear
+       </code>
+       example is full of identical code. How would you DRY it out?
+      </p>
+     </div>
+     <h2 id="comments_where_needed">
+      Comments Where Needed
+     </h2>
+     <div data-outline="comments_where_needed">
+      <p>
+       A quick general word about commenting.  Good software developers write comments in their code, and do it judiciously.  Good comments should make the code easier to understand, safer from bugs (because important assumptions have been documented), and ready for change.
+      </p>
+      <p>
+       One kind of crucial comment is a specification, which appears above a method or above a class and documents the behavior of the method or class.
+In Java, this is conventionally written as a Javadoc comment, meaning that it starts with
+       <code>
+        /**
+       </code>
+       and includes
+       <code>
+        @
+       </code>
+       -syntax, like
+       <code>
+        @param
+       </code>
+       and
+       <code>
+        @return
+       </code>
+       for methods.
+Here’s an example of a spec:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/**
+ * Compute the hailstone sequence.
+ * See http://en.wikipedia.org/wiki/Collatz_conjecture#Statement_of_the_problem
+ * <span class="hljs-doctag">@param</span> n starting number of sequence; requires n &gt; 0.
+ * <span class="hljs-doctag">@return</span> the hailstone sequence starting at n and ending with 1.
+ *         For example, hailstone(3)=[3,10,5,16,8,4,2,1].
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;Integer&gt; <span class="hljs-title">hailstoneSequence</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    ...
+}</code></pre>
+      <p>
+       Specifications document assumptions.  We’ve already mentioned specs a few times, and there will be much more to say about them in a future reading.
+      </p>
+      <p>
+       Another crucial comment is one that specifies the provenance or source of a piece of code that was copied or adapted from elsewhere.  This is vitally important for practicing software developers, and is required by the
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/general/collaboration.html">
+        6.005 collaboration policy
+       </a>
+       when you adapt code you found on the web.  Here is an example:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-comment">// read a web page into a string</span>
+<span class="hljs-comment">// see http://stackoverflow.com/questions/4328711/read-url-to-string-in-few-lines-of-java-code</span>
+String mitHomepage = <span class="hljs-keyword">new</span> Scanner(<span class="hljs-keyword">new</span> URL(<span class="hljs-string">"http://www.mit.edu"</span>).openStream(), <span class="hljs-string">"UTF-8"</span>).useDelimiter(<span class="hljs-string">"\\A"</span>).next();</code></pre>
+      <p>
+       One reason for documenting sources is to avoid violations of copyright.  Small snippets of code on Stack Overflow are typically in the public domain, but code copied from other sources may be proprietary or covered by other kinds of open source licenses, which are more restrictive.  Another reason for documenting sources is that the code can fall out of date; the
+       <a href="https://stackoverflow.com/questions/4328711/read-url-to-string-in-few-lines-of-java-code">
+        Stack Overflow answer
+       </a>
+       from which this code came has evolved significantly in the years since it was first answered.
+      </p>
+      <p>
+       Some comments are bad and unnecessary.  Direct transliterations of code into English, for example, do nothing to improve understanding, because you should assume that your reader at least knows Java:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-keyword">while</span> (n != <span class="hljs-number">1</span>) { <span class="hljs-comment">// test whether n is 1   (don't write comments like this!)</span>
+   ++i; <span class="hljs-comment">// increment i</span>
+   l.add(n); <span class="hljs-comment">// add n to l</span>
+}</code></pre>
+      <p>
+       But obscure code should get a comment:
+      </p>
+      <pre><code class="language-java hljs">sendMessage(<span class="hljs-string">"as you wish"</span>); <span class="hljs-comment">// this basically says "I love you"</span></code></pre>
+      <p>
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/04-code-review/#dayOfYear">
+        The
+        <code>
+         dayOfYear
+        </code>
+        code
+       </a>
+       needs some comments — where would you put them?
+For example, where would you document whether
+       <code>
+        month
+       </code>
+       runs from 0 to 11 or from 1 to 12?
+      </p>
+     </div>
+     <h2 id="fail_fast">
+      Fail Fast
+     </h2>
+     <div data-outline="fail_fast">
+      <p>
+       <em>
+        Failing fast
+       </em>
+       means that code should reveal its bugs as early as possible.  The earlier a problem is observed (the closer to its cause), the easier it is to find and fix.  As we saw in the
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/01-static-checking/#static_checking_dynamic_checking_no_checking">
+        first reading
+       </a>
+       , static checking fails faster than dynamic checking, and dynamic checking fails faster than producing a wrong answer that may corrupt subsequent computation.
+      </p>
+      <p>
+       The
+       <code>
+        dayOfYear
+       </code>
+       function doesn’t fail fast — if you pass it the arguments in the wrong order, it will quietly return the wrong answer.
+In fact, the way dayOfYear is designed, it’s highly likely that a non-American will pass the arguments in the wrong order!
+It needs more checking — either static checking or dynamic checking.
+      </p>
+     </div>
+     <h2 id="avoid_magic_numbers">
+      Avoid Magic Numbers
+     </h2>
+     <div data-outline="avoid_magic_numbers">
+      <p>
+       There are really only two constants that computer scientists recognize as valid in and of themselves: 0, 1, and maybe 2.  (Okay, three constants.)
+      </p>
+      <p>
+       All other constants are called
+       <a href="https://en.wikipedia.org/wiki/Magic_number_(programming)#Unnamed_numerical_constants">
+        magic
+       </a>
+       because they appear as if out of thin air with no explanation.
+      </p>
+      <p>
+       One way to explain a number is with a comment, but a far better way is to declare the number as a named constant with a good, clear name.
+      </p>
+      <p>
+       <code>
+        dayOfYear
+       </code>
+       is full of magic numbers:
+      </p>
+      <ul>
+       <li>
+        The months 2, …, 12 would be far more readable as
+        <code>
+         FEBRUARY
+        </code>
+        , …,
+        <code>
+         DECEMBER
+        </code>
+        .
+       </li>
+       <li>
+        The days-of-months 30, 31, 28 would be more readable (and eliminate duplicate code) if they were in a data structure like an array, list, or map, e.g.
+        <code>
+         MONTH_LENGTH[month]
+        </code>
+        .
+       </li>
+       <li>
+        The mysterious numbers 59 and 90 are particularly pernicious examples of magic numbers.  Not only are they uncommented and undocumented, they are actually the result of a
+        <em>
+         computation done by hand
+        </em>
+        by the programmer.  Don’t hardcode constants that you’ve computed by hand.  Java is better at arithmetic than you are.  Explicit computations like
+        <code>
+         31 + 28
+        </code>
+        make the provenance of these mysterious numbers much clearer.
+        <code>
+         MONTH_LENGTH[JANUARY] + MONTH_LENGTH[FEBRUARY]
+        </code>
+        would be clearer still.
+       </li>
+      </ul>
+     </div>
+     <h2 id="one_purpose_for_each_variable">
+      One Purpose For Each Variable
+     </h2>
+     <div data-outline="one_purpose_for_each_variable">
+      <p>
+       In the
+       <code>
+        dayOfYear
+       </code>
+       example, the parameter
+       <code>
+        dayOfMonth
+       </code>
+       is reused to compute a very different value — the return value of the function, which is not the day of the month.
+      </p>
+      <p>
+       Don’t reuse parameters, and don’t reuse variables.  Variables are not a scarce resource in programming.  Introduce them freely, give them good names, and just stop using them when you stop needing them.  You will confuse your reader if a variable that used to mean one thing suddenly starts meaning something different a few lines down.
+      </p>
+      <p>
+       Not only is this an ease-of-understanding question, but it’s also a safety-from-bugs and ready-for-change question.
+      </p>
+      <p>
+       Method parameters, in particular, should generally be left unmodified.  (This is important for being ready-for-change — in the future, some other part of the method may want to know what the original parameters of the method were, so you shouldn’t blow them away while you’re computing.)
+It’s a good idea to use
+       <code>
+        final
+       </code>
+       for method parameters, and as many other variables as you can.  The
+       <code>
+        final
+       </code>
+       keyword says that the variable should never be reassigned, and the Java compiler will check it statically.  For example:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">dayOfYear</span><span class="hljs-params">(<span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> month, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> dayOfMonth, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> year)</span> </span>{
+    ...
+}</code></pre>
+     </div>
+     <h2 id="leap">
+      Smelly Example #2
+     </h2>
+     <div data-outline="leap">
+      <p>
+       There was a latent bug in
+       <code>
+        dayOfYear
+       </code>
+       .  It didn’t handle leap years at all.  As part of fixing that, suppose we write a leap-year method.
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">leap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> y)</span> </span>{
+    String tmp = String.valueOf(y);
+    <span class="hljs-keyword">if</span> (tmp.charAt(<span class="hljs-number">2</span>) == <span class="hljs-string">'1'</span> || tmp.charAt(<span class="hljs-number">2</span>) == <span class="hljs-string">'3'</span> || tmp.charAt(<span class="hljs-number">2</span>) == <span class="hljs-number">5</span> || tmp.charAt(<span class="hljs-number">2</span>) == <span class="hljs-string">'7'</span> || tmp.charAt(<span class="hljs-number">2</span>) == <span class="hljs-string">'9'</span>) {
+        <span class="hljs-keyword">if</span> (tmp.charAt(<span class="hljs-number">3</span>)==<span class="hljs-string">'2'</span>||tmp.charAt(<span class="hljs-number">3</span>)==<span class="hljs-string">'6'</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; <span class="hljs-comment">/*R1*/</span>
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; <span class="hljs-comment">/*R2*/</span>
+    }<span class="hljs-keyword">else</span>{
+        <span class="hljs-keyword">if</span> (tmp.charAt(<span class="hljs-number">2</span>) == <span class="hljs-string">'0'</span> &amp;&amp; tmp.charAt(<span class="hljs-number">3</span>) == <span class="hljs-string">'0'</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; <span class="hljs-comment">/*R3*/</span>
+        }
+        <span class="hljs-keyword">if</span> (tmp.charAt(<span class="hljs-number">3</span>)==<span class="hljs-string">'0'</span>||tmp.charAt(<span class="hljs-number">3</span>)==<span class="hljs-string">'4'</span>||tmp.charAt(<span class="hljs-number">3</span>)==<span class="hljs-string">'8'</span>)<span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; <span class="hljs-comment">/*R4*/</span>
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; <span class="hljs-comment">/*R5*/</span>
+}</code></pre>
+      <p>
+       What are the bugs hidden in this code?  And what style problems that we’ve already talked about?
+      </p>
+     </div>
+     <h2 id="use_good_names">
+      Use Good Names
+     </h2>
+     <div data-outline="use_good_names">
+      <p>
+       Good method and variable names are long and self-descriptive.  Comments can often be avoided entirely by making the code itself more readable, with better names that describe the methods and variables.
+      </p>
+      <p>
+       For example, you can rewrite
+      </p>
+      <pre><code class="hljs cpp"><span class="hljs-keyword">int</span> tmp = <span class="hljs-number">86400</span>;  <span class="hljs-comment">// tmp is the number of seconds in a day (don't do this!)</span>
+</code></pre>
+      <p>
+       as:
+      </p>
+      <pre><code class="hljs cpp"><span class="hljs-keyword">int</span> secondsPerDay = <span class="hljs-number">86400</span>;
+</code></pre>
+      <p>
+       In general, variable names like
+       <code>
+        tmp
+       </code>
+       ,
+       <code>
+        temp
+       </code>
+       , and
+       <code>
+        data
+       </code>
+       are awful, symptoms of extreme programmer laziness.  Every local variable is temporary, and every variable is data, so those names are generally meaningless.  Better to use a longer, more descriptive name, so that your code reads clearly all by itself.
+      </p>
+      <p>
+       Follow the lexical naming conventions of the language.  In Python, classes are typically Capitalized, variables are lowercase, and words_are_separated_by_underscores.  In Java:
+      </p>
+      <ul>
+       <li>
+        methodsAreNamedWithCamelCaseLikeThis
+       </li>
+       <li>
+        variablesAreAlsoCamelCase
+       </li>
+       <li>
+        CONSTANTS_ARE_IN_ALL_CAPS_WITH_UNDERSCORES
+       </li>
+       <li>
+        ClassesAreCapitalized
+       </li>
+       <li>
+        packages.are.lowercase.and.separated.by.dots
+       </li>
+      </ul>
+      <p>
+       Method names are usually verb phrases, like
+       <code>
+        getDate
+       </code>
+       or
+       <code>
+        isUpperCase
+       </code>
+       , while variable and class names are usually noun phrases.  Choose short words, and be concise, but avoid abbreviations.  For example,
+       <code>
+        message
+       </code>
+       is clearer than
+       <code>
+        msg
+       </code>
+       , and
+       <code>
+        word
+       </code>
+       is so much better than
+       <code>
+        wd
+       </code>
+       .  Keep in mind that many of your teammates in class and in the real world will not be native English speakers, and abbreviations can be even harder for non-native speakers.
+      </p>
+      <p>
+       The
+       <code>
+        leap
+       </code>
+       method has bad names: the method name itself, and the local variable name.  What would you call them instead?
+      </p>
+     </div>
+     <h2 id="use_whitespace_to_help_the_reader">
+      Use Whitespace to Help the Reader
+     </h2>
+     <div data-outline="use_whitespace_to_help_the_reader">
+      <p>
+       Use consistent indentation.  The
+       <code>
+        leap
+       </code>
+       example is bad at this.  The
+       <code>
+        dayOfYear
+       </code>
+       example is much better.  In fact,
+       <code>
+        dayOfYear
+       </code>
+       nicely lines up all the numbers into columns, making them easy for a human reader to compare and check.  That’s a great use of whitespace.
+      </p>
+      <p>
+       Put spaces within code lines to make them easy to read.  The leap example has some lines that are packed together — put in some spaces.
+      </p>
+      <p>
+       Never use tab characters for indentation, only space characters.  Note that we say
+       <em>
+        characters
+       </em>
+       , not keys. We’re not saying you should never press the Tab key, only that your editor should never put a tab character into your source file in response to your pressing the Tab key.  The reason for this rule is that different tools treat tab characters differently — sometimes expanding them to 4 spaces, sometimes to 2 spaces, sometimes to 8.  If you run “git diff” on the command line, or if you view your source code in a different editor, then the indentation may be completely screwed up.  Just use spaces.  Always set your programming editor to insert space characters when you press the Tab key.
+      </p>
+     </div>
+     <h2 id="countLongWords">
+      Smelly Example #3
+     </h2>
+     <div data-outline="countLongWords">
+      <p>
+       Here’s a third example of smelly code that will illustrate the remaining points of this reading.
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> LONG_WORD_LENGTH = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String longestWord;
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">countLongWords</span><span class="hljs-params">(List&lt;String&gt; words)</span> </span>{
+   <span class="hljs-keyword">int</span> n = <span class="hljs-number">0</span>;
+   longestWord = <span class="hljs-string">""</span>;
+   <span class="hljs-keyword">for</span> (String word: words) {
+       <span class="hljs-keyword">if</span> (word.length() &gt; LONG_WORD_LENGTH) ++n;
+       <span class="hljs-keyword">if</span> (word.length() &gt; longestWord.length()) longestWord = word;
+   }
+   System.out.println(n);
+}</code></pre>
+     </div>
+     <h2 id="dont_use_global_variables">
+      Don’t Use Global Variables
+     </h2>
+     <div data-outline="dont_use_global_variables">
+      <p>
+       Avoid global variables.  Let’s break down what we mean by
+       <em>
+        global variable
+       </em>
+       .  A global variable is:
+      </p>
+      <ul>
+       <li>
+        a
+        <em>
+         variable
+        </em>
+        , a name whose meaning can be changed
+       </li>
+       <li>
+        that is
+        <em>
+         global
+        </em>
+        , accessible and changeable from anywhere in the program.
+       </li>
+      </ul>
+      <p>
+       <a href="https://c2.com/cgi/wiki?GlobalVariablesAreBad">
+        Why Global Variables Are Bad
+       </a>
+       has a good list of the dangers of global variables.
+      </p>
+      <p>
+       In Java, a global variable is declared
+       <code>
+        public static
+       </code>
+       .  The
+       <code>
+        public
+       </code>
+       modifier makes it accessible anywhere, and
+       <code>
+        static
+       </code>
+       means there is a single instance of the variable.
+      </p>
+      <p>
+       In general, change global variables into parameters and return values, or put them inside objects that you’re calling methods on.  We’ll see many techniques for doing that in future readings.
+      </p>
+     </div>
+     <h2 id="methods_should_return_results_not_print_them">
+      Methods Should Return Results, not Print Them
+     </h2>
+     <div data-outline="methods_should_return_results_not_print_them">
+      <p>
+       <code>
+        countLongWords
+       </code>
+       isn’t ready for change.  It sends some of its result to the console,
+       <code>
+        System.out
+       </code>
+       .  That means that if you want to use it in another context — where the number is needed for some other purpose, like computation rather than human eyes — it would have to be rewritten.
+      </p>
+      <p>
+       In general, only the highest-level parts of a program should interact with the human user or the console.  Lower-level parts should take their input as parameters and return their output as results.  The sole exception here is debugging output, which can of course be printed to the console.  But that kind of output shouldn’t be a part of your design, only a part of how you debug your design.
+      </p>
+     </div>
+     <h2 id="summary">
+      Summary
+     </h2>
+     <div data-outline="summary">
+      <p>
+       Code review is a widely-used technique for improving software quality by human inspection.  Code review can detect many kinds of problems in code, but as a starter, this reading talked about these general principles of good code:
+      </p>
+      <ul>
+       <li>
+        Don’t Repeat Yourself (DRY)
+       </li>
+       <li>
+        Comments where needed
+       </li>
+       <li>
+        Fail fast
+       </li>
+       <li>
+        Avoid magic numbers
+       </li>
+       <li>
+        One purpose for each variable
+       </li>
+       <li>
+        Use good names
+       </li>
+       <li>
+        No global variables
+       </li>
+       <li>
+        Return results, don’t print them
+       </li>
+       <li>
+        Use whitespace for readability
+       </li>
+      </ul>
+      <p>
+       The topics of today’s reading connect to our three key properties of good software as follows:
+      </p>
+      <ul>
+       <li>
+        <p>
+         <strong>
+          Safe from bugs.
+         </strong>
+         In general, code review uses human reviewers to find bugs.  DRY code lets you fix a bug in only one place, without fear that it has propagated elsewhere.  Commenting your assumptions clearly makes it less likely that another programmer will introduce a bug.  The Fail Fast principle detects bugs as early as possible.  Avoiding global variables makes it easier to localize bugs related to variable values, since non-global variables can be changed in only limited places in the code.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Easy to understand.
+         </strong>
+         Code review is really the only way to find obscure or confusing code, because other people are reading it and trying to understand it.  Using judicious comments, avoiding magic numbers, keeping one purpose for each variable, using good names, and using whitespace well can all improve the understandability of code.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Ready for change.
+         </strong>
+         Code review helps here when it’s done by experienced software developers who can anticipate what might change and suggest ways to guard against it.  DRY code is more ready for change, because a change only needs to be made in one place.  Returning results instead of printing them makes it easier to adapt the code to a new purpose.
+        </p>
+       </li>
+      </ul>
+      <hr>
+     </div>
+    </div>
+   </div>
+  </main>
+  <script src="./Reading 4 Code Review_files/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 4 Code Review_files/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 4 Code Review_files/handout-run.js" type="text/javascript">
+  </script>
+ 
+
+<!-- Handout delivered Tue Feb 16 2016 15:22:47 GMT-0500 (EST) -->
+</body><auto-scroll></auto-scroll><div id="revolut-extension-root"></div></html>

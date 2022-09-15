@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<!-- saved from url=(0088)https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+   <title>
+    Reading 13: Abstraction Functions &amp; Rep Invariants
+   </title>
+   <link href="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/handout-style.css" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+   
+  
+ </head>
+ <body>
+  <header>
+   <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/">
+    6.005 — Software Construction on MIT OpenCourseWare
+   </a>
+   |
+   <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-005-software-construction-spring-2016/">
+    OCW 6.005 Homepage
+   </a>
+   <div>
+    Spring 2016
+   </div>
+  </header>
+  <nav class="table-of-contents col-sm-2">
+   <ul class="nav">
+    <li class="active">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/#reading_13_abstraction_functions_rep_invariants">
+      Reading 13: Abstraction Functions &amp; Rep Invariants
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/#invariants">
+      Invariants
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/#rep_invariant_and_abstraction_function">
+      Rep Invariant and Abstraction Function
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/#documenting_the_af_ri_and_safety_from_rep_exposure">
+      Documenting the AF, RI, and Safety from Rep Exposure
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/#adt_invariants_replace_preconditions">
+      ADT invariants replace preconditions
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/#summary">
+      Summary
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="container-fluid">
+   <h1 class="handout-title col-sm-8 col-sm-offset-2" id="reading_13_abstraction_functions_rep_invariants">
+    Reading 13: Abstraction Functions &amp; Rep Invariants
+   </h1>
+   <div data-outline="reading_13_abstraction_functions_rep_invariants">
+    <div class="markdown col-sm-8 col-sm-offset-2 converted">
+     <h4>
+      Software in 6.005
+     </h4>
+     <table class="table table-striped no-markdown">
+      <tbody>
+       <tr>
+        <th width="33%">
+         Safe from bugs
+        </th>
+        <th>
+         Easy to understand
+        </th>
+        <th>
+         Ready for change
+        </th>
+       </tr>
+       <tr>
+        <td>
+         Correct today and correct in the unknown future.
+        </td>
+        <td>
+         Communicating clearly with future programmers, including future you.
+        </td>
+        <td>
+         Designed to accommodate change without rewriting.
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <h4>
+      Objectives
+     </h4>
+     <p>
+      Today’s reading introduces several ideas:
+     </p>
+     <ul>
+      <li>
+       invariants
+      </li>
+      <li>
+       representation exposure
+      </li>
+      <li>
+       abstraction functions
+      </li>
+      <li>
+       representation invariants
+      </li>
+     </ul>
+     <p>
+      In this reading, we study a more formal mathematical idea of what it means for a class to implement an ADT, via the notions of
+      <em>
+       abstraction functions
+      </em>
+      and
+      <em>
+       rep invariants
+      </em>
+      .  These mathematical notions are eminently practical in software design.  The abstraction function will give us a way to cleanly define the equality operation on an abstract data type (which we’ll discuss in more depth in a future class).  The rep invariant will make it easier to catch bugs caused by a corrupted data structure.
+     </p>
+     <h2 id="invariants">
+      Invariants
+     </h2>
+     <div data-outline="invariants">
+      <p>
+       Resuming our discussion of what makes a good abstract data type, the final, and perhaps most important, property of a good abstract data type is that it
+       <strong>
+        preserves its own invariants
+       </strong>
+       .
+An
+       <em>
+        invariant
+       </em>
+       is a property of a program that is always true, for every possible runtime state of the program.
+Immutability is one crucial invariant that we’ve already encountered: once created, an immutable object should always represent the same value, for its entire lifetime.
+Saying that the ADT
+       <em>
+        preserves its own invariants
+       </em>
+       means that the ADT is responsible for ensuring that its own invariants hold.
+It doesn’t depend on good behavior from its clients.
+      </p>
+      <p>
+       When an ADT preserves its own invariants, reasoning about the code becomes much easier.
+If you can count on the fact that Strings never change, you can rule out that possibility when you’re debugging code that uses Strings – or when you’re trying to establish an invariant for another ADT that uses Strings.
+Contrast that with a string type that guarantees that it will be immutable only if its clients promise not to change it. 
+Then you’d have to check all the places in the code where the string might be used.
+      </p>
+      <h3 id="immutability">
+       Immutability
+      </h3>
+      <div data-outline="immutability">
+       <p>
+        Later in this reading, we’ll see many interesting invariants. 
+Let’s focus on immutability for now. Here’s a specific example:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/**
+ * This immutable data type represents a tweet from Twitter.
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tweet</span> </span>{
+
+    <span class="hljs-keyword">public</span> String author;
+    <span class="hljs-keyword">public</span> String text;
+    <span class="hljs-keyword">public</span> Date timestamp;
+
+    <span class="hljs-comment handout-javadoc-comment">/**
+     * Make a Tweet.
+     * <span class="hljs-doctag">@param</span> author    Twitter user who wrote the tweet
+     * <span class="hljs-doctag">@param</span> text      text of the tweet
+     * <span class="hljs-doctag">@param</span> timestamp date/time when the tweet was sent
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Tweet</span><span class="hljs-params">(String author, String text, Date timestamp)</span> </span>{
+        <span class="hljs-keyword">this</span>.author = author;
+        <span class="hljs-keyword">this</span>.text = text;
+        <span class="hljs-keyword">this</span>.timestamp = timestamp;
+    }
+}</code></pre>
+       <p>
+        How do we guarantee that these Tweet objects are immutable – that, once a tweet is created, its author, message, and date can never be changed?
+       </p>
+       <p>
+        The first threat to immutability comes from the fact that clients can — in fact must — directly access its fields. So nothing’s stopping us from writing code like this:
+       </p>
+       <pre><code class="language-java hljs">Tweet t = <span class="hljs-keyword">new</span> Tweet(<span class="hljs-string">"justinbieber"</span>, 
+                    <span class="hljs-string">"Thanks to all those beliebers out there inspiring me every day"</span>, 
+                    <span class="hljs-keyword">new</span> Date());
+t.author = <span class="hljs-string">"rbmllr"</span>;</code></pre>
+       <p>
+        This is a trivial example of
+        <strong>
+         representation exposure
+        </strong>
+        , meaning that code outside the class can modify the representation directly. Rep exposure like this threatens not only invariants, but also representation independence. We can’t change the implementation of Tweet without affecting all the clients who are directly accessing those fields.
+       </p>
+       <p>
+        Fortunately, Java gives us language mechanisms to deal with this kind of rep exposure:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tweet</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String author;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String text;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Date timestamp;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Tweet</span><span class="hljs-params">(String author, String text, Date timestamp)</span> </span>{
+        <span class="hljs-keyword">this</span>.author = author;
+        <span class="hljs-keyword">this</span>.text = text;
+        <span class="hljs-keyword">this</span>.timestamp = timestamp;
+    }
+
+    <span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> Twitter user who wrote the tweet */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getAuthor</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> author;
+    }
+
+    <span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> text of the tweet */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getText</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> text;
+    }
+
+    <span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> date/time when the tweet was sent */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Date <span class="hljs-title">getTimestamp</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> timestamp;
+    }
+
+}</code></pre>
+       <p>
+        The
+        <code>
+         private
+        </code>
+        and
+        <code>
+         public
+        </code>
+        keywords indicate which fields and methods are accessible only within the class and which can be accessed from outside the class.
+The
+        <code>
+         final
+        </code>
+        keyword also helps by guaranteeing that the fields of this immutable type won’t be reassigned after the object is constructed.
+       </p>
+       <div class="panel panel-figure pull-right pull-margin">
+        <img alt="retweetLater breaking Tweet&#39;s immutability" src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/retweetLater.png" width="300">
+       </div>
+       <p>
+        But that’s not the end of the story: the rep is still exposed! Consider this perfectly reasonable client code that uses
+        <code>
+         Tweet
+        </code>
+        :
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> a tweet that retweets t, one hour later*/</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Tweet <span class="hljs-title">retweetLater</span><span class="hljs-params">(Tweet t)</span> </span>{
+    Date d = t.getTimestamp();
+    d.setHours(d.getHours()+<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Tweet(<span class="hljs-string">"rbmllr"</span>, t.getText(), d);
+}</code></pre>
+       <p>
+        <code>
+         retweetLater
+        </code>
+        takes a tweet and should return another tweet with the same message (called a
+        <em>
+         retweet
+        </em>
+        ) but sent an hour later. The
+        <code>
+         retweetLater
+        </code>
+        method might be part of a system that automatically echoes funny things that Twitter celebrities say.
+       </p>
+       <p>
+        What’s the problem here? The
+        <code>
+         getTimestamp
+        </code>
+        call returns a reference to the same
+        <code>
+         Date
+        </code>
+        object referenced by tweet
+        <code>
+         t
+        </code>
+        .
+        <code>
+         t.timestamp
+        </code>
+        and
+        <code>
+         d
+        </code>
+        are aliases to the same mutable object. So when that date object is mutated by
+        <code>
+         d.setHours()
+        </code>
+        , this affects the date in
+        <code>
+         t
+        </code>
+        as well, as shown in the snapshot diagram.
+       </p>
+       <p>
+        <code>
+         Tweet
+        </code>
+        ’s immutability invariant has been broken. The problem is that
+        <code>
+         Tweet
+        </code>
+        leaked out a reference to a mutable object that its immutability depended on. We exposed the rep, in such a way that
+        <code>
+         Tweet
+        </code>
+        can no longer guarantee that its objects are immutable. Perfectly reasonable client code created a subtle bug.
+       </p>
+       <p>
+        We can patch this kind of rep exposure by using defensive copying: making a copy of a mutable object to avoid leaking out references to the rep. Here’s the code:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> Date <span class="hljs-title">getTimestamp</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Date(timestamp.getTime());
+}</code></pre>
+       <p>
+        Mutable types often have a copy constructor that allows you to make a new instance that duplicates the value of an existing instance.
+In this case,
+        <code>
+         Date
+        </code>
+        ’s copy constructor uses the timestamp value, measured in milliseconds since January 1, 1970. As another example,
+        <code>
+         StringBuilder
+        </code>
+        ’s copy constructor takes a
+        <code>
+         String
+        </code>
+        . Another way to copy a mutable object is
+        <code>
+         clone()
+        </code>
+        , which is supported by some types but not all.
+There are unfortunate problems with the way
+        <code>
+         clone()
+        </code>
+        works in Java.
+For more, see Josh Bloch,
+        <a href="https://library.mit.edu/item/001484188">
+         <em>
+          Effective Java
+         </em>
+        </a>
+        , item 11.
+       </p>
+       <div class="panel panel-figure pull-right pull-margin">
+        <img alt="tweetEveryHourToday breaking Tweet&#39;s immutability" src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/tweetEveryHourToday.png" width="300">
+       </div>
+       <p>
+        So we’ve done some defensive copying in the return value of
+        <code>
+         getTimestamp
+        </code>
+        .
+But we’re not done yet! There’s still rep exposure. Consider this (again perfectly reasonable) client code:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> a list of 24 inspiring tweets, one per hour today */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;Tweet&gt; <span class="hljs-title">tweetEveryHourToday</span> <span class="hljs-params">()</span> </span>{
+    List&lt;Tweet&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;Tweet&gt;(); 
+    Date date = <span class="hljs-keyword">new</span> Date();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">24</span>; i++) {
+        date.setHours(i);
+        list.add(<span class="hljs-keyword">new</span> Tweet(<span class="hljs-string">"rbmllr"</span>, <span class="hljs-string">"keep it up! you can do it"</span>, date));
+    } 
+    <span class="hljs-keyword">return</span> list;
+}</code></pre>
+       <p>
+        This code intends to advance a single
+        <code>
+         Date
+        </code>
+        object through the 24 hours of a day, creating a tweet for every hour. But notice that the constructor of Tweet saves the reference that was passed in, so all 24 Tweet objects end up with the same time, as shown in this snapshot diagram.
+       </p>
+       <p>
+        Again, the immutability of Tweet has been violated. We can fix this problem too by using judicious defensive copying, this time in the constructor:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Tweet</span><span class="hljs-params">(String author, String text, Date timestamp)</span> </span>{
+    <span class="hljs-keyword">this</span>.author = author;
+    <span class="hljs-keyword">this</span>.text = text;
+    <span class="hljs-keyword">this</span>.timestamp = <span class="hljs-keyword">new</span> Date(timestamp.getTime());
+}</code></pre>
+       <p>
+        In general, you should carefully inspect the argument types and return types of all your ADT operations. If any of the types are mutable, make sure your implementation doesn’t return direct references to its representation.  Doing that creates rep exposure.
+       </p>
+       <p>
+        You may object that this seems wasteful. Why make all these copies of dates? Why can’t we just solve this problem by a carefully written specification, like this?
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/**
+ * Make a Tweet.
+ * <span class="hljs-doctag">@param</span> author    Twitter user who wrote the tweet
+ * <span class="hljs-doctag">@param</span> text      text of the tweet
+ * <span class="hljs-doctag">@param</span> timestamp date/time when the tweet was sent. Caller must never 
+ *                   mutate this Date object again!
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Tweet</span><span class="hljs-params">(String author, String text, Date timestamp)</span> </span>{</code></pre>
+       <p>
+        This approach is sometimes taken when there isn’t any other reasonable alternative – for example, when the mutable object is too large to copy efficiently. But the cost in your ability to reason about the program, and your ability to avoid bugs, is enormous. In the absence of compelling arguments to the contrary, it’s almost always worth it for an abstract data type to guarantee its own invariants, and preventing rep exposure is essential to that.
+       </p>
+       <p>
+        An even better solution is to prefer immutable types. If – as recommended in
+        <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#risky_example_2_returning_mutable_values">
+         <em>
+          Mutability &amp; Immutability
+         </em>
+         ’s Groundhog Day example
+        </a>
+        – we had used an immutable date object, like
+        <code>
+         java.time.ZonedDateTime
+        </code>
+        , instead of the mutable
+        <code>
+         java.util.Date
+        </code>
+        , then we would have ended this section after talking about
+        <code>
+         public
+        </code>
+        and
+        <code>
+         private
+        </code>
+        . No further rep exposure would have been possible.
+       </p>
+      </div>
+      <h3 id="immutable_wrappers_around_mutable_data_types">
+       Immutable Wrappers Around Mutable Data Types
+      </h3>
+      <div data-outline="immutable_wrappers_around_mutable_data_types">
+       <p>
+        The Java collections classes offer an interesting compromise: immutable wrappers.
+       </p>
+       <p>
+        <code>
+         Collections.unmodifiableList()
+        </code>
+        takes a (mutable)
+        <code>
+         List
+        </code>
+        and wraps it with an object that looks like a
+        <code>
+         List
+        </code>
+        , but whose mutators are disabled –
+        <code>
+         set()
+        </code>
+        ,
+        <code>
+         add()
+        </code>
+        ,
+        <code>
+         remove()
+        </code>
+        , etc. throw exceptions.
+So you can construct a list using mutators, then seal it up in an unmodifiable wrapper (and throw away your reference to the original mutable list, as discussed in
+        <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#useful_immutable_types">
+         <em>
+          Mutability &amp; Immutability
+         </em>
+        </a>
+        ), and get an immutable list.
+       </p>
+       <p>
+        The downside here is that you get immutability at runtime, but not at compile time. Java won’t warn you at compile time if you try to
+        <code>
+         sort()
+        </code>
+        this unmodifiable list.  You’ll just get an exception at runtime. But that’s still better than nothing, so using unmodifiable lists, maps, and sets can be a very good way to reduce the risk of bugs.
+       </p>
+      </div>
+     </div>
+     <h2 id="rep_invariant_and_abstraction_function">
+      Rep Invariant and Abstraction Function
+     </h2>
+     <div data-outline="rep_invariant_and_abstraction_function">
+      <p>
+       We now take a deeper look at the theory underlying abstract data types. This theory is not only elegant and interesting in its own right; it also has immediate practical application to the design and implementation of abstract types. If you understand the theory deeply, you’ll be able to build better abstract types, and will be less likely to fall into subtle traps.
+      </p>
+      <p>
+       In thinking about an abstract type, it helps to consider the relationship between two spaces of values.
+      </p>
+      <p>
+       The space of representation values (or rep values for short) consists of the values of the actual implementation entities. In simple cases, an abstract type will be implemented as a single object, but more commonly a small network of objects is needed, so this value is actually often something rather complicated. For now, though, it will suffice to view it simply as a mathematical value.
+      </p>
+      <p>
+       The space of abstract values consists of the values that the type is designed to support. These are a figment of our imaginations. They’re platonic entities that don’t exist as described, but they are the way we want to view the elements of the abstract type, as clients of the type. For example, an abstract type for unbounded integers might have the mathematical integers as its abstract value space; the fact that it might be implemented as an array of primitive (bounded) integers, say, is not relevant to the user of the type.
+      </p>
+      <p>
+       Now of course the implementor of the abstract type must be interested in the representation values, since it is the implementor’s job to achieve the illusion of the abstract value space using the rep value space.
+      </p>
+      <p>
+       Suppose, for example, that we choose to use a string to represent a set of characters:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CharSet</span> </span>{
+    <span class="hljs-keyword">private</span> String s;
+    ...
+}</code></pre>
+      <div class="panel panel-figure pull-right pull-margin">
+       <img alt="the abstract space and rep space of CharSet" src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/charset-af-ri.png" width="300">
+      </div>
+      <p>
+       Then the rep space R contains Strings, and the abstract space A is mathematical sets of characters. We can show the two value spaces graphically, with an arc from a rep value to the abstract value it represents.  There are several things to note about this picture:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Every abstract value is mapped to by some rep value
+        </strong>
+        . The purpose of implementing the abstract type is to support operations on abstract values. Presumably, then, we will need to be able to create and manipulate all possible abstract values, and they must therefore be representable.
+       </li>
+       <li>
+        <strong>
+         Some abstract values are mapped to by more than one rep value
+        </strong>
+        . This happens because the representation isn’t a tight encoding. There’s more than one way to represent an unordered set of characters as a string.
+       </li>
+       <li>
+        <strong>
+         Not all rep values are mapped
+        </strong>
+        . In this case, the string “abbc” is not mapped. In this case, we have decided that the string should not contain duplicates. This will allow us to terminate the remove method when we hit the first instance of a particular character, since we know there can be at most one.
+       </li>
+      </ul>
+      <div class="clearfix">
+      </div>
+      <p>
+       In practice, we can only illustrate a few elements of the two spaces and their relationships; the graph as a whole is infinite. So we describe it by giving two things:
+      </p>
+      <p>
+       1.  An
+       <em>
+        abstraction function
+       </em>
+       that maps rep values to the abstract values they represent:
+      </p>
+      <blockquote>
+       <p>
+        AF : R → A
+       </p>
+      </blockquote>
+      <p>
+       The arcs in the diagram show the abstraction function. In the terminology of functions, the properties we discussed above can be expressed by saying that the function is surjective (also called
+       <em>
+        onto
+       </em>
+       ), not necessarily injective (
+       <em>
+        one-to-one
+       </em>
+       ) and therefore not necessarily bijective, and often partial.
+      </p>
+      <p>
+       2.  A
+       <em>
+        rep invariant
+       </em>
+       that maps rep values to booleans:
+      </p>
+      <blockquote>
+       <p>
+        RI : R → boolean
+       </p>
+      </blockquote>
+      <p>
+       For a rep value
+       <em>
+        r
+       </em>
+       ,
+       <em>
+        RI(r)
+       </em>
+       is true if and only if
+       <em>
+        r
+       </em>
+       is mapped by
+       <em>
+        AF
+       </em>
+       . In other words,
+       <em>
+        RI
+       </em>
+       tells us whether a given rep value is well-formed. Alternatively, you can think of
+       <em>
+        RI
+       </em>
+       as a set: it’s the subset of rep values on which
+       <em>
+        AF
+       </em>
+       is defined.
+      </p>
+      <div class="panel panel-figure pull-right pull-margin">
+       <img alt="the abstract space and rep space of CharSet using the NoRepeatsRep" src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/charset-norepeats.svg" width="300">
+      </div>
+      <p>
+       Both the rep invariant and the abstraction function should be documented in the code, right next to the declaration of the rep itself:
+      </p>
+      <pre><code class="hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CharSet</span> {
+    <span class="hljs-keyword">private</span> String s;
+    <span class="hljs-comment">// Rep invariant:</span>
+    <span class="hljs-comment">//    s contains no repeated characters</span>
+    <span class="hljs-comment">// Abstraction Function:</span>
+    <span class="hljs-comment">//   represents the set of characters found in s</span>
+    ...
+}</code></pre>
+      <div class="clearfix">
+      </div>
+      <p>
+       A common confusion about abstraction functions and rep invariants is that they are determined by the choice of rep and abstract value spaces, or even by the abstract value space alone. If this were the case, they would be of little use, since they would be saying something redundant that’s already available elsewhere.
+      </p>
+      <p>
+       The abstract value space alone doesn’t determine AF or RI: there can be several representations for the same abstract type. A set of characters could equally be represented as a string, as above, or as a bit vector, with one bit for each possible character. Clearly we need two different abstraction functions to map these two different rep value spaces.
+      </p>
+      <p>
+       It’s less obvious why the choice of both spaces doesn’t determine AF and RI. The key point is that defining a type for the rep, and thus choosing the values for the space of rep values, does not determine which of the rep values will be deemed to be legal, and of those that are legal, how they will be interpreted. Rather than deciding, as we did above, that the strings have no duplicates, we could instead allow duplicates, but at the same time require that the characters be sorted, appearing in nondecreasing order. This would allow us to perform a binary search on the string and thus check membership in logarithmic rather than linear time. Same rep value space – different rep invariant:
+      </p>
+      <div class="panel panel-figure pull-right pull-margin">
+       <img alt="the abstract space and rep space of CharSet using the SortedRep" src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/charset-sorted.svg" width="300">
+      </div>
+      <pre><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CharSet</span> </span>{
+    <span class="hljs-keyword">private</span> String s;
+    <span class="hljs-comment">// Rep invariant:</span>
+    <span class="hljs-comment">//    s[0] &lt;= s[1] &lt;= ... &lt;= s[s.length()-1]</span>
+    <span class="hljs-comment">// Abstraction Function:</span>
+    <span class="hljs-comment">//   represents the set of characters found in s</span>
+    ...
+}</code></pre>
+      <p>
+       Even with the same type for the rep value space and the same rep invariant RI, we might still interpret the rep differently, with different abstraction functions AF. Suppose RI admits any string of characters. Then we could define AF, as above, to interpret the array’s elements as the elements of the set. But there’s no
+       <em>
+        a priori
+       </em>
+       reason to let the rep decide the interpretation. Perhaps we’ll interpret consecutive pairs of characters as subranges, so that the string rep
+       <code>
+        "acgg"
+       </code>
+       is interpreted as two range pairs, [a-c] and [g-g], and therefore represents the set {a,b,c,g}.  Here’s what the AF and RI would look like for that representation:
+      </p>
+      <div class="panel panel-figure pull-right pull-margin">
+       <img alt="the abstract space and rep space of CharSet using the SortedRangeRep" src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/charset-sortedrange.svg" width="300">
+      </div>
+      <pre><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CharSet</span> </span>{
+    <span class="hljs-keyword">private</span> String s;
+    <span class="hljs-comment">// Rep invariant:</span>
+    <span class="hljs-comment">//    s.length is even</span>
+    <span class="hljs-comment">//    s[0] &lt;= s[1] &lt;= ... &lt;= s[s.length()-1]</span>
+    <span class="hljs-comment">// Abstraction Function:</span>
+    <span class="hljs-comment">//   represents the union of the ranges</span>
+    <span class="hljs-comment">//   {s[i]...s[i+1]} for each adjacent pair of characters </span>
+    <span class="hljs-comment">//   in s</span>
+    ...
+}</code></pre>
+      <p>
+       The essential point is that designing an abstract type means
+       <strong>
+        not only choosing the two spaces
+       </strong>
+       – the abstract value space for the specification and the rep value space for the implementation –
+       <strong>
+        but also deciding what rep values to use and how to interpret them
+       </strong>
+       .
+      </p>
+      <p>
+       It’s critically important to write down these assumptions in your code, as we’ve done above, so that future programmers (and your future self) are aware of what the representation actually means.  Why? What happens if different implementers disagree about the meaning of the rep?
+      </p>
+      <div class="handout-solo alert alert-warning">
+       <p>
+        You can find example code for
+        <a class="alert-link" href="https://github.com/mit6005/sp16-ex13-adt-examples/tree/master/src/charset">
+         three different
+         <code>
+          CharSet
+         </code>
+         implementations
+        </a>
+        on GitHub.
+       </p>
+      </div>
+      <h3 id="example_rational_numbers">
+       Example: Rational Numbers
+      </h3>
+      <div data-outline="example_rational_numbers">
+       <p>
+        Here’s an example of an abstract data type for rational numbers.  Look closely at its rep invariant and abstraction function.
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RatNum</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> numer;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> denom;
+
+    <span class="hljs-comment">// Rep invariant:</span>
+    <span class="hljs-comment">//   denom &gt; 0</span>
+    <span class="hljs-comment">//   numer/denom is in reduced form</span>
+
+    <span class="hljs-comment">// Abstraction Function:</span>
+    <span class="hljs-comment">//   represents the rational number numer / denom</span>
+
+    <span class="hljs-comment handout-javadoc-comment">/** Make a new Ratnum == n.
+     *  <span class="hljs-doctag">@param</span> n value */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RatNum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+        numer = n;
+        denom = <span class="hljs-number">1</span>;
+        checkRep();
+    }
+
+    <span class="hljs-comment handout-javadoc-comment">/** Make a new RatNum == (n / d).
+     *  <span class="hljs-doctag">@param</span> n numerator
+     *  <span class="hljs-doctag">@param</span> d denominator
+     *  <span class="hljs-doctag">@throws</span> ArithmeticException if d == 0 */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RatNum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> d)</span> <span class="hljs-keyword">throws</span> ArithmeticException </span>{
+        <span class="hljs-comment">// reduce ratio to lowest terms</span>
+        <span class="hljs-keyword">int</span> g = gcd(n, d);
+        n = n / g;
+        d = d / g;
+
+        <span class="hljs-comment">// make denominator positive</span>
+        <span class="hljs-keyword">if</span> (d &lt; <span class="hljs-number">0</span>) {
+            numer = -n;
+            denom = -d;
+        } <span class="hljs-keyword">else</span> {
+            numer = n;
+            denom = d;
+        }
+        checkRep();
+    }
+}</code></pre>
+       <div class="panel panel-figure pull-right pull-margin">
+        <img alt="the abstraction function and rep invariant of RatNum" src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/ratnum-af-ri.png" width="500">
+       </div>
+       <p>
+        Here is a picture of the abstraction function and rep invariant for this code. The RI requires that numerator/denominator pairs be in reduced form (i.e., lowest terms), so pairs like (2,4) and (18,12) above should be drawn as outside the RI.
+       </p>
+       <p>
+        It would be completely reasonable to design another implementation of this same ADT with a more permissive RI.  With such a change, some operations might become more expensive to perform, and others cheaper.
+       </p>
+       <div class="clearfix">
+       </div>
+      </div>
+      <h3 id="checking_the_rep_invariant">
+       Checking the Rep Invariant
+      </h3>
+      <div data-outline="checking_the_rep_invariant">
+       <p>
+        The rep invariant isn’t just a neat mathematical idea. If your implementation asserts the rep invariant at run time, then you can catch bugs early.  Here’s a method for
+        <code>
+         RatNum
+        </code>
+        that tests its rep invariant:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment">// Check that the rep invariant is true</span>
+<span class="hljs-comment">// *** Warning: this does nothing unless you turn on assertion checking</span>
+<span class="hljs-comment">// by passing -enableassertions to Java</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">checkRep</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">assert</span> denom &gt; <span class="hljs-number">0</span>;
+    <span class="hljs-function"><span class="hljs-keyword">assert</span> <span class="hljs-title">gcd</span><span class="hljs-params">(numer, denom)</span> </span>== <span class="hljs-number">1</span>;
+}</code></pre>
+       <p>
+        You should certainly call
+        <code>
+         checkRep()
+        </code>
+        to assert the rep invariant at the end of every operation that creates or mutates the rep – in other words, creators, producers, and mutators.  Look back at the
+        <code>
+         RatNum
+        </code>
+        code above, and you’ll see that it calls
+        <code>
+         checkRep()
+        </code>
+        at the end of both constructors.
+       </p>
+       <p>
+        Observer methods don’t normally need to call
+        <code>
+         checkRep()
+        </code>
+        , but it’s good defensive practice to do so anyway.  Why? Calling
+        <code>
+         checkRep()
+        </code>
+        in every method, including observers, means you’ll be more likely to catch rep invariant violations caused by rep exposure.
+       </p>
+       <p>
+        Why is
+        <code>
+         checkRep
+        </code>
+        private?  Who should be responsible for checking and enforcing a rep invariant – clients, or the implementation itself?
+       </p>
+      </div>
+      <h3 id="no_null_values_in_the_rep">
+       No Null Values in the Rep
+      </h3>
+      <div data-outline="no_null_values_in_the_rep">
+       <p>
+        Recall from the
+        <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/06-specifications/specs/">
+         <em>
+          Specifications
+         </em>
+         reading
+        </a>
+        that null values are troublesome and unsafe, so much so that we try to remove them from our programming entirely.
+In 6.005, the preconditions and postconditions of our methods implicitly require that objects and arrays be non-null.
+       </p>
+       <p>
+        We extend that prohibition to the reps of abstract data types.  By default, in 6.005, the rep invariant implicitly includes
+        <code>
+         x != null
+        </code>
+        for every reference
+        <code>
+         x
+        </code>
+        in the rep that has object type (including references inside arrays or lists).  So if your rep is:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CharSet</span> </span>{
+    String s;
+}</code></pre>
+       <p>
+        then its rep invariant automatically includes
+        <code>
+         s != null
+        </code>
+        , and you don’t need to state it in a rep invariant comment.
+       </p>
+       <p>
+        When it’s time to implement that rep invariant in a
+        <code>
+         checkRep()
+        </code>
+        method, however, you still must
+        <em>
+         implement
+        </em>
+        the
+        <code>
+         s != null
+        </code>
+        check, and make sure that your
+        <code>
+         checkRep()
+        </code>
+        correctly fails when
+        <code>
+         s
+        </code>
+        is
+        <code>
+         null
+        </code>
+        .  Often that check comes for free from Java, because checking other parts of your rep invariant will throw an exception if
+        <code>
+         s
+        </code>
+        is null.  For example, if your
+        <code>
+         checkRep()
+        </code>
+        looks like this:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">checkRep</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">assert</span> s.length() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>;
+    ...
+}</code></pre>
+       <p>
+        then you don’t need
+        <code>
+         assert s!= null
+        </code>
+        , because the call to
+        <code>
+         s.length()
+        </code>
+        will fail just as effectively on a null reference.  But if
+        <code>
+         s
+        </code>
+        is not otherwise checked by your rep invariant, then assert
+        <code>
+         s != null
+        </code>
+        explicitly.
+       </p>
+      </div>
+     </div>
+     <h2 id="documenting_the_af_ri_and_safety_from_rep_exposure">
+      Documenting the AF, RI, and Safety from Rep Exposure
+     </h2>
+     <div data-outline="documenting_the_af_ri_and_safety_from_rep_exposure">
+      <p>
+       It’s good practice to document the abstraction function and rep invariant in the class, using comments right where the private fields of the rep are declared.  We’ve been doing that above.
+      </p>
+      <p>
+       Another piece of documentation that 6.005 asks you to write is a
+       <strong>
+        rep exposure safety argument
+       </strong>
+       .  This is a comment that examines each part of the rep, looks at the code that handles that part of the rep (particularly with respect to parameters and return values from clients, because that is where rep exposure occurs), and presents a reason why the code doesn’t expose the rep.
+      </p>
+      <p>
+       Here’s an example of
+       <code>
+        Tweet
+       </code>
+       with its rep invariant, abstraction function, and safety from rep exposure fully documented:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-comment">// Immutable type representing a tweet.</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tweet</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String author;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String text;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Date timestamp;
+
+    <span class="hljs-comment">// Rep invariant:</span>
+    <span class="hljs-comment">//   author is a Twitter username (a nonempty string of letters, digits, underscores)</span>
+    <span class="hljs-comment">//   text.length &lt;= 140</span>
+    <span class="hljs-comment">// Abstraction Function:</span>
+    <span class="hljs-comment">//   represents a tweet posted by author, with content text, at time timestamp </span>
+    <span class="hljs-comment">// Safety from rep exposure:</span>
+    <span class="hljs-comment">//   All fields are private;</span>
+    <span class="hljs-comment">//   author and text are Strings, so are guaranteed immutable;</span>
+    <span class="hljs-comment">//   timestamp is a mutable Date, so Tweet() constructor and getTimestamp() </span>
+    <span class="hljs-comment">//        make defensive copies to avoid sharing the rep's Date object with clients.</span>
+
+    <span class="hljs-comment">// Operations (specs and method bodies omitted to save space)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Tweet</span><span class="hljs-params">(String author, String text, Date timestamp)</span> </span>{ ... }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getAuthor</span><span class="hljs-params">()</span> </span>{ ... }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getText</span><span class="hljs-params">()</span> </span>{ ... }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Date <span class="hljs-title">getTimestamp</span><span class="hljs-params">()</span> </span>{ ... }
+}</code></pre>
+      <p>
+       Notice that we don’t have any explicit rep invariant conditions on
+       <code>
+        timestamp
+       </code>
+       (aside from the conventional assumption that
+       <code>
+        timestamp!=null
+       </code>
+       , which we have for all object references).  But we still need to include
+       <code>
+        timestamp
+       </code>
+       in the rep exposure safety argument, because the immutability property of the whole type depends on all the fields remaining unchanged.
+      </p>
+      <p>
+       Compare the argument above with
+       <a href="https://github.com/mit6005/sp16-ex13-adt-examples/blob/master/src/Timespan.java">
+        an example of a broken argument involving mutable
+        <code>
+         Date
+        </code>
+        objects
+       </a>
+       .
+      </p>
+      <p>
+       Here are the arguments for
+       <code>
+        RatNum
+       </code>
+       .
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-comment">// Immutable type representing a rational number.</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RatNum</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> numer;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> denom;
+
+    <span class="hljs-comment">// Rep invariant:</span>
+    <span class="hljs-comment">//   denom &gt; 0</span>
+    <span class="hljs-comment">//   numer/denom is in reduced form, i.e. gcd(|numer|,denom) = 1</span>
+    <span class="hljs-comment">// Abstraction Function:</span>
+    <span class="hljs-comment">//   represents the rational number numer / denom</span>
+    <span class="hljs-comment">// Safety from rep exposure:</span>
+    <span class="hljs-comment">//   All fields are private, and all types in the rep are immutable.</span>
+
+    <span class="hljs-comment">// Operations (specs and method bodies omitted to save space)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RatNum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{ ... }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RatNum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> d)</span> <span class="hljs-keyword">throws</span> ArithmeticException </span>{ ... }
+    ...
+}</code></pre>
+      <p>
+       Notice that an immutable rep is particularly easy to argue for safety from rep exposure.
+      </p>
+      <div class="handout-solo alert alert-warning">
+       <p>
+        You can find
+        <a class="alert-link" href="https://github.com/mit6005/sp16-ex13-adt-examples/blob/master/src/RatNum.java">
+         the full code for
+         <code>
+          RatNum
+         </code>
+        </a>
+        on GitHub.
+       </p>
+      </div>
+      <h3 id="how_to_establish_invariants">
+       How to Establish Invariants
+      </h3>
+      <div data-outline="how_to_establish_invariants">
+       <p>
+        An invariant is a property that is true for the entire program – which in the case of an invariant about an object, reduces to the entire lifetime of the object.
+       </p>
+       <p>
+        To make an invariant hold, we need to:
+       </p>
+       <ul>
+        <li>
+         make the invariant true in the initial state of the object; and
+        </li>
+        <li>
+         ensure that all changes to the object keep the invariant true.
+        </li>
+       </ul>
+       <p>
+        Translating this in terms of the types of ADT operations, this means:
+       </p>
+       <ul>
+        <li>
+         creators and producers must establish the invariant for new object instances; and
+        </li>
+        <li>
+         mutators and observers must preserve the invariant.
+        </li>
+       </ul>
+       <p>
+        The risk of rep exposure makes the situation more complicated.  If the rep is exposed, then the object might be changed anywhere in the program, not just in the ADT’s operations, and we can’t guarantee that the invariant still holds after those arbitrary changes.  So the full rule for proving invariants is:
+       </p>
+       <p>
+        <strong>
+         Structural induction
+        </strong>
+        . If an invariant of an abstract data type is
+       </p>
+       <ol>
+        <li>
+         established by creators and producers;
+        </li>
+        <li>
+         preserved by mutators, and observers; and
+        </li>
+        <li>
+         no representation exposure occurs,
+        </li>
+       </ol>
+       <p>
+        then the invariant is true of all instances of the abstract data type.
+       </p>
+      </div>
+     </div>
+     <h2 id="adt_invariants_replace_preconditions">
+      ADT invariants replace preconditions
+     </h2>
+     <div data-outline="adt_invariants_replace_preconditions">
+      <p>
+       Now let’s bring a lot of pieces together.  An enormous advantage of a well-designed abstract data type is that it encapsulates and enforces properties that we would otherwise have to stipulate in a precondition.  For example, instead of a spec like this, with an elaborate precondition:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** 
+ * <span class="hljs-doctag">@param</span> set1 is a sorted set of characters with no repeats
+ * <span class="hljs-doctag">@param</span> set2 is likewise
+ * <span class="hljs-doctag">@return</span> characters that appear in one set but not the other,
+ *  in sorted order with no repeats 
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> String <span class="hljs-title">exclusiveOr</span><span class="hljs-params">(String set1, String set2)</span></span>;</code></pre>
+      <p>
+       We can instead use an ADT that captures the desired property:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> characters that appear in one set but not the other */</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> SortedSet&lt;Character&gt; <span class="hljs-title">exclusiveOr</span><span class="hljs-params">(SortedSet&lt;Character&gt;  set1, SortedSet&lt;Character&gt; set2)</span></span>;</code></pre>
+      <p>
+       This is easier to understand, because the name of the ADT conveys all the programmer needs to know.  It’s also safer from bugs, because Java static checking comes into play, and the required condition (sorted with no repeats) can be enforced in exactly one place, the
+       <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/SortedSet.html">
+        <code>
+         SortedSet
+        </code>
+       </a>
+       type.
+      </p>
+      <p>
+       Many of the places where we used preconditions on the problem sets would have benefited from a custom ADT instead.
+      </p>
+     </div>
+     <h2 id="summary">
+      Summary
+     </h2>
+     <div data-outline="summary">
+      <ul>
+       <li>
+        An invariant is a property that is always true of an ADT object instance, for the lifetime of the object.
+       </li>
+       <li>
+        A good ADT preserves its own invariants. Invariants must be established by creators and producers, and preserved by observers and mutators.
+       </li>
+       <li>
+        The rep invariant specifies legal values of the representation, and should be checked at runtime with
+        <code>
+         checkRep()
+        </code>
+        .
+       </li>
+       <li>
+        The abstraction function maps a concrete representation to the abstract value it represents.
+       </li>
+       <li>
+        Representation exposure threatens both representation independence and invariant preservation.
+       </li>
+      </ul>
+      <p>
+       The topics of today’s reading connect to our three properties of good software as follows:
+      </p>
+      <ul>
+       <li>
+        <p>
+         <strong>
+          Safe from bugs.
+         </strong>
+         A good ADT preserves its own invariants, so that those invariants are less vulnerable to bugs in the ADT’s clients, and violations of the invariants can be more easily isolated within the implementation of the ADT itself.  Stating the rep invariant explicitly, and checking it at runtime with checkRep(), catches misunderstandings and bugs earlier, rather than continuing on with a corrupt data structure.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Easy to understand.
+         </strong>
+         Rep invariants and abstraction functions explicate the meaning of a data type’s representation, and how it relates to its abstraction.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Ready for change.
+         </strong>
+         Abstract data types separate the abstraction from the concrete representation, which makes it possible to change the representation without having to change client code.
+        </p>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </main>
+  <script src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 13 Abstraction Functions &amp; Rep Invariants_files/handout-run.js" type="text/javascript">
+  </script>
+ 
+
+<!-- Handout delivered Thu Mar 03 2016 15:26:17 GMT-0500 (EST) -->
+</body><auto-scroll></auto-scroll><div id="revolut-extension-root"></div></html>

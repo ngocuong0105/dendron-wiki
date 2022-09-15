@@ -106,6 +106,8 @@ Malko me pobivat trupki kato se setq za tozi experience
 It is not expensive (time-wise and money-wise) to become nacepen. You basically pay fixed cost first 2 months to get nacepen,
 then you need to pay small regular costs (2,3 times per week). Gym helps me to be more productive when working too. My most efficient work periods have always been when I go to gym regularly too. So it is worth it. Abs is all about diet.
 
----
+
+
+--
 
 I've lost motivation...
