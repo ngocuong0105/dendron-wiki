@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+   <title>
+    Reading 21: Sockets &amp; Networking
+   </title>
+   <link href="./Reading 21 Sockets &amp; Networking_files/handout-style.css" rel="stylesheet">
+    <style>
+     /* styles for sockets & networking examples */
+pre.no-markdown b, p.no-markdown b { color: #009900; }
+    </style>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+   
+  
+ </head>
+ <body>
+  <header>
+   <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/">
+    6.005 — Software Construction on MIT OpenCourseWare
+   </a>
+   |
+   <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-005-software-construction-spring-2016/">
+    OCW 6.005 Homepage
+   </a>
+   <div>
+    Spring 2016
+   </div>
+  </header>
+  <nav class="table-of-contents col-sm-2">
+   <ul class="nav">
+    <li class="active">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#reading_21_sockets_networking">
+      Reading 21: Sockets &amp; Networking
+     </a>
+    </li>
+    <li class="">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#clientserver_design_pattern">
+      Client/server design pattern
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#network_sockets">
+      Network sockets
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#io">
+      I/O
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#blocking">
+      Blocking
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#using_network_sockets">
+      Using network sockets
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#wire_protocols">
+      Wire protocols
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#testing_clientserver_code">
+      Testing client/server code
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#summary">
+      Summary
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="container-fluid">
+   <h1 class="handout-title col-sm-8 col-sm-offset-2" id="reading_21_sockets_networking">
+    Reading 21: Sockets &amp; Networking
+   </h1>
+   <div data-outline="reading_21_sockets_networking">
+    <div class="markdown col-sm-8 col-sm-offset-2 converted">
+     <h4>
+      Software in 6.005
+     </h4>
+     <table class="table table-striped no-markdown">
+      <tbody>
+       <tr>
+        <th width="33%">
+         Safe from bugs
+        </th>
+        <th>
+         Easy to understand
+        </th>
+        <th>
+         Ready for change
+        </th>
+       </tr>
+       <tr>
+        <td>
+         Correct today and correct in the unknown future.
+        </td>
+        <td>
+         Communicating clearly with future programmers, including future you.
+        </td>
+        <td>
+         Designed to accommodate change without rewriting.
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <h4>
+      Objectives
+     </h4>
+     <p>
+      In this reading we examine
+      <em>
+       client/server communication
+      </em>
+      over the network using the
+      <em>
+       socket
+      </em>
+      abstraction.
+     </p>
+     <p>
+      Network communication is inherently concurrent, so building clients and servers will require us to reason about their concurrent behavior and to implement them with thread safety.
+We must also design the
+      <em>
+       wire protocol
+      </em>
+      that clients and servers use to communicate, just as we design the operations that clients of an ADT use to work with it.
+     </p>
+     <p>
+      Some of the operations with sockets are
+      <em>
+       blocking
+      </em>
+      : they block the progress of a thread until they can return a result.
+Blocking makes writing some code easier, but it also foreshadows a new class of concurrency bugs we’ll soon contend with in depth: deadlocks.
+     </p>
+     <h2 id="clientserver_design_pattern">
+      Client/server design pattern
+     </h2>
+     <div data-outline="clientserver_design_pattern">
+      <p>
+       In this reading (and in the problem set) we explore the
+       <strong>
+        client/server design pattern
+       </strong>
+       for communication with message passing.
+      </p>
+      <p>
+       In this pattern there are two kinds of processes: clients and servers.
+A client initiates the communication by connecting to a server.
+The client sends requests to the server, and the server sends replies back.
+Finally, the client disconnects.
+A server might handle connections from many clients concurrently, and clients might also connect to multiple servers.
+      </p>
+      <p>
+       Many Internet applications work this way: web browsers are clients for web servers, an email program like Outlook is a client for a mail server, etc.
+      </p>
+      <p>
+       On the Internet, client and server processes are often running on different machines, connected only by the network, but it doesn’t have to be that way — the server can be a process running on the same machine as the client.
+      </p>
+     </div>
+     <h2 id="network_sockets">
+      Network sockets
+     </h2>
+     <div data-outline="network_sockets">
+      <h3 id="ip_addresses">
+       IP addresses
+      </h3>
+      <div data-outline="ip_addresses">
+       <p>
+        A network interface is identified by an
+        <a href="https://en.wikipedia.org/wiki/IP_address">
+         IP address
+        </a>
+        .
+IPv4 addresses are 32-bit numbers written in four 8-bit parts.
+For example (as of this writing):
+       </p>
+       <ul>
+        <li>
+         <p>
+          <code>
+           18.9.22.69
+          </code>
+          is the IP address of a MIT web server.
+Every address whose
+          <a href="https://en.wikipedia.org/wiki/List_of_assigned_/8_IPv4_address_blocks">
+           first octet is
+           <code>
+            18
+           </code>
+          </a>
+          is on the MIT network.
+         </p>
+        </li>
+        <li>
+         <p>
+          <code>
+           18.9.25.15
+          </code>
+          is the address of a MIT incoming email handler.
+         </p>
+        </li>
+        <li>
+         <p>
+          <code>
+           173.194.123.40
+          </code>
+          is the address of a Google web server.
+         </p>
+        </li>
+        <li>
+         <p>
+          <code>
+           127.0.0.1
+          </code>
+          is the
+          <a href="https://en.wikipedia.org/wiki/Loopback">
+           loopback
+          </a>
+          or
+          <a href="https://en.wikipedia.org/wiki/Localhost">
+           localhost
+          </a>
+          address: it always refers to the local machine.
+Technically, any address whose first octet is
+          <code>
+           127
+          </code>
+          is a loopback address, but
+          <code>
+           127.0.0.1
+          </code>
+          is standard.
+         </p>
+        </li>
+       </ul>
+       <p>
+        You can
+        <a href="https://www.google.com/search?q=my+ip">
+         ask Google for your current IP address
+        </a>
+        .
+In general, as you carry around your laptop, every time you connect your machine to the network it can be assigned a new IP address.
+       </p>
+      </div>
+      <h3 id="hostnames">
+       Hostnames
+      </h3>
+      <div data-outline="hostnames">
+       <p>
+        <a href="https://en.wikipedia.org/wiki/Hostname">
+         Hostnames
+        </a>
+        are names that can be translated into IP addresses.
+A single hostname can map to different IP addresses at different times; and multiple hostnames can map to the same IP address.
+For example:
+       </p>
+       <ul>
+        <li>
+         <p>
+          <code>
+           web.mit.edu
+          </code>
+          is the name for MIT’s web server.
+You can translate this name to an IP address yourself using
+          <code>
+           dig
+          </code>
+          ,
+          <code>
+           host
+          </code>
+          , or
+          <code>
+           nslookup
+          </code>
+          on the command line, e.g.:
+         </p>
+         <pre class="no-markdown" style="position: relative;">$ <b>dig +short web.mit.edu</b>
+18.9.22.69
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+        </li>
+        <li>
+         <p>
+          <code>
+           dmz-mailsec-scanner-4.mit.edu
+          </code>
+          is the name for one of MIT’s spam filter machines responsible for handling incoming email.
+         </p>
+        </li>
+        <li>
+         <p>
+          <code>
+           google.com
+          </code>
+          is exactly what you think it is.
+Try using one of the commands above to find
+          <code>
+           google.com
+          </code>
+          ’s IP address.
+What do you see?
+         </p>
+        </li>
+        <li>
+         <p>
+          <code>
+           localhost
+          </code>
+          is a name for
+          <code>
+           127.0.0.1
+          </code>
+          .
+When you want to talk to a server running on your own machine, talk to
+          <code>
+           localhost
+          </code>
+          .
+         </p>
+        </li>
+       </ul>
+       <p>
+        Translation from hostnames to IP addresses is the job of the
+        <a href="https://en.wikipedia.org/wiki/Domain_Name_System">
+         Domain Name System (DNS)
+        </a>
+        .
+It’s super cool, but not part of our discussion today.
+       </p>
+      </div>
+      <h3 id="port_numbers">
+       Port numbers
+      </h3>
+      <div data-outline="port_numbers">
+       <p>
+        A single machine might have multiple server applications that clients wish to connect to, so we need a way to direct traffic on the same network interface to different processes.
+       </p>
+       <p>
+        Network interfaces have multiple
+        <a href="https://en.wikipedia.org/wiki/Port_(computer_networking)">
+         ports
+        </a>
+        identified by a 16-bit number from 0 (which is reserved, so we effectively start at 1) to 65535.
+       </p>
+       <p>
+        A server process binds to a particular port — it is now
+        <strong>
+         listening
+        </strong>
+        on that port.
+Clients have to know which port number the server is listening on.
+There are some
+        <a href="https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers#Well-known_ports">
+         well-known ports
+        </a>
+        which are reserved for system-level processes and provide standard ports for certain services.
+For example:
+       </p>
+       <ul>
+        <li>
+         Port 22 is the standard SSH port.
+When you connect to
+         <code>
+          athena.dialup.mit.edu
+         </code>
+         using SSH, the software automatically uses port 22.
+        </li>
+        <li>
+         Port 25 is the standard email server port.
+        </li>
+        <li>
+         Port 80 is the standard web server port.
+When you connect to the URL
+         <code>
+          http://web.mit.edu
+         </code>
+         in your web browser, it connects to
+         <code>
+          18.9.22.69
+         </code>
+         on port 80.
+        </li>
+       </ul>
+       <p>
+        When the port is not a standard port, it is specified as part of the address.
+For example, the URL
+        <code>
+         http://128.2.39.10:9000
+        </code>
+        refers to port 9000 on the machine at
+        <code>
+         128.2.39.10
+        </code>
+        .
+       </p>
+       <p>
+        When a client connects to a server, that outgoing connection also uses a port number on the client’s network interface, usually chosen at random from the available
+        <em>
+         non
+        </em>
+        -well-known ports.
+       </p>
+      </div>
+      <h3 id="network_sockets_2">
+       Network sockets
+      </h3>
+      <div data-outline="network_sockets_2">
+       <p>
+        A
+        <a href="https://en.wikipedia.org/wiki/Network_socket">
+         <strong>
+          socket
+         </strong>
+        </a>
+        represents one end of the connection between client and server.
+       </p>
+       <ul>
+        <li>
+         <p>
+          A
+          <strong>
+           listening socket
+          </strong>
+          is used by a server process to wait for connections from remote clients.
+         </p>
+         <p>
+          In Java, use
+          <a href="https://docs.oracle.com/javase/8/docs/api/?java/net/ServerSocket.html">
+           <code>
+            ServerSocket
+           </code>
+          </a>
+          to make a listening socket, and use its
+          <a href="https://docs.oracle.com/javase/8/docs/api/java/net/ServerSocket.html#accept--">
+           <code>
+            accept
+           </code>
+          </a>
+          method to listen to it.
+         </p>
+        </li>
+        <li>
+         <p>
+          A
+          <strong>
+           connected socket
+          </strong>
+          can send and receive messages to and from the process on the other end of the connection.
+It is identified by both the local IP address and port number plus the remote address and port, which allows a server to differentiate between concurrent connections from different IPs, or from the same IP on different remote ports.
+         </p>
+         <p>
+          In Java, clients use a
+          <a href="https://docs.oracle.com/javase/8/docs/api/?java/net/Socket.html">
+           <code>
+            Socket
+           </code>
+          </a>
+          constructor to establish a socket connection to a server.
+Servers obtain a connected socket as a
+          <code>
+           Socket
+          </code>
+          object returned from
+          <code>
+           ServerSocket.accept
+          </code>
+          .
+         </p>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <h2 id="io">
+      I/O
+     </h2>
+     <div data-outline="io">
+      <h3 id="buffers">
+       Buffers
+      </h3>
+      <div data-outline="buffers">
+       <p>
+        The data that clients and servers exchange over the network is sent in chunks.
+These are rarely just byte-sized chunks, although they might be.
+The sending side (the client sending a request or the server sending a response) typically writes a large chunk (maybe a whole string like “HELLO, WORLD!” or maybe 20 megabytes of video data).
+The network chops that chunk up into packets, and each packet is routed separately over the network.
+At the other end, the receiver reassembles the packets together into a stream of bytes.
+       </p>
+       <p>
+        The result is a bursty kind of data transmission — the data may already be there when you want to read them, or you may have to wait for them to arrive and be reassembled.
+       </p>
+       <p>
+        When data arrive, they go into a
+        <strong>
+         buffer
+        </strong>
+        , an array in memory that holds the data until you read it.
+       </p>
+       <p>
+        * see
+        <a href="https://web.mit.edu/adorai/www/seuss-technical-writing.html">
+         <strong>
+          <em>
+           What if Dr. Seuss Did Technical Writing?
+          </em>
+         </strong>
+        </a>
+        , although the issue described in the first stanza is no longer relevant with the obsolescence of floppy disk drives
+       </p>
+      </div>
+      <h3 id="streams">
+       Streams
+      </h3>
+      <div data-outline="streams">
+       <p>
+        The data going into or coming out of a socket is a
+        <a href="https://en.wikipedia.org/wiki/Stream_(computing)">
+         <strong>
+          stream
+         </strong>
+        </a>
+        of bytes.
+       </p>
+       <p>
+        In Java,
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/io/InputStream.html">
+         <code>
+          InputStream
+         </code>
+        </a>
+        objects represent sources of data flowing into your program.
+For example:
+       </p>
+       <ul>
+        <li>
+         Reading from a file on disk with a
+         <a href="https://docs.oracle.com/javase/8/docs/api/?java/io/FileInputStream.html">
+          <code>
+           File­Input­Stream
+          </code>
+         </a>
+        </li>
+        <li>
+         User input from
+         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#in">
+          <code>
+           System.in
+          </code>
+         </a>
+        </li>
+        <li>
+         Input from a network socket
+        </li>
+       </ul>
+       <p>
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/io/OutputStream.html">
+         <code>
+          OutputStream
+         </code>
+        </a>
+        objects represent data sinks, places we can write data to.
+For example:
+       </p>
+       <ul>
+        <li>
+         <a href="https://docs.oracle.com/javase/8/docs/api/?java/io/FileOutputStream.html">
+          <code>
+           FileOutputStream
+          </code>
+         </a>
+         for saving to files
+        </li>
+        <li>
+         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#out">
+          <code>
+           System.out
+          </code>
+         </a>
+         is a
+         <a href="https://docs.oracle.com/javase/8/docs/api/?java/io/PrintStream.html">
+          <code>
+           PrintStream
+          </code>
+         </a>
+         , an
+         <code>
+          OutputStream
+         </code>
+         that prints readable representations of various types
+        </li>
+        <li>
+         Output to a network socket
+        </li>
+       </ul>
+       <div class="handout-solo alert alert-warning">
+        <p>
+         In the Java Tutorials, read:
+        </p>
+        <ul>
+         <li>
+          <a class="alert-link" href="https://docs.oracle.com/javase/tutorial/essential/io/streams.html">
+           I/O Streams
+          </a>
+          up to and including
+          <em>
+           I/O from the Command Line
+          </em>
+          (8 pages)
+         </li>
+        </ul>
+       </div>
+       <p>
+        With sockets, remember that the
+        <em>
+         output
+        </em>
+        of one process is the
+        <em>
+         input
+        </em>
+        of another process.  If Alice and Bob have a socket connection, Alice has an output stream that flows to Bob’s input stream, and
+        <em>
+         vice versa
+        </em>
+        .
+       </p>
+      </div>
+     </div>
+     <h2 id="blocking">
+      Blocking
+     </h2>
+     <div data-outline="blocking">
+      <p>
+       <strong>
+        Blocking
+       </strong>
+       means that a thread waits (without doing further work) until an event occurs.
+We can use this term to describe methods and method calls: if a method is a
+       <strong>
+        blocking method
+       </strong>
+       , then a call to that method can
+       <strong>
+        block
+       </strong>
+       , waiting until some event occurs before it returns to the caller.
+      </p>
+      <p>
+       Socket input/output streams exhibit blocking behavior:
+      </p>
+      <ul>
+       <li>
+        When an incoming socket’s buffer is empty, calling
+        <code>
+         read
+        </code>
+        blocks until data are available.
+       </li>
+       <li>
+        When the destination socket’s buffer is full, calling
+        <code>
+         write
+        </code>
+        blocks until space is available.
+       </li>
+      </ul>
+      <p>
+       Blocking is very convenient from a programmer’s point of view, because the programmer can write code as if the
+       <code>
+        read
+       </code>
+       (or
+       <code>
+        write
+       </code>
+       ) call will always work, no matter what the timing of data arrival.
+If data (or for
+       <code>
+        write
+       </code>
+       , space) is already available in the buffer, the call might return very quickly.
+But if the read or write can’t succeed, the call
+       <strong>
+        blocks
+       </strong>
+       .
+The operating system takes care of the details of delaying that thread until
+       <code>
+        read
+       </code>
+       or
+       <code>
+        write
+       </code>
+       <em>
+        can
+       </em>
+       succeed.
+      </p>
+      <p>
+       Blocking happens throughout concurrent programming, not just in
+       <a href="https://en.wikipedia.org/wiki/Input/output">
+        I/O
+       </a>
+       (communication into and out of a process, perhaps over a network, or to/from a file, or with the user on the command line or a GUI, …).
+Concurrent modules don’t work in lockstep, like sequential programs do, so they typically have to wait for each other to catch up when coordinated action is required.
+      </p>
+      <p>
+       We’ll see in the next reading that this waiting gives rise to the second major kind of bug (the first was race conditions) in concurrent programming:
+       <strong>
+        deadlock
+       </strong>
+       , where modules are waiting for each other to do something, so none of them can make any progress.
+But that’s for next time.
+      </p>
+     </div>
+     <h2 id="using_network_sockets">
+      Using network sockets
+     </h2>
+     <div data-outline="using_network_sockets">
+      <p>
+       Make sure you’ve read about
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/21-sockets-networking/#streams">
+        streams
+       </a>
+       at the Java Tutorial link above, then read about network sockets:
+      </p>
+      <div class="handout-solo alert alert-warning">
+       <p>
+        In the Java Tutorials, read:
+       </p>
+       <ul>
+        <li>
+         <a class="alert-link" href="https://docs.oracle.com/javase/tutorial/networking/sockets/index.html">
+          All About Sockets
+         </a>
+         (4 pages)
+        </li>
+       </ul>
+      </div>
+      <p>
+       This reading describes everything you need to know about creating server- and client-side sockets and writing to and reading from their I/O streams.
+      </p>
+      <h4>
+       On the second page
+      </h4>
+      <p>
+       The example uses a syntax we haven’t seen: the
+       <a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">
+        try-with-resources
+       </a>
+       statement.
+This statement has the form:
+      </p>
+      <div>
+       <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-keyword">try</span> (
+    <span class="hljs-comment">// create new objects here that require cleanup after being used,</span>
+    <span class="hljs-comment">// and assign them to variables</span>
+) {
+    <span class="hljs-comment">// code here runs with those variables</span>
+    <span class="hljs-comment">// cleanup happens automatically after the code completes</span>
+} <span class="hljs-keyword">catch</span>(...) {
+    <span class="hljs-comment">// you can include catch clauses if the code might throw exceptions</span>
+}</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      </div>
+      <h4>
+       On the last page
+      </h4>
+      <p>
+       Notice how both
+       <code>
+        ServerSocket.accept()
+       </code>
+       and
+       <code>
+        in.readLine()
+       </code>
+       are
+       <em>
+        blocking
+       </em>
+       .
+This means that the server will need a
+       <em>
+        new thread
+       </em>
+       to handle I/O with each new client.
+While the client-specific thread is working with that client (perhaps blocked in a read or a write), another thread (perhaps the main thread) is blocked waiting to
+       <code>
+        accept
+       </code>
+       a new connection.
+      </p>
+      <p>
+       Unfortunately, their multithreaded Knock Knock Server implementation creates that new thread by
+       <em>
+        subclassing
+        <code>
+         Thread
+        </code>
+       </em>
+       .
+That’s
+       <em>
+        not
+       </em>
+       the recommended strategy.
+Instead, create a new class that implements
+       <code>
+        Runnable
+       </code>
+       , or
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/19-concurrency/anonymous-runnable/">
+        use an anonymous
+        <code>
+         Runnable
+        </code>
+       </a>
+       that calls a method where that client connection will be handled until it’s closed.
+Don’t use
+       <strike class="no-markdown">
+        <code>
+         extends Thread
+        </code>
+       </strike>
+       .
+And while subclassing was popular when the Java API was designed, we don’t discuss or recommend it at all because it has many downsides.
+      </p>
+     </div>
+     <h2 id="wire_protocols">
+      Wire protocols
+     </h2>
+     <div data-outline="wire_protocols">
+      <p>
+       Now that we have our client and server connected up with sockets, what do they pass back and forth over those sockets?
+      </p>
+      <p>
+       A
+       <strong>
+        protocol
+       </strong>
+       is a set of messages that can be exchanged by two communicating parties.
+A
+       <strong>
+        wire protocol
+       </strong>
+       in particular is a set of messages represented as byte sequences, like
+       <code>
+        hello world
+       </code>
+       and
+       <code>
+        bye
+       </code>
+       (assuming we’ve agreed on a way to encode those characters into bytes).
+      </p>
+      <p>
+       Most Internet applications use simple ASCII-based wire protocols.
+You can use a program called Telnet to check them out.
+For example:
+      </p>
+      <h3 id="http">
+       HTTP
+      </h3>
+      <div data-outline="http">
+       <p>
+        <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">
+         Hypertext Transfer Protocol (HTTP)
+        </a>
+        is the language of the World Wide Web.
+We already know that port 80 is the well-known port for speaking HTTP to web servers, so let’s talk to one on the command line.
+       </p>
+       <p class="no-markdown">
+        You'll be using Telnet on the problem set, so try these out now.
+User input is shown in
+        <b>
+         green
+        </b>
+        , and for input to the telnet connection, newlines (pressing enter) are shown with
+        <b>
+         ↵
+        </b>
+        :
+       </p>
+       <pre class="no-markdown" style="position: relative;">$ <b>telnet www.eecs.mit.edu 80</b>
+Trying 18.62.0.96...
+Connected to eecsweb.mit.edu.
+Escape character is '^]'.
+<b>GET /↵</b>
+&lt;!DOCTYPE html&gt;
+<i>... lots of output ...</i>
+&lt;title&gt;Homepage | MIT EECS&lt;/title&gt;
+<i>... lots more output ...</i>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        The
+        <code>
+         GET
+        </code>
+        command gets a web page.
+The
+        <code>
+         /
+        </code>
+        is the path of the page you want on the site.
+So this command fetches the page at
+        <code>
+         http://www.eecs.mit.edu:80/
+        </code>
+        .
+Since 80 is the default port for HTTP, this is equivalent to visiting
+        <a href="https://www.eecs.mit.edu/">
+         http://www.eecs.mit.edu/
+        </a>
+        in your web browser.
+The result is HTML code that your browser renders to display the EECS homepage.
+       </p>
+       <p>
+        Internet protocols are defined by
+        <a href="https://en.wikipedia.org/wiki/Request_for_Comments">
+         RFC specifications
+        </a>
+        (RFC stands for “request for comment”, and some RFCs are eventually adopted as standards).
+        <a href="https://tools.ietf.org/html/rfc1945">
+         RFC 1945
+        </a>
+        defined HTTP version 1.0, and was superseded by HTTP 1.1 in
+        <a href="https://tools.ietf.org/html/rfc2616">
+         RFC 2616
+        </a>
+        .
+So for many web sites, you might need to speak HTTP 1.1 if you want to talk to them.
+For example:
+       </p>
+       <pre class="no-markdown" style="position: relative;">$ <b>telnet web.mit.edu 80</b>
+Trying 18.9.22.69...
+Connected to web.mit.edu.
+Escape character is '^]'.
+<b>GET /aboutmit/ HTTP/1.1↵
+Host: web.mit.edu↵
+↵</b>
+HTTP/1.1 200 OK
+Date: Tue, 31 Mar 2015 15:14:22 GMT
+<i>... more headers ...</i>
+
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+<i>... more HTML ...</i>
+&lt;title&gt;MIT — About&lt;/title&gt;
+<i>... lots more HTML ...</i>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        This time, your request must end with a blank line.
+HTTP version 1.1 requires the client to specify some extra information (called headers) with the request, and the blank line signals the end of the headers.
+       </p>
+       <p>
+        You will also more than likely find that telnet does not exit after making this request — this time, the server keeps the connection open so you can make another request right away.
+To quit Telnet manually, type the escape character (probably
+        <code>
+         Ctrl
+        </code>
+        -
+        <code>
+         ]
+        </code>
+        ) to bring up the
+        <code>
+         telnet&gt;
+        </code>
+        prompt, and type
+        <code>
+         quit
+        </code>
+        :
+       </p>
+       <pre class="no-markdown" style="position: relative;"><i>... lots more HTML ...</i>
+&lt;/html&gt;
+<b><i>Ctrl-]</i>↵</b>
+telnet&gt; <b>quit↵</b>
+Connection closed.
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      </div>
+      <h3 id="smtp">
+       SMTP
+      </h3>
+      <div data-outline="smtp">
+       <p>
+        <a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">
+         Simple Mail Transfer Protocol (SMTP)
+        </a>
+        is the protocol for sending email (different protocols are used for client programs that retrieve email from your inbox).
+Because the email system was designed in a time before spam, modern email communication is fraught with traps and heuristics designed to prevent abuse.
+But we can still try to speak SMTP.
+Recall that the well-known SMTP port is 25, and
+        <code>
+         dmz-mailsec-scanner-4.mit.edu
+        </code>
+        was the name of a MIT email handler.
+       </p>
+       <p>
+        You’ll need to fill in
+        <em>
+         your-IP-address-here
+        </em>
+        and
+        <em>
+         your-username-here
+        </em>
+        , and the ↵ indicate newlines for clarity.
+This will only work if you’re on MITnet, and even then your mail might be rejected for looking suspicious:
+       </p>
+       <pre class="no-markdown" style="position: relative;">$ <b>telnet dmz-mailsec-scanner-4.mit.edu 25</b>
+Trying 18.9.25.15...
+Connected to dmz-mailsec-scanner-4.mit.edu.
+Escape character is '^]'.
+220 dmz-mailsec-scanner-4.mit.edu ESMTP Symantec Messaging Gateway
+<b>HELO <i>your-IP-address-here</i>↵</b>
+250 2.0.0 dmz-mailsec-scanner-4.mit.edu says HELO to <i>your-ip-address</i>:<i>port</i>
+<b>MAIL FROM: &lt;<i>your-username-here</i>@mit.edu&gt;↵</b>
+250 2.0.0 MAIL FROM accepted
+<b>RCPT TO: &lt;<i>your-username-here</i>@mit.edu&gt;↵</b>
+250 2.0.0 RCPT TO accepted
+<b>DATA↵</b>
+354 3.0.0 continue.  finished with "\r\n.\r\n"
+<b>From: &lt;<i>your-username-here</i>@mit.edu&gt;↵
+To: &lt;<i>your-username-here</i>@mit.edu&gt;↵
+Subject: testing↵
+This is a hand-crafted artisanal email.↵
+.↵</b>
+250 2.0.0 OK 99/00-11111-22222222
+<b>QUIT↵</b>
+221 2.3.0 dmz-mailsec-scanner-4.mit.edu closing connection
+Connection closed by foreign host.
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        SMTP is quite chatty in comparison to HTTP, providing some human-readable instructions like
+        <code>
+         continue. finished with "\r\n.\r\n"
+        </code>
+        to tell us how to terminate our message content.
+       </p>
+      </div>
+      <h3 id="designing_a_wire_protocol">
+       Designing a wire protocol
+      </h3>
+      <div data-outline="designing_a_wire_protocol">
+       <p>
+        When designing a wire protocol, apply the same rules of thumb you use for designing the operations of an abstract data type:
+       </p>
+       <ul>
+        <li>
+         <p>
+          Keep the number of different messages
+          <strong>
+           small
+          </strong>
+          .
+It’s better to have a few commands and responses that can be combined rather than many complex messages.
+         </p>
+        </li>
+        <li>
+         <p>
+          Each message should have a well-defined purpose and
+          <strong>
+           coherent
+          </strong>
+          behavior.
+         </p>
+        </li>
+        <li>
+         <p>
+          The set of messages must be
+          <strong>
+           adequate
+          </strong>
+          for clients to make the requests they need to make and for servers to deliver the results.
+         </p>
+        </li>
+       </ul>
+       <p>
+        Just as we demand representation independence from our types, we should aim for
+        <strong>
+         platform-independence
+        </strong>
+        in our protocols.
+HTTP can be spoken by any web server and any web browser on any operating system.
+The protocol doesn’t say anything about how web pages are stored on disk, how they are prepared or generated by the server, what algorithms the client will use to render them, etc.
+       </p>
+       <p>
+        We can also apply the three big ideas in this class:
+       </p>
+       <ul>
+        <li>
+         <p>
+          <strong>
+           Safe from bugs
+          </strong>
+         </p>
+         <ul>
+          <li>
+           <p>
+            The protocol should be easy for clients and servers to generate and parse.
+Simpler code for reading and writing the protocol (whether written with a parser generator like ANTLR, with regular expressions, etc.) will have fewer opportunities for bugs.
+           </p>
+          </li>
+          <li>
+           <p>
+            Consider the ways a broken or malicious client or server could stuff garbage data into the protocol to break the process on the other end.
+           </p>
+           <p>
+            Email spam is one example: when we spoke SMTP above, the mail server asked
+            <em>
+             us
+            </em>
+            to say who was sending the email, and there’s nothing in SMTP to prevent us from lying outright.
+We’ve had to build systems on top of SMTP to try to stop spammers who lie about
+            <code>
+             From:
+            </code>
+            addresses.
+           </p>
+           <p>
+            Security vulnerabilities are a more serious example.
+For example, protocols that allow a client to send requests with arbitrary amounts of data require careful handling on the server to avoid running out of buffer space,
+            <a href="https://en.wikipedia.org/wiki/Buffer_overflow">
+             or worse
+            </a>
+            .
+           </p>
+          </li>
+         </ul>
+        </li>
+        <li>
+         <p>
+          <strong>
+           Easy to understand
+          </strong>
+          : for example, choosing a text-based protocol means that we can debug communication errors by reading the text of the client/server exchange.
+It even allows us to speak the protocol “by hand” as we saw above.
+         </p>
+        </li>
+        <li>
+         <p>
+          <strong>
+           Ready for change
+          </strong>
+          : for example, HTTP includes the ability to specify a version number, so clients and servers can agree with one another which version of the protocol they will use.
+If we need to make changes to the protocol in the future, older clients or servers can continue to work by announcing the version they will use.
+         </p>
+        </li>
+       </ul>
+       <p>
+        <a href="https://en.wikipedia.org/wiki/Serialization">
+         <strong>
+          Serialization
+         </strong>
+        </a>
+        is the process of transforming data structures in memory into a format that can be easily stored or transmitted (not the same as
+        <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/20-thread-safety/#serializability">
+         serializability from
+         <em>
+          Thread Safety
+         </em>
+        </a>
+        ).
+Rather than invent a new format for serializing your data between clients and servers, use an existing one.
+For example,
+        <a href="https://en.wikipedia.org/wiki/JSON">
+         JSON (JavaScript Object Notation)
+        </a>
+        is a simple, widely-used format for serializing basic values, arrays, and maps with string keys.
+       </p>
+      </div>
+      <h3 id="specifying_a_wire_protocol">
+       Specifying a wire protocol
+      </h3>
+      <div data-outline="specifying_a_wire_protocol">
+       <p>
+        In order to precisely define for clients &amp; servers what messages are allowed by a protocol, use a grammar.
+       </p>
+       <p>
+        For example, here is a very small part of the HTTP 1.1 request grammar from
+        <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html">
+         RFC 2616 section 5
+        </a>
+        :
+       </p>
+       <pre style="position: relative;"><code class="language-python hljs">request ::= request-line
+            ((general-header | request-header | entity-header) CRLF)*
+            CRLF
+            message-body?
+request-line ::= method SPACE request-uri SPACE http-version CRLF
+method ::= <span class="hljs-string">"OPTIONS"</span> | <span class="hljs-string">"GET"</span> | <span class="hljs-string">"HEAD"</span> | <span class="hljs-string">"POST"</span> | ...
+...</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        Using the grammar, we can see that in this example request from earlier:
+       </p>
+       <pre style="position: relative;"><code class="language-none">GET /aboutmit/ HTTP/1.1
+Host: web.mit.edu</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <ul>
+        <li>
+         <code>
+          GET
+         </code>
+         is the
+         <code>
+          method
+         </code>
+         : we’re asking the server to get a page for us.
+        </li>
+        <li>
+         <code>
+          /aboutmit/
+         </code>
+         is the
+         <code>
+          request-uri
+         </code>
+         : the description of what we want to get.
+        </li>
+        <li>
+         <code>
+          HTTP/1.1
+         </code>
+         is the
+         <code>
+          http-version
+         </code>
+         .
+        </li>
+        <li>
+         <code>
+          Host: web.mit.edu
+         </code>
+         is some kind of header — we would have to examine the rules for each of the
+         <code>
+          ...-header
+         </code>
+         options to discover which one.
+        </li>
+        <li>
+         And we can see why we had to end the request with a blank line: since a single
+         <code>
+          request
+         </code>
+         can have multiple headers that end in CRLF (newline), we have another CRLF at the end to finish the
+         <code>
+          request
+         </code>
+         .
+        </li>
+        <li>
+         We don’t have any
+         <code>
+          message-body
+         </code>
+         — and since the server didn’t wait to see if we would send one, presumably that only applies for other kinds of requests.
+        </li>
+       </ul>
+       <p>
+        The grammar is not enough: it fills a similar role to method signatures when defining an ADT.
+We still need the specifications:
+       </p>
+       <ul>
+        <li>
+         <p>
+          <strong>
+           What are the preconditions of a message?
+          </strong>
+          For example, if a particular field in a message is a string of digits, is any number valid?
+Or must it be the ID number of a record known to the server?
+         </p>
+         <p>
+          Under what circumstances can a message be sent?
+Are certain messages only valid when sent in a certain sequence?
+         </p>
+        </li>
+        <li>
+         <p>
+          <strong>
+           What are the postconditions?
+          </strong>
+          What action will the server take based on a message?
+What server-side data will be mutated?
+What reply will the server send back to the client?
+         </p>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <h2 id="testing_clientserver_code">
+      Testing client/server code
+     </h2>
+     <div data-outline="testing_clientserver_code">
+      <p>
+       Remember that
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/19-concurrency/#concurrency_is_hard_to_test_and_debug">
+        concurrency is hard to test and debug
+       </a>
+       .
+We can’t reliably reproduce race conditions, and the network adds a source of latency that is entirely beyond our control.
+You need to design for concurrency and argue carefully for the correctness of your code.
+      </p>
+      <h3 id="separate_network_code_from_data_structures_and_algorithms">
+       Separate network code from data structures and algorithms
+      </h3>
+      <div data-outline="separate_network_code_from_data_structures_and_algorithms">
+       <p>
+        Most of the ADTs in your client/server program don’t need to rely on networking.
+Make sure you specify, test, and implement them as separate components that are safe from bugs, easy to understand, and ready for change — in part because they don’t involve any networking code.
+       </p>
+       <p>
+        If those ADTs will need to be used concurrently from multiple threads (for example, threads handling different client connections), our next reading will discuss your options.
+Otherwise, use the
+        <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/20-thread-safety/">
+         thread safety strategies of confinement, immutability, and existing threadsafe data types
+        </a>
+        .
+       </p>
+      </div>
+      <h3 id="separate_socket_code_from_stream_code">
+       Separate socket code from stream code
+      </h3>
+      <div data-outline="separate_socket_code_from_stream_code">
+       <p>
+        A function or module that needs to read from and write to a socket may only need access to the input/output streams, not to the socket itself.
+This design allows you to test the module by connecting it to streams that don’t come from a socket.
+       </p>
+       <p>
+        Two useful Java classes for this are
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/io/ByteArrayInputStream.html">
+         <code>
+          ByteArray­InputStream
+         </code>
+        </a>
+        and
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/io/ByteArrayOutputStream.html">
+         <code>
+          ByteArray­OutputStream
+         </code>
+        </a>
+        .
+Suppose we want to test this method:
+       </p>
+       <pre class="pull-margin" style="position: relative;"><p>void upperCaseLine(BufferedReader input, PrintWriter output) throws IOException
+  <em>requires</em>: input and output are open
+  <em>effects</em>: attempts to read a line from input
+           and attempts to write that line, in upper case, to output</p><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       <p>
+        The method is normally used with a socket:
+       </p>
+       <div class="pull-margin">
+        <pre style="position: relative;"><code class="language-java hljs">Socket sock = ...
+
+<span class="hljs-comment">// read a stream of characters from the socket input stream</span>
+BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(sock.getInputStream()));
+<span class="hljs-comment">// write characters to the socket output stream</span>
+PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(sock.getOutputStream(), <span class="hljs-keyword">true</span>);
+
+upperCaseLine(in, out);</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       </div>
+       <p>
+        If the case conversion is a function we implement, it should already be specified, tested, and implemented separately.
+But now we can now also test the read/write behavior of
+        <code>
+         upperCaseLine
+        </code>
+        :
+       </p>
+       <div class="pull-margin">
+        <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-comment">// fixed input stream of "dog" (line 1) and "cat" (line 2)</span>
+String inString = <span class="hljs-string">"dog\ncat\n"</span>;
+ByteArrayInputStream inBytes = <span class="hljs-keyword">new</span> ByteArrayInputStream(inString.getBytes());
+ByteArrayOutputStream outBytes = <span class="hljs-keyword">new</span> ByteArrayOutputStream();
+
+<span class="hljs-comment">// read a stream of characters from the fixed input string</span>
+BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(inBytes));
+<span class="hljs-comment">// write characters to temporary storage</span>
+PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(outBytes, <span class="hljs-keyword">true</span>);
+
+upperCaseLine(in, out);
+
+<span class="hljs-comment">// check that it read the expected amount of input</span>
+assertEquals(<span class="hljs-string">"expected input line 2 remaining"</span>, <span class="hljs-string">"cat"</span>, in.readLine());
+<span class="hljs-comment">// check that it wrote the expected output</span>
+assertEquals(<span class="hljs-string">"expected upper case of input line 1"</span>, <span class="hljs-string">"DOG\n"</span>, outBytes.toString());</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+       </div>
+       <p>
+        In this test,
+        <code>
+         inBytes
+        </code>
+        and
+        <code>
+         outBytes
+        </code>
+        are
+        <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/03-testing/#unit_testing_and_stubs">
+         <strong>
+          test stubs
+         </strong>
+        </a>
+        .
+To isolate and test just
+        <code>
+         upperCaseLine
+        </code>
+        , we replace the components it normally depends on (input/output streams from a socket) with components that satisfy the same spec but have canned behavior: an input stream with fixed input, and an output stream that stores the output in memory.
+       </p>
+       <p>
+        Testing strategies for more complex modules might use a
+        <strong>
+         mock object
+        </strong>
+        to simulate the behavior of a real client or server by producing entire canned sequences of interaction and asserting the correctness of each message received from the other component.
+       </p>
+      </div>
+     </div>
+     <h2 id="summary">
+      Summary
+     </h2>
+     <div data-outline="summary">
+      <p>
+       In the
+       <em>
+        client/server design pattern
+       </em>
+       , concurrency is inevitable: multiple clients and multiple servers are connected on the network, sending and receiving messages simultaneously, and expecting timely replies.
+A server that
+       <em>
+        blocks
+       </em>
+       waiting for one slow client when there are other clients waiting to connect to it or to receive replies will not make those clients happy.
+At the same time, a server that performs incorrect computations or returns bogus results because of concurrent modification to shared mutable data by different clients will not make anyone happy.
+      </p>
+      <p>
+       All the challenges of making our multi-threaded code
+       <strong>
+        safe from bugs
+       </strong>
+       ,
+       <strong>
+        easy to understand
+       </strong>
+       , and
+       <strong>
+        ready for change
+       </strong>
+       apply when we design network clients and servers.
+These processes run concurrently with one another (if on different machines), and any server that wants to talk to multiple clients concurrently (or a client that wants to talk to multiple servers) must manage that multi-threaded communication.
+      </p>
+     </div>
+    </div>
+   </div>
+  </main>
+  <script src="./Reading 21 Sockets &amp; Networking_files/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 21 Sockets &amp; Networking_files/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 21 Sockets &amp; Networking_files/handout-run.js" type="text/javascript">
+  </script>
+ 
+
+<!-- Handout delivered Fri Mar 25 2016 10:42:26 GMT-0400 (EDT) -->
+</body><auto-scroll></auto-scroll><div id="revolut-extension-root"></div></html>
