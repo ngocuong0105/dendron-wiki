@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+   <title>
+    Reading 14: Interfaces
+   </title>
+   <link href="./Reading 14 Interfaces_files/handout-style.css" rel="stylesheet">
+    <style>
+     .adts-in-java-table th, .adts-in-java-table td {
+  vertical-align: top;
+  padding: 0 10px 0;
+}
+.adts-in-java-table p {
+  margin: 0px;
+}
+.adts-in-java-table .new-row td {
+  padding-top: 10px;
+}
+.adts-in-java-table .new-row td:first-child {
+  white-space: nowrap;
+}
+    </style>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+   
+  
+ </head>
+ <body>
+  <header>
+   <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/">
+    6.005 — Software Construction on MIT OpenCourseWare
+   </a>
+   |
+   <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-005-software-construction-spring-2016/">
+    OCW 6.005 Homepage
+   </a>
+   <div>
+    Spring 2016
+   </div>
+  </header>
+  <nav class="table-of-contents col-sm-2">
+   <ul class="nav">
+    <li class="active">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/#reading_14_interfaces">
+      Reading 14: Interfaces
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/#interfaces">
+      Interfaces
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/#subtypes">
+      Subtypes
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/#example_mystring">
+      Example: MyString
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/#example_set">
+      Example: Set
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/#generic_interfaces">
+      Generic Interfaces
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/#why_interfaces">
+      Why Interfaces?
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/#realizing_adt_concepts_in_java">
+      Realizing ADT Concepts in Java
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/14-interfaces/#summary">
+      Summary
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="container-fluid">
+   <h1 class="handout-title col-sm-8 col-sm-offset-2" id="reading_14_interfaces">
+    Reading 14: Interfaces
+   </h1>
+   <div data-outline="reading_14_interfaces">
+    <div class="markdown col-sm-8 col-sm-offset-2 converted">
+     <h4>
+      Software in 6.005
+     </h4>
+     <table class="table table-striped no-markdown">
+      <tbody>
+       <tr>
+        <th width="33%">
+         Safe from bugs
+        </th>
+        <th>
+         Easy to understand
+        </th>
+        <th>
+         Ready for change
+        </th>
+       </tr>
+       <tr>
+        <td>
+         Correct today and correct in the unknown future.
+        </td>
+        <td>
+         Communicating clearly with future programmers, including future you.
+        </td>
+        <td>
+         Designed to accommodate change without rewriting.
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <h4>
+      Objectives
+     </h4>
+     <p>
+      The topic of today’s class is interfaces: separating the interface of an abstract data type from its implementation, and using Java
+      <code>
+       interface
+      </code>
+      types to enforce that separation.
+     </p>
+     <p>
+      After today’s class, you should be able to define ADTs with interfaces, and write classes that implement interfaces.
+     </p>
+     <h2 id="interfaces">
+      Interfaces
+     </h2>
+     <div data-outline="interfaces">
+      <p>
+       Java’s
+       <code>
+        interface
+       </code>
+       is a useful language mechanism for expressing an abstract data type.
+An interface in Java is a list of method signatures, but no method bodies.
+A class
+       <em>
+        implements
+       </em>
+       an interface if it declares the interface in its
+       <code>
+        implements
+       </code>
+       clause, and provides method bodies for all of the interface’s methods.
+So one way to define an abstract data type in Java is as an interface, with its implementation as a class implementing that interface.
+      </p>
+      <p>
+       One advantage of this approach is that the interface specifies the contract for the client and nothing more.
+The interface is all a client programmer needs to read to understand the ADT.
+The client can’t create inadvertent dependencies on the ADT’s rep, because instance variables can’t be put in an interface at all.
+The implementation is kept well and truly separated, in a different class altogether.
+      </p>
+      <p>
+       Another advantage is that multiple different representations of the abstract data type can co-exist in the same program, as different classes implementing the interface.
+When an abstract data type is represented just as a single class, without an interface, it’s harder to have multiple representations.
+In the
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/12-abstract-data-types/#example_different_representations_for_strings">
+        <code>
+         MyString
+        </code>
+        example from
+        <em>
+         Abstract Data Types
+        </em>
+       </a>
+       ,
+       <code>
+        MyString
+       </code>
+       was a single class.
+We explored two different representations for
+       <code>
+        MyString
+       </code>
+       , but we couldn’t have both representations for the ADT in the same program.
+      </p>
+      <p>
+       Java’s static type checking allows the compiler to catch many mistakes in implementing an ADT’s contract.
+For instance, it is a compile-time error to omit one of the required methods, or to give a method the wrong return type.
+Unfortunately, the compiler doesn’t check for us that the code adheres to the specs of those methods that are written in documentation comments.
+      </p>
+      <div class="handout-solo alert alert-warning">
+       <p>
+        For the details of how to define interfaces in Java, consult the
+        <a class="alert-link" href="https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html">
+         Java Tutorials section on interfaces
+        </a>
+        .
+       </p>
+      </div>
+     </div>
+     <h2 id="subtypes">
+      Subtypes
+     </h2>
+     <div data-outline="subtypes">
+      <p>
+       Recall that a
+       <em>
+        type
+       </em>
+       is a set of values.
+The Java
+       <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/List.html">
+        <code>
+         List
+        </code>
+       </a>
+       type is defined by an interface.
+If we think about all possible
+       <code>
+        List
+       </code>
+       values, none of them are
+       <code>
+        List
+       </code>
+       objects: we cannot create instances of an interface.
+Instead, those values are all
+       <code>
+        ArrayList
+       </code>
+       objects, or
+       <code>
+        LinkedList
+       </code>
+       objects, or objects of another class that implements
+       <code>
+        List
+       </code>
+       .
+A
+       <em>
+        subtype
+       </em>
+       is simply a subset of the
+       <em>
+        supertype
+       </em>
+       :
+       <code>
+        ArrayList
+       </code>
+       and
+       <code>
+        LinkedList
+       </code>
+       are subtypes of
+       <code>
+        List
+       </code>
+       .
+      </p>
+      <p>
+       “B is a subtype of A” means “every B is an A.”
+In terms of specifications: “every B satisfies the specification for A.”
+      </p>
+      <p>
+       That means B is only a subtype of A if B’s specification is at least as strong as A’s specification.
+When we declare a class that implements an interface, the Java compiler enforces part of this requirement automatically: for example, it ensures that every method in A appears in B, with a compatible type signature.
+Class B cannot implement interface A without implementing all of the methods declared in A.
+      </p>
+      <p>
+       But the compiler cannot check that we haven’t weakened the specification in other ways: strengthening the precondition on some inputs to a method, weakening a postcondition, weakening a guarantee that the interface abstract type advertises to clients.
+If you declare a subtype in Java — implementing an interface is our current focus — then you must ensure that the subtype’s spec is at least as strong as the supertype’s.
+      </p>
+     </div>
+     <h2 id="example_mystring">
+      Example:
+      <code>
+       MyString
+      </code>
+     </h2>
+     <div data-outline="example_mystring">
+      <p>
+       Let’s revisit
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/12-abstract-data-types/#example_different_representations_for_strings">
+        <code>
+         MyString
+        </code>
+       </a>
+       .
+Using an interface instead of a class for the ADT, we can support multiple implementations:
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** MyString represents an immutable sequence of characters. */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">MyString</span> </span>{ 
+
+    <span class="hljs-comment">// We'll skip this creator operation for now</span>
+    <span class="hljs-comment">// /** @param b a boolean value</span>
+    <span class="hljs-comment">//  *  @return string representation of b, either "true" or "false" */</span>
+    <span class="hljs-comment">// public static MyString valueOf(boolean b) { ... }</span>
+
+    <span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> number of characters in this string */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">length</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@param</span> i character position (requires 0 &lt;= i &lt; string length)
+     *  <span class="hljs-doctag">@return</span> character at position i */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">char</span> <span class="hljs-title">charAt</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>;
+
+    <span class="hljs-comment handout-javadoc-comment">/** Get the substring between start (inclusive) and end (exclusive).
+     *  <span class="hljs-doctag">@param</span> start starting index
+     *  <span class="hljs-doctag">@param</span> end ending index.  Requires 0 &lt;= start &lt;= end &lt;= string length.
+     *  <span class="hljs-doctag">@return</span> string consisting of charAt(start)...charAt(end-1) */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> MyString <span class="hljs-title">substring</span><span class="hljs-params">(<span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span></span>;
+}</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       We’ll skip the static
+       <code>
+        valueOf
+       </code>
+       method and come back to it in a minute.
+Instead, let’s go ahead using a different technique from our
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/12-abstract-data-types/#realizing_adt_concepts_in_java">
+        toolbox of ADT concepts in Java
+       </a>
+       : constructors.
+      </p>
+      <p>
+       Here’s our first implementation:
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleMyString</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MyString</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">char</span>[] a;
+
+    <span class="hljs-comment">/* Create an uninitialized SimpleMyString. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">SimpleMyString</span><span class="hljs-params">()</span> </span>{}
+
+    <span class="hljs-comment handout-javadoc-comment">/** Create a string representation of b, either "true" or "false".
+     *  <span class="hljs-doctag">@param</span> b a boolean value */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SimpleMyString</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> b)</span> </span>{
+        a = b ? <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[] { <span class="hljs-string">'t'</span>, <span class="hljs-string">'r'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'e'</span> } 
+              : <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[] { <span class="hljs-string">'f'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'l'</span>, <span class="hljs-string">'s'</span>, <span class="hljs-string">'e'</span> };
+    }
+
+    <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">length</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> a.length; }
+
+    <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">char</span> <span class="hljs-title">charAt</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{ <span class="hljs-keyword">return</span> a[i]; }
+
+    <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> MyString <span class="hljs-title">substring</span><span class="hljs-params">(<span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>{
+        SimpleMyString that = <span class="hljs-keyword">new</span> SimpleMyString();
+        that.a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[end - start];
+        System.arraycopy(<span class="hljs-keyword">this</span>.a, start, that.a, <span class="hljs-number">0</span>, end - start);
+        <span class="hljs-keyword">return</span> that;
+    }
+}</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       And here’s the optimized implementation:
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FastMyString</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MyString</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">char</span>[] a;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> start;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> end;
+
+    <span class="hljs-comment">/* Create an uninitialized FastMyString. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">FastMyString</span><span class="hljs-params">()</span> </span>{}
+
+    <span class="hljs-comment handout-javadoc-comment">/** Create a string representation of b, either "true" or "false".
+     *  <span class="hljs-doctag">@param</span> b a boolean value */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FastMyString</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> b)</span> </span>{
+        a = b ? <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[] { <span class="hljs-string">'t'</span>, <span class="hljs-string">'r'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'e'</span> } 
+              : <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[] { <span class="hljs-string">'f'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'l'</span>, <span class="hljs-string">'s'</span>, <span class="hljs-string">'e'</span> };
+        start = <span class="hljs-number">0</span>;
+        end = a.length;
+    }
+
+    <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">length</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> end - start; }
+
+    <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">char</span> <span class="hljs-title">charAt</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{ <span class="hljs-keyword">return</span> a[start + i]; }
+
+    <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">public</span> MyString <span class="hljs-title">substring</span><span class="hljs-params">(<span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>{
+        FastMyString that = <span class="hljs-keyword">new</span> FastMyString();
+        that.a = <span class="hljs-keyword">this</span>.a;
+        that.start = <span class="hljs-keyword">this</span>.start + start;
+        that.end = <span class="hljs-keyword">this</span>.start + end;
+        <span class="hljs-keyword">return</span> that;
+    }
+}</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <ul>
+       <li>
+        <p>
+         Compare these classes to the
+         <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/12-abstract-data-types/#example_different_representations_for_strings">
+          implementations of
+          <code>
+           MyString
+          </code>
+          in
+          <em>
+           Abstract Data Types
+          </em>
+         </a>
+         .
+Notice how the code that previously appeared in static
+         <code>
+          valueOf
+         </code>
+         methods now appears in the constructors, slightly changed to refer to the rep of
+         <code>
+          this
+         </code>
+         .
+        </p>
+       </li>
+       <li>
+        <p>
+         Also notice the use of
+         <a href="https://docs.oracle.com/javase/tutorial/java/annotations/predefined.html">
+          <code>
+           @Override
+          </code>
+         </a>
+         .
+This annotation informs the compiler that the method must have the same signature as one of the methods in the interface we’re implementing.
+But since the compiler already checks that we’ve implemented all of the interface methods, the primary value of
+         <code>
+          @Override
+         </code>
+         here is for readers of the code: it tells us to look for the spec of that method in the interface.
+Repeating the spec wouldn’t be DRY, but saying nothing at all makes the code harder to understand.
+        </p>
+       </li>
+       <li>
+        <p>
+         And notice the private empty constructors we use to make new instances in
+         <code>
+          substring(..)
+         </code>
+         before we fill in their reps with data.
+We didn’t have to write these empty constructors before because Java provides them by default when we don’t declare any others.
+Adding the constructors that take
+         <code>
+          boolean b
+         </code>
+         means we have to declare the empty constructors explicitly.
+        </p>
+        <p>
+         Now that we know good ADTs scrupulously
+         <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/#invariants">
+          preserve their own invariants
+         </a>
+         , these do-nothing constructors are a
+         <strong>
+          bad
+         </strong>
+         pattern: they don’t assign any values to the rep, and they certainly don’t establish any invariants.
+We should strongly consider revising the implementation.
+Since
+         <code>
+          MyString
+         </code>
+         is immutable, a starting point would be making all the fields
+         <code>
+          final
+         </code>
+         .
+        </p>
+       </li>
+      </ul>
+      <p>
+       How will clients use this ADT?
+Here’s an example:
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs">MyString s = <span class="hljs-keyword">new</span> FastMyString(<span class="hljs-keyword">true</span>);
+System.out.println(<span class="hljs-string">"The first character is: "</span> + s.charAt(<span class="hljs-number">0</span>));</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       This code looks very similar to the code we write to use the Java collections classes:
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs">List&lt;String&gt; s = <span class="hljs-keyword">new</span> ArrayList&lt;String&gt;();
+...</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       Unfortunately, this pattern
+       <strong>
+        breaks the abstraction barrier
+       </strong>
+       we’ve worked so hard to build between the abstract type and its concrete representations.
+Clients must know the name of the concrete representation class.
+Because interfaces in Java cannot contain constructors, they must directly call one of the concrete class’ constructors.
+The spec of that constructor won’t appear anywhere in the interface, so there’s no static guarantee that different implementations will even provide the same constructors.
+      </p>
+      <p>
+       Fortunately, (as of Java 8) interfaces
+       <em>
+        are
+       </em>
+       allowed to contain static methods, so we can implement the creator operation
+       <code>
+        valueOf
+       </code>
+       as a static factory method in the interface
+       <code>
+        MyString
+       </code>
+       :
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">MyString</span> </span>{ 
+
+    <span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@param</span> b a boolean value
+     *  <span class="hljs-doctag">@return</span> string representation of b, either "true" or "false" */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> MyString <span class="hljs-title">valueOf</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> b)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FastMyString(<span class="hljs-keyword">true</span>);
+    }
+
+    <span class="hljs-comment">// ...</span></code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       Now a client can use the ADT without breaking the abstraction barrier:
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs">MyString s = MyString.valueOf(<span class="hljs-keyword">true</span>);
+System.out.println(<span class="hljs-string">"The first character is: "</span> + s.charAt(<span class="hljs-number">0</span>));</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+     </div>
+     <h2 id="example_set">
+      Example:
+      <code>
+       Set
+      </code>
+     </h2>
+     <div data-outline="example_set">
+      <p>
+       Java’s collection classes provide a good example of the idea of separating interface and implementation.
+      </p>
+      <p>
+       Let’s consider as an example one of the ADTs from the Java collections library,
+       <code>
+        Set
+       </code>
+       .
+       <code>
+        Set
+       </code>
+       is the ADT of finite sets of elements of some other type
+       <code>
+        E
+       </code>
+       .
+Here is a simplified version of the
+       <code>
+        Set
+       </code>
+       interface:
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** A mutable set.
+ *  <span class="hljs-doctag">@param</span> &lt;E&gt; type of elements in the set */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Set</span>&lt;<span class="hljs-title">E</span>&gt; </span>{</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       <code>
+        Set
+       </code>
+       is an example of a
+       <em>
+        generic type
+       </em>
+       : a type whose specification is in terms of a placeholder type to be filled in later.
+Instead of writing separate specifications and implementations for
+       <code>
+        Set&lt;String&gt;
+       </code>
+       ,
+       <code>
+        Set&lt;Integer&gt;
+       </code>
+       , and so on, we design and implement one
+       <code>
+        Set&lt;E&gt;
+       </code>
+       .
+      </p>
+      <p>
+       We can match Java interfaces with our classification of ADT operations, starting with a creator:
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs">    <span class="hljs-comment">// example creator operation</span>
+    <span class="hljs-comment handout-javadoc-comment">/** Make an empty set.
+     *  <span class="hljs-doctag">@param</span> &lt;E&gt; type of elements in the set
+     *  <span class="hljs-doctag">@return</span> a new set instance, initially empty */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;E&gt; <span class="hljs-function">Set&lt;E&gt; <span class="hljs-title">make</span><span class="hljs-params">()</span> </span>{ ... } </code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       The
+       <code>
+        make
+       </code>
+       operation is implemented as a static factory method.
+Clients will write code like:
+       <br>
+        <code>
+         Set&lt;String&gt; strings = Set.make();
+        </code>
+        <br>
+         and the compiler will understand that the new
+         <code>
+          Set
+         </code>
+         is a set of
+         <code>
+          String
+         </code>
+         objects.
+        <br>
+       <br>
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs">    <span class="hljs-comment">// example observer operations</span>
+
+    <span class="hljs-comment handout-javadoc-comment">/** Get size of the set.
+     *  <span class="hljs-doctag">@return</span> the number of elements in this set */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment handout-javadoc-comment">/** Test for membership.
+     *  <span class="hljs-doctag">@param</span> e an element
+     *  <span class="hljs-doctag">@return</span> true iff this set contains e */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">contains</span><span class="hljs-params">(E e)</span></span>;</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       Next we have two observer methods.
+Notice how the specs are in terms of our abstract notion of a set; it would be malformed to mention the details of any particular implementation of sets with particular private fields.
+These specs should apply to any valid implementation of the set ADT.
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs">    <span class="hljs-comment">// example mutator operations</span>
+
+    <span class="hljs-comment handout-javadoc-comment">/** Modifies this set by adding e to the set.
+     *  <span class="hljs-doctag">@param</span> e element to add */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(E e)</span></span>;
+
+    <span class="hljs-comment handout-javadoc-comment">/** Modifies this set by removing e, if found.
+     *  If e is not found in the set, has no effect.
+     *  <span class="hljs-doctag">@param</span> e element to remove */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(E e)</span></span>;</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       The story for these mutators is basically the same as for the observers.
+We still write specs at the level of our abstract model of sets.
+      </p>
+      <div class="handout-solo alert alert-warning">
+       <p>
+        In the Java Tutorials, read these pages:
+       </p>
+       <ul>
+        <li>
+         <a class="alert-link" href="https://docs.oracle.com/javase/tutorial/collections/interfaces/">
+          Lesson: Interfaces
+         </a>
+        </li>
+        <li>
+         <a class="alert-link" href="https://docs.oracle.com/javase/tutorial/collections/interfaces/set.html">
+          The Set Interface
+         </a>
+        </li>
+        <li>
+         <a class="alert-link" href="https://docs.oracle.com/javase/tutorial/collections/implementations/set.html">
+          Set Implementations
+         </a>
+        </li>
+        <li>
+         <a class="alert-link" href="https://docs.oracle.com/javase/tutorial/collections/interfaces/list.html">
+          The List Interface
+         </a>
+        </li>
+        <li>
+         <a class="alert-link" href="https://docs.oracle.com/javase/tutorial/collections/implementations/list.html">
+          List Implementations
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <h2 id="generic_interfaces">
+      Generic Interfaces
+     </h2>
+     <div data-outline="generic_interfaces">
+      <p>
+       Suppose we want to implement the generic
+       <code>
+        Set&lt;E&gt;
+       </code>
+       interface above.
+      </p>
+      <p>
+       <strong>
+        Generic interface, non-generic implementation.
+       </strong>
+       One way we might do this is to implement
+       <code>
+        Set&lt;E&gt;
+       </code>
+       for a
+       <em>
+        particular
+       </em>
+       type
+       <code>
+        E
+       </code>
+       .
+      </p>
+      <p>
+       In
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/#rep_invariant_and_abstraction_function">
+        <em>
+         Abstraction Functions &amp; Rep Invariants
+        </em>
+       </a>
+       we looked at
+       <code>
+        CharSet
+       </code>
+       , which represents a set of characters.
+The
+       <a href="https://github.com/mit6005/sp16-ex13-adt-examples/tree/master/src/charset">
+        example code for
+        <code>
+         CharSet
+        </code>
+       </a>
+       includes a generic
+       <a href="https://github.com/mit6005/sp16-ex13-adt-examples/blob/master/src/charset/Set.java">
+        <code>
+         Set
+        </code>
+        interface
+       </a>
+       and each of the implementations
+       <code>
+        CharSet1
+       </code>
+       /
+       <code>
+        2
+       </code>
+       /
+       <code>
+        3
+       </code>
+       declare:
+      </p>
+      <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CharSet</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Set</span>&lt;<span class="hljs-title">Character</span>&gt;</span></code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+      <p>
+       When the interface mentions placeholder type
+       <code>
+        E
+       </code>
+       , the
+       <code>
+        CharSet
+       </code>
+       implementations replace
+       <code>
+        E
+       </code>
+       with
+       <code>
+        Character
+       </code>
+       .
+For example:
+      </p>
+      <table class="side-by-side pull-margin">
+       <tbody>
+        <tr>
+         <td>
+          <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Set</span>&lt;<span class="hljs-title">E</span>&gt; </span>{
+
+    <span class="hljs-comment">// ...</span>
+
+    <span class="hljs-comment handout-javadoc-comment">/**
+     * Test for membership.
+     * <span class="hljs-doctag">@param</span> e an element
+     * <span class="hljs-doctag">@return</span> true iff this set contains e
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">contains</span><span class="hljs-params">(E e)</span></span>;
+
+    <span class="hljs-comment handout-javadoc-comment">/**
+     * Modifies this set by adding e to the set.
+     * <span class="hljs-doctag">@param</span> e element to add
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(E e)</span></span>;
+
+    <span class="hljs-comment">// ...</span>
+}</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+         </td>
+         <td>
+          <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CharSet1</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Set</span>&lt;<span class="hljs-title">Character</span>&gt; </span>{
+
+    <span class="hljs-keyword">private</span> String s = <span class="hljs-string">""</span>;
+
+
+    <span class="hljs-comment">// ...</span>
+
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">contains</span><span class="hljs-params">(Character e)</span> </span>{
+        checkRep();
+        <span class="hljs-keyword">return</span> s.indexOf(e) != -<span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(Character e)</span> </span>{
+        <span class="hljs-keyword">if</span> (!contains(e)) s += e;
+        checkRep();
+    }
+    <span class="hljs-comment">// ...</span>
+}</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+      <p>
+       The representations used by
+       <code>
+        CharSet1
+       </code>
+       /
+       <code>
+        2
+       </code>
+       /
+       <code>
+        3
+       </code>
+       are not suited for representing sets of arbitrary-type elements.
+The
+       <code>
+        String
+       </code>
+       reps, for example, cannot represent a
+       <code>
+        Set&lt;Integer&gt;
+       </code>
+       without careful work to define a new rep invariant and abstraction function that handles multi-digit numbers.
+      </p>
+      <p>
+       <strong>
+        Generic interface, generic implementation.
+       </strong>
+       We can also implement the generic
+       <code>
+        Set&lt;E&gt;
+       </code>
+       interface without picking a type for
+       <code>
+        E
+       </code>
+       .
+In that case, we write our code blind to the actual type that clients will choose for
+       <code>
+        E
+       </code>
+       .
+Java’s
+       <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/HashSet.html">
+        <code>
+         HashSet
+        </code>
+       </a>
+       does that for
+       <code>
+        Set
+       </code>
+       .
+It’s declaration looks like:
+      </p>
+      <table class="side-by-side pull-margin">
+       <tbody>
+        <tr>
+         <td>
+          <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Set</span>&lt;<span class="hljs-title">E</span>&gt; </span>{
+
+    <span class="hljs-comment">// ...</span>
+                                              &nbsp;</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+         </td>
+         <td>
+          <pre style="position: relative;"><code class="language-java hljs"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashSet</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Set</span>&lt;<span class="hljs-title">E</span>&gt; </span>{
+
+    <span class="hljs-comment">// ...</span>
+    &nbsp;</code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+      <p>
+       A generic implementation can only rely on details of the placeholder types that are included in the interface’s specification.
+We’ll see in a future reading how
+       <code>
+        HashSet
+       </code>
+       relies on methods that every type in Java is required to implement — and only on those methods, because it can’t rely on methods declared in any specific type.
+      </p>
+     </div>
+     <h2 id="why_interfaces">
+      Why Interfaces?
+     </h2>
+     <div data-outline="why_interfaces">
+      <p>
+       Interfaces are used pervasively in real Java code.
+Not every class is associated with an interface, but there are a few good reasons to bring an interface into the picture.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Documentation for both the compiler and for humans
+        </strong>
+        .
+Not only does an interface help the compiler catch ADT implementation bugs, but it is also much more useful for a human to read than the code for a concrete implementation.
+Such an implementation intersperses ADT-level types and specs with implementation details.
+       </li>
+       <li>
+        <strong>
+         Allowing performance trade-offs
+        </strong>
+        .
+Different implementations of the ADT can provide methods with very different performance characteristics.
+Different applications may work better with different choices, but we would like to code these applications in a way that is representation-independent.
+From a correctness standpoint, it should be possible to drop in any new implementation of a key ADT with simple, localized code changes.
+       </li>
+       <li>
+        <strong>
+         Optional methods
+        </strong>
+        .
+        <code>
+         List
+        </code>
+        from the Java standard library marks all mutator methods as optional.
+By building an implementation that does not support these methods, we can provide immutable lists. Some operations are hard to implement with good enough performance on immutable lists, so we want mutable implementations, too.
+Code that doesn’t call mutators can be written to work automatically with either kind of list.
+       </li>
+       <li>
+        <strong>
+         Methods with intentionally underdetermined specifications
+        </strong>
+        .
+An ADT for finite sets could leave unspecified the element order one gets when converting to a list.
+Some implementations might use slower method implementations that manage to keep the set representation in some sorted order, allowing quick conversion to a sorted list.
+Other implementations might make many methods faster by not bothering to support conversion to sorted lists.
+       </li>
+       <li>
+        <strong>
+         Multiple views of one class
+        </strong>
+        .
+A Java class may implement multiple methods.
+For instance, a user interface widget displaying a drop-down list is natural to view as both a widget and a list.
+The class for this widget could implement both interfaces.
+In other words, we don’t implement an ADT multiple times just because we are choosing different data structures; we may make multiple implementations because many different sorts of objects may also be seen as special cases of the ADT, among other useful perspectives.
+       </li>
+       <li>
+        <strong>
+         More and less trustworthy implementations
+        </strong>
+        .
+Another reason to implement an interface multiple times might be that it is easy to build a simple implementation that you believe is correct, while you can work harder to build a fancier version that is more likely to contain bugs.
+You can choose implementations for applications based on how bad it would be to get bitten by a bug.
+       </li>
+      </ul>
+     </div>
+     <h2 id="realizing_adt_concepts_in_java">
+      Realizing ADT Concepts in Java
+     </h2>
+     <div data-outline="realizing_adt_concepts_in_java">
+      <p>
+       We can now extend our
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/12-abstract-data-types/#realizing_adt_concepts_in_java">
+        Java toolbox of ADT concepts
+       </a>
+       from the first ADTs reading:
+      </p>
+      <table class="adts-in-java-table pull-margin">
+       <tbody>
+        <tr>
+         <th>
+          <p>
+           ADT concept
+          </p>
+         </th>
+         <th>
+          <p>
+           Ways to do it in Java
+          </p>
+         </th>
+         <th>
+          <p>
+           Examples
+          </p>
+         </th>
+        </tr>
+        <tr class="new-row">
+         <td rowspan="2">
+          <p>
+           Abstract data type
+          </p>
+         </td>
+         <td>
+          <p>
+           Single class
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">
+            <code>
+             String
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr class="highlighted">
+         <td>
+          <p>
+           Interface + class(es)
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">
+            <code>
+             List
+            </code>
+           </a>
+           and
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">
+            <code>
+             ArrayList
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr class="new-row">
+         <td rowspan="3">
+          <p>
+           Creator operation
+          </p>
+         </td>
+         <td>
+          <p>
+           Constructor
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#ArrayList--">
+            <code>
+             ArrayList()
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          <p>
+           Static (factory) method
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#singletonList-T-">
+            <code>
+             Collections.singletonList()
+            </code>
+           </a>
+           ,
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#asList-T...-">
+            <code>
+             Arrays.toList()
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          <p>
+           Constant
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html#ZERO">
+            <code>
+             BigInteger.ZERO
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr class="new-row">
+         <td rowspan="2">
+          <p>
+           Observer operation
+          </p>
+         </td>
+         <td>
+          <p>
+           Instance method
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html#get-int-">
+            <code>
+             List.get()
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          <p>
+           Static method
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#max-java.util.Collection-">
+            <code>
+             Collections.max()
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr class="new-row">
+         <td rowspan="2">
+          <p>
+           Producer operation
+          </p>
+         </td>
+         <td>
+          <p>
+           Instance method
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#trim--">
+            <code>
+             String.trim()
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          <p>
+           Static method
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#unmodifiableList-java.util.List-">
+            <code>
+             Collections.unmodifiableList()
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr class="new-row">
+         <td rowspan="2">
+          <p>
+           Mutator operation
+          </p>
+         </td>
+         <td>
+          <p>
+           Instance method
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html#add-E-">
+            <code>
+             List.add()
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          <p>
+           Static method
+          </p>
+         </td>
+         <td>
+          <p>
+           <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#copy-java.util.List-java.util.List-">
+            <code>
+             Collections.copy()
+            </code>
+           </a>
+          </p>
+         </td>
+        </tr>
+        <tr class="new-row">
+         <td>
+          <p>
+           Representation
+          </p>
+         </td>
+         <td>
+          <p>
+           <code>
+            private
+           </code>
+           fields
+          </p>
+         </td>
+         <td>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <h2 id="summary">
+      Summary
+     </h2>
+     <div data-outline="summary">
+      <p>
+       Java interfaces help us formalize the idea of an abstract data type as a set of operations that must be supported by a type.
+      </p>
+      <p>
+       This helps make our code…
+      </p>
+      <ul>
+       <li>
+        <p>
+         <strong>
+          Safe from bugs.
+         </strong>
+         An ADT is defined by its operations, and interfaces do just that.
+When clients use an interface type, static checking ensures that they only use methods defined by the interface.
+If the implementation class exposes other methods — or worse, has visible representation — the client can’t accidentally see or depend on them.
+When we have multiple implementations of a data type, interfaces provide static checking of the method signatures.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Easy to understand.
+         </strong>
+         Clients and maintainers know exactly where to look for the specification of the ADT.
+Since the interface doesn’t contain instance fields or implementations of instance methods, it’s easier to keep details of the implementation out of the specifications.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Ready for change.
+         </strong>
+         We can easily add new implementations of a type by adding classes that implement interface.
+If we avoid constructors in favor of static factory methods, clients will only see the interface.
+That means we can switch which implementation class clients are using without changing their code at all.
+        </p>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </main>
+  <script src="./Reading 14 Interfaces_files/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 14 Interfaces_files/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 14 Interfaces_files/handout-run.js" type="text/javascript">
+  </script>
+ 
+
+<!-- Handout delivered Tue Mar 01 2016 14:49:41 GMT-0500 (EST) -->
+</body><auto-scroll></auto-scroll><div id="revolut-extension-root"></div></html>
