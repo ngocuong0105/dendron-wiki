@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+   <title>
+    Reading 9: Mutability &amp; Immutability
+   </title>
+   <link href="./Reading 9 Mutability &amp; Immutability_files/handout-style.css" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+   
+  
+ </head>
+ <body>
+  <header>
+   <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/">
+    6.005 — Software Construction on MIT OpenCourseWare
+   </a>
+   |
+   <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-005-software-construction-spring-2016/">
+    OCW 6.005 Homepage
+   </a>
+   <div>
+    Spring 2016
+   </div>
+  </header>
+  <nav class="table-of-contents col-sm-2">
+   <ul class="nav">
+    <li class="active">
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#reading_9_mutability_immutability">
+      Reading 9: Mutability &amp; Immutability
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#mutability">
+      Mutability
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#risks_of_mutation">
+      Risks of mutation
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#aliasing_is_what_makes_mutable_types_risky">
+      Aliasing is what makes mutable types risky
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#specifications_for_mutating_methods">
+      Specifications for mutating methods
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#iterating_over_arrays_and_lists">
+      Iterating over arrays and lists
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#mutation_undermines_an_iterator">
+      Mutation undermines an iterator
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#mutation_and_contracts">
+      Mutation and contracts
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#useful_immutable_types">
+      Useful immutable types
+     </a>
+    </li>
+    <li>
+     <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/09-immutability/#summary">
+      Summary
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="container-fluid">
+   <h1 class="handout-title col-sm-8 col-sm-offset-2" id="reading_9_mutability_immutability">
+    Reading 9: Mutability &amp; Immutability
+   </h1>
+   <div data-outline="reading_9_mutability_immutability">
+    <div class="markdown col-sm-8 col-sm-offset-2 converted">
+     <h4>
+      Software in 6.005
+     </h4>
+     <table class="table table-striped no-markdown">
+      <tbody>
+       <tr>
+        <th width="33%">
+         Safe from bugs
+        </th>
+        <th>
+         Easy to understand
+        </th>
+        <th>
+         Ready for change
+        </th>
+       </tr>
+       <tr>
+        <td>
+         Correct today and correct in the unknown future.
+        </td>
+        <td>
+         Communicating clearly with future programmers, including future you.
+        </td>
+        <td>
+         Designed to accommodate change without rewriting.
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <h4>
+      Objectives
+     </h4>
+     <ul>
+      <li>
+       Understand mutability and mutable objects
+      </li>
+      <li>
+       Identify aliasing and understand the dangers of mutability
+      </li>
+      <li>
+       Use immutability to improve correctness, clarity, &amp; changeability
+      </li>
+     </ul>
+     <h2 id="mutability">
+      Mutability
+     </h2>
+     <div data-outline="mutability">
+      <p>
+       Recall from
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/02-basic-java/#snapshot_diagrams">
+        <em>
+         Basic Java
+        </em>
+        when we discussed snapshot diagrams
+       </a>
+       that some objects are
+       <em>
+        immutable
+       </em>
+       : once created, they always represent the same value.
+Other objects are
+       <em>
+        mutable
+       </em>
+       : they have methods that change the value of the object.
+      </p>
+      <p>
+       <a href="https://docs.oracle.com/javase/8/docs/api/?java/lang/String.html">
+        <code>
+         String
+        </code>
+       </a>
+       is an example of an immutable type.
+A
+       <code>
+        String
+       </code>
+       object always represents the same string.
+       <a href="https://docs.oracle.com/javase/8/docs/api/?java/lang/StringBuilder.html">
+        <code>
+         StringBuilder
+        </code>
+       </a>
+       is an example of a mutable type.
+It has methods to delete parts of the string, insert or replace characters, etc.
+      </p>
+      <div class="panel panel-figure pull-right pull-margin">
+       <img alt="reassigning a variable" src="./Reading 9 Mutability &amp; Immutability_files/reassignment.png" width="200">
+      </div>
+      <p>
+       Since
+       <code>
+        String
+       </code>
+       is immutable, once created, a
+       <code>
+        String
+       </code>
+       object always has the same value.
+To add something to the end of a String, you have to create a new String object:
+      </p>
+      <pre><code class="language-java hljs">String s = <span class="hljs-string">"a"</span>;
+s = s.concat(<span class="hljs-string">"b"</span>); <span class="hljs-comment">// s+="b" and s=s+"b" also mean the same thing</span></code></pre>
+      <div class="clearfix">
+      </div>
+      <div class="panel panel-figure pull-right pull-margin">
+       <img alt="mutating an object" src="./Reading 9 Mutability &amp; Immutability_files/mutation.png" width="200">
+      </div>
+      <p>
+       By contrast,
+       <code>
+        StringBuilder
+       </code>
+       objects are mutable.
+This class has methods that change the value of the object, rather than just returning new values:
+      </p>
+      <pre><code class="language-java hljs">StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">"a"</span>);
+sb.append(<span class="hljs-string">"b"</span>);</code></pre>
+      <p>
+       <code>
+        StringBuilder
+       </code>
+       has other methods as well, for deleting parts of the string, inserting in the middle, or changing individual characters.
+      </p>
+      <div class="clearfix">
+      </div>
+      <p>
+       So what?
+In both cases, you end up with
+       <code>
+        s
+       </code>
+       and
+       <code>
+        sb
+       </code>
+       referring to the string of characters
+       <code>
+        "ab"
+       </code>
+       .
+The difference between mutability and immutability doesn’t matter much when there’s only one reference to the object. But there are big differences in how they behave when there are
+       <em>
+        other
+       </em>
+       references to the object.
+For example, when another variable
+       <code>
+        t
+       </code>
+       points to the same String object as
+       <code>
+        s
+       </code>
+       , and another variable
+       <code>
+        tb
+       </code>
+       points to the same StringBuilder as
+       <code>
+        sb
+       </code>
+       , then the differences between the immutable and mutable objects become more evident:
+      </p>
+      <div class="panel panel-figure pull-right pull-margin">
+       <img alt="different behavior of String and StringBuilder" src="./Reading 9 Mutability &amp; Immutability_files/string-vs-stringbuilder.png" width="500">
+      </div>
+      <pre><code class="language-java hljs">String t = s;
+t = t + <span class="hljs-string">"c"</span>;
+
+StringBuilder tb = sb;
+tb.append(<span class="hljs-string">"c"</span>);</code></pre>
+      <div class="clearfix">
+      </div>
+      <p>
+       Why do we need the mutable
+       <code>
+        StringBuilder
+       </code>
+       in programming?
+A common use for it is to concatenate a large number of strings together.
+Consider this code:
+      </p>
+      <pre><code class="language-java hljs">String s = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+    s = s + n;
+}</code></pre>
+      <p class="no-markdown">
+       Using immutable strings, this makes a lot of temporary copies — the first number of the string (
+       <code>
+        "0"
+       </code>
+       ) is actually copied
+       <em>
+        n
+       </em>
+       times in the course of building up the final string, the second number is copied
+       <em>
+        n-1
+       </em>
+       times, and so on.
+It actually costs
+       <em>
+        O(n
+        <sup>
+         2
+        </sup>
+        )
+       </em>
+       time just to do all that copying, even though we only concatenated
+       <em>
+        n
+       </em>
+       elements.
+      </p>
+      <p>
+       <code>
+        StringBuilder
+       </code>
+       is designed to minimize this copying.
+It uses a simple but clever internal data structure to avoid doing any copying at all until the very end, when you ask for the final
+       <code>
+        String
+       </code>
+       with a
+       <code>
+        toString()
+       </code>
+       call:
+      </p>
+      <pre><code class="language-java hljs">StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+  sb.append(String.valueOf(i));
+}
+String s = sb.toString();</code></pre>
+      <p>
+       Getting good performance is one reason why we use mutable objects.  Another is convenient sharing: two parts of your program can communicate more conveniently by sharing a common mutable data structure.
+      </p>
+     </div>
+     <h2 id="risks_of_mutation">
+      Risks of mutation
+     </h2>
+     <div data-outline="risks_of_mutation">
+      <p>
+       Mutable types seem much more powerful than immutable types.
+If you were shopping in the Datatype Supermarket, and you had to choose between a boring immutable
+       <code>
+        String
+       </code>
+       and a super-powerful-do-anything mutable
+       <code>
+        StringBuilder
+       </code>
+       , why on earth would you choose the immutable one?
+       <code>
+        StringBuilder
+       </code>
+       should be able to do everything that
+       <code>
+        String
+       </code>
+       can do, plus
+       <code>
+        set()
+       </code>
+       and
+       <code>
+        append()
+       </code>
+       and everything else.
+      </p>
+      <p>
+       The answer is that
+       <strong>
+        immutable types are safer from bugs, easier to understand, and more ready for change
+       </strong>
+       .
+Mutability makes it harder to understand what your program is doing, and much harder to enforce contracts.
+Here are two examples that illustrate why.
+      </p>
+      <h3 id="risky_example_1_passing_mutable_values">
+       Risky example #1: passing mutable values
+      </h3>
+      <div data-outline="risky_example_1_passing_mutable_values">
+       <p>
+        Let’s start with a simple method that sums the integers in a list:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> the sum of the numbers in the list */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(List&lt;Integer&gt; list)</span> </span>{
+    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x : list)
+        sum += x;
+    <span class="hljs-keyword">return</span> sum;
+}</code></pre>
+       <p>
+        Suppose we also need a method that sums the absolute values.
+Following good DRY practice (
+        <a href="https://en.wikipedia.org/wiki/Don&#39;t_repeat_yourself">
+         Don’t Repeat Yourself
+        </a>
+        ), the implementer writes a method that uses
+        <code>
+         sum()
+        </code>
+        :
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> the sum of the absolute values of the numbers in the list */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sumAbsolute</span><span class="hljs-params">(List&lt;Integer&gt; list)</span> </span>{
+    <span class="hljs-comment">// let's reuse sum(), because DRY, so first we take absolute values</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; list.size(); ++i)
+        list.set(i, Math.abs(list.get(i)));
+    <span class="hljs-keyword">return</span> sum(list);
+}</code></pre>
+       <p>
+        Notice that this method does its job by
+        <strong>
+         mutating the list directly
+        </strong>
+        .
+It seemed sensible to the implementer, because it’s more efficient to reuse the existing list.
+If the list is millions of items long, then you’re saving the time and memory of generating a new million-item list of absolute values.
+So the implementer has two very good reasons for this design: DRY, and performance.
+       </p>
+       <p>
+        But the resulting behavior will be very surprising to anybody who uses it!
+For example:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment">// meanwhile, somewhere else in the code...</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+    <span class="hljs-comment">// ...</span>
+    List&lt;Integer&gt; myData = Arrays.asList(-<span class="hljs-number">5</span>, -<span class="hljs-number">3</span>, -<span class="hljs-number">2</span>);
+    System.out.println(sumAbsolute(myData));
+    System.out.println(sum(myData));
+}</code></pre>
+       <p>
+        What will this code print?
+Will it be 10 followed by -10?
+Or something else?
+       </p>
+       <p>
+        Let’s think about the key points here:
+       </p>
+       <ul>
+        <li>
+         <p>
+          <strong>
+           Safe from bugs?
+          </strong>
+          In this example, it’s easy to blame the implementer of
+          <code>
+           sum­Absolute()
+          </code>
+          for going beyond what its spec allowed.
+But really,
+          <strong>
+           passing mutable objects around is a latent bug
+          </strong>
+          .
+It’s just waiting for some programmer to inadvertently mutate that list, often with very good intentions like reuse or performance, but resulting in a bug that may be very hard to track down.
+         </p>
+        </li>
+        <li>
+         <p>
+          <strong>
+           Easy to understand?
+          </strong>
+          When reading
+          <code>
+           main()
+          </code>
+          , what would you assume about
+          <code>
+           sum()
+          </code>
+          and
+          <code>
+           sum­Absolute()
+          </code>
+          ?
+Is it clearly visible to the reader that
+          <code>
+           myData
+          </code>
+          gets
+          <em>
+           changed
+          </em>
+          by one of them?
+         </p>
+        </li>
+       </ul>
+      </div>
+      <h3 id="risky_example_2_returning_mutable_values">
+       Risky example #2: returning mutable values
+      </h3>
+      <div data-outline="risky_example_2_returning_mutable_values">
+       <p>
+        We just saw an example where passing a mutable object to a function caused problems.
+What about returning a mutable object?
+       </p>
+       <p>
+        Let’s consider
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/Date.html">
+         <code>
+          Date
+         </code>
+        </a>
+        , one of the built-in Java classes.
+        <code>
+         Date
+        </code>
+        happens to be a mutable type.
+Suppose we write a method that determines the first day of spring:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> the first day of spring this year */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Date <span class="hljs-title">startOfSpring</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> askGroundhog();
+}</code></pre>
+       <p>
+        Here we’re using the well-known Groundhog algorithm for calculating when spring starts (Harold Ramis, Bill Murray, et al.
+        <em>
+         Groundhog Day
+        </em>
+        , 1993).
+       </p>
+       <p>
+        Clients start using this method, for example to plan their big parties:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment">// somewhere else in the code...</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">partyPlanning</span><span class="hljs-params">()</span> </span>{
+    Date partyDate = startOfSpring();
+    <span class="hljs-comment">// ...</span>
+}</code></pre>
+       <p>
+        All the code works and people are happy.
+Now, independently, two things happen.
+First, the implementer of
+        <code>
+         startOfSpring()
+        </code>
+        realizes that the groundhog is starting to get annoyed from being constantly asked when spring will start.
+So the code is rewritten to ask the groundhog at most once, and then cache the groundhog’s answer for future calls:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/** <span class="hljs-doctag">@return</span> the first day of spring this year */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Date <span class="hljs-title">startOfSpring</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">if</span> (groundhogAnswer == <span class="hljs-keyword">null</span>) groundhogAnswer = askGroundhog();
+    <span class="hljs-keyword">return</span> groundhogAnswer;
+}
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Date groundhogAnswer = <span class="hljs-keyword">null</span>;</code></pre>
+       <p>
+        (Aside: note the use of a private static variable for the cached answer.
+Would you consider this a global variable, or not?)
+       </p>
+       <p>
+        Second, one of the clients of
+        <code>
+         startOfSpring()
+        </code>
+        decides that the actual first day of spring is too cold for the party, so the party will be exactly a month later instead:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-comment">// somewhere else in the code...</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">partyPlanning</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// let's have a party one month after spring starts!</span>
+    Date partyDate = startOfSpring();
+    partyDate.setMonth(partyDate.getMonth() + <span class="hljs-number">1</span>);
+    <span class="hljs-comment">// ... uh-oh. what just happened?</span>
+}</code></pre>
+       <p>
+        (Aside: this code also has a latent bug in the way it adds a month.
+Why?
+What does it implicitly assume about when spring starts?)
+       </p>
+       <p>
+        What happens when these two decisions interact?
+Even worse, think about who will first discover this bug — will it be
+        <code>
+         startOfSpring()
+        </code>
+        ?
+Will it be
+        <code>
+         partyPlanning()
+        </code>
+        ?
+Or will it be some completely innocent third piece of code that also calls
+        <code>
+         startOfSpring()
+        </code>
+        ?
+       </p>
+       <p>
+        Key points:
+       </p>
+       <ul>
+        <li>
+         <p>
+          <strong>
+           Safe from bugs?
+          </strong>
+          Again we had a latent bug that reared its ugly head.
+         </p>
+        </li>
+        <li>
+         <p>
+          <strong>
+           Ready for change?
+          </strong>
+          Obviously the mutation of the date object is a change, but that’s not the kind of change we’re talking about when we say “ready for change.”
+Instead, the question is whether the code of the program can be easily changed without rewriting a lot of it or introducing bugs.
+Here we had two apparently independent changes, by different programmers, that interacted to produce a bad bug.
+         </p>
+        </li>
+       </ul>
+       <p>
+        In both of these examples — the
+        <code>
+         List&lt;Integer&gt;
+        </code>
+        and the
+        <code>
+         Date
+        </code>
+        — the problems would have been completely avoided if the list and the date had been immutable types.
+The bugs would have been impossible by design.
+       </p>
+       <p>
+        In fact, you should never use
+        <code>
+         Date
+        </code>
+        !
+Use one of the classes from
+        <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/time/package-summary.html">
+         package
+         <code>
+          java.time
+         </code>
+        </a>
+        :
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/time/LocalDateTime.html">
+         <code>
+          LocalDateTime
+         </code>
+        </a>
+        ,
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/time/Instant.html">
+         <code>
+          Instant
+         </code>
+        </a>
+        , etc.
+All guarantee in their specifications that they are
+        <em>
+         immutable
+        </em>
+        .
+       </p>
+       <p>
+        This example also illustrates why using mutable objects can actually be
+        <em>
+         bad
+        </em>
+        for performance.
+The simplest solution to this bug, which avoids changing any of the specifications or method signatures, is for
+        <code>
+         startOfSpring()
+        </code>
+        to always return a
+        <em>
+         copy
+        </em>
+        of the groundhog’s answer:
+       </p>
+       <pre><code class="language-java hljs">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Date(groundhogAnswer.getTime());</code></pre>
+       <p>
+        This pattern is
+        <strong>
+         defensive copying
+        </strong>
+        , and we’ll see much more of it when we talk about abstract data types.
+The defensive copy means
+        <code>
+         partyPlanning()
+        </code>
+        can freely stomp all over the returned date without affecting
+        <code>
+         startOfSpring()
+        </code>
+        ’s cached date.
+But defensive copying forces
+        <code>
+         startOfSpring()
+        </code>
+        to do extra work and use extra space for
+        <em>
+         every client
+        </em>
+        — even if 99% of the clients never mutate the date it returns.
+We may end up with lots of copies of the first day of spring throughout memory.
+If we used an immutable type instead, then different parts of the program could safely share the same values in memory, so less copying and less memory space is required.
+Immutability can be more efficient than mutability, because immutable types never need to be defensively copied.
+       </p>
+      </div>
+     </div>
+     <h2 id="aliasing_is_what_makes_mutable_types_risky">
+      Aliasing is what makes mutable types risky
+     </h2>
+     <div data-outline="aliasing_is_what_makes_mutable_types_risky">
+      <p>
+       Actually, using mutable objects is just fine if you are using them entirely locally within a method, and with only one reference to the object.
+What led to the problem in the two examples we just looked at was having multiple references, also called
+       <strong>
+        aliases
+       </strong>
+       , for the same mutable object.
+      </p>
+      <p>
+       Walking through the examples with a snapshot diagram will make this clear, but here’s the outline:
+      </p>
+      <ul>
+       <li>
+        <p>
+         In the
+         <code>
+          List
+         </code>
+         example, the same list is pointed to by both
+         <code>
+          list
+         </code>
+         (in
+         <code>
+          sum
+         </code>
+         and
+         <code>
+          sumAbsolute
+         </code>
+         ) and
+         <code>
+          myData
+         </code>
+         (in
+         <code>
+          main
+         </code>
+         ).
+One programmer (
+         <code>
+          sumAbsolute
+         </code>
+         ’s) thinks it’s ok to modify the list; another programmer (
+         <code>
+          main
+         </code>
+         ’s) wants the list to stay the same.
+Because of the aliases,
+         <code>
+          main
+         </code>
+         ’s programmer loses.
+        </p>
+       </li>
+       <li>
+        <p>
+         In the
+         <code>
+          Date
+         </code>
+         example, there are two variable names that point to the
+         <code>
+          Date
+         </code>
+         object,
+         <code>
+          groundhogAnswer
+         </code>
+         and
+         <code>
+          partyDate
+         </code>
+         .
+These aliases are in completely different parts of the code, under the control of different programmers who may have no idea what the other is doing.
+        </p>
+       </li>
+      </ul>
+      <p>
+       Draw snapshot diagrams on paper first, but your real goal should be to develop the snapshot diagram in your head, so you can visualize what’s happening in the code.
+      </p>
+     </div>
+     <h2 id="specifications_for_mutating_methods">
+      Specifications for mutating methods
+     </h2>
+     <div data-outline="specifications_for_mutating_methods">
+      <p>
+       At this point it should be clear that when a method performs mutation, it is crucial to include that mutation in the method’s spec, using
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/06-specifications/specs/#specifications_for_mutating_methods">
+        the structure we discussed in the previous reading
+       </a>
+       .
+      </p>
+      <p>
+       (Now we’ve seen that even when a particular method
+       <em>
+        doesn’t
+       </em>
+       mutate an object, that object’s mutability can still be a source of bugs.)
+      </p>
+      <p>
+       Here’s an example of a mutating method:
+      </p>
+      <pre class="no-markdown">static void sort(List&lt;String&gt; lst)
+  <em>requires</em>: nothing
+  <em>effects</em>:  puts lst in sorted order, i.e. lst[i] &lt;= lst[j]
+              for all 0 &lt;= i &lt; j &lt; lst.size()</pre>
+      <p>
+       And an example of a method that does not mutate its argument:
+      </p>
+      <pre class="no-markdown">static List&lt;String&gt; toLowerCase(List&lt;String&gt; lst)
+  <em>requires</em>: nothing
+  <em>effects</em>:  returns a new list t where t[i] = lst[i].toLowerCase()</pre>
+      <p>
+       If the
+       <em>
+        effects
+       </em>
+       do not explicitly say that an input can be mutated, then in 6.005 we assume mutation of the input is implicitly disallowed.  Virtually all programmers would assume the same thing.  Surprise mutations lead to terrible bugs.
+      </p>
+     </div>
+     <h2 id="iterating_over_arrays_and_lists">
+      Iterating over arrays and lists
+     </h2>
+     <div data-outline="iterating_over_arrays_and_lists">
+      <p>
+       The next mutable object we’re going to look at is an
+       <strong>
+        iterator
+       </strong>
+       — an object that steps through a collection of elements and returns the elements one by one.
+Iterators are used under the covers in Java when you’re using a
+       <a href="https://ocw.mit.edu/ans7870/6/6.005/s16/classes/02-basic-java/#iteration">
+        <code>
+         for (... : ...)
+        </code>
+        loop
+       </a>
+       to step through a
+       <code>
+        List
+       </code>
+       or array.
+This code:
+      </p>
+      <pre class="no-markdown"><code class="java hljs">List&lt;String&gt; lst = ...;
+<strong class="text-danger"><span class="hljs-keyword">for</span> (String str : lst) {</strong>
+    System.out.println(str);
+<strong class="text-danger">}</strong>
+</code></pre>
+      <p>
+       is rewritten by the compiler into something like this:
+      </p>
+      <pre class="no-markdown"><code class="java hljs">List&lt;String&gt; lst = ...;
+<strong class="text-danger">Iterator iter = lst.iterator();</strong>
+<strong class="text-danger"><span class="hljs-keyword">while</span> (iter.hasNext()) {</strong>
+    <strong class="text-danger">String str = iter.next();</strong>
+    System.out.println(str);
+<strong class="text-danger">}</strong>
+</code></pre>
+      <p>
+       An iterator has two methods:
+      </p>
+      <ul>
+       <li>
+        <code>
+         next()
+        </code>
+        returns the next element in the collection
+       </li>
+       <li>
+        <code>
+         hasNext()
+        </code>
+        tests whether the iterator has reached the end of the collection.
+       </li>
+      </ul>
+      <p>
+       Note that the
+       <code>
+        next()
+       </code>
+       method is a
+       <strong>
+        mutator
+       </strong>
+       method, not only returning an element but also advancing the iterator so that the subsequent call to
+       <code>
+        next()
+       </code>
+       will return a different element.
+      </p>
+      <p>
+       You can also look at the
+       <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/Iterator.html">
+        Java API definition of
+        <code>
+         Iterator
+        </code>
+       </a>
+       .
+      </p>
+      <p>
+       Before we go any further:
+      </p>
+      <div class="handout-solo alert alert-warning">
+       <p>
+        You should already have read:
+        <strong>
+         <a class="alert-link" href="https://docs.oracle.com/javase/tutorial/java/javaOO/index.html">
+          Classes and Objects
+         </a>
+        </strong>
+        in the Java Tutorials.
+       </p>
+      </div>
+      <div class="handout-solo alert alert-warning">
+       <p>
+        Read:
+        <strong>
+         <a class="alert-link" href="https://www.codeguru.com/java/tij/tij0071.shtml">
+          the
+          <code>
+           final
+          </code>
+          keyword
+         </a>
+        </strong>
+        on CodeGuru.
+       </p>
+      </div>
+      <h3 id="myiterator">
+       <code>
+        MyIterator
+       </code>
+      </h3>
+      <div data-outline="myiterator">
+       <p>
+        To better understand how an iterator works, here’s a simple implementation of an iterator for
+        <code>
+         ArrayList&lt;String&gt;
+        </code>
+        :
+       </p>
+       <div class="panel panel-figure pull-right pull-margin">
+        <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/**
+ * A MyIterator is a mutable object that iterates over
+ * the elements of an ArrayList&lt;String&gt;, from first to last.
+ * This is just an example to show how an iterator works.
+ * In practice, you should use the ArrayList's own iterator
+ * object, returned by its iterator() method.
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyIterator</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ArrayList&lt;String&gt; list;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> index;
+    <span class="hljs-comment">// list[index] is the next element that will be returned</span>
+    <span class="hljs-comment">//   by next()</span>
+    <span class="hljs-comment">// index == list.size() means no more elements to return</span>
+
+    <span class="hljs-comment handout-javadoc-comment">/**
+     * Make an iterator.
+     * <span class="hljs-doctag">@param</span> list list to iterate over
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyIterator</span><span class="hljs-params">(ArrayList&lt;String&gt; list)</span> </span>{
+        <span class="hljs-keyword">this</span>.list = list;
+        <span class="hljs-keyword">this</span>.index = <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-comment handout-javadoc-comment">/**
+     * Test whether the iterator has more elements to return.
+     * <span class="hljs-doctag">@return</span> true if next() will return another element,
+     *         false if all elements have been returned
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> index &lt; list.size();
+    }
+
+    <span class="hljs-comment handout-javadoc-comment">/**
+     * Get the next element of the list.
+     * Requires: hasNext() returns true.
+     * Modifies: this iterator to advance it to the element 
+     *           following the returned element.
+     * <span class="hljs-doctag">@return</span> next element of the list
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">final</span> String element = list.get(index);
+        ++index;
+        <span class="hljs-keyword">return</span> element;
+    }
+}</code></pre>
+       </div>
+       <p>
+        <code>
+         MyIterator
+        </code>
+        makes use of a few Java language features that are different from the classes we’ve been writing up to this point.
+Make sure you’ve read the linked Java Tutorial sections so that you understand them:
+       </p>
+       <p>
+        <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/variables.html">
+         <strong>
+          Instance variables
+         </strong>
+        </a>
+        , also called fields in Java.
+Instance variables differ from method parameters and local variables; the instance variables are stored in the object instance and persist for longer than a method call.
+What are the instance variables of
+        <code>
+         My­Iterator
+        </code>
+        ?
+       </p>
+       <p>
+        A
+        <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html">
+         <strong>
+          constructor
+         </strong>
+        </a>
+        , which makes a new object instance and initializes its instance variables.
+Where is the constructor of
+        <code>
+         My­Iterator
+        </code>
+        ?
+       </p>
+       <p>
+        The
+        <code>
+         static
+        </code>
+        keyword is missing from
+        <code>
+         My­Iterator
+        </code>
+        ’s methods, which means they are
+        <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html">
+         <strong>
+          instance methods
+         </strong>
+        </a>
+        that must be called on an instance of the object, e.g.
+        <code>
+         iter.next()
+        </code>
+        .
+       </p>
+       <p>
+        The
+        <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/thiskey.html">
+         <strong>
+          <code>
+           this
+          </code>
+          keyword
+         </strong>
+        </a>
+        is used at one point to refer to the
+        <strong>
+         instance object
+        </strong>
+        , in particular to refer to an instance variable (
+        <code>
+         this.list
+        </code>
+        ).
+This was done to disambiguate two different variables named
+        <code>
+         list
+        </code>
+        (an instance variable and a constructor parameter).
+Most of
+        <code>
+         My­Iterator
+        </code>
+        ’s code refers to instance variables without an explicit
+        <code>
+         this
+        </code>
+        , but this is just a convenient shorthand that Java supports — e.g.,
+        <code>
+         index
+        </code>
+        actually means
+        <code>
+         this.index
+        </code>
+        .
+       </p>
+       <p>
+        <strong>
+         <code>
+          private
+         </code>
+        </strong>
+        is used for the object’s internal state and internal helper methods, while
+        <code>
+         public
+        </code>
+        indicates methods and constructors that are intended for clients of the class (
+        <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html">
+         access control
+        </a>
+        ).
+       </p>
+       <p>
+        <strong>
+         <code>
+          final
+         </code>
+        </strong>
+        is used to indicate which of the object’s internal variables can be reassigned and which can’t.
+        <code>
+         index
+        </code>
+        is allowed to change (
+        <code>
+         next()
+        </code>
+        updates it as it steps through the list), but
+        <code>
+         list
+        </code>
+        cannot (the iterator has to keep pointing at the same list for its entire life — if you want to iterate through another list, you’re expected to create another iterator object).
+       </p>
+       <span class="clearfix">
+       </span>
+       <div class="panel panel-figure pull-right pull-margin">
+        <div class="panel-body">
+         <img src="./Reading 9 Mutability &amp; Immutability_files/iterator.png" width="400">
+        </div>
+       </div>
+       <p>
+        Here’s a snapshot diagram showing a typical state for a
+        <code>
+         MyIterator
+        </code>
+        object in action:
+       </p>
+       <p>
+        Note that we draw the arrow from
+        <code>
+         list
+        </code>
+        with a double line, to indicate that it’s
+        <em>
+         final
+        </em>
+        .
+That means the arrow can’t change once it’s drawn.
+But the
+        <code>
+         ArrayList
+        </code>
+        object it points to is mutable — elements can be changed within it — and declaring
+        <code>
+         list
+        </code>
+        as final has no effect on that.
+       </p>
+       <p>
+        Why do iterators exist?
+There are many kinds of collection data structures (linked lists, maps, hash tables) with different kinds of internal representations.
+The iterator concept allows a single uniform way to access them all, so that client code is simpler and the collection implementation can change without changing the client code that iterates over it.
+Most modern languages (including Python, C#, and Ruby) use the notion of an iterator.
+It’s an effective
+        <strong>
+         design pattern
+        </strong>
+        (a well-tested solution to a common design problem).
+We’ll see many other design patterns as we move through the course.
+       </p>
+      </div>
+     </div>
+     <h2 id="mutation_undermines_an_iterator">
+      Mutation undermines an iterator
+     </h2>
+     <div data-outline="mutation_undermines_an_iterator">
+      <p>
+       Let’s try using our iterator for a simple job.
+Suppose we have a list of MIT subjects represented as strings, like
+       <code>
+        ["6.005", "8.03", "9.00"]
+       </code>
+       .
+We want a method
+       <code>
+        dropCourse6
+       </code>
+       that will delete the Course 6 subjects from the list, leaving the other subjects behind.
+Following good practices, we first write the spec:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/**
+ * Drop all subjects that are from Course 6. 
+ * Modifies subjects list by removing subjects that start with "6."
+ * 
+ * <span class="hljs-doctag">@param</span> subjects list of MIT subject numbers
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dropCourse6</span><span class="hljs-params">(ArrayList&lt;String&gt; subjects)</span></span></code></pre>
+      <p>
+       Note that
+       <code>
+        dropCourse6
+       </code>
+       has a frame condition (the
+       <em>
+        modifies
+       </em>
+       clause) in its contract, warning the client that its list argument will be mutated.
+      </p>
+      <p>
+       Next, following test-first programming, we devise a testing strategy that partitions the input space, and choose test cases to cover that partition:
+      </p>
+      <pre><code class="hljs sql">// Testing strategy:
+//   subjects.size: 0, 1, n
+//   contents: no 6.xx, one 6.xx, all 6.xx
+//   position: 6.xx at <span class="hljs-keyword">start</span>, <span class="hljs-number">6.</span>xx <span class="hljs-keyword">in</span> middle, <span class="hljs-number">6.</span>xx <span class="hljs-keyword">at</span> <span class="hljs-keyword">end</span>
+
+// <span class="hljs-keyword">Test</span> cases:
+//   [] =&gt; []
+//   [<span class="hljs-string">"8.03"</span>] =&gt; [<span class="hljs-string">"8.03"</span>]
+//   [<span class="hljs-string">"14.03"</span>, <span class="hljs-string">"9.00"</span>, <span class="hljs-string">"21L.005"</span>] =&gt; [<span class="hljs-string">"14.03"</span>, <span class="hljs-string">"9.00"</span>, <span class="hljs-string">"21L.005"</span>]
+//   [<span class="hljs-string">"2.001"</span>, <span class="hljs-string">"6.01"</span>, <span class="hljs-string">"18.03"</span>] =&gt; [<span class="hljs-string">"2.001"</span>, <span class="hljs-string">"18.03"</span>]
+//   [<span class="hljs-string">"6.045"</span>, <span class="hljs-string">"6.005"</span>, <span class="hljs-string">"6.813"</span>] =&gt; []
+</code></pre>
+      <p>
+       Finally, we implement it:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dropCourse6</span><span class="hljs-params">(ArrayList&lt;String&gt; subjects)</span> </span>{
+    MyIterator iter = <span class="hljs-keyword">new</span> MyIterator(subjects);
+    <span class="hljs-keyword">while</span> (iter.hasNext()) {
+        String subject = iter.next();
+        <span class="hljs-keyword">if</span> (subject.startsWith(<span class="hljs-string">"6."</span>)) {
+            subjects.remove(subject);
+        }
+    }
+}</code></pre>
+      <p>
+       Now we run our test cases, and they work! … almost.
+The last test case fails:
+      </p>
+      <pre><code class="hljs bash">// dropCourse6([<span class="hljs-string">"6.045"</span>, <span class="hljs-string">"6.005"</span>, <span class="hljs-string">"6.813"</span>])
+//   expected [], actual [<span class="hljs-string">"6.005"</span>]
+</code></pre>
+      <p>
+       We got the wrong answer:
+       <code>
+        dropCourse6
+       </code>
+       left a course behind in the list!
+Why?
+Trace through what happens.
+It will help to use a snapshot diagram showing the
+       <code>
+        MyIterator
+       </code>
+       object and the
+       <code>
+        ArrayList
+       </code>
+       object and update it while you work through the code.
+      </p>
+      <p>
+       Note that this isn’t just a bug in our
+       <code>
+        MyIterator
+       </code>
+       .
+The built-in iterator in
+       <code>
+        ArrayList
+       </code>
+       suffers from the same problem, and so does the
+       <code>
+        for
+       </code>
+       loop that’s syntactic sugar for it.
+The problem just has a different symptom.
+If you used this code instead:
+      </p>
+      <pre><code class="language-java hljs"><span class="hljs-keyword">for</span> (String subject : subjects) {
+    <span class="hljs-keyword">if</span> (subject.startsWith(<span class="hljs-string">"6."</span>)) {
+        subjects.remove(subject);
+    }
+}</code></pre>
+      <p>
+       then you’ll get a
+       <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/ConcurrentModificationException.html">
+        <code>
+         Concurrent­Modification­Exception
+        </code>
+       </a>
+       .
+The built-in iterator detects that you’re changing the list under its feet, and cries foul.
+(How do you think it does that?)
+      </p>
+      <p>
+       How can you fix this problem?
+One way is to use the
+       <code>
+        remove()
+       </code>
+       method of
+       <code>
+        Iterator
+       </code>
+       , so that the iterator adjusts its index appropriately:
+      </p>
+      <pre class="no-markdown"><code class="java hljs">Iterator iter = subjects.iterator();
+<span class="hljs-keyword">while</span> (iter.hasNext()) {
+    String subject = iter.next();
+    <span class="hljs-keyword">if</span> (subject.startsWith(<span class="hljs-string">"6."</span>)) {
+        <strong class="text-danger">iter.remove();</strong>
+    }
+}
+</code></pre>
+      <p>
+       This is actually more efficient as well, it turns out, because
+       <code>
+        iter.remove()
+       </code>
+       already knows where the element it should remove is, while
+       <code>
+        subjects.remove()
+       </code>
+       had to search for it again.
+      </p>
+      <p>
+       But this doesn’t fix the whole problem.
+What if there are other
+       <code>
+        Iterator
+       </code>
+       s currently active over the same list?
+They won’t all be informed!
+      </p>
+     </div>
+     <h2 id="mutation_and_contracts">
+      Mutation and contracts
+     </h2>
+     <div data-outline="mutation_and_contracts">
+      <h3 id="mutable_objects_can_make_simple_contracts_very_complex">
+       Mutable objects can make simple contracts very complex
+      </h3>
+      <div data-outline="mutable_objects_can_make_simple_contracts_very_complex">
+       <p>
+        This is a fundamental issue with mutable data structures.
+Multiple references to the same mutable object (also called
+        <strong>
+         aliases
+        </strong>
+        for the object) may mean that multiple places in your program — possibly widely separated — are relying on that object to remain consistent.
+       </p>
+       <p>
+        To put it in terms of specifications, contracts can’t be enforced in just one place anymore, e.g. between the client of a class and the implementer of a class.
+Contracts involving mutable objects now depend on the good behavior of everyone who has a reference to the mutable object.
+       </p>
+       <p>
+        As a symptom of this non-local contract phenomenon, consider the Java collections classes, which are normally documented with very clear contracts on the client and implementer of a class.
+Try to find where it documents the crucial requirement on the client that we’ve just discovered — that you can’t modify a collection while you’re iterating over it.
+Who takes responsibility for it?
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/Iterator.html">
+         <code>
+          Iterator
+         </code>
+        </a>
+        ?
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/List.html">
+         <code>
+          List
+         </code>
+        </a>
+        ?
+        <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/Collection.html">
+         <code>
+          Collection
+         </code>
+        </a>
+        ?
+Can you find it?
+       </p>
+       <p>
+        The need to reason about global properties like this make it much harder to understand, and be confident in the correctness of, programs with mutable data structures.
+We still have to do it — for performance and convenience — but we pay a big cost in bug safety for doing so.
+       </p>
+      </div>
+      <h3 id="mutable_objects_reduce_changeability">
+       Mutable objects reduce changeability
+      </h3>
+      <div data-outline="mutable_objects_reduce_changeability">
+       <p>
+        Mutable objects make the contracts between clients and implementers more complicated, and reduce the freedom of the client and implementer to change.
+In other words, using
+        <em>
+         objects
+        </em>
+        that are allowed to change makes the
+        <em>
+         code
+        </em>
+        harder to change.
+Here’s an example to illustrate the point.
+       </p>
+       <p>
+        The crux of our example will be the specification for this method, which looks up a username in MIT’s database and returns the user’s 9-digit identifier:
+       </p>
+       <div class="pull-margin">
+        <pre><code class="language-java hljs"><span class="hljs-comment handout-javadoc-comment">/**
+ * <span class="hljs-doctag">@param</span> username username of person to look up
+ * <span class="hljs-doctag">@return</span> the 9-digit MIT identifier for username.
+ * <span class="hljs-doctag">@throws</span> NoSuchUserException if nobody with username is in MIT's database
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span>[] getMitId(String username) <span class="hljs-keyword">throws</span> NoSuchUserException {        
+    <span class="hljs-comment">// ... look up username in MIT's database and return the 9-digit ID</span>
+}</code></pre>
+       </div>
+       <p>
+        A reasonable specification.
+Now suppose we have a client using this method to print out a user’s identifier:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-keyword">char</span>[] id = getMitId(<span class="hljs-string">"bitdiddle"</span>);
+System.out.println(id);</code></pre>
+       <p>
+        <strong>
+         Now both the client and the implementor separately decide to make a change.
+        </strong>
+        The client is worried about the user’s privacy, and decides to obscure the first 5 digits of the id:
+       </p>
+       <pre><code class="language-java hljs"><span class="hljs-keyword">char</span>[] id = getMitId(<span class="hljs-string">"bitdiddle"</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; ++i) {
+    id[i] = <span class="hljs-string">'*'</span>;
+}
+System.out.println(id);</code></pre>
+       <p>
+        The implementer is worried about the speed and load on the database, so the implementer introduces a cache that remembers usernames that have been looked up:
+       </p>
+       <div class="pull-margin">
+        <pre><code class="language-java hljs"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Map&lt;String, <span class="hljs-keyword">char</span>[]&gt; cache = <span class="hljs-keyword">new</span> HashMap&lt;String, <span class="hljs-keyword">char</span>[]&gt;();
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span>[] getMitId(String username) <span class="hljs-keyword">throws</span> NoSuchUserException {        
+    <span class="hljs-comment">// see if it's in the cache already</span>
+    <span class="hljs-keyword">if</span> (cache.containsKey(username)) {
+        <span class="hljs-keyword">return</span> cache.get(username);
+    }
+
+    <span class="hljs-comment">// ... look up username in MIT's database ...</span>
+
+    <span class="hljs-comment">// store it in the cache for future lookups</span>
+    cache.put(username, id);
+    <span class="hljs-keyword">return</span> id;
+}</code></pre>
+       </div>
+       <p>
+        These two changes have created a subtle bug.
+When the client looks up
+        <code>
+         "bitdiddle"
+        </code>
+        and gets back a char array, now both the client and the implementer’s cache are pointing to the
+        <em>
+         same
+        </em>
+        char array.
+The array is aliased.
+That means that the client’s obscuring code is actually overwriting the identifier in the cache, so future calls to
+        <code>
+         getMidId("bitdiddle")
+        </code>
+        will not return the full 9-digit number, like “928432033”, but instead the obscured version “*****2033”.
+       </p>
+       <p>
+        <strong>
+         Sharing a mutable object complicates a contract
+        </strong>
+        .
+If this contract failure went to software engineering court, it would be contentious.
+Who’s to blame here?
+Was the client obliged not to modify the object it got back?
+Was the implementer obliged not to hold on to the object that it returned?
+       </p>
+       <p>
+        Here’s one way we could have clarified the spec:
+       </p>
+       <pre class="pull-margin"><p>public static char[] getMitId(String username) throws NoSuchUserException 
+  <em>requires</em>: nothing
+  <em>effects</em>: returns an array containing the 9-digit MIT identifier of username,
+             or throws NoSuchUserException if nobody with username is in MIT’s
+             database. Caller may never modify the returned array.</p></pre>
+       <p>
+        <strong>
+         This is a bad way to do it
+        </strong>
+        .
+The problem with this approach is that it means the contract has to be in force for the entire rest of the program.
+It’s a lifetime contract!
+The other contracts we wrote were much narrower in scope; you could think about the precondition just before the call was made, and the postcondition just after, and you didn’t have to reason about what would happen for the rest of time.
+       </p>
+       <p>
+        Here’s a spec with a similar problem:
+       </p>
+       <pre class="pull-margin"><p>public static char[] getMitId(String username) throws NoSuchUserException 
+  <em>requires</em>: nothing
+  <em>effects</em>: returns a new array containing the 9-digit MIT identifier of username,
+             or throws NoSuchUserException if nobody with username is in MIT’s
+             database.</p></pre>
+       <p>
+        <strong>
+         This doesn’t entirely fix the problem either
+        </strong>
+        .
+This spec at least says that the array has to be fresh.
+But does it keep the implementer from holding an alias to that new array?
+Does it keep the implementer from changing that array or reusing it in the future for something else?
+       </p>
+       <p>
+        Here’s a much better spec:
+       </p>
+       <pre class="pull-margin"><p>public static String getMitId(String username) throws NoSuchUserException 
+  <em>requires</em>: nothing
+  <em>effects</em>: returns the 9-digit MIT identifier of username, or throws
+             NoSuchUserException if nobody with username is in MIT’s database.</p></pre>
+       <p>
+        The immutable String return value provides a
+        <em>
+         guarantee
+        </em>
+        that the client and the implementer will never step on each other the way they could with char arrays.
+It doesn’t depend on a programmer reading the spec comment carefully.
+String is
+        <em>
+         immutable
+        </em>
+        .
+Not only that, but this approach (unlike the previous one) gives the implementer the freedom to introduce a cache — a performance improvement.
+       </p>
+      </div>
+     </div>
+     <h2 id="useful_immutable_types">
+      Useful immutable types
+     </h2>
+     <div data-outline="useful_immutable_types">
+      <p>
+       Since immutable types avoid so many pitfalls, let’s enumerate some commonly-used immutable types in the Java API:
+      </p>
+      <ul>
+       <li>
+        <p>
+         The primitive types and primitive wrappers are all immutable.
+If you need to compute with large numbers,
+         <a href="https://docs.oracle.com/javase/8/docs/api/?java/math/BigInteger.html">
+          <code>
+           BigInteger
+          </code>
+         </a>
+         and
+         <a href="https://docs.oracle.com/javase/8/docs/api/?java/math/BigDecimal.html">
+          <code>
+           BigDecimal
+          </code>
+         </a>
+         are immutable.
+        </p>
+       </li>
+       <li>
+        <p>
+         Don’t use mutable
+         <code>
+          Date
+         </code>
+         s, use the appropriate immutable type from
+         <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/time/package-summary.html">
+          <code>
+           java.time
+          </code>
+         </a>
+         based on the granularity of timekeeping you need.
+        </p>
+       </li>
+       <li>
+        <p>
+         The usual implementations of Java’s collections types —
+         <code>
+          List
+         </code>
+         ,
+         <code>
+          Set
+         </code>
+         ,
+         <code>
+          Map
+         </code>
+         — are all mutable:
+         <code>
+          ArrayList
+         </code>
+         ,
+         <code>
+          HashMap
+         </code>
+         , etc.
+The
+         <a href="https://docs.oracle.com/javase/8/docs/api/?java/util/Collections.html">
+          <code>
+           Collections
+          </code>
+         </a>
+         utility class has methods for obtaining
+         <em>
+          unmodifiable views
+         </em>
+         of these mutable collections:
+        </p>
+        <ul>
+         <li>
+          <code>
+           Collections.unmodifiableList
+          </code>
+         </li>
+         <li>
+          <code>
+           Collections.unmodifiableSet
+          </code>
+         </li>
+         <li>
+          <code>
+           Collections.unmodifiableMap
+          </code>
+         </li>
+        </ul>
+        <p>
+         You can think of the unmodifiable view as a wrapper around the underlying list/set/map.
+A client who has a reference to the wrapper and tries to perform mutations —
+         <code>
+          add
+         </code>
+         ,
+         <code>
+          remove
+         </code>
+         ,
+         <code>
+          put
+         </code>
+         , etc. — will trigger an
+         <a href="https://docs.oracle.com/javase/8/docs/api/?java/lang/UnsupportedOperationException.html">
+          <code>
+           Unsupported­Operation­Exception
+          </code>
+         </a>
+         .
+        </p>
+        <p>
+         Before we pass a mutable collection to another part of our program, we can wrap it in an unmodifiable wrapper.
+We should be careful at that point to forget our reference to the mutable collection, lest we accidentally mutate it.
+(One way to do that is to let it go out of scope.)
+Just as a mutable object behind a
+         <code>
+          final
+         </code>
+         reference can be mutated, the mutable collection inside an unmodifiable wrapper can still be modified by someone with a reference to it, defeating the wrapper.
+        </p>
+       </li>
+       <li>
+        <p>
+         <code>
+          Collections
+         </code>
+         also provides methods for obtaining immutable empty collections:
+         <code>
+          Collections.emptyList
+         </code>
+         , etc.
+Nothing’s worse than discovering your
+         <em>
+          definitely very empty
+         </em>
+         list is suddenly
+         <em>
+          definitely not empty
+         </em>
+         !
+        </p>
+       </li>
+      </ul>
+     </div>
+     <h2 id="summary">
+      Summary
+     </h2>
+     <div data-outline="summary">
+      <p>
+       In this reading, we saw that mutability is useful for performance and convenience, but it also creates risks of bugs by requiring the code that uses the objects to be well-behaved on a global level, greatly complicating the reasoning and testing we have to do to be confident in its correctness.
+      </p>
+      <p>
+       Make sure you understand the difference between an immutable
+       <em>
+        object
+       </em>
+       (like a
+       <code>
+        String
+       </code>
+       ) and an immutable
+       <em>
+        reference
+       </em>
+       (like a
+       <code>
+        final
+       </code>
+       variable).
+Snapshot diagrams can help with this understanding.
+Objects are values, represented by circles in a snapshot diagram, and an immutable one has a double border indicating that it never changes its value.
+A reference is a pointer to an object, represented by an arrow in the snapshot diagram, and an immutable reference is an arrow with a double line, indicating that the arrow can’t be moved to point to a different object.
+      </p>
+      <p>
+       The key design principle here is
+       <strong>
+        immutability
+       </strong>
+       : using immutable objects and immutable references as much as possible.
+Let’s review how immutability helps with the main goals of this course:
+      </p>
+      <ul>
+       <li>
+        <p>
+         <strong>
+          Safe from bugs
+         </strong>
+         .
+Immutable objects aren’t susceptible to bugs caused by aliasing.
+Immutable references always point to the same object.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Easy to understand
+         </strong>
+         .
+Because an immutable object or reference always means the same thing, it’s simpler for a reader of the code to reason about — they don’t have to trace through all the code to find all the places where the object or reference might be changed, because it can’t be changed.
+        </p>
+       </li>
+       <li>
+        <p>
+         <strong>
+          Ready for change
+         </strong>
+         .
+If an object or reference can’t be changed at runtime, then code that depends on that object or reference won’t have to be revised when the program changes.
+        </p>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </main>
+  <script src="./Reading 9 Mutability &amp; Immutability_files/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 9 Mutability &amp; Immutability_files/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="./Reading 9 Mutability &amp; Immutability_files/handout-run.js" type="text/javascript">
+  </script>
+ 
+
+<!-- Handout delivered Thu Feb 25 2016 12:33:23 GMT-0500 (EST) -->
+</body><auto-scroll></auto-scroll><div id="revolut-extension-root"></div></html>
