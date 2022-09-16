@@ -2,12 +2,13 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1662893999354
+updated: 1663362645131
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
 
-Lecture [notes](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/). All notes + your marks in one place [here](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/Design%20and%20Analysis%20of%20Algorithms%20MIT.pdf)
+Lecture [notes](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/). All notes + your marks in one place [here](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/Lectures/Design%20and%20Analysis%20of%20Algorithms%20MIT.pdf)
+
 
 Lecture [videos](https://www.youtube.com/watch?v=2P-yW7LQr08&list=PLUl4u3cNGP6317WaSNfmCvGym2ucw3oGp)
 
@@ -902,3 +903,10 @@ We will rove the theorem by proving 3 implies 1, 1 implies 2 and 2 implies 3.
 Ford Fulkerson depends a lot on which augmenting paths you choose every time. Depending on the the order of your Edges, the DFS would choose different augmenting paths. Some of them would have residual flows which are super small and on each augmentation you would add very small flow.
 
 If you do BFS augmenting path search (assuming each edge is of weight 1)  then augmentation is proven to be $O(VE)$, hence the final run time of the algo is O(VE(V+E))
+
+**Baseball elimination**
+
+A team survives if it has the largest number of wins. Given a table of standings we want to know which teams still have a chance of surviving.
+
+Check the [notes](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/Lectures/Design%20and%20Analysis%20of%20Algorithms%20MIT.pdf)
+ for this example.
