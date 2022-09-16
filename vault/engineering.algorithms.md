@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1662888374211
+updated: 1663361054630
 created: 1658766702063
 ---
 
@@ -95,7 +95,7 @@ pref = list(accumulate(nums))
 
 # Algos
 
-- Manacher, [p1](https://leetcode.com/problems/longest-palindromic-substring/), [p2](https://leetcode.com/problems/shortest-palindrome/)
+- , [p1](https://leetcode.com/problems/longest-palindromic-substring/), [p2](https://leetcode.com/problems/shortest-palindrome/)
 ```Python
 # O(n**2)
 class Solution:
@@ -176,3 +176,112 @@ class Monoqueue(collections.deque):
 
 - kth element in sorted matrix [p](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/), check
 [paper](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/X%2BY.pdf)
+
+- Most Recently Used Queue [p](https://leetcode.com/problems/design-most-recently-used-queue/)
+
+```Python
+# O(nlogn) initialization, O(logn) fetch
+from sortedcontainers import SortedList
+
+class MRUQueue:
+
+    def __init__(self, n: int):
+        self.ls = SortedList([(i-1,i) for i in range(1,n+1)])
+        self.rank = n
+        
+    def fetch(self, k: int) -> int:
+        res = self.ls.pop(k-1)
+        res = res[1]
+        self.ls.add((self.rank,res))
+        self.rank += 1
+        return res
+
+
+# BIT solutions are hard to come up with?
+class BIT:
+    
+    def __init__(self, n) -> None:
+        self.bit = [0]*(n+1)
+
+    def add(self, index, delta) -> None:
+        index += 1
+        while index < len(self.bit):
+            self.bit[index] += delta
+            index += index & -index
+        
+    def query(self, index) -> int:
+        res = 0
+        while index:
+            res += self.bit[index]
+            index -= index & -index
+        return res
+
+# O(NlogN) initialization, O(log^2n)fetch
+class MRUQueue:
+
+    def __init__(self, n: int):
+        self.bit = BIT(n+2000)
+        self.vals = [0]*(n+2000)
+        for i in range(n):
+            self.vals[i] = i+1
+            self.bit.add(i,1)
+        self.size = n
+    
+    # O(log^2n)
+    def fetch(self, k: int) -> int:
+        l,r = 1, self.size
+        while l<r:
+            m = l+r >> 1 
+            if self.bit.query(m) >= k:
+                r = m
+            else:
+                l = m+1
+        self.bit.add(l-1, -1)
+        self.bit.add(self.size, 1)
+        self.vals[self.size] = self.vals[l-1]
+        self.size += 1
+        return self.vals[l-1]
+    
+# Square root decomposition technique - O(n) init, O(sqrt(n)) fetch
+class MRUQueue:
+
+    def __init__(self, n: int):
+        self.buckets = []
+        self.indecies = []
+        self.n = n
+        self.nn = int(n**0.5)
+        for i in range(1,n+1):
+            ii = (i-1)//self.nn
+            if ii == len(self.buckets):
+                self.indecies.append(i)
+                self.buckets.append([])
+            self.buckets[-1].append(i)
+            
+    def fetch(self, k: int) -> int:
+        i = self._bs(self.indecies, k)-1
+        res = self.buckets[i].pop(k-self.indecies[i])
+        for ii in range(i+1,len(self.indecies)):
+            self.indecies[ii] -= 1
+            
+        if len(self.buckets[-1]) >= self.nn:
+            self.buckets.append([])
+            self.indecies.append(self.n)
+        self.buckets[-1].append(res)
+        
+        if not self.buckets[i]:
+            self.buckets.pop(i)
+            self.indecies.pop(i)
+            
+        return res
+        
+    def _bs(self, nums, num):
+        l,r = 1,len(nums)
+        while l<r:
+            m = l+r>>1
+            if nums[m] > num:
+                r = m
+            else:
+                l = m+1
+        return l
+```
+
