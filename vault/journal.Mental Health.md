@@ -2,7 +2,7 @@
 id: 7h50s7ga5ziiyblmoctsqmw
 title: Mental Health
 desc: ''
-updated: 1663232341730
+updated: 1663232530642
 created: 1663232161120
 ---
 I found these good notes somewhere long time ago but don't remember whose are those. Contact me if they are yours and I will give credits.
@@ -47,11 +47,14 @@ Run thought experiments to investigate how you would feel in different hypotheti
 Often, you'll hit on some words or phrases that "click", but aren't a complete answer. Build on them and explore the most promising areas.
 At some point, you'll finally hit on a description that "clicks" really well, and feel a release of tension. This is the core of the felt sense.
 
-## Exploration
+# Exploration
 Explore different things (e.g.  places / people / social groups / activities / books / art / etc) and observe the thoughts and emotional responses that they generate in you. Try to draw inferences about your proxy goals and core values from these thoughts & emotions.
 
 This kind of exploration can be more or less directed, depending on what your specific needs are.
-Handling strong emotions and urges
+
+
+# Handling strong emotions and urges
+
 Exposure therapy: practice exposing yourself to and managing your mental state in milder versions of the situation that is causing the strong emotion. Gradually increase the intensity of the situations you practice in.
 
 Objectifying / Impermanence trick: When you experience a strong emotion or urge: [3]
@@ -100,8 +103,8 @@ Generating specific emotions
 
 ## Resources
 [1] Feeling Good (Cognitive Behavioral Therapy)
-[2] Focusing - Eugene Gendlin
-[3] Buddhism and Modern Psychology - Robert Wright
 
-https://www.remnote.io/doc/60af0190e2d03e0034d4830f/XaaEm5HicekyC4yAD
+[2] Focusing - Eugene Gendlin
+
+[3] Buddhism and Modern Psychology - Robert Wright
 
