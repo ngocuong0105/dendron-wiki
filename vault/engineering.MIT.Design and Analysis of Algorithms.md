@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1663362645131
+updated: 1663408290839
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -910,3 +910,101 @@ A team survives if it has the largest number of wins. Given a table of standings
 
 Check the [notes](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/Lectures/Design%20and%20Analysis%20of%20Algorithms%20MIT.pdf)
  for this example.
+
+
+# Lecture 15: Linear Programming. LP, reductions, Simplex.
+
+You can formulate the max flow problem as an LP problem. LP is more general than Max Flow.
+
+Linear programming (LP) is a method to achieve the optimum outcome under some requirements represented by linear relationships.
+
+
+LP is polynomial time solvable. Integer LP is NP hard (that is we add extra constraint that the $x$ variables are integers).
+
+In general, the **standard form** of LP consists of
+
+• Variables: $x = (x_1 , x_2 , . . . , x_d)^T$
+
+• Objective function: $c · x$
+
+• Inequalities (constraints): $Ax ≤ b$, where $A$ is a $n × d$ matrix
+
+and we maximize the objective function subject to the constraints and $x ≥ 0$.
+
+
+The natural LP formulation of a problem may not result in the standard LP form. Do these transformations:
+
+- Minimize an objective function: Negate the coeﬃcients and maximize.
+- Variable xj does not have a non-negativity constraint: Replace $x_j$ with
+$x'_j − x''_j$, and $x'_j$ , $x'_j,x''_j ≥ 0$.
+- Equality constraints: Split into two diﬀerent constraints; $x = b$ into $x ≤ b, x ≥
+b$.
+- Greater than or equal to constraints: Negate the coeﬃcients, and translate to less than or equal to constraint.
+
+**Linear Programming Duality**
+
+Gives you a certificate of optimality. If I get a solution of the LP problem, I can get a certificate that it is the optimal one (only if indeed it is the optimal one).
+
+For every **primal** LP problem in the form of:
+```
+Maximize c · x
+Subject to Ax ≤ b, x ≥ 0,
+```
+there exists an equivalent **dual** LP problem
+
+```
+Minimize b · y
+Subject to A^T y ≥ c, y ≥ 0.
+```
+
+The max-ﬂow min-cut theorem can be proven by formulating the max-ﬂow problem as the primal LP problem.
+
+
+**Maximum Flow**
+Given $G(V, E)$, the capacity $c(e)$ for each $e \in E$, the source $s$, and the sink $t$:
+
+Maximize $\sum_{\text{over v}}f(s, v)$
+
+Subject to $f(u, v) = −f (v, u) ∀u, v ∈ V$ skew symmetry
+
+$f(u, v) = 0 ∀u ∈ V − \{s, t\}$ conservation 
+
+$v∈V f (u, v) ≤ c(u, v) ∀u, v ∈ V$ capacity.
+
+LP could be used for multi-commodity problems.
+
+**Shortest Paths**
+
+Given $G(V, E)$, weights $w(e)$ for each $e ∈ E$, and the source $s$, we want to find the shortet paths from s to all $v \in V$, denoted $d(v)$.
+
+```
+Maximize \sum_{v∈V}d(v)
+
+Subject to d(v) − d(u) ≤ w(u,v) ∀u, v ∈ V -  triangular inequality
+
+d(s) = 0.
+```
+
+Note the maximization above, so all distances don’t end up being zero. In the inequalities constrins I have minimim already.
+
+**LP Algorithms**
+
+1. Simplex algorithm
+2. Ellipsoid algorithm
+3. Interior Point Method
+
+**Simplex**
+The simplex algorithm works well in practice, but runs in ex­ ponential time in the worst case. Steps:
+
+• Represent LP in “slack” form. 
+
+• Convert one slack form into an equivalent slack form, while likely increasing the
+value of the objective function, and ensuring that the value does not decrease.
+
+• Repeat until the optimal solution becomes apparent.
+
+Slackness is a measure of how tight are our constriants. See Lecture notes for example of algo.
+
+At each step of the simplex algo, you increase the objective value, while maintaining correctness of constraints.
+
+In general, simplex algorithm is guaranteed to converge in $(n+m)$ choose $m$,  iterations where $n is the number of variables, and $n + m$ is the number of constraints.
