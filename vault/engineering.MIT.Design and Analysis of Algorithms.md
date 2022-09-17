@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1663435105640
+updated: 1663446012948
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -1054,3 +1054,32 @@ $X$ is NP-hard if every problem $Y\in NP$ reduces to $X$. X is NP-hard if it is 
 How to prove X is NP-complete.
 1. Show $X \in NP$ (come up with polynomial verification)
 2. Show $X \in NP-hard$ by reducint from known NP-complete problem from Y to X.
+
+**Super Mario Brothers**
+
+We show that Super Mario Brothers is NP-hard by giving a reduction from 3SAT.
+
+**Dimensional Matching (3DM)**
+
+Deﬁnition 3. 3DM: Given disjoint sets $X, Y$ , and $Z$, each of $n$ elements and triples $T ⊆ X × Y × Z$ is there a subset $S ⊆ T$ such that each element $∈ X ∪ Y ∪ Z$ is in
+exactly one triplet $s ∈ S$?
+
+3DM is NP. Given a certiﬁcate, which lists a candidate list of triples, a veriﬁer can check that each triple belongs to T and every element of X ∪ Y ∪ Z is in one triple.
+
+3DM is also NP-complete, via a reduction from 3SAT.
+
+
+**Subset Sum**
+
+Deﬁnition 4. Subset Sum Given $n$ integers $A = {a1 , a2 , . . . , an }$ and a target sum $t$, is there a subset $S ⊆ A$ such that
+
+$\sum S = t$
+
+Lectures reduce this problem to 3DM and prove it is NP-complete and NP-weakly hard
+
+
+**Subset Sum**
+
+Deﬁnition 4. Subset Sum Given $n$ integers $A = {a1 , a2 , . . . , an }$ and a target sum $t$, is there a subset $S ⊆ A$ such that
+
+$\sum S = \sum A/2$
