@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1663408290839
+updated: 1663435105640
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -1007,4 +1007,50 @@ Slackness is a measure of how tight are our constriants. See Lecture notes for e
 
 At each step of the simplex algo, you increase the objective value, while maintaining correctness of constraints.
 
-In general, simplex algorithm is guaranteed to converge in $(n+m)$ choose $m$,  iterations where $n is the number of variables, and $n + m$ is the number of constraints.
+In general, simplex algorithm is guaranteed to converge in $(n+m)$ choose $m$,  iterations where $n$ is the number of variables, and $n + m$ is the number of constraints.
+
+# Lecture 16. Complexity: P, NP, NP-completeness, Reductions
+
+**P**
+
+$P = \{ \text{problems solvable in polynomial times } O(n^{O(1)}) \}$
+
+**NP**
+
+$NP = $ {decision problems (answer is yes or no) solvable in nondeterministic polynomial time} 
+
+Nondeterministic refers to the fact that a solution can be guessed out of polynomially many options in O(1) time. If any guess is a YES instance, then the nondeterministic algorithm will make that guess. NP is biased towards YES.
+
+
+|**Example NP problem. 3SAT**
+
+SAT = satisfiability
+
+AT is satisfiability problem - say you have Boolean expression written using only AND, OR, NOT, variables, and parentheses. The SAT problem is: given the expression, is there some assignment of TRUE and FALSE values to the variables that will make the entire expression true?
+
+SAT3 problem is a special case of SAT problem, where Boolean expression should be divided to clauses,such that every clause contains of three literals.
+
+Given a boolean formula of the form $(x_1 ∨ x_3 ∨ x_{6}^{not} ) ∧ (x_2 ∨ x_3 ∨ x_7 ) ∧ . . .$ where $∨$ is `and` and $∧$ is `or`. Can you set the variables $x_1, x_2...$ such that the boolean formula results in True (satisfiable).
+
+This is NP problem beacuse:
+- guess x_1 = T or F
+- guess x_2 = T or F
+
+If the answer to the SAT3 problem is YES, you can start guessing and then you can check in polynomial time (polynomial verification) if the answer from the guesses is a YES.
+
+NP problems allow you to check the answers in polynomial time.
+
+$NP = $ {decision problems with poly-size certificates and poly-time verifiers for YES outputs}
+
+**NP-complete**
+
+$X$ is NP-complete if $X \in NP$ \intersect $NP$-hard.
+
+$X$ is NP-hard if every problem $Y\in NP$ reduces to $X$. X is NP-hard if it is at least as hard as all NP-problems.
+
+
+![p_np_line.png](assets/images/p_np_line.png)
+
+How to prove X is NP-complete.
+1. Show $X \in NP$ (come up with polynomial verification)
+2. Show $X \in NP-hard$ by reducint from known NP-complete problem from Y to X.
