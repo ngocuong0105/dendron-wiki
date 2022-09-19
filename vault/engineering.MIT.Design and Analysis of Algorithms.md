@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1663446012948
+updated: 1663590594108
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -1021,6 +1021,16 @@ $NP = $ {decision problems (answer is yes or no) solvable in nondeterministic po
 
 Nondeterministic refers to the fact that a solution can be guessed out of polynomially many options in O(1) time. If any guess is a YES instance, then the nondeterministic algorithm will make that guess. NP is biased towards YES.
 
+**P vs NP**
+
+Does being able to quickly recognize if a solution is correct, means that you can quickly solve the problem?
+
+If yes, then $P = NP$
+
+
+Sudoku is NP-complete when generalized to a $n × n$ grid. 
+
+[youtube](https://www.youtube.com/watch?v=YX40hbAHx3s)
 
 |**Example NP problem. 3SAT**
 
@@ -1078,8 +1088,146 @@ $\sum S = t$
 Lectures reduce this problem to 3DM and prove it is NP-complete and NP-weakly hard
 
 
-**Subset Sum**
+**Partition**
 
 Deﬁnition 4. Subset Sum Given $n$ integers $A = {a1 , a2 , . . . , an }$ and a target sum $t$, is there a subset $S ⊆ A$ such that
 
 $\sum S = \sum A/2$
+
+reduce it to Subset Sum problem (harday direction) and prove it is NP-complete
+
+
+# Lecture 17. Complexity: Approximation Algorithms
+
+Consider optimization problems. Instead of finding the right answer we approximate the optimal answer.
+
+Definition. An algoithm for a problem of size $n$ has an approximation ratio $\rho(n)$ if for any input, the algo produces a solution with cost $c$ s.t. $max(C/C_{opt},C/C_{opt} \leq \rho(n))$ where $C_{opt}$ is the cost of the optimal algorithm.
+
+We take the max because the optimization problem can be maximization or minimization.
+
+This says we are a factor of $\rho(n)$ from an optimal solutions.
+
+Definition. An approximation scheme that takes as input \$eps > 0$ and produces a solution such that $C = (1 + \eps)C_{opt}$ for any fixed $\eps$, is a $(1 + \eps)$-approximation algorithm.
+
+$O(n^{2/\eps})$ if PTAS is polynomial time approximation scheme.
+
+
+$O(n/\eps})$ if FPTAS is fuly polynomial time approximation scheme.
+
+
+**Vertex Cover**
+
+For an undirected graph $G$ find a smallest subset of vertices such that all edges are covered. An edge is covered if one of its endpoints is in the subset of vertices. (NP-complete)
+
+
+Heuristics:
+- pick maximum degree vertex
+- pick random edge $(u,v)$, then remove all incident edges to $u,v$
+
+![vertex_cover_max_degree.png](assets/images/vertex_cover_max_degree.png)
+
+
+- pick random edge $(u,v)$, then remove all incident edges to $u,v$ is a factor of 2 apart from the optimal solution. All edges we pick are disjoint and if the number of edges we pick in the end is A, then the number of vertices is 2A.
+
+**Set Cover**
+![set_cover.png](assets/images/set_cover.png)
+
+
+Heuristic: pick subset which covers the most uncovered elements.
+
+Algo:
+
+Start by initializing the set $P$ to the empty set. While there are still ele­ments in $X,4 pick the largest set $S_i$ and add $i$ to $P$. Then remove all elements in
+$S_i$ from $X$ and all other subsets $S_j$ . Repeat until there are no more elements in $X$.
+
+Claim: This is a $(ln(n)+1)$-approximation algorithm (where $n = |X|$).
+
+
+**Partition**
+
+Given a set of elements, split it into two subsets and minimize the max of the sums of the two subsets. This is an NP-Complete problem.
+
+Partition [problem](https://en.wikipedia.org/wiki/Partition_problem)
+
+Multiway partition [problem](https://en.wikipedia.org/wiki/Multiway_number_partitioning#Dynamic_programming_solution)
+
+
+Approximation algo.
+
+Phase 1. For smaller subset of size $m<n$ find optimal solution using brute force $O(2^m)$. You get two subsets $A'$ and $B'$. 
+
+Phase 2. For the rest of the elements add greedily one by one.
+
+If m = $(1/ \eps$) then this is $(1+\eps)$-approximation algo.
+
+
+# Lecture 18. Complexity: Fixed-Parameter Algorithms
+
+Last 3 lectures:
+
+Pick any two:
+1. solve hard problems
+2. solve them fast (poly-time)
+3. exact solution
+
+**Idea:** Aim for exact algorithm, but confine exponential depedence to a parameter.
+
+**Parameter**: A parameter is a nonnegative integer k(x) where x is the problem
+input. The parameter is a measure of how tough is the problem you are solving.
+
+**Parameterized Problem:** A parameterized problem is simply the problem plus
+the parameter or the problem as seen with respect to the parameter.
+
+**Goal:** Algo is polynomial in problem size $n$, exponential in parameter $k$.
+
+**$k-$Vertex Cover Problem**
+Given a graph $G = (V,E)$ and non-negative integer $k$. Question: is there a vertex cover $S\in V$ of size not greater than $k$
+
+This is a decision problem for Vertex Cover and is also NP-hard.
+
+Obvious choice of parameter is $k$. (natural parameter)
+
+**Brute force**
+
+Try all $n$ choose $k$ subsets of $k$ vertices., test each for coverage. Running time is $O(EV^{k})$
+
+exponent depends on $k$ this is slow. I cannot say that for any fixed $k$ the algo is quadratic for example.
+
+**Fixed Parameter Tractability**
+
+A parameterized problem is ﬁxed-parameter tractable (FPT) if there is an algorithm
+with running time $≤ f (k) · n^{O(1)}$ , such that $f : N → N$ (non negative) and $k$ is the parameter, and the $O(1)$ degree of the polynomial is independent of $k$ and $n$.
+
+
+Question: Why $f(k) · n^{O(1)}$ and not $f(k) + n^{O(1)}$?
+Theorem: $∃f(k)·n^c$ algorithm iff $∃f'(k) + n^{c'}$
+
+
+$k-$vertex cover problem is FPT:
+
+- pick random edge $e = (u,v)$
+- either $u$ or $v$ or both is in the subset $S$
+- guess each one:
+  - add $u$ to $S$, delete u an all incident edges from G, recurse with $k' = k-1$
+  - do the same but with $v$ instead of $u$
+  - return the $OR$ of the two outcomes
+
+Recursion tree: 
+```
+                (n,k)
+      (n-1,k-1)       (n-1,k-1)
+(n-2,k-2) (n-2,k-2) (n-2,k-2) (n-2,k-2)
+```
+
+base case when $k=0$ return true if no edges, else false. At each node we do $O(n)$ work to delete incident edges. The total runtime is $O(2^k(|V|+|E|))$ 
+
+**Kernalization** is a polynomial time algorithm that converts an input $(x, k)$ into a small and equivalent input $(x', k')$. Equivalent means that the answer I get in the end are the same. We want $|x'| \leq f(k)$. The algo you run on the smaller input would not depend on $n$ anymore, your problem size depends on $f(k)$, hence your running time is O(kernalization) + O(run on smaller input) = $O(n^c) + O(f(k))$.
+
+**Theorem** Aproblem is FPT iff there exists a kernelization.
+
+Kernelize -> FPT is trivial.
+![kernalization_proof.png](assets/images/kernalization_proof.png)
+
+![kernel_p1.png](assets/images/kernel_p1.png)
+![kernel_p2.png](assets/images/kernel_p2.png)
+
