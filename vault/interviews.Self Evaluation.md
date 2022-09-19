@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: Self Evaluation
 desc: ''
-updated: 1660040550228
+updated: 1663537410306
 created: 1658698186720
 ---
 
@@ -166,6 +166,10 @@ I did not enjoy the experience either. Made mistake not to listen Arlo as I shou
 
 Given an array of size n and and integer k. We partition the array in k subarrays (some can be empty). Compute each sum
 of the elements in each subarray s1, s2, ... sk. Take the max. Among all partitionings minimize the max value.
+
+Multiway partitioning [problem](https://en.wikipedia.org/wiki/Multiway_number_partitioning#Dynamic_programming_solution)
+
+NP-hard
 
 # DE Shaw
 - Position software engineer ( the guy said could be 50/50 computer science vs maths)
