@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1663590594108
+updated: 1663690941620
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -1231,3 +1231,147 @@ Kernelize -> FPT is trivial.
 ![kernel_p1.png](assets/images/kernel_p1.png)
 ![kernel_p2.png](assets/images/kernel_p2.png)
 
+# Lecture 19. Synchronous Distributed Algorithms: Symmetry-Breaking. Shortest-Paths Spanning Trees
+
+
+What are Distributed Algorithms?
+
+Algorithms that run on networked processors, or on multiprocessors that share memory.
+
+Most computing is on distributed systems.
+
+Difficulties:
+- concurrent activities
+- uncertainty of timing
+
+You have a different way of framework for thinking about problems here. You cannot just solve graph problems the usaul way you do, e.g. storing everything in adjacency list or matrix. All nodes are similar and you are allowed to send messages. By sending messages across the network you solve algos.
+
+We consider two distributed computing models:
+• Synchronous distributed algorithms:
+  - Leader Election
+  - Maximal Independent Set
+  - Breadth-First Spanning Trees
+  - Shortest Paths Trees
+• Asynchronous distributed algorithms:
+  - Breadth-First Spanning Trees
+  - Shortest Paths Trees
+
+**Distributed Network**
+
+Based on an undirected graph $G= (V,E)$ associate:
+- a *process* with each graph vertex 
+- two directed *communication channels* with each edge
+
+Processes at nodes communicating using messages.
+
+Each process has output ports, input ports that connect to communication channels.
+
+Select a **leader** node in a distributed system.
+
+Theorem 2: Let $G = (V, E)$ be an $n$-vertex clique. Then there is an algorithm consisting of deterministic processes with UIDs that is guaranteed to elect a leader in $G$. The algorithm takes only 1 round and uses only $n^2$ point-to-point messages.
+
+• Algorithm:
+- Everyone sends its UID on all its output ports, and collects UIDs received on all its input ports.
+- The process with the maximum UID elects itself the leader.
+
+**Maximal Independent Set**
+
+Problem: Select a subset $S$ of the nodes, so that they form a Maximal Independent Set.
+
+- Independent: No two neighbors are both in the set.
+- Maximal: We can’t add any more nodes without violating independence.
+
+Need not be globally maximum, you just need to have local independence. Can have more than one MIS sets.
+
+**Distributed MIS?**
+
+You have a graph representing the distributed system. The problem of finding an MIS in distributed system is not the same as gather all nodes and edges and run algo. Here each node should know if it is in the MIS or not using messages.
+
+Assume:
+- No UIDs
+- Processes know a good upper bound on $n$.
+
+Require:
+- Compute an MIS $S$ of the entire network graph.
+- Each process in $S$ should output **in**, others output **out**.
+
+
+**Luby’s MIS Algorithm**
+
+• Executes in 2-round phases.
+
+• Initially all nodes are active.
+
+• At each phase, some active nodes decide to be in, others decide to be out, algorithm continues to the next phase with a smaller graph.
+
+• Repeat until all nodes have decided.
+
+• Behavior of active node $u$ at phase $ph$:
+
+• Round 1:
+- Choose a random value $r$ in $1,2, … , n^5$ , send it to all neighbors.
+- Receive values from all active neighbors.
+- If $r$ is strictly greater than all received values, then join the MIS, output in.
+
+• Round 2:
+– If you joined the MIS, announce it in messages to all (active) neighbors.
+– If you receive such an announcement, decide not to join the MIS, output out.
+– If you decided one way or the other at this phase, become inactive.
+
+
+**Termination**
+
+• With probability 1, Luby’s MIS algorithm eventually terminates.
+
+• **Theorem 7**: With probability at least $1 - 1/n$, all nodes decide within $4logn$ phases.
+
+• Proof uses a lemma similar to before: 
+• Lemma 8: With probability at least $1 - 1/n^2$ , in each phase 1, ... , $4logn$ , all nodes choose different random values.
+
+• So we can essentially pretend that, in each phase, all the random numbers chosen are differet.
+
+• Key idea: Show the graph gets sufficiently “smaller” in each phase.
+
+• Lemma 9: For each phase ph, the expected number of edges that
+are live (connect two active nodes) at the end of the phase is at
+most half the number that were live at the beginning of the phase.
+
+**Formal proof with probability bounds and expectation in slides. Animation of Luby algo in slides.**
+
+**Breath-First Spanning Trees**
+
+That's the tree you get from BFS.
+
+• New problem, new setting.
+
+• Assume graph G = (V, E) is connected.
+
+• V includes a distinguished vertex $v_0$ , which will be theorigin (root) of the BFS tree.
+
+• Generally, processes have no knowledge about the graph.
+
+• Processes have UIDs.
+- Each process knows its own UID.
+- $i_0$ is the UID of the root $v_0$ .
+- Process with UID io knows it is located at the root.
+
+• We may assume (WLOG) that processes know the UIDs of their neighbors, and know which input and output ports are connected to each neighbor.
+
+• Algorithms will be deterministic (or nondeterministic), but not randomized.
+
+**Output**: Each process $i != i_0$ should output parent $j$, meaning that $j$’s vertex is the parent of $i$’s vertex in the BFS tree.
+
+Very similar strategy to standard BFS just need to add te sending and hearing messages part.
+
+
+**Termination**
+
+• Q: How can processes learn when the BFS tree is completed?
+
+• If they knew an upper bound on diam, then they could simply wait until that number of rounds have passed.
+
+• Q: What if they don’t know anything about the graph?
+
+When a subtree finishes propagate upwards that you are done, this starts from the leaves and goes upward. Need to send information up on the tree.
+
+Need to send info upwards the tree.
