@@ -14,17 +14,17 @@ class BIT:
             if i + (i & -i) < len(nums):
                 self.bit[i + (i & -i)] += self.bit[i]
 
-    def update(self, idx, val):
+    def update(self, i, val):
         """
-        Adds val to self.nums[idx]
+        Adds val to self.nums[i]
         """
-        while idx < len(self.bit):
-            self.bit[idx] += val
-            idx += idx & (idx & -idx)
+        while i < len(self.bit):
+            self.bit[i] += val
+            i += i & (i & -i)
 
     def query(self, i):
         """
-        Gives sum of first i elements in nums
+        sum nums[:i+1]
         """
         res = 0
         i += 1
@@ -33,5 +33,9 @@ class BIT:
             i -= i & -i
         return res
 
-
 bit = BIT([3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3])
+
+
+# https://leetcode.com/problems/range-sum-query-mutable/
+
+# https://leetcode.com/problems/range-sum-query-2d-mutable/
