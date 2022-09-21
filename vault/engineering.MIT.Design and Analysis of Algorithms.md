@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1663690941620
+updated: 1663793038044
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -1375,3 +1375,76 @@ Very similar strategy to standard BFS just need to add te sending and hearing me
 When a subtree finishes propagate upwards that you are done, this starts from the leaves and goes upward. Need to send information up on the tree.
 
 Need to send info upwards the tree.
+
+# Lecture 20. Asynchronous Distributed Algorithms: Shortest-Paths Spanning Trees
+
+
+**Synchronous Network Model**
+
+- Processes at graph vertices, communicate using messages.
+- Each process has output ports, input ports that connect to communication channels.
+- Algorithm executes in synchronous rounds.
+- In each round:
+  - Each process sends messages on its ports.
+  - Each message gets put into the channel, delivered to the process at the other end.
+  - Each process computes a new state based on the arriving messages.
+
+The way of thinking in distributed systems is fundamentally different. You have a string limitation that every node in the system knows only things about itself and its neighbourhood. It is not aware of the whole system.
+
+Each node of the graph has some process which is not aware of how the graph looks like. Nodes are connected through channels
+
+**Asynchronous Network Model**
+- Complications so far:
+  - Processes act concurrently.
+  - A little nondeterminism.
+- Now things get much worse:
+  - No rounds---process steps and message deliveries happen at arbitrary times, in arbitrary orders.
+  - Processes get out of synch.
+  - Much more nondeterminism.
+
+  Asynchronous networks complexity:
+
+- Message complexity is number of messages sent by all processes during the entire execution
+- Time complexity. Cannot measure rounds like in synchronous networks.
+- A common approach:
+- Assume real-time upper bounds on the time to perform basic steps:
+  - $d$ for a channel to deliver the next message, and
+  - $l$ for a process to perform its next step. (local processing time)
+
+Infer a real-time upper bound for solving the overall problem.
+
+
+Now we have a big machine (queue) where each process is somewhere in the queue. As they execute we push and dequeu from the queue of processes. 
+
+**BFS in asynchronous model**
+
+If you run simply the BFS like in synchronous model you might end up with a tre which is not BFS-output tree and do not have the shortest paths:
+
+![bfs_asynchronous.png](assets/images/bfs_asynchronous.png)
+
+
+Message complexity:
+
+Number of messages sent by all processes during the entire execution. $O(E)$
+
+Time complexity:
+
+Time until all processes have chosen their parents. Neglect local processing time.
+$O(diam·d)$
+- Q: Why diam, when some of the paths are longer? To have long paths these processes must run faster than the diameter path.
+
+To fix it you need  a **relaxation algorithm**, like synchronous Bellman-Ford.
+
+Strategy:
+-  Each process keeps track of the hop distance, changes its parent when it learns of a shorter path, and propagates the improved distances.
+- Eventually stabilizes to a breadth-first spanning tree.
+
+**Shortest Paths**
+
+- Use a relaxation algorithm, once again. (same as synchronous but would be slower)
+- Asynchronous Bellman-Ford.
+- Now, it handles two kinds of corrections:
+  - Because of long, small-weight paths (as in synchronous Bellman-Ford).
+  - Because of asynchrony (as in asynchronous Breadth-First search).
+
+• The combination leads to surprisingly high message and time complexity, much worse than either type of correction alone (exponential).
