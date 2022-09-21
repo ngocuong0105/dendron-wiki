@@ -2,11 +2,15 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1663361054630
+updated: 1663775954859
 created: 1658766702063
 ---
 
-Should add some tricky algos/data structures here.
+**Jivota e bolka i zadachi!**
+
+Resources:
+- [cp algos](https://cp-algorithms.com/)
+- [dbabichev](https://flykiller.github.io/)
 
 **Buzz words**
 BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal [inorder](https://leetcode.com/problems/binary-tree-inorder-traversal/), Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls, BFS, DFS
@@ -95,7 +99,7 @@ pref = list(accumulate(nums))
 
 # Algos
 
-- , [p1](https://leetcode.com/problems/longest-palindromic-substring/), [p2](https://leetcode.com/problems/shortest-palindrome/)
+- Manacher, [p1](https://leetcode.com/problems/longest-palindromic-substring/), [p2](https://leetcode.com/problems/shortest-palindrome/)
 ```Python
 # O(n**2)
 class Solution:
@@ -174,7 +178,7 @@ class Monoqueue(collections.deque):
         return self[0][0] if self else 0
 ```
 
-- kth element in sorted matrix [p](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/), check
+- kth element in sorted matrix [p](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/), #TODO check
 [paper](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/X%2BY.pdf)
 
 - Most Recently Used Queue [p](https://leetcode.com/problems/design-most-recently-used-queue/)
@@ -222,7 +226,7 @@ class MRUQueue:
     def __init__(self, n: int):
         self.bit = BIT(n+2000)
         self.vals = [0]*(n+2000)
-        for i in range(n):
+        for i in range(n):BIT
             self.vals[i] = i+1
             self.bit.add(i,1)
         self.size = n
@@ -285,3 +289,130 @@ class MRUQueue:
         return l
 ```
 
+- BIT, 1D, [problem](https://leetcode.com/problems/range-sum-query-mutable/)
+- supports cumulutaive computations only on functions which have inverse like sum
+- min function has limited support. cannot do min_range(i,j) and also whenever you do an update the new value should be smaller than the old one
+- BIT needs functions which form a **group**, such as $\Z$ with operator + 
+- $\Z$ and min form a semi-ring and that is not enough. 
+
+- A Fenwick tree can support the following range operations:
+    - Point Update and Range Query (classical one with implementation below)
+    - Range Update and Point Query (initialize to 0-s, range update = update(l,x), update(r+1,-x), query(l) becomes a point query. Cumulative sum trick)
+    - Range Update and Range Query [math trick using two BIT-s](https://cp-algorithms.com/data_structures/fenwick.html#2-range-update-and-point-query)
+
+
+
+```python
+class BIT:
+    
+    def __init__(self, nums):
+        self.nums = nums
+        self.bit = [0]*(len(nums)+1)
+        for i in range(1,len(self.bit)):
+            self.bit[i] += nums[i-1]
+            if i + (i & -i) < len(self.bit):
+                self.bit[i + (i & -i)] += self.bit[i]
+
+    def update(self, i, val):
+        diff = val-self.nums[i]
+        self.nums[i] += diff
+        i += 1
+        while i < len(self.bit):
+            self.bit[i] += diff
+            i += (i & -i)
+
+    def query(self, i):
+        '''sum nums[:i+1] '''
+        i += 1
+        res = 0
+        while i:
+            res += self.bit[i]
+            i -= (i & -i)
+        return res
+
+    def sum_range(self, l, r):
+        return self.query(r) - self.query(l-1)
+    
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.bit = BIT(nums)
+
+    def update(self, i: int, val: int) -> None:
+        self.bit.update(i,val)
+
+    def sumRange(self, l: int, r: int) -> int:
+        return self.bit.sum_range(l,r)
+
+```
+
+- BIT, Fenwick Tree, Binary Index Tree, 2D, [problem](https://leetcode.com/problems/range-sum-query-2d-mutable/)
+- think BIT on x axis, then recursively create another BIT on Y axis.
+- $O(log(n) log(n))$ for updates and queries. Linear initialization is a bit tricky.
+- nesting loops in update and query methods
+
+```Python
+class BIT:
+    
+    def __init__(self, mat):
+        self.nums = mat
+        self.bit = [[0]*(len(mat[0])+1) for _ in range(len(mat)+1)]
+        
+        # build O(n*m*logn*logm)
+        # self.mat = [[0]*len(mat[0]) for _ in range(len(mat))]
+        # self.bit = [[0]*(len(mat[0])+1) for _ in range(len(mat)+1)]
+        # for i in range(len(mat)):
+        #     for j in range(len(mat[0])):
+        #         self.update(i,j,mat[i][j])   
+        
+        # build O(m*n), order of loops matter
+        for i in range(1,len(self.bit)):
+            for j in range(1,len(self.bit[0])):
+                self.bit[i][j] += mat[i-1][j-1]
+                if self.next(i) < len(self.bit):
+                    self.bit[self.next(i)][j] += self.bit[i][j]
+        
+        for i in range(1,len(self.bit)):
+            for j in range(1,len(self.bit[0])):
+                if self.next(j) < len(self.bit[0]):
+                    self.bit[i][self.next(j)] += self.bit[i][j]
+
+    def next(self, i):
+        return i + (i&-i)
+    
+    def update(self, i, j, val):
+        diff = val - self.nums[i][j]
+        self.nums[i][j] += diff
+        i,j = i+1, j+1
+        while i < len(self.bit):
+            jj = j
+            while jj < len(self.bit[0]):
+                self.bit[i][jj] += diff
+                jj += (jj & -jj)
+            i += (i & -i)
+
+    def query(self, i, j):
+        res,i,j = 0,i+1,j+1
+        while i:
+            jj = j
+            while jj:
+                res += self.bit[i][jj]
+                jj -= (jj & -jj)
+            i -= (i & -i)
+        return res
+
+    def sum_range(self,i,j,x,y):
+        return self.query(x,y) - self.query(x,j-1) - self.query(i-1,y) + self.query(i-1,j-1) 
+
+class NumMatrix:
+
+    def __init__(self, mat: List[List[int]]):
+        self.bit = BIT(mat)
+
+    def update(self, i: int, j: int, val: int) -> None:
+        self.bit.update(i,j,val)
+
+    def sumRegion(self, i: int, j: int, x: int, y: int) -> int:
+        return self.bit.sum_range(i,j,x,y)
+
+```
