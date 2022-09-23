@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1663775954859
+updated: 1663948388589
 created: 1658766702063
 ---
 
@@ -13,7 +13,7 @@ Resources:
 - [dbabichev](https://flykiller.github.io/)
 
 **Buzz words**
-BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal [inorder](https://leetcode.com/problems/binary-tree-inorder-traversal/), Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls, BFS, DFS
+BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal [inorder](https://leetcode.com/problems/binary-tree-inorder-traversal/), Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls, BFS, DFS, [Fractional Cascading](https://en.wikipedia.org/wiki/Fractional_cascading)
 [TSP](https://leetcode.com/problems/find-the-shortest-superstring/)
 
 See dbabichev link for [patterns](https://flykiller.github.io/coding%20ideas/).
@@ -156,7 +156,7 @@ def rotate_inplace(matrix):
 
 - sliding window with augmented/additional data structure heap + queue, [p1](https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/)
 
-- monotonic queue, [p1](https://leetcode.com/problems/constrained-subsequence-sum/)
+- monotonic queue, [p1](https://leetcode.com/problems/constrained-subsequence-sum/), the cnt variable below defines the enqueue priority, can have different priority implementations, e.g in max sliding window [problem](https://leetcode.com/problems/sliding-window-maximum/) it would be the index of the element
 
 ```python
 
@@ -176,10 +176,30 @@ class Monoqueue(collections.deque):
 
     def max(self):
         return self[0][0] if self else 0
+
+class MonoQueue(collections.deque):
+    def enqueue(self,i,num): # enqueue dequeu depending on index value, useful when you need monotonic queue used as sliding window
+        while self and self[-1][1] <= num:
+            self.pop()
+        self.append((i,num))
+    def dequeue(self,i):
+        if self and self[0][0] <= i:
+            self.popleft()
+    def max(self):
+        if not self: return 0
+        return self[0][1]
 ```
 
 - kth element in sorted matrix [p](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/), #TODO check
 [paper](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/X%2BY.pdf)
+
+- order statistic tree, Red Black tree implementation I think
+```
+from sortedcontainers import SortedList
+sl.add(num)
+sl.bisect_left(num) # get order statistic
+sl.remove(num)
+```
 
 - Most Recently Used Queue [p](https://leetcode.com/problems/design-most-recently-used-queue/)
 
@@ -414,5 +434,90 @@ class NumMatrix:
 
     def sumRegion(self, i: int, j: int, x: int, y: int) -> int:
         return self.bit.sum_range(i,j,x,y)
+
+```
+- Segment Tree recursive, slower than iterative 2,3 times in practice
+- below is point update, range query
+- query can be sum, max, gcd. lcd etc (as long as it is a semi-ring)
+
+```Python
+
+class SegmentTree:
+    def __init__(self, update_fn, query_fn):
+        '''
+        for summation tree: query_fn = update_fn = lambda x,y: x+y 
+        works if these two with the space of the values form a semi-ring
+        '''
+        self.UF, self.QF = update_fn, query_fn
+        self.T = defaultdict(int) # [0]*4*n
+
+    def update(self, v, tl, tr, pos, delta):
+        '''
+        v is the index of the node (we use 1-indexing, as v has children 2v, 2(v+1))
+        (v,tl,tr) is root node, e.g. (1,0,n-1)
+        The tree nodes are represented using the index v and INCLUSIVE intervals [tl,tr]
+        Updates SINGLE value at position pos by coposing delta with UF (e.g. adding delta)
+        '''
+        if tl == tr: 
+            self.T[v] = self.UF(self.T[v], delta)
+        else:
+            tm = (tl + tr)//2
+            if pos <= tm:
+                self.update(v*2, tl, tm, pos, delta)
+            else:
+                self.update(v*2+1, tm+1, tr, pos, delta)
+            self.T[v] = self.QF(self.T[v*2], self.T[v*2+1])
+
+    def query(self, v, tl, tr, l, r):
+        '''
+        (v,tl,tr) is root node, e.g. (1,0,n-1)
+        returns QF[l:r+1], e.g. sum(nums[l:l+r]) if QF = lambda x,y: x+y 
+        '''        
+        if l > r: return 0
+        if l == tl and r == tr: return self.T[v]
+        tm = (tl + tr)//2
+        return self.QF(self.query(v*2, tl, tm, l, min(r, tm)), self.query(v*2+1, tm+1, tr, max(l, tm+1), r))
+
+st = SegmentTree(lambda x,y:x+y, lambda x,y: x+y)
+```
+
+
+- Segment tree, range update, range query
+- in both segment trees if you have been given array `nums` in advance you can do build in `__init__` in $O(n)$ time (recursively)
+
+```Python
+class SegmentTree:
+    def __init__(self, update_fn, query_fn):
+        self.UF, self.QF = update_fn, query_fn
+        self.T = defaultdict(int)   # [0] * (4*N)
+        self.L = defaultdict(int)   # [0] * (4*N), keep info for whole segment when making range updates
+ 
+    # lazy propagation
+    def push(self, v):
+        for u in [2*v, 2*v+1]:
+            self.T[u] = self.UF(self.T[u], self.L[v])
+            self.L[u] = self.UF(self.L[u], self.L[v])
+        self.L[v] = 0
+
+    def update(self, v, tl, tr, l, r, h):
+        '''changes nums[l,r+1]'''
+        if l > r: return
+        if l == tl and r == tr:
+            self.T[v] = self.UF(self.T[v], h)
+            self.L[v] = self.UF(self.L[v], h)
+        else:
+            self.push(v)
+            tm = (tl + tr)//2
+            self.update(v*2, tl, tm, l, min(r, tm), h)
+            self.update(v*2+1, tm+1, tr, max(l, tm+1), r, h)
+            self.T[v] = self.QF(self.T[v*2], self.T[v*2+1])
+
+    def query(self, v, tl, tr, l, r):
+        '''max(nums[l:r+1])'''
+        if l > r: return -float("inf")
+        if l == tl and tr == r: return self.T[v]
+        self.push(v)
+        tm = (tl + tr)//2
+        return self.QF(self.query(v*2, tl, tm, l, min(r, tm)), self.query(v*2+1, tm+1, tr, max(l, tm+1), r))
 
 ```
