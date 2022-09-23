@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1663793038044
+updated: 1663867225973
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -1448,3 +1448,25 @@ Strategy:
   - Because of asynchrony (as in asynchronous Breadth-First search).
 
 • The combination leads to surprisingly high message and time complexity, much worse than either type of correction alone (exponential).
+
+# Lecture 21. Cryptography: Hash Functions
+
+A hash function $h$ maps arbitrary strings of data to ﬁxed length output. We want it to look random. In practice, hash functions are used for “digesting” large data.
+
+$h: \{0,1\}* -> {0,1}^{d}$, the stars says that we can have arbitrary long string of bits.
+
+No secret keys, all is public. Anyone can compute $h(x)$.
+
+Goal: Make $h$ run fast (polytime) and make it hard to have collisions. Simple stuff with mod is $O(1)$ but is easy to find colissions.
+
+We want to approximate/create a **random oracle** $h$ with these properties:
+- For input $x \in \{0,1\}*$, if $h$ has not seen $x$ before, then it outputs a random value $h(x)$, Else $h(x)$ returns its previously output.
+- the random oracle gives a random value (get it by throw a coin 256 times (SHA-256)), and gives deterministic answers to all inputs it has seen before.
+
+**Desirable Properties**
+
+1. One-way (pre-image resistance): Given $y ∈ \{0, 1\}^d$ , it is hard to ﬁnd an x such that $h(x) = y$.
+2. Strong **collision-resistance**: It is hard to ﬁnd any pair of inputs $x, x'$ such that $h(x) = h(x')$.
+3. Weak **collision-resistance** (target collision resistance, 2nd pre-image resistance): Given $x$, it is hard to ﬁnd $x'$ such that $h(x) = h(x')$.
+4. **Pseudo-random**: The function behaves indistinguishable from a random oracle.
+5. Non-malleability: Given $h(x)$, it is hard to generate $h(f(x))$ (without using $h$)for any function $f$.
