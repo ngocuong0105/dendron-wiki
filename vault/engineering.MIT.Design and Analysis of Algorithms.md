@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1663867225973
+updated: 1664225007318
 created: 1660838818693
 ---
 # MIT 6.046J - Design and Analysis of Algorithms
@@ -1470,3 +1470,198 @@ We want to approximate/create a **random oracle** $h$ with these properties:
 3. Weak **collision-resistance** (target collision resistance, 2nd pre-image resistance): Given $x$, it is hard to ﬁnd $x'$ such that $h(x) = h(x')$.
 4. **Pseudo-random**: The function behaves indistinguishable from a random oracle.
 5. Non-malleability: Given $h(x)$, it is hard to generate $h(f(x))$ (without using $h$)for any function $f$.
+
+# Lecture 22. Cryptography: Encryption
+
+**Symmetric key encryption**
+
+- secret key $k$ assume is 128 bit. It is shared between Alice and Bob.
+
+$c = e_k(m)$
+
+$m = d_k(c)$
+
+$c$ stands for ciphertext, $m$ is message (plaintext), $e$ is the encryption function, $d$ is descryption function.
+
+$e$ and $d$ need to be reversible operations (plus, minus, permutation, shift left, right)
+
+**Key exchange**
+
+How does secret key $k$ get exchanged/shared?
+
+Puzzle: Alice sends to Bob a box with money, but need to be locked otherwise it would get stolen. 
+
+Solution: A locks the box sends to Bob. Bob locks the box and sends to Alice. Alice unlocks her lock and sends back to Bob.
+
+Math assumption: **Communitivy** tbetween the lockers. Locking a box within a Box would not work. 
+
+**Diﬃe-Hellman Key Exchange**
+
+![key_exchange.png](assets/images/key_exchange.png)
+
+$g^a$ is Alice's locker that hides $a$, $g^b$ is Bob's locker that hides $b$. The goal is Alice and Bob share secretly the key $k$. Middle man Mal might put their own locker $g^c$, thus we need asymmetric encryptions, Alice needs a way to authenticate she is communicationg with Bob. Authenticate using public/private key enctyption
+
+**Public Key encryption**
+
+Bob comes up with public and private keys. Alice sends to Bob cipher text.
+
+message + public key = ciphertext
+ciphertext + private key = message
+
+The two keys need to be linked in a mathematical way. Knowing the public key should tell you nothing about the private key.
+ 
+**RSA** encryption algorithm.
+
+- Alice picks two large secret primes $p$ and $q$
+- Alice computes $N = p * q$
+- Alice chooses an encryption exponent $e$ s.t. $gcd(e,(p-1)(q-1)) = 1$
+- Alice public key is a tuple $= (N,e)$
+- Dectyption exponent obtained using Extended Euclidean Algorithm by Alice (secretly) such that $e*d = 1 mod(p-1)(q-1)$
+- Alice private key $= (d,p,q)$
+
+**Encryption and Decrypton with RSA**
+
+- encryption $c = m^e mod N$
+- descryption $m = c^d mod N$
+
+To prove it works we need to show that $m^{ed} = m mod N$
+
+
+Hardness of RSA
+
+• Factoring: given $N$ , hard to factor into $p, q$.
+
+• RSA Problem: given $e$ such that gcd $(e, (p − 1)(q − 1)) = 1$ and $c$, find $m$ such
+that $m^e ≡ c$ mod $N$ . Breaking a particular encryption $c$. 
+
+
+The factoring problem: $N = pq$ Given $N$ find $p$ and $q$, is unknown if is $NP$-complete. Weird.
+
+Other problems $k-colorable$ and knapsack are NP-complete and have been used in crypto algos but have been all broken and do not work in practice.
+
+This is because NP-completeness is telling you stuff about the worse case. For cryptography we want probblems to have hard problems on **average**.
+
+# Lecture 23. Cache-Oblivious Algorithms: Medians & Matrices
+
+In all algos so far we assumed accessing different data cost the same.
+
+**Modern Memory Hierarchy**
+
+![memory_hierarchy.png](assets/images/memory_hierarchy.png)
+
+The closer to the CPU the faster you can transfer data.
+
+Two notion of speed:
+- latency (how quickly you can fetch data)
+- bandwidth (how fat are the pipes between different hierarchies)
+
+longer latency due to lnger distance data need to travel
+
+A common technique to mitigate latency is **blocking**: when fetching a word of data, get the entire block containing it.
+
+Amortize latency over a whole block. 
+
+Cost for getting one data point over a block:
+
+latency/block size + 1/bandwidth
+
+Block should have useful elements. We require the algorithm to use all words in a block (*spatial locality*) and reuse blocks in cache (*temporal locality*).
+
+
+**Exteranal Memory Model**
+
+![external_model.png](assets/images/external_model.png)
+
+Assume:
+- cache access is free
+- disk is huge (infinitely large)
+
+This model handles blocks **explicitly**.
+
+We count number of memory transfers between cache and the disk.
+
+**Cache-oblivious Model**
+
+The only change from the external memory model is that the algorithm no longer knows $B$ and $M$ . Accessing a word in the memory automatically fetches an entire block into the cache, and evicts the least recently used (LRU) block from the cache if the cache is full.
+
+Different computers might have different $B$ and $M$.
+
+
+**External and Cache-oblivious models give you a way to measure the data transfer complexity of algorithms.**
+
+
+**Scanning**
+```
+for i in range(N):
+  sum += A[i]
+```
+Assume $A$ is stored contiguously in memory. Arrays are stored in contiguous parts of the memory, dictionaries not. This is why **DICTIONARIES READ AND WRITE** is much **SLOWER** 
+
+External memory model can align $A$ with a block boundary, so it needs $N/B$ memory transfers.
+
+Cache -oblivious algorithms cannot control alignment (because it does not know B), so in needs $N/B + 1$ memory transfers. $N$ cound be 2 and these two elements could be at a boundary, so you would need to access 2  blocks of memory.
+
+**Divide and Conquer**
+
+Base case:
+- problem fits in cache $\leq M$
+- problem fits in $O(1)$ blocks, $MT(O(B)) = O(1)$
+
+
+**Median Finding**
+
+1. view array as partitioned into columns of 5 (each column is $O(1)$ size).
+2. sort each column
+3. recursively find the median of the column medians
+4. partition array by x
+5. recurse on one side
+
+We will now analyze the number of memory transfers in each step. Let $MT(N)$ be the total number of memory transfers.
+
+1. free
+2. a scan, $O(N/B + 1)$
+3. $MT(N/5)$, this involves a pre-processing step that coallesces the $N/5$ elements
+in a consecutive array
+4. 3 parallel scans, $O(N/B + 1)$, read all elements, check those less than $x$, check those greater than $x$
+5. $MT(7N/10)$
+
+$MT(N) = MT(N/5) + MT(7N/10) + O(N/B + 1)$
+
+$MT(N) = O(N/B + 1)$
+
+# Lecture 24. Cache-Oblivious Algorithms: Searching & Sorting
+
+Why LRU block replacement strategy?
+
+$LRU_{M} \leq 2 OPT_{M/2}$
+
+$M$ is the size of the Cache size $M$
+
+$LRU_M$ is the number of block evictions(i.e. number of block reads)
+
+OPT knows the future and gives the most optimal eviction policy which minimizes the number of evictions.
+
+Proof in lecture notes.
+
+
+**Final notes on other classes.**
+
+
+- 6.047 - Computational Biology
+- 6.854 - Advanced Algorithms (natural class to take after this one)
+- 6.850 - Computational Geometry
+- 6.849 - Folding algorithms
+- 6.851 - Advanced Datastructure
+- 6.852 - Distributed Algorithms
+- 6.853 - Algorithms on game theory
+- 6.855 - Network optimization
+- 6.856 - Randomized algorithms
+- 6.857 - Applied cryptography
+- 6.875 - Theoretical cryptography
+- 6.816 - Multicore programming
+- 6.045 - Theory of computation classes (NP complete stuff, complexity)
+- 6.840 - Theory of computation grad class
+- 6.841 - Advanced complexity theory
+- 6.842 - Randomized complexity theory
+- 6.845 - Quantom complexity thery
+- 6.440 - Coding theory
