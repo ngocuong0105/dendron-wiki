@@ -2,10 +2,10 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1664225007318
+updated: 1664226552415
 created: 1660838818693
 ---
-# MIT 6.046J - Design and Analysis of Algorithms
+# MIT 6.046
 
 Lecture [notes](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/). All notes + your marks in one place [here](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/Lectures/Design%20and%20Analysis%20of%20Algorithms%20MIT.pdf)
 
