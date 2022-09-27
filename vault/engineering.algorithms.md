@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1663948388589
+updated: 1664271312526
 created: 1658766702063
 ---
 
@@ -11,9 +11,10 @@ created: 1658766702063
 Resources:
 - [cp algos](https://cp-algorithms.com/)
 - [dbabichev](https://flykiller.github.io/)
+- [pyrival](https://github.com/ngocuong0105/PyRival)
 
 **Buzz words**
-BIT, Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal [inorder](https://leetcode.com/problems/binary-tree-inorder-traversal/), Palindrome algo, Manacher, Combinations, Permutations mart ways to get (yield) + no duplicated calls, BFS, DFS, [Fractional Cascading](https://en.wikipedia.org/wiki/Fractional_cascading)
+BIT, AVL trees, B-trees (used in databses?), Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal [inorder](https://leetcode.com/problems/binary-tree-inorder-traversal/), Palindrome algo, Manacher, Combinations, Permutations smart ways to get (yield) + no duplicated calls, BFS, DFS, [Fractional Cascading](https://en.wikipedia.org/wiki/Fractional_cascading)
 [TSP](https://leetcode.com/problems/find-the-shortest-superstring/)
 
 See dbabichev link for [patterns](https://flykiller.github.io/coding%20ideas/).
