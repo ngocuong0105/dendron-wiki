@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1664226552415
+updated: 1664296278633
 created: 1660838818693
 ---
 # MIT 6.046
@@ -20,7 +20,8 @@ Lecture [videos](https://www.youtube.com/watch?v=2P-yW7LQr08&list=PLUl4u3cNGP631
 - Network Flow (network, capacities, max flow - min cut problem)
 - Linear Programming
 - Intractability (polynomial vs exponential time problems, approximation problems)
-- Synchronous, Asynchronous algos, Cryptography, Cache
+- Synchronous, Asynchronous algos, Cryptography, RSA 
+- Cache, External Memory Model, Cache Oblivious Model, Complexity in terms of memory transfers 
 
 # Lecture 1. Interval Scheduling
 
