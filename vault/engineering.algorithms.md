@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1664446534151
+updated: 1664446584095
 created: 1658766702063
 ---
 
@@ -16,6 +16,7 @@ Resources:
 #TODOs 
 - add from dbabichev link for [patterns](https://flykiller.github.io/coding%20ideas/).
 - add from pyrival
+- add from cp algos
 # Buzz words
 BIT, AVL trees, B-trees (used in databses?), Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal [inorder](https://leetcode.com/problems/binary-tree-inorder-traversal/), Palindrome algo, Manacher, Combinations, Permutations smart ways to get (yield) + no duplicated calls, BFS, DFS, [Fractional Cascading](https://en.wikipedia.org/wiki/Fractional_cascading)
 [TSP](https://leetcode.com/problems/find-the-shortest-superstring/)
