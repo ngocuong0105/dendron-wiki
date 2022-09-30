@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1664446524293
+updated: 1664533239795
 created: 1664446506779
 ---
 
@@ -83,4 +83,9 @@ def overlap(a,b,x,y):
 from itertools import accumulate
 suff = list(accumulate(nums[::-1]))[::-1]
 pref = list(accumulate(nums))
+```
+
+- max with key, array of arrays, return array of max length
+```Python
+max(arrs, key = len) # gives array of maximul length
 ```
