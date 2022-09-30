@@ -2,7 +2,7 @@
 id: tmyxaki17gpq6jb9xav1x3v
 title: String Processing
 desc: ''
-updated: 1664446456588
+updated: 1664518097885
 created: 1664382813257
 ---
     Fundamentals
@@ -16,7 +16,43 @@ created: 1664382813257
         Suffix Tree
         Suffix Automaton
         Lyndon factorization
-    Tasks
-        Expression parsing
-        Manacher's Algorithm - Finding all sub-palindromes in O(N)
-        Finding repetitions
+# Tasks
+## Expression parsing
+## Manacher's Algorithm - Finding all sub-palindromes in O(N)
+
+- Manacher, [p1](https://leetcode.com/problems/longest-palindromic-substring/), [p2](https://leetcode.com/problems/shortest-palindrome/)
+```Python
+# O(n**2)
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        def palin(i,j):
+            while i >= 0 and j < len(s) and s[i] == s[j]:
+                i -= 1
+                j += 1
+            return s[i+1:j]
+        res = ''
+        for i in range(len(s)):
+            odd = palin(i,i)
+            even = palin(i,i+1)
+            if len(res)<len(odd): res = odd
+            if len(res)<len(even): res = even
+        return res
+
+# Manacher Algorithm. Find Longest Palindrome in O(n) time.
+class Solution:
+    def longestPalindrome(self, s: str) -> str:  
+        T = '$#'+'#'.join(s)+'#&'
+        P = [0]*len(T)
+        C,R = 0,0
+        for i in range(len(T)-1):
+            P[i] = (R>i) and min(R-i,P[2*C-i])
+            while T[i+P[i]+1] == T[i-P[i]-1]:
+                P[i] += 1
+            if R < i+P[i]:
+                C,R = i,i+P[i]
+        l = max(P)
+        i = P.index(l)
+        return s[(i-l)//2:(i+l)//2]
+
+```
+## Finding repetitions
