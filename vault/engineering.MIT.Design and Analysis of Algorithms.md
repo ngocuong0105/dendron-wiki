@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1664296278633
+updated: 1664523379753
 created: 1660838818693
 ---
 # MIT 6.046
@@ -74,7 +74,7 @@ $(a_2,b_2), ... (a_{k},b_{k})$ of size $k-1$. Then $k-1 = k*$ and proves the whe
 
 ---
 
-Problem. Weighted interval scheduling. Each interval has a weight $w_i$. Find a schedule with maximum total weight.
+[Problem](https://leetcode.com/problems/maximum-profit-in-job-scheduling/). Weighted interval scheduling. Each interval has a weight $w_i$. Find a schedule with maximum total weight.
 
 *Greedy does not work here, need to use DP*
 
@@ -83,6 +83,73 @@ $O(n^2), O(nlogn)$
 ![dp_weighted_intervals.png](assets/images/dp_weighted_intervals.png)
 
 ![dp_weighted_intervals_2.png](assets/images/dp_weighted_intervals_2.png)
+
+1. subproblem space:jobs[i:], dp(i) is max profit given jobs[i:] 
+  - need NOT neccessarily include job[i]
+  - note need to sort by start/end time
+  - need to sort by start time and define subproblem jobs[i:] or sort by end time and define subproblem to be s[:i]
+
+2. O(n**2) is easy
+3. improve to O(nlogn) with BS
+
+```Python
+# O(n^2)
+class Solution:
+    def jobScheduling(self, start: List[int], end: List[int], profit: List[int]) -> int:
+        @cache
+        def dp(i):
+            if i == len(jobs): return 0
+            val = max(dp(i+1),jobs[i][2])
+            for j in range(i+1,len(jobs)):
+                if jobs[i][1] <= jobs[j][0]:
+                    val = max(val,dp(j)+jobs[i][2])
+            return val
+        jobs = [(s,e,p) for s,e,p in zip(start,end,profit)]
+        jobs.sort(key=lambda x:x[0])
+        return dp(0)
+
+# O(nlog(n))
+class Solution:
+    def jobScheduling(self, start: List[int], end: List[int], profit: List[int]) -> int:
+        def bs(l,r,num):
+            while l<r:
+                m = l+r>>1
+                if jobs[m][0]>=num:
+                    r = m
+                else:
+                    l = m+1
+            return l
+        @cache
+        def dp(i):
+            if i == len(jobs): return 0
+            j = bs(i+1,len(jobs),jobs[i][1])
+            return max(dp(i+1),dp(j)+jobs[i][2])
+        jobs = [(s,e,p) for s,e,p in zip(start,end,profit)]
+        jobs.sort(key=lambda x:x[0])
+        return dp(0)
+    
+# O(nlog(n))
+class Solution:
+    def jobScheduling(self, start: List[int], end: List[int], profit: List[int]) -> int:
+        def bs(l,r,num):
+            while l<r:
+                m = l+r>>1
+                if jobs[m][1]>num:
+                    r=m
+                else:
+                    l=m+1
+            return l-1
+        @cache
+        def dp(j):
+            if j < 0: return 0
+            i = bs(0,j,jobs[j][0])
+            return max(dp(j-1),dp(i)+jobs[j][2])
+        
+        jobs = [(s,e,p) for s,e,p in zip(start,end,profit)]
+        jobs.sort(key=lambda x:x[1])
+        return dp(len(jobs)-1)
+
+```
 
 ---
 
