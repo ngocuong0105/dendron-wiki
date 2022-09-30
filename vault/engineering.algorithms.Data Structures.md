@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1664518023456
+updated: 1664537141696
 created: 1664382752052
 ---
 
@@ -144,6 +144,9 @@ class NumMatrix:
 
 ## Sqrt Decomposition
 ## Segment Tree
+
+**Questions**
+- [Falling Squares](https://leetcode.com/problems/falling-squares/), [Skyline](https://leetcode.com/problems/the-skyline-problem/)
 
 - Segment Tree recursive, slower than iterative 2,3 times in practice
 - below is point update, range query - both $O(log(n))$
