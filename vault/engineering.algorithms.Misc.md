@@ -42,7 +42,7 @@ def maxSubArray(nums: List[int]) -> int:
     return res
 ```
 
-#QEDP
+#QED
 
 
 ## K-th order statistic in O(N)
