@@ -105,4 +105,4 @@ publishing:
         editBranch: main
         editViewMode: tree
     enablePrettyLinks: true
-    theme: dark
+    theme: light
