@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1664611836388
+updated: 1664637678511
 created: 1664382752052
 ---
 
@@ -11,8 +11,60 @@ created: 1664382752052
 ## Sparse Table
 
 # Trees
-## Disjoint Set Union
+## Disjoint Set Union = DSU = Union Find
+- Complexity:
+- If we make $N$ requestis to the union method it would take
+- $O(alpha(N))$ amortised time per ops and alpha is the Inverse-Ackermann function. This is approximately constant
+- To perform a sequence of m addition, union, or find operations on a disjoint-set forest with n nodes requires total time
+- $O(mα(n))$, where $α(n)$ is the extremely slow-growing inverse Ackermann function.
+```Python
+class DSU:
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
+        self.rank = [0 for _ in range(n)]
+
+    # path compression
+    def find(self, idx: int) -> int:
+        if self.parent[idx] != idx:
+            self.parent[idx] = self.find(self.parent[idx])
+        return self.parent[idx]
+
+    # keep tree's rank small
+    def union(self, x: int, y: int) -> None:
+        u, v = self.find(x), self.find(y)
+        if self.rank[u] < self.rank[v]:
+            self.parent[u] = v
+        elif self.rank[u] > self.rank[v]:
+            self.parent[v] = u
+        else:
+            self.parent[v] = u
+            self.rank[u] += 1
+
+```
+
+
 ## Fenwick Tree = BIT = Binary index tree
+
+- light weight BIT
+```Python
+class BIT:
+    def __init__(self,n):
+        self.bit = [0]*(n+1)
+    def update(self,i,val):
+        '''adds val to nums[i]'''
+        i += 1
+        while i<len(self.bit):
+            self.bit[i] += val
+            i += (i & -i)
+    def query(self,i):
+        '''sum(nums[:i+1])'''
+        i += 1
+        res = 0
+        while i:
+            res += self.bit[i]
+            i -= (i & -i)
+        return res
+```
 
 - BIT, 1D, [problem](https://leetcode.com/problems/range-sum-query-mutable/), [problem](https://leetcode.com/problems/count-of-smaller-numbers-after-self/?envType=study-plan&id=algorithm-iii)
 - supports cumulutaive computations only on functions which have inverse like sum
