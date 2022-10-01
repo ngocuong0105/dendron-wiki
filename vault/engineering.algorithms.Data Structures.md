@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1664537141696
+updated: 1664611836388
 created: 1664382752052
 ---
 
@@ -14,7 +14,7 @@ created: 1664382752052
 ## Disjoint Set Union
 ## Fenwick Tree = BIT = Binary index tree
 
-- BIT, 1D, [problem](https://leetcode.com/problems/range-sum-query-mutable/)
+- BIT, 1D, [problem](https://leetcode.com/problems/range-sum-query-mutable/), [problem](https://leetcode.com/problems/count-of-smaller-numbers-after-self/?envType=study-plan&id=algorithm-iii)
 - supports cumulutaive computations only on functions which have inverse like sum
 - min function has limited support. cannot do min_range(i,j) and also whenever you do an update the new value should be smaller than the old one
 - BIT needs functions which form a **group**, such as $\Z$ with operator + 
@@ -141,6 +141,8 @@ class NumMatrix:
         return self.bit.sum_range(i,j,x,y)
 
 ```
+
+
 
 ## Sqrt Decomposition
 ## Segment Tree
