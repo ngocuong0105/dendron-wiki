@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1664610348762
+updated: 1664620224931
 created: 1664382870554
 ---
 
@@ -59,3 +59,19 @@ def maxSubArray(nums: List[int]) -> int:
 ## Josephus problem
 ## 15 Puzzle Game: Existence Of The Solution
 ## The Stern-Brocot Tree and Farey Sequences
+
+## Rotate image
+
+- rotate image, [p1](https://leetcode.com/problems/rotate-image/)
+- 90 degree rotation = flip + transpose
+```Python
+def rotate(matrix):
+    matrix.reverse()
+    return list(zip(*matrix))
+
+def rotate_inplace(matrix):
+    matrix.reverse()
+    for i in range(len(matrix)):
+        for j in range(i):
+            matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
+```
