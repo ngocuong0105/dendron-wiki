@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1664518101958
+updated: 1664620213425
 created: 1658766702063
 ---
 
@@ -23,20 +23,6 @@ BIT, AVL trees, B-trees (used in databses?), Red Black Trees, Segment Trees, A* 
 
 
 # Algos
-
-- rotate image, [p1](https://leetcode.com/problems/rotate-image/)
-- 90 degree rotation = flip + transpose
-```Python
-def rotate(matrix):
-    matrix.reverse()
-    return list(zip(*matrix))
-
-def rotate_inplace(matrix):
-    matrix.reverse()
-    for i in range(len(matrix)):
-        for j in range(i):
-            matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
-```
 
 
 - guess the algo, [p1](https://leetcode.com/problems/shortest-path-with-alternating-colors/)
