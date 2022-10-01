@@ -7,7 +7,6 @@ class DSU:
     def __init__(self, n):
         self.parent = [i for i in range(n)]
         self.rank = [0 for _ in range(n)]
-        self.components = n
 
     # path compression
     def find(self, idx: int) -> int:
@@ -25,4 +24,3 @@ class DSU:
         else:
             self.parent[v] = u
             self.rank[u] += 1
-        self.components -= 1
