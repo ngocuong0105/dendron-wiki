@@ -2,10 +2,28 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1664638169844
+updated: 1664657947989
 created: 1664382870554
 ---
 # Sequences
+
+## Binary Search
+- template for finding smallest element $i$ in array such that `func(i)` is `True`
+```Python
+def bs(i,j,func):
+    while i < j:
+        mid = i+j >> 1
+        if func(mid):
+            j = mid
+        else:
+            i = mid + 1
+    return i
+```
+
+- 2D problems often treat columns/rows as elements. E.g each column is element and we do binary search on columns $O(m*logn)$
+    - [black pixels](https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/)
+    - [peak element](https://leetcode.com/problems/find-a-peak-element-ii/)
+
 ## RMQ task (Range Minimum Query - the smallest element in an interval)
 ## Longest increasing subsequence
 ## Maximum/minimum subarray sum
