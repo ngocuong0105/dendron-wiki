@@ -1,8 +1,7 @@
 ---
-id: q334c9dkrbs70eq5gujgcb3
+id: 2pzhpouodnn9fn9451isbr6
 title: QEDP
 desc: ''
-updated: 1664610355804
-created: 1664610355804
+updated: 1664637793519
+created: 1664637793519
 ---
-Topics finished from CP algo
