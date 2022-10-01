@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1664609222457
+updated: 1664610348762
 created: 1664382870554
 ---
 
@@ -12,6 +12,40 @@ created: 1664382870554
 ## Longest increasing subsequence
 ## Maximum/minimum subarray sum
 - [leetcode](https://leetcode.com/problems/maximum-subarray/)
+
+**Solution 1.**
+- goal find `nums[l:r+1]` with max sum
+- use cumulative sums `nums[l:r+1] = cum[r]-cum[l-1]`
+- redefined goal for each $r$ find $l$ which maximizes `sum(nums[l:r+1])`
+- compute $cum[r]$ as we go, and maintain minimum possible value for $cum[l-1]$
+
+```Python
+def maxSubArray(nums: List[int]) -> int:
+    res,min_sum,sm = -float('inf'),0,0
+    for r in range(len(nums)):
+        sm += nums[r]
+        res = max(res,sm-min_sum)
+        min_sum = min(min_sum,sm)
+    return res
+```
+
+**Solution 2.**
+- Kadane algo
+- compute partial/cumulative sum `sm` as we go. If negative rest to 0
+- our maximum subarray must start at a critical point when $sm < 0$
+
+```Python
+def maxSubArray(nums: List[int]) -> int:
+    res,curr = -float('inf'),0
+    for num in nums:
+        curr += num
+        res = max(res,curr)
+        curr = max(curr,0)
+    return res
+```
+
+#QEDP
+
 
 ## K-th order statistic in O(N)
 # Game Theory
