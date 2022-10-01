@@ -2,11 +2,9 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1664620224931
+updated: 1664638169844
 created: 1664382870554
 ---
-
-
 # Sequences
 ## RMQ task (Range Minimum Query - the smallest element in an interval)
 ## Longest increasing subsequence
