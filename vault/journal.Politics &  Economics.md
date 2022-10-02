@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics &  Economics
 desc: ''
-updated: 1662150625872
+updated: 1664692833271
 created: 1658766097444
 ---
 
@@ -61,7 +61,7 @@ supermarkets, ask the top 10% companies to increase their corporate taxes and th
 they will do the coalition
 -18 Aug PP and DB would not go to elections together
 - 18 Aug Slavi Trifonov did not declare his net worth in KPKOPNI
-
+- 2nd Oct election time
 # Printing money
 In general, when governments print large amount of money it would be bad for you. This is a smooth way to steal from you.
 Indeed, the act of printing money benefits only those who would get large portions of the money. You are unlikely to be part
