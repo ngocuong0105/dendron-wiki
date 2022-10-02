@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1664696060982
+updated: 1664724269692
 created: 1664382870554
 ---
 # Sequences
@@ -111,3 +111,4 @@ class Solution:
             return res
         return max(compute('(',s),compute(')',s[::-1]))
 ```
+
