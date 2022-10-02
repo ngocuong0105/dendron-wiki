@@ -88,7 +88,7 @@ publishing:
     enableSiteLastModified: true
     siteRootDir: docs
     siteUrl: 'https://ngocuong0105.github.io'
-    logoPath: '/dendron-wiki/vault/assets/images/jupyter.png'
+    logoPath: '/dendron-wiki/vault/assets/images/qed.png'
     enableFrontmatterTags: true
     enableHashesForFMTags: false
     enableRandomlyColoredTags: true
