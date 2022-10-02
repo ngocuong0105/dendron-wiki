@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1664657947989
+updated: 1664696060982
 created: 1664382870554
 ---
 # Sequences
@@ -90,4 +90,24 @@ def rotate_inplace(matrix):
     for i in range(len(matrix)):
         for j in range(i):
             matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
+```
+
+## Longest valid parenthesis
+- [leetcode](https://leetcode.com/problems/longest-valid-parentheses/)
+
+```Python
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        def compute(ch,s):
+            bal,res,curr = 0,0,0
+            for p in s:
+                bal += (p == ch)
+                bal -= (p != ch)
+                curr += 2*(p == ch)
+                if bal == 0: 
+                    res = max(res,curr)
+                elif bal<0:
+                    curr,bal = 0,0
+            return res
+        return max(compute('(',s),compute(')',s[::-1]))
 ```
