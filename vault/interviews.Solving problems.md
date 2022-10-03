@@ -2,7 +2,7 @@
 id: 7a6xif2f07wd4le4d5fhuia
 title: Solving problems
 desc: ''
-updated: 1664638490643
+updated: 1664782926763
 created: 1664638436236
 ---
 
@@ -37,7 +37,7 @@ When you are asked about another solution to the problem:
 -  finding good examples and playing around them
 - for monotonic stack problems better go through example and write steps before that
 
-# Materials to have open during interview:
+# Topics
 - BST delete procedure picture of cases from Intro to algo book page 297, dbabichev recursive!
 - power of 2 table 1KB,1MB..
 - latency table in System Design book An insider guide
