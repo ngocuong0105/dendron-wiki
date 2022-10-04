@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1664865596813
+updated: 1664871868668
 created: 1664832112863
 ---
 
@@ -47,7 +47,7 @@ How many distinct non-negative intger-valued solutions of the equation $x_1 +...
 ${n+m-1\choose m-1}$ - use sticks argument
 
 
-**Lemma. Vandermonde’s identity** ${m+n\choose k} = \sum_j^k {m\choose j}{n\choose k-j} $
+**Lemma. Vandermonde’s identity** ${m+n\choose k} = \sum_j^k {m\choose j}{n\choose k-j}$
 
 Use Breaking things down argument
 
@@ -97,7 +97,7 @@ $A$ and $B$ independent imply $A$ and $B^c$ are independent.
 
 **Theorem 1.20 (The law of total probability)**. Suppose $\{B1 , B2 , . . .\}$ is a partition of $Ω$ by sets from $F$, such that $P(B_i ) > 0$ for all $i ≥ 1$. Then for any $A ∈ F$,
 
-$P(A) = \sum_{i≥1} P(A|B_i)P(B_i)#.
+$P(A) = \sum_{i≥1} P(A|B_i)P(B_i)$.
 
 (partition theorem)
 
@@ -109,3 +109,33 @@ $P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{\sum P(B|A_i)P(A_i)}$
 Simpson’s paradox
 
 ![simpson_paradox.png](assets/images/simpson_paradox.png)
+
+## Problems
+
+Solutions to  **1.11** from the book.
+
+Q1. Condition on first event and do linear differencing equation. Homogeneous and particular solution.
+
+$p_n = 1/6 + 2/3 p_{n-1}$. Can use indeuction too.
+
+Note this is a binomial distribution and we compute probability we have even outcome. Can expend $(1+x)^{n} + (1-n)^n$
+
+Q2. No. Finate spaces should be power of two.
+
+Q3. By induction. Use union operation is associative $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+
+Q4. By Q3 and $P(A_1 ∪ A_2 ∪ . . . ∪ A_n) = 1 − P ((A_1 ∪ A_2 ∪ . . . ∪ A_n)^{c} ) = 1 − P(A_1^{c} ∩ . . . ∩ A_n^{c})$
+
+Q5. Example of pairwise independence (3 events) that does not imply independence of all 3 events $P(A \cap B \cap C) \neq P(A)P(B)P(C)$.
+
+Q6. Conditional probability + Bayes. 79/140, 40/61
+
+Q7. 3 spades sequences/all sequences $= \dfrac{13.12.11}{13.12.50}$ 
+
+Q8. Binomial distribution and expand Stirling.
+
+Q9. Contidional probability + Binomial disribution + Vandermonde’s identity
+
+Q10. Skip physics
+
+Q11. Law of total probability (parititon theorem). They want to get the eight element so can do manually with iteration. I don't see easy way to solve this difference equation by hand?
