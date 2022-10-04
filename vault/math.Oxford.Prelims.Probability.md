@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1664871868668
+updated: 1664888903513
 created: 1664832112863
 ---
 
@@ -104,7 +104,7 @@ $P(A) = \sum_{i≥1} P(A|B_i)P(B_i)$.
 
 **Bayes theorem = Conditional probability + law of total probability**
 
-$P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{\sum P(B|A_i)P(A_i)}$ 
+$P(A|B) = \dfrac{P(B|A)P(A)}{P(B)} = \dfrac{P(B|A)P(A)}{\sum P(B|A_i)P(A_i)}$ 
 
 Simpson’s paradox
 
@@ -139,3 +139,21 @@ Q9. Contidional probability + Binomial disribution + Vandermonde’s identity
 Q10. Skip physics
 
 Q11. Law of total probability (parititon theorem). They want to get the eight element so can do manually with iteration. I don't see easy way to solve this difference equation by hand?
+
+#TODO Q12. Extra hard, did not solve it. [stack](https://math.stackexchange.com/questions/3277206/prove-0-1234567891011-is-a-normal-number), [normal numbers](https://en.wikipedia.org/wiki/Normal_number), [Champernowne constant](https://en.wikipedia.org/wiki/Champernowne_constant)
+
+
+Q13. Conditional probability + algebra iteration... Goal is to get differencing equation in each variable e.g. $f(c_{n+1},c_n,c_{n-1}) = 0$
+
+Q14. a) Inclusion-exclusion principle.
+b) $e^{-1}, 1-e^{-1}$
+
+Q15. Condition on k cards match. Then use incllusion exclusion principle.
+
+Q16. Conditional probability on when 8:45 and 9:00 trains come. $\dfrac{e^{-1}}{2}+\dfrac{e^{-2}}{4}+\dfrac{e^{-4}}{4}$
+
+Q17.
+
+Q18
+
+Q19. $n=6$
