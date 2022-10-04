@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1664888903513
+updated: 1664890588395
 created: 1664832112863
 ---
 
@@ -22,7 +22,7 @@ Random sample, sums of independent random variables. Markov’s inequality, Cheb
 
  - Eulers's formula (Riemann zeta function expressed with prime numbers) has probabilistic proof
 
- # Chapter 1. Events and probability
+# Chapter 1. Events and probability
 
  Set of all possible outcomes $\Omega$ is called the *sample* space. S subset of $\Omega$ is called an *event*. 
 
