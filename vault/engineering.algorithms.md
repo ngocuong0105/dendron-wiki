@@ -2,7 +2,7 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1664620213425
+updated: 1664812158679
 created: 1658766702063
 ---
 
@@ -12,6 +12,7 @@ Resources:
 - [cp algos](https://cp-algorithms.com/)
 - [dbabichev](https://flykiller.github.io/)
 - [pyrival](https://github.com/ngocuong0105/PyRival)
+- [usaco](https://usaco.guide/CPH.pdf)
 
 #TODOs 
 - add from dbabichev link for [patterns](https://flykiller.github.io/coding%20ideas/).
