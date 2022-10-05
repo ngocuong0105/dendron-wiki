@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1664890588395
+updated: 1664967637381
 created: 1664832112863
 ---
 
@@ -152,8 +152,100 @@ Q15. Condition on k cards match. Then use incllusion exclusion principle.
 
 Q16. Conditional probability on when 8:45 and 9:00 trains come. $\dfrac{e^{-1}}{2}+\dfrac{e^{-2}}{4}+\dfrac{e^{-4}}{4}$
 
-Q17.
+Q17. #TODO
 
-Q18
+Q18 #TODO
 
 Q19. $n=6$
+
+# Chapter 2. Discrete random variables
+
+Encode information about an outcome using numbers
+
+Definition 2.1. A **discrete random variable** X on a probability space $(Ω, F, P)$ is a function $X : Ω → R$
+such that
+
+- (a) $\{ω ∈ Ω : X(ω) = x\} ∈ F$ for each $x ∈ R$,
+- (b) $ImX := \{X(ω) : ω ∈ Ω\}$ is a **finite** or **countable subset** of $R$.
+
+(a) says $\{ω ∈ Ω : X(ω) = x\} = \{X = x\}$ lives in $F$, that is it is an event and we can assign probability.
+
+(b) is the definition of discrete.
+
+Definition 2.3. A probability mass function (pmf) of a random variable is $p_{X}(x) = \P(X = x)$ s.t.:
+
+- $p_X(x) ≥ 0$ for all $x$,
+- $\sum p_X(x) = 1$
+
+Classic discrete distributions:
+- Bernoulli
+- Binomial
+- Geometric
+- Poisson
+
+**Definition 2.6** The expectation (or expected value or mean) of $X$ is
+
+
+$\E[X] = \sum_{x∈ImX} xP(X = x)$
+provided that $\sum_{x∈ImX}|x|P (X = x) < inf$, otherwise it does not exist. We require **absolutely convergent** series sum.
+
+The expectation of $X$ is the ‘average’ value which $X$ takes.
+
+**Theorem.** $\E[f(X)] = \sum_{x∈ImX} f(x)P(X = x)$
+
+**Linearity of expectation**:
+- $\E[aX + b] = a\E[X] + b$
+- $\E[X+Y] = \E[X] + \E[Y]$
+
+**Definition 2.11.** For a discrete random variable $X$, the variance of $X$ is defined by:
+
+$var(X) = E[(X − E[X])^2] = E[X^2] - (E[X])^2$, provided that this quantity exists.
+
+Variance gives size of fluctuations around the expectation.
+
+$var(Y) = var(aX + b) = a^2var(X)$
+
+
+**Theorem 2.14** (Law of total expectation = Partition theorem for expectations).
+
+$E[X] = \sum_{B} E[X|B]P(B)$
+
+
+Joint pmf is $p_{X,Y}(x,y) = \P(X=x,Y=y) = \P(\{X=x\} \cap \{Y=y\})$
+
+Marginal distribution exists for joint distribution and is just integrating/summing out one of the variables $p_{X}(x) = \sum_{y} p_{X,Y}(x,y)$
+
+**Theorem 2.23** If $X$ and $Y$ are independent, then $E[XY] = E[X]E[Y]$. Reverse is NOT true.
+
+**Definition** $cov (X,Y) = E[(X − E[X])(Y − E[Y])] = E[XY] - E[X]E[Y]$.
+
+**i.i.d. = independent and identically distributed**
+
+# Problems
+
+Solution from chapter 2.6 in book.
+
+Q1. $f(x) = \dfrac{x!}{(x-k)!}$
+
+Q2. $\dfrac{r}{p}$
+
+Q3. Discrete RV with zero variance then, the RV is eqaul to the mean. In cts RV, $X=E[X]$ almost surely (degenerate distribution).
+
+Q4. $\alpha < -1$ need convergence, $c = 1/\zeta(-\alpha)$ Rieman zeta function
+
+Q5. Lack of memory proerty of Geometric distribution. *Kvot bilo bilo*.
+
+Q6. 
+1. Proof by visualization.
+2. $3(\dfrac{2}{3})^{k}$
+3. coupun collection problem, linearity of exp. $3*(1+1/2+1/3)$
+
+Q7. harmonic series $log(n)$
+
+Q8. #TODO
+
+Q9. Expected tosses till see $n$ consecutive heads $\dfrac{1-p^n}{p^n(1-p)}$. 
+Write it using Markov chain state technique and goal is to compute $e_0$, with boundary condition $e_{H..HH} = e_n = 0$
+To solve it you need to take difference of consecutive equations and do telescoping sum like idea.
+
+Q10. #TODO
