@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1664967637381
+updated: 1665042299605
 created: 1664832112863
 ---
 
@@ -249,3 +249,54 @@ Write it using Markov chain state technique and goal is to compute $e_0$, with b
 To solve it you need to take difference of consecutive equations and do telescoping sum like idea.
 
 Q10. #TODO
+
+# Chapter 3. Difeerence equations and random walks
+
+**Theorem 3.3** The general solution $(u_n)_{n>=0}$ to a difference equation:
+
+$\sum_{j=0}^{k} a_{j}u_{n+j} = f(n)$
+
+can be written as $u_n = v_n + w_n$ where:
+
+- $v_n$ is a particular solution to the equation (resembles $f(n)$)
+- $w_n$ solves the homogeneous equation $\sum_{j=0}^{k}a_{j}w_{n+j} = 0$
+
+To solve the homogeneous equation when you have $k>1$ you need to get the auxilary equation - substitute in the homogenous equat $u_n = x^{n}$ and the roots of it gives you the general form of the solution to the homogeneous equation. For $k=2$ it looks like: $w_n = A_1 x_{1}^{n} + A_2 x_{2}^{n}$
+
+If $x_1=x_2$, then try $w_n = (A + Bn)x_{1}^{n}$
+
+To solve the particular equation try solutions similar to $f(n)$ if it fails try the next most complicated thing. 
+
+**Gamblers ruin:**
+
+$u_n = pu_{n+1} + qu_{n-1}$, where $u_n = P(bankruptcy)$ if gambler has $n$ money. Boundary conditions: $u_0 = 1, u_M = 0$.
+
+This is second order difference equation. If you remove the boundary $M$ you need to take limits $\lim_{M->inf}u_n^{(M)} = P(\text{hit 0 before )M}$.
+
+
+![gamblers_ruin.png](assets/images/gamblers_ruin.png)
+![gamblers_hit0.png](assets/images/gamblers_hit0.png)
+
+$P(ever hit 0)$ is $\lim_{M->inf}u_n^{(M)}$. To prove that formally you need to use that for an **increasing** set of events $A_1 ⊆ A_2 ⊆ A_3 ⊆ ... ⊆ A_M ...$ you have $P(\cup A_k) = lim_{k->inf} P(A_k)$. 
+
+
+Gamblers ruin for expectation $e_n =$ number of steps to hit absorbing stage. 
+
+$e_n = p(1+e_{n+1}) + q(1+e_{n-1})$, with bc $e_0 = e_M = 0$
+
+# Problems
+
+Solution to problems from Chapter 10.5
+
+
+# Chaptert 4 Probability generating functions
+
+Q1. $P(two iid random walks end in the same position)$ can  be expressed using two expressions. Think about the two walks separately and combined as in one walk.
+
+Q2. Gamblers ruin with different parameters.
+
+Q3. Condition on first step and use gamblers ruin solution for $n = 1,-1$. $\dfrac{1}{N}$
+
+Q4. Skipped, to do property need to take limit as $M->inf$ and define $a_n^{M}$
+
+#TODO finish questions, might need to read chapter. It is more comprehensive than the lecture notes
