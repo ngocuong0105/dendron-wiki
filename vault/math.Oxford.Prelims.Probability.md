@@ -339,6 +339,65 @@ You need to go this way: $q = P(\cup_{n} \{X_n = 0\}) = lim_{n->inf} P(X_n = 0) 
 It turns out that the question of whether the branching process inevitably dies out is determined by the mean number of children of a single individual. Then we find that there is a positive probability of survival of the process for ever if and only if $µ > 1$. (Theorem 4.15 proves it)
 
 
+# Problems
+
+#TODO
+
+# Chapter 5. Continuous random variables
+
+Recall that random variable is a function which maps $\Omega$ the outcome space to $\R$. Discrete random variables have $Im(X)$ to be countable set.
+
+
+**Definition 5.2.** The cumulative distribution function (**cdf**) of a random variable $X$ is the function $F_X : \R → [0, 1]$ defined by
+$F_X(x) = P(X \leq x)$.
+
+$F_X$ is non-decreasing.
+
+CTS random variable:
+
+![cts_rv_defn.png](assets/images/cts_rv_defn.png)
+
+**WARNING: $f_X(x)$ IS NOT A PROBABILITY.**
+
+For cts random variable $P(X = x) = 0$ for any $x \in \R$
+
+![expectation_cts.png](assets/images/expectation_cts.png)
+
+Independece in cts random variables is defined through the pdf:
+
+![independence_cts.png](assets/images/independence_cts.png)
+
+But can be defined through cdf too.
+
+
+$var(X + Y) = var(X) + var(Y) + 2cov(X,Y)$
+
+**NB** Standard normal random variables $X$ and $Y$ are independent if and only if their covariance is 0. This is a nice property of normal random variables which
+is not true for general random variables, as we have already observed in the discrete case.
+
+# Chapter 6. Random samples and the weak law of large numbers
+
+**Definition 6.1.** Let $X_1,X_2 , ... , X_n$ denote i.i.d. random variables. Then these random variables are
+said to constitute a random sample of size $n$ from the distribution.
+
+
+Let $X_1,X_2 , ... , X_n$ denote i.i.d. random variables with mean $\mu$ and variance $\sigma^2$. Then $X_n = \sum_{i=1}^{n}X_i/n$ has $E(X_n)= \mu$ and $var(X_n) = \dfrac{\sigma^2}{n}$.
+
+![wlln.png](assets/images/wlln.png)
+
+Theorem 6.6. [Markov's inequality](https://en.wikipedia.org/wiki/Markov%27s_inequality) gives upper bound for a random variable to be larger than certain threshhold.
+
+Theorem 6.7. [Chebyshev's inequality](https://en.wikipedia.org/wiki/Chebyshev%27s_inequality) tells you how far from the mean a random variable can deviate.
+
+
+# Distributions
+
+
+![discrete_distributions.png](assets/images/discrete_distributions.png)
+
+![cts_distributions.png](assets/images/cts_distributions.png)
+
+
 # Problem sheets answers
 
 **Sheet 1**
