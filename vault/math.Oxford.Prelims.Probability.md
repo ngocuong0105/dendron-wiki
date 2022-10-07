@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1665125656837
+updated: 1665134931633
 created: 1664832112863
 ---
 
@@ -20,7 +20,8 @@ cts random variables, cdf, pdf
 Random sample, sums of independent random variables. Markov’s inequality, Chebyshev’s inequality, Weak Law of Large Numbers.
 
 
- - Eulers's formula (Riemann zeta function expressed with prime numbers) has probabilistic proof
+ - Eulers's formula (Riemann zeta function expressed with prime numbers) has cool probabilistic proof. Check sheet 2 last problem.
+
 
 # Chapter 1. Events and probability
 
@@ -336,3 +337,107 @@ This equation always have solution at 1. However you cannot solve it for $q$.
 You need to go this way: $q = P(\cup_{n} \{X_n = 0\}) = lim_{n->inf} P(X_n = 0) = lim_{n->inf}G_n(0)$ using the fact about increasing sequences of events.
 
 It turns out that the question of whether the branching process inevitably dies out is determined by the mean number of children of a single individual. Then we find that there is a positive probability of survival of the process for ever if and only if $µ > 1$. (Theorem 4.15 proves it)
+
+
+# Problem sheets answers
+
+**Sheet 1**
+
+Q1. $\dfrac{11!}{2!}, 2\dfrac{10!}{2!}, \dfrac{6!}{2!}$
+
+Q2. $(100!)^{2}$
+
+Q3. $\dfrac{1}{6^9}$
+
+Q4. ${k\choose r}$, then condition on largest element.
+
+Q5. basic set theory holds for probability of events
+
+Q6. a) $P(B \cup C \cap A^{c})$. b)141
+
+Q7. a) 23, $\dfrac{365...(365-n+1)}{365^n}$
+b) $1 - (\dfrac{364}{365})^{n}$
+
+Q8. Inclusion exclusion principle
+$P(\text{no coorect hook}) = P(\cup_{i=1}^{n} A_{i}) = 1 - \dfrac{1}{2!} + \dfrac{1}{3!} ...$
+
+number of arrangements of no correct hook = 
+$n! \times P(\text{no correct hooks})$
+
+d) $P(\text{exactly r correct hooks}) = \dfrac{\text{arrangements with exacly r correct}}{\text{all arrangements}} = \dfrac{{n\choose r}(n-r)!\sum_{k}^{n-r}\frac{(-1)^k}{k}}{n!}$
+
+Remark. probability no correct hooks converges to $1-e^{-1}$
+
+**Sheet 2**
+Q1. Example that pairwice independence does not imply independence
+
+Q2. $\dfrac{95}{95+2 \times 99.5} ~ 32%$
+
+Q3. 
+- a) $\dfrac{m}{m+n}$
+- b) $\dfrac{m}{m+n}\dfrac{m-1}{(m+n-1)} + \dfrac{n}{m+n}\dfrac{m}{m+n-1}$
+- c) Bayes from a) and b)
+
+Q4 Use Bayes. Clarification: $p$ proportion are conservative, $1-p$
+are liberal.
+ 
+Q5. 
+- a) ${26\choose 13}\dfrac{1}{2^26}$
+- b) $\dfrac{{26\choose 13}^2}{{52 \choose 26}}$
+
+Second is bigger. Intution is that in a) you reset every time, and in b) you are pulled towards balance.
+
+Q6. Euler's formula for Riemann's zeta function.
+- a) $\dfrac{1}{k^{s}}$
+- b) directly from definition $P(AB) = P(A)P(B)$, but for infinite number of events (pairwise dependence is not enough) 
+- c) if an integer is not divisibel by any prime number it muist be 1!
+
+**Sheet 3**
+
+Q1. $np$
+
+Q2. proof by visualization
+
+Q3. 
+- a) $(1-p)^k$
+- b) memoryless propery of geometric distribution
+
+Q4. Complete th exponent and use sum of pmf is 1.
+
+Q5. 
+- a) for large $n$ binomial becomes poisson
+- b) $e^{-\lambda}$
+
+Q6. 6
+
+Q7. Coupon collector problem.
+- a) $\dfrac{n-1}{n}$, geometric($\dfrac{n-1}{n}$)
+
+- b) Geo($\dfrac{n-k+1}{n}$)
+
+- c) harmonic series
+
+**Sheet 4**
+
+Q1. $\dfrac{n+1}{2}, \dfrac{(n+1)(4n+1)}{12}$
+
+Q2. zero covariance does not imply independence
+
+Q3. 
+- a) independent so can just multiply
+- b) sum of poisson independen is poisson (derive from pgf)
+- c) binomial with $p = \dfrac{\lambda}{\lambda + \mu}$
+- use c
+
+Q4.
+- bayes, in numerator $P(X=k,Y=n+1-k)$
+- b) $(1-p)^{2k}(2p-p^2)$, use $p_k = p_{\ge k} - p_{\ge k+
+
+Q5. 
+- $n\times e^{-\lambda}$
+- $P(Bin(m,p) = k)$, sum of binomial times poisson which turns out to be $Po(\lambda p)$
+
+
+Q6. from axioms?
+
+Q7. first and second order difference equations. solvable using particular and homogeneous solutions. For particular solutions - strategy try next most complex thing.
