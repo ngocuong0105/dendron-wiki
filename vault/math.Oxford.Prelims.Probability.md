@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1665042299605
+updated: 1665125656837
 created: 1664832112863
 ---
 
@@ -288,9 +288,6 @@ $e_n = p(1+e_{n+1}) + q(1+e_{n-1})$, with bc $e_0 = e_M = 0$
 
 Solution to problems from Chapter 10.5
 
-
-# Chaptert 4 Probability generating functions
-
 Q1. $P(two iid random walks end in the same position)$ can  be expressed using two expressions. Think about the two walks separately and combined as in one walk.
 
 Q2. Gamblers ruin with different parameters.
@@ -300,3 +297,42 @@ Q3. Condition on first step and use gamblers ruin solution for $n = 1,-1$. $\dfr
 Q4. Skipped, to do property need to take limit as $M->inf$ and define $a_n^{M}$
 
 #TODO finish questions, might need to read chapter. It is more comprehensive than the lecture notes
+
+
+# Chapter 4 Probability generating functions
+
+The probability generating function of a discrete random variable is a power series representation of its pmf. It is defined only for discrete random variables.
+
+$G_X(s) = \E[s^{X}] = \sum s^kP(X = k)$
+
+where $s\in \R$ such that the expectation exists.
+
+
+**Theorem 4.2**. The distribution of $X$ is uniquely determined by its probability generating function, $G_X$ .
+
+The $k$th derivative of $G$ evaluated at zero gives $P(X = k)$.
+
+**Theorem 4.3** If $X$ and $Y$ are independent, then $G_{X+Y}(s) = G_X(s)G_Y(s)$
+
+
+Use the above two theorems to prove that sum of $n$ independent Bernoulli random variables is a Binomial random variable.
+
+Sum of $n$ iid Poisson rvs is Poisson rv with parameter = sum of parameters.
+
+**Calculate moments** by taking derivative of the pgf and evaluate at $s = 1$
+
+**Theorem 4.8.** Let $X_1 , X_2 , ...$ be i.i.d. non-negative integer-valued random variables with p.g.f. $G_X (s)$.
+Let $N$ be another non-negative integer-valued random variable, independent of $X_1, X_2 ,...$ and with p.g.f. $G_N(s)$. Then the p.g.f. of $\sum_{i=1}^{N} X_i$ is $G_N(G_X(s))$.
+
+This chain trick appears in branching processes. Start with one individual which gives birth to many children. In generation $n$ each individual in the population gives children. The pgf of total number of individuals in generation $n+1$ satisfies $G_{n+1}(s) = G(G_n(s))$ Where $G$ is the pgf of random variable giving number of children for 1 individual. By induction you can express $G_{n+1}(s)$ as nested $G(s)$ n times.
+
+
+**Extintion probability.**
+
+$q = \sum_{k}q^k P(X=k) = G(q)$, where we condition on the number of children of the first individual.
+
+This equation always have solution at 1. However you cannot solve it for $q$.
+
+You need to go this way: $q = P(\cup_{n} \{X_n = 0\}) = lim_{n->inf} P(X_n = 0) = lim_{n->inf}G_n(0)$ using the fact about increasing sequences of events.
+
+It turns out that the question of whether the branching process inevitably dies out is determined by the mean number of children of a single individual. Then we find that there is a positive probability of survival of the process for ever if and only if $µ > 1$. (Theorem 4.15 proves it)
