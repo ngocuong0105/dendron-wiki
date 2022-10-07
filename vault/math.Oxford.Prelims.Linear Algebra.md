@@ -1,7 +1,7 @@
 ---
-id: 3ecgdrzmxv653whgpx6jb5g
-title: Probability
+id: cvh7mmdz9aimup06f4amn9j
+title: Linear Algebra
 desc: ''
-updated: 1665134931633
-created: 1664832112863
+updated: 1665159477499
+created: 1665159477499
 ---
