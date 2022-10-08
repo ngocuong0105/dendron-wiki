@@ -2,7 +2,7 @@
 id: 277avtfwyyjz54xolamqn91
 title: Probability
 desc: ''
-updated: 1665160101538
+updated: 1665160374800
 created: 1664832112863
 ---
 Notes on Oxford [lectures]() and solutions/answers to all problems from this [book](). 
@@ -186,16 +186,16 @@ Classic discrete distributions:
 **Definition 2.6** The expectation (or expected value or mean) of $X$ is
 
 
-$\E[X] = \sum_{x∈ImX} xP(X = x)$
+$E[X] = \sum_{x∈ImX} xP(X = x)$
 provided that $\sum_{x∈ImX}|x|P (X = x) < inf$, otherwise it does not exist. We require **absolutely convergent** series sum.
 
 The expectation of $X$ is the ‘average’ value which $X$ takes.
 
-**Theorem.** $\E[f(X)] = \sum_{x∈ImX} f(x)P(X = x)$
+**Theorem.** $E[f(X)] = \sum_{x∈ImX} f(x)P(X = x)$
 
 **Linearity of expectation**:
-- $\E[aX + b] = a\E[X] + b$
-- $\E[X+Y] = \E[X] + \E[Y]$
+- $E[aX + b] = aE[X] + b$
+- $E[X+Y] = E[X] + E[Y]$
 
 **Definition 2.11.** For a discrete random variable $X$, the variance of $X$ is defined by:
 
@@ -211,7 +211,7 @@ $var(Y) = var(aX + b) = a^2var(X)$
 $E[X] = \sum_{B} E[X|B]P(B)$
 
 
-Joint pmf is $p_{X,Y}(x,y) = \P(X=x,Y=y) = \P(\{X=x\} \cap \{Y=y\})$
+Joint pmf is $p_{X,Y}(x,y) = P(X=x,Y=y) = P(\{X=x\} \cap \{Y=y\})$
 
 Marginal distribution exists for joint distribution and is just integrating/summing out one of the variables $p_{X}(x) = \sum_{y} p_{X,Y}(x,y)$
 
@@ -498,4 +498,10 @@ Q5.
 
 Q6. from axioms?
 
-Q7. first and second order difference equations. solvable using particular and homogeneous solutions. For particular solutions - strategy try next most complex thing. -->
+Q7. first and second order difference equations. solvable using particular and homogeneous solutions. For particular solutions - strategy try next most complex thing. 
+
+
+**Sheet 5**
+
+`   
+

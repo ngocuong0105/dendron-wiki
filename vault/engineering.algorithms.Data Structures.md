@@ -2,12 +2,202 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1664637678511
+updated: 1665227306559
 created: 1664382752052
 ---
 
 # Fundamentals
+
 ## Minimum Stack / Minimum Queue
+- monotonic queue, [p1](https://leetcode.com/problems/constrained-subsequence-sum/), the cnt variable below defines the enqueue priority, can have different priority implementations, e.g in max sliding window [problem](https://leetcode.com/problems/sliding-window-maximum/) it would be the index of the element
+
+```python
+class Monoqueue(collections.deque):
+    def enqueue(self, val):
+        count = 1 # counts the number of elements which value is greater or equal than
+        while self and self[-1][0] < val:
+            count += self.pop()[1]
+        self.append([val, count])
+
+    def dequeue(self):
+        ans = self.max()
+        self[0][1] == 1
+        if self[0][1] =S= 0:
+            self.popleft()
+        return ans
+
+    def max(self):
+        return self[0][0] if self else 0
+
+class MonoQueue(collections.deque):
+    def enqueue(self,i,num): # enqueue dequeu depending on index value, useful when you need monotonic queue used as sliding window
+        while self and self[-1][1] <= num:
+            self.pop()
+        self.append((i,num))
+    def dequeue(self,i):
+        if self and self[0][0] <= i:
+            self.popleft()
+    def max(self):
+        if not self: return 0
+        return self[0][1]
+```
+
+- [max stack](https://leetcode.com/problems/max-stack/)
+```Python
+class MaxStack:
+
+    def __init__(self):
+        self.heap = []
+        self.stack = []
+        self.del_stack = set()
+        self.del_heap = set()
+        self.id = 0
+        
+    def push(self, x: int) -> None:
+        heappush(self.heap,(-x,-self.id))
+        self.stack.append((x,self.id))
+        self.id += 1
+        
+    def pop(self) -> int:
+        self._update_stack()
+        self.del_heap.add(self.stack[-1][1])
+        return self.stack.pop()[0]
+
+    def top(self) -> int:
+        self._update_stack()
+        return self.stack[-1][0]
+
+    def peekMax(self) -> int:
+        self._update_heap()
+        return -self.heap[0][0]
+
+    def popMax(self) -> int:
+        self._update_heap()
+        self.del_stack.add(-self.heap[0][1])
+        return -heappop(self.heap)[0]
+
+    def _update_heap(self):
+        while self.heap and -self.heap[0][1] in self.del_heap:
+            heappop(self.heap)
+            
+    def _update_stack(self):
+        while self.stack and self.stack[-1][1] in self.del_stack:
+            self.stack.pop()
+
+```
+
+
+
+- Most Recently Used Queue [p](https://leetcode.com/problems/design-most-recently-used-queue/)
+
+```Python
+# O(nlogn) initialization, O(logn) fetch
+from sortedcontainers import SortedList
+
+class MRUQueue:
+
+    def __init__(self, n: int):
+        self.ls = SortedList([(i-1,i) for i in range(1,n+1)])
+        self.rank = n
+        
+    def fetch(self, k: int) -> int:
+        res = self.ls.pop(k-1)
+        res = res[1]
+        self.ls.add((self.rank,res))
+        self.rank += 1
+        return res
+
+
+# BIT solutions are hard to come up with?
+class BIT:
+    
+    def __init__(self, n) -> None:
+        self.bit = [0]*(n+1)
+
+    def add(self, index, delta) -> None:
+        index += 1
+        while index < len(self.bit):
+            self.bit[index] += delta
+            index += index & -index
+        
+    def query(self, index) -> int:
+        res = 0
+        while index:
+            res += self.bit[index]
+            index -= index & -index
+        return res
+
+# O(NlogN) initialization, O(log^2n)fetch
+class MRUQueue:
+
+    def __init__(self, n: int):
+        self.bit = BIT(n+2000)
+        self.vals = [0]*(n+2000)
+        for i in range(n):BIT
+            self.vals[i] = i+1
+            self.bit.add(i,1)
+        self.size = n
+    
+    # O(log^2n)
+    def fetch(self, k: int) -> int:
+        l,r = 1, self.size
+        while l<r:
+            m = l+r >> 1 
+            if self.bit.query(m) >= k:
+                r = m
+            else:
+                l = m+1
+        self.bit.add(l-1, -1)
+        self.bit.add(self.size, 1)
+        self.vals[self.size] = self.vals[l-1]
+        self.size += 1
+        return self.vals[l-1]
+    
+# Square root decomposition technique - O(n) init, O(sqrt(n)) fetch
+class MRUQueue:
+
+    def __init__(self, n: int):
+        self.buckets = []
+        self.indecies = []
+        self.n = n
+        self.nn = int(n**0.5)
+        for i in range(1,n+1):
+            ii = (i-1)//self.nn
+            if ii == len(self.buckets):
+                self.indecies.append(i)
+                self.buckets.append([])
+            self.buckets[-1].append(i)
+            
+    def fetch(self, k: int) -> int:
+        i = self._bs(self.indecies, k)-1
+        res = self.buckets[i].pop(k-self.indecies[i])
+        for ii in range(i+1,len(self.indecies)):
+            self.indecies[ii] -= 1
+            
+        if len(self.buckets[-1]) >= self.nn:
+            self.buckets.append([])
+            self.indecies.append(self.n)
+        self.buckets[-1].append(res)
+        
+        if not self.buckets[i]:
+            self.buckets.pop(i)
+            self.indecies.pop(i)
+            
+        return res
+        
+    def _bs(self, nums, num):
+        l,r = 1,len(nums)
+        while l<r:
+            m = l+r>>1
+            if nums[m] > num:
+                r = m
+            else:
+                l = m+1
+        return l
+```
+
+
+
 ## Sparse Table
 
 # Trees
