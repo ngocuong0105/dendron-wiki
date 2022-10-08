@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1664446403746
+updated: 1665227190014
 created: 1664382861926
 ---
 
@@ -98,11 +98,39 @@ Spanning trees
     Second best Minimum Spanning Tree - Using Kruskal and Lowest Common Ancestor
     Kirchhoff Theorem
     Prüfer code
-Cycles
-    Checking a graph for acyclicity and finding a cycle in O(M)
-    Finding a Negative Cycle in the Graph
-    Eulerian Path
-Lowest common ancestor
+# Cycles
+## Checking a graph for acyclicity and finding a cycle in O(M)
+
+- nonlocal variables cycle and visited
+- keep path variable tracing the dfs
+- CLRS and CP algo use coloring, white, gray, black and nonlocal cycle variable (i think we cannot avoid nonlocal stuff)
+- below is for cycle in directed graph, for **undirected** need to keep parent pointers and make sure you when you go back to parent you don't consider it as cycle
+```Python
+def dfs(s,path):
+    nonlocal cycle
+    visited.add(s)
+    for u in adj[s]:
+        if u not in visited:
+            dfs(u,path|{u})
+        elif u in path:
+            cycle = True
+            return
+cycle,visited = False,set()
+for s in range(n):
+    if s not in visited:
+        dfs(s,set([s]))
+print(cycle)
+```
+#QED
+
+## Finding a Negative Cycle in the Graph
+
+
+## Eulerian Path
+
+
+
+# Lowest common ancestor
     Lowest Common Ancestor
     Lowest Common Ancestor - Binary Lifting
     Lowest Common Ancestor - Farach-Colton and Bender algorithm
@@ -120,9 +148,35 @@ Flows and related problems
 Matchings and related problems
     Bipartite Graph Check
     Kuhn's Algorithm - Maximum Bipartite Matching
-Miscellaneous
-    Topological Sorting
-    Edge connectivity / Vertex connectivity
-    Tree painting
-    2-SAT
-    Heavy-light decomposition
+# Miscellaneous
+## Topological Sorting
+For DAGs only. Topo sort exists only if there are no cycles in the DAG.
+- use dfs
+- after you have exosted vertex `s`, append it as all its descendants have been visited.
+- think of exit/finish times
+- need to reverse answer in the end
+- below version we also track if there is a cycle
+```Python
+def dfs(s,path):
+    nonlocal cycle
+    visited.add(s)
+    for u in adj[s]:
+        if u not in visited:
+            dfs(u,path|{s})
+        elif u in path:
+            cycle = True
+            return
+    res.append(s) # all topo sort needs, the rest are for cycle tracking
+cycle,res,visited = False,[],set()
+for s in range(n):
+    if s not in visited:
+        dfs(s,set([s]))
+if cycle: print([])
+print(res[::-1])
+```
+#QED
+
+## Edge connectivity / Vertex connectivity
+## Tree painting
+## 2-SAT
+## Heavy-light decomposition
