@@ -2,7 +2,7 @@
 id: 277avtfwyyjz54xolamqn91
 title: Probability
 desc: ''
-updated: 1665160374800
+updated: 1665254140903
 created: 1664832112863
 ---
 Notes on Oxford [lectures]() and solutions/answers to all problems from this [book](). 
@@ -329,6 +329,8 @@ This chain trick appears in branching processes. Start with one individual which
 
 **Extintion probability.**
 
+$s = G(s)$ is solution to probability of extinction!
+
 $q = \sum_{k}q^k P(X=k) = G(q)$, where we condition on the number of children of the first individual.
 
 This equation always have solution at 1. However you cannot solve it for $q$.
@@ -503,5 +505,108 @@ Q7. first and second order difference equations. solvable using particular and h
 
 **Sheet 5**
 
-`   
+Q1. $2q_n+p_n = 1, q_n = \dfrac{p_{n-1}+q_{n-1}}{2}$ $\dfrac{1}{3}$ first order recurence equation.
 
+Q2. 19
+
+Q3. 
+- a) $n$
+- b) $\dfrac{n+1}{2n}$
+- c) $\dfrac{M}{2}$, $e_n = n(M-n)$
+
+Q4.
+- a) sum of geometric series
+- b) Take derivatives and evaluate at 1 $E(X) = p'_{X}(1) = \dfrac{1}{p}$.
+$var(X) = \dfrac{1-p}{p^2}$
+
+Q5.
+- a) condition on first two throws, second order recurence.
+- b) last 3 tosses are fixed, $\dfrac{1}{8}r_{n-3}$
+- c) take derivative of probability generating function
+- d) hmmmm #TODO, maybe need two probabilities $p_n, q_n$ and use trick like in Q1?
+
+Q6. 
+- a) $\dfrac{N(N-1)}{2}$, need to use $e_1$ from Q3.
+- b) always need to go the whole way around, by symmetry the answer is $\dfrac{1}{N-1}$
+
+**Sheet 6**
+
+Q1.
+- a) $s^a$
+- b) $s^n p_{Y}(s^m)$
+
+Q2.
+- a) negative binomial - number of trials up to and including the $k$-th success.
+- b) negative binomial is sum of geometric distributions! $p_{Geo}(s)^m = (\dfrac{ps}{1-(1-p)s})^m$
+
+Q3.
+- a) law of total expectation, or use Theorem 4.8 $G_Z(s)=G_N(G_X(s))$ and play around with pgf derivatives evaluated at 1.
+- b) $\lambda p$
+- c) no, $E[Z]$ is not longer $E[N]E[X_1]$, your proof in a) using law of total expecation uses the independence
+
+Q4. $\dfrac{G_X(-1)+1}{2}$
+
+Q5. $G(s) = 1/12 + 2s/3 + s^2/4$, $G(G(s))$, $P(extinction after 2 minutes)=G(G(0))$ 
+
+
+Q6.
+- a) $2p$, $G(s) = ps^2+1-p$
+- b) $\dfrac{1-p}{p}$
+- c) #TODO, maybe need to revisit notes, or look Miro's solution
+
+**Sheet 7**
+
+Q1. pictures of distributions
+
+Q2. check if the integral of these functions exists
+
+Q3.
+- a) $\dfrac{1}{2}$, $\dfrac{1}{12}$
+- b) $\dfrac{a}{b}$
+
+Q4.
+- a) $e^{-\lambda x}$
+- b) $e^{-\lambda a} - e^{-\lambda b}$
+- c) Bayes theorem + a) memoryless property of exponential distribution
+- d) take arcsin and use that $X$ is exponential
+- e) exponential, with lower rate
+- f) **exponential distribution is the continuous version of the geometric distribution**, capped exp is geometric. [proof](https://math.stackexchange.com/questions/2087662/proving-that-the-discrete-exponential-distribution-is-geometric-distribution)
+
+Q5.
+substract mean, divide by std to get standard normal
+- a) 0.454
+- b) 0.921 - 0.454
+- c) $0.921^20 + 20 \times 0.921^19 \times(1-0.921)$
+
+Q6.
+- dont need pdf to get expecation and variance [see](https://math.stackexchange.com/questions/2473968/radius-of-a-circle-w-uniform-distribution)
+- to get pdf just take derivate of cdf, $\sqrt\dfrac{x}{\pi}$
+
+Q7.
+- a) $F_X(X)$ is uniform distribution, just go through definition $F_X(F_{X}^{-1}(x)) = x$
+- b) $F_X(x)$ - gi>ves a way to generate $X$ from uniform distribution $U$
+- c) thats exponential distribution, get the cdf, find its inverse and apply b)
+
+**Sheet 8**
+
+Q1. Integrate, choose constants which would make the integrals equal to 1.
+for independence check with marginal distributions $f_{X,Y}(x,y) = f_{X}(x)f_{Y}(y)$
+
+Q2
+- a) $P(min(X_i)>t) = \prod_{i}P(X_i>t) ~ Exp(\sum_{i}\lambda_{i})$
+- b) treat using indicator variable $\sum_{i}P(T_i > 1) = \sum_{i}e^{-\lambda_{i}}$
+- c) $P(M < median) = 0.5$
+
+Q3. integrate $x^2$ from 0 to 1. Area under the shaded region..
+
+Q4. chebyshev
+
+Q5. chebyshev
+
+Q6. 
+- a) $\dfrac{1}{4}$, $\dfrac{3}{16}$
+- b) 0 when $|i-j| > 1$, $\dfrac{1}{16}$ otherwise
+- c) use b, $\dfrac{n}{4}$,  $\dfrac{7n}{16}$
+- d)  $\dfrac{n}{4}$,  $\dfrac{3n}{16}$
+
+Q7 .WLLN
