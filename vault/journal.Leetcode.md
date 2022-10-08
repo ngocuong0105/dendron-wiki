@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1659171768358
+updated: 1665267097758
 created: 1658695863781
 ---
 # Progress
@@ -25,16 +25,18 @@ Went to my 21st competition. Solved 3/4 questions. The last one was hard level b
 I lost 22 points in rating after the competition (2020 points now). Messed up one of the previous questions as well and got time penalties. Overall, I underperformed.
 
 
+08.10.2022
+Had 3 bad compatitions and lost a bit of rating. Last competiton went good - solved 4 problems under an hour and got rank around 600. Now rating is 2037. I started doing USACO and am currently in bronze division (easies one). Competitive programming problems seem much harder than leetcode. Some questions in bronze are diffficult,though most of them I am able to solve. But CP is whole another level compared with leetcoding.
+Overall last two months I have been doing standard and a bit more hards unseen problems on leetcode and started competitive programming. Leetcode $\neq$ CP. In future I would probably need to learn C++, as Python code is sloooow. Also ordered a Leetcode pack (7800 leetcoins). It is flying from China to here!
+I am more confident in solving hard questions in Leetcode now - say 5.5/10. Easy I am 10/10, medium I am 8.5/10.
+
+
+
 # Plans for the future
-Ideally I would become a descent competitive programmer by 1-2 years. Need to:
+Ideally I would become a descent competitive programmer by 1-2 years (written in August 2022). Need to:
 - do more leetcode competitions
 - learn more advanced topics in CLRS
 - take the MIT advance courses for algorithms and data structures
 - learn C++
 - start codeforces
 - join Google/Facebook coding jams
-
-
-# Cool problems
-
-[132 pattern](https://leetcode.com/problems/132-pattern/)
