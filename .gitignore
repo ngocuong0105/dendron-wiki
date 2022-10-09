@@ -5,4 +5,6 @@ docs
 .next
 .history
 .backup
+# private stuff
 vault/journal.temporary.md
+vault/interviews.Negotiation.md
