@@ -1,7 +1,7 @@
 ---
 id: q7gonhx2ncjvh8vr9qpwlaq
-title: Probability
+title: Statistics
 desc: ''
-updated: 1665134931633
+updated: 1665330358684
 created: 1664832112863
 ---

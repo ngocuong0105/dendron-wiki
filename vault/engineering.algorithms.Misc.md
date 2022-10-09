@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1665043717978
+updated: 1665319134833
 created: 1664382870554
 ---
 # Sequences
@@ -29,6 +29,14 @@ def bs(i,j,func):
 import bisect
 bisect.bisect_left(arr,num,key) # uses >=
 bisect.bisect_right(arr,num,key) # uses >
+
+# can binary search tuples too
+bisect.bisect_left(arr, (x,y), key = lambda x: (x[0],x[1]))
+```
+- binary search + insert
+```python
+import bisect
+bisect.insort_left(arr,num,key) # runs binary search and inserts O(n)
 ```
 
 ## RMQ task (Range Minimum Query - the smallest element in an interval)
