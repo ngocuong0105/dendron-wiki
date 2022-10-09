@@ -2,7 +2,7 @@
 id: 277avtfwyyjz54xolamqn91
 title: Probability
 desc: ''
-updated: 1665254140903
+updated: 1665307390985
 created: 1664832112863
 ---
 Notes on Oxford [lectures]() and solutions/answers to all problems from this [book](). 
@@ -10,14 +10,32 @@ Notes on Oxford [lectures]() and solutions/answers to all problems from this [bo
 # Buzzwords
 Sample space, events, probability measure. Sampling with or without replacement. Conditional probability = partition of sample space, law of total probability/total expectation, Bayes’ Theorem. Independence.
 
+variance, covariance, zero covariance does not imply independence, in normal distributions zero covariance = independence
+
 Discrete radom variablers, pmf = probability mass function, Marginal and conditional distributions, first and second order linear difference equations (fibonacci), random walk, Gambler's ruin.
 
-probability generating function, variaance covariance
+Poisson interpretation: The number of occurrences during a time interval of length $\lambda$ is a Poisson-distributed random variable with expected value $\lambda$.
+
+Po $(\lambda)$ is approximation of Bin $(n,\dfrac{\lambda}{n})$ for large $n$, derive from pmf of binomial.
+
+Poisson limit therem, law of rare events, poisson approximation of binomial (less computationally expensive),
+exponential distribution is the poisson discrete equivalent
+
+negative binomial is sum of geometric distributions, binomial is sum of bernoulli distributions
+
+$gamma(\sum_{i}a_i,b)$ is sum of gamma distributions $gamma(a_i,b)$
+
+sum of $n$ exponential distributions $Exp(\lambda)$ is $Gamma(n,\lambda)$
+
+probability generating function, branching processes
 
 cts random variables, cdf, pdf
 
+sample any cdf from uniform samples. $F_{X}^{-1}(U)$
+
 Random sample, sums of independent random variables. Markov’s inequality, Chebyshev’s inequality, Weak Law of Large Numbers.
 
+[mixture distributions](https://actuarialmodelingtopics.wordpress.com/2017/10/02/examples-of-mixtures/) good for bayesian modelling
 
  - Eulers's formula (Riemann zeta function expressed with prime numbers) has cool probabilistic proof. Check sheet 2 last problem.
 
@@ -374,6 +392,23 @@ $var(X + Y) = var(X) + var(Y) + 2cov(X,Y)$
 
 **NB** Standard normal random variables $X$ and $Y$ are independent if and only if their covariance is 0. This is a nice property of normal random variables which
 is not true for general random variables, as we have already observed in the discrete case.
+
+# Problems
+
+Answers on problems from chapter 5.8 in the book.
+
+Q1. $E(X) = 0$ (substitution + symmetry), $var(X) = 2c^{-2}$ - integration by parts + substitution.
+
+Q2. for $w \in \N$ for Poisson $X$ we have $P(X \geq w) = 1 - \dfrac{\Gamma(w,\lambda)}{\Gamma(w)}$, [see](https://math.stackexchange.com/questions/467341/question-about-connection-between-poisson-and-gamma-distributions)
+
+The number of occurrences before time λ is at least w if and only if the waiting time until the wth occurrence is less than λ.
+
+
+Q3.
+
+Q5. sample from uniform distribution, directly from cdf definition
+
+Q11. integrate $arctan(x)$ from zero to inf to get the constant, $(2\ \pi)arctan(x)$
 
 # Chapter 6. Random samples and the weak law of large numbers
 
