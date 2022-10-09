@@ -2,13 +2,13 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1665267097758
+updated: 1665313504942
 created: 1658695863781
 ---
 # Progress
 My first ever submission in leetcode was on 8th of January 2021. Did some Hackerrank for 2-3 months before that as I did
 not know how to code (found it hard to press quickly stuff on the keyboard...). Started leetcoding more seriously mid Feb
-2021 and have been doing it for 1.5 years so far (24 Jul 2022). Current leetcode count is solved 1526 problems. Main progress
+2021 and have been doing it for 1.5 years so far (24 Jul 2022). Current leetcode count is solved **1526** problems. Main progress
 stages were:
 - first 3 months good learning curve Feb-Apr, but copy-pasted lost of solutions and failed to solve most of the problems alone. Got good progress on easy questions, mediums were very hard for me, hard were impossible.
 - May rested a bit and slowed down the leetcoding
@@ -29,6 +29,7 @@ I lost 22 points in rating after the competition (2020 points now). Messed up on
 Had 3 bad compatitions and lost a bit of rating. Last competiton went good - solved 4 problems under an hour and got rank around 600. Now rating is 2037. I started doing USACO and am currently in bronze division (easies one). Competitive programming problems seem much harder than leetcode. Some questions in bronze are diffficult,though most of them I am able to solve. But CP is whole another level compared with leetcoding.
 Overall last two months I have been doing standard and a bit more hards unseen problems on leetcode and started competitive programming. Leetcode $\neq$ CP. In future I would probably need to learn C++, as Python code is sloooow. Also ordered a Leetcode pack (7800 leetcoins). It is flying from China to here!
 I am more confident in solving hard questions in Leetcode now - say 5.5/10. Easy I am 10/10, medium I am 8.5/10.
+Current leetcode count **1743** (08.10.2022)
 
 
 
