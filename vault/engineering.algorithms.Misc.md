@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1665319134833
+updated: 1665486142420
 created: 1664382870554
 ---
 # Sequences
@@ -82,6 +82,73 @@ def maxSubArray(nums: List[int]) -> int:
 # Game Theory
 ## Games on arbitrary graphs
 ## Sprague-Grundy theorem. Nim
+
+- [flip game II](https://leetcode.com/problems/flip-game-ii/)
+```Python
+# O(C_n) where C_n is n-th Catalan number
+class Solution:
+    def canWin(self, s: str) -> bool:
+        def adj(s):
+            neigh = []
+            for i in range(len(s)-1):
+                if s[i:i+2] == '++': neigh.append(s[:i]+'--'+s[i+2:])
+            return neigh
+        @cache
+        def dfs(s):
+            for u in adj(s):
+                if not dfs(u): return True
+            return False
+        return dfs(s)
+
+# O(n^2) Sprague-Grundy theorem
+class Solution:
+    def canWin(self, s: str) -> bool:
+        @cache
+        def dp(s):
+            if len(s) < 2: return 0
+            st = set()
+            for i in range(len(s)-1):
+                if s[i:i+2] == '++':
+                    st.add(dp(s[:i]) ^ dp(s[i+2:]))
+            # mex
+            i = 0 
+            while i in st:
+                i += 1
+            return i
+        return dp(s) != 0
+
+```
+
+**Note** the second solution is not $O(N^2)$ truly as it has lots of subproblems. Need to preprocess the input so that the subproblems depend on single numbers. e.g. get lenghts of plus groups: '++++--++-' -> `[4,2]`. See your leetcode solution.
+
+
+- [game of nim](https://leetcode.com/problems/game-of-nim/)
+- [chalkboard](https://leetcode.com/problems/chalkboard-xor-game/)
+
+
+
+**Concept 1 (Impartial Game)**: Given a particular arrangement of the game
+board, if either player have exactly the same set of moves should he
+move first, and both players have exactly the same winning condition,
+then this game is called impartial game. For example, chess is not
+impartial because the players can control only their own pieces, and
+the +- flip game, on the other hand, is impartial.
+
+
+**Concept 2 (Normal Play vs Misere Play)**: If the winning condition of
+the game is that the opponent has no valid moves, then this game is
+said to follow the normal play convention; if, alternatively, the
+winning condition is that the player himself has no valid moves, then
+the game is a Misere game. Our +- flip has apprently normal play.
+
+We consider impartial normal games.
+
+Such games can be completely described by a directed acyclic graph: the vertices are game states and the edges are transitions (moves). 
+A vertex without outgoing edges is a losing vertex (a player who must make a move from this vertex loses).
+
+
+**Goal:** A state is winning if there is at least one transition to a losing state and is losing if there isn't at least one transition to a losing state. Our task is to classify the states of a given game.
+
 # Schedules
 ## Scheduling jobs on one machine
 ## Scheduling jobs on two machines
