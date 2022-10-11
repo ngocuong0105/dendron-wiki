@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1665486142420
+updated: 1665491734192
 created: 1664382870554
 ---
 # Sequences
@@ -83,6 +83,63 @@ def maxSubArray(nums: List[int]) -> int:
 ## Games on arbitrary graphs
 ## Sprague-Grundy theorem. Nim
 
+**Concept 1 (Impartial Game)**: Given a particular arrangement of the game
+board, if either player have exactly the same set of moves should he
+move first, and both players have exactly the same winning condition,
+then this game is called impartial game. For example, chess is not
+impartial because the players can control only their own pieces, and
+the [flip game II](https://leetcode.com/problems/flip-game-ii/) , on the other hand, is impartial.
+
+
+**Concept 2 (Normal Play vs Misere Play)**: If the winning condition of
+the game is that the opponent has no valid moves, then this game is
+said to follow the normal play convention; if, alternatively, the
+winning condition is that the player himself has no valid moves, then
+the game is a Misere game. Our +- [flip game II](https://leetcode.com/problems/flip-game-ii/) has apprently normal play.
+
+We consider impartial normal games.
+
+Such games can be completely described by a directed acyclic graph: the vertices are game states and the edges are transitions (moves). 
+A vertex without outgoing edges is a losing vertex (a player who must make a move from this vertex loses).
+
+
+**Goal:** A state is winning if there is at least one transition to a losing state and is losing if there isn't at least one transition to a losing state. Our task is to classify the states of a given game.
+
+**Nim**
+There are several piles, each with several stones. In a move a player can take any positive number of stones from any one pile and throw them away. A player loses if they can't make a move, which happens when all the piles are empty.
+
+**Charles L. Bouton Theorem.** The current player has a winning strategy if and only if the xor-sum of the pile sizes is non-zero.
+
+Proof by induction. Induction step proves that if the current state is 0 then all other neighbour states are non zero. If the current state is non-zero you can always reach a zero state, consider the pile with the largest number of stones and consider is largest bit. (do xor tricks).
+
+**Colloraly.** Nim games are equivalent as long as the xor value is the same.
+
+Game of Nim can be reduced to game of one pile.
+
+**Sprague-Grundy theorem** 
+This theorem proves the equivalence of impartial games and Nim. It reduces every impartial normal game to Nim.
+
+Let's consider a state $v$ of a two-player impartial game and let $\{v_{i},i = 1 \dots n\}$ be the states reachable from it. To this state $v$, we can assign a fully equivalent game of Nim with one pile of size $x$. The number is called the Grundy value or **nim-value** of state $v$. (this is the Game to Nim mapping)
+
+Find this number $x$ recursively:
+
+$x = mex(x_1, x_2, .... x_n)$
+
+where $mex$ is the minimum excluding function, e.g $mex([0,1,2,4,5]) = 3$
+
+Recursion base case is the end states where there are no possible moves and whoever turn it is they loose (nim-value equal to 0).
+
+
+**Recipe**
+To calculate the Grundy value of a given state you need to:
+1. Get all possible transitions from this state
+2. Each transition can lead to a sum of independent games (one game in the degenerate case). Calculate the Grundy value for each independent game and xor-sum them. Of course xor does nothing if there is just one game.
+3. After we calculated Grundy values for each transition we find the state's value as the $mex$ of these numbers.
+4. If the value is zero, then the current state is losing, otherwise it is winning.
+
+
+**Problems**
+
 - [flip game II](https://leetcode.com/problems/flip-game-ii/)
 ```Python
 # O(C_n) where C_n is n-th Catalan number
@@ -119,35 +176,14 @@ class Solution:
 
 ```
 
-**Note** the second solution is not $O(N^2)$ truly as it has lots of subproblems. Need to preprocess the input so that the subproblems depend on single numbers. e.g. get lenghts of plus groups: '++++--++-' -> `[4,2]`. See your leetcode solution.
+**Note** the second solution is not $O(N^2)$ truly as it has lots of subproblems. Need to preprocess the input so that the subproblems depend on single numbers. e.g. get lenghts of plus groups: '++++--++-' preprocess to `[4,2]`. See your leetcode solution.
 
 
 - [game of nim](https://leetcode.com/problems/game-of-nim/)
 - [chalkboard](https://leetcode.com/problems/chalkboard-xor-game/)
 
 
-
-**Concept 1 (Impartial Game)**: Given a particular arrangement of the game
-board, if either player have exactly the same set of moves should he
-move first, and both players have exactly the same winning condition,
-then this game is called impartial game. For example, chess is not
-impartial because the players can control only their own pieces, and
-the +- flip game, on the other hand, is impartial.
-
-
-**Concept 2 (Normal Play vs Misere Play)**: If the winning condition of
-the game is that the opponent has no valid moves, then this game is
-said to follow the normal play convention; if, alternatively, the
-winning condition is that the player himself has no valid moves, then
-the game is a Misere game. Our +- flip has apprently normal play.
-
-We consider impartial normal games.
-
-Such games can be completely described by a directed acyclic graph: the vertices are game states and the edges are transitions (moves). 
-A vertex without outgoing edges is a losing vertex (a player who must make a move from this vertex loses).
-
-
-**Goal:** A state is winning if there is at least one transition to a losing state and is losing if there isn't at least one transition to a losing state. Our task is to classify the states of a given game.
+#QED
 
 # Schedules
 ## Scheduling jobs on one machine
