@@ -2,15 +2,25 @@
 id: bvywezxe342ge7lrslfg9ue
 title: Geometry
 desc: ''
-updated: 1664383363313
+updated: 1665395054525
 created: 1664382853125
 ---
 
-Geometry
 
-    Elementary operations
-        Basic Geometry
-        Finding the equation of a line for a segment
+# Elementary operations
+## Basic Geometry
+- cross product checks for collinearity (line on one line)
+```python
+def collinear(u,v):
+    sm = 0
+    for i in range(len(u)):
+        sm += u[i]*v[i]
+    return sm == 0
+```
+# Finding the equation of a line for a segment
+- [leetcode](https://leetcode.com/problems/check-if-it-is-a-straight-line/)
+vertical lines have infinite slope, to avoid edge cases use above representaion of a line $Ax+By+C = 0$
+
         Intersection Point of Lines
         Check if two segments intersect
         Intersection of Segments
