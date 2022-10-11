@@ -2,7 +2,7 @@
 id: 277avtfwyyjz54xolamqn91
 title: Probability
 desc: ''
-updated: 1665307390985
+updated: 1665469534093
 created: 1664832112863
 ---
 Notes on Oxford [lectures]() and solutions/answers to all problems from this [book](). 
@@ -27,11 +27,17 @@ $gamma(\sum_{i}a_i,b)$ is sum of gamma distributions $gamma(a_i,b)$
 
 sum of $n$ exponential distributions $Exp(\lambda)$ is $Gamma(n,\lambda)$
 
-probability generating function, branching processes
+probability generating function, branching processes, solution to probability of extinction $s = G(s)$, random sum formula $G_N(G_X(s)) = G_S(s)$ where $S = X_1 + X_2 + ... + X_n$, $X_i ~ X$ iid and independent from $N$. use it to prove $E(S) = E(N)E(X)$ (alternatively use total law of expectation) . This solves problems with stopping times too.
+
+use pgfs to compute $P(X mod 2 = 0)$, hint $G(1), G(-1)$. 
 
 cts random variables, cdf, pdf
 
+pdf has similar properties as pmf but is NOT a probability.
+
 sample any cdf from uniform samples. $F_{X}^{-1}(U)$
+
+$E[X] = \int_{0}^{\infty}P(X>x)$, need $X$ to be non-negative random variable. Prove that using swap integrands (Tonelli's theorem).
 
 Random sample, sums of independent random variables. Markov’s inequality, Chebyshev’s inequality, Weak Law of Large Numbers.
 
@@ -39,6 +45,7 @@ Random sample, sums of independent random variables. Markov’s inequality, Cheb
 
  - Eulers's formula (Riemann zeta function expressed with prime numbers) has cool probabilistic proof. Check sheet 2 last problem.
 
+$P(\text{break stick into n pieces and have polygon}) = P(\text{all pieces are less than } \dfrac{1}{2}) = 1 - P(\text{all points lie in one semi circle}) = 1- \dfrac{n}{2^{n-1}}$
 
 # Chapter 1. Events and probability
 
@@ -360,7 +367,22 @@ It turns out that the question of whether the branching process inevitably dies 
 
 # Problems
 
-#TODO
+Problems from Chapter 4.5 from the book
+
+Q1. $P(X = k) = u_{k-1}-u_kS
+
+Q2. $\dfrac{1}{6^7}({13\choose 6} - 49)$, need to count number of ways you can sum 7 number and equal to 14 then subtract when any of the numbers is greater than 6 (could be 7 or 8 only, sum 6 numbers is minimum 6).
+
+Q3. Geometric distribution with $p=1/3$. Get pgf of geo + some arithmetic.
+
+probability of winning are sum of geometric series. Mean durtion of game is 3.
+
+Q4. Sum of $N$ **alternative** geometric distributions. 
+
+Q5.
+
+Q6. eavluate pgf at smart points [trick](https://math.stackexchange.com/questions/458549/probability-that-number-of-heads-flipped-is-divisible-by-3)
+
 # Chapter 5. Continuous random variables
 
 Recall that random variable is a function which maps $\Omega$ the outcome space to $\R$. Discrete random variables have $Im(X)$ to be countable set.
@@ -403,12 +425,36 @@ Q2. for $w \in \N$ for Poisson $X$ we have $P(X \geq w) = 1 - \dfrac{\Gamma(w,\l
 
 The number of occurrences before time λ is at least w if and only if the waiting time until the wth occurrence is less than λ.
 
+Q3. Skipped
 
-Q3.
+Q4. [trick](https://math.stackexchange.com/questions/1248334/p-d-f-of-the-absolute-value-of-a-normally-distributed-variable)
+$P(|X| \leq x) = P(X \leq x) - P(X \leq -x)$
 
-Q5. sample from uniform distribution, directly from cdf definition
+$E(Y) = \sqrt{\dfrac{2}{\pi}}$
 
-Q11. integrate $arctan(x)$ from zero to inf to get the constant, $(2\ \pi)arctan(x)$
+$var(Y) =  1 - \dfrac{2}{\pi}$, integrate by parts, use pdf integrates to 1
+
+Q5. shows how to sample uniform distribution
+
+Q6. sample any other distribution from uniform distribution
+
+Q7. Integration question ,need to swap integrands (use Tonelli's theorem)[trick](https://math.stackexchange.com/questions/1690740/prove-that-ex-int-0-infty-pxx-dx-int-0-infty-1-f-xx)
+
+Q8. skipped, basic principles
+
+Q9. use indicator function?
+
+Q10. cdf is $1- e^{-\dfrac{y+2}{1-y}}$, take derivative to find pdf
+
+Q11. integrate $arctan(x)$ from zero to inf to get the constant, $(2/\pi)arctan(x)$
+
+Q12. need to define pdf of the angle theta and the distance from center needle to the strips. (can simulate $\pi$ from this problem.)
+[wiki](https://en.wikipedia.org/wiki/Buffon%27s_needle_problem)
+
+Q13. $P(\text{break stick into n pieces and have polygon}) = P(\text{all pieces are less than} \dfrac{1}{2}) = 1 - P(\text{all points lie in one semi circle}) = 1- \dfrac{n}{2^{n-1}}$
+
+
+Q14. cdf is $\dfrac{y}{3+y}$
 
 # Chapter 6. Random samples and the weak law of large numbers
 
