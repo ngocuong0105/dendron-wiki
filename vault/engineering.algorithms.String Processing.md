@@ -21,6 +21,10 @@ created: 1664382813257
 ## Manacher's Algorithm - Finding all sub-palindromes in O(N)
 
 - Manacher, [p1](https://leetcode.com/problems/longest-palindromic-substring/), [p2](https://leetcode.com/problems/shortest-palindrome/)
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 # O(n**2)
 class Solution:
@@ -55,4 +59,6 @@ class Solution:
         return s[(i-l)//2:(i+l)//2]
 
 ```
+</details>
+
 ## Finding repetitions

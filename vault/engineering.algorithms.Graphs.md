@@ -24,6 +24,10 @@ created: 1664382861926
     - entry time in all descendants u of s which are back edges
     - `low[u]` for all u where $(s,u)$ is tree edge
 
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 def bridges(n, adj_mat) -> List[List[int]]:
     def dfs(s,p):
@@ -46,12 +50,17 @@ def bridges(n, adj_mat) -> List[List[int]]:
             dfs(s,-1)
     return res
 ```
+</details>
 
 ## Finding Bridges Online
 
 ## Finding Articulation Points in $O(N+M)$
 - [leetcode](https://leetcode.com/problems/minimum-number-of-days-to-disconnect-island/)
 - [explanation](https://cp-algorithms.com/graph/cutpoints.html)
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python 
 def articulation_point(adj):
@@ -79,6 +88,8 @@ def articulation_point(adj):
     return art != []
             
 ```
+</details>
+
     Strongly Connected Components and Condensation Graph
     Strong Orientation
 
@@ -105,6 +116,10 @@ Spanning trees
 - keep path variable tracing the dfs
 - CLRS and CP algo use coloring, white, gray, black and nonlocal cycle variable (i think we cannot avoid nonlocal stuff)
 - below is for cycle in directed graph, for **undirected** need to keep parent pointers and make sure you when you go back to parent you don't consider it as cycle
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 def dfs(s,path):
     nonlocal cycle
@@ -121,6 +136,8 @@ for s in range(n):
         dfs(s,set([s]))
 print(cycle)
 ```
+</details>
+
 #QED
 
 ## Finding a Negative Cycle in the Graph
@@ -136,7 +153,7 @@ print(cycle)
     Lowest Common Ancestor - Farach-Colton and Bender algorithm
     Solve RMQ by finding LCA
     Lowest Common Ancestor - Tarjan's off-line algorithm
-Flows and related problems
+# Flows and related problems
     Maximum flow - Ford-Fulkerson and Edmonds-Karp
     Maximum flow - Push-relabel algorithm
     Maximum flow - Push-relabel algorithm improved
@@ -145,6 +162,8 @@ Flows and related problems
     Flows with demands
     Minimum-cost flow
     Assignment problem
+    - [min XOR sum](https://leetcode.com/problems/minimum-xor-sum-of-two-arrays/)
+    - hungarian algo?
 Matchings and related problems
     Bipartite Graph Check
     Kuhn's Algorithm - Maximum Bipartite Matching
@@ -156,6 +175,10 @@ For DAGs only. Topo sort exists only if there are no cycles in the DAG.
 - think of exit/finish times
 - need to reverse answer in the end
 - below version we also track if there is a cycle
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 def dfs(s,path):
     nonlocal cycle
@@ -174,6 +197,8 @@ for s in range(n):
 if cycle: print([])
 print(res[::-1])
 ```
+</details>
+
 #QED
 
 ## Edge connectivity / Vertex connectivity
