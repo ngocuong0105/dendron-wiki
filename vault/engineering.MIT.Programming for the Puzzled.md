@@ -27,6 +27,10 @@ an array of people with caps.
 
 Simple solution is just to count forward and backward intervals
 
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 arr = ['F','B','F','F','B','F','F']
 
@@ -41,9 +45,13 @@ def solve(arr):
         else: backward.append([i,j])
     return min(len(forward),len(backward))
 ```
-
+</details>
 ---
 First person in line gives up what set of commands you will say to the people. For example if arr[0] = 'F', then you would say to all 'B-s' to flip their caps.
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 
@@ -57,6 +65,7 @@ def please_all_conform(arr):
                 print(f' through {i - 1} flip your caps!')
 
 ```
+</details>
 
 'Nuances with how you solve a problem and how you code it.'
 
@@ -70,6 +79,10 @@ Celebrities come at a party at particular times (intervals). When should you go 
 Closed intervals on the left and open on the right.
 
 Simple solution. Check all hours (starts and ends) and check how many intervals contain it. Depends on granularity of time
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 def solve(intervals):
@@ -85,6 +98,8 @@ def count(t):
     return sum([ s <= t < e for s,e  in intervals])
 
 ```
+</details>
+
 ---
 'Lots of repeated computation = redundancy. Often you could reduce this redundancy by computing things incrementally.'
 
@@ -93,6 +108,10 @@ The only times that are interesting is when celebrities come and leave
 The only time the result could change is if a celebrity enters or leaves.
 
 Line sweep solution.  Relies on the fact that the result would change only when you reach an event.
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 def solve(intervals):
@@ -118,6 +137,7 @@ def solve(intervals):
     events.sort()
     return max(accumulate([p for _p in events]))
 ```
+</details>
 
 [problem](https://leetcode.com/problems/meeting-rooms-ii/)
 
@@ -257,6 +277,10 @@ Given $n$x$n$ board return the number of different ways we put $n$ queens on the
 
 **Solution**
 Represent a board using just an array where $j$-th element shows on which row we have a queen in column $j$. Exploit the fact there can be at most one queen in a single column.
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 class Solution:
     def totalNQueens(self, n: int) -> int:
@@ -279,6 +303,7 @@ class Solution:
         backtrack(0)
         return res
 ```
+</details>
 
 There is no closed form solution depending on $n$.
 
@@ -292,6 +317,10 @@ Divide and Conquer **Solution:**
 
 There is always a perfect tiling of the courtyard!
 
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 #Programming for the Puzzled -- Srini Devadas
@@ -377,10 +406,15 @@ def printYard(yard):
 printYard(tileMissingYard(3, 4, 6))
 printYard(tileMissingYard(4, 5, 7))
 ```
+</details>
 
 # Problem 8: You Won't Want to Play Sudoku Again. Recursive search
 
 **Problem** Given a sudoku grid, find a solution to it. [problem](https://leetcode.com/problems/sudoku-solver/)
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 class Solution:
@@ -417,10 +451,16 @@ class Solution:
 
         solve()
 ```
+</details>
+
 Whenever you do a recursive search you need to clean what you did (line `board[i][j] ='.'`) - this we call **backtracking**.
 
 
 The above solution does not do any implications (row and column scans, boxes etc.) It is not the way you would solve sudoku in your head. The `poss()` function gives you potential values to fill in and you just do blind **guessing**. We want to integrate human approach in the algo - **implications!**
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
         def make_implications(board,i,j,e):
@@ -455,6 +495,8 @@ The above solution does not do any implications (row and column scans, boxes etc
         
         solve()
 ```
+</details>
+
 
 # Problem 9: The Disorganized Handyman. Sorting
 
@@ -495,6 +537,10 @@ Bipartite graphs are those which you can split in two groups of nodes and all ed
 Bipartite graph = 2-colorable (color vertices such that no edge has two same color edges) =
 graph with no odd-cycles
 
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 class Solution:
     def isBipartite(self, graph: List[List[int]]) -> bool:
@@ -520,6 +566,7 @@ class Solution:
         return is_two_color(white,black)
 
 ```
+</details>
 
 *Never depend of order of keys in a dictionary. Different looping through the same dictionary may give different order.*
 
