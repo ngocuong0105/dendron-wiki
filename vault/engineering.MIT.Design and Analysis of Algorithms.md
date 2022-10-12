@@ -92,6 +92,10 @@ $O(n^2), O(nlogn)$
 2. O(n**2) is easy
 3. improve to O(nlogn) with BS
 
+`
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 # O(n^2)
 class Solution:
@@ -150,6 +154,8 @@ class Solution:
         return dp(len(jobs)-1)
 
 ```
+</details>
+
 
 ---
 
@@ -624,7 +630,11 @@ We consider 3 problems:
 Given a string $s$ find the longest subsequence which is a palindrome (not necessarily contiguous).
 
 *Solution*
-```python
+`
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
 # O(n**2)
 def solve(s):
     @cache
@@ -634,6 +644,7 @@ def solve(s):
       if s[i] == s[j]: return 2 + dp(i+1,j-1)
       return max(dp(i+1,j),dp(i,j-1))
 ```
+</details>
 
 Run time = Number of subproblems * Time per subproblem (assumes lookup is $O(1)$)
 
@@ -717,7 +728,11 @@ Below are the 5 steps of DP thinking from Eric:
 
 ![dp_shortest_path_1.png](assets/images/dp_shortest_path_1.png)
 
-```python
+`
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
 # Bottom-up via relaxation steps
 for m = 1 to n by 1
   for u in V
@@ -726,6 +741,8 @@ for m = 1 to n by 1
         if duv > dux + dxv # can put wxv too
             duv = dux + dxv
 ```
+
+</details>
 
 Runtime is $O(V^4)$, which is the same as running $V$ time Bellman Ford.
 
@@ -756,7 +773,10 @@ All pairs shortest path problem requires computing $W^n$ in circle land. Single 
 
 ![floyd_warshall.png](assets/images/floyd_warshall.png)
 
-```python
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
 C = (w(u, v))
 for k = 1 to n by 1
   for u in V
@@ -765,6 +785,8 @@ for k = 1 to n by 1
         c uv = c uk + c kv
 
 ```
+
+</details>
 
 Run time $O(V^3)$
 
@@ -839,6 +861,10 @@ It is Dijkstra like.
 
 Idea is to start with one vertex $s$. This is your initial cut $s$ vs the rest.
 
+`
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 def dist(a,b):
     return abs(a[0]-b[0]) + abs(a[1]-b[1])
@@ -857,6 +883,8 @@ while h:
             heappush(h,(edges[u],u))
 # edges has the weights of the MST tree
 ```
+</details>
+
 ![run_time_prim.png](assets/images/run_time_prim.png)
 
 Runtime just like Dijkstra.
