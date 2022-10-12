@@ -9,6 +9,10 @@ created: 1664382870554
 
 ## Binary Search
 - template for finding smallest element $i$ in array such that `func(i)` is `True`
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 def bs(i,j,func):
     while i < j:
@@ -20,11 +24,17 @@ def bs(i,j,func):
     return i
 ```
 
+</details>
+
 - 2D problems often treat columns/rows as elements. E.g each column is element and we do binary search on columns $O(m*logn)$
     - [black pixels](https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/)
     - [peak element](https://leetcode.com/problems/find-a-peak-element-ii/)
 
 - built in python library
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 import bisect
 bisect.bisect_left(arr,num,key) # uses >=
@@ -39,6 +49,10 @@ import bisect
 bisect.insort_left(arr,num,key) # runs binary search and inserts O(n)
 ```
 
+
+</details>
+
+
 ## RMQ task (Range Minimum Query - the smallest element in an interval)
 ## Longest increasing subsequence
 ## Maximum/minimum subarray sum
@@ -50,6 +64,9 @@ bisect.insort_left(arr,num,key) # runs binary search and inserts O(n)
 - redefined goal for each $r$ find $l$ which maximizes `sum(nums[l:r+1])`
 - compute $cum[r]$ as we go, and maintain minimum possible value for $cum[l-1]$
 
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 def maxSubArray(nums: List[int]) -> int:
     res,min_sum,sm = -float('inf'),0,0
@@ -59,11 +76,15 @@ def maxSubArray(nums: List[int]) -> int:
         min_sum = min(min_sum,sm)
     return res
 ```
+</details>
 
 **Solution 2.**
 - Kadane algo
 - compute partial/cumulative sum `sm` as we go. If negative rest to 0
 - our maximum subarray must start at a critical point when $sm < 0$
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 def maxSubArray(nums: List[int]) -> int:
@@ -74,6 +95,7 @@ def maxSubArray(nums: List[int]) -> int:
         curr = max(curr,0)
     return res
 ```
+</details>
 
 #QED
 
@@ -141,6 +163,10 @@ To calculate the Grundy value of a given state you need to:
 **Problems**
 
 - [flip game II](https://leetcode.com/problems/flip-game-ii/)
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 # O(C_n) where C_n is n-th Catalan number
 class Solution:
@@ -176,12 +202,14 @@ class Solution:
 
 ```
 
+</details>
+
+
 **Note** the second solution is not $O(N^2)$ truly as it has lots of subproblems. Need to preprocess the input so that the subproblems depend on single numbers. e.g. get lenghts of plus groups: '++++--++-' preprocess to `[4,2]`. See your leetcode solution.
 
 
 - [game of nim](https://leetcode.com/problems/game-of-nim/)
 - [chalkboard](https://leetcode.com/problems/chalkboard-xor-game/)
-
 
 #QED
 
@@ -198,6 +226,10 @@ class Solution:
 
 - rotate image, [p1](https://leetcode.com/problems/rotate-image/)
 - 90 degree rotation = flip + transpose
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 def rotate(matrix):
     matrix.reverse()
@@ -209,9 +241,13 @@ def rotate_inplace(matrix):
         for j in range(i):
             matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
 ```
+</details>
 
 ## Longest valid parenthesis
 - [leetcode](https://leetcode.com/problems/longest-valid-parentheses/)
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 class Solution:
@@ -229,4 +265,69 @@ class Solution:
             return res
         return max(compute('(',s),compute(')',s[::-1]))
 ```
+</details>
 
+
+
+## LRU cache
+- [LRU](https://leetcode.com/problems/lru-cache)
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+class Node:
+    def __init__(self, key = None, val = None, next = None, prev = None):
+        self.key = key
+        self.val = val
+        self.next = next
+        self.prev = prev
+
+class LRUCache:
+
+    def __init__(self, cap: int):
+        self.cache = {}
+        self.cap = cap
+        self.head = Node()
+        self.tail = Node()
+        self.link(self.head,self.tail)
+        
+    def get(self, key: int) -> int:
+        if key not in self.cache: return -1
+        self.update(key)
+        return self.cache[key].val
+
+    def put(self, key: int, val: int) -> None:
+        if key not in self.cache:
+            if len(self.cache) == self.cap:
+                self.evict()
+            self.add(key,val)
+        else:
+            self.remove(key)
+            self.add(key,val)
+    
+    def add(self,key,val):
+        node = Node(key,val)
+        self.link(node,self.head.next)
+        self.link(self.head,node)
+        self.cache[key] = node
+        
+    def remove(self,key):
+        node = self.cache[key]
+        self.link(node.prev,node.next)
+        del self.cache[key]
+    
+    def evict(self):
+        self.remove(self.tail.prev.key)
+        
+    def link(self,a,b):
+        a.next,b.prev = b,a
+    
+    def update(self,key):
+        node = self.cache[key]
+        self.link(node.prev,node.next)
+        self.link(node,self.head.next)
+        self.link(self.head,node)
+```
+
+</details>
