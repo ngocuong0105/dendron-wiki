@@ -10,13 +10,19 @@ created: 1664382853125
 # Elementary operations
 ## Basic Geometry
 - cross product checks for collinearity (line on one line)
-```python
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
 def collinear(u,v):
     sm = 0
     for i in range(len(u)):
         sm += u[i]*v[i]
     return sm == 0
 ```
+</details>
+
 # Finding the equation of a line for a segment
 - [leetcode](https://leetcode.com/problems/check-if-it-is-a-straight-line/)
 vertical lines have infinite slope, to avoid edge cases use above representaion of a line $Ax+By+C = 0$
