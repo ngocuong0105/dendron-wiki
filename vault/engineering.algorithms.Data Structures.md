@@ -11,7 +11,11 @@ created: 1664382752052
 ## Minimum Stack / Minimum Queue
 - monotonic queue, [p1](https://leetcode.com/problems/constrained-subsequence-sum/), the cnt variable below defines the enqueue priority, can have different priority implementations, e.g in max sliding window [problem](https://leetcode.com/problems/sliding-window-maximum/) it would be the index of the element
 
-```python
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
 class Monoqueue(collections.deque):
     def enqueue(self, val):
         count = 1 # counts the number of elements which value is greater or equal than
@@ -41,8 +45,13 @@ class MonoQueue(collections.deque):
         if not self: return 0
         return self[0][1]
 ```
+</details>
 
 - [max stack](https://leetcode.com/problems/max-stack/)
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 class MaxStack:
 
@@ -85,10 +94,14 @@ class MaxStack:
             self.stack.pop()
 
 ```
-
+</details>
 
 
 - Most Recently Used Queue [p](https://leetcode.com/problems/design-most-recently-used-queue/)
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 # O(nlogn) initialization, O(logn) fetch
@@ -195,7 +208,7 @@ class MRUQueue:
                 l = m+1
         return l
 ```
-
+</details>
 
 
 ## Sparse Table
@@ -207,6 +220,10 @@ class MRUQueue:
 - $O(alpha(N))$ amortised time per ops and alpha is the Inverse-Ackermann function. This is approximately constant
 - To perform a sequence of m addition, union, or find operations on a disjoint-set forest with n nodes requires total time
 - $O(mα(n))$, where $α(n)$ is the extremely slow-growing inverse Ackermann function.
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 class DSU:
     def __init__(self, n):
@@ -231,11 +248,15 @@ class DSU:
             self.rank[u] += 1
 
 ```
-
+</details>
 
 ## Fenwick Tree = BIT = Binary index tree
 
 - light weight BIT
+
+<details>
+<summary> <b>CODE</b> </summary>
+
 ```Python
 class BIT:
     def __init__(self,n):
@@ -255,6 +276,7 @@ class BIT:
             i -= (i & -i)
         return res
 ```
+</details>
 
 - BIT, 1D, [problem](https://leetcode.com/problems/range-sum-query-mutable/), [problem](https://leetcode.com/problems/count-of-smaller-numbers-after-self/?envType=study-plan&id=algorithm-iii)
 - supports cumulutaive computations only on functions which have inverse like sum
@@ -269,7 +291,11 @@ class BIT:
 
 
 
-```python
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
 class BIT:
     
     def __init__(self, nums):
@@ -312,11 +338,16 @@ class NumArray:
         return self.bit.sum_range(l,r)
 
 ```
+</details>
 
 - BIT, Fenwick Tree, Binary Index Tree, 2D, [problem](https://leetcode.com/problems/range-sum-query-2d-mutable/)
 - think BIT on x axis, then recursively create another BIT on Y axis.
 - $O(log(n) log(n))$ for updates and queries. Linear initialization is a bit tricky.
 - nesting loops in update and query methods
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 class BIT:
@@ -383,7 +414,7 @@ class NumMatrix:
         return self.bit.sum_range(i,j,x,y)
 
 ```
-
+</details>
 
 
 ## Sqrt Decomposition
@@ -395,6 +426,10 @@ class NumMatrix:
 - Segment Tree recursive, slower than iterative 2,3 times in practice
 - below is point update, range query - both $O(log(n))$
 - query can be sum, max, gcd. lcd etc (as long as it is a semi-ring)
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 
@@ -436,11 +471,15 @@ class SegmentTree:
 
 st = SegmentTree(lambda x,y:x+y, lambda x,y: x+y)
 ```
-
+</details>
 
 - Segment tree, range update, range query - both $O(log(n))$
 - lazy update to have query in $O(logn)$
 - in both segment trees if you have been given array `nums` in advance you can do build in `__init__` in $O(n)$ time (recursively)
+
+
+<details>
+<summary> <b>CODE</b> </summary>
 
 ```Python
 class SegmentTree:
@@ -478,7 +517,7 @@ class SegmentTree:
         return self.QF(self.query(v*2, tl, tm, l, min(r, tm)), self.query(v*2+1, tm+1, tr, max(l, tm+1), r))
 
 ```
-
+</details>
 
 
 ## Treap
