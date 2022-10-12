@@ -37,9 +37,14 @@ BIT, AVL trees, B-trees (used in databses?), Red Black Trees, Segment Trees, A* 
 [paper](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/X%2BY.pdf)
 
 - order statistic tree, Red Black tree implementation I think
-```python
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
 from sortedcontainers import SortedList
 sl.add(num)
 sl.bisect_left(num) # get order statistic
 sl.remove(num)
 ```
+</details>
