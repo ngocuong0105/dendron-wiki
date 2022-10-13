@@ -36,7 +36,6 @@ workspace:
         addBehavior: asOwnDomain
     graph:
         zoomSpeed: 1
-        createStub: false
     enableAutoCreateOnDefinition: false
     enableXVaultWikiLink: false
     enableRemoteVaultInit: true
@@ -72,9 +71,12 @@ workspace:
     dendronVersion: 0.95.0
     enableEditorDecorations: true
     enableFullHierarchyNoteTitle: false
+    enableHandlebarTemplates: false
+    templateHierarchy: template
 preview:
     enableFMTitle: true
     enableNoteTitleForLink: true
+    enableMermaid: true
     enablePrettyRefs: true
     enableKatex: true
     automaticallyShowPreview: false
@@ -83,6 +85,7 @@ preview:
 publishing:
     enableFMTitle: true
     enableNoteTitleForLink: true
+    enableMermaid: true
     enablePrettyRefs: true
     enableKatex: true
     assetsPrefix: /dendron-wiki
@@ -111,4 +114,4 @@ publishing:
     enablePrettyLinks: true
     theme: light
     enableTaskNotes: true
-    searchMode: lookup
+    templateVersion: 0.97.0
