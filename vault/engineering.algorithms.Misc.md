@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1665491734192
+updated: 1665648142638
 created: 1664382870554
 ---
 # Sequences
@@ -267,67 +267,3 @@ class Solution:
 ```
 </details>
 
-
-
-## LRU cache
-- [LRU](https://leetcode.com/problems/lru-cache)
-
-<details>
-<summary> <b>CODE</b> </summary>
-
-```Python
-class Node:
-    def __init__(self, key = None, val = None, next = None, prev = None):
-        self.key = key
-        self.val = val
-        self.next = next
-        self.prev = prev
-
-class LRUCache:
-
-    def __init__(self, cap: int):
-        self.cache = {}
-        self.cap = cap
-        self.head = Node()
-        self.tail = Node()
-        self.link(self.head,self.tail)
-        
-    def get(self, key: int) -> int:
-        if key not in self.cache: return -1
-        self.update(key)
-        return self.cache[key].val
-
-    def put(self, key: int, val: int) -> None:
-        if key not in self.cache:
-            if len(self.cache) == self.cap:
-                self.evict()
-            self.add(key,val)
-        else:
-            self.remove(key)
-            self.add(key,val)
-    
-    def add(self,key,val):
-        node = Node(key,val)
-        self.link(node,self.head.next)
-        self.link(self.head,node)
-        self.cache[key] = node
-        
-    def remove(self,key):
-        node = self.cache[key]
-        self.link(node.prev,node.next)
-        del self.cache[key]
-    
-    def evict(self):
-        self.remove(self.tail.prev.key)
-        
-    def link(self,a,b):
-        a.next,b.prev = b,a
-    
-    def update(self,key):
-        node = self.cache[key]
-        self.link(node.prev,node.next)
-        self.link(node,self.head.next)
-        self.link(self.head,node)
-```
-
-</details>
