@@ -21,7 +21,7 @@ As of 1st Oct 2022, I am in bronze division.
 - [meet in the middle](https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/)
 - [cow tipping](http://www.usaco.org/index.php?page=viewproblem2&cpid=689)
 - [cow features](http://www.usaco.org/index.php?page=viewproblem2&cpid=941)
-- 
+- [drought](http://usaco.org/index.php?page=viewproblem2&cpid=1181)
 - [out of place](http://www.usaco.org/index.php?page=viewproblem2&cpid=785)
 - 
 -
