@@ -18,7 +18,9 @@ commands:
     insertNoteIndex:
         enableMarker: false
     randomNote: {}
-    copyNoteLink: {}
+    copyNoteLink:
+        aliasMode: title
+    templateHierarchy: template
 workspace:
     vaults:
         -
@@ -34,6 +36,7 @@ workspace:
         addBehavior: asOwnDomain
     graph:
         zoomSpeed: 1
+        createStub: false
     enableAutoCreateOnDefinition: false
     enableXVaultWikiLink: false
     enableRemoteVaultInit: true
@@ -61,6 +64,9 @@ workspace:
             L: low
         todoIntegration: false
         createTaskSelectionType: selection2link
+        taskCompleteStatus:
+            - done
+            - x
     enableUserTags: true
     enableHashTags: true
     dendronVersion: 0.95.0
@@ -69,7 +75,6 @@ workspace:
 preview:
     enableFMTitle: true
     enableNoteTitleForLink: true
-    enableMermaid: true
     enablePrettyRefs: true
     enableKatex: true
     automaticallyShowPreview: false
@@ -78,7 +83,6 @@ preview:
 publishing:
     enableFMTitle: true
     enableNoteTitleForLink: true
-    enableMermaid: true
     enablePrettyRefs: true
     enableKatex: true
     assetsPrefix: /dendron-wiki
@@ -87,8 +91,7 @@ publishing:
         - root
     enableSiteLastModified: true
     siteRootDir: docs
-    siteUrl: 'https://ngocuong0105.github.io'
-    # logoPath: '/dendron-wiki/vault/assets/images/qed.png'
+    siteUrl: https://ngocuong0105.github.io
     enableFrontmatterTags: true
     enableHashesForFMTags: false
     enableRandomlyColoredTags: true
@@ -107,3 +110,5 @@ publishing:
         editViewMode: tree
     enablePrettyLinks: true
     theme: light
+    enableTaskNotes: true
+    searchMode: lookup
