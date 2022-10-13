@@ -14,7 +14,9 @@
 Unfortunately dendron does not support that in published pages. You can toggle only on your local.
 
 - image
+```
 ![name.png](assets/images/name.png)
+```
 
 - [mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams) enabled
 
