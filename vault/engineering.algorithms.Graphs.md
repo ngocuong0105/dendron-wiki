@@ -9,6 +9,9 @@ created: 1664382861926
 # Graph traversal
     Breadth First Search
     Depth First Search
+
+----
+
 # Connected components, bridges, articulations points
 
 ## Finding Connected Components
@@ -90,10 +93,16 @@ def articulation_point(adj):
 ```
 </details>
 
-    Strongly Connected Components and Condensation Graph
-    Strong Orientation
+- [malware spread](https://leetcode.com/problems/minimize-malware-spread-ii/); can be solved using simple dfs/bfs for each node in $O(N^3)$, use articulation points $O(N^2)$, DSU $O(N^2)$
+
+## Strongly Connected Components and Condensation Graph
+## Strong Orientation
+
+
+----
 
 # Single-source shortest paths
+
     Dijkstra - finding shortest paths from given vertex
     Dijkstra on sparse graphs
     Bellman-Ford - finding shortest paths with negative weights
