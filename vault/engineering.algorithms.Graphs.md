@@ -2,13 +2,15 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1665227190014
+updated: 1665673222866
 created: 1664382861926
 ---
 
 # Graph traversal
-    Breadth First Search
-    Depth First Search
+## Breadth First Search
+
+- [visit all](https://leetcode.com/problems/shortest-path-visiting-all-nodes/?envType=study-plan&id=dynamic-programming-iv)
+## Depth First Search
 
 ----
 
