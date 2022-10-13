@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1665227306559
+updated: 1665660757815
 created: 1664382752052
 ---
 
@@ -420,11 +420,11 @@ class NumMatrix:
 ## Sqrt Decomposition
 ## Segment Tree
 
-**Questions**
-- [Falling Squares](https://leetcode.com/problems/falling-squares/), [Skyline](https://leetcode.com/problems/the-skyline-problem/)
+
+- Questions: [Falling Squares](https://leetcode.com/problems/falling-squares/), [Skyline](https://leetcode.com/problems/the-skyline-problem/)
 
 - Segment Tree recursive, slower than iterative 2,3 times in practice
-- below is point update, range query - both $O(log(n))$
+- below is **point update, range query** - both $O(log(n))$
 - query can be sum, max, gcd. lcd etc (as long as it is a semi-ring)
 
 
@@ -473,7 +473,7 @@ st = SegmentTree(lambda x,y:x+y, lambda x,y: x+y)
 ```
 </details>
 
-- Segment tree, range update, range query - both $O(log(n))$
+- Segment tree with **range update, range query** - both $O(log(n))$
 - lazy update to have query in $O(logn)$
 - in both segment trees if you have been given array `nums` in advance you can do build in `__init__` in $O(n)$ time (recursively)
 
@@ -520,6 +520,77 @@ class SegmentTree:
 </details>
 
 
+**Assignment on segments**
+
+Suppose now that the modification query asks to assign each element of a certain segment `a[l...r]` to some value $x$.
+
+- store at each vertex of the Segment Tree whether the corresponding segment is covered entirely with the same value or not. Augment the segment tree with `self.marked = defaultdict(bool)`
+- "lazy" update: instead of changing all segments in the tree that cover the query segment, we only change some, and leave others unchanged. 
+
+- A marked vertex will mean, that every element of the corresponding segment is assigned to that value, and actually also the complete subtree should only contain this value.
+
+Small problem: assume you do `update(0,n-1)` and you keep info only in the root. Then you do a second `update(0,n//2)`. the info in the root is irrelevant as half of the values are with one value and the other half with another.
+
+The way to solve this is to push the information of the root to its children and then do the second update.
+
+- Question: [Range module](https://leetcode.com/problems/range-module/)
+
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+class SegmentTree:
+    def __init__(self):
+        self.T = defaultdict(bool)   # [0] * (4*N) takes values 0 or 1 whether segment is covered or not
+        self.marked = defaultdict(bool)
+        
+    # lazy propagation
+    def push(self, v):
+        if self.marked[v]:
+            for u in [2*v, 2*v+1]:
+                self.T[u] = self.T[v]
+                self.marked[u] = True
+            self.marked[v] = False
+
+    def update(self, v, tl, tr, l, r, h):
+        '''changes nums[l,r+1]'''
+        if l > r: return
+        if l == tl and r == tr:
+            self.T[v] = h
+            self.marked[v] = True
+        else:
+            self.push(v)
+            tm = (tl + tr)//2
+            self.update(v*2, tl, tm, l, min(r, tm), h)
+            self.update(v*2+1, tm+1, tr, max(l, tm+1), r, h)
+            self.T[v] = self.T[v*2] and self.T[v*2+1]
+
+    def query(self, v, tl, tr, l, r):
+        if l > r: return 1
+        if l == tl and tr == r: return self.T[v]
+        self.push(v)
+        tm = (tl + tr)//2
+        return self.query(v*2, tl, tm, l, min(r, tm)) and self.query(v*2+1, tm+1, tr, max(l, tm+1), r)
+
+class RangeModule:
+
+    def __init__(self):
+        self.sl = SegmentTree()
+        self.n = 10**9+1
+        
+    def addRange(self, l: int, r: int) -> None:
+        self.sl.update(1,0,self.n-1,l,r-1,True)
+
+    def queryRange(self, l: int, r: int) -> bool:
+        return self.sl.query(1,0,self.n-1,l,r-1) == 1
+
+    def removeRange(self, l: int, r: int) -> None:
+        self.sl.update(1,0,self.n-1,l,r-1,False)
+```
+
+</details>
+
 ## Treap
 ## Sqrt Tree
 ## Randomized Heap
@@ -527,3 +598,263 @@ class SegmentTree:
 Advanced
     Deleting from a data structure in O(T(n) log n)
 
+
+
+## LRU cache
+
+`LRUCache(int capacity)` Initialize the LRU cache with positive size `capacity`.
+
+`int get(int key)` Return the value of the key if the key exists, otherwise return -1.
+
+`void put(int key, int value)` Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If reach capacity **evict** the least recently used key.
+
+**Algorithm:**
+
+- [LRU](https://leetcode.com/problems/lru-cache)
+- $O(1)$ amortised for put and get
+- use hashmap to map keys to nodes (nodes has key, val, prev and next)
+- use Dlink (represented below as `self.head` and `self.tail`) to track least recently used element (it would be at the tail)
+
+`__init__`
+```Python
+self.cache = {}
+self.cap = cap
+self.head = Node()
+self.tail = Node()
+```
+
+`get(key)`
+1. if key not in cache return -1
+2. else: update(key) 
+3. return `self.cache[key].val`
+
+`put(key,val)`
+1. if key in cache: update(key) and change the val
+2. else: 
+    - if cache is full: evict()
+    - add(key,val)
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+class Node:
+    def __init__(self, key = None, val = None, next = None, prev = None):
+        self.key = key
+        self.val = val
+        self.next = next
+        self.prev = prev
+
+class LRUCache:
+
+    def __init__(self, cap: int):
+        self.cache = {}
+        self.cap = cap
+        self.head = Node()
+        self.tail = Node()
+        self.link(self.head,self.tail)
+        
+    def get(self, key: int) -> int:
+        if key not in self.cache: return -1
+        self.update(key)
+        return self.cache[key].val
+
+    def put(self, key: int, val: int) -> None:
+        if key not in self.cache:
+            if len(self.cache) == self.cap:
+                self.evict()
+            self.add(key,val)
+        else:
+            self.remove(key)
+            self.add(key,val)
+    
+    def add(self,key,val):
+        node = Node(key,val)
+        self.link(node,self.head.next)
+        self.link(self.head,node)
+        self.cache[key] = node
+        
+    def remove(self,key):
+        node = self.cache[key]
+        self.link(node.prev,node.next)
+        del self.cache[key]
+    
+    def evict(self):
+        self.remove(self.tail.prev.key)
+        
+    def link(self,a,b):
+        a.next,b.prev = b,a
+    
+    def update(self,key):
+        node = self.cache[key]
+        self.link(node.prev,node.next)
+        self.link(node,self.head.next)
+        self.link(self.head,node)
+```
+
+</details>
+
+
+## LFU cache
+
+`LFUCache(int capacity)` Initializes the object with the `capacity` of the data structure.
+
+`int get(int key)` Gets the value of the key if the key exists in the cache. Otherwise, returns -1.
+
+`void put(int key, int value)` Update the value of the key if present, or inserts the key if not already present. If reach capacity **evict** least frequently used. Ties are resolved using least recently used. (LFU,LRU)
+
+- [LFU](https://leetcode.com/problems/lfu-cache/)
+- $O(1)$ amortised for put and get
+- idea: for every frequency create a doubly linked list (LRU idea)
+
+**Algorithm:**
+
+`get(key)`
+1. query the node by calling self._node[key]
+2. find the frequency by checking node.freq, assigned as f, and query the DLinkedList that this node is in, through calling self._freq[f]
+3. pop this node
+4. update node's frequence, append the node to the new DLinkedList with frequency f+1
+5. if the DLinkedList is empty and self._minfreq == f, update self._minfreq to f+1.
+6. return node.val
+
+`put(key, value)`
+1. If key is already in cache, do the same thing as get(key), and update node.val as value
+2. Otherwise:
+    - if the cache is full, pop the least frequenly used element (*)
+    - add new node to self._node
+    - add new node to self._freq[1]
+    - reset self._minfreq to 1
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+class Node:
+    def __init__(self, key=None, val=None, freq=1, prev=None, next=None):
+        self.key = key
+        self.val = val  
+        self.freq = freq
+        self.prev = prev    
+        self.next = next
+        
+class DLink:
+    def __init__(self):
+        self.head = Node()
+        self.tail = Node()
+        self.link(self.head,self.tail)
+        
+    def pop(self,node):
+        self.link(node.prev,node.next)
+        
+    def append(self,node):
+        self.link(node,self.head.next)
+        self.link(self.head,node)
+    
+    def link(self,a,b):
+        a.next,b.prev = b,a
+    
+    def is_empty(self):
+        return self.head.next == self.tail
+
+class LFUCache:
+
+    def __init__(self, cap: int):
+        self.cap = cap
+        self.cache = {}
+        self.freq = defaultdict(DLink)
+        self.min_freq = 0
+        
+    def get(self, key: int) -> int:
+        if key not in self.cache: return -1
+        self.update(key)
+        return self.cache[key].val
+
+    def put(self, key: int, val: int) -> None:
+        if self.cap == 0: return
+        if key in self.cache:
+            self.update(key)
+            self.cache[key].val = val
+        else:
+            if len(self.cache) == self.cap:
+                self.evict()
+            self.add(key,val)
+    
+    def update(self,key):
+        node = self.cache[key]
+        self.freq[node.freq].pop(node)
+        if self.freq[node.freq].is_empty() and self.min_freq == node.freq:
+            self.min_freq += 1
+        node.freq += 1
+        self.freq[node.freq].append(node)
+
+    def add(self, key, val):
+        node = Node(key,val)
+        self.freq[1].append(node)
+        self.cache[key] = node
+        self.min_freq = 1
+
+    def evict(self):
+        node = self.freq[self.min_freq].tail.prev
+        self.freq[self.min_freq].pop(node)
+        del self.cache[node.key]
+```
+</details>
+
+Additionally, you can implement a dynamic balanced binary tree `SortedList()` solution by adding the notion of frequency and time. get and put would be $O(logn)$.
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+from sortedcontainers import SortedList
+
+class LFUCache:
+
+    def __init__(self, capacity: int):
+        self.cap = capacity
+        self.cache = {}
+        self.sl = SortedList() # [counter,time,key,value]
+        self.time = 0
+        
+    def get(self, key: int) -> int:
+        if key not in self.cache: return -1
+        el = self.cache[key]
+        self._increase_count(el)
+        self.time += 1
+        # print(self.sl, self.cache)
+        return el[-1]
+
+    def put(self, key: int, value: int) -> None:
+        if self.cap == 0: return
+        old_freq = 0
+        if key in self.cache:
+            old_freq = self.cache[key][0]
+            self._delete(self.cache[key])
+            del self.cache[key]    
+            
+        if len(self.cache) == self.cap:
+            el = self.sl.pop(0)
+            del self.cache[el[2]]
+            
+        el = (1+old_freq, self.time, key, value)
+        self.cache[key] = el
+        self._add(el)        
+        self.time += 1
+            
+    def _add(self, el):
+        self.sl.add(el)
+        
+    def _delete(self, el):
+        self.sl.remove(el)
+        
+    def _increase_count(self, el):
+        self.sl.remove(el)
+        del self.cache[el[2]]
+        new_el = list(el)
+        new_el[0] += 1
+        new_el[1] = self.time
+        new_el = tuple(new_el)
+        self.sl.add(new_el)
+        self.cache[new_el[2]] = new_el 
+```
+</details>
