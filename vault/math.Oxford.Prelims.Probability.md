@@ -31,6 +31,11 @@ probability generating function, branching processes, solution to probability of
 
 use pgfs to compute $P(X mod 2 = 0)$, hint $G(1), G(-1)$. 
 
+pgf helps to prove sum of independent distribution is another distribution
+use $G_{X+Y}(s) = G_{X}(s)G_{Y}(s)$ and that pgf defines **uniquely** the distribution
+
+use pgf's to compute distribution. $P(X = k) = \text{k-th derivative} G_X(0)$, eval derivatives at 0, need to be easility differentiable
+
 cts random variables, cdf, pdf
 
 pdf has similar properties as pmf but is NOT a probability.
@@ -380,8 +385,33 @@ probability of winning are sum of geometric series. Mean durtion of game is 3.
 Q4. Sum of $N$ **alternative** geometric distributions. 
 
 Q5.
+- a) $G_N(G_X(s))$ where $N ~ \text{Alternative Geometric}$ and $X ~ Ber(1/2)$, differentiate pgf many times and evaluate at 0
+- b) 
 
-Q6. eavluate pgf at smart points [trick](https://math.stackexchange.com/questions/458549/probability-that-number-of-heads-flipped-is-divisible-by-3)
+Q6. 
+- a) $np$, $np(1-p)$
+- b) $\dfrac{1+(1-2p)^n}{2}$, eval pgf at -1
+- c) evaluate pgf at smart points [trick](https://math.stackexchange.com/questions/458549/probability-that-number-of-heads-flipped-is-divisible-by-3)
+
+In this case the pgf evaluated at 3rd non trivial roots of unity $w^3 = 1$ is
+$G_{X}(w) = 1 - w^2 P(X \% 3 = 1) - w P(X \% 3 =2)$, the pgf is known at $w_1, w_2$, so you can compute the probabilities.
+
+
+Q7. Use $G_{X+Y}(s) = G_{X}(s) G_{Y}(s)$. Then use bayesien theorem to prove the condinitonal probability  is binomial distribution.
+
+Q8. Skipped
+
+Q9. Coupon-collecting problem, geometric distributions, pgf is known.
+
+Q10. derivative of pgf evaluated at 1 is mean - directly from derivative of infinite sum series. for second prove need to use $\phi(1) = 1$.
+- $\dfrac{a}{a+b-ab}$ two conditional probabilities from A and B points of view.
+- distribution is something like geometric
+- condition expectation. $e_{A} = (1-b)e_{B} + 1$, similarly for $B$. Answer $\dfrac{2-a}{a+b-ab}$
+
+Q11. 
+- a) $F = \sum_{i = 1}^{N} I_{i}$ sum of independent Bernoulli. $G_F(s) = G_N(G_I(s))$
+- b) directly from pgf definition, pgf denies distribution uniquely
+- c) $G_N(s) = G_{F+S}(s) = G_{F}(s) G_{S}(s) = G_{N}(\dfrac{s+1}{2})^2$ last eq come from a).
 
 # Chapter 5. Continuous random variables
 
