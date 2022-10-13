@@ -18,7 +18,9 @@ commands:
     insertNoteIndex:
         enableMarker: false
     randomNote: {}
-    copyNoteLink: {}
+    copyNoteLink:
+        aliasMode: title
+    templateHierarchy: template
 workspace:
     vaults:
         -
@@ -34,6 +36,7 @@ workspace:
         addBehavior: asOwnDomain
     graph:
         zoomSpeed: 1
+        createStub: false
     enableAutoCreateOnDefinition: false
     enableXVaultWikiLink: false
     enableRemoteVaultInit: true
@@ -64,6 +67,9 @@ workspace:
         taskCompleteStatus:
             - done
             - x
+        taskCompleteStatus:
+            - done
+            - x
     enableUserTags: true
     enableHashTags: true
     dendronVersion: 0.95.0
@@ -74,7 +80,6 @@ workspace:
 preview:
     enableFMTitle: true
     enableNoteTitleForLink: true
-    enableMermaid: true
     enablePrettyRefs: true
     enableKatex: true
     automaticallyShowPreview: false
@@ -83,7 +88,6 @@ preview:
 publishing:
     enableFMTitle: true
     enableNoteTitleForLink: true
-    enableMermaid: true
     enablePrettyRefs: true
     enableKatex: true
     assetsPrefix: /dendron-wiki
