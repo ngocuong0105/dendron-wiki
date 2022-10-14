@@ -2,11 +2,10 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1665484417840
+updated: 1665755749863
 created: 1658766702063
 ---
 
-**Jivota e bolka i zadachi**
 
 Resources:
 - [cp algos](https://cp-algorithms.com/)
