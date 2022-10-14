@@ -5,6 +5,7 @@ docs
 .next
 .history
 .backup
+.gitignore
 # private stuff
 vault/journal.temporary.md
 vault/interviews.Negotiation.md
