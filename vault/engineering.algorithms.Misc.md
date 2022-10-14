@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1665648142638
+updated: 1665779941021
 created: 1664382870554
 ---
 # Sequences
@@ -80,8 +80,8 @@ def maxSubArray(nums: List[int]) -> int:
 
 **Solution 2.**
 - Kadane algo
-- compute partial/cumulative sum `sm` as we go. If negative rest to 0
-- our maximum subarray must start at a critical point when $sm < 0$
+- compute partial/cumulative sum `sm` as we go. If negative restart to 0
+- our maximum subarray must start at a critical point when $sm < 0$ proof bby minimality + contradiction.
 
 <details>
 <summary> <b>CODE</b> </summary>
