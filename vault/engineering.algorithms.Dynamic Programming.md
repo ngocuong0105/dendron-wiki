@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1665731543119
+updated: 1665827877728
 created: 1664382766630
 ---
 - [remove boxes](https://leetcode.com/problems/remove-boxes/)
@@ -10,3 +10,4 @@ created: 1664382766630
 - [domino tromino](https://leetcode.com/problems/domino-and-tromino-tiling/)
 - [merge stones](https://leetcode.com/problems/minimum-cost-to-merge-stones/)
 - [smallest sufficient team](https://leetcode.com/problems/smallest-sufficient-team/)
+- [student exams](https://leetcode.com/problems/maximum-students-taking-exam/)
