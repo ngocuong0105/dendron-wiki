@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1665680858029
+updated: 1665834063773
 created: 1658698294975
 ---
 
@@ -127,6 +127,17 @@ IFNULL(field, 0) AS field
 ```sql
 DELETE FROM table_name WHERE condition;
 ```
+- delete [problem](https://leetcode.com/problems/delete-duplicate-emails/), cannot delete from referenced table and need to create a temporary copy
+
+```sql
+# delete from person
+# where id not in (select min(id) from person group by email) 
+
+# create temporary copy of table
+delete from person
+where id not in (select t.id from (select min(id) as id from person group by email) t)
+
+```
 
 - substring
 ```sql
@@ -151,7 +162,24 @@ SELECT column_name(s)
 FROM table_name
 WHERE column_name BETWEEN value1 AND value2;
 ```
+- [2388](https://leetcode.com/problems/change-null-values-in-a-table-to-the-previous-value/) Change Null Values in a Table to the Previous Value
+```sql
+with cte as (select *, row_number() over() as row_num, if(isnull(drink),0,1) as flag from coffeeshop),
+     cte2 as (select *, sum(flag) over(order by row_num) as group_id from cte)
+select id, first_value(drink) over(partition by group_id) as drink
+from cte2
+```
 
+- concatanete two strings
+```sql
+select concat(s1,s2) as combined 
+from t
+```
+- lower case, upper case
+```sql
+select lower(s), upper(s)
+from t
+```
 
 - functions in SQL [leetcode](https://leetcode.com/problems/nth-highest-salary/)
 ```sql
@@ -232,6 +260,13 @@ LEAD (salary,1) OVER (ORDER BY salary) AS next_highest_salary
 FROM employees;
 ```
 
+- like, search in substring, [patients](https://leetcode.com/problems/patients-with-a-condition/)
+```sql
+select col
+from table
+where col like '%KUR%'
+```
+
 - to get island values (group of equal consecutive values in a column) use rank- rank trick, [leetcode](https://leetcode.com/problems/longest-winning-streak/)
 
 - CAST to datatypes
@@ -243,7 +278,38 @@ CAST(<value_to_cast> AS <data_type_to_cast_to>)
 */
 ```
 
-- pivot table with group_concat
+- put stuff in one cell table with group_concat
+```
++------------+------------+
+| sell_date  | product     |
++------------+------------+
+| 2020-05-30 | Headphone  |
+| 2020-06-01 | Pencil     |
+| 2020-06-02 | Mask       |
+| 2020-05-30 | Basketball |
+| 2020-06-01 | Bible      |
++------------+------------+
+
+TO
+
++------------+----------+------------------------------+
+| sell_date  | num_sold | products                     |
++------------+----------+------------------------------+
+| 2020-05-30 | 3        | Basketball,Headphone,T-shirt |
+| 2020-06-01 | 2        | Bible,Pencil                 |
+| 2020-06-02 | 1        | Mask                         |
++------------+----------+------------------------------+
+```
+
+```sql
+# Write your MySQL query statement below
+select sell_date, 
+count(distinct product) as num_sold, 
+group_concat(distinct product order by product separator ',') as products
+from activities
+group by sell_date
+order by sell_date
+```
 
 - pivot trick [student by geography](https://leetcode.com/problems/students-report-by-geography/)
 
