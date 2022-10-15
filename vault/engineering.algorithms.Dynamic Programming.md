@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1665827877728
+updated: 1665828229101
 created: 1664382766630
 ---
 - [remove boxes](https://leetcode.com/problems/remove-boxes/)
