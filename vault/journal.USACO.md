@@ -2,7 +2,7 @@
 id: maki4i54gl6bqto8uf29d2n
 title: USACO
 desc: ''
-updated: 1665779845383
+updated: 1666014025381
 created: 1664646684679
 ---
 
@@ -25,7 +25,7 @@ As of 1st Oct 2022, I am in bronze division.
 - [cow features](http://www.usaco.org/index.php?page=viewproblem2&cpid=941)
 - [drought](http://usaco.org/index.php?page=viewproblem2&cpid=1181)
 - [out of place](http://www.usaco.org/index.php?page=viewproblem2&cpid=785)
-- 
+- [paint the barn](http://www.usaco.org/index.php?page=viewproblem2&cpid=919)
 - [gcd on board](https://atcoder.jp/contests/abc125/tasks/abc125_c)
 - [race](http://www.usaco.org/index.php?page=viewproblem2&cpid=989)
 
