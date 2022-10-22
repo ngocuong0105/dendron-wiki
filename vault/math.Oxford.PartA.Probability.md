@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1666335763493
+updated: 1666337128816
 created: 1664832112863
 ---
 
@@ -84,7 +84,6 @@ WLLN in convergence in probability.
 $S_n  = X_1 + ... X_n$, where $X_1, ... X_n$ are iid with finite variance. Then:
 
 $P(|\dfrac{S_n}{n}  - \mu| < \epsilon) \rightarrow 1$ as $n \rightarrow \infty$
-
 proove it using Chebyshevs inequality.
 
 CLT - convergence in distribution (standard normal). The fluctuations of $S_n = X_1 + ... + X_n$ around $n\mu$ is of order $\sqrt{n}$.

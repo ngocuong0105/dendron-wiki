@@ -2,7 +2,7 @@
 id: maki4i54gl6bqto8uf29d2n
 title: USACO
 desc: ''
-updated: 1666175912745
+updated: 1666369339969
 created: 1664646684679
 ---
 
@@ -29,3 +29,4 @@ As of 1st Oct 2022, I am in bronze division.
 - [gcd on board](https://atcoder.jp/contests/abc125/tasks/abc125_c)
 - [race](http://www.usaco.org/index.php?page=viewproblem2&cpid=989)
 - [rectangular pasture](http://www.usaco.org/index.php?page=viewproblem2&cpid=1063)
+- [lifeguards](http://www.usaco.org/index.php?page=viewproblem2&cpid=786)
