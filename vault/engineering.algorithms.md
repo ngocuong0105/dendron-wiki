@@ -2,13 +2,14 @@
 id: 7m3gais9ll8mlmzqlw08s7g
 title: Algorithms
 desc: ''
-updated: 1665755749863
+updated: 1666360881772
 created: 1658766702063
 ---
 
 
 Resources:
 - [cp algos](https://cp-algorithms.com/)
+- [e-maxx](https://github.com/e-maxx-eng/e-maxx-eng)
 - [dbabichev](https://flykiller.github.io/)
 - [pyrival](https://github.com/ngocuong0105/PyRival)
 - [usaco](https://usaco.guide/CPH.pdf)
