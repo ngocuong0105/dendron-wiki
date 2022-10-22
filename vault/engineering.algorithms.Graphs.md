@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1666447457166
+updated: 1666448017053
 created: 1664382861926
 ---
 
@@ -98,6 +98,7 @@ def articulation_point(adj):
 - [malware spread](https://leetcode.com/problems/minimize-malware-spread-ii/); can be solved using simple dfs/bfs for each node in $O(N^3)$, use articulation points $O(N^2)$, DSU $O(N^2)$
 
 ## Strongly Connected Components and Condensation Graph
+
 ## Strong Orientation
 
 
@@ -285,6 +286,8 @@ def solve(nums,N,K,S):
 ```
 </details>
 
+- binary lifting = jumps
+
 <details>
 <summary> <b>CODE</b> </summary>
 
@@ -333,7 +336,10 @@ def solve2(nums,N,K,S):
 
 ## Lowest Common Ancestor - Farach-Colton and Bender algorithm
 ## Solve RMQ by finding LCA
-##Lowest Common Ancestor - Tarjan's off-line algorithm
+
+## Lowest Common Ancestor - Tarjan's off-line algorithm
+
+-----------------------------------------
 # Flows and related problems
     Maximum flow - Ford-Fulkerson and Edmonds-Karp
     Maximum flow - Push-relabel algorithm
