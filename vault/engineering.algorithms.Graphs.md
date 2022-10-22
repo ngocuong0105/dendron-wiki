@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1665673222866
+updated: 1666353719541
 created: 1664382861926
 ---
 
@@ -159,11 +159,114 @@ print(cycle)
 
 
 # Lowest common ancestor
-    Lowest Common Ancestor
-    Lowest Common Ancestor - Binary Lifting
-    Lowest Common Ancestor - Farach-Colton and Bender algorithm
-    Solve RMQ by finding LCA
-    Lowest Common Ancestor - Tarjan's off-line algorithm
+## Lowest Common Ancestor
+Given a tree $G$ find the lowest common ancestor of two nodes $(u,v)$. If you have to do just once it is easy, see [lca](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+def lca(root, p, q):
+    if not root or root == p or root == q:
+        return root
+    l,r = lca(root.left),lca(root.right)
+    if l and r: return root
+    return l if l else r
+```
+</details>
+
+More interesting is when you have **queries** $(u_i,v_i)$. Note lca lies on shortest path.
+
+Euler path
+
+
+## Lowest Common Ancestor - Binary Lifting
+Binary tree lifting is also known as jump pointers. Idea: Number of powers of two is logarithmic. [Errihto](https://www.youtube.com/watch?v=oib-XsjFa-M&t=579s&ab_channel=Errichto).
+
+With Binary tree lifting you can answer questions such as given a tree, what is its k-th ancestor.
+
+**Define** $u[v][j]$ is the $2^j$-th ancestor of v.
+
+$u[v][j]$ is the $2^j$-th ancestor of v.
+$u[v][0] = parent[v]$ - that is my first parent
+$u[v][1] = u[u[v][0]][0]$ - what is my second parent? first parent of my first parent
+$u[v][2] = u[u[v][1]][1]$ - what is my fourth parent? second parent of my second parent
+
+```Python
+# parent[i] if the parent of node i
+log = len(bin(n))
+parent[0] = 0 # root
+for i in range(len(parent)):
+    up[i][0] = parent[i]
+for j in range(1,log):
+    for i in range(n):
+        up[i][j] = up[up[i][j-1]][j-1]
+        
+def getKthAncestor(node: int, k: int) -> int:
+    # if depth[node] < k: return -1
+    for j in range(log):
+        if k & (1<<j):
+            node = up[node][j]
+    return node
+```
+
+careful with for loops, you might need $parent[i] < i$ to do preprocessing (computing) matrix $u$ (depending on your loop order).  
+
+- [Kth ancestor](https://leetcode.com/problems/kth-ancestor-of-a-tree-node/) 
+
+**Complexity:** $O(nlog(n))$ on preprocessing and $O(log(n))$ per query.
+
+
+**Lowest common ancestor**
+
+For queries with nodes $(u,v)$ we want to get the lowest common ancestor of $u$ and $v$.
+
+Idea: Run dfs, record for each nodes `timein` and `timeout`. This helps to answer if $u$ is ancestor ov $v$ or vice versa.
+
+Start from the top $up[u][L]$ = the highest ancestor of $u$. Decrement $L$ checking if $up[u][i]$ is ancestor of $v$. Goal is to find highest ancestor of u which is not ancestor of $v$, return $up[u][0]$.
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+def is_ancestor(p,q):
+    return timein[p] <= timein[q] and timeout[p] >= timeout[q]
+
+def lca(p,q):
+    if is_ancestor(p,q): return p
+    if is_ancestor(q,p): return q
+    for i in range(l-1,-1,-1):
+        if not is_ancestor(up[p][i],q):
+            p = up[p][i]
+    return up[p][0]
+
+def dfs(root,p):
+    nonlocal time
+    if not root: return
+    timein[root] = time
+    time += 1
+    up[root] = [None]*l
+    up[root][0] = p
+    for i in range(1,l):
+        up[root][i] = up[up[root][i-1]][i-1]
+    dfs(root.left, root)
+    dfs(root.right, root)
+    timeout[root] = time
+    
+time,l = 0,20 # supports 2**19 nodes
+up,timein,timeout = {},{},{}
+dfs(root,root)
+    
+print(lca(p,q)) # lowest common ancestor
+```
+</details>
+
+
+#QED
+
+## Lowest Common Ancestor - Farach-Colton and Bender algorithm
+## Solve RMQ by finding LCA
+##Lowest Common Ancestor - Tarjan's off-line algorithm
 # Flows and related problems
     Maximum flow - Ford-Fulkerson and Edmonds-Karp
     Maximum flow - Push-relabel algorithm
