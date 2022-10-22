@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1666353719541
+updated: 1666447457166
 created: 1664382861926
 ---
 
@@ -261,6 +261,73 @@ print(lca(p,q)) # lowest common ancestor
 ```
 </details>
 
+- [longest good segement](https://www.codechef.com/problems/LGSEG)
+
+
+- semi brute force, for each index i (starting index), find largest good segment
+- $O(n^2)$
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+def solve(nums,N,K,S):
+    def compute(i):
+        seg,curr,j = 1,nums[i],i+1
+        while seg <= K and j<N:
+            if curr + nums[j] > S:
+                curr = 0
+                seg += 1
+            curr += nums[j]
+            j += 1
+        return j-i-(seg>K)
+    return max(compute(i) for i in range(N))
+```
+</details>
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+
+def build(N,start_index):
+    up = [[None]*N for _ in range(20)]
+    up[0] = start_index
+    for i in range(1,20):
+        for j in range(N):
+            p = up[i-1][j]
+            if p == -1:
+                up[i][j] = -1
+            else:
+                up[i][j] = up[i-1][p]
+    return up
+
+def call(up, node, K):
+    last,jump = node,1
+    for i in range(19):
+        if node == -1: break
+        if K & jump:
+            node = up[i][node]
+        jump <<= 1
+    return last-node
+
+def solve2(nums,N,K,S):
+    start_index,j,curr = [],0,0
+    for i in range(N):
+        curr += nums[i]
+        while curr > S:
+            curr -= nums[j]
+            j += 1
+        start_index.append(j-1)
+    
+    up = build(N,start_index)
+    res = 0
+    for i in range(N-1,-1,-1):
+        res = max(res, call(up,i,K))
+    return res
+
+```
+</details>
 
 #QED
 
