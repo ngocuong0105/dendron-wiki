@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1666337128816
+updated: 1666519051571
 created: 1664832112863
 ---
 
@@ -35,6 +35,38 @@ Binomial with small probability and many events is poisson
 
 Binomial = sum of Beornoulli. If fixed $p$, then by CLT Binomial converges to Normal distribution. Consider $W_n ~ Bin(n,p_n)$, where $p_n$ converges to 0. Assume the expected total number of successes stays approximately the same $np_n = \lambda$. Then Binomial converges to Poisson. 
 
+
+generating functions are used to compute moments and pmfs. Take kth derivative and evaluate at 0 or 1.
+
+Pgf-s used for discrete random variables $E(z^{X})$.
+
+Mgf-s used for continuous random variables $E(e^{tX})$.
+
+Mgfs and Pgfs define uniquely the distribution of random variables.
+
+For $M_{X_1},M_{X_2} ... M_{X_n}$ if $M_{X_n} \rightarrow M_{X}$ then $X_{n} \rightarrow X$ in distribution as $n \rightarrow \infty$.
+
+
+Proof WLLN CLT using mgfs and above fact
+
+Chebyshev’s inequality, which is the application of Markov’s inequality to the random variable $(X − \mu)^2$.
+
+Markovs inequality is about bouding the tails of non-negative distributions.
+$P(X>a) \leq \dfrac{E(X)}{a}$
+
+
+Fact: For standard normal random variable $P(X > 3) \approx 10^{-3}$
+
+Markov chain is a sequence of variables satisfying the Markov property
+
+$P(X_{n+1} = i_{n+1} | X_n = i_n ,..., X_0 = i_0) = P(X_{n+1} = i_{n+1} | X_n = i_n)$.
+
+
+To describe a time homogeneous Markov chain you need the initial distribution of $X_0$ and a **transition matrix** $P = (p_{ij})_{i,j \in I}$
+
+The matrix $P$ is indexed by the state space $I$. $P$ has non-negative entries and each row sums to 1.
+
+Markov chains are memoryless.
 
 # Chapter 1. Recap Prelims
 
@@ -91,3 +123,105 @@ CLT - convergence in distribution (standard normal). The fluctuations of $S_n = 
 Binomial with small probability and many events is poisson
 
 Binomial = sum of Beornoulli. If fixed $p$, then by CLT Binomial converges to Normal distribution. Consider $W_n ~ Bin(n,p_n)$, where $p_n$ converges to 0. Assume the expected total number of successes stays approximately the same $np_n = \lambda$. Then Binomial converges to Poisson. 
+
+# Chapter 3. Generating functions
+
+The generating function of random variable $X$ is $G(z) = E(z^{X})$
+
+Using generating dunctions you can compute moments and the pmf of $X$. Take kth derivative and evaluate at 0 or 1.
+
+**Theorem 3.2** (Uniqueness theorem for probability generating functions). If X and Y have the same generating function, then they have the same distribution.
+
+
+Generating functions for independen rvs: $G_{X+Y}(z) = G_{X}(z)G_{Y}(z)$
+
+Generating functions used for random sums: $G_{S}(z) = G_{N}(G_{X}(z))$
+
+**Probability genrating functions** are used for discrete random variables!
+
+
+**Moment generating function** of a random variable is $M_X{t} = E(e^{tX})$
+
+Mgf is Pgf with  $z = e^t$
+
+We use $e^{t}$ because we can expand around $t=0$. If we expand around $z=0$ we would no longer have power series in the general case for cts variables.
+
+Assuming the mgf exists (the expecation is finite), Taylor expansion:
+
+$M_{X}(t) = \sum_{k=0}^{\infty} \dfrac{t^{k}E(X^k)}{k!}$
+
+$M_{X}^{(k)}(0) = E(X^{k})$
+
+
+Mgfs and Pgfs define uniquely the distribution of random variables.
+
+For $M_{X_1},M_{X_2} ... M_{X_n}$ if $M_{X_n} \rightarrow M_{X}$ then $X_{n} \rightarrow X$ in distribution as $n \rightarrow \infty$.
+
+
+Fact For standard normal random variable $P(X > 3) \approx 10^{-3}$.
+
+**Characteristic functions**
+
+Replace in mgf $t$ with $it$
+
+$\phi_{X}(t) = E(e^{itX}) = E(cos(tx)) + iE(sin(tX))$.
+
+Results for mgf hold for cgf too.
+
+**Mgf vs Cgf**
+
+Cgf does not require exponentially decaying tails (it is all on complex plain). Mgf to proove CLT uses exponential decay (finite expectation).
+
+Mgf could be used to show bounds of tails (using Markov inequality, see section 3.3). CGf just does not makes sense as we use complex numbers and cannot compare them.
+
+# Chapter 4. Joint distributions of continuous random variables
+
+
+
+# Chapter 5. Markov chains
+
+Let $X = (X_0 , X_1 , X2 , ...)$ be a sequence of random variables taking values in some state space $I$. The process $X$ is called a Markov chain if for any $n \geq 0$ and any $i_0 , i_1 , . . . , i_{n+1} \in I$,
+
+$P(X_{n+1} = i_{n+1} | X_n = i_n ,..., X_0 = i_0) = P(X_{n+1} = i_{n+1} | X_n = i_n)$.
+
+The Markov chain is called **(time) homogeneous** if in addition $P(X_{n+1} = j| X_{n} = i)$ does not depend on $n$. Then $p_{ij} = P(X_{n+1} = j| X_{n} = i)$ and these are called **transition** probabilities of the chain.
+
+To describe a time homogeneous Markov chain you need the initial distribution of $X_0$ and a **transition matrix** $P = (p_{ij})_{i,j \in I}$
+
+The matrix $P$ is indexed by the state space $I$. $P$ has non-negative entries and each row sums to 1.
+
+Markov chains are memoryless.
+
+We can say that “the future is independent of the past, given the present”.
+
+**Theorem 5.2. (Chapman-Kolmogorov equations)**
+
+- To reach from $i$ to $k$ in $m+n$ steps try middle: $p_{ik}^{m+n} = p_{ij}^{m} p_{jk}^{n}$
+- To reach from $i$ to $j$ in $n$ steps: $p_{ij}^{n} = (P^n)_{i,j}$ 
+
+**Theorem 5.3** If $\lambda$ is the initial distribution, then the distribution of $X_n$ is $\lambda P^{n}$.
+
+
+**Class structure** of state space of Markov chains.
+
+We say state $i$ communicates with state $j$ if we can reach from $i \rightarrow j$, that is $p_{ij}^{n}$ is positive for some $n$ (after certain number of steps we can reach from $i$ to $j$) and vice verca.
+
+A class of states $C$ is **closed** if the probability to go out of the class is 0.
+
+If the class $\{i\}$ is closed then we call it an **absorbing state**.
+
+A state $I$ is **irreducible** if all states communicate (can reach from elsewhere to everywhere).
+
+**Period** of a state $i$ is the least number of steps after which you will be back and back and back ... in $i$, that is the gcd of the set $\{ n \geq 1: p_{ii}^{n}\}$, if it does not exist (never go back, p_{ii}^{n} = 0)then the period is not defined.
+
+$i$ is called **aperiodic** if this g.c.d. is 1. Example: go back in 1, 3, 7 steps
+
+**Fact. All states in a communicating class have the same period.**
+In particular, if a chain is irreducible, then all states have the same period.
+
+**Hitting probabilities**
+
+Define $h_{i}^{A} = P_{i}(X_{n} \in A \texttt{for some} n \geq 0)$, the hitting
+probability of $A$ starting from state $i$. If $A$ is a closed class we call that the **absorbtion probability**.
+
+```Continue with Transient and Reccurence``` of states definition

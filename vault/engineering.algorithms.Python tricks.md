@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1664533239795
+updated: 1666556290379
 created: 1664446506779
 ---
 
@@ -88,4 +88,14 @@ pref = list(accumulate(nums))
 - max with key, array of arrays, return array of max length
 ```Python
 max(arrs, key = len) # gives array of maximul length
+```
+
+- custom comparator in sorting, sorted(), sort, key, compare
+```Python
+from functools import cmp_to_key
+def compare(x, y):
+     return x[0] - y[0]
+ 
+data = [(4, None), (3, None), (2, None), (1, None)]
+sorted(data, key=cmp_to_key(compare))
 ```

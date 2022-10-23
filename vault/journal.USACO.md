@@ -2,19 +2,24 @@
 id: maki4i54gl6bqto8uf29d2n
 title: USACO
 desc: ''
-updated: 1666471979846
+updated: 1666553882334
 created: 1664646684679
 ---
 
 USACO is the US highschool olympiad used for selection for IOI. 
 
-I've been doing leetcode for the last 22 months and feel ready to do competitive programming. Thus in Sept 2022, I decided to start with USACO - 25 years old and back to highschool...
+I've been doing leetcode for the last 22 months and feel ready to do competitive programming. Thus in Sept 2022, I decided to start with USACO - 25 years old and back to high school...
 
 As of 1st Oct 2022, I am in bronze division.
 
-8th Oct - just leaned I could get test casses for the problems... Click on the problem name when open USACO's IDE.
+8th Oct 2022 - just leaned I could get test casses for the problems... Click on the problem name when open USACO's IDE.
 
-14th Oct - Moved to Silver. Bronze went well overall. Just 3-4 Very Hard questions are remaining (haven't tried yet.) 
+14th Oct 2022 - Moved to Silver. Bronze went well overall. Just 3-4 Very Hard questions are remaining (haven't tried yet.) 
+
+23th Oct 2022 - USACO is fucking hard to me. Some teenagers are able to solve these stuff. WTF. Problems are really coold though. Require lots of analysis before writing code.
+They are very similar to problems at high school math competitions. Also in order to solve harder problems you really need to believe in yourself and keep pushing.
+
+
 
 #TODO questions
 - [cowvid19](http://www.usaco.org/index.php?page=viewproblem2&cpid=1037)
@@ -31,3 +36,4 @@ As of 1st Oct 2022, I am in bronze division.
 - [rectangular pasture](http://www.usaco.org/index.php?page=viewproblem2&cpid=1063)
 - [lifeguards](http://www.usaco.org/index.php?page=viewproblem2&cpid=786)
 - [stuck in a rut](http://www.usaco.org/index.php?page=viewproblem2&cpid=1064)
+- [splitting the field](http://www.usaco.org/index.php?page=viewproblem2&cpid=645)
