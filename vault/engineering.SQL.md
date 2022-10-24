@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1665834063773
+updated: 1666603995046
 created: 1658698294975
 ---
 
@@ -333,12 +333,14 @@ CREATE INDEX [index name] ON [table name] ( [column name] )
 BEGIN TRANSACTION
 BEGIN TRY
 
-UPDATE HESAP SET BAKIYE = BAKIYE - 1000
+UPDATE table_name SET BAKIYE = BAKIYE - 1000
 WHERE Name='Name' AND Surname='Surname'
 
-UPDATE HESAP SET BAKIYE = BAKIYE + 1000
+UPDATE table_name SET BAKIYE = BAKIYE + 1000
 WHERE Name='Name' AND Surname='Surname'
 
+update salary set sex = if(sex ='f','m','f') 
+--  swap f to m and m to f in sex column
 COMMIT
 END TRY
 BEGIN CATCH
