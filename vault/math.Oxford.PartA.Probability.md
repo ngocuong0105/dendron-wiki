@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1666519051571
+updated: 1666594166663
 created: 1664832112863
 ---
 
@@ -67,6 +67,20 @@ To describe a time homogeneous Markov chain you need the initial distribution of
 The matrix $P$ is indexed by the state space $I$. $P$ has non-negative entries and each row sums to 1.
 
 Markov chains are memoryless.
+
+Chapman-Kolmogorov equations
+
+irreducible chains, communicating classes, closed class, periodicity of classes
+
+recurrence, transience, mean return time, null recurrence, positive recurrence
+
+null recurrent = mean return time is infinite but probability of goiing back infinitely many times is 1.
+
+in a class all states are either positive recurrent or null recurrent, or transient
+
+Random walk on $\Z^{d}$ is a irreducible chain with period 2.
+
+
 
 # Chapter 1. Recap Prelims
 
@@ -224,4 +238,85 @@ In particular, if a chain is irreducible, then all states have the same period.
 Define $h_{i}^{A} = P_{i}(X_{n} \in A \texttt{for some} n \geq 0)$, the hitting
 probability of $A$ starting from state $i$. If $A$ is a closed class we call that the **absorbtion probability**.
 
-```Continue with Transient and Reccurence``` of states definition
+**Recurrence and transience**
+
+$P_{i}(X_{n} = i \texttt{for some } n \geq 1) = p \leq 1$ equivalently
+$P_{i}(\texttt{git } i \texttt{ infinitely often}) = 0$. The state $i$ is called transient.
+
+$P_{i}(X_{n} = i \texttt{for some } n \geq 1) = 1$ equivalently
+$P_{i}(\texttt{git } i \texttt{ infinitely often}) = 1$. The state $i$ is called recurrent.
+
+**Theorem 5.9** In a recurrent class: either all states are recurrent or all are transient.
+
+Every recurrent class is closed. Every finite closed class is recurrent.
+
+
+The theorem tells us that recurrence and transience are quite boring for finite chains: state $i$ is recurrent if and only if its communicating class is closed. But infinite chains are more interesting! An infinite closed class may be either transient or recurrent.
+
+**Therem** State $i$ is recurrent iff $\sum_{n=0}^{\infty}p_{ii}^{(n)} = \infty$
+
+**Random walk in $\Z^{d}$**
+
+Consider a simple symmetric random walk on the $d$-dimensional integer lattice. This is a Markov chain with state space $\Z^{d}$ and transition probabilities $p_xy = 1/(2d)$ if $|x − y| = 1$, and $p_xy = 0$ otherwise. The chain is irreducible, with period 2.
+
+For $d=1,2$ the chain is recurrent (probability of go back to 0 infinitely often is 1), and for $d \geq 3$ the cahin is transient.
+
+**Mean Return Time to a state**
+
+$m_{i} = E(\texttt{start from }i\textt{ and go back to }i) = 1 + \sum p_{ij}k_{j}^{i}$
+
+where $k_{j}^{i}$ is the mean hitting time of $i$ starting from $j$
+
+If $i$ is transient then $m_i = \infty$ (return time to itsleft is infinite with positive with probability).
+
+If $i$ is recurrent and $m_i = \infty$, we say $i$ is **null recurrent**
+
+If $i$ is recurrent and $m_i < \infty$, we say $i$ is **positive recurrent**
+
+If the chain is irreducible, we can therefore call the whole chain either transient, or null recurrent, or positive recurrent.
+
+
+# Chapter 6. Markov chains: stationary distributions and convergence to equilibrium
+
+Let $\pi = (\pi_{i} , i \in I)$ be a distribution on the state space $I$.
+We say that $\pi$ is a **stationary distribution**, or invariant distribution, or equilibrium distribution, for the transition matrix $P$ if $\pi P  = \pi$
+
+$\pi$ is a **left** eigenvector of the matrix $P$ with eigenvalue 1.
+
+That is for all $j$ $\pi_{j} = \sum_{i}\pi_{i} p_{ij}$
+
+Stationary distributions are those for which after we move using transition matrix, the distribution does not change.
+
+
+**Theorem 6.1 (Existence and uniqueness of stationary distributions)**. Let $P$ be an irreducible transition matrix.
+- (a) $P$ has a stationary distribution if and only if $P$ is positive recurrent.
+- (b) In that case, the stationary distribution π is unique, and is given by $\pi_{i} = 1/m_{i}$ for all $i$ (where $m_{i}$ is the mean return time to state $i$ defined at (5.12)).
+
+**Theorem 6.2 (Convergence to equilibrium)**. Suppose $P$ is irreducible and aperiodic, with stationary distribution $\pi$. For a Markov chain with transition matrix $P$ and any initial distribution $P(X_n = j) \rightarrow \pi_{j}$ as $n \rightarrow \infty$ for all $j$.
+
+**Theorem 6.3 (Ergodic theorem)**. Let $P$ be irreducible. Let $V_i(n)$ be the number of visits to state $i$ before time $n$.
+
+Then $\dfrac{V_i(n)}{n} \rightarrow \dfrac{1}{m_i}$ almost surely as $n \rightarrow \infty$.
+
+The ergodic theorem concerns the “long-run proportion of time” spent in a state.
+
+In the positive recurrent case, the theorem says the long-run proportion of time   $\dfrac{V_i(n)}{n}$ spent in a state $i$ is the stationary probability of that state $\dfrac{1}{m_i} = \pi_{i}$.
+
+
+In the null-recurrent or transient case, $1/m_{i} = 0$, so the ergodic theorem says that with probability 1 the long-run proportion of time spent in a state is 0.
+
+We can see the ergodic theorem as a generalisation of the strong law of large numbers.
+The ergodic theorem can be seen as extending this to the case where Xn is not i.i.d. but is a Markov chain. IID is stronger asumption that Markov propery.
+
+
+**Intuition** about the convergence theorems.
+
+
+The idea will be that after a long time, a Markov chain should more or less “forget where it started”. There are essentially two reasons why this might not happen: 
+
+- (a) periodicity; for example if a chain has period 2, then it alternates between, say, “odd” and “even” states; even an arbitrarily long time, the chain will still remember whether it started at an “odd” or “even” state. 
+
+- (b) lack of irreducibility. A chain with more than one closed class can never
+move from one to the other, and so again will retain some memory of where it started, forever
+
+Thus for convergence to equillibrium (which does not depend on initial distribution) we require aperiodicity and irreducibility
