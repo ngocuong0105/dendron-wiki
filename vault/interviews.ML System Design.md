@@ -2,10 +2,9 @@
 id: 7gvqmnpgid74pmbrww8z1oh
 title: ML System Design
 desc: ''
-updated: 1665738980274
+updated: 1666692828898
 created: 1658698236203
 ---
 
-Stefan's general ML design on [escalidraw](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/ML-SYSTEM-DESIGN.excalidraw)
-Recommendation system notes
-given by Stefan
+Stefan's general ML design on [escalidraw](https://drive.google.com/drive/folders/1CT4cBULH30uYSQt5MA0Xc0UsMD89ZyCZ?usp=sharing)
+Recommendation system [notes](https://drive.google.com/drive/folders/1CT4cBULH30uYSQt5MA0Xc0UsMD89ZyCZ?usp=sharing) given by Stefan
