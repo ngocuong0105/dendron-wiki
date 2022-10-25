@@ -2,13 +2,13 @@
 id: 7a6xif2f07wd4le4d5fhuia
 title: Solving problems
 desc: ''
-updated: 1664782926763
+updated: 1666704416315
 created: 1664638436236
 ---
 
-**Steps:**
+# Steps
 1.  Ask questions:
-    1. 1 about input (size, values, all constraints, sorted, duplicates)
+    1.1 about input (size, values, all constraints, sorted, duplicates)
     1.2 find solution -> chekcif there is input data for which the solution does not exist
 2. Play around with a examples (Visualize problem)
     2.1 Think edge cases (especially linked lists)

@@ -2,9 +2,20 @@
 id: wyxv9icmv8mne5ldhpvptzr
 title: Behaviour
 desc: ''
-updated: 1666692434441
+updated: 1666706374107
 created: 1658698164037
 ---
+
+Top questions:
+
+- Tell me about yourself
+- Why did you apply for this position
+- Why our company/ company info/ what do you know about us
+- Weakness/Strength
+- Why do you move companies so often (give specific reason for each), or better focus on why you want to join the new company rather than why you leave the old one. I want to work for you beacuse you are tech and currently I am in a bank. Find something that the new company has and the old one does not and just say it.
+
+**NB** prepare questions to ask them. Some questions might sound offensive careful. E.g Asking Atomico (venture capital) how they deal with crisis, recession, war, lower investements is not a very good question. It might imply you thing they are doing bad.
+
 LP principles from Stefan are pretty good stuff. You should do your own like these.
 
 Listen, listen, listen! Do not interrupt even if you know something - no points for saying things quickly if you interrupt.
@@ -14,6 +25,7 @@ need to prepare stories per each company
 Interviewers search for signal in these domains:
 - for low level just don't be asshole
 - team work
+- CV key words. You need to be able to talk abount everything you have in your CV
 
 - For higher levels:
 - team management
