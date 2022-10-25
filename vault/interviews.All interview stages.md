@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1666692884487
+updated: 1666693304226
 created: 1658698186720
 ---
 
@@ -62,4 +62,6 @@ Steps 1-2 take most of the time and depends on your current interview prep state
 Steps 3-8 take around 2-3 months
 
 **Total time needed to find new job: 5 months.**
+
+For each of the above steps you need to prepare Jira tickets and complete them in order.
 
