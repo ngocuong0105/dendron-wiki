@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1666594166663
+updated: 1666629979578
 created: 1664832112863
 ---
 
@@ -284,7 +284,7 @@ We say that $\pi$ is a **stationary distribution**, or invariant distribution, o
 $\pi$ is a **left** eigenvector of the matrix $P$ with eigenvalue 1.
 
 That is for all $j$ $\pi_{j} = \sum_{i}\pi_{i} p_{ij}$
-
+zzz
 Stationary distributions are those for which after we move using transition matrix, the distribution does not change.
 
 
@@ -304,7 +304,7 @@ In the positive recurrent case, the theorem says the long-run proportion of time
 
 
 In the null-recurrent or transient case, $1/m_{i} = 0$, so the ergodic theorem says that with probability 1 the long-run proportion of time spent in a state is 0.
-
+zz
 We can see the ergodic theorem as a generalisation of the strong law of large numbers.
 The ergodic theorem can be seen as extending this to the case where Xn is not i.i.d. but is a Markov chain. IID is stronger asumption that Markov propery.
 
@@ -320,3 +320,24 @@ The idea will be that after a long time, a Markov chain should more or less “f
 move from one to the other, and so again will retain some memory of where it started, forever
 
 Thus for convergence to equillibrium (which does not depend on initial distribution) we require aperiodicity and irreducibility
+
+
+
+
+# Problem sheets
+
+Problem sheet 3.
+
+Q1. closed classes: $\{3\},\{1,5\}$, $\{1,2,5\}$ (1-indexd)
+closed classes are always communicating classes.
+
+$(1/5,1/10,7/20,1/5,3/20)$, for second pard need chapman kolmogorv $9/16$
+raise $P^2$
+
+Q2. $p_{ii} = 1 - (\dfrac{N-i}{N})^2 - (\dfrac{i}{N})^2, p_{i,i-1} = (\dfrac{i}{N})^2, p_{i,i+1} = (\dfrac{N-i}{N})^2$
+
+Q3. states  6 and not 6. need to get eigenvalue decomposition and raise the transition matrix to power n. Or condition of last state $p_n = p_{n-1} \dfrac{4}{5} \dfrac{1}{5}$
+
+$P(\texttt{return} 1 \texttt{after n steps})$ = $\dfrac{1}{5}(1-P(\texttt{return to} 6)$
+
+

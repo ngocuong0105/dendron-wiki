@@ -2,7 +2,7 @@
 id: zidfrfy9q0ug03k2qmtwlqg
 title: Blind
 desc: ''
-updated: 1659299679979
+updated: 1666691162021
 created: 1659165970456
 ---
 Which is more prestigious DS vs SDE? 13 vs 73
@@ -19,3 +19,7 @@ Which is better on CV, Yelp vs C1? 89 vs 45
 
 Top 5% TC-wise in London, 2YOE.
 300k+ 31 votes, 200k 15 votes, 150k 10 votes, 100 9votes, 120 8 votes, 250k 8 votes
+
+London TC-s for 2 YOE in hedge funds are around 200k (even sde-s can get that). Quant devs, Quant analyst/ research are coser to this. 
+
+Meta TC Sanfrancisco is likley to be 300k for 2 YOE (E5)
