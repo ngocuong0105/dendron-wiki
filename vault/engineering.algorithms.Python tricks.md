@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1666556290379
+updated: 1666882236592
 created: 1664446506779
 ---
 
@@ -99,3 +99,5 @@ def compare(x, y):
 data = [(4, None), (3, None), (2, None), (1, None)]
 sorted(data, key=cmp_to_key(compare))
 ```
+
+- python does not have tail [recursion](https://stackoverflow.com/questions/13591970/does-python-optimize-tail-recursion) (unlike Lisp)

@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1665660757815
+updated: 1666878483647
 created: 1664382752052
 ---
 
@@ -249,6 +249,13 @@ class DSU:
 
 ```
 </details>
+
+## Balanced binary sear tree
+
+```Python
+from sortedcontainers import SortedList
+```
+
 
 ## Fenwick Tree = BIT = Binary index tree
 

@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1666629979578
+updated: 1666882967185
 created: 1664832112863
 ---
 
@@ -322,6 +322,57 @@ move from one to the other, and so again will retain some memory of where it sta
 Thus for convergence to equillibrium (which does not depend on initial distribution) we require aperiodicity and irreducibility
 
 
+# Poisson processes
+
+A Poisson process is a natural model for a stream of events occuring one by one in continuous time, in an uncoordinated way.
+
+Example:
+- the process of times of detections by a Geiger counter near a radioactive source (a very accurate model)
+- the process of times of arrivals of
+calls at a call centre (often a good model)
+- the process of times of arrivals of buses at a bus
+stop (probably an inaccurate model; different buses are not really uncoordinated, for various
+reasons
+
+**Definition** A *counting process* is a random process $N_t$ for $t \in [0,\infty]$, where time $t$ is continuous and $N_t$ is a random variable which takes values in $\{1,2,3...\}$ and $N_s < N_t$ for $s < t$.
+
+**Arrival process**
+
+If $N_t$ describes an arrival process, then $N_t = k$ means that there hae been $k$ arrivals in the time interval $[0,t]$.
+
+In fact we can describe the process by the sequence of arrival times, which we might call “points” of the process. Let $T_k = inf\{t ≥ 0 : N_t ≥ k\}$ for $k ≥ 0$. inf = infimum!
+
+$T_0 = 0$, $T_k$ is the *k-th arrival time*.
+
+Also $Y_k = T_k - T_{k-1}$ $k \geq 1$ and $Y_k$ is the **interarrival** time between $k-1$ and $k$.
+
+
+For $s < t$, we write $N(s, t]$ for $N_t − N_s$ and we call this the increment process $N$ on the interval $(s,t]$ = number of arravals between $s$ and $t$.
+
+
+**Definition 7.1 (Definition of Poisson process via exponential interarrival times).** $(Nt , t ≥ 0)$ is a Poisson process of rate $\lambda$ if its interarrival times $Y_1 , Y_2 , Y_3,...$ are i.i.d. with $Exp(\lambda)$ distribution.
+
+**Definition 7.2 (Definition of Poisson process via Poisson distribution of increments).** $(Nt , t ≥ 0)$ is a Poisson process of rate $\lambda$ if:
+- N_0 = 0
+- If $(s_1,t_1), ... (s_k,t_k)$ are disjoint intervals $\R_{+}$, then the increments $N(s_i,t_i]$ are independent. The number of points falling in disjoint intervals is independent.
+- For any $s < t$, the increment $N(s,t]$ has Poisson distribution $\lambda(t-s)$
+
+The two definitions are equivalent. The key idea is that the memoryless property for the exponential distribution and the independent increments property are telling us the same thing.
+
+
+To get more intuition for the relation between Poisson increments and exponential interarrivals, one can also think about a related discrete-time process.
+
+- (1) If $X_n ∼ Binomial(n, λ/n)$, then $X_n → Poisson(λ)$ as $n \rightarrow \infty$. (See Example 2.9.)
+- (2) If $Y_n ∼ Geometric(λ/n)$, then $Y_n/n → Exp(λ)$ as $n \rightarrow \infty$. (See Example 2.3.)
+
+So we can see this exponential/Poisson relationship in the Pois-
+son process as a limit of the geometric/binomial relationship which is already familiar from sequences of independent trials
+
+
+**Theorem 7.1 (Superposition of Poisson processes)**. Let $L_t and $M_t$ be independent Poisson processes of rate $λ$ and $µ$ respectively. Let $N_t = L_t + M_t$. Then Nt is a Poisson process of rate $λ + µ$.
+
+
+**Theorem 7.2 (Thinning of a Poisson process).** Let $N_t$ be a Poisson process of rate $λ$. “Mark” each point of the process with probability $p$, independently for different points. Let $M_t$ be the counting process of the marked points. Then $M_t$ is a Poisson process of rate $pλ$.
 
 
 # Problem sheets
