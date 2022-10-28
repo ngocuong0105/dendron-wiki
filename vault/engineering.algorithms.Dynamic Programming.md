@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1666763585048
+updated: 1666947857193
 created: 1664382766630
 ---
 - [remove boxes](https://leetcode.com/problems/remove-boxes/)
@@ -17,3 +17,4 @@ created: 1664382766630
 - [arithmetic subsequences](https://leetcode.com/problems/arithmetic-slices-ii-subsequence/)
 - [numbers with repeated digits](https://leetcode.com/problems/numbers-with-repeated-digits/)
 - [encode string](https://leetcode.com/problems/encode-string-with-shortest-length/)
+- [maximum profit in job scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/)
