@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1661773458798
+updated: 1666959538317
 created: 1658754729845
 ---
 # Actions
@@ -111,3 +111,25 @@ then you need to pay small regular costs (2,3 times per week). Gym helps me to b
 --
 
 I've lost motivation...
+
+---
+
+[Garry Kasparov](https://www.youtube.com/watch?v=8RVa0THWUWw&ab_channel=LexFridman)
+
+Fear of mistakes guarantees making mistakes.
+
+Key in success is not fear of mistakes or love of winning. It is a passion to make a difference.
+
+"I always think that the outcome of the game depends on my gameplay"
+
+Machine will beat human in closed systems like chess.
+
+[Mark Zuckerberg](https://www.youtube.com/watch?v=5zOHSysMmH0&ab_channel=LexFridman)
+
+health, loving familiy and friends, **making time for friends**
+
+**be excited for something in the future**
+
+need to have something you are looking forward to
+
+hiring heuristic: Hire somebody only if you would be happy to work on them.
