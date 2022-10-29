@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1666878483647
+updated: 1667040614855
 created: 1664382752052
 ---
 
@@ -250,12 +250,14 @@ class DSU:
 ```
 </details>
 
-## Balanced binary sear tree
+## Balanced binary search tree
 
 ```Python
 from sortedcontainers import SortedList
 ```
 
+- [Data Stream as Disjoint Intervals](https://leetcode.com/problems/data-stream-as-disjoint-intervals/)
+- []
 
 ## Fenwick Tree = BIT = Binary index tree
 

@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1666705728530
+updated: 1667032836909
 created: 1658698186720
 ---
 
@@ -16,6 +16,7 @@ Interviewing has different stages. I have divided them in 3 main ones - core pre
     - ml design: stefan's escalidraw example is pretty good
     - probability: puzzle's app, 3 quant books
     - stats: [[interviews.Probability and Statistics]]
+    - skim job descriptions to check tech stacks and requirements
 
 2. Prepare for behavior questions + leadership principles (**2 weeks**)
     - stories for each of your jobs - stating point is your Job search folder
