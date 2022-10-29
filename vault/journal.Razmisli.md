@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1666959538317
+updated: 1667032632607
 created: 1658754729845
 ---
 # Actions
@@ -133,3 +133,8 @@ health, loving familiy and friends, **making time for friends**
 need to have something you are looking forward to
 
 hiring heuristic: Hire somebody only if you would be happy to work on them.
+
+---
+**Managing your work and setting goals**
+
+You have underestimated planning and project management. For example when you started using Jira tasks, roadmap, backlog, sprints, these have increased your productivity significantly. Being able to track what you do is super important. Writing things down is highly underappreciated. Writing when and what you achive and seeing it regularly adds lots of value and helps for conistency.
