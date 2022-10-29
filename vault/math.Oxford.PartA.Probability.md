@@ -2,7 +2,7 @@
 id: 3ecgdrzmxv653whgpx6jb5g
 title: Probability
 desc: ''
-updated: 1666882967185
+updated: 1667059393391
 created: 1664832112863
 ---
 
@@ -80,7 +80,9 @@ in a class all states are either positive recurrent or null recurrent, or transi
 
 Random walk on $\Z^{d}$ is a irreducible chain with period 2.
 
+iid is subcase of Markov chain
 
+Ergodic theorem is generalization of SLLN
 
 # Chapter 1. Recap Prelims
 
@@ -391,4 +393,17 @@ Q3. states  6 and not 6. need to get eigenvalue decomposition and raise the tran
 
 $P(\texttt{return} 1 \texttt{after n steps})$ = $\dfrac{1}{5}(1-P(\texttt{return to} 6)$
 
+Q5. basic logic
 
+Q6.
+- a) write transition matrix
+- b) write all equations $e_8 = e_{10}/2+e_{6}/2+1$ etc., answer is 2, alternatively consider state one $\{0,10\}$ and state two $\{2,4,6,8\}$. Currently we are in state two. 0.5 probability to go from state two to one and 0.5 to stay in same state. By geometrix distribution you get expectation 2.
+- c) write all equations (conditioning) $p_8 = p_{10}/2 + p_{6}/2$ etc.
+- d) use c) + bayes equality, for later part need to compute probability win given we reach 10 starting from 2,4,6.
+
+Q7.
+- a) $p_{i}+q_{i} = 1$ and condition of first step
+- b) $h_{i} = 1 - u_{1}\sum_{k=1}^{i}\gamma_{k}$
+- c) the maximal solution (look at theorem)
+
+Q9. uniform distribution by symmetry
