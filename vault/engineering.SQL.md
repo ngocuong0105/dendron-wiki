@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1666603995046
+updated: 1666985991627
 created: 1658698294975
 ---
 
@@ -139,7 +139,7 @@ where id not in (select t.id from (select min(id) as id from person group by ema
 
 ```
 
-- substring
+- substring(col_name, start_index, length), length is optional
 ```sql
  SELECT SUBSTRING('SQL Tutorial', 1, 3) AS ExtractString;
 
@@ -303,12 +303,10 @@ TO
 
 ```sql
 # Write your MySQL query statement below
-select sell_date, 
-count(distinct product) as num_sold, 
+select sell_date, count(distinct product) as num_sold, 
 group_concat(distinct product order by product separator ',') as products
 from activities
 group by sell_date
-order by sell_date
 ```
 
 - pivot trick [student by geography](https://leetcode.com/problems/students-report-by-geography/)
