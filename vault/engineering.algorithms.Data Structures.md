@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1667040614855
+updated: 1667166968951
 created: 1664382752052
 ---
 
@@ -11,7 +11,9 @@ created: 1664382752052
 ## Minimum Stack / Minimum Queue
 - monotonic queue, [p1](https://leetcode.com/problems/constrained-subsequence-sum/), the cnt variable below defines the enqueue priority, can have different priority implementations, e.g in max sliding window [problem](https://leetcode.com/problems/sliding-window-maximum/) it would be the index of the element
 
+Queue solves sliding window minimum problem, which means that we should report the smallest value inside each window.
 
+Stack solves next nearest element problem
 <details>
 <summary> <b>CODE</b> </summary>
 
@@ -257,7 +259,7 @@ from sortedcontainers import SortedList
 ```
 
 - [Data Stream as Disjoint Intervals](https://leetcode.com/problems/data-stream-as-disjoint-intervals/)
-- []
+- [Closest Room](https://leetcode.com/problems/closest-room/)
 
 ## Fenwick Tree = BIT = Binary index tree
 
