@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1667032632607
+updated: 1667167315740
 created: 1658754729845
 ---
 # Actions
@@ -138,3 +138,8 @@ hiring heuristic: Hire somebody only if you would be happy to work on them.
 **Managing your work and setting goals**
 
 You have underestimated planning and project management. For example when you started using Jira tasks, roadmap, backlog, sprints, these have increased your productivity significantly. Being able to track what you do is super important. Writing things down is highly underappreciated. Writing when and what you achive and seeing it regularly adds lots of value and helps for conistency.
+
+---
+
+Getting in FAANG has lots of learning value. Will have the chance to learn super many new stuff. Meta publishes papers every week, including in big conferences like NeurIPS.
+I should aim for TC + going in such places with lots of smart people. Stefan seemed quite impressed by Meta tools and leaning stuff so it must be really good stuff.
