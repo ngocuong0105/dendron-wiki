@@ -2,11 +2,11 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1667032836909
+updated: 1667074583408
 created: 1658698186720
 ---
 
-Interviewing has different stages. I have divided them in 3 main ones - core preparation, warm-up mindset + applications, interviewing + negotiation.  For each of the steps  below you need to prepare Jira tickets and complete them in order. **Total time needed to find new job: 5 months.**
+Interviewing has different stages. I have divided them in 3 main ones - core preparation, warm-up mindset + applications, interviewing + negotiation.  For each of the steps  below you need to prepare Jira tickets and complete them in order. **Expected time needed to find new job: 5 months.**
 
 
 1. Preparation for interviews (**2 months**)
