@@ -2,9 +2,11 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1667036732409
+updated: 1667208274555
 created: 1664382766630
 ---
+
+#Zadachi
 - [remove boxes](https://leetcode.com/problems/remove-boxes/)
 - [dungeon game](https://leetcode.com/problems/dungeon-game/)
 - [domino tromino](https://leetcode.com/problems/domino-and-tromino-tiling/)
@@ -19,4 +21,4 @@ created: 1664382766630
 - [encode string](https://leetcode.com/problems/encode-string-with-shortest-length/)
 - [maximum profit in job scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/)
 
-Fibonacci numbers in $O(log(n))$, see solution tab in [Climbing stairs](https://leetcode.com/problems/climbing-stairs/)
+Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, see solution tab in [Climbing stairs](https://leetcode.com/problems/climbing-stairs/)

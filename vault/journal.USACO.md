@@ -2,7 +2,7 @@
 id: maki4i54gl6bqto8uf29d2n
 title: USACO
 desc: ''
-updated: 1666553882334
+updated: 1667208295168
 created: 1664646684679
 ---
 
@@ -21,7 +21,7 @@ They are very similar to problems at high school math competitions. Also in orde
 
 
 
-#TODO questions
+#Zadachi
 - [cowvid19](http://www.usaco.org/index.php?page=viewproblem2&cpid=1037)
 - [sleepy cows](http://www.usaco.org/index.php?page=viewproblem2&cpid=892)
 - [photo shoot](http://usaco.org/index.php?page=viewproblem2&cpid=1227)

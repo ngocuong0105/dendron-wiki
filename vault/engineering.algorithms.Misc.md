@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1665779941021
+updated: 1667208189211
 created: 1664382870554
 ---
 # Sequences
@@ -267,3 +267,7 @@ class Solution:
 ```
 </details>
 
+
+## Bit manipulation
+#Zadachi
+- [convert to hexadecimal](https://leetcode.com/problems/convert-a-number-to-hexadecimal/)
