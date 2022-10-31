@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1667208189211
+updated: 1667230530980
 created: 1664382870554
 ---
 # Sequences
@@ -26,9 +26,13 @@ def bs(i,j,func):
 
 </details>
 
+#Zadachi
 - 2D problems often treat columns/rows as elements. E.g each column is element and we do binary search on columns $O(m*logn)$
     - [black pixels](https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/)
     - [peak element](https://leetcode.com/problems/find-a-peak-element-ii/)
+
+binary search in disguise
+- [maximum average subarray](https://leetcode.com/problems/maximum-average-subarray-ii/)
 
 - built in python library
 
