@@ -2,7 +2,7 @@
 id: maki4i54gl6bqto8uf29d2n
 title: USACO
 desc: ''
-updated: 1667208295168
+updated: 1667246889504
 created: 1664646684679
 ---
 
@@ -37,3 +37,4 @@ They are very similar to problems at high school math competitions. Also in orde
 - [lifeguards](http://www.usaco.org/index.php?page=viewproblem2&cpid=786)
 - [stuck in a rut](http://www.usaco.org/index.php?page=viewproblem2&cpid=1064)
 - [splitting the field](http://www.usaco.org/index.php?page=viewproblem2&cpid=645)
+- [diamond display](http://www.usaco.org/index.php?page=viewproblem2&cpid=643)
