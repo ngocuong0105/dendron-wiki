@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1666985991627
+updated: 1667299698709
 created: 1658698294975
 ---
 
@@ -75,7 +75,9 @@ group by person1,person2
 
 - date operations
 ```sql
-select datediff(date1,date2) as diff,
+select 
+        datediff(date1,date2) as diff, -- measred in days
+        period_diff('202210','202301') as diff, -- measured in months
         month(date1) as month,
         date_add('2018-05-01',INTERVAL 1 DAY) as next_day,
         dayofweek('2007-02-03') as day_of_week # 1 to 7 (1 and 7 are weekend)
