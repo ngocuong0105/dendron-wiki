@@ -2,12 +2,13 @@
 id: tmyxaki17gpq6jb9xav1x3v
 title: String Processing
 desc: ''
-updated: 1664518097885
+updated: 1667292849150
 created: 1664382813257
 ---
-    Fundamentals
-        String Hashing
-        Rabin-Karp for String Matching
+# Fundamentals
+## String Hashing
+## Rabin-Karp for String Matching
+- [longest duplicate string](https://leetcode.com/problems/longest-duplicate-substring/)
         Prefix function - Knuth-Morris-Pratt
         Z-function
         Suffix Array
