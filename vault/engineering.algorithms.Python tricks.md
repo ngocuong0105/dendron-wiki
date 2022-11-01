@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1666882236592
+updated: 1667322435107
 created: 1664446506779
 ---
 
@@ -35,8 +35,8 @@ ls = [1,2,3,1,1]
 ls.count(1)
 ```
 
+- adjacency list
 ```Python
-# adjacency list
 from collections import defaultdict
 adj = defaultdict(list) # default dict takes a function
 for u,v in edges:
@@ -101,3 +101,11 @@ sorted(data, key=cmp_to_key(compare))
 ```
 
 - python does not have tail [recursion](https://stackoverflow.com/questions/13591970/does-python-optimize-tail-recursion) (unlike Lisp)
+
+- get groups, groupby
+
+```Python
+from itertools import groupby
+s = 'aaabbddca'
+groups = [(ch,len(list(g))) for ch,g in groupby(s)] # [(a,3),(b,2),(d,2),(c,1),(a,1)]
+```
