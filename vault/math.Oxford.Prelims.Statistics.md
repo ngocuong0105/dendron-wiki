@@ -2,7 +2,7 @@
 id: q7gonhx2ncjvh8vr9qpwlaq
 title: Statistics
 desc: ''
-updated: 1667238410675
+updated: 1667337833451
 created: 1664832112863
 ---
 # Buzzwords
@@ -26,7 +26,7 @@ In probability we assume that parameters $λ$ and $µ$ in our two examples are k
 
 **Sample mean** and **Sample variance**, **sample standard deviation**
 
-Denominator in sample variance is $n-1$, so that the sample variance will be what is called an **unbiased** estimator of the population variance. If we divide by $n$ our sample variance would be underestimating the TRUE variance on average.
+Denominator in sample variance is $n-1$, so that the sample variance will be what is called an **unbiased** estimator of the population variance. If we divide by $n$ our sample variance would be underestimating the TRUE variance on average. **We need to divide by the degrees of freedom, not the number of samples!** [stack](https://stats.stackexchange.com/questions/406327/degrees-of-freedom-in-sample-variance)
 _
 Given observations $x_1,...,x_n$ we can compute the observed values $x$ and $s^2$ .
 
@@ -179,9 +179,9 @@ The standard deviation of the true parameter $SE(\beta)$ is usually unknown and 
 
 $var(\beta) = X^{T}X var(y) = X^{T}X \sigma^{2}$
 
-You can use the The MLE: $\hat{\sigma}^{2} = \dfrac{1}{n}\sum(y_i-x_i\beta)$ to get 95\% CI: $(\hat{\beta} \pm z_{\alpha/2}\SE(\beta))$ 
+You can use the The MLE: $\hat{\sigma}^{2} = \dfrac{1}{n}\sum(y_i-x_i\beta)$ to get 95\% CI: $(\hat{\beta} \pm z_{\alpha/2}SE(\beta))$ 
 
-A better approach is to estimate $\sigma^{2}$ using $\dfrac{1}{n-p}\sum(y_i-x_i\beta)$ because this is an unbiased estimator (on average you are correct) and to base the confidence interval on a t-distribution rather than a normal distribution
+A better approach is to estimate $\sigma^{2}$ using $\dfrac{1}{n-p-1}\sum(y_i-x_i\beta)$ because this is an unbiased estimator (on average you are correct) and to base the confidence interval on a chi square-distribution rather than a normal distribution. (t-distribution in univariate case $x_i$ is one dimensional and p = 1, division by $n-2$ in this case)
 
 [example](https://stats.stackexchange.com/questions/29981/should-confidence-intervals-for-linear-regression-coefficients-be-based-on-the-n)
 
@@ -280,8 +280,148 @@ Pair plots
 
 # The Multivariate Normal Distribution
 
+![mvn.png](assets/images/mvn.png)
+
+Given a sample of $n$ observations $N_{p}(\mu,\Sigma)$, the MLE-s are:
+
+![mle_mvn.png](assets/images/mle_mvn.png)
 
 # PCA
 
+Principal components analysis (PCA) finds a low-dimensional representation of the data that captures as much of the information in the dataset as possible.
+
+PCA key points:
+- each component coming from PCA is a linear combination of the variables
+- each components looks for maximum varaibility in the data
+
+**components choose a good way to choose a projection that separates the two clusters**
+
+![pca.png](assets/images/pca.png)
+
+PCA is maximization problem. Tofind componene $\alpha_{1}$:
+
+$max \alpha_{1}^{T}S\alpha_{1}$ subject to $|\alpha_{1}| = 1$ 
+
+We try to maximize the sample variance of the first component. Solve this using Lagrange Multipliers.
+
+Using vector calculus you will get:
+- $\alpha_{1}$ is the eigen vector  with largest eigen value $\lambda_{1} = \alpha_{1}^{T}S\alpha_{1}$
+
+The way PCA algo work is by doing an **eigendecomposition** of the sample variance matrix $S = VDV^{T}$, where $D$ is diagonal matrix with the eighen values and $V$ is orthonormal/orthogonal $VV^{T} = I$ and $V$ has the eigenvectors of $S$
+
+**Plotting**
+
+If we define $Z$ to be an $n × p$ matrix containing the transformed data, such
+that $Z_{ij}$ is the value of the $j$th principal component for the $i$th observation
+
+$\bf{Z} = \bf{XV}$
+
+
+We can then plot the columns of Z against each other to visualize the data as
+represented by those pairs of principal components. The matrix Z is known
+as the scores matrix.
+
+**Biplots** shows pair of PC-s how they cluster the data. It uses the data projection
+on the principal components.
+
+The **total amount of variance** in the original data matrix X is the sum of
+the diagonal entries in $S$.
+
+It is common practice to plot the decreasing sequence of eigenvalues to visualize ths structure in the dataset. Such plots are sometimes refered to as **eigenspectrum plots** or **variance scree plots**, and usually they are scaled so each bar is percentage of the total variance.
+
+
+**Question**
+
+Apply PCA to raw data or to transformed data?
+
+
+The first principal component maximises the variance of a linear combination of variables. If the variables have very different levels of variability then maximizing the projection with the largest variance may tend to dominate the first principal component.
+
+For this reason, it can sometimes make sense to **standardize** the variables before PCA
+
+This can be achieved by applying PCA to the sample correlation matrix R, rather than the sample covariance matrix S.
+
+
+It can be shown (see Exercises) that the PCA components derived from using S are not the same as those derived from using R, and knowledge of one of these sets of components does not enable the other set to be derived.
+
+## PCA via SVD
+
+![svd.png](assets/images/svd.png)
+
+Express design matrix $X$ using SVD and rewrite $S=\dfrac{1}{n-1}X^{T}X$.
+
+You can win on computation time if $n << p$.
+
+Calculating the eigendecomposition of $XX^{T}$ scales like $O(n^3)$ which
+is much less than the eigendecomposition of $X^{T}X$ which scales like $O(p^3)$.
+
+
+## PCA as minimizing reconstruction error
+
+There is another way to derive principal components analysis that uses the
+idea that we might try to find the low-dimensional approximation that is as
+close as possible to the original data.
+
+**data compression**
+
 
 # Clustering
+
+PCA provides low dimensional represeantaion of the data and show groupings of observations when visualized. It does not provide **labelling**.
+
+**Clustering** refers to a very broad set of techniques for finding subgroups,
+or clusters, in a dataset.
+
+**K-means**
+
+To perform $K$-means clustering we must first decide upon the number of
+clusters $K$. The algorithm will assign each observation to excatly one of the
+$K$ clusters.
+
+![k-means.png](assets/images/k-means.png)
+
+
+Goals:
+- minimize **within** distance between points in same cluster
+- maximize distance between observations from different clusters
+
+K-means algo explicitly tackles the first goal by finding a local minimum. Finiding global minimum would require goind through all partitions of $n$ elements in $k$ 
+subsets which is factoriel like (Stirling numbers).
+
+The two goals above are actually equivalent [see](https://stats.stackexchange.com/questions/158210/k-means-why-minimizing-wcss-is-maximizing-distance-between-clusters)
+
+K means objective function:
+
+
+![k-means-obj.png](assets/images/k-means-obj.png)
+
+**Multiple starts**
+
+The algorithm does not always give the same solution since the start point is random.
+
+$K = n$ is **overfitting**
+
+
+**Hierarchical clustering**
+![dendrongram.png](assets/images/dendrongram.png)
+
+Dendrograms can be used to cluster observations into a discrete number of
+clusters or groups
+
+Different ways to create a hierarchy. Here we consider **agglomerative** clustering approache.
+
+1. Begin with $n$ observations and a measure of all the $n \choose 2$ pairwise dissimilarities, denoted $d_{ij}$ for $i,j ∈ (1, . . . , n)$. These dissimilarities
+can be represented in a lower diagonal matrix, denoted $D^{(n)}$.
+
+2. For $i = n, n - 1, . . . , 2$
+- (a) Find the pair of clusters with the smallest dissimilarity. Fuse
+these two clusters.
+- (b) Compute the new dissimilarity matrix between the new fused cluster and all other $i-1$ remaining clusters and create an updated matrix of dissimilarities $D^{(n−1)}$ .
+
+Distance betwwen two clusters:
+
+**single linkage** = minimum (closest) distance betwwen elements from the two clusters
+
+**complete linkage** = maximum ...
+
+**group average** = $\dfrac{|G1|}{|G2|} \sum \sum d_{ij}$
