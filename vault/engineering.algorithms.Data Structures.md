@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1667208246473
+updated: 1667315744896
 created: 1664382752052
 ---
 
@@ -260,7 +260,7 @@ from sortedcontainers import SortedList
 #Zadachi
 - [Data Stream as Disjoint Intervals](https://leetcode.com/problems/data-stream-as-disjoint-intervals/)
 - [Closest Room](https://leetcode.com/problems/closest-room/)
-
+- [Traffic lights](https://cses.fi/problemset/task/1163/)
 ## Fenwick Tree = BIT = Binary index tree
 
 - light weight BIT
