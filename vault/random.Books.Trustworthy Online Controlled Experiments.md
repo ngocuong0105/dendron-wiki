@@ -2,11 +2,11 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1667390766716
+updated: 1667412254557
 created: 1667338869712
 ---
 
-# Intro and motivation
+# 1. Intro and motivation
 
 *One accurate measurement is worth more than a thousand expert opinions*
 
@@ -86,3 +86,73 @@ Two things to consider when making big jumps:
 
 
 
+# 2. Running and analysing experiments
+
+This chapter contains an example of setting up, running and analysing results of an experiment
+
+Experiment **setup/design**: 
+
+**Hypothesis**: Adding a coupon code field to the checkout page will degrade revenue.
+
+**OEC**: Profit itself is bad metric as it depends on the number of users in each variant. Revenue-per-user is better.
+
+What should be in the denominator?
+
+- all users: valid but would be quite noise. Lots of users will never initiate checkout
+- only users who complete purchase process. Wrong. The more users purchase the lower metric??
+- only users who start the purchase process. That's the most accurate denominator. Includes all potentially affected users.
+
+**Refined hypothesis:** Adding a coupon code field to the checkout page will degrade revenue-per-users who start the purchase process.
+
+Decide what **statistical significance** p-value to use.
+
+Statistical significance means whether the observed result is by chance or not.
+
+However, in practice we need **practical significance** - does it make sense from business stand point to make the change?
+
+practical significance is usually larger than statistical significance. If you are on start-up you would like to have larger practical significance say 10\% where as big businesses like Google with billions of revenue  the 0.2\% change is practically significant
+
+**randomization unit** - usually these are users
+
+**size** - how large in size should be the population. Larges smaple size needed to detect smaller changes. alternatively you can reduce the variance in the data, e.g. use *purchase indicator* (1 if user buys 0 if not) instead of revenue as OEC and that would have lower variance data, detect easier.
+
+detecting larger changes requires less data
+
+lower p-value rtequires larger data
+
+size ~ variance, minimum detectable effect needed, p-value
+
+**power** of the test
+
+**time** - how long do we run thhe experiment
+
+- more time = more users
+- day-of-week effect (seasonality)
+- primacy and novelty effects
+
+
+**Results of experiment**
+
+- do sanity checks for trustworthiness of your experiment
+
+some metrics should be the same in all variants, e.g. latency
+
+to catch errors looks at invariants between Treatment and Control datasets
+
+
+**Launch/no-launch**
+
+Desisions take into considerations the results of the experiment as well as broader context:
+
+- different metrics tradeoffs, e.g. if CPU utilization usage increases, is the cost of running the new service worth? 
+- cost of launching the change (sometimes all the cost is in the setup experiment, sometimes there are add ons)
+- what is the downside of making the wrong decision/risks
+
+
+The decisions are usually three way:
+
+Launch, no-launch and continue testing.
+
+statistical, practical significance -> launch
+no statistical significance, no practical significance -> no launch
+statistical significance, no practical significance -> no launch/continue testing
