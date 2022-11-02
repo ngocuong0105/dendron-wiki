@@ -2,7 +2,7 @@
 id: wyxv9icmv8mne5ldhpvptzr
 title: Behaviour
 desc: ''
-updated: 1666706374107
+updated: 1667374898690
 created: 1658698164037
 ---
 
@@ -19,6 +19,9 @@ Top questions:
 LP principles from Stefan are pretty good stuff. You should do your own like these.
 
 Listen, listen, listen! Do not interrupt even if you know something - no points for saying things quickly if you interrupt.
+
+
+Create **Bullet points to some of your major projects (stories)** and referece those during interview.
 
 need to prepare stories per each company
 

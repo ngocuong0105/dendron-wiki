@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1667167315740
+updated: 1667402832641
 created: 1658754729845
 ---
 # Actions
@@ -143,3 +143,16 @@ You have underestimated planning and project management. For example when you st
 
 Getting in FAANG has lots of learning value. Will have the chance to learn super many new stuff. Meta publishes papers every week, including in big conferences like NeurIPS.
 I should aim for TC + going in such places with lots of smart people. Stefan seemed quite impressed by Meta tools and leaning stuff so it must be really good stuff.
+
+
+---
+
+**TC**
+
+High TC factors/variables are:
+- interview skills: getting interviews + doing interviews (behaviour + technical)
+- your skillset and whether you can do the job (this is important but interviewing skills are more important to get high TC)
+- YOE
+- market
+
+Main TC factor is interview skills. It is similar to rising in power in democratic countries. Main skill is marketing/populism and winning elections. Other things such as economics knowldge, finance, politics, leadership, giving speeches, diplomacy are secondary. It is all about winning elections. High TC is all about cracking the interviews.
