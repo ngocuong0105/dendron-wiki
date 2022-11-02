@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1667230530980
+updated: 1667384069184
 created: 1664382870554
 ---
 # Sequences
@@ -31,11 +31,13 @@ def bs(i,j,func):
     - [black pixels](https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/)
     - [peak element](https://leetcode.com/problems/find-a-peak-element-ii/)
 
-binary search in disguise
+**binary search in disguise**
 - [maximum average subarray](https://leetcode.com/problems/maximum-average-subarray-ii/)
+- [sum of floored pairs](https://leetcode.com/problems/sum-of-floored-pairs/)
+- [max submatrix sum less than k](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/)
 
-- built in python library
 
+**built in python library**
 <details>
 <summary> <b>CODE</b> </summary>
 
