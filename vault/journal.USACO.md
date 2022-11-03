@@ -2,7 +2,7 @@
 id: maki4i54gl6bqto8uf29d2n
 title: USACO
 desc: ''
-updated: 1667407184399
+updated: 1667489546727
 created: 1664646684679
 ---
 
@@ -39,3 +39,4 @@ They are very similar to problems at high school math competitions. Also in orde
 - [splitting the field](http://www.usaco.org/index.php?page=viewproblem2&cpid=645)
 - [diamond display](http://www.usaco.org/index.php?page=viewproblem2&cpid=643)
 - [sleepy cows herding](http://www.usaco.org/index.php?page=viewproblem2&cpid=918)
+- [movie festival ii](https://usaco.guide/problems/cses-1632-movie-festival-ii/solution)
