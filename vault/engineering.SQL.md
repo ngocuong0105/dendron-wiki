@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1667299698709
+updated: 1667472431499
 created: 1658698294975
 ---
 
@@ -324,6 +324,46 @@ from student) t
 group by rn
 ```
 
+- [dynamic pivoting](https://leetcode.com/problems/dynamic-pivoting-of-a-table/)
+```sql
+-- static pivot
+-- select product_id,
+-- sum(case when store = "store1" then price end) as store1,
+-- sum(case when store = "store"then price end) as store2,
+-- ....
+-- from products
+-- group by product_id
+
+
+-- this procedusre would concatenate all select statements in case_stmtsum(..)
+CREATE PROCEDURE PivotProducts()
+
+BEGIN
+	# Write your MySQL query statement below.
+    SET SESSION group_concat_max_len = 1000000;
+    --define case statement
+    select group_concat(distinct concat('sum(case when store = "',store,'" then price end) as ', store))
+    into @case_stmt
+    from products;
+    -- get whole sql query
+    set @sql_query = concat('select product_id, ',@case_stmt, ' from products group by product_id');
+    
+    prepare final_sql_query from @sql_query;
+    execute final_sql_query;
+    deallocate prepare final_sql_query;
+END
+```
+
+- [dynamic unpivoting](https://leetcode.com/problems/dynamic-unpivoting-of-a-table/)
+
+
+- [delimit identifiers](https://stackoverflow.com/questions/9917196/meaning-of-square-brackets-in-ms-sql-table-designer), ignore special symbols, characters, spaces etc
+```sql
+select *
+from [my table]
+where [order] = 10
+```
+
 - index column
 ```sql
 CREATE INDEX [index name] ON [table name] ( [column name] )
@@ -346,6 +386,71 @@ END TRY
 BEGIN CATCH
 ROLLBACK
 END CATCH
+```
+## SQL Variables
+
+If we want to use a variable in SQL Server, we have to declare it using `DECLARE` statement.
+
+Local variable names have to start with an at (@) sign.
+
+- declaring variables
+
+```sql
+DECLARE @TestVariable AS VARCHAR(100)
+DECLARE @TestVariable -- NULL initialization
+```
+- assign values to variables
+```sql
+SELECT @TestVariable = 'Save the Nature' --single select line
+
+--- ASSIGN LAST VALUE OF TABLE T
+select @TestVariable = person_name
+from t
+where salary = 100000
+```
+
+- assign variable value using set
+
+```sql
+DECLARE @Variable1 AS VARCHAR(100)
+DECLARE @Variable2 AS UNIQUEIDENTIFIER
+SET @Variable1 = 'Save Water Save Life'
+SET @Variable2= '6D8446DE-68DA-4169-A2C5-4C0995C00CC1'
+```
+
+- assign many varaibles to values
+```sql
+DECLARE @Variable1 AS VARCHAR(100), @Variable2 AS UNIQUEIDENTIFIER
+SELECT @Variable1 = 'Save Water Save Life' , @Variable2= '6D8446DE-68DA-4169-A2C5-4C0995C00CC1'
+```
+
+
+- end of batch, `GO` keyword
+```sql 
+DECLARE @TestVariable AS VARCHAR(100)
+SET @TestVariable = 'Think Green'
+GO
+PRINT @TestVariable -- ERROR, varibale not declared
+```
+
+- PREPARE, EXECUTE and DEALLOCATE statement in MySQL
+- running strings as statements
+
+```sql
+SET @s = 'SELECT ? + ? AS sumtable';
+PREPARE stmt1 FROM @s;
+SET @a = 4;
+SET @b = 6;
+EXECUTE stmt1 USING @a, @b;
+DEALLOCATE PREPARE stmt1;
+```
+this would return
+```
++----------+
+| sumtable |
++----------+
+|       10 |
++----------+
 ```
 
 ## SQL CTE
