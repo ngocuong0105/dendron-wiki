@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1667402832641
+updated: 1667467849237
 created: 1658754729845
 ---
 # Actions
@@ -156,3 +156,10 @@ High TC factors/variables are:
 - market
 
 Main TC factor is interview skills. It is similar to rising in power in democratic countries. Main skill is marketing/populism and winning elections. Other things such as economics knowldge, finance, politics, leadership, giving speeches, diplomacy are secondary. It is all about winning elections. High TC is all about cracking the interviews.
+
+---
+
+This year tech companies struggle. High interest rates means high cost to loan money.
+
+Tech companies don't do lending. Lots of regulations, huigh buy-in.
+
