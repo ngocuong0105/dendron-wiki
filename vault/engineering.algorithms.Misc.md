@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1667384069184
+updated: 1667491020019
 created: 1664382870554
 ---
 # Sequences
@@ -35,9 +35,11 @@ def bs(i,j,func):
 - [maximum average subarray](https://leetcode.com/problems/maximum-average-subarray-ii/)
 - [sum of floored pairs](https://leetcode.com/problems/sum-of-floored-pairs/)
 - [max submatrix sum less than k](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/)
-
+- [mysterious function](https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/)
 
 **built in python library**
+
+**Added after Python 3.10!!!**
 <details>
 <summary> <b>CODE</b> </summary>
 
