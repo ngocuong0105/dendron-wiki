@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1667322435107
+updated: 1667459399346
 created: 1664446506779
 ---
 
@@ -44,12 +44,13 @@ for u,v in edges:
 
 ```
 
-
+- Counter
 ```Python
 # Counter dict
 from collections import Counter
 arr = [1,2,3,1,2,4,4,2]
 c = Counter(arr)
+c.most_common() # returns tuple of all elements and counts in sorted order
 ```
 
 - [Toeplitz Matrix](https://leetcode.com/problems/toeplitz-matrix/), diagonals have constant values
