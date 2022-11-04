@@ -2,10 +2,27 @@
 id: q7gonhx2ncjvh8vr9qpwlaq
 title: Statistics
 desc: ''
-updated: 1667337833451
+updated: 1667569560477
 created: 1664832112863
 ---
 # Buzzwords
+
+random sample = iid = independent and identically distributed
+
+sum of normal distributions is normal
+
+sum of jointly normal distributions is normal
+
+$var(aX + b) = a^{2}var(X)$
+
+unbiased estimator (sample variance) divides by $n-1$ to have unbiased estimator of the TRUE variance
+
+MLE = maximum likelihod estimator 
+
+likelihood function $L(\theta|x_1.. x_n)$
+
+
+If you parametrize $p = \dfrac{1}{\theta}$ in Geometric distribution and find MLE for $\theta$ you will have unbiased MLE! The MLE for $p$ is not unbiased (its overestimating)
 
 # Introduction. Random samples. Summary Statistics, MLE
 
@@ -425,3 +442,91 @@ Distance betwwen two clusters:
 **complete linkage** = maximum ...
 
 **group average** = $\dfrac{|G1|}{|G2|} \sum \sum d_{ij}$
+
+# Problem Sheets
+
+**Sheet 1**
+
+Q1. Proove that $S^2 = \dfrac{1}{n-1} \sum(X_i - \bar{X})^2$ is unbiased estimator of the TRUE variance $\sigma^{2}$
+
+Q2.
+Given data $X_{1} .. X{n}$
+
+i) - $Binomial(r,\theta)$ MLE with known $r$ : $\dfrac{\bar{X}}{r}$
+
+ii) Mle negative binomial (different representaion) $\dfrac{r}{r+\bar{x}}$
+
+iii) $\dfrac{r}{\bar{x}}$
+
+Q3. 
+
+i) $P(MM) = P(MM|I)P(I) + P(MM|NON)P(NON) = \theta\2 + (1-\theta)\4$
+
+ii) $\dfrac{n_1+n_2-n_3}{n_1+n_2+n_3}$
+
+
+Q4. 
+
+i) mgf to prove normality, $var(aX + b) = a^{2}var(X)$
+
+ii) ..
+
+iii) $\Phi(c) - \Phi(-c)$
+
+
+Q5. $N(\sum_{i=1}^{n}a_{i}\mu_{i}, \sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2})$
+
+Proof $X_{1}+X_{2}$ is normal using moment generating functions
+
+
+**Sheet 2**
+
+Q1. $\hat{p} = \dfrac{1}{\bar(x)}$
+
+If you parametrize $p = \dfrac{1}{\theta}$ in Geometric distribution and find MLE for $\theta$ you will have unbiased MLE! The MLE for $p$ is not unbiased (its overestimating)
+
+Q2. maximize likelihood
+
+Q3. $\hat{p} = \dfrac{\sum x_i}{\sum v_i]$
+
+
+Q5.
+
+a) $\dfrac{n}{143.5-nlog(\alpha)}$
+
+b)
+
+i) by definition of distribution - just maximize the likelihood
+
+ii) integrate the pdf from y to inf
+
+iii rewrite the modulus (open it up to use ii) 
+
+
+**Sheet 3**
+
+Q1. $ (\bar{X}-\dfrac{z_{0.025}}{\sqrt(n)},\bar{X}-\dfrac{z_{-0.025}}{\sqrt(n)})$  $(2\times 1.96)^2$
+
+Q2. 
+
+i) $p(1-p)$
+
+ii) $(\bar{x}\pm z_{0,025}\sqrt{(\hat{p}(1-\hat{p}))}/\sqrt{n})$
+
+iii) (0.48,0.76) neshto takova
+
+Q3. use 95\% CI $(\bar{x}\pm \dfrac{z_{0.025}}{\sqrt{n}} \sigma$
+
+where $\sigma = \sqrt{\hat{theta}}$ using the MLE of Theta (poisson MLE)
+
+Q4.
+
+MLE is $max(X_i)$, then use $P(Max < x) = P(X<x)^n$
+
+Q5.
+
+a) straight
+
+b) mean
+
+c) $L ~ N(\mu,\sigma^2)$, $R ~ N(\mu,\sigma^2)$ but are dependent! Need to compute the bivariate normal distribution.
