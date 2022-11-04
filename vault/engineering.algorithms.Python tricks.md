@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1667459399346
+updated: 1667583007989
 created: 1664446506779
 ---
 
@@ -84,6 +84,14 @@ def overlap(a,b,x,y):
 from itertools import accumulate
 suff = list(accumulate(nums[::-1]))[::-1]
 pref = list(accumulate(nums))
+```
+
+- xor cumulative
+```python
+xor_cum = [0] + list(accumulate(arr,lambda x,y:x^y))
+def f(l,r):
+    '''returns xor subarray arr[l]^arr[l+1]^...^arr[r]'''
+    xor_cum[r+1]^xor_cum[l]
 ```
 
 - max with key, array of arrays, return array of max length
