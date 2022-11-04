@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1667498220800
+updated: 1667602875156
 created: 1667338869712
 ---
 
@@ -157,3 +157,135 @@ Launch, no-launch and continue testing.
 - no statistical significance, no practical significance -> no launch
 - statistical significance, no practical significance -> no launch/continue testing
 
+# 3. Twyman's Law and Experimentation Trustworthiness
+
+**Twyman's Law: "Any figure that looks interesting or different is usually wrong."**
+
+Extreme resultss are more likely to be result of an error:
+- in instrumentation (logging)
+- loss/duplication of data
+- computational error
+
+Hypothesis testing depends on
+- significance level/value ($\alpha = 0.05$, that's Type 1 error(false positives))
+- power (high power = low Type 2 error (false negatives)), high power = catch Alternative hypothesis if it is true 
+- minimum detectable effect
+- sample size
+
+**Mistakes:**
+
+**A common mistake is to assme that low significance value = no Treatment effect.** It migh be just that our test is **underpowered**.
+
+Need to ensure you have enough power to detect a change of that magnitude or smaller.
+
+
+**p-value != probability of $H_{0}$ is true.** p-value is GIVEN $H_{0}$ how likely is we observe AS EXTREME VALUE AS the current test statistic value.
+
+p-value computes on CONDITIONING
+
+**[Peeking at p-values](https://towardsdatascience.com/wish-tackles-peeking-with-always-valid-p-values-8a0782ac9654)**
+
+Running online experiments and make conclusiong before reaching the sample size you need. Might lead to infalted false positive rates (underpowered tests).
+
+
+Fix it using always valid p-values method
+
+**Multiple Hypothesis testing**
+
+Multiple hypothesis vs single Null
+
+Bonferronni correction (conservative). Need it as high probability of false negatives (high probability of incorrectly rejecting the null)
+
+
+Duality between confidence intervals and p-values. For Null hypothesis that the threatment has no effect, a 95\% CI containing a zero is equavalent to having significat p value 0.05\%
+
+95\% CI is referring to the fact that if you run the experiment many times and compute the CI, then 95\% of the time you will catch the TRUE value.
+
+**Threat to internal Validity** - is your experiment trustworthy?
+
+Careful about:
+
+**SUTVA** (Stable Unit Treatment Value Assumption):
+- **spillover effect** (networks have this problem)
+- two-sided markets (lowering prices in Treatment might affect the Contol buy side)
+- shared resources (CPU, storage, cache)
+
+
+**Survivor bias**
+
+
+**SRM - Sample Ratio Mismatch**
+
+The size of the variants must be close to the designed ratio! Good place to do sanity checks.
+
+Small imbalances might change your result completely (reject null to not reject null)
+
+In practice it is easy to have this wrong:
+
+- browser redirects (e.g. links can be send by certain users to other users etc. better use **server side mechanism**)
+- gathering data (the way you define stuff like clicks)
+- bots (automatic filtering)
+- residual or carryover effects from previous experiments
+- time-of-day effect (if you send mail campaign for control in working hours and treatment in non-working hours)
+
+
+**Threats to External Validity** - are your experiments generalizable
+
+Generalizing across population is rarely applicable.
+
+Threats:
+- primacy effect (attached to the old)
+- novelty effect (excited for the shiny)
+
+Catch these effects by ploitting traffic over time.
+
+
+Viewing metrics by segments!
+
+- market or country
+- device type
+- time of dayweek
+- user characteristcs
+
+
+**Analysis by segments can be wrong** - thats when you add rates and averages.
+
+For two segments the OEC can increase for both but decrease overall due to migration from one segment to another.
+
+average 20 sessions-per-user use feature F, average 10 users-per-session not use feature F
+
+If users who use F have 15 sessions and stop using it, then both OES metrics would increase, overall would decrese.
+
+**Simpson's Paradox**
+
+Run experiment for two phases and in each the OEC increase. But overall it deacreases
+$\dfrac{a}{b} < \dfrac{A}[B], \dfrac{c}{d} < \dfrac{C}[D]$ but $\dfrac{a+c}{b+d}<\dfrac{A+C}{B+D}$
+
+
+Good data scientists are sceptic! Invoke Twyman's Law.
+
+# 4. Experimentation Platform and Culture
+
+Phases of experimation maturity models:
+
+- Crawl (1-10 experiments/year) - fundamental capabilities, instrumentation, data analytics/science
+- Walk (50 experiments/year) - validating your experiments + defining metrics
+- Run (250 experiments/year) - codifying your OEC, run experiments at scale
+- Fly (1000+ experiments/year) - do not launch anything before running an experiment, automation ,institutional memory, learning form past experiments, automation
+
+To add experimentation in an organization need learship buy-in espessially in Crawl and Wal phases to define OEC and set up fundamentals
+
+
+Infrastructure:
+
+- Experiment definition, setup, management via UI, or API, store configurations
+- experiment deployment, both server and client side - variant assignment and parametrization
+- experiment instrumentation (logging, triggers, alerting, automation)
+- experiment analysis, aggregate, clean, statistical tests, p-values, power analysis, visualization
+
+*Iterations* - progressively roll out new features to many users (not all at once).
+
+Scaling experimentation:
+- need multiple experiments and assign same user to many experiments (multi-layer method)
+- need to do lots of monitoring
+- deal with interactions between experiments
