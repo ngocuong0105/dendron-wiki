@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1667412254557
+updated: 1667498220800
 created: 1667338869712
 ---
 
@@ -153,6 +153,7 @@ The decisions are usually three way:
 
 Launch, no-launch and continue testing.
 
-statistical, practical significance -> launch
-no statistical significance, no practical significance -> no launch
-statistical significance, no practical significance -> no launch/continue testing
+- statistical, practical significance -> launch
+- no statistical significance, no practical significance -> no launch
+- statistical significance, no practical significance -> no launch/continue testing
+
