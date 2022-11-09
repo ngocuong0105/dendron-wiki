@@ -2,7 +2,7 @@
 id: maki4i54gl6bqto8uf29d2n
 title: USACO
 desc: ''
-updated: 1667489546727
+updated: 1667653971789
 created: 1664646684679
 ---
 
@@ -40,3 +40,4 @@ They are very similar to problems at high school math competitions. Also in orde
 - [diamond display](http://www.usaco.org/index.php?page=viewproblem2&cpid=643)
 - [sleepy cows herding](http://www.usaco.org/index.php?page=viewproblem2&cpid=918)
 - [movie festival ii](https://usaco.guide/problems/cses-1632-movie-festival-ii/solution)
+- [angry birds chain](http://www.usaco.org/index.php?page=viewproblem2&cpid=597)

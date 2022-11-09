@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1667583007989
+updated: 1667907696013
 created: 1664446506779
 ---
 
@@ -117,4 +117,46 @@ sorted(data, key=cmp_to_key(compare))
 from itertools import groupby
 s = 'aaabbddca'
 groups = [(ch,len(list(g))) for ch,g in groupby(s)] # [(a,3),(b,2),(d,2),(c,1),(a,1)]
+```
+
+- concurrent, multithreaded programming, [web crawler](https://leetcode.com/problems/web-crawler-multithreaded/)
+```Python
+# simple DFS
+class Solution:
+    def crawl(self, start: str, parser: 'HtmlParser') -> List[str]:
+        hostname = lambda x: x.split('/')[2]
+        visited,stack= set([start]),[start]
+        while stack:
+            s = stack.pop()
+            for u in parser.getUrls(s):
+                if u not in visited and hostname(start) == hostname(u):
+                    visited.add(u)
+                    stack.append(u)
+        return visited
+
+# concurrent DFS
+from concurrent import futures
+class Solution:
+    def crawl(self, s: str, parser: 'HtmlParser') -> List[str]:
+        hostname = lambda x: x.split('/')[2]
+        visited = set([s])
+        with futures.ThreadPoolExecutor(max_workers=16) as executor:
+            tasks = [executor.submit(parser.getUrls, s)]
+            while tasks:
+                neigh = tasks.pop().result()
+                for u in neigh:
+                    if u not in visited and hostname(s) == hostname(u):
+                        visited.add(u)
+                        tasks.append(executor.submit(parser.getUrls, u))
+        return visited
+```
+
+- string operations/methods
+```Python
+char.islower()
+char.isupper()
+char.lower()
+char.upper()
+ch.isnumeric() # is an integer
+ch.isalpha() # is a character
 ```
