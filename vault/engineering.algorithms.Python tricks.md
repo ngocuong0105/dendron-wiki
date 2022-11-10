@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1667907696013
+updated: 1668105065439
 created: 1664446506779
 ---
 
@@ -159,4 +159,12 @@ char.lower()
 char.upper()
 ch.isnumeric() # is an integer
 ch.isalpha() # is a character
+```
+
+- permutations
+```python
+from itertools import permutations
+nums = [2,1,3,5]
+for p in permutations(nums):
+    print(p)
 ```
