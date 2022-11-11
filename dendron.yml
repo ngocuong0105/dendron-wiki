@@ -1,6 +1,10 @@
 version: 5
 dev:
     enablePreviewV2: true
+site:
+    ga_tracking: G-W5DRRLQ1N7
+    ga:
+        tracking: G-W5DRRLQ1N7
 commands:
     lookup:
         note:
