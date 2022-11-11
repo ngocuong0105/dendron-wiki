@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1668189860254
+updated: 1668208008057
 created: 1667338869712
 ---
 
@@ -491,4 +491,49 @@ Example. Improving revenue metric with 3% on 10 % of users.
 1. Should we take data prior tirggerring point? If you take it you oose a bit statistical power. If you do not take it you might have abnormal metrics. Clicks prior checkout to be 0.
 2. Plotting a metric over time with increasing numbers of users usually leads to false trends. Best look at graphs over time where each day shows the user who visited that day. Same problem with triggered users. 100% of users who visited first day were triggered. Smaller portion on second day (as thoe visited first day would not trigger). Best compute triggered user ratio for each day - users who visited that day and were triggered that day. **Issue** is that you need overall Treatment for all days not day per day.
 
-# 21. 
+# 21. Sample Ratio Mismatch 
+
+SRM is used as a **guardrail metric** making sure your experiment design holds (all assumptions are plausible).
+
+SRM looks at the ratio of users between two variant (Treatment and Control) and checks if it is similar to the experimental design sample ratio.
+
+Example: we expect 1:1 ratio and get:
+- Contol: 821,588 users
+- Treatment: 815,482 users
+
+we need to run test to check if the p value is significant or not. If it is significant then we have SRM and probaly all other metrics outputed from the experiment would be wrong.
+
+Causes of SRM:
+- Buggy randomization of users
+- data pipeline issues (bot's filtering)
+- residual effect (say we ran expirement and it had a bug. We fix the bug, avoid re-randomization and run the experiment again)
+- bad trigger condition
+
+Other trust related guardrail metrics:
+- cache hit rates
+- click tracking (web beacons)
+- cookie write rate
+
+# 22. Leakage
+
+
+SUTVA = Stable Unit Treatment Value Assumption states that the behaviour of each unit in the experiment is unaffected by variant assignment of other units.
+
+between variants **interference** = violation of SUTVA = data leakage = spillover
+
+units might have direct or indirect connection
+- direct connection in networks (friends)
+- indirect (shared resources, e.g ads budget, CPU) 
+
+when there is interference between data in variants applying treatment might affect control group as well. So the delta estimation would be wrong.
+
+Shared resources example: Say we apply new feature in Airbnb and Treamnet users book more. Revenue generated in Treatment increases, but the number of free rooms decreases which affects the revenue of the control. We would overestimate the treatment effect.
+
+
+Tackle data leakage:
+- Isolation (group by geography, time, clusters). When randomizing A/B test take one point per group (decreases the power of the test)
+- Evaluate the effect of data leakage:
+    - total messages send and responded to
+    - total number of posts created and total number of likes/cmments these posts receive
+these metrics can measure the downstream impact = measure spillover by measuring the first-order impact.
+
