@@ -2,7 +2,7 @@
 id: tmyxaki17gpq6jb9xav1x3v
 title: String Processing
 desc: ''
-updated: 1668079377042
+updated: 1668189599495
 created: 1664382813257
 ---
 # Fundamentals
@@ -115,7 +115,7 @@ Therefore the number of new substrings appearing when we add a new character  
 ## Manacher's Algorithm - Finding all sub-palindromes in O(N)
 
 - Manacher, [p1](https://leetcode.com/problems/longest-palindromic-substring/), [p2](https://leetcode.com/problems/shortest-palindrome/)
-
+- [maximum product of two palins](https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-substrings/)
 <details>
 <summary> <b>CODE</b> </summary>
 
@@ -143,13 +143,15 @@ class Solution:
         P = [0]*len(T)
         C,R = 0,0
         for i in range(len(T)-1):
-            P[i] = (R>i) and min(R-i,P[2*C-i])
+            if R > i: # P[i] = (R>i) and min(R-i,P[2*C-i]) slows down
+                P[i] = min(R-i,P[2*C-i])
             while T[i+P[i]+1] == T[i-P[i]-1]:
                 P[i] += 1
             if R < i+P[i]:
                 C,R = i,i+P[i]
         l = max(P)
         i = P.index(l)
+        # P[2:-2:2] returns the sizes of largest palindrom for each i being the center (only odd length palindromes!)
         return s[(i-l)//2:(i+l)//2]
 
 ```
