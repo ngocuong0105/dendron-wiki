@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1667653989153
+updated: 1668186834248
 created: 1664382870554
 ---
 # Sequences
@@ -38,6 +38,7 @@ def bs(i,j,func):
 - [mysterious function](https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/)
 - [minimum wasted space](https://leetcode.com/problems/minimum-space-wasted-from-packaging/)
 - [angry birds](http://www.usaco.org/index.php?page=viewproblem2&cpid=597)
+- [minimum cost to make equal array](https://leetcode.com/problems/minimum-cost-to-make-array-equal/)
 **built in python library**
 
 **Added after Python 3.10!!!**

@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1667208274555
+updated: 1668165283049
 created: 1664382766630
 ---
 
@@ -20,5 +20,6 @@ created: 1664382766630
 - [numbers with repeated digits](https://leetcode.com/problems/numbers-with-repeated-digits/)
 - [encode string](https://leetcode.com/problems/encode-string-with-shortest-length/)
 - [maximum profit in job scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/)
+- [encode string with shortest length](https://leetcode.com/problems/encode-string-with-shortest-length/)
 
 Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, see solution tab in [Climbing stairs](https://leetcode.com/problems/climbing-stairs/)
