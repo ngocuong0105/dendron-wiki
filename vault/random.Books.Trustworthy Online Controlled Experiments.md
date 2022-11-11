@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1668151389578
+updated: 1668162186085
 created: 1667338869712
 ---
 
@@ -426,3 +426,67 @@ Achieve this by reducing variance in the data.
 Varaince of other statistics (such as quantiles, not only the mean.)
 
 Use bootstrap. By estimating the density you can estimate the variance.
+
+# 19. The A/A Test
+
+A/A test is a sanity check. Establishes trust in your experimentation platform.
+
+Split users in two identical groups and do A/A test. If the system is operating correctly then in repeated trials about 5% of the time a given metric hould be statistically significant with p-value less than 5%.
+
+When conducting t -tests to compute p-values, the distribution of the p-values from repeated trials should be *uniform distribution*.
+
+A/A tests benefits:
+- ensure Type I error are controlled (within 5%)
+- assess metrics variability - larger variance in metric means you need to run longer the A/B test to detect the minimum detectable effect
+- no bias between Control and Treatment (especially if you reuse populations from previous experiments - no carry-over effect)
+- good first validation step
+- distribution mismatch, platform anomalies
+- catch wrong variance estimates (if you underestimate the variance you would have large t statistic hence reject Null too often)
+- catch when independence assumption is violated (and wrong variance estimate)
+- skewed distribution (normal assumption violated)
+
+Run A/A test in parrallel and continously with other experiments.
+
+You dont need new data to run many A/A tests. Just split the data again and again.
+
+The p-values should follow iniform distribution.
+
+Use **goodness-of-fit** such as Anderson-Darling or Kolmogorov-Smirnoff to check if it is uniform distribution
+
+If there is a large p-value of around 0.32, then you might have an outlier. $T = \dfrac{\delta}{\sqrt{var(\delta)}}$ would be around 1 as the outlier would swamp all other values.
+
+# 20 Triggering for Improved Sensiitivity
+
+Sensitivity, Power, Variance are all related.
+
+Users are triggered into the analysis of the experiment if there is (potentially) difference for this user when being in the varaint they are in or the counterfactual.
+
+Example: Wnat to test a new checkout UI. We should trigger the experiment for only users who initiated checkout.
+
+Example: Chage free shopping cart from 25$ to 35$. The triggered users shold be only those who have shopping cart between 25$ and 35$. Only they differ.
+
+When analyzing only triggered users you might need smaller sample sized to reach the same power(high sensitivity) of the experiment.
+
+Triggering only relevant users reduces the noise in the data.
+
+
+**Trigerring Trustworthiness**
+
+1. Check SRM (Sample ratio). If the overall experiment has no SRM, then the triggered data should not have SRM too.
+2. Complement analysis. Run A/B test on the **non**- triggerred users. You should get A/A test results.
+
+**Overall Treatment Effect**
+
+When computing Treatment effect on the triggered population, you must *dilute* the effect to the overall user base.
+
+Diluting depends on the triggering metric!
+
+Example. Improving revenue metric with 3% on 10 % of users.
+
+- If the triggered users were those who initiated checkout (and that's the only way to make money), then the overall revenue increased by 3%.
+- If the trigerred users were those who spend 10% of the average user, then the improved revenue is 3%*10%*10% = 0.03%
+
+**Open questions**
+
+1. Should we take data prior tirggerring point? If you take it you oose a bit statistical power. If you do not take it you might have abnormal metrics. Clicks prior checkout to be 0.
+2. Plotting a metric over time with increasing numbers of users usually leads to false trends. Best look at graphs over time where each day shows the user who visited that day. Same problem with triggered users. 100% of users who visited first day were triggered. Smaller portion on second day (as thoe visited first day would not trigger). Best compute triggered user ratio for each day - users who visited that day and were triggered that day. **Issue** is that you need overall Treatment for all days not day per day.
