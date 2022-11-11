@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1667602875156
+updated: 1668151389578
 created: 1667338869712
 ---
 
@@ -69,7 +69,7 @@ Useful concept to have in mind EVI (expected value of information). Running a fa
 
 Experiments evauluate ideas (people could be very poor at this)
 
-Experiments usually make small many improvements over time. 10\% improvemnt for 5\% of users is 0.5\% overall improvement
+Experiments usually make small many improvements over time. 10% improvemnt for 5% of users is 0.5% overall improvement
 
 Winning is done inch by inch.
 
@@ -110,7 +110,7 @@ Statistical significance means whether the observed result is by chance or not.
 
 However, in practice we need **practical significance** - does it make sense from business stand point to make the change?
 
-practical significance is usually larger than statistical significance. If you are on start-up you would like to have larger practical significance say 10\% where as big businesses like Google with billions of revenue  the 0.2\% change is practically significant
+practical significance is usually larger than statistical significance. If you are on start-up you would like to have larger practical significance say 10% where as big businesses like Google with billions of revenue  the 0.2% change is practically significant
 
 **randomization unit** - usually these are users
 
@@ -197,9 +197,9 @@ Multiple hypothesis vs single Null
 Bonferronni correction (conservative). Need it as high probability of false negatives (high probability of incorrectly rejecting the null)
 
 
-Duality between confidence intervals and p-values. For Null hypothesis that the threatment has no effect, a 95\% CI containing a zero is equavalent to having significat p value 0.05\%
+Duality between confidence intervals and p-values. For Null hypothesis that the threatment has no effect, a 95% CI containing a zero is equavalent to having significat p value 0.05%
 
-95\% CI is referring to the fact that if you run the experiment many times and compute the CI, then 95\% of the time you will catch the TRUE value.
+95% CI is referring to the fact that if you run the experiment many times and compute the CI, then 95% of the time you will catch the TRUE value.
 
 **Threat to internal Validity** - is your experiment trustworthy?
 
@@ -289,3 +289,140 @@ Scaling experimentation:
 - need multiple experiments and assign same user to many experiments (multi-layer method)
 - need to do lots of monitoring
 - deal with interactions between experiments
+
+
+# 17. The stattistics behind Online Controlled Experiments
+
+**Two-sample** t-tests look at the size of the difference between the means *relative* to the variance.
+
+The significance of the difference is measured using p-value
+
+The lower the p-value the strnger evidence that the Treatment is different from the Control.
+
+$T-statistic = \dfrac{\delta}{\sqrt{var(\delta)}}$
+
+$\delta = \bar{Y_t} - \bar{Y_c}$ 
+
+t-statstic $T$ is normalized version of $\delta$
+
+Intuitively, the larger t, the less likley the means are the same, the more likely we reject the Null hypothesis.
+
+**p-value**
+
+This is the probability we observe as extreme as the observed $\delta$ given $H_{0}$ is True
+
+$P(H_{0}|\delta observed) = \dfrac{P(H_{0} is True)}{P(\delta observed)} \times P(\delta observed| H_{0} is True) = \dfrac{prior}{likelihood} \times p-value$
+
+95% CI is equivalent to p-value of 0.05. If 0 is not in the 95% CI, we reject the null hypothesis (p-value is significant and is less than 0.05).
+
+
+**Normality assumption** when doing t test is for the average $\bar{Y}$, not the sample $Y_{i}$.
+
+This assumption holds for large $n$ by the CLT.
+
+Rule-of-thumb is to use $355s^2$ data points where $s$ is the skewness coefficient.
+
+To reduce skewness - transform the metrics or cap them.
+
+To be more confident if normality assumption holds test in offline simulation.
+
+Shuffle samples across Treatment and Control and test for normality using **Kolmogorov-Smirnov** and **Anderson-Darling**.
+
+
+**Type I/II errors and Power**
+
+- Type I error: false positives (reject Null incorrecly)
+- Type II error: false negatives (do not reject Null incorrectly)
+
+Tradeoff between the two errors:
+
+higher p-value threshold -> higher Type I error but lower Type 2 error
+
+You control Type I error by setting the significance level p-value $\leq 0.05$.
+
+$Type II error = 1 - Power$
+
+Power = probability detecting difference(reject null) when there is indeed difference.
+
+Power is usually parametrized by $\delta$ = the minimum delta of practical interest
+
+$Power_{\delta} = P(|T| \geq 1.96| true difference is \delta)$
+
+**power analysis**
+
+To achieve enough power (industry standard of 80%) you need approximately $n = \dfrac{16 \sigma^2}{\delta^{2}}$
+
+We do not know the true difference $\delta$ so we use **practical difference**, known as the **minimum detectable effect**.
+
+Want to spot big difference need less power.
+
+
+**Bias = when the estimate and the true value of the mean are systematically different.**
+
+**Multiple Testsing problem** When you have many alternative hypothesis, your probability of false discoveries increases (false positive).
+
+Simple way to fix it is reducing the p-value threshold (Bonferroni correction).
+
+Similar problem appears when you have many many metrics. "Why is this irrelevant metric significant?"
+
+Here you can separete the metrics in groups and assign varying p-value thresholds.
+
+
+**Fisher's Meta-analysis**
+
+Combining results (p-values) from multiple experiments with the same hypothesis.
+
+Fisher's method:
+
+$\chi_{2k}^{2} = -2 \sum_{i=1}^{k}ln(p_{i})$
+
+$p_i$ is p-value from $i-$th experiment.
+
+Fisher's method increases the power and reduces the false-positives of your experiment.
+
+
+do orthogonal replications of the experiment and apply Fisher's method.
+
+# 18. Variance estimation and Improved sensitivity
+
+**Variance estimation is the core of experiment analysis**
+
+incorrect estimate of variance leads to incorrect p-value and confidence interval.
+
+overestimated varaince leads to false negatives (reject when we should have) and underestmated variance leads to false positives
+
+
+**Delta vs Delta %**
+
+percent delta is the relative difference $\delta \% = \dfrac{\delta}{\bar{Y_{c}}}$
+
+1% session increase more meaningful than 0.01 increase per user.
+
+$var(\delta \%) = \dfrac{var(\bar{Y_{t}}-\bar{Y_{c}})}{\bar{Y_{c}}} = var(\dfrac{\bar{Y_{t}}}{\bar{Y_{c}}})$
+
+estimate it using the delta method (taylor expansion etc.)
+
+
+variance of Ratio metrics can be estimated using delta method or bootstrap method.
+
+**Ratio metric. When analysis unit is didfferent from the experiment unit**
+
+**NB ASSUMPTION** the varaince formula $var(Y) = \dfrac{1}{n-1}\sum(Y_{i}-\bar{Y})^2$ is true when $Y_i$ are iid.
+
+If $Y_{i}$ is CTR per user, or other measurement by user, then this assumtion does not hold!
+
+NB: Rmove outliers before computing variance.
+
+Improving sensistivity = Higher power
+
+Achieve this by reducing variance in the data.
+- create an evaluation metric with smaller variance while capturing similar information (instead of purchase price, is_purchase)
+- transform metric, cap ,log
+- triggered analysis
+- stratification, CUPED
+- randomize on more gradular unit
+
+
+Varaince of other statistics (such as quantiles, not only the mean.)
+
+Use bootstrap. By estimating the density you can estimate the variance.
