@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1668105065439
+updated: 1668162892154
 created: 1664446506779
 ---
 
@@ -167,4 +167,11 @@ from itertools import permutations
 nums = [2,1,3,5]
 for p in permutations(nums):
     print(p)
+```
+
+- is a string a rotated version of another string, is rotate
+```python
+# Consider a string S="helloworld". Now, given another string T="lloworldhe", can we figure out if T is a rotated version of S? Yes, we can! We check if S is a substring of T+T.
+def is_rotate(s,t):
+    return s in t+t
 ```
