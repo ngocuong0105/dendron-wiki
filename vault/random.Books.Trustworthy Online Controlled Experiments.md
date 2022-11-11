@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1668162186085
+updated: 1668189860254
 created: 1667338869712
 ---
 
@@ -490,3 +490,5 @@ Example. Improving revenue metric with 3% on 10 % of users.
 
 1. Should we take data prior tirggerring point? If you take it you oose a bit statistical power. If you do not take it you might have abnormal metrics. Clicks prior checkout to be 0.
 2. Plotting a metric over time with increasing numbers of users usually leads to false trends. Best look at graphs over time where each day shows the user who visited that day. Same problem with triggered users. 100% of users who visited first day were triggered. Smaller portion on second day (as thoe visited first day would not trigger). Best compute triggered user ratio for each day - users who visited that day and were triggered that day. **Issue** is that you need overall Treatment for all days not day per day.
+
+# 21. 
