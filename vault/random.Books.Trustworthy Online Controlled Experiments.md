@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1668208008057
+updated: 1668275786775
 created: 1667338869712
 ---
 
@@ -537,3 +537,62 @@ Tackle data leakage:
     - total number of posts created and total number of likes/cmments these posts receive
 these metrics can measure the downstream impact = measure spillover by measuring the first-order impact.
 
+# 23. Measuring Long-Term Treatment Effects
+
+Experiments running for one or two weeks measure short-term effects. Our goal is to design experiments and measure short-term effects which can generalize to long-term effects.
+
+Poor generalization examples:
+- showing poor search results, would initally make users search more, but long term they might abandon the search engine
+- showing many low quality, might initially work and ahve higher CTR and revenue, but long term not
+
+Reasons why the treatment effect may differ between short-term and long-term:
+- user-learned effects. User adapt to change. If the search engine or the reccomendation system give bad results users may try it initially, but abandon in the long term. On the other hand if the new feature is useful but complex, they may need time to discover the usefulness.
+- network effects. Treatment effect takes time to propagate through the whole network. Or initial propagationg may result in good results but once it finishes it is no good anymore. For example 'People you may know' feature in Linkdin. Changing the rec algo may improve simply because you reccommend new people.
+- delayed experience and measurement. In Airbnb people can book in advance by several months.
+- ecosystem changes:
+    - other new features are launched
+    - seasonality
+    - competitive landscape
+
+One way to measure long term effect is to run the experiment for longer time, and the last delta you get is what you consider as the long term delta.
+
+Caveat: The longer you run the experiment the more likely you will have data leakage:
+- users may start using the feature from multiple devices
+- netwrok effect would propagate
+- treatment effect dilution
+
+The longer yourun the experiment the higher survivorship bias you might have.
+
+**Alternative methods for Long-Running Experiments**
+
+1. Cohort Analysis - divide data using stable ID (addressing survivorship bias and data leakage). You can track for each cohort the bias and leakage.
+
+Need to combine results from different cohorts in the end
+
+2. Post-Period Analysis.
+
+You have Control and Treatment for time $T$. Then you turn off the new feature for all users.
+
+For time $T$ to $T+1$ you check the *learning effect.* There are two types:
+- user-learning effect (say you added more ads in treatment and they are used to clicking adds. Then after time T users from treatment might continue clicking lots of ads)
+- system-learning effect. Your ML models have better parameters.
+
+3.  Time-staggered Treatments
+
+The experiments so far require to wait 'enough' time before taking the long-term measurement. How to decide what is enough?
+
+Run the same treatment to two variants where one lagged, i.e. we have 2 starting times $t_{0} = t$, $t'_{0} = t+1$.
+
+You have effectivle A/A test where the second A is has the treatment effect 1 period less.
+
+When your test statistic are the same (running A/A test), i.e the p-valu is not significant, you can say that is enough.
+
+Assumes over time the difference between the statistics converges to 0
+
+4. Holdback and reverse experiment
+
+Runng long time and experiment might cost a lot. Not releasing the feautre to the control group might lead to missed opportunities.
+
+Thus you can consider *holdback* - i.e. leave 10% control group and 90% Treatment. You loose a bit of power of the test though.
+
+*reverse experiment*. Release for all the treatment and after some time reverse 10% back to Control. Problem is control group might be confused.
