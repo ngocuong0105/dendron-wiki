@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1667472431499
+updated: 1668244176436
 created: 1658698294975
 ---
 
@@ -659,6 +659,8 @@ Decide how to normalize your database by looking for:
 
 ![multivalued_dep.png](assets/images/multivalued_dep.png){width: 600px}
 
+
+Maybe check this [youtube](https://www.youtube.com/watch?v=GFQaEYEc8_8&ab_channel=Decomplexify)
 
 # Problems
 [1285](https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/)
