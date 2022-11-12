@@ -11,7 +11,6 @@
 
 </details>
 
-Unfortunately dendron does not support that in published pages. You can toggle only on your local.
 
 - image
 
