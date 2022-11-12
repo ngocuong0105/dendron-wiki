@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1668007461923
+updated: 1668248804695
 created: 1664382752052
 ---
 
@@ -289,6 +289,10 @@ class BIT:
             res += self.bit[i]
             i -= (i & -i)
         return res
+        
+    def sum_range(self, l, r):
+        '''sum(nums[l:r+1])'''
+        return self.query(r) - self.query(l-1)
 ```
 </details>
 
