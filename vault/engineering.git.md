@@ -2,7 +2,7 @@
 id: 78ld05rlq10336r34dz8sxc
 title: Git
 desc: ''
-updated: 1668338731838
+updated: 1668338801850
 created: 1668288491690
 ---
 
@@ -189,5 +189,5 @@ git cherry-pick <Commit1><Commit2>
 
 says that you would like to copy a series of commits below your current location (HEAD).
 
-
 - **interactive rebase**
+
