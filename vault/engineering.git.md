@@ -2,7 +2,7 @@
 id: 78ld05rlq10336r34dz8sxc
 title: Git
 desc: ''
-updated: 1668340866056
+updated: 1668341216966
 created: 1668288491690
 ---
 
@@ -18,7 +18,7 @@ A **commit** in a git repository records a snapshot of all the (tracked) files i
 Commits can be visually represented as nodes.
 
 - create a commit
-```
+```s
 git commit -m 'commit message'
 ```
 
@@ -31,17 +31,17 @@ Branches are super lightweight and have no storage/memory overhead
 Branches are pointers. To get yourself to a branch you need to *checkout* there
 
 - create a new branch
-```
+```s
 git branch new_branch
 ```
 
 - go to the branch
-```
+```s
 git checkout new_branch
 ```
 
 - shortcut
-```
+```s
 git checkout -b new_branch
 ```
 
@@ -59,7 +59,7 @@ Merging in Git creates a special commit that has two unique parents.
 Above we merge bugFix into main and main contains all the work.
 
 - merge
-```
+```s
 git checkout -b bugFix
 git commit -m 'Blah'
 git checkout main
@@ -84,7 +84,7 @@ We would like to move our work from bugFix directly onto the work from main. Tha
 
 C3 still exists, and the rebase creates a copy C3'
 - **rebase**
-```
+```s
 git checkout -b bugFix
 git commit -m 'Blah'
 git checkout main
@@ -95,7 +95,7 @@ git rebase main
 
 
 - interactive rebase (can squash commits)
-```
+```s
 git rebase -i main
 ```
 
@@ -120,7 +120,7 @@ HEAD -> main -> C1
 To checkout to a commit you need to use its hash (C1)
 
 To see commits hashes:
-```
+```s
 git log
 ```
 
@@ -132,16 +132,16 @@ Specifying commits by their hash isn't the most convenient thing ever, which is 
 
 saying **main^** is equivalent to "the first parent of main
 - go to parent commit
-```
+```s
 git checkout main^
 ```
 
 You can also reference HEAD as a relative ref
-```
+```s
 git checkout HEAD^
 ```
 - go to previous commit, if current commit is C4, the one below will go to C0
-```
+```s
 git checkout HEAD~4
 ```
 
@@ -149,7 +149,7 @@ git checkout HEAD~4
 
 One of the most common ways I use relative refs is to move branches around. You can directly r**eassign a branch to a commit** with the -f option
 
-```
+```s
 git branch -f main HEAD~3
 ```
 
@@ -167,13 +167,13 @@ git branch -f main HEAD~3
 
 ![after_reset.png](assets/images/after_reset.png)
 
-```
+```s
 git reset HEAD~1
 ```
 
 reset does not work for remote branches. Need to use
 
-```
+```s
 git revert HEAD
 ```
 
@@ -184,8 +184,8 @@ You know how to move around the source tree using reference operators `^ ~`.
 
 The next concept we're going to cover is "moving work around" -- in other words, it's a way for developers to say "I want this work here and that work there"
 
-- **cherry pick**
-```
+- ** pick**
+```s
 git cherry-pick <Commit1><Commit2>
 ```
 
@@ -193,7 +193,7 @@ says that you would like to copy a series of commits below your current location
 
 - **interactive rebase**
 
-```
+```s
 git rebase -i branch_name
 ```
 
@@ -203,7 +203,7 @@ In interactive rebase you can **reorder, omit, squash, change commit messages**.
 
 alternatively using references:
 
-```
+```s
 git rebase -i HEAD~3
 ```
 
@@ -218,13 +218,13 @@ Branches are easily mutated, often temporary, and always changing. You can move 
 
 Tags never move, even if you create new commits.
 
-```
+```s
 git tag v1 commit_hash
 ```
 
 tags serve as an anchor point:
 
-```
+```s
 git checkout v1
 ```
 
@@ -232,7 +232,7 @@ git checkout v1
 
 Because tags serve as such great "anchors" in the codebase, git has a command to describe where you are relative to the closest "anchor" (aka tag). And that command is called git describe
 
-```
+```s
 git describe <ref>
 ```
 
