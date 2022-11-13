@@ -2,7 +2,7 @@
 id: tmyxaki17gpq6jb9xav1x3v
 title: String Processing
 desc: ''
-updated: 1668189599495
+updated: 1668349557692
 created: 1664382813257
 ---
 # Fundamentals
@@ -152,9 +152,36 @@ class Solution:
         l = max(P)
         i = P.index(l)
         # P[2:-2:2] returns the sizes of largest palindrom for each i being the center (only odd length palindromes!)
+        #P[2:-2] returns sized of largest palindromes (odd and even)
         return s[(i-l)//2:(i+l)//2]
 
 ```
 </details>
+
+
+- using Manacher to query if substring is palindome in `O(1)` per query
+
+```Python
+def Manacher(s):
+    T = '$#'+'#'.join(s)+'#&'
+    P = [0]*len(T)
+    C,R = 0,0
+    for i in range(len(T)-1):
+        if R > i: 
+            P[i] = min(R-i,P[2*C-i])
+        while T[i+P[i]+1] == T[i-P[i]-1]:
+            P[i] += 1
+        if R < i+P[i]:
+            C,R = i,i+P[i]
+    return P[2:-2]
+
+def palin(i,j):
+    if j > len(s): return False
+    l = j-i
+    c = 2*((i+j)//2)-(l%2==0)
+    return P[c] >= l
+P = Manacher(s)
+palin(i,j) # returns if s[i:j] is a palindrome
+```
 
 ## Finding repetitions

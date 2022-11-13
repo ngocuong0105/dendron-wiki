@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1668275786775
+updated: 1668369436218
 created: 1667338869712
 ---
 
@@ -289,6 +289,91 @@ Scaling experimentation:
 - need multiple experiments and assign same user to many experiments (multi-layer method)
 - need to do lots of monitoring
 - deal with interactions between experiments
+
+
+
+# 5. Speed Matters
+
+Measure impact of performance improvements by slowing down artifitially your feature and run A/B test.
+
+Assume that the metrc(e.g revenue) has linear dependence on the performance. This assumption is reaistic locally (for small performance improvements like miliseconds.)
+
+**Measuring Page Load time of search engine.**
+
+1. The user makes a request at time $T_0$ by typing a query into the browser.
+2. The request takes time to reach the server at time $T_{1}$, $T_{1}-T_{0}$ is super small and hard to measure.
+3. On receiving the request the server typically sends the first chunk of HTML at time $T_{2}$. It is often independent of the request (e.f. query or URL). It returns the header. navigation elemtns etc. It tells the user his request was received. User receives this chunk at time $T_{3}$.
+4. At time $T_{4}$ the server sends the rest of the page and the other chunks of HTML. At time $T_{5}$ user receives all chunks
+5. At time $T_{6}$, the browser fires the Onload event, indicating the page is ready. It makes a log request from the server. At time $T_{7}$ the server receives the log request (user clicks, scorlls, hovers).
+
+The Page load time is $T_{0}-T_{6}$ which we estimate with $T_{1}-T_{7}$ (stuff happening on server side).
+
+
+**Slowdown experiment design**
+
+Best is to slowdown the experiment when the server finishes computing Chunk2 which is the URL dependent HTML - as if it took longer to compute it.
+
+
+Above is the real performance. User experience **perceived performance** - denoting the idea that users stat to interpret the page once enough of it is showing. E.g. can measure the time to first result instead of displaying all results.
+
+# 6. Organizational Metrics
+
+Objectives and Key Results (OKRs).
+
+Objecties represent long-term goals and Key results short-term goals.
+
+Types of metrics:
+
+- **Goal metrics** reflect what the organization ultimately cares about. Need to articulate your goal in words. Goal metrics are proxies to what you really want to achieve. 
+
+- **Driver metrics** tend to be short-term faster-moving and more sensitive metrics than goal metrics. HEART(HAppiness, Engagement, Adoption, Retention and Task Success). PIRATE framework (AARRR! Acquisition, Retention, Referral, Revenue)., user funnel.
+
+- **Guardrail metrics** guard agains violated assumptions and come in two types: metrics that protect the busness and that assess the trustworthiness of experiments. These metrics make sure there is balance in all metrics.
+
+The same metric may play different role in different teams. Some teams use latency and performance as guardrail metric. That is if you ship new feature and have revenue as driver metric you want to make sure you don't loose a lot on performance. Infrastructure teams might have these swapped.
+
+**Asset vs engagement metrics:** asset metrics are static (number of users), engagement are dynamic and measure the valuea a user receive
+
+**Business vs operational metrics:** business metrics are (daily average users (DAU), revenue per user) track busniess health. Operational are (queries per second) track operational concerns
+
+You want your goal metrics to be **simple and stable**.
+
+You want your driver metrics to be:
+- alligned with the goal
+- actionable and relevant
+- sensitive
+- resistant to gaming
+
+**Always remember that metrics are proxies!**, e.g. simply driving high CTR might result in clickbaits.
+
+
+example metrics: bounce rate(ratio of users went back - away from your content)
+
+example gurdrail metrics(organizational):
+- HTML responcse size per page
+- Client crashes
+- latency
+
+these are metrics that usually most teams should NOT affect.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 17. The stattistics behind Online Controlled Experiments
