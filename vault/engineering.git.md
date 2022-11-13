@@ -2,7 +2,7 @@
 id: 78ld05rlq10336r34dz8sxc
 title: Git
 desc: ''
-updated: 1668338801850
+updated: 1668340866056
 created: 1668288491690
 ---
 
@@ -93,10 +93,12 @@ git checkout bugFix
 git rebase main
 ```
 
+
 - interactive rebase (can squash commits)
 ```
 git rebase -i main
 ```
+
 
 # HEAD
 
@@ -191,3 +193,53 @@ says that you would like to copy a series of commits below your current location
 
 - **interactive rebase**
 
+```
+git rebase -i branch_name
+```
+
+Your current HEAD would copy from branch_name and do a rebase.
+
+In interactive rebase you can **reorder, omit, squash, change commit messages**.
+
+alternatively using references:
+
+```
+git rebase -i HEAD~3
+```
+
+Juggle commits: Say you want to make changes to an older commit but still keep the order. 
+
+Trick: Interactive rebase, then reorder, then make changes, reorder again.   
+
+
+# Git Tags
+
+Branches are easily mutated, often temporary, and always changing. You can move them around and refer to different commits. We use **tags** to permanently mark historical points in your project's history - major releases and big merges.
+
+Tags never move, even if you create new commits.
+
+```
+git tag v1 commit_hash
+```
+
+tags serve as an anchor point:
+
+```
+git checkout v1
+```
+
+**git describe**
+
+Because tags serve as such great "anchors" in the codebase, git has a command to describe where you are relative to the closest "anchor" (aka tag). And that command is called git describe
+
+```
+git describe <ref>
+```
+
+Where `<ref>` is anything git can resolve into a commit. If you don't specify a ref, git just uses where you're checked out right now (`HEAD`).
+
+The output of the command looks like:
+
+`<tag>_<numCommits>_g<hash>`
+
+Where `tag` is the closest ancestor tag in history, `numCommits` is how many commits away that tag is, and `<hash>` is the hash of the commit being described.
