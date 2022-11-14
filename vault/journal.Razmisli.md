@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1668381535842
+updated: 1668459937277
 created: 1658754729845
 ---
 # Actions
@@ -45,7 +45,7 @@ What is love?
 How to have meaningful and thoughtful discussions?
 
 ---
-# Steve, Musk
+# Speeches
 
 Steve Jobs graduation speech - [youtube](https://www.youtube.com/watch?v=UF8uR6Z6KLc&ab_channel=Stanford).
 His three stories:
