@@ -2,11 +2,11 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1668162892154
+updated: 1668411616355
 created: 1664446506779
 ---
 
-
+- transpose of a matrix
 
 ```Python
 # transpose with unzipping
@@ -14,25 +14,29 @@ mat = [(1,2,3),(4,5,6)]
 transpose_mat = list(zip((*mat)))
 ```
 
+- cumulative sum,min,max,xor,gcd. Note sum and xor are semi-rings on $\Z$ (that is they have minus) - you can query subarrays in $O(1)$.
 ```Python
 # cumulative sum array, cdf
 from itertools import accumulate
 nums = [1,2,3,4]
-cum = list(accumulate(nums)) # [1,3,6,10]
+cum = list(accumulate(nums),key=sum) # [1,3,6,10]
 ```
 
+- xor cumulative
+```python
+xor_cum = [0] + list(accumulate(arr,lambda x,y:x^y))
+def f(l,r):
+    '''returns xor subarray arr[l]^arr[l+1]^...^arr[r]'''
+    xor_cum[r+1]^xor_cum[l]
+```
+
+- flatten list with chain
 ```Python
 # flatten list
 from itertools import chain
 equations = [[1,2,3],[4,5]]
 list(chain(*equations))
 
-```
-
-```Python
-# count occurrences of element in list
-ls = [1,2,3,1,1]
-ls.count(1)
 ```
 
 - adjacency list
@@ -51,6 +55,12 @@ from collections import Counter
 arr = [1,2,3,1,2,4,4,2]
 c = Counter(arr)
 c.most_common() # returns tuple of all elements and counts in sorted order
+```
+
+```Python
+# count occurrences of element in list
+ls = [1,2,3,1,1]
+ls.count(1)
 ```
 
 - [Toeplitz Matrix](https://leetcode.com/problems/toeplitz-matrix/), diagonals have constant values
@@ -78,20 +88,6 @@ class Solution:
 # [a,b], [x,y]
 def overlap(a,b,x,y):
     return a < y and x < b
-```
-- suffix and prefix sum
-```python
-from itertools import accumulate
-suff = list(accumulate(nums[::-1]))[::-1]
-pref = list(accumulate(nums))
-```
-
-- xor cumulative
-```python
-xor_cum = [0] + list(accumulate(arr,lambda x,y:x^y))
-def f(l,r):
-    '''returns xor subarray arr[l]^arr[l+1]^...^arr[r]'''
-    xor_cum[r+1]^xor_cum[l]
 ```
 
 - max with key, array of arrays, return array of max length
@@ -174,4 +170,13 @@ for p in permutations(nums):
 # Consider a string S="helloworld". Now, given another string T="lloworldhe", can we figure out if T is a rotated version of S? Yes, we can! We check if S is a substring of T+T.
 def is_rotate(s,t):
     return s in t+t
+```
+
+- traverse squares quickly. If $x = a*a$ then $x = 1+3+5...$
+```python
+x,n = 0,1
+while True:
+    print(x)
+    x += n
+    n += 2
 ```
