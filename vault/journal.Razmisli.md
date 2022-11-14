@@ -81,6 +81,19 @@ Talking with my father is super productive, I learn so much stuff about life. To
 Nai skupata taina na sveta
 
 ---
+
+[The Mars generation is shooting for the stars](https://www.youtube.com/watch?v=I0booXqf5W4&ab_channel=TEDxTalks)
+
+"Make my dreams turn into a goal" - Tatyana
+
+Prioritazing my goals drastically changed the circle of people around me. By focusing on my work and studies, I attracted the right people around me.
+
+Whereever you go, you will follow your dream, you will speak the truth, you will be vocal, you will share your story.
+
+"Imagine that this astronout is you. You are capable of doing everything as long as you believe it."
+
+
+
 # Oxford
 
 I made lots of mistakes during my 4 years at uni. When I started I thought too much of myself and that I could do whatever I want. Didn't realize that the true work actually started then... I thought I did so much work at highschool and that success was 'v kurpa vurzano'. Kind of wasted first year completely and half of second year. Had some 'love' distractions which affected my study focus and was pretty bad. Basically these 'love' distractions distracted me for nearly 4 years... Super stupid from my side but well, that's it. Now in 2022 I am fully back. I think I got over the love distractions in 100% around March 2020 (covid started and was last year of uni). At that point in time I have 0 in-person and remote contact with the distraction. Felt good. Felt great.
