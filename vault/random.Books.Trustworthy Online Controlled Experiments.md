@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1668381960927
+updated: 1668428051529
 created: 1667338869712
 ---
 
@@ -360,22 +360,71 @@ example gurdrail metrics(organizational):
 
 these are metrics that usually most teams should NOT affect.
 
+# 7. Metrics for experimentation and the OEC
+
+Organizational metrics are *goal, driver and guardrail metrics.*
+
+Metrics for experimentation are specific to the experiments themself. They need to be 
+- measurable (post-purcahse satisfaction is hard to measure)
+- attributable: metrics values shoule be able to attribute to the variant (measuring high rates of app crashes requires being able to attribute app crash to treatment) 
+- sensitive and timely: metrics should be able to capture deltas. Sesitivity depends on the varaince, the effect size (minimum detectable effect), number of data points
 
 
+OEC is usually a single metric which weights in several key metrics.
+
+Alternatively you can use several metrics and decide to launch/not-launch:
+- only if all metrics are significant
+- at least onemetrics is significant
+- look at tradeoffs between different metrics
+
+Note the Probability of false positive increases a lot when having multiple metrics. Setting a p-value of 0.05 for $k$ metrics means $P(at least one metrics is significant) = 1 - (1-0.05)^k$, for $k=5$ you have probability 23%.
+
+Experiment metrics usually are:
+- subset of goal, driver and organizational guardrail metrics 
+- more goals and driver metrics
+- more granular metrics such as on feature level
+- diagnostic and debug metrics
+- data quality and trustworthiness guardrails
 
 
+**Example: OEC for Bing's Search Engine**
 
+Inital OEC = query share = distict search queries divided by distinct queries from all search engines over one month
 
+Simply trying to improve this OEC drove to negative effect, making the search suggestions of worse quality. Because then users had to search more! Short-term looked good bud long-term it is not!
 
+Lets decompose:
 
+distinct search queries for one month = $\dfrac{Users}{Month} \dfrac{Sessions}{User} \dfrac{Distinct queries}{Session}$
 
+The first fraction is fixed (A/B test uses 50/50 split)
 
+The second fration you want to maximize
 
+The third you want to minimize (measures quality of session)
 
+Further you might need to difine what is a successfuls session!
 
+# 8. Insitutional Memory and Meta-Analysis
 
+The digital journal of all historical experiments is called *Instituational MEmory*
 
+Mining data from historical experiments is called meta-analysis
 
+It drives experiment culture:
+- how has experimentation contributed to the growth overall (usually you get many small wins, Bing example)
+- which experiments had big or suprising impact
+- how many experiments positively or negatively (this shows value of experimentation, and shows what happens if we launch features without experimentation)
+- experiment best practices are distributed in the company
+- future innovation
+- improving metrics
+
+# 9. Ethics in controlled experiments
+
+Anonymous data methods:
+- Safe Harbor
+- k-anonymity
+- differential privacy
 
 
 
