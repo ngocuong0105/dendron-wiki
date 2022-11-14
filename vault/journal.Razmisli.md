@@ -2,17 +2,17 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1667467849237
+updated: 1668381535842
 created: 1658754729845
 ---
 # Actions
 These action items have arose after doing razmisli.
 - define clear dream
-- define passion which can bring value to other people (math/coding zadachi does not bring actual value).
+- define passion which can bring value to other people
 - find a product which you would be passionate about
 - occasionally check yourself where you are compared to others ('сверявай си часовника'), e.g. blind, forums, articles, friends and family. Don't fall in the trap of just working by yourself. Competition is what drives people and opportunities.
 
-# Razmisli
+# General
 
 What do I want to do with my life?
 
@@ -45,6 +45,7 @@ What is love?
 How to have meaningful and thoughtful discussions?
 
 ---
+# Steve, Musk
 
 Steve Jobs graduation speech - [youtube](https://www.youtube.com/watch?v=UF8uR6Z6KLc&ab_channel=Stanford).
 His three stories:
@@ -80,7 +81,7 @@ Talking with my father is super productive, I learn so much stuff about life. To
 Nai skupata taina na sveta
 
 ---
-Oxford "Jivota e bolka i zadachi."
+# Oxford
 
 I made lots of mistakes during my 4 years at uni. When I started I thought too much of myself and that I could do whatever I want. Didn't realize that the true work actually started then... I thought I did so much work at highschool and that success was 'v kurpa vurzano'. Kind of wasted first year completely and half of second year. Had some 'love' distractions which affected my study focus and was pretty bad. Basically these 'love' distractions distracted me for nearly 4 years... Super stupid from my side but well, that's it. Now in 2022 I am fully back. I think I got over the love distractions in 100% around March 2020 (covid started and was last year of uni). At that point in time I have 0 in-person and remote contact with the distraction. Felt good. Felt great.
 
@@ -101,7 +102,7 @@ SIG internship
 Malko me pobivat trupki kato se setq za tozi experience
 
 ---
-**Fitness and health**
+# Fitness and health
 
 It is not expensive (time-wise and money-wise) to become nacepen. You basically pay fixed cost first 2 months to get nacepen,
 then you need to pay small regular costs (2,3 times per week). Gym helps me to be more productive when working too. My most efficient work periods have always been when I go to gym regularly too. So it is worth it. Abs is all about diet.
@@ -113,6 +114,7 @@ then you need to pay small regular costs (2,3 times per week). Gym helps me to b
 I've lost motivation...
 
 ---
+# Podcasts
 
 [Garry Kasparov](https://www.youtube.com/watch?v=8RVa0THWUWw&ab_channel=LexFridman)
 
@@ -135,7 +137,7 @@ need to have something you are looking forward to
 hiring heuristic: Hire somebody only if you would be happy to work on them.
 
 ---
-**Managing your work and setting goals**
+# Managing your work and setting goals
 
 You have underestimated planning and project management. For example when you started using Jira tasks, roadmap, backlog, sprints, these have increased your productivity significantly. Being able to track what you do is super important. Writing things down is highly underappreciated. Writing when and what you achive and seeing it regularly adds lots of value and helps for conistency.
 
@@ -147,13 +149,15 @@ I should aim for TC + going in such places with lots of smart people. Stefan see
 
 ---
 
-**TC**
+# TC
 
 High TC factors/variables are:
 - interview skills: getting interviews + doing interviews (behaviour + technical)
 - your skillset and whether you can do the job (this is important but interviewing skills are more important to get high TC)
 - YOE
 - market
+
+Taka kakto za kasierka davat 2k ne zashtoto izkarva na firmata 2k+, taka v tech plashtat mn pari za gluposti.
 
 Main TC factor is interview skills. It is similar to rising in power in democratic countries. Main skill is marketing/populism and winning elections. Other things such as economics knowldge, finance, politics, leadership, giving speeches, diplomacy are secondary. It is all about winning elections. High TC is all about cracking the interviews.
 
@@ -163,3 +167,26 @@ This year tech companies struggle. High interest rates means high cost to loan m
 
 Tech companies don't do lending. Lots of regulations, huigh buy-in.
 
+
+---
+
+# Blind
+
+Which is more prestigious DS vs SDE? 13 vs 73
+
+Getting 200k in DS vs SDE is easier? 12 vs 57
+
+Can get from DS to SDE, yes vs no? 42 vs 4
+
+Which career makes more more on average, DS vs SDE vs the same? 27 vs 135 vs 23
+
+Does IDE matter Language specific vs general vs the same? 39 vs 14 vs 23
+
+Which is better on CV, Yelp vs C1? 89 vs 45
+
+Top 5% TC-wise in London, 2YOE.
+300k+ 31 votes, 200k 15 votes, 150k 10 votes, 100 9votes, 120 8 votes, 250k 8 votes
+
+London TC-s for 2 YOE in hedge funds are around 200k (even sde-s can get that). Quant devs, Quant analyst/ research are coser to this. 
+
+Meta TC Sanfrancisco is likley to be 300k for 2 YOE (E5)
