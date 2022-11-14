@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1668411616355
+updated: 1668415450083
 created: 1664446506779
 ---
 
@@ -180,3 +180,4 @@ while True:
     x += n
     n += 2
 ```
+
