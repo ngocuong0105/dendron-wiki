@@ -2,7 +2,7 @@
 id: t5gsbpgz9ynlt4cduxak5hl
 title: CapitalOne
 desc: ''
-updated: 1666708124713
+updated: 1668703641080
 created: 1658990504488
 ---
 
@@ -87,3 +87,58 @@ Organise Data all hands event for data uk. Fun fair theme with stalls. Increase 
 Follow Agile principles by using tools such as Jira and Confluence Enforcing the scrum rituals (sprint planning/retrospective, daily huddles, and customer demos). 
 
 - Building system: infrastructure, storage, network protocols
+
+---
+
+**Behave** is a python library that enforces behaviour driven developement BDD which is an extension of TDD.
+
+As we all know in TDD we write tests first and then   develop  individual functions in the code
+
+BDD is the same but it acts on the level of features rather than functions.
+So in BDD users and developers writetest cases in English so  that non-programmers can understand.
+And only then developers start writing code
+
+Involves users/BA-s and non-technical people can participate in the implementation process
+
+Writes tests using normal language - allows users to write tests
+
+FEATURES files are written by users
+
+Advantages
+Allow users to be in the developement process + instead of writing feature spec and requirements, they write test directly. 
+
+Disadvantage is that it might take more BA-s time and given that tehy are already quite busy it might not be optimal
+
+If we use behave it will probably worth it only for some integration tests
+and do not use it for all unit tests which
+
+---
+
+Recoveries liquidation array = money we recover when our clients go in default
+
+I compute RLA for each account using only matrix operations avoiding loops.  After making 100 runs each with 3k account the speed up is 46\%. $O(N^3)$ problem I did using one loop and for each iteration of the loop I use matrix operations.
+
+```python
+liquid_array_per_id =
+            np.outer(co_pop1, padded_pop1_non_debt_sale)
+            + np.outer(co_pop2, padded_pop2_non_debt_sale)
+            + np.outer(co_pop3, padded_pop3_non_debt_sale)
+            + window_multiply(debt_sale_prop * np.array(co_pop1),sale_price)
+```
+#### Time complexity
+
+Assume we have `N` accounts, `S` statements and `CO` statements since charge off. The output contains for each account (`N` in total) and each statement (`S` in total) a liquidation array of size (`CO`). Hence the output is with dimension `N x S x CO` and just writing the output would require `O(N x S x CO)` runtime (i.e. that is the minimum runtime required).
+
+Our RLA computation as we saw above calls two main functions which have non-constant run time - `np.outer(co_pop1, padded_pop1_non_debt_sale)` and `window_multiply(debt_sale_prop * np.array(co_pop1), sale_price)`
+
+`co_pop1` is with dimension `S` and `padded_pop1_non_debt_sale` is with dimension `CO`,  hence  `np.outer(co_pop1, padded_pop1_non_debt_sale)` costs `O(S x CO)`.
+
+`debt_sale_prop` is with dimension `CO` and hence `window_multiply(debt_sale_prop * np.array(co_pop1), sale_price)` costs `O(S x CO)`
+
+Since we call these two functions **for each account**,  the total runtime is `O(N x S x CO)` which is the minimum achievable.
+Thus, in terms of orders of growth, this is the fastest possible computation. Note the old RLA version was also `O(N x S x CO)`  but had a very large constant factor because of using multiple nested for loops.
+
+
+# Key words
+
+numba, jit decorator, dask, docosaurous, Agile, behave driven developement, cash flows, valuations, 

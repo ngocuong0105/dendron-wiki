@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1668459937277
+updated: 1668942700895
 created: 1658754729845
 ---
 # Actions
@@ -92,6 +92,17 @@ Whereever you go, you will follow your dream, you will speak the truth, you will
 
 "Imagine that this astronout is you. You are capable of doing everything as long as you believe it."
 
+---
+
+[Jeff Bezos in 1999](https://www.youtube.com/watch?v=GltlJO56S1g&t=29s&ab_channel=CNBC)
+
+Long term I believe it is very easy to predict lots of successful companies born of the internet - with very large market caps and so on. I also believe that today, it is very hard to predict which are these companies.
+
+If you can focus **obsessively** enough on customer experience, they you would have a good chance.
+
+If it one thing what Amazon is about it is excessive attention to customer experience end-to-end.
+
+In the long term there is never misaalignment in shareholder experience and customer experience.
 
 
 # Oxford
@@ -203,3 +214,21 @@ Top 5% TC-wise in London, 2YOE.
 London TC-s for 2 YOE in hedge funds are around 200k (even sde-s can get that). Quant devs, Quant analyst/ research are coser to this. 
 
 Meta TC Sanfrancisco is likley to be 300k for 2 YOE (E5)
+
+
+---
+
+Мотивацията е силно надценена. Постоянството е ключа.  Изгради система от малки задачи/навици, които да те изведат до успеха.
+
+
+---
+
+Financials
+
+P/E ratio
+
+EPS ratio
+
+Quarterly earnings
+
+how to read balance sheet

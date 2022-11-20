@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1668670205350
+updated: 1668699210442
 created: 1664446506779
 ---
 
@@ -269,6 +269,29 @@ class Binary:
 ```
 
 - print + assignment
-```
+```python
 print(x:=10)
+```
+
+- window multiply
+```python
+def window_multiply(filter_window: np.ndarray, target: np.ndarray):
+    """
+    Example:filter_window = np.array([1,2,3]),  target = np.array([4,5,6,7,8,9,10]), 
+    out = [
+        [ 4, 10, 18],
+        [ 5, 12, 21],
+        [ 6, 14, 24],
+        [ 7, 16, 27],
+        [ 8, 18, 30]
+        ]
+    out[0] = [1*4, 2*5, 3*6] = [4, 10, 18]
+    out[1] = [1*5, 2*6, 3*7] = [5, 12, 21]
+    etc.
+    """
+    w = len(filter_window)
+    indices = np.arange(len(target) - w + 1)[:, None] + np.arange(w)
+    out = filter_window * target[indices]
+    return out
+
 ```

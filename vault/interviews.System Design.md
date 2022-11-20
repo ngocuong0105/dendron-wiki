@@ -2,9 +2,17 @@
 id: 37ghcmfqsbumla66qt9qh4y
 title: System Design
 desc: ''
-updated: 1662754843335
+updated: 1668961137444
 created: 1658698150589
 ---
+# Resources
+- [System Design Primer](https://github.com/donnemartin/system-design-primer)
+- [System Design Interview - An Insider Interviw](https://github.com/ngocuong0105/algorithms/blob/main/Readings/Engineering/System%20Design%20Interview%20Insider%20Guide)
+- [Grokking the System Design Interview github notes](https://github.com/Jeevan-kumar-Raj/Grokking-System-Design)
+- drawing tool [escalidraw](https://excalidraw.com/)
+- [TechLead overview](https://www.youtube.com/watch?v=WV2Ed1QTst8)
+
+
 *Strategy prep*
 - read this notes
 - Anki notes and questions (you have an app)
@@ -299,14 +307,3 @@ international coverage.
 • Monitor your system and use automation tools
 
 ![web_traffic.png](assets/images/web_traffic.png)
-
-# Resources
-- [System Design Primer](https://github.com/donnemartin/system-design-primer)
-- [System Design Interview - An Insider Interviw](https://github.com/ngocuong0105/algorithms/blob/main/Readings/Engineering/System%20Design%20Interview%20Insider%20Guide)
-- [Grokking the System Design Interview github notes](https://github.com/Jeevan-kumar-Raj/Grokking-System-Design)
-- drawing tool [escalidraw](https://excalidraw.com/)
-
-
-
-
-
