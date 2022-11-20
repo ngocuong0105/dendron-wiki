@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1667074583408
+updated: 1668961308851
 created: 1658698186720
 ---
 
@@ -68,4 +68,11 @@ Steps 6-10 (**interviewing + negotiation**) form the stage where you apply what 
 
 
 
-
+**CV updates**
+- change Applied GBM to another verb
+- need to convey message that you are DS/SDE
+- Two CV-s DS and SDE (HIT THE KEYWORDS!), make a list of key words you need to hit
+- add that you are currently in the DS team
+- Built internal app
+- add ML as keywords in more places
+- data pipeline at Transmetrics (ML pipeline)
