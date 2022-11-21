@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1668961308851
+updated: 1668961590479
 created: 1658698186720
 ---
 
@@ -36,7 +36,7 @@ Interviewing has different stages. I have divided them in 3 main ones - core pre
         - LinkdIn, your previous applications, Referalls (from friends and random Blind users + write a Blind Post), Linkdin recruiters, email recruiters
     - roles to aim for: quant, quant devs, data science, algo engineers, machine learning engineer
     - prepare applications for all of them, don't apply yet! (some may need motivation letters or random stupid questions)
-    - prepare messages/talk with recruiters, define what you want in terms of role, company, TC
+    - prepare messages/talk with recruiters (see [[interviews.Talk with recruiters]], define what you want in terms of role, company, TC
     - apply at all companies all at once
 
 5. Mock interviews for System Design and ML Design.
