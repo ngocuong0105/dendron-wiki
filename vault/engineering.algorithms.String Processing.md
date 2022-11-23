@@ -2,7 +2,7 @@
 id: tmyxaki17gpq6jb9xav1x3v
 title: String Processing
 desc: ''
-updated: 1668349557692
+updated: 1669232735937
 created: 1664382813257
 ---
 # Fundamentals
@@ -31,7 +31,7 @@ def compute_prefix(s):
 
 **First optimization**
 
-Observe $\pi(i+1)$ is at most 1 larger than $\pi(i)$. Thus when moving to the next position, the value of the prefix function can either increase by one, stay the same, or decrease by some amount. 
+Observe $\pi(i+1)$ is at most 1 larger than $\pi(i)$. Thus when moving to the next position, the value of the prefix function can either **increase by one, stay the same, or decrease by some amount**. 
 
 Algo: In total the function can grow at most  $n$  steps, and therefore also only can decrease a total of  $n$  steps. This means we only have to perform  $O(n)$  string comparisons, and reach the complexity  $O(n^2)$ .
 
@@ -72,7 +72,7 @@ $pi$ is called prefix function = longest preffix suffix (LPS)
 <summary> <b>Idea</b> </summary>
 Search substring t in string s:
 
-Apply KMP(t+'#'+s)
+Apply KMP(t+'#'+s) # use the hashtag for cases such as s = 'aaa', t = 'aa'
 </details>
 
 **Counting the number of occurrences of each prefix**

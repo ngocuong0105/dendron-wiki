@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1666471963383
+updated: 1669235296826
 created: 1664382861926
 ---
 
@@ -114,13 +114,18 @@ def articulation_point(adj):
 All-pairs shortest paths
     Floyd-Warshall - finding all shortest paths
     Number of paths of fixed length / Shortest paths of fixed length
-Spanning trees
-    Minimum Spanning Tree - Prim's Algorithm
-    Minimum Spanning Tree - Kruskal
-    Minimum Spanning Tree - Kruskal with Disjoint Set Union
-    Second best Minimum Spanning Tree - Using Kruskal and Lowest Common Ancestor
-    Kirchhoff Theorem
-    Prüfer code
+# Spanning trees
+## Minimum Spanning Tree - Prim's Algorithm
+Dijkstra spirit
+## Minimum Spanning Tree - Kruskal
+## Minimum Spanning Tree - Kruskal with Disjoint Set Union
+- [minimum cost to connect points](https://leetcode.com/problems/min-cost-to-connect-all-points/)
+
+Idea: Edges have weights. Sort by weights and pick up minimum edges which connect disconnected components.
+
+## Second best Minimum Spanning Tree - Using Kruskal and Lowest Common Ancestor
+## Kirchhoff Theorem
+## Prüfer code
 # Cycles
 ## Checking a graph for acyclicity and finding a cycle in O(M)
 
