@@ -2,7 +2,7 @@
 id: 575nhoxd9zglbmn3y4gmcnz
 title: Algebra
 desc: ''
-updated: 1667670879717
+updated: 1669103747579
 created: 1664382729044
 ---
     Fundamentals
@@ -17,9 +17,15 @@ created: 1664382729044
         Linear Sieve
         Primality tests
         Integer factorization
-    Number-theoretic functions
-        Euler's totient function
-        Number of divisors / sum of divisors
+# Number-theoretic functions
+## Euler's totient function
+## Number of divisors / sum of divisors
+    
+## Lagrange's four-square theorem
+Any number can be represented by at most 4 squares. Check proof in wikipedia.
+- [least squares sum](https://leetcode.com/problems/perfect-squares/)
+
+    
     Modular arithmetic
         Modular Inverse
         Linear Congruence Equation
