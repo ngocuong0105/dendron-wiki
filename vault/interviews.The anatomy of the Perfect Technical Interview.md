@@ -2,10 +2,12 @@
 id: x1j0gqwugz3w88z8t9zv7my
 title: The anatomy of the Perfect Technical Interview
 desc: ''
-updated: 1669387954967
+updated: 1669388002609
 created: 1669386049252
 ---
 Notes from: [The Anatomy of the Perfect Technical Interview](http://firstround.com/review/The-anatomy-of-the-perfect-technical-interview-from-a-former-Amazon-VP/) from a Former Amazon VP
+
+Interviewers perspective
 
 Resume:
 - Probe: Look for things to push candidates to explain in depth. Ask for examples.
