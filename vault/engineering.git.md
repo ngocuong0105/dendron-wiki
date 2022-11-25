@@ -2,12 +2,13 @@
 id: 78ld05rlq10336r34dz8sxc
 title: Git
 desc: ''
-updated: 1668341216966
+updated: 1669374280893
 created: 1668288491690
 ---
 
-My notes on [Learn Git Branching](https://learngitbranching.js.org/).
-
+# Resources:
+- [Learn Git Branching](https://learngitbranching.js.org/).
+- [Git reference common commands](https://git.github.io/git-reference/creating/#init)
 
 # Commits and branches
 
