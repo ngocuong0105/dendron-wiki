@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1668248804695
+updated: 1669398635311
 created: 1664382752052
 ---
 
@@ -249,6 +249,39 @@ class DSU:
             self.parent[v] = u
             self.rank[u] += 1
 
+```
+</details>
+
+<details>
+<summary> <b>CODE</b> </summary>
+```Python
+class DSU:
+    
+    def __init__(self):
+        self.parent = {}
+        self.rank = {}
+    
+    def add(self,x):
+        if x not in self.parent:
+            self.parent[x] = x
+            self.rank[x] = 0
+    
+    # path compression
+    def find(self, idx):
+        if self.parent[idx] != idx:
+            self.parent[idx] = self.find(self.parent[idx])
+        return self.parent[idx]
+
+    # keep tree's rank small
+    def union(self, x, y) -> None:
+        u, v = self.find(x), self.find(y)
+        if self.rank[u] < self.rank[v]:
+            self.parent[u] = v
+        elif self.rank[u] > self.rank[v]:
+            self.parent[v] = u
+        else:
+            self.parent[v] = u
+            self.rank[u] += 1
 ```
 </details>
 
