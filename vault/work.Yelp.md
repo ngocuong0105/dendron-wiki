@@ -2,7 +2,7 @@
 id: oqzcofwhigtnyuk9q5eu653
 title: Yelp
 desc: ''
-updated: 1669034598914
+updated: 1669630553057
 created: 1666708177903
 ---
 
@@ -29,6 +29,4 @@ How does Yelp make money?
 
 For example, if you pay $50 per lead and close 50 percent of your leads, you’ll pay $100 for each successful new customer. If your average customer value is more than $100 in this example, you’ve generated a profit and your marketing campaign can be considered a success.For example, if you pay $50 per lead and close 50 percent of your leads, you’ll pay $100 for each successful new customer. If your average customer value is more than $100 in this example, you’ve generated a profit and your marketing campaign can be 
 
-
-
-# People
+# 
