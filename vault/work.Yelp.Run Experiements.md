@@ -2,9 +2,13 @@
 id: 0qjr95oigreiv0ihjlwgtcz
 title: Run Experiements
 desc: ''
-updated: 1669657804648
+updated: 1669734302144
 created: 1669630575598
 ---
+
+# Resources
+- [Наръчкник за експерименти](https://docs.google.com/document/d/1yhuKfUP5LNthE8pItsjGKQlAf7UrYYCB/edit)
+
 # Experiment Design
 
 Write a PEP (Product Enhancement Proposal) document.
