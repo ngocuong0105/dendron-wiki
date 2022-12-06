@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1668942700895
+updated: 1670228997528
 created: 1658754729845
 ---
 # Actions
@@ -232,3 +232,9 @@ EPS ratio
 Quarterly earnings
 
 how to read balance sheet
+
+---
+
+# Communication
+
+Conversations based on sarcasm, "vsichko e na buzik" mindset is a powerful framework. Your starting point in having conversations with people is not to think about yourself (or proving yourself), rather think that everything is a joke.
