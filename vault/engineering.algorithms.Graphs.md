@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1666471963383
+updated: 1670154491507
 created: 1664382861926
 ---
 
@@ -106,11 +106,15 @@ def articulation_point(adj):
 
 # Single-source shortest paths
 
-    Dijkstra - finding shortest paths from given vertex
-    Dijkstra on sparse graphs
-    Bellman-Ford - finding shortest paths with negative weights
-    0-1 BFS
-    D´Esopo-Pape algorithm
+## Dijkstra - finding shortest paths from given vertex
+- [Cheapest flights within k stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/?envType=study-plan&id=level-3)
+
+## Dijkstra on sparse graphs
+## Bellman-Ford - finding shortest paths with negative weights
+## 0-1 BFS
+## D´Esopo-Pape algorithm
+
+
 All-pairs shortest paths
     Floyd-Warshall - finding all shortest paths
     Number of paths of fixed length / Shortest paths of fixed length
