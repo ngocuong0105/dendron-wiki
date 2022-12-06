@@ -2,17 +2,34 @@
 id: 575nhoxd9zglbmn3y4gmcnz
 title: Algebra
 desc: ''
-updated: 1669103747579
+updated: 1669979408572
 created: 1664382729044
 ---
-    Fundamentals
+# Fundamentals
         Binary Exponentiation
         Factoring Exponentiation
         Euclidean algorithm for computing the greatest common divisor
         Extended Euclidean Algorithm
         Linear Diophantine Equations
-        Fibonacci Numbers
-    Prime numbers
+## Fibonacci Numbers
+- [express k as a minimum number of Fibonacci numbers](https://leetcode.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/)
+
+**Math behind why greedy works**
+
+Among all resolution with the minimum number of Fibonacci numbers, we are to find the lexicographically largest one.
+
+Facts about shortest sequence:
+- uses each Fibonacci number at most once `fibo[i] * 2 = fibo[i - 2] + fibo[i + 1]`
+- never uses two consecutive Fibonacci numbers
+
+Then: If no dup, no adjacent, we must take the biggest.
+
+`fibo[0] + fibo[2] + fibo[4] + ... + fibo[2n] = fibo[2n + 1] - 1`
+
+`fibo[1] + fibo[3] + fibo[5] + .... + fibo[2n-1] = fibo[2n] - 1`
+
+
+# Prime numbers
         Sieve of Eratosthenes
         Linear Sieve
         Primality tests
