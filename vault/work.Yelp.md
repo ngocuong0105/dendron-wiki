@@ -31,7 +31,7 @@ For example, if you pay $50 per lead and close 50 percent of your leads, you’l
 
 # MLoc welcome deck
 
-Yelp's biggest asset are "Consumers with high intent to purchase".
+Yelp's biggest asset are "Consumers with high 
 
 Yelp clients:
 - consumers (app users)

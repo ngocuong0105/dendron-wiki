@@ -2,7 +2,7 @@
 id: k4eme4qh3vx31nam1l2a6d4
 title: Yelp Audiences
 desc: ''
-updated: 1669892099880
+updated: 1669989920621
 created: 1669734384934
 ---
 
@@ -94,6 +94,12 @@ The goal of our YA Incrementality Test is to show a statistically-significant co
 
 ![ya_incrementality_new.png](assets/images/ya_incrementality_new.png)
 
+
+**Current concerns:**
+- p-value is always stattistcally significant for all campaigns
+- PSA conversions (control group) are too low and it looks like all onversions are incremental...
+    - run power analysis only once we have enough conversions
+    - have more impression in the control group
 
 # Yelp Audiences Adjustment Factor Project
 
