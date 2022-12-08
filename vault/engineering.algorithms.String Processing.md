@@ -2,7 +2,7 @@
 id: tmyxaki17gpq6jb9xav1x3v
 title: String Processing
 desc: ''
-updated: 1668349557692
+updated: 1670410135008
 created: 1664382813257
 ---
 # Fundamentals
@@ -94,6 +94,8 @@ def solve(s):
 
 [The number of different substring in a string](https://cp-algorithms.com/string/prefix-function.html#counting-the-number-of-occurrences-of-each-prefix)
 
+
+- [remove substring while it exits](https://leetcode.com/problems/remove-all-occurrences-of-a-substring/)
 
 <details>
 <summary> <b>Idea</b> </summary>

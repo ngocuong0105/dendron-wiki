@@ -36,6 +36,7 @@ workspace:
         addBehavior: asOwnDomain
     graph:
         zoomSpeed: 1
+        createStub: false
     enableAutoCreateOnDefinition: false
     enableXVaultWikiLink: false
     enableRemoteVaultInit: true
@@ -71,12 +72,10 @@ workspace:
     dendronVersion: 0.95.0
     enableEditorDecorations: true
     enableFullHierarchyNoteTitle: false
-    enableHandlebarTemplates: false
     templateHierarchy: template
 preview:
     enableFMTitle: true
     enableNoteTitleForLink: true
-    enableMermaid: true
     enablePrettyRefs: true
     enableKatex: true
     automaticallyShowPreview: false
@@ -85,24 +84,13 @@ preview:
 publishing:
     enableFMTitle: true
     enableNoteTitleForLink: true
-    enableMermaid: true
     enablePrettyRefs: true
     enableKatex: true
-    assetsPrefix: /dendron-wiki
     copyAssets: true
     siteHierarchies:
         - root
-    enableSiteLastModified: true
-    siteRootDir: docs
-    siteUrl: https://ngocuong0105.github.io
-    enableFrontmatterTags: true
-    enableHashesForFMTags: false
-    enableRandomlyColoredTags: true
-    duplicateNoteBehavior:
-        action: useVault
-        payload:
-            - vault
     writeStubs: false
+    siteRootDir: docs
     seo:
         title: Dendron
         description: Personal knowledge space
@@ -111,9 +99,20 @@ publishing:
         editLinkText: Edit this page on GitHub
         editBranch: main
         editViewMode: tree
-    enablePrettyLinks: true
-    theme: light
+    enableSiteLastModified: true
+    enableFrontmatterTags: true
+    enableHashesForFMTags: false
+    enableRandomlyColoredTags: true
     enableTaskNotes: true
+    enablePrettyLinks: true
+    searchMode: lookup
+    assetsPrefix: /dendron-wiki
+    siteUrl: https://ngocuong0105.github.io
+    duplicateNoteBehavior:
+        action: useVault
+        payload:
+            - vault
+    theme: light
     templateVersion: 0.97.0
     ga:
         tracking: G-W5DRRLQ1N7

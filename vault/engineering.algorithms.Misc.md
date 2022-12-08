@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1668186834248
+updated: 1670329227867
 created: 1664382870554
 ---
 # Sequences
@@ -104,8 +104,31 @@ def maxSubArray(nums: List[int]) -> int:
         res = max(res,curr)
         curr = max(curr,0)
     return res
+            curr,res = -float('inf'),-float('inf')
+        for num in nums:
+            curr = max(curr+num,num)
+            res = max(res,curr)
+        return res
 ```
 </details>
+
+
+**Solution 3.**
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+def maxSubArray(nums: List[int]) -> int:
+    curr,res = -float('inf'),-float('inf')
+    for num in nums:
+        curr = max(curr+num,num)
+        res = max(res,curr)
+    return res
+```
+</details>
+
+- [maximum alternating subarray](https://leetcode.com/problems/maximum-alternating-subarray-sum/)
 
 #QED
 
