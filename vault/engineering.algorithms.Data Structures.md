@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1670592190328
+updated: 1670592279253
 created: 1664382752052
 ---
 
@@ -233,10 +233,10 @@ class DSU:
         self.rank = [0 for _ in range(n)]
 
     # path compression
-    def find(self, idx: int) -> int:
-        if self.parent[idx] != idx:
-            self.parent[idx] = self.find(self.parent[idx])
-        return self.parent[idx]
+    def find(self, x: int) -> int:
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
 
     # keep tree's rank small
     def union(self, x: int, y: int) -> None:
@@ -268,10 +268,10 @@ class DSU:
             self.rank[x] = 0
     
     # path compression
-    def find(self, idx):
-        if self.parent[idx] != idx:
-            self.parent[idx] = self.find(self.parent[idx])
-        return self.parent[idx]
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
 
     # keep tree's rank small
     def union(self, x, y) -> None:
