@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1669398635311
+updated: 1670592190328
 created: 1664382752052
 ---
 
@@ -254,6 +254,7 @@ class DSU:
 
 <details>
 <summary> <b>CODE</b> </summary>
+
 ```Python
 class DSU:
     
