@@ -2,7 +2,7 @@
 id: k4eme4qh3vx31nam1l2a6d4
 title: Yelp Audiences
 desc: ''
-updated: 1669989920621
+updated: 1670511370441
 created: 1669734384934
 ---
 
@@ -86,7 +86,7 @@ Incrementality (Lift) = Exposed group visit rate  /  Control group visit rate
 
 YA clients want irrefutable evidence that YA adds value to the consumer journey and are not just coincidental, especially when conversions are dominantly view-through-conversion. The goal of offering incrementality tests is to demonstrate that YA campaigns add value to advertisers by showing a stats-sig conversion lift of the test group(exposed to YA ads) from the control group(not exposed to YA ads). We estimate that the incrementality test can potentially unlock $500K ARR opportunities.
 
-It is a defensive product for when our clients want to leave us from YA.
+It is a **defensive product** for when our clients want to leave us from YA.
 
 The goal of our YA Incrementality Test is to show a statistically-significant conversion lift between a test group and a control group.
 

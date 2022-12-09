@@ -2,7 +2,7 @@
 id: u3zfztagih88ue4hmwsuh5n
 title: Shark Tank
 desc: ''
-updated: 1669971170573
+updated: 1670578394099
 created: 1669971096021
 ---
 
@@ -21,3 +21,11 @@ Finally, the final presentation ‘pitch’ to the SharkTank judges for each tea
 - Problem Definition (The Why) - Focus on outlining ‘Yelp stakeholder X has Y problem’ or  ‘Yelp product area A has B inefficiency or missed value’ AND the size of the opportunity in terms of any product or operational metrics positively impacted over time.
 - Solution (The What) - Focus on describing the solution itself and how it gets applied to the problem (e.g. predictive model X to help target user segment Y) AND also the target business impact (e.g. increase engagement metric A by Z%) 
 - Approach (The How) - Focus on describing how you will implement and scale the solution, including how you will address dependencies and mitigate any risks (to increase confidence and minimize effort for the overall project)
+
+**Presentation slides**
+
+WHY/HOW/WHAT framework
+
+- The problem 
+- The solution + Implementation of solution
+- Benefits/impact of solution + Testimonies
