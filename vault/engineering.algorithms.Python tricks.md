@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1668699210442
+updated: 1670602184093
 created: 1664446506779
 ---
 
@@ -19,7 +19,7 @@ transpose_mat = list(zip((*mat)))
 # cumulative sum array, cdf
 from itertools import accumulate
 nums = [1,2,3,4]
-cum = list(accumulate(nums),key=sum) # [1,3,6,10]
+cum = list(accumulate(nums,,lambda x,y:x+y)) # [1,3,6,10]
 ```
 
 - xor cumulative
@@ -294,4 +294,14 @@ def window_multiply(filter_window: np.ndarray, target: np.ndarray):
     out = filter_window * target[indices]
     return out
 
+```
+
+- itertools.groupby()
+```python
+for k,v in groupby('aaabbcddd'):
+    print(k,list(v)) # a, [a,a,a]
+
+groups = []
+for k,v in groupby(s):
+    groups.append((k,len(list(v))))
 ```
