@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1670358107590
+updated: 1671209463344
 created: 1658754729845
 ---
 # Actions
@@ -251,3 +251,7 @@ how to read balance sheet
 # Communication
 
 Conversations based on sarcasm, "vsichko e na buzik" mindset is a powerful framework. Your starting point in having conversations with people is not to think about yourself (or proving yourself), rather think that everything is a joke.
+
+# Покупка на жилище
+
+В София апартаментите ще стават все по-недостъпни. Ще стане като Лондон, където масово хората живеят под наем, защото не могат да си позволят апартамент. След 20-30 години ще стане такаи в София.
