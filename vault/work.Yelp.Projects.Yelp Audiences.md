@@ -2,19 +2,24 @@
 id: k4eme4qh3vx31nam1l2a6d4
 title: Yelp Audiences
 desc: ''
-updated: 1670511370441
+updated: 1671202936080
 created: 1669734384934
 ---
 
 YA (Yelp Audiences) =  Yelp’s new advertising platform. (July 2021)
 
-Yelp Audiences is the only way for advertisers to target Yelp users off-platform and across the web
+Yelp Audiences is the only way for advertisers to target Yelp high-intent users off-platform and across the web.
+Expands the target audiences but also the space of our advertisers. We can have advertisers which need not necessarily have onsite stores (can be fully online such as VISA).
 
 This is one of Yelp's Ads products and connects advertisers with customers based on Yelp search activity, nomatter where they spend their time online.
 
 Example when you are browsing through BTV, you see google ads, which are recommendations based on the search you made.
 
 YA allows advertisers to show Yelp users ads **off**-Yelp, target based on the users’ **on**-Yelp behavior and interests.
+
+# How does YA work?
+
+ Yelp Audiences allows brand marketers to reach consumers off of the Yelp platform based on behaviors and purchasing intent displayed on Yelp. We can segment our audience based on things like search terms, category interest and leads. 
 
 
 **Project history**:
