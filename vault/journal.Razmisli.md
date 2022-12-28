@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1671209463344
+updated: 1672245996434
 created: 1658754729845
 ---
 # Actions
@@ -255,3 +255,9 @@ Conversations based on sarcasm, "vsichko e na buzik" mindset is a powerful frame
 # Покупка на жилище
 
 В София апартаментите ще стават все по-недостъпни. Ще стане като Лондон, където масово хората живеят под наем, защото не могат да си позволят апартамент. След 20-30 години ще стане такаи в София.
+
+# Dealing with rejection
+
+Job hunt rejection. It is not personal, when they say it is not a good fit, it indeed is is not a good fit! And probs you did not do well enough on the interview. Just move on and apply at a bunch of places.
+
+Asking out girls and when they say no. She did nothing to you. You made an offer and she declined. As simple as that. Just move on.
