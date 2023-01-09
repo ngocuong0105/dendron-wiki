@@ -2,7 +2,7 @@
 id: 7gvqmnpgid74pmbrww8z1oh
 title: Machine Learning
 desc: ''
-updated: 1666854478183
+updated: 1673259795542
 created: 1658698236203
 ---
 
@@ -17,3 +17,9 @@ write from scratch basic ml models, linear regression etc
 numpy tricks, vectorization
 
 - [image overlap](https://leetcode.com/problems/image-overlap/)
+
+# Math
+
+- PCA, SVM, Matrix diagonalization
+- Loss functions
+- Linear regression
