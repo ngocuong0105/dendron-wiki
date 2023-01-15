@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1671705799028
+updated: 1673264413348
 created: 1664382766630
 ---
 
@@ -23,5 +23,6 @@ created: 1664382766630
 - [encode string with shortest length](https://leetcode.com/problems/encode-string-with-shortest-length/)
 - [grid with 3 different colors](https://leetcode.com/problems/painting-a-grid-with-three-different-colors/)
 - [sum of distances in tree](https://leetcode.com/problems/sum-of-distances-in-tree/)
+- [count palindromes](https://leetcode.com/problems/count-palindromic-subsequences/)
 
 Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, see solution tab in [Climbing stairs](https://leetcode.com/problems/climbing-stairs/)
