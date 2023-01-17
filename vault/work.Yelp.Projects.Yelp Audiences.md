@@ -2,7 +2,7 @@
 id: k4eme4qh3vx31nam1l2a6d4
 title: Yelp Audiences
 desc: ''
-updated: 1671202936080
+updated: 1673865601364
 created: 1669734384934
 ---
 
@@ -16,6 +16,11 @@ This is one of Yelp's Ads products and connects advertisers with customers based
 Example when you are browsing through BTV, you see google ads, which are recommendations based on the search you made.
 
 YA allows advertisers to show Yelp users ads **off**-Yelp, target based on the users’ **on**-Yelp behavior and interests.
+
+
+# Revenue growth
+
+Approx. 7M (2020) → 18M (2021) → 28M (2022 target)
 
 # How does YA work?
 
