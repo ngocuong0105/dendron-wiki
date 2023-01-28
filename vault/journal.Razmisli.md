@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1673262362869
+updated: 1674487027240
 created: 1658754729845
 ---
 # Actions
@@ -139,7 +139,7 @@ then you need to pay small regular costs (2,3 times per week). Gym helps me to b
 
 How to bring back your motivation and be productive?
 
-Goal: Get your high energy state back!
+**Goal: Get your high energy state back!**
 
 - Eat healthy/loose weight
 - Go to gym (helps a lot)
@@ -154,6 +154,7 @@ Songs
 - [Dara - Cold as Ice](https://www.youtube.com/watch?v=D5YbBZpdjAE)
 - [100 Kila - Nqma takava jena](https://www.youtube.com/watch?v=keh-V_DP0y8)
 - [Upsurt - 3v1](https://www.youtube.com/watch?v=tQ5oMD5QDX4)
+- [Sabrina Carpenter - Thumbs](https://www.youtube.com/watch?v=uAVUl0cAKpo)
 ---
 # Podcasts
 

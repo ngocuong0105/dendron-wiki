@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1670602184093
+updated: 1674940994826
 created: 1664446506779
 ---
 
@@ -304,4 +304,9 @@ for k,v in groupby('aaabbcddd'):
 groups = []
 for k,v in groupby(s):
     groups.append((k,len(list(v))))
+```
+
+- [negative power modulus](https://math.stackexchange.com/questions/2592324/how-to-do-a-modular-arithmetic-with-negative-exponents). You can use it as of Python 3.8. Useful for solving linear Diophantine equality. First and third argument need to be coprime.
+```python
+pow(23,-1,2)
 ```

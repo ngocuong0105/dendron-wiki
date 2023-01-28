@@ -2,7 +2,7 @@
 id: nkefr7ipopudoxe89h53oy4
 title: Decision Trees
 desc: ''
-updated: 1673953436751
+updated: 1674729446179
 created: 1673945350311
 ---
 
@@ -184,6 +184,12 @@ We add the trees $f_k$ additevely/iteratively. For example we learn $f_{t}$ by o
 
 One important advantage of this definition is that the value of the objective function only depends on $g_i$ and $h_i$. This is how XGBoost support custom loss functions. 
 
+
+## Implementation resources
+
+- [Scikit-Learn API](https://xgboost.readthedocs.io/en/stable/python/python_api.html)
+- [XGBoost parameter](https://xgboost.readthedocs.io/en/stable/parameter.html)
+- [Hyper parameter tuning (Bayesian)](https://www.kaggle.com/code/prashant111/a-guide-on-xgboost-hyperparameters-tuning/notebook)
 
 
 **Limitation of additive tree learning.**
