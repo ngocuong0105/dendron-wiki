@@ -2,7 +2,7 @@
 id: 575nhoxd9zglbmn3y4gmcnz
 title: Algebra
 desc: ''
-updated: 1669979408572
+updated: 1675193691948
 created: 1664382729044
 ---
 # Fundamentals
@@ -30,7 +30,16 @@ Then: If no dup, no adjacent, we must take the biggest.
 
 
 # Prime numbers
-        Sieve of Eratosthenes
+## Sieve of Eratosthenes
+
+- [leetcode problem](https://leetcode.com/problems/closest-prime-numbers-in-range/)
+```python
+sieve = [False,False]+[True]*(r-2)
+for i in range(2,int(r**0.5)+2):
+    for j in range(i*i,r+1):
+        sieve[j] = False
+primes = [i for i,p in enumerate(primes) if p]
+```
         Linear Sieve
         Primality tests
         Integer factorization

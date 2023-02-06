@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1670501472524
+updated: 1675238077826
 created: 1664382870554
 ---
 # Sequences
@@ -169,7 +169,8 @@ Proof by induction. Induction step proves that if the current state is 0 then al
 
 **Colloraly.** Nim games are equivalent as long as the xor value is the same.
 
-Game of Nim can be reduced to game of one pile.
+Game of 
+dsacan be reduced to game of one pile.
 
 **Sprague-Grundy theorem** 
 This theorem proves the equivalence of impartial games and Nim. It reduces every impartial normal game to Nim.

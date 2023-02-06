@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1674940994826
+updated: 1675195843207
 created: 1664446506779
 ---
 
@@ -180,7 +180,7 @@ while True:
     x += n
     n += 2
 ```
-
+- [Binary operations laws](https://stackoverflow.com/questions/12764670/are-there-any-bitwise-operator-laws)
 - bitwise tricks, binary operations
 ```Python
 class Binary:

@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1674206555661
+updated: 1675328099260
 created: 1664382766630
 ---
 
@@ -26,3 +26,5 @@ created: 1664382766630
 - [count palindromes](https://leetcode.com/problems/count-palindromic-subsequences/)
 - [substrings diff 1](https://leetcode.com/problems/count-substrings-that-differ-by-one-character/submissions/)
 Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, see solution tab in [Climbing stairs](https://leetcode.com/problems/climbing-stairs/)
+- [good binary strings](https://leetcode.com/problems/number-of-good-binary-strings/submissions/)
+- [least number of lines cover all points](https://leetcode.com/problems/minimum-number-of-lines-to-cover-points/)
