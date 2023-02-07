@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1674487027240
+updated: 1675766949634
 created: 1658754729845
 ---
 # Actions
@@ -279,3 +279,9 @@ Conversations based on sarcasm, "vsichko e na buzik" mindset is a powerful frame
 Job hunt rejection. It is not personal, when they say it is not a good fit, it indeed is is not a good fit! And probs you did not do well enough on the interview. Just move on and apply at a bunch of places.
 
 Asking out girls and when they say no. She did nothing to you. You made an offer and she declined. As simple as that. Just move on.
+
+# Scaling tech business
+
+Avoid premature optimization. Check how levels fyi scaled to million of users using google sheets.
+
+[article](https://www.levels.fyi/blog/scaling-to-millions-with-google-sheets.html)
