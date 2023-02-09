@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1675195843207
+updated: 1675885960348
 created: 1664446506779
 ---
 
@@ -19,7 +19,7 @@ transpose_mat = list(zip((*mat)))
 # cumulative sum array, cdf
 from itertools import accumulate
 nums = [1,2,3,4]
-cum = list(accumulate(nums,,lambda x,y:x+y)) # [1,3,6,10]
+cum = list(accumulate(nums,func = lambda x,y:x+y)) # [1,3,6,10]
 ```
 
 - xor cumulative

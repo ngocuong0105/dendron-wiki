@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1675328099260
+updated: 1675866981604
 created: 1664382766630
 ---
 
@@ -28,3 +28,4 @@ created: 1664382766630
 Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, see solution tab in [Climbing stairs](https://leetcode.com/problems/climbing-stairs/)
 - [good binary strings](https://leetcode.com/problems/number-of-good-binary-strings/submissions/)
 - [least number of lines cover all points](https://leetcode.com/problems/minimum-number-of-lines-to-cover-points/)
+- [max nonegative path](https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/)

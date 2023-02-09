@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1674206495732
+updated: 1675940845321
 created: 1658695863781
 ---
 # Progress
@@ -40,7 +40,14 @@ My best competition performance was yesterday - rank 125 on Biweekly 90. Today I
 
 
 **20.01.2023**
+
 Last year in December I hit the **2000** problems solved mark. Now I solve Leetcode casually and focus more on Kaggle.
+
+
+**09.02.2023**
+
+Hit another milestone of **2100** problems solved.
+
 
 # Plans for the future
 Ideally I would become a descent competitive programmer by 1-2 years (written in August 2022). Need to:
