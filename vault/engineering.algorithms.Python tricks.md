@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1675885960348
+updated: 1677146593407
 created: 1664446506779
 ---
 
@@ -309,4 +309,9 @@ for k,v in groupby(s):
 - [negative power modulus](https://math.stackexchange.com/questions/2592324/how-to-do-a-modular-arithmetic-with-negative-exponents). You can use it as of Python 3.8. Useful for solving linear Diophantine equality. First and third argument need to be coprime.
 ```python
 pow(23,-1,2)
+```
+
+- binary to decimal
+```python
+int('101',2)
 ```

@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1670592279253
+updated: 1677193078509
 created: 1664382752052
 ---
 
@@ -472,6 +472,7 @@ class NumMatrix:
 ## Sqrt Decomposition
 ## Segment Tree
 
+- [Increments on subarrays](https://leetcode.com/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/)
 
 - Questions: [Falling Squares](https://leetcode.com/problems/falling-squares/), [Skyline](https://leetcode.com/problems/the-skyline-problem/)
 
