@@ -2,7 +2,7 @@
 id: k4eme4qh3vx31nam1l2a6d4
 title: Yelp Audiences
 desc: ''
-updated: 1673865601364
+updated: 1676571012085
 created: 1669734384934
 ---
 
@@ -20,7 +20,9 @@ YA allows advertisers to show Yelp users ads **off**-Yelp, target based on the u
 
 # Revenue growth
 
-Approx. 7M (2020) → 18M (2021) → 28M (2022 target)
+Approx. 7M (2020) → 17M (2021) → 31M (2022) -> 50m (2023 target)
+
+43M users targetted in 2022
 
 # How does YA work?
 
@@ -116,6 +118,8 @@ The goal of our YA Incrementality Test is to show a statistically-significant co
 This is my first project.
 
 TTD gives us inflated forecasted number of impressions. 
+
+# YA Enhancing Reports Project
 
 
 # Questions
