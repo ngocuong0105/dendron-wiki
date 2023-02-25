@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1677193078509
+updated: 1677344000268
 created: 1664382752052
 ---
 
@@ -212,6 +212,8 @@ class MRUQueue:
 ```
 </details>
 
+
+- [heights queue](https://leetcode.com/problems/number-of-visible-people-in-a-queue/)
 
 ## Sparse Table
 
