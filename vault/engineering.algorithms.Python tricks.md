@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1677146593407
+updated: 1677328342886
 created: 1664446506779
 ---
 
@@ -314,4 +314,19 @@ pow(23,-1,2)
 - binary to decimal
 ```python
 int('101',2)
+```
+
+- careful with instantiation and constructor
+```python
+
+class Node:
+    def __init__(self,val,children=[]):
+        self.val = val
+        self.children = children
+
+a = Node('a')
+b = Node('b')
+a.children.append(12)
+print(b.children) # prints [12]
+# modification on object a modifies b too, children is a class variable... if not set
 ```
