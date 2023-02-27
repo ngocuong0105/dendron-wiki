@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1675770075026
+updated: 1677411121931
 created: 1664382861926
 ---
 
@@ -178,7 +178,7 @@ for (int k = 0; k < n; ++k) {
 - nonlocal variables cycle and visited
 - keep path variable tracing the dfs
 - CLRS and CP algo use coloring, white, gray, black and nonlocal cycle variable (i think we cannot avoid nonlocal stuff)
-- below is for cycle in directed graph, for **undirected** need to keep parent pointers and make sure you when you go back to parent you don't consider it as cycle
+- **NB!!!** below is for cycle in directed graph, for **undirected** need to keep parent pointers and make sure you when you go back to parent you don't consider it as cycle
 
 <details>
 <summary> <b>CODE</b> </summary>
@@ -200,6 +200,40 @@ for s in range(n):
 print(cycle)
 ```
 </details>
+
+- To get the nodes in the cycle you might keep a `parent` dictionary and do a while loop instead of marking cycle = True
+- Alternatively there is this trick to get the cycle nodes:
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```python
+# step 1: backtracking DFS to find the cycle
+circle = []
+vis = set()
+
+def find_circle(node, par):
+    if node in vis:
+        return (True, node)
+    for nei in g[node]:
+        if nei == par: continue
+        vis.add(node)
+        circle.append(node)
+        status, res = find_circle(nei, node)
+        if status: return status, res
+        circle.pop()
+        vis.remove(node)
+
+    return False, None
+
+
+_, node = find_circle(0, None)
+# get the circle from start "node"
+circle = circle[circle.index(node):] 
+```
+</details>
+
+
 
 #QED
 
