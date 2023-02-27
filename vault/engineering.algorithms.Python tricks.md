@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1677328342886
+updated: 1677428478522
 created: 1664446506779
 ---
 
@@ -329,4 +329,9 @@ b = Node('b')
 a.children.append(12)
 print(b.children) # prints [12]
 # modification on object a modifies b too, children is a class variable... if not set
+```
+
+- swapcase(), string, uppercase, lowercase swap
+```python
+'aA'.swapcase() # gives 'Aa'
 ```
