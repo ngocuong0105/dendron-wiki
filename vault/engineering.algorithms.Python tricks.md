@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1677428478522
+updated: 1677665114756
 created: 1664446506779
 ---
 
@@ -181,6 +181,12 @@ while True:
     n += 2
 ```
 - [Binary operations laws](https://stackoverflow.com/questions/12764670/are-there-any-bitwise-operator-laws)
+
+- Distributive of AND over XOR
+```
+a & (b1 ^ b2) = (a & b1) ^ (a & b2)
+```
+
 - bitwise tricks, binary operations
 ```Python
 class Binary:

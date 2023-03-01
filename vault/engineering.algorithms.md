@@ -19,7 +19,7 @@ Resources:
 - add from pyrival
 - add from cp algos
 # Buzz words
-BIT, AVL trees, B-trees (used in databses?), Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms KMP, State machines. Prime numbers algos, Sieve of Eratosthenes, union find, Morris Traversal [inorder](https://leetcode.com/problems/binary-tree-inorder-traversal/), Palindrome algo, Manacher, Combinations, Permutations smart ways to get (yield) + no duplicated calls, BFS, DFS, [Fractional Cascading](https://en.wikipedia.org/wiki/Fractional_cascading), huffman encoding (greedy)
+BIT, AVL trees, B-trees (used in databses?), Red Black Trees, Segment Trees, A* Search, Dijkstra, Kruskal, Prim algo, Trie. String algorithms 
 [TSP](https://leetcode.com/problems/find-the-shortest-superstring/), Sprague-Grundy theorem, game theory, normal incomplete games
 
 #TODO

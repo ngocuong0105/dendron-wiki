@@ -2,7 +2,7 @@
 id: 575nhoxd9zglbmn3y4gmcnz
 title: Algebra
 desc: ''
-updated: 1675193691948
+updated: 1677576843678
 created: 1664382729044
 ---
 # Fundamentals
@@ -96,9 +96,38 @@ class Solution:
         return res[i:] + res[:i]
 ```
 
-It's not obvious why $n ^ (n>>1)$ and $(n+1) ^ ((n+1)>>1)$ would differ by 1 bit.
+It's not super obvious why $n$ XOR $(n>>1)$ and $(n+1)$ XOR $((n+1)>>1)$ would differ by 1 bit.
 
+XOR is commulative. we need to prove that $n$ XOR $(n>>1)$ XOR $(n+1)$ XOR $((n+1)>>1)$ is a power of two.
 
+$n$ XOR $(n>>1)$ and $(n+1)$ XOR $((n+1)>>1)$ $=$ $n$ XOR $(n+1)$ and $(n>>1)$ XOR $((n+1)>>1)$ $=$ $2^{k} - 1$ XOR $2^{k-1} - 1$
+
+## Finding inverse Gray code
+
+Given Gray code $g$, restore the original number $n$, i.e. $g = n^(n>>1)$, given $g$ find $n$
+
+We will move from the most significant bits to the least significant ones (the least significant bit has index 1 and the most significant bit has index $k$). The relation between the bits $n_i$ of number $n$ and the bits $g_i$ of number $g$:
+
+$n = n_{k}n_{k-1}...n_{1}$ in binary presentation $n_{i} \in \{0,1\}$
+
+Rewrite $n = g$ XOR $n>>1$ to get:
+
+$$\begin{align}
+  n_k &= g_k, \\
+  n_{k-1} &= g_{k-1} \oplus n_k = g_k \oplus g_{k-1}, \\
+  n_{k-2} &= g_{k-2} \oplus n_{k-1} = g_k \oplus g_{k-1} \oplus g_{k-2}, \\
+  n_{k-3} &= g_{k-3} \oplus n_{k-2} = g_k \oplus g_{k-1} \oplus g_{k-2} \oplus g_{k-3},
+  \vdots
+\end{align}$$
+
+```python
+def gray_to_dec(g):
+    res = 0
+    while g:
+        res ^= g
+        g >>= 1
+    return res
+```
 # Miscellaneous
         Enumerating submasks of a bitmask
         Arbitrary-Precision Arithmetic
