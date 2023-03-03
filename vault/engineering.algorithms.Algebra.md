@@ -2,7 +2,7 @@
 id: 575nhoxd9zglbmn3y4gmcnz
 title: Algebra
 desc: ''
-updated: 1677576843678
+updated: 1677786462849
 created: 1664382729044
 ---
 # Fundamentals
@@ -40,6 +40,17 @@ for i in range(2,int(r**0.5)+2):
         sieve[j] = False
 primes = [i for i,p in enumerate(primes) if p]
 ```
+
+- find all primes less or equal to n
+```python
+primes = []
+for d in range(2,n+1):
+    for p in primes:
+        if d%p == 0: break
+    else:
+        primes.append(d)
+```
+
         Linear Sieve
         Primality tests
         Integer factorization

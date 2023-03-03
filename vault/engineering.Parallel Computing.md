@@ -2,7 +2,7 @@
 id: jzk1mddj0zb2oo0f086qr9i
 title: Parallel Computing
 desc: ''
-updated: 1676497463963
+updated: 1677840523680
 created: 1676496034053
 ---
 
@@ -65,7 +65,7 @@ lock.release()
 lock.acquire()
 
 ```
-
+- [Print Order](https://leetcode.com/problems/print-in-order/)
 
 - [FizzBuzz](https://leetcode.com/problems/fizz-buzz-multithreaded/)
 

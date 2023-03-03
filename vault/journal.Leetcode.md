@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1677428436431
+updated: 1677842054787
 created: 1658695863781
 ---
 # Progress
@@ -51,6 +51,10 @@ Hit another milestone of **2100** problems solved. **Two years of Leetcode.**
 **26.02.2023**
 
 Hit another milestone of **2200** problems solved.
+
+**03.03.2023**
+
+Solved all easy questions in leetcode and hit another milestone of **2300** problems solved. BG NAD VSICHKO
 
 # Plans for the future
 Ideally I would become a descent competitive programmer by 1-2 years (written in August 2022). Need to:

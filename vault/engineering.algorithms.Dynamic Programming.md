@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1677601715967
+updated: 1677834016918
 created: 1664382766630
 ---
 
@@ -31,3 +31,4 @@ Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, se
 - [max nonegative path](https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/)
 - [Minimum flips in evaluation tree](https://leetcode.com/problems/minimum-flips-in-binary-tree-to-get-result/)
 - [Apples in pizza](https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/)
+- [Pyramids count](https://leetcode.com/problems/count-fertile-pyramids-in-a-land/)
