@@ -40,7 +40,7 @@ Yelp clients:
 
 ![mloc_funnel.png](assets/images/mloc_funnel.png)
 
-Yelp audiences is one of the current Yelp Ad Products.
+
 
 The funnel is the consumer experience (users)
 
