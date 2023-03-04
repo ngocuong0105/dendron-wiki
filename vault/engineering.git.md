@@ -2,7 +2,7 @@
 id: 78ld05rlq10336r34dz8sxc
 title: Git
 desc: ''
-updated: 1669374280893
+updated: 1677849923448
 created: 1668288491690
 ---
 
@@ -244,3 +244,8 @@ The output of the command looks like:
 `<tag>_<numCommits>_g<hash>`
 
 Where `tag` is the closest ancestor tag in history, `numCommits` is how many commits away that tag is, and `<hash>` is the hash of the commit being described.
+
+
+# Collaborative developement models
+
+[Shared repo model vs Fork and pull model](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models)
