@@ -2,11 +2,28 @@
 id: 9a4cf8g6ax04f7o71y2d627
 title: Practice and guide
 desc: ''
-updated: 1677863008448
+updated: 1677923796409
 created: 1677851804607
 ---
 
 Collection of problem solvning and system design questions. General guidlines from interviewers perspective.
+
+# Machine Learning Roles
+Although not a comprehensive list, ML roles at Yelp can be split into three roles that complement each other in a typical project lifecycle. These roles are:
+
+**Applied Scientists:** Applied Scientists at Yelp leverage data to identify and tackle opportunity areas, employing statistical inference and machine learning skills in exploratory as well as production settings to develop new products, optimize business metrics, and perform causal inference.
+
+**Machine Learning Engineers:** Machine Learning Engineers at Yelp work on engineering ML systems such as Yelp’s real-time ad targeting and search ranking services or batch-based content mining applications.  This involves an understanding of software engineering and system design, data ETL and data stores, and machine learning.
+
+**ML Platform Engineers:** ML Platform Engineers at Yelp build the infrastructure and tooling to support our Machine Learning Engineers and Applied Scientists.
+
+
+[Role responsibilities](https://drive.google.com/file/d/1DeoYjPHcetPNN4fuyA6_4ih4b2N7QSO9/view?usp=share_link)
+
+
+# Resume screening
+
+[What recruiters/hiring managers look in your CV?](https://drive.google.com/file/d/1djEJvVQOKgPRsp4vJDH6vfAWLXQvvzcB/view?usp=share_link)
 
 # General guidelines
 [pdf](https://drive.google.com/file/d/1kJNLV6ZHrvh6Yu4t20acEAZ7KyYFDm-T/view?usp=share_link)
