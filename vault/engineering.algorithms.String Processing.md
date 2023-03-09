@@ -2,11 +2,7 @@
 id: tmyxaki17gpq6jb9xav1x3v
 title: String Processing
 desc: ''
-<<<<<<< HEAD
-updated: 1669232735937
-=======
 updated: 1670410135008
->>>>>>> 48207ec7c38b24dd1c1b68983a523a233cc5cdbe
 created: 1664382813257
 ---
 # Fundamentals
