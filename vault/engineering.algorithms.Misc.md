@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1668186834248
+updated: 1675238077826
 created: 1664382870554
 ---
 # Sequences
@@ -104,8 +104,31 @@ def maxSubArray(nums: List[int]) -> int:
         res = max(res,curr)
         curr = max(curr,0)
     return res
+            curr,res = -float('inf'),-float('inf')
+        for num in nums:
+            curr = max(curr+num,num)
+            res = max(res,curr)
+        return res
 ```
 </details>
+
+
+**Solution 3.**
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+def maxSubArray(nums: List[int]) -> int:
+    curr,res = -float('inf'),-float('inf')
+    for num in nums:
+        curr = max(curr+num,num)
+        res = max(res,curr)
+    return res
+```
+</details>
+
+- [maximum alternating subarray](https://leetcode.com/problems/maximum-alternating-subarray-sum/)
 
 #QED
 
@@ -146,7 +169,8 @@ Proof by induction. Induction step proves that if the current state is 0 then al
 
 **Colloraly.** Nim games are equivalent as long as the xor value is the same.
 
-Game of Nim can be reduced to game of one pile.
+Game of 
+dsacan be reduced to game of one pile.
 
 **Sprague-Grundy theorem** 
 This theorem proves the equivalence of impartial games and Nim. It reduces every impartial normal game to Nim.
@@ -281,3 +305,42 @@ class Solution:
 ## Bit manipulation
 #Zadachi
 - [convert to hexadecimal](https://leetcode.com/problems/convert-a-number-to-hexadecimal/)
+
+## Random index pick with weights in O(1)
+
+[problem](https://leetcode.com/problems/random-pick-with-weight/)
+
+Can do Preprocessing in $O(n)$ and then pick in $O(1)$ (better than standard $O(log(n))$ using cdf and binary search)
+
+Reference [Alias method](https://en.wikipedia.org/wiki/Alias_method), [dbabichev](https://leetcode.com/problems/random-pick-with-weight/discuss/671439/Python-Smart-O(1)-solution-with-detailed-explanation)
+
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+class Solution:
+
+    def __init__(self, w: List[int]):
+        ep = 10e-10
+        n,sm = len(w),sum(w)
+        w = [ww/sm for ww in w]
+        self.boxes = []
+        s = [[i,ww] for i,ww in enumerate(w) if ww<1/n]
+        g = [[i,ww] for i,ww in enumerate(w) if ww>=1/n]
+        while s and g:
+            i,ws = s.pop()
+            j,wg = g[-1]
+            self.boxes.append((i,j,ws)) # index,index,weight
+            g[-1][1] -= (1/n-ws)
+            if g[-1][1]<1/n-ep:
+                s.append(g.pop())
+        for i,ww in g:
+            self.boxes.append((i,i,1))
+            
+    def pickIndex(self) -> int:
+        n = len(self.boxes)
+        box_num = random.randint(0, len(self.boxes) - 1)
+        return self.boxes[box_num][random.uniform(0, 1 / n) >= self.boxes[box_num][2]]
+```
+</details>

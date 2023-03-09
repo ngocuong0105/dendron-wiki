@@ -2,7 +2,7 @@
 id: wyxv9icmv8mne5ldhpvptzr
 title: Behaviour
 desc: ''
-updated: 1667374898690
+updated: 1677660619912
 created: 1658698164037
 ---
 
@@ -38,3 +38,15 @@ Interviewers search for signal in these domains:
 - helping people with getting started
 - think of what your managers have done to help you and these are stuff that show signal that you are higher level
 
+
+# Tactics
+
+[DS Interviews](https://www.youtube.com/watch?v=PNExsBwdDlo&t=365s)
+
+Submit research report for your top companies (check minute 7).
+
+Even better is to reach to gatekeepers (hiring managers directly and sed the research report).
+
+Hiring manager is the tech manager.
+
+[DS hiring 01.03.2023](https://s3.amazonaws.com/kajabi-storefronts-production/file-uploads/sites/2147512189/themes/2150624317/downloads/cf16572-07c-ab0b-681-5dd4f8df277_U.S._Companies_Hiring_Data_Scientists.pdf)

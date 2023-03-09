@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1667167250650
+updated: 1677842054787
 created: 1658695863781
 ---
 # Progress
@@ -39,6 +39,23 @@ Current leetcode count **1743** (08.10.2022)
 My best competition performance was yesterday - rank 125 on Biweekly 90. Today I hit new milestone **1800** Leetcode problems solved.
 
 
+**20.01.2023**
+
+Last year in December I hit the **2000** problems solved mark. Now I solve Leetcode casually and focus more on Kaggle.
+
+
+**09.02.2023**
+
+Hit another milestone of **2100** problems solved. **Two years of Leetcode.**
+
+**26.02.2023**
+
+Hit another milestone of **2200** problems solved.
+
+**03.03.2023**
+
+Solved all easy questions in leetcode and hit another milestone of **2300** problems solved. BG NAD VSICHKO
+
 # Plans for the future
 Ideally I would become a descent competitive programmer by 1-2 years (written in August 2022). Need to:
 - do more leetcode competitions
@@ -47,3 +64,4 @@ Ideally I would become a descent competitive programmer by 1-2 years (written in
 - learn C++
 - start codeforces
 - join Google/Facebook coding jams
+

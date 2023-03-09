@@ -2,18 +2,55 @@
 id: 575nhoxd9zglbmn3y4gmcnz
 title: Algebra
 desc: ''
-updated: 1669103747579
+updated: 1677786462849
 created: 1664382729044
 ---
-    Fundamentals
+# Fundamentals
         Binary Exponentiation
         Factoring Exponentiation
         Euclidean algorithm for computing the greatest common divisor
         Extended Euclidean Algorithm
         Linear Diophantine Equations
-        Fibonacci Numbers
-    Prime numbers
-        Sieve of Eratosthenes
+## Fibonacci Numbers
+- [express k as a minimum number of Fibonacci numbers](https://leetcode.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/)
+
+**Math behind why greedy works**
+
+Among all resolution with the minimum number of Fibonacci numbers, we are to find the lexicographically largest one.
+
+Facts about shortest sequence:
+- uses each Fibonacci number at most once `fibo[i] * 2 = fibo[i - 2] + fibo[i + 1]`
+- never uses two consecutive Fibonacci numbers
+
+Then: If no dup, no adjacent, we must take the biggest.
+
+`fibo[0] + fibo[2] + fibo[4] + ... + fibo[2n] = fibo[2n + 1] - 1`
+
+`fibo[1] + fibo[3] + fibo[5] + .... + fibo[2n-1] = fibo[2n] - 1`
+
+
+# Prime numbers
+## Sieve of Eratosthenes
+
+- [leetcode problem](https://leetcode.com/problems/closest-prime-numbers-in-range/)
+```python
+sieve = [False,False]+[True]*(r-2)
+for i in range(2,int(r**0.5)+2):
+    for j in range(i*i,r+1):
+        sieve[j] = False
+primes = [i for i,p in enumerate(primes) if p]
+```
+
+- find all primes less or equal to n
+```python
+primes = []
+for d in range(2,n+1):
+    for p in primes:
+        if d%p == 0: break
+    else:
+        primes.append(d)
+```
+
         Linear Sieve
         Primality tests
         Integer factorization
@@ -70,9 +107,38 @@ class Solution:
         return res[i:] + res[:i]
 ```
 
-It's not obvious why $n ^ (n>>1)$ and $(n+1) ^ ((n+1)>>1)$ would differ by 1 bit.
+It's not super obvious why $n$ XOR $(n>>1)$ and $(n+1)$ XOR $((n+1)>>1)$ would differ by 1 bit.
 
+XOR is commulative. we need to prove that $n$ XOR $(n>>1)$ XOR $(n+1)$ XOR $((n+1)>>1)$ is a power of two.
 
+$n$ XOR $(n>>1)$ and $(n+1)$ XOR $((n+1)>>1)$ $=$ $n$ XOR $(n+1)$ and $(n>>1)$ XOR $((n+1)>>1)$ $=$ $2^{k} - 1$ XOR $2^{k-1} - 1$
+
+## Finding inverse Gray code
+
+Given Gray code $g$, restore the original number $n$, i.e. $g = n^(n>>1)$, given $g$ find $n$
+
+We will move from the most significant bits to the least significant ones (the least significant bit has index 1 and the most significant bit has index $k$). The relation between the bits $n_i$ of number $n$ and the bits $g_i$ of number $g$:
+
+$n = n_{k}n_{k-1}...n_{1}$ in binary presentation $n_{i} \in \{0,1\}$
+
+Rewrite $n = g$ XOR $n>>1$ to get:
+
+$$\begin{align}
+  n_k &= g_k, \\
+  n_{k-1} &= g_{k-1} \oplus n_k = g_k \oplus g_{k-1}, \\
+  n_{k-2} &= g_{k-2} \oplus n_{k-1} = g_k \oplus g_{k-1} \oplus g_{k-2}, \\
+  n_{k-3} &= g_{k-3} \oplus n_{k-2} = g_k \oplus g_{k-1} \oplus g_{k-2} \oplus g_{k-3},
+  \vdots
+\end{align}$$
+
+```python
+def gray_to_dec(g):
+    res = 0
+    while g:
+        res ^= g
+        g >>= 1
+    return res
+```
 # Miscellaneous
         Enumerating submasks of a bitmask
         Arbitrary-Precision Arithmetic

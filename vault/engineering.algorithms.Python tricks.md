@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1668699210442
+updated: 1677665114756
 created: 1664446506779
 ---
 
@@ -19,7 +19,7 @@ transpose_mat = list(zip((*mat)))
 # cumulative sum array, cdf
 from itertools import accumulate
 nums = [1,2,3,4]
-cum = list(accumulate(nums),key=sum) # [1,3,6,10]
+cum = list(accumulate(nums,func = lambda x,y:x+y)) # [1,3,6,10]
 ```
 
 - xor cumulative
@@ -180,6 +180,12 @@ while True:
     x += n
     n += 2
 ```
+- [Binary operations laws](https://stackoverflow.com/questions/12764670/are-there-any-bitwise-operator-laws)
+
+- Distributive of AND over XOR
+```
+a & (b1 ^ b2) = (a & b1) ^ (a & b2)
+```
 
 - bitwise tricks, binary operations
 ```Python
@@ -294,4 +300,44 @@ def window_multiply(filter_window: np.ndarray, target: np.ndarray):
     out = filter_window * target[indices]
     return out
 
+```
+
+- itertools.groupby()
+```python
+for k,v in groupby('aaabbcddd'):
+    print(k,list(v)) # a, [a,a,a]
+
+groups = []
+for k,v in groupby(s):
+    groups.append((k,len(list(v))))
+```
+
+- [negative power modulus](https://math.stackexchange.com/questions/2592324/how-to-do-a-modular-arithmetic-with-negative-exponents). You can use it as of Python 3.8. Useful for solving linear Diophantine equality. First and third argument need to be coprime.
+```python
+pow(23,-1,2)
+```
+
+- binary to decimal
+```python
+int('101',2)
+```
+
+- careful with instantiation and constructor
+```python
+
+class Node:
+    def __init__(self,val,children=[]):
+        self.val = val
+        self.children = children
+
+a = Node('a')
+b = Node('b')
+a.children.append(12)
+print(b.children) # prints [12]
+# modification on object a modifies b too, children is a class variable... if not set
+```
+
+- swapcase(), string, uppercase, lowercase swap
+```python
+'aA'.swapcase() # gives 'Aa'
 ```

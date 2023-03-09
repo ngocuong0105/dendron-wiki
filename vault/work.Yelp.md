@@ -2,7 +2,7 @@
 id: oqzcofwhigtnyuk9q5eu653
 title: Yelp
 desc: ''
-updated: 1669034598914
+updated: 1669803196546
 created: 1666708177903
 ---
 
@@ -29,6 +29,23 @@ How does Yelp make money?
 
 For example, if you pay $50 per lead and close 50 percent of your leads, you’ll pay $100 for each successful new customer. If your average customer value is more than $100 in this example, you’ve generated a profit and your marketing campaign can be considered a success.For example, if you pay $50 per lead and close 50 percent of your leads, you’ll pay $100 for each successful new customer. If your average customer value is more than $100 in this example, you’ve generated a profit and your marketing campaign can be 
 
+# MLoc welcome deck
+
+Yelp's biggest asset are "Consumers with high 
+
+Yelp clients:
+- consumers (app users)
+- businesses (local and multi-local biz)
 
 
-# People
+![mloc_funnel.png](assets/images/mloc_funnel.png)
+
+
+
+The funnel is the consumer experience (users)
+
+Yelp for businesses has 3 ingredients for success:
+- reporting
+- attribution (what money each marketing campaign made me money, connecting the dots between our ads and conversions, ROI measurement)
+    - YSV (Yelp store visit) is able to measure the number of times user visit a client locations attributable to Yelp ads
+- acquisition (making it easier to purchase and advertise on Yelp)

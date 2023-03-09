@@ -2,7 +2,7 @@
 id: pn4b2d4br8xn0y2dh1sgor4
 title: Trustworthy Online Controlled Experiments
 desc: ''
-updated: 1668428051529
+updated: 1669887925262
 created: 1667338869712
 ---
 
@@ -322,7 +322,7 @@ Objectives and Key Results ([OKRs](https://github.com/joelparkerhenderson/object
 
 Objecties represent long-term goals and Key results short-term goals.
 
-Objectives are ambitious, and should feel somewhat uncomfortabl
+Objectives are ambitious, and should feel somewhat uncomfortable
 
 Key Results are measurable; they should be easy to grade with a number
 

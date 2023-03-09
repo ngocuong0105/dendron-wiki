@@ -2,12 +2,17 @@
 id: 78ld05rlq10336r34dz8sxc
 title: Git
 desc: ''
+<<<<<<< HEAD
 updated: 1669241920793
+=======
+updated: 1677849923448
+>>>>>>> 48207ec7c38b24dd1c1b68983a523a233cc5cdbe
 created: 1668288491690
 ---
 
-My notes on [Learn Git Branching](https://learngitbranching.js.org/).
-
+# Resources:
+- [Learn Git Branching](https://learngitbranching.js.org/).
+- [Git reference common commands](https://git.github.io/git-reference/creating/#init)
 
 # Commits and branches
 
@@ -250,6 +255,7 @@ The output of the command looks like:
 
 Where `tag` is the closest ancestor tag in history, `numCommits` is how many commits away that tag is, and `<hash>` is the hash of the commit being described.
 
+<<<<<<< HEAD
 # Git Remotes
 
 Git remotes are actually just copies of your repository on another computer. You can typically talk to this other computer through the Internet, which allows you to transfer commits back and forth.
@@ -284,3 +290,9 @@ These two steps are incorporated in
 git pull
 ```
 
+=======
+
+# Collaborative developement models
+
+[Shared repo model vs Fork and pull model](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models)
+>>>>>>> 48207ec7c38b24dd1c1b68983a523a233cc5cdbe

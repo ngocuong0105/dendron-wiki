@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1668961590479
+updated: 1673336124861
 created: 1658698186720
 ---
 
@@ -19,15 +19,15 @@ Interviewing has different stages. I have divided them in 3 main ones - core pre
     - skim job descriptions to check tech stacks and requirements
 
 2. Prepare for behavior questions + leadership principles (**2 weeks**)
-    - stories for each of your jobs - stating point is your Job search folder
+    - stories for each of your jobs - starting point is your Job search folder
     - lp principles file from stefan is good
     - cracking the coding interview book
     - why you james reed book
     - [[interviews.Behaviour]]
 
 3. Prepare good CV (**3 days**)
-    - one more engineering (for MLE)
-    - one more data science (math + stats stuff)
+    - one for engineering (for MLE)
+    - one for data science (math + stats stuff)
     - this step often will improve through iteration, as you apply to companies and talk stuff you will add/change your CV
 
 4. Apply at bunch of companies (**2 weeks**)
@@ -60,7 +60,7 @@ Interviewing has different stages. I have divided them in 3 main ones - core pre
     - do self evaluation of the whole interview cycle and update [[interviews.Self evaluation]]
     - gather all your notes and put in dendron
 
-Steps 1-2 (**core preparation**) take most of the time (2-months) and depends on your current interview prep state. Although this takes most of your time in the interviewing cycle it is actually the part you would enjoy the most as it is about solving problems. Mke sure you spend proper time on behaviour practice too.
+Steps 1-2 (**core preparation**) take most of the time (2-months) and depends on your current interview prep state. Although this takes most of your time in the interviewing cycle it is actually the part you would enjoy the most as it is about solving problems. Make sure you spend proper time on behaviour practice too.
 
 Steps 3-5 (**warm-up stage + applications**) take about 2-4 weeks. This part is the shortest one. Key here is to adjust your mindset to interview mode. Mocks with friends or paid one help. Also this part includes lots of admin work to make applications. Although it could be tedious it is super important as it gets you the interviews. Make sure you spend enough time on the applications. Need to pull out all your connections for referals, ask Blind for referrals, write to recruiters.
 

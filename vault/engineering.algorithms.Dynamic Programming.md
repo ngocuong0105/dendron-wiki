@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1668415427295
+updated: 1677834016918
 created: 1664382766630
 ---
 
@@ -22,5 +22,13 @@ created: 1664382766630
 - [maximum profit in job scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/)
 - [encode string with shortest length](https://leetcode.com/problems/encode-string-with-shortest-length/)
 - [grid with 3 different colors](https://leetcode.com/problems/painting-a-grid-with-three-different-colors/)
-
+- [sum of distances in tree](https://leetcode.com/problems/sum-of-distances-in-tree/)
+- [count palindromes](https://leetcode.com/problems/count-palindromic-subsequences/)
+- [substrings diff 1](https://leetcode.com/problems/count-substrings-that-differ-by-one-character/submissions/)
 Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, see solution tab in [Climbing stairs](https://leetcode.com/problems/climbing-stairs/)
+- [good binary strings](https://leetcode.com/problems/number-of-good-binary-strings/submissions/)
+- [least number of lines cover all points](https://leetcode.com/problems/minimum-number-of-lines-to-cover-points/)
+- [max nonegative path](https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/)
+- [Minimum flips in evaluation tree](https://leetcode.com/problems/minimum-flips-in-binary-tree-to-get-result/)
+- [Apples in pizza](https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/)
+- [Pyramids count](https://leetcode.com/problems/count-fertile-pyramids-in-a-land/)

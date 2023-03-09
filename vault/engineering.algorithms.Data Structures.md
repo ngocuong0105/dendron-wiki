@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1668248804695
+updated: 1677344000268
 created: 1664382752052
 ---
 
@@ -213,6 +213,8 @@ class MRUQueue:
 </details>
 
 
+- [heights queue](https://leetcode.com/problems/number-of-visible-people-in-a-queue/)
+
 ## Sparse Table
 
 # Trees
@@ -233,10 +235,10 @@ class DSU:
         self.rank = [0 for _ in range(n)]
 
     # path compression
-    def find(self, idx: int) -> int:
-        if self.parent[idx] != idx:
-            self.parent[idx] = self.find(self.parent[idx])
-        return self.parent[idx]
+    def find(self, x: int) -> int:
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
 
     # keep tree's rank small
     def union(self, x: int, y: int) -> None:
@@ -249,6 +251,40 @@ class DSU:
             self.parent[v] = u
             self.rank[u] += 1
 
+```
+</details>
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```Python
+class DSU:
+    
+    def __init__(self):
+        self.parent = {}
+        self.rank = {}
+    
+    def add(self,x):
+        if x not in self.parent:
+            self.parent[x] = x
+            self.rank[x] = 0
+    
+    # path compression
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    # keep tree's rank small
+    def union(self, x, y) -> None:
+        u, v = self.find(x), self.find(y)
+        if self.rank[u] < self.rank[v]:
+            self.parent[u] = v
+        elif self.rank[u] > self.rank[v]:
+            self.parent[v] = u
+        else:
+            self.parent[v] = u
+            self.rank[u] += 1
 ```
 </details>
 
@@ -438,6 +474,7 @@ class NumMatrix:
 ## Sqrt Decomposition
 ## Segment Tree
 
+- [Increments on subarrays](https://leetcode.com/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/)
 
 - Questions: [Falling Squares](https://leetcode.com/problems/falling-squares/), [Skyline](https://leetcode.com/problems/the-skyline-problem/)
 

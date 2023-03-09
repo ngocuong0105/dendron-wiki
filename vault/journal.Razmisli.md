@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1668942700895
+updated: 1675766949634
 created: 1658754729845
 ---
 # Actions
@@ -133,10 +133,28 @@ then you need to pay small regular costs (2,3 times per week). Gym helps me to b
 
 
 
---
+---
 
-I've lost motivation...
+#  I've lost motivation...
 
+How to bring back your motivation and be productive?
+
+**Goal: Get your high energy state back!**
+
+- Eat healthy/loose weight
+- Go to gym (helps a lot)
+- Listen to motivational/party music
+- Work, work, work
+- Avoid being in states where you lie all day, watch movies/tv-series and play games
+
+**You cannot get depressed if you do not belive depression exists - Andrew Tate hahah**
+
+Songs 
+- [Dara - Thunder](https://www.youtube.com/watch?v=ftgcdlazhk0)
+- [Dara - Cold as Ice](https://www.youtube.com/watch?v=D5YbBZpdjAE)
+- [100 Kila - Nqma takava jena](https://www.youtube.com/watch?v=keh-V_DP0y8)
+- [Upsurt - 3v1](https://www.youtube.com/watch?v=tQ5oMD5QDX4)
+- [Sabrina Carpenter - Thumbs](https://www.youtube.com/watch?v=uAVUl0cAKpo)
 ---
 # Podcasts
 
@@ -215,6 +233,19 @@ London TC-s for 2 YOE in hedge funds are around 200k (even sde-s can get that). 
 
 Meta TC Sanfrancisco is likley to be 300k for 2 YOE (E5)
 
+---
+**On job hopping**
+
+Job switching requires work which a fair number of people aren't willing to do.
+We have all met people who have worked the same job for 10 years etc...
+
+Companies know this and accounting departments have realized that people are willing to exchange the feeling of "comfort" (but not actual job security) of being in the same job for less than market compensation. Its optimizing for people's inertia.
+
+This is why this community exists as it allows us in the industry the tools to collaborate to ensure we make the best TC we can.
+
+This trend of needing to job hop extends far beyond tech and really is the economy as a whole. The boomer mythos of working the same job and showing loyalty to move up is well and thoroughly dead but it's remnants still exist and seep into people's perceptions.
+
+So now that you realize this. Go out there and apply, it's the only way to truly determine your market TC. And take this lesson to heart, you owe companies nothing, it's simply an exchange of your time for more money.
 
 ---
 
@@ -232,3 +263,25 @@ EPS ratio
 Quarterly earnings
 
 how to read balance sheet
+
+---
+
+# Communication
+
+Conversations based on sarcasm, "vsichko e na buzik" mindset is a powerful framework. Your starting point in having conversations with people is not to think about yourself (or proving yourself), rather think that everything is a joke.
+
+# Покупка на жилище
+
+В София апартаментите ще стават все по-недостъпни. Ще стане като Лондон, където масово хората живеят под наем, защото не могат да си позволят апартамент. След 20-30 години ще стане такаи в София.
+
+# Dealing with rejection
+
+Job hunt rejection. It is not personal, when they say it is not a good fit, it indeed is is not a good fit! And probs you did not do well enough on the interview. Just move on and apply at a bunch of places.
+
+Asking out girls and when they say no. She did nothing to you. You made an offer and she declined. As simple as that. Just move on.
+
+# Scaling tech business
+
+Avoid premature optimization. Check how levels fyi scaled to million of users using google sheets.
+
+[article](https://www.levels.fyi/blog/scaling-to-millions-with-google-sheets.html)
