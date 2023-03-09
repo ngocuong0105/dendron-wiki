@@ -2,7 +2,11 @@
 id: 78ld05rlq10336r34dz8sxc
 title: Git
 desc: ''
+<<<<<<< HEAD
+updated: 1669241920793
+=======
 updated: 1677849923448
+>>>>>>> 48207ec7c38b24dd1c1b68983a523a233cc5cdbe
 created: 1668288491690
 ---
 
@@ -146,6 +150,12 @@ git checkout HEAD^
 git checkout HEAD~4
 ```
 
+**Advanced moving when there is a merge**
+
+![move_up_adv_0.png](assets/images/move_up_adv_0.png)
+![move_up_adv.png](assets/images/move_up_adv.png)
+
+
 # Branch forcing
 
 One of the most common ways I use relative refs is to move branches around. You can directly r**eassign a branch to a commit** with the -f option
@@ -244,6 +254,40 @@ The output of the command looks like:
 `<tag>_<numCommits>_g<hash>`
 
 Where `tag` is the closest ancestor tag in history, `numCommits` is how many commits away that tag is, and `<hash>` is the hash of the commit being described.
+
+# Git Remotes
+
+Git remotes are actually just copies of your repository on another computer. You can typically talk to this other computer through the Internet, which allows you to transfer commits back and forth.
+- remotes serve as a great backup
+- remotes make coding social
+
+- create local copy of remote repositories
+```
+git clone
+```
+on your local you iwll have branches: `main` and `origin/main` (the remote branch)
+
+Remote branches reflect the state of remote repositories
+
+Remote branches have the special property that when you check them out, you are put into detached `HEAD` mode. **Git does this on purpose because you can't work on these branches directly.**
+
+
+```
+git fetch
+```
+git fetch performs two main steps, and two main steps:
+- downloads the commits that the remote has but are missing from our local
+- updates where our remote branches point
+
+NB: fetch does **not** update branches
+
+To reflect those changes  -- once you have new commits available locally you can do git merge `o/main`
+
+
+These two steps are incorporated in
+```
+git pull
+```
 
 
 # Collaborative developement models
