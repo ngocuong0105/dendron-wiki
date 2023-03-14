@@ -2,7 +2,7 @@
 id: nkefr7ipopudoxe89h53oy4
 title: Decision Trees
 desc: ''
-updated: 1674729446179
+updated: 1678448846575
 created: 1673945350311
 ---
 
@@ -135,6 +135,8 @@ Record the prediction accuracy on the oob samples for each tree.
 - Randomly permute the data for column $j$ in the oob samples the record the accuracy again (make it unmeaningful).
 - The decrease in accuracy as a result of this permuting is averaged over all trees, and is used as a measure of the importance of variable $j$ in the random forest. 
 
+**Xgboost** has an implementation of random forests [link](https://xgboost.readthedocs.io/en/stable/tutorials/rf.html).
+
 # Gradient Boosting
 
 Random forests and boosted trees are really the same models; the difference arises from how we train them.
@@ -143,7 +145,7 @@ By increasing the number of trees $B$ and reducing the pairwise correlation $\rh
 
 Rather than reducing variance, we can aim to reduce bias of simple trees and make them more **expressive**. Boosting is another ensemble method which achieves that.
 
-Add weak models $T_{i}$ additively and iteratively to ensemble a linear combination $T = \sum \w_{i}T_{i}$  whis is expressive.
+Add weak models $T_{i}$ additively and iteratively to ensemble a linear combination $T = \sum w_{i}T_{i}$  whis is expressive.
 
 
 ![gradient_boost.png](assets/images/gradient_boost.png)
@@ -165,6 +167,10 @@ Choosing $\lambda$
 
 
 # XGBoost
+
+XGBoost is a more regularized form of Gradient Boosting. XGBoost uses advanced regularization (L1 & L2), which improves model generalization capabilities. XGBoost delivers high performance as compared to Gradient Boosting. 
+
+Extreme grading boosting refers to pushing the limits of computation rather than modelling approach.
 
 Our model is written in the form:
 

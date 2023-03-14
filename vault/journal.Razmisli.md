@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1675766949634
+updated: 1678828683830
 created: 1658754729845
 ---
 # Actions
@@ -285,3 +285,20 @@ Asking out girls and when they say no. She did nothing to you. You made an offer
 Avoid premature optimization. Check how levels fyi scaled to million of users using google sheets.
 
 [article](https://www.levels.fyi/blog/scaling-to-millions-with-google-sheets.html)
+
+sad
+# Birthday wishes
+
+Your birthday is the perfect excuse to get drunk on a weekday. Bottoms up!
+
+
+“Happy birthday! Your life is just about to pick up speed and blast off into the stratosphere. Wear a seat belt and be sure to enjoy the journey. Happy birthday!”
+
+Congratulations on being even more experienced.
+
+“Wishing you a beautiful day with good health and happiness forever. Happy birthday!”
+
+
+Best wishes on your birthday! May you have maximum fun today, and minimum hangover tomorrow!
+
+Hope your special day brings you all that your heart desires! Here’s wishing you a day full of pleasant surprises! Happy birthday!
