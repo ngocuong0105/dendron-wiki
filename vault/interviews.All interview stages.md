@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1673336124861
+updated: 1677940935378
 created: 1658698186720
 ---
 
@@ -17,6 +17,7 @@ Interviewing has different stages. I have divided them in 3 main ones - core pre
     - probability: puzzle's app, 3 quant books
     - stats: [[interviews.Probability and Statistics]]
     - skim job descriptions to check tech stacks and requirements
+    - Think about what you want to have in your CV (avoind flufing, [[interviews.Practice and guide]] has CV screening from hiring manager's perspective)
 
 2. Prepare for behavior questions + leadership principles (**2 weeks**)
     - stories for each of your jobs - starting point is your Job search folder

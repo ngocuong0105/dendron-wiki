@@ -2,20 +2,20 @@
 id: 9a4cf8g6ax04f7o71y2d627
 title: Practice and guide
 desc: ''
-updated: 1677923796409
+updated: 1678354515765
 created: 1677851804607
 ---
 
-Collection of problem solvning and system design questions. General guidlines from interviewers perspective.
+Collection of problem solving and system design questions. General guidlines from interviewers perspective.
 
 # Machine Learning Roles
-Although not a comprehensive list, ML roles at Yelp can be split into three roles that complement each other in a typical project lifecycle. These roles are:
+Although not a comprehensive list, ML roles can be split into three roles that complement each other in a typical project lifecycle. These roles are:
 
-**Applied Scientists:** Applied Scientists at Yelp leverage data to identify and tackle opportunity areas, employing statistical inference and machine learning skills in exploratory as well as production settings to develop new products, optimize business metrics, and perform causal inference.
+**Applied Scientists:** Applied Scientists leverage data to identify and tackle opportunity areas, employing statistical inference and machine learning skills in exploratory as well as production settings to develop new products, optimize business metrics, and perform causal inference.
 
-**Machine Learning Engineers:** Machine Learning Engineers at Yelp work on engineering ML systems such as Yelp’s real-time ad targeting and search ranking services or batch-based content mining applications.  This involves an understanding of software engineering and system design, data ETL and data stores, and machine learning.
+**Machine Learning Engineers:** Machine Learning Engineers work on engineering ML systems such as Yelp’s real-time ad targeting and search ranking services or batch-based content mining applications.  This involves an understanding of software engineering and system design, data ETL and data stores, and machine learning.
 
-**ML Platform Engineers:** ML Platform Engineers at Yelp build the infrastructure and tooling to support our Machine Learning Engineers and Applied Scientists.
+**ML Platform Engineers:** ML Platform Engineers build the infrastructure and tooling to support our Machine Learning Engineers and Applied Scientists.
 
 
 [Role responsibilities](https://drive.google.com/file/d/1DeoYjPHcetPNN4fuyA6_4ih4b2N7QSO9/view?usp=share_link)
@@ -24,6 +24,55 @@ Although not a comprehensive list, ML roles at Yelp can be split into three role
 # Resume screening
 
 [What recruiters/hiring managers look in your CV?](https://drive.google.com/file/d/1djEJvVQOKgPRsp4vJDH6vfAWLXQvvzcB/view?usp=share_link)
+
+**Google** [Resume Tips and Advice](https://www.youtube.com/watch?v=BYUy1yvjHxE)
+
+Top: Programming languages, github profile
+
+For experienced industry professsional list:
+- First section: Experience should be the bulk of the CV.
+- Second Section or within First Section: Projects
+- Leadership and awards section
+- Final Section: Education
+
+List everything in reverse CChronological order with your most recent experience first. Use action words: created, dsigned, debugged, negotiated,developed, managed.
+
+**Framework**:
+Accomplished [X] as by measured by [Y] by doing [Z]
+
+Increased server query response by 15\% by restructuring API.
+
+Grow revenue from small and medium business clients by 1- \% by mapping new software features as solutions to their business goals.
+
+
+# Your CV
+
+Example LinkdIn profiles of AS/MLE people with no Phd:
+- https://www.linkedin.com/in/shanchaoli/
+A lot of projects. His DS work is closely related to productionizing ML pipelines. Also takes part in business definition of the problems using ML.
+
+- https://www.linkedin.com/in/tianwng/ - Publications...
+- https://www.linkedin.com/in/makeshsreedhar/ - no phd but has showed doing some research internships
+
+MLE:
+- https://www.linkedin.com/in/alex-lo-19528414a/ (DS/DA)
+- https://www.linkedin.com/in/aman3014/ (CS, Computer Vision)
+- https://www.linkedin.com/in/rayan-hatout/ (AI/ML)
+- https://www.linkedin.com/in/thakarar/ (DS, SE)
+- https://www.linkedin.com/in/dtomek/ (Applied Maths + SE)
+- https://www.linkedin.com/in/yunru-l-49157784/(Maths + Engineering)
+- https://www.linkedin.com/in/simone-merello-bb0aa6107/ (CS)
+
+
+Looks like for Meta to become a Research/Applied Scientist you need a phd. Out of 30 profiles I found only 3 without a Phd.
+
+For MLE, looks like you do not need a Phd. Most of the MLE people have Bachelor or MS. However, they all show proof that they know how to code.
+
+
+**No fluffy things!**
+
+Carefully select which projects to share from your Github (remove snake and ping pong games).
+
 
 # General guidelines
 [pdf](https://drive.google.com/file/d/1kJNLV6ZHrvh6Yu4t20acEAZ7KyYFDm-T/view?usp=share_link)
@@ -153,3 +202,5 @@ Fullstack, Data backed questions for SD are the same as Backend questions.
 See folders:
 - questions
 -  structured questions (System Design)
+
+[Crack Meta MLE interview](https://towardsdatascience.com/how-i-cracked-the-meta-machine-learning-engineering-interview-aa32f64b8e4b)
