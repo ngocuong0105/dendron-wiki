@@ -1,0 +1,23 @@
+---
+id: ufrcqzs753ifx67ttk5u303
+title: Cross Validation
+desc: ''
+updated: 1679514605384
+created: 1679414225853
+---
+"Trust your CV score in Kaggle competitions more than the public LB score."
+
+- Hold-out (standard one 80/20 split)
+- K-folds (split data into k folds and each fold would be a validation set)
+- Leave-one-out (extreme K-folds)
+- Leave-p-out
+- Stratified K-folds (useful for imbalanced datasets)
+- Repeated K-folds (pick 80/20 split data randomly k times, bad for imbalanced datasets)
+- Nested K-folds
+- Time series CV (deals with forwardlooking bias in TS data)
+
+[Description of CV techniques](https://neptune.ai/blog/cross-validation-in-machine-learning-how-to-do-it-right)
+
+```python
+from sklearn.model_selection import KFold, GroupKFold
+```

@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1678828683830
+updated: 1678890305935
 created: 1658754729845
 ---
 # Actions
@@ -302,3 +302,74 @@ Congratulations on being even more experienced.
 Best wishes on your birthday! May you have maximum fun today, and minimum hangover tomorrow!
 
 Hope your special day brings you all that your heart desires! Here’s wishing you a day full of pleasant surprises! Happy birthday!
+
+# Conversation Q&A (Chit Chat)
+
+How are you doing?
+
+Tell me about yourself
+
+Weather talk.. What’s your favorite season and why?
+
+Do you have any pets? What are their names? What’s your favorite animal?
+
+What were you obsessed with when you were a child? 
+
+What’s your most controversial opinion? 
+
+Do you have any brothers or sisters?
+
+What food would you eat every day if you could?
+
+What music do you listen to?
+
+What are you going to do this weekend?
+
+What do you do to relax?
+
+What’s your favorite thing about your hometown? 
+
+
+
+
+# Story telling
+
+## In DS presentation
+
+**Template for graphs/figures:**
+
+On this graph you can see.
+
+The message you should take out of the graph....
+
+What this figure shows you is that...
+
+The implication that you get from this graph is...
+
+
+
+**Structure**
+
+Intro: 
+- set expectations
+- quick mention of an appropriate joke
+
+Mid game:
+-  Between switching topics, ask if there are any questions!
+
+End:
+- Thank you for your attention. I am happy to answer any questions you might have.
+
+
+## Taking time to answer questions
+
+Quick stalling: "This is a good question. I have not thought about it before. Let me think about it for a moment."
+
+Understand the question/take more time: Rephrasing the question: 
+- "From my understanding, you want to know..."
+- "What you are asking is whether..."
+- "In other words..."
+
+Take things off-line:
+- I don't have the answer to that question right now. I will get back to you on that.
+- I don't want to give you the wrong information, so let me get back to you.

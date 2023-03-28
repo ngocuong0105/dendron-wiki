@@ -2,7 +2,7 @@
 id: ltvbyf1oqc8qx7khy58pby2
 title: Kaggle Learn
 desc: ''
-updated: 1678294896006
+updated: 1678960397422
 created: 1677947097369
 ---
 [Hands-on course in Kaggle](https://www.kaggle.com/learn)
@@ -134,3 +134,13 @@ from category_encoders import MEstimateEncoder # scikit-learn-contrib package
 
 **Tip**
 When  using a target encoder it's very important to use separate data sets for training the encoder and training the model. Otherwise the results can be very disappointing!
+
+# Data Vsualization
+
+
+categorical scatter plot
+
+```python
+sns.swarmplot(x=insurance_data['smoker'],
+              y=insurance_data['charges'])
+```
