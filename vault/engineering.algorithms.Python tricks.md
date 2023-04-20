@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1677665114756
+updated: 1681221172604
 created: 1664446506779
 ---
 
@@ -340,4 +340,26 @@ print(b.children) # prints [12]
 - swapcase(), string, uppercase, lowercase swap
 ```python
 'aA'.swapcase() # gives 'Aa'
+```
+
+- (dangerous default values)[https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments]
+
+```python
+def append_to(element, to=[]): # mutable default arguments
+    to.append(element)
+    return to
+
+my_list = append_to(12)
+print(my_list)
+
+my_other_list = append_to(42)
+print(my_other_list)
+
+# What you want:
+# [12]
+# [42]
+
+# What actually happens:
+# [12]
+# [12, 42]
 ```

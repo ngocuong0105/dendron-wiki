@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics &  Economics
 desc: ''
-updated: 1664692833271
+updated: 1680366943042
 created: 1658766097444
 ---
 
@@ -180,3 +180,14 @@ New government by president Radev (3rd in the last year and a half). Tis one is 
 have all stars like Kiril and Asen. Seems not competent too. Radev made some really good moves with bringing Asen and Kiril
 and riding the protests wave in summer 2021. Now he seems to have deviated from this direction and is more pro-Russia.
 Like ITN it looks like everybody is fighting for themselves.
+
+
+# Rank Choice Voting System
+
+Each person votes by ranking the parties 1,2,3 etc.
+
+At the first round all voters who voted with 1 for parties that do not get 4%, then we consider their second vote and distribute it to the parties with more than 4%.
+
+# Questionier before voting
+
+Every time you vote you need to fill in the answers of 3 questions that parties have answered. This is a way so that people know what they have voted for.

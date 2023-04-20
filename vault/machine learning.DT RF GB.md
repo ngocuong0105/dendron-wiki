@@ -1,8 +1,8 @@
 ---
 id: nkefr7ipopudoxe89h53oy4
-title: Decision Trees
+title: DT RF GB
 desc: ''
-updated: 1678448846575
+updated: 1681837957608
 created: 1673945350311
 ---
 
@@ -191,6 +191,28 @@ We add the trees $f_k$ additevely/iteratively. For example we learn $f_{t}$ by o
 One important advantage of this definition is that the value of the objective function only depends on $g_i$ and $h_i$. This is how XGBoost support custom loss functions. 
 
 
+## XGBoost paper
+[Paper](https://drive.google.com/file/d/1wFl7VZuxz1_yPL8p3XNTNLfqNO2_h3EQ/view?usp=share_link)
+
+Tree boosting has been shown togive state-of-the-art resutls on many standard classification benchmarks. XGBoost is a scalable machine learning system for tree boosting.
+
+XGBoost  major contributions:
+- highly scalable parallel end-to-end tree boosting system
+- regularized learning objective (regularization term is L2 on the leaf scores,i.e. gains). Regularization term in decision trees/boosting trees is measuring  what is the minimum amount of gain that would reduce the loss by the same amount
+- novel sparsity-aware algorithm for nan-values (learn all non-nans, then try put nans on left and on right, chooses whatever gives better gain)
+- weighted quantile sketch for effiecient proposal calculation (this is algo for the first step in approximate split finding). One of the key problems in tree learning is to find the best split threshold.
+
+**Control overfitting**
+When you observe high training accuracy, but low test accuracy, it is likely that you encountered overfitting problem.
+
+There are in general two ways that you can control overfitting in XGBoost:
+
+- The first way is to directly control model complexity.
+    - This includes max_depth, min_child_weight and gamma.
+- The second way is to add randomness to make training robust to noise.
+    - This includes subsample and colsample_bytree.
+    - You can also reduce stepsize eta. Remember to increase num_round when you do so.
+
 ## Implementation resources
 
 - [Scikit-Learn API](https://xgboost.readthedocs.io/en/stable/python/python_api.html)
@@ -202,6 +224,9 @@ One important advantage of this definition is that the value of the objective fu
 
 Since it is intractable to enumerate all possible tree structures, we add one split at a time. This approach works well most of the time, but there are some edge cases that fail due to this approach. For those edge cases, training results in a degenerate model because we consider only one feature dimension at a time. 
 
+**NOTE!!!!**
+
+[Xgboost order of features MATTERS](https://beverly-wang0005.medium.com/pitfall-of-xgboost-order-of-features-e651628ab3b7)
 
 # Adaboost
 
