@@ -2,9 +2,19 @@
 id: tfv2mbp7pm72fjssn0eijec
 title: Imbalanced dataset
 desc: ''
-updated: 1680686642070
+updated: 1684317942478
 created: 1680683206762
 ---
+
+# Implications
+1. If the train and test sets are both imbalanced with the same imbalance ratio, you do not need to balance your train data.
+2. If the train set is imbalanced and the test set is balanced, balancing your train data using oversampling would improve your model.
+3. Undersample the majority class when working with an imbalanced dataset only if you want to train faster. Bear in mind that your model score would decrease.
+4. If you decide to change the balance ratio of your train set, then MAE and MSE errors would be almost constant, whereas F1 scores, precision, and recall can vary up to 2%.
+4. Use F1 score **macro-averaged** to give equal weight to all classes in your data.
+5. The default F1 score metric in scikit-learn gives big weight to the majority class, resulting in overoptimistic predictions when working with an imbalanced dataset.
+
+
 
 Common pitfalls
 

@@ -1,8 +1,8 @@
 ---
 id: ltvbyf1oqc8qx7khy58pby2
-title: Kaggle Learn
+title: Kaggle
 desc: ''
-updated: 1682953623796
+updated: 1684317980580
 created: 1677947097369
 ---
 [Hands-on course in Kaggle](https://www.kaggle.com/learn)
@@ -37,16 +37,16 @@ sns.swarmplot(x=insurance_data['smoker'],
 
 # Videos
 
-## [Beyond Feature Selection](https://www.youtube.com/watch?v=gdyuCqmLMUg&t=944)
+---
+[Beyond Feature Selection](https://www.youtube.com/watch?v=gdyuCqmLMUg&t=944)
 
 **Is more features better? should I just get more and more features?**
 
 More features is generally better. As long as your features bring novel information it is good.
 
-
 Decision trees have built in Feature Selection. for each split you choose the best split - it is a feature selection algorithm.
 
-So do we really need FS when training Decision Trees (LGBM, XGBOOST). The answer is yes. You still need. It does happen your model on the sample data might pick up noisy feature. So you still need FS.
+**So do we really need FS when training Decision Trees (LGBM, XGBOOST)**. The answer is yes. You still need. It does happen your model on the sample data might pick up noisy feature. So you still need FS.
 
 Feature selection can reduce the number of features and you can get your AUC/Score up by a few points.
 
@@ -85,7 +85,7 @@ There is some biase in the feature selection. If you do FS for Xgboost, then the
 
 Feature engineering is usually better that Feature Selection
 
-
+---
 [CPMP talk](https://www.youtube.com/watch?v=VC8Jc9_lNoY&t=408s)
 
 
@@ -103,10 +103,45 @@ Setup good Cross validation local setup. You CV score should correlate with the 
 
 For xgboost/LGBM no need to worry about one hot encoding, or nan values. They handle it well.
 
+---
+
 [Feature engineering deck](https://www.slideshare.net/HJvanVeen/feature-engineering-72376750)
 
+Categorical features:
+- large cardinality creates sparse data
+- one hot encoding
+- hash encoding (deals with new varaibles, may introduce collisions), avoids extremely sparse data
+- label encoding (for every categorical variable give a unique numerical ID)
+- count encoding (sensitive to outliers, may add log transform, replace unseen varaibles with 1)
+- LabelCount encoding (rank categorical varaibles by count in the train set, no collisions)
+- target encoding - encode cat varaibles by their ratio of target (becareful to avoid overfit, nested CV)
+- use NN to create dense embeddings from categorical variables
+- give NaN valies an explicit encoding instead of ignoring  (use them only when train and test NANs are coused by the same, or your local CV proves it holds signal)
+- expansion encoding (create multiple categorical varaibles from a single variable)
+
+Numerical features:
+- round numerical variables (form of lossy compression, retain most significant features of the data)
+- sometimes too much precision is just noise
+- binning (by quantiles, plot data to llog for good interval binning)
+- scaling (standard Z, MinMax, Root, Log scaling)
+- impute missing (mean, median (robust to outliers), KNN,) add boolean column
+- interactions (substraction, addition, multiplication, divison) Ignore human intuition!, weird interactions can give significant improvement
+- create statistic on a row of data (number of NaNs, Number of 0s, Number of negative values, Mean, Max, Min, Skewness, etc)
+- temporal variables (dates, needs backtesting)
+- turn single features, like day_of_week into two coordinates on a circle
+- for TS, instead of total spend, encoed things lik spend in last week, month, etc
+- hardcode categorical features like: date_3_days_before_holidays: 1
+- spacial variables (find closeness between big hubs)
 
 
+Nearul Networks & DL
+- NN claim end-to-end automatic feature engineering
+- FE dying field? No - moves the focus to architecture engineering
+- encode order of samples in dataset
+
+*Applied Machine Learning is basically feature engineering, Andrew Ng*
+
+---
 [Winning gold is easy](https://www.youtube.com/watch?v=XBJ2f68LuO4&t=38s)
 
 A LOT OF TIPS AND TRICKS in this video.
@@ -146,3 +181,20 @@ Working with NN or linear models, when a feature you have NAN, add additional bo
 NN are making feature engineering implicitly.
 
 ----
+
+[Giba talk, tips for feature engineering and selection](https://www.youtube.com/watch?v=RtqtM1UJfZc&t)
+
+---
+
+[Kaggle Grandmaster and startuo](https://www.youtube.com/watch?v=A8oBphPOliM)
+
+- CPU/RAM management is 1st priority
+- Work on a single model as long as you can (1 week for other models)
+- ML is just function approximation of the real world
+- Tree methods ARE sensitive to noisy/useless features (spend enough time in Feature selection...)
+- In kaggle you do not always have CV LB correlation (you have absolute noise in the LB, or the dataset is very small)
+- Every time the dataset is small - you can do 5 Fold CV, repeated with 20 different CV splits. Models bagged 20 times - 2000 models in total to train just 1 model.
+
+---
+
+[When averaging models in forecasting tasks help](https://www.kaggle.com/competitions/godaddy-microbusiness-density-forecasting/discussion/394975)
