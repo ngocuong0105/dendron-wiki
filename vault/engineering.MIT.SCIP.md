@@ -5,4 +5,4 @@ desc: ''
 updated: 1659356809789
 created: 1658698353011
 ---
-Book in [[engineering.books.SCIP]]
+Book in [[books.SCIP]]
