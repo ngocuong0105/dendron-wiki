@@ -2,7 +2,7 @@
 id: ltvbyf1oqc8qx7khy58pby2
 title: Kaggle
 desc: ''
-updated: 1684317980580
+updated: 1684407765928
 created: 1677947097369
 ---
 [Hands-on course in Kaggle](https://www.kaggle.com/learn)
@@ -133,8 +133,7 @@ Numerical features:
 - hardcode categorical features like: date_3_days_before_holidays: 1
 - spacial variables (find closeness between big hubs)
 
-
-Nearul Networks & DL
+Neural Networks & DL
 - NN claim end-to-end automatic feature engineering
 - FE dying field? No - moves the focus to architecture engineering
 - encode order of samples in dataset
@@ -186,7 +185,7 @@ NN are making feature engineering implicitly.
 
 ---
 
-[Kaggle Grandmaster and startuo](https://www.youtube.com/watch?v=A8oBphPOliM)
+[Kaggle Grandmaster and startup](https://www.youtube.com/watch?v=A8oBphPOliM)
 
 - CPU/RAM management is 1st priority
 - Work on a single model as long as you can (1 week for other models)

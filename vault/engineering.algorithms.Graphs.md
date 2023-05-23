@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1677411121931
+updated: 1684830046477
 created: 1664382861926
 ---
 
@@ -263,8 +263,15 @@ def lca(root, p, q):
 
 More interesting is when you have **queries** $(u_i,v_i)$. Note lca lies on shortest path.
 
-Euler path
+## Euler path
 
+Eulerian Path is a path in a graph that visits every edge exactly once. 
+
+## Hamiltonian path
+
+A Hamiltonian path or traceable path is a path that visits each vertex of the graph exactly once. A graph that contains a Hamiltonian path is called a traceable graph.
+
+Whether Hamiltonian path exists in a graph or not is NP-complete problem.
 
 ## Lowest Common Ancestor - Binary Lifting
 Binary tree lifting is also known as jump pointers. Idea: Number of powers of two is logarithmic. [Errihto](https://www.youtube.com/watch?v=oib-XsjFa-M&t=579s&ab_channel=Errichto).
