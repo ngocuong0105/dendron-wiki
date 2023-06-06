@@ -1,6 +1,6 @@
 ---
 id: uy9u1co5ih1fokind8tg0eq
-title: Politics &  Economics
+title: Politics and Economics
 desc: ''
 updated: 1680366943042
 created: 1658766097444

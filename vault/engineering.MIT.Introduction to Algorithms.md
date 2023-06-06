@@ -2,9 +2,9 @@
 id: rm5bxh7rj0vlcnfhxeohm9w
 title: Introduction to Algorithms
 desc: ''
-updated: 1664632336975
+updated: 1685438031519
 created: 1662221201113
 ---
 # MIT 6.001
 
-Classic course which you should know for life. All lectures in one place [here](https://github.com/ngocuong0105/dendron-wiki/blob/main/vault/assets/files/Engineering/Introduction%20to%20Algorithms%20-%20All%20lecture%20slides.pdf)
+Classic course which you should know for life. All lectures in one place [here](https://drive.google.com/file/d/1FzGbSqWS9xufckvR5J5HrQ0qt-iVF1IU/view?usp=share_link)

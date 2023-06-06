@@ -2,11 +2,78 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1677344000268
+updated: 1685439577871
 created: 1664382752052
 ---
 
 # Fundamentals
+
+
+## Hash Tables
+Tags: Hashing, Open Addressing, Open-Addressing, Chaining
+
+[Design HashSet](https://leetcode.com/problems/design-hashset/)
+
+```Python
+# Chaining
+class MyHashSet:
+
+    def __init__(self):
+        self.buckets = [[] for _ in range(1999)]
+        
+    def hash(self, key):
+        return key%len(self.buckets)
+        
+    def add(self, key: int) -> None:
+        i = self.hash(key)
+        self.remove(key)
+        self.buckets[i].append(key)
+        
+    def remove(self, key: int) -> None:
+        if self.contains(key):
+            i = self.hash(key)
+            self.buckets[i].remove(key)
+            
+    def contains(self, key: int) -> bool:
+        i = self.hash(key)
+        return key in self.buckets[i]
+
+# Open addressing
+class MyHashSet:
+
+    def __init__(self):
+        self.size = 10069
+        self.hash_table = [None for _ in range(self.size)]
+
+    def hash(self, key, probe):
+        return (key%1999 + probe + probe**2) % self.size
+    
+    def add(self, key: int) -> None:
+        for probe in range(self.size):
+            i = self.hash(key,probe)
+            if self.hash_table[i] in [key,-1,None]:
+                break
+        self.hash_table[i] = key
+        
+    def remove(self, key: int) -> None:
+        for probe in range(self.size):
+            i = self.hash(key,probe)
+            if self.hash_table[i] in [key,-1,None]:
+                self.hash_table[i] = -1
+                break    
+                
+    def contains(self, key: int) -> bool:
+        for probe in range(self.size):
+            i  = self.hash(key, probe)
+            if self.hash_table[i] == None:
+                return False
+            elif self.hash_table[i] == key:
+                return True
+        return False
+        
+        
+```
+
 
 ## Minimum Stack / Minimum Queue
 - monotonic queue, [p1](https://leetcode.com/problems/constrained-subsequence-sum/), the cnt variable below defines the enqueue priority, can have different priority implementations, e.g in max sliding window [problem](https://leetcode.com/problems/sliding-window-maximum/) it would be the index of the element

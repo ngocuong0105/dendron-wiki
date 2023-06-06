@@ -2,10 +2,10 @@
 id: 7h50s7ga5ziiyblmoctsqmw
 title: Mental Health
 desc: ''
-updated: 1663232530642
+updated: 1686037785439
 created: 1663232161120
 ---
-I found these good notes somewhere long time ago but don't remember whose are those. Contact me if they are yours and I will give credits.
+I found these good notes somewhere long time ago but don't remember whose are those.
 
 # Fundamental model
 

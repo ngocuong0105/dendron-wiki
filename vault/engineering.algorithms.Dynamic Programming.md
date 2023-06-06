@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1677834016918
+updated: 1685956074431
 created: 1664382766630
 ---
 
@@ -13,6 +13,7 @@ created: 1664382766630
 - [merge stones](https://leetcode.com/problems/minimum-cost-to-merge-stones/)
 - [smallest sufficient team](https://leetcode.com/problems/smallest-sufficient-team/)
 - [student exams](https://leetcode.com/problems/maximum-students-taking-exam/)
+- [stone game 2](https://leetcode.com/problems/stone-game-ii/)
 - [hats to different people](https://leetcode.com/problems/number-of-ways-to-wear-different-hats-to-each-other/)
 - [binary tree cameras](https://leetcode.com/problems/binary-tree-cameras/?envType=study-plan&id=dynamic-programming-iv)
 - [constraint sum](https://leetcode.com/problems/constrained-subsequence-sum/)
@@ -32,3 +33,9 @@ Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, se
 - [Minimum flips in evaluation tree](https://leetcode.com/problems/minimum-flips-in-binary-tree-to-get-result/)
 - [Apples in pizza](https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/)
 - [Pyramids count](https://leetcode.com/problems/count-fertile-pyramids-in-a-land/)
+- [Music playlist](https://leetcode.com/problems/number-of-music-playlists/)
+- [Minimum cost to connect groups](https://leetcode.com/problems/minimum-cost-to-connect-two-groups-of-points/)
+- [Min Cost to make all chars equals](https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/)
+- [Count k-free subsets](https://leetcode.com/problems/count-the-number-of-k-free-subsets/)
+- [Type on keyboard using 2 fingers](https://leetcode.com/problems/minimum-distance-to-type-a-word-using-two-fingers/)
+- [make sorted columns](https://leetcode.com/problems/delete-columns-to-make-sorted-iii/)
