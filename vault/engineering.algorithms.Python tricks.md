@@ -363,3 +363,21 @@ print(my_other_list)
 # [12]
 # [12, 42]
 ```
+
+- key, custom bisect bisect_left
+```
+def poss:
+    """ returns True/False""
+bisect.bisect_left(range(n), x=True, key=poss)
+
+# equivalent to
+def bs(nums=range(n)):
+    l,r = 0,n
+    while l<r:
+        m =l+r>>1
+        if poss(m):
+            r = m
+        else:
+            l = m+1
+    return l
+```
