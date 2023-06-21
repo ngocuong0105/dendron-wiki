@@ -2,7 +2,7 @@
 id: 6eb6qm06u6vpwbpxckyzkem
 title: 'Stanford CS230: Deep Learning'
 desc: ''
-updated: 1685996938563
+updated: 1686217953062
 created: 1684778311163
 ---
 
@@ -20,9 +20,26 @@ This course is youtube videos + coursera videos. Youtube has deeper insights and
 - Gradient evaluated at particular point = slope of the tangent at particular point
 - Gradient checking (e.g if the signs changes often) is a good way to see if your optimization of the loss function is divergent.
 - Backprogation is just an application of the chain rule.
+- Backpropagation is used to calculate the gradient of the loss function with respect to the parameters. 
 - ReLU is the most common activation function
 - Sigmoid is almost never used for hidden layers, tanh is almost always better choice
 - NN require random initialization
+- Aim to have yur validation and test set coming from the same distribution.
+- L2 regularization is also called weight decay $w = (1-\dfrac{\alpha\lambda}{n})w - other terms$
+- Sanity checks for your NN:
+    - cost is decreasing as number of iterations increase (if using dropout, might not be the case)
+    - gradient checking  
+- Regularization is used to reduce overfitting
+    - L1, L2
+    - Dropout
+    - Data augmentation (add more data, rotate image, add some noise, flip image, blur image )
+    - Early stopping
+- Orthogonalisation idea one task at a time. (First focus on minimizing the cost function (overfit!). Then focus on regularization.)
+- Normalize inputs for NN to converge more quickly
+- Careful choice of weights initialization can solve vanishing/exploding gradients
+- Gradient tracking
+- https://arxiv.org/abs/1502.01852
+
 
 # Lecture 1 Deep Learning overview
 

@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1685956074431
+updated: 1686207224999
 created: 1664382766630
 ---
 
@@ -39,3 +39,4 @@ Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, se
 - [Count k-free subsets](https://leetcode.com/problems/count-the-number-of-k-free-subsets/)
 - [Type on keyboard using 2 fingers](https://leetcode.com/problems/minimum-distance-to-type-a-word-using-two-fingers/)
 - [make sorted columns](https://leetcode.com/problems/delete-columns-to-make-sorted-iii/)
+- [Dice roll simulation](https://leetcode.com/problems/dice-roll-simulation/)
