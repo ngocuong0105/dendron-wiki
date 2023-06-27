@@ -40,3 +40,4 @@ Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, se
 - [Type on keyboard using 2 fingers](https://leetcode.com/problems/minimum-distance-to-type-a-word-using-two-fingers/)
 - [make sorted columns](https://leetcode.com/problems/delete-columns-to-make-sorted-iii/)
 - [Dice roll simulation](https://leetcode.com/problems/dice-roll-simulation/)
+- [First day](https://leetcode.com/problems/first-day-where-you-have-been-in-all-the-rooms/)
