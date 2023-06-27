@@ -1,8 +1,8 @@
 ---
 id: o78bfxkjzbeqkxuasv6bihf
-title: CAP
+title: CAPI
 desc: ''
-updated: 1685095101907
+updated: 1686137478151
 created: 1684243822123
 ---
 CAPI is a product which would help Yelp to measure attribution in a more accurate way. User tracking data using third parties such as IOS and Safari is becoming more difficult so we need to create our own API to do that. Our goal is to collect first party data.
@@ -32,27 +32,32 @@ FB CAPI is easy to setup almost no coding.
 
 # Matching transactions to users and attribution of matched transactions
 
-For CAPI we have 2 phases of matching and get 2 match rates in the end. First is match transactions to yelp users (using email, phone, zip etc.).This gives us Yelp users <> transactions match rate. Second, for the transactions we have matched yelp users we match to Yelp ads (that is attribution).  This gives us Yelp ads <> transactions match rate.
-For the first step, when we match transactions with yelp users we can have two cases:
-Transactions which have unique Yelp users (these we can use directly in ad attribution)
-Transactions which have multiple Yelp users (due to not being able to define uniquely what a Yelp user is when using email, phone, zip). Now for each of these users we can have a score measuring the likelihood of being matched with this transaction. Say for a transaction with amount 100$ I have 3 users with scores 0.5, 0.4, 0.1. The question is how should we use these scores to compute ad attribution amount $?
+In the context of CAPI, our matching process consists of two phases, resulting in two match rates. The first phase involves matching transactions to Yelp users based on criteria such as email, phone, and zip code. This yields the match rate for Yelp users <> transactions. In the second phase, we match the transactions associated with Yelp users to Yelp ads, which determines the attribution match rate for Yelp ads <> transactions.
+During the first step of matching transactions to Yelp users, we encounter two scenarios:
+Transactions with unique Yelp users: In these cases, we can directly utilize the matched Yelp user for ad attribution.
+Transactions with multiple potential Yelp users: Due to the ambiguity in uniquely identifying Yelp users based on email, phone, and zip code, we assign a likelihood score to each potential match.  Say for a transaction with amount 100$ we have 3 users with scores 0.5, 0.4, 0.1. The question is how should we use these scores to compute ad attribution amount $?
 Potential options:
-Get only the user with maximum score 0.5 and match it to the transaction. If they have seen the ad, then we attribute 100$ otherwise we attribute 0$
-Keep the 3 users matched to the transaction. If the first user has seen an ad we attribute 0.5*100$, otherwise 0. Do the same for user two and three and in the end add all 3 user attributions (weighted sum with indicator variables and scores are used as weights).
-Get the user with the highest score 0.5 and match it to the transaction. If they has seen the ad, then we attribute 0.5*100$, if not we go to the second user and if they have seen the ad then we attribute 0.4*100$ and if they haven’t seen the ad we continue with the third user and so on.
+Select only the user with the highest score (0.5) and match them to the transaction. If this user has seen the ad, we attribute $100; otherwise, we attribute $0.
+Retain all three users matched to the transaction. If the first user has seen the ad, we attribute 0.5 * $100; otherwise, we attribute $0. We apply the same logic for the second and third users. Finally, we sum up the attributions for all three users, using the scores as weights (weighted sum with indicator variables and scores are used as weights).
+Choose the user with the highest score (0.5) and match them to the transaction. If this user has seen the ad, we attribute 0.5 * $100. If they haven't seen the ad, we proceed to the second user and attribute 0.4 * $100 if they have seen the ad. This process continues for subsequent users until a user who has seen the ad is found.
+Same as Option 2, but instead of using simple weighted average, we can use inverse propensity weighting (IPTW). This is a better option when we get scores that are very small.
 
 
 In essence and assumptions:
-Option 1 says: for each transaction match only the top user. Assumes each transaction can be attributed  to at most one user regardless of whether they have seen a Yelp ad  or not.
+Option 1 says: for each transaction match only the top user. Assumes each transaction can be attributed  to at most one user regardless of whether they have seen a Yelp ad or not.
 Option 2 says: for each transaction match all potential matchable users.  Assumes each transaction can be attributed to multiple users seeing an Yelp ad and the attributed amount is weighted using the likelihoods of these users being matched to the transaction.
-Option 3 says: each transaction must be attributed to an Yelp ad. Rank users and go through them in decreasing order until there is a user who saw the ad to compute attribution.  Assumes each transaction is attributed to exactly one user seeing an Yelp ad.
-Option 1 seems to me to be the most clean one as each transaction is mapped to at most 1 user. The other two would probably have higher attribution $$$ with Option 2 being strictly higher than Option 3, but aren’t they a bit unreal? 
+Option 3 says: each transaction must be attributed to an Yelp ad. Users are ranked, and we proceed in descending order until a user who has seen the ad is found. Attribution is computed accordingly.  Assumes each transaction is attributed to exactly one user seeing an Yelp ad.
 
-Essentially, computing the second match rate Yelp ads <> transactions can be thought of as a 2 steps problem process. We want to find an estimate for P(transaction is attributed to a Yelp ad). That is equal to:
-P(transaction is attributed to a Yelp ad| transaction is matched to Yelp user) * P(transaction is matched to Yelp user)
-Steps:
+The order of attribution amounts would likely be Option 2 > Option 3 > Option 1.
+Although Option 1 would give us the smallest attribution it appears to be the cleanest approach as each transaction is associated with a maximum of one user (which is what we want, each transaction can be attributed to at most one Yelp user).
+
+Option 1 interpretation
+To compute the second match rate (Yelp ads <> transactions), we can conceptualize it as a two-step process.  We aim to estimate P(transaction is attributed to a Yelp ad), which can be expressed as:  P(transaction is attributed to a Yelp ad| transaction is matched to Yelp user) * P(transaction is matched to Yelp user). The two steps involved are as follows:
 1. Compute P(transaction is matched to Yelp user) := P(A)
 2. Compute P(transaction is attributed to a Yelp ad| transaction is matched to Yelp user) := P(B|A)
-Note these two probabilities P(A) and P(B|A) should be independent and only Option 1 computes them independently - firstly gets the maximum of users' scores that can match a transaction and then looks if a Yelp ad can be attributed to the transaction. Options 2 and 3 uses the scores (that is P(A)) to compute P(B|A) and hence these two probabilities would not be independent.
+Note that these two probabilities, P(A) and P(B|A) should be independent. Only Option 1 calculates them independently by first obtaining the maximum score among users that can match a transaction and subsequently determining if a Yelp ad can be attributed to the transaction.  Options 2 and 3 uses the scores (0.1, 0.4, 0.5 that is P(A)) to compute P(B|A) and hence these two probabilities would not be independent.
 
-For now, Option 1 is the easiest to test out and is the most theoretically sound one, therefore is good to start with. Options 2 and 3 make sense only if we get very low scores (P(A) is very small) which means we cannot attribute any Yelp ad to a particular transaction with high confidence - then we could use these 2 options to “distribute” the attribution from a transaction to multiple Yelp users seeing a Yelp ad.
+For now, Option 1 is the easiest to test out and is the most theoretically sound one, therefore is good to start with. Options 2 and 3 can become relevant only if we encounter very low scores (indicating a small likelihood, P(A) )  and are unable to confidently attribute a Yelp ad to a specific transaction. In such cases, we could use Options 2, 3 and 4  to “distribute” the attribution from a transaction to multiple Yelp users seeing a Yelp ad.
+
+Options 2 and 4 interpretation
+These two options use the scores (P(transaction is matched to Yelp user), P(A)) to compute weighted average of the transaction amount. Philosophically speaking we want each transaction to be attributed to at most one Yelp user. These options do not reflect this philosophy. Rather, they match each transaction to multiple users with different levels of certainty, where the levels are measured using these scores. Options 2 and 4 offer a probabilistic point of view of the problem and their main advantage is that we would get more stable results over time, that is attribution amounts would not differ a lot month over month because we use averaging.
