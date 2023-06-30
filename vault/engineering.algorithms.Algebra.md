@@ -34,9 +34,9 @@ Then: If no dup, no adjacent, we must take the biggest.
 
 - [leetcode problem](https://leetcode.com/problems/closest-prime-numbers-in-range/)
 ```python
-sieve = [False,False]+[True]*(r-2)
+sieve = [False,False]+[True]*(r-1)
 for i in range(2,int(r**0.5)+2):
-    for j in range(i*i,r+1):
+    for j in range(i*i,r+1,i):
         sieve[j] = False
 primes = [i for i,p in enumerate(primes) if p]
 ```
