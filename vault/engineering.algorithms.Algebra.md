@@ -32,13 +32,15 @@ Then: If no dup, no adjacent, we must take the biggest.
 # Prime numbers
 ## Sieve of Eratosthenes
 
+
 - [leetcode problem](https://leetcode.com/problems/closest-prime-numbers-in-range/)
 ```python
-sieve = [False,False]+[True]*(r-2)
+sieve = [False,False]+[True]*(n-1)
 for i in range(2,int(r**0.5)+2):
-    for j in range(i*i,r+1):
+    for j in range(i*i,n+1,i):
         sieve[j] = False
 primes = [i for i,p in enumerate(primes) if p]
+# O(nlog(logn))
 ```
 
 - find all primes less or equal to n
@@ -53,7 +55,62 @@ for d in range(2,n+1):
 
         Linear Sieve
         Primality tests
-        Integer factorization
+## Integer factorization
+
+- trial division
+
+'smallest divisor should be prime'
+```python
+# O(sqrt(n))
+def factorization(n):
+    res = []
+    for d in range(2,int(n**0.5)+1):
+        while n%d == 0:
+            res.append(d)
+            n //= d
+    return res
+```
+
+- simple sieve of eratosthenes + dp
+```python
+@cache
+def factorization(num):
+    if num == 1: return [1]
+    if sieve[num]: return [num]
+    for p in range(2,num+1):
+        if sieve[p] and num%p==0: return [p]+factorization(num//p)
+
+sieve = [False,False]+[True]*(n-1)
+for i in range(2,int(n**0.5)+2):
+    for j in range(i*i,n+1,i):
+        sieve[j] = False
+```
+
+iterative implementation:
+
+```python
+
+sieve = [False,False]+[True]*(n-1)
+for i in range(2,int(n**0.5)+2):
+    for j in range(i*i,n+1,i):
+        sieve[j] = False
+primes = [p for p in range(len(sieve)) if sieve[p]]
+res = []
+for d in primes:
+    if d * d > n: break
+    while n % d == 0:
+        res.append(d)
+        n //= d
+if n > 1:
+    res.append(n) # n-prime
+```
+- Fermat's factorization method
+- Pollard's  $p - 1$  method
+- Pollard's rho algorithm
+- Floyd's cycle-finding algorithm
+- Brent's algorithm
+
+
 # Number-theoretic functions
 ## Euler's totient function
 ## Number of divisors / sum of divisors
