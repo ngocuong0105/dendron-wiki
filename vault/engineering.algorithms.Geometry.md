@@ -2,7 +2,7 @@
 id: bvywezxe342ge7lrslfg9ue
 title: Geometry
 desc: ''
-updated: 1687336128587
+updated: 1689087576910
 created: 1664382853125
 ---
 
@@ -91,9 +91,16 @@ print("Result:", mec(0,[]))
     Convex hull
         Convex hull construction
         Convex hull trick and Li Chao tree
-    Sweep-line
-        Search for a pair of intersecting segments
-        Point location in O(log N)
+# Sweep-line
+## Search for a pair of intersecting segments
+- [perfect rectangle](https://leetcode.com/problems/perfect-rectangle/)
+Given  a list of rectangles we want to find if there is any overlap of two rectangles.
+
+- Line sweep x-axis and add y1,y2 intervals into a SortedList data structure
+
+
+
+## Point location in O(log N)
     Miscellaneous
         Finding the nearest pair of points
         Delaunay triangulation and Voronoi diagram

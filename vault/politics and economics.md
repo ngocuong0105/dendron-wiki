@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics and Economics
 desc: ''
-updated: 1680366943042
+updated: 1689077991346
 created: 1658766097444
 ---
 
@@ -184,9 +184,13 @@ Like ITN it looks like everybody is fighting for themselves.
 
 # Rank Choice Voting System
 
+This voting system is used when we need a clear winner (president or mayor elections).
+First Past the Post is not a a fair system. Even with balotage system, the 2nd round is not fair (although probably better than FPTP), e.g. elections for mayor in Sofia with Fandukova, Manolova, Boris Bonev and Da Bulgaria. The balotage had Fandukova vs Manolova, but with ranked choice we could have Bonev(or Da Bulgaria) vs Fandukova.
+
 Each person votes by ranking the parties 1,2,3 etc.
 
-At the first round all voters who voted with 1 for parties that do not get 4%, then we consider their second vote and distribute it to the parties with more than 4%.
+If there is a mojaorty winner they win. If not the lowest candidate is removed and the votes of the people who voted for him are distributed to the other candidates (whoever was their second choice gets all the votes). This is repeated until there is a majority winner.
+
 
 # Questionier before voting
 

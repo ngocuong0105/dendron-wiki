@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1684830046477
+updated: 1687897538553
 created: 1664382861926
 ---
 
@@ -242,6 +242,28 @@ circle = circle[circle.index(node):]
 
 ## Eulerian Path
 
+Euler path
+
+Eulerian Path is a path in a graph that visits every edge exactly once. 
+
+- [leetcode](https://leetcode.com/problems/valid-arrangement-of-pairs/)
+```{python}
+def hierholzer_recursive(graph):
+    def visit(vertex, circuit):
+        while graph[vertex]:
+            next_vertex = graph[vertex].pop()
+            visit(next_vertex, circuit)
+        circuit.append(vertex)
+
+    circuit = []
+    start_vertex = list(graph.keys())[0]
+    visit(start_vertex, circuit)
+    circuit.reverse()
+    return circuit
+
+```
+To properly initialize the start vertex in the recursive version of Hierholzer's algorithm, you can modify the code to select a vertex with an odd degree (if one exists) as the starting point. This ensures that the algorithm will find an Eulerian circuit if one exists in the graph.
+
 
 
 # Lowest common ancestor
@@ -263,9 +285,6 @@ def lca(root, p, q):
 
 More interesting is when you have **queries** $(u_i,v_i)$. Note lca lies on shortest path.
 
-## Euler path
-
-Eulerian Path is a path in a graph that visits every edge exactly once. 
 
 ## Hamiltonian path
 

@@ -2,7 +2,7 @@
 id: oqzcofwhigtnyuk9q5eu653
 title: Yelp
 desc: ''
-updated: 1669803196546
+updated: 1689178192662
 created: 1666708177903
 ---
 
@@ -49,3 +49,8 @@ Yelp for businesses has 3 ingredients for success:
 - attribution (what money each marketing campaign made me money, connecting the dots between our ads and conversions, ROI measurement)
     - YSV (Yelp store visit) is able to measure the number of times user visit a client locations attributable to Yelp ads
 - acquisition (making it easier to purchase and advertise on Yelp)
+
+
+
+
+![aaaarr framework.png](assets/images/aaaarr_framework.png)

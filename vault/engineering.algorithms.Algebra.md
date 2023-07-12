@@ -2,7 +2,7 @@
 id: 575nhoxd9zglbmn3y4gmcnz
 title: Algebra
 desc: ''
-updated: 1677786462849
+updated: 1689162244719
 created: 1664382729044
 ---
 # Fundamentals
@@ -63,15 +63,55 @@ Any number can be represented by at most 4 squares. Check proof in wikipedia.
 - [least squares sum](https://leetcode.com/problems/perfect-squares/)
 
     
-    Modular arithmetic
-        Modular Inverse
-        Linear Congruence Equation
-        Chinese Remainder Theorem
-        Factorial modulo p
-        Discrete Log
-        Primitive Root
-        Discrete Root
-        Montgomery Multiplication
+# Modular arithmetic
+## Modular Inverse
+
+A [modular multiplicative inverse](http://en.wikipedia.org/wiki/Modular_multiplicative_inverse) of an integer $a$ is an integer $x$ such that $a \cdot x$ is congruent to $1$ modular some modulus $m$.
+To write it in a formal way: we want to find an integer $x$ so that 
+
+$$a \cdot x \equiv 1 \mod m.$$
+
+We will also denote $x$ simply with $a^{-1}$.
+
+It can be proven that the modular inverse exists if and only if $a$ and $m$ are relatively prime (i.e. $\gcd(a, m) = 1$).
+
+**Finding the Modular Inverse using Binary Exponentiation**
+
+```python
+pow(a,m-2,m)  # m must be prime/Fermat's little theorem
+```
+
+* For an arbitrary (but coprime) modulus $m$: $a ^ {\phi (m) - 1} \equiv a ^{-1} \mod m$
+* For a prime modulus $m$: $a ^ {m - 2} \equiv a ^ {-1} \mod m$
+
+**Finding the Modular Inverse using Extended Euclidean algorithm**
+
+Use the identity eqaution (linear diophantine equation in two variables)
+
+$$a \cdot x + m \cdot y = 1$$
+
+Take modulu m both sides and you get the result.
+
+The function below solves $ax+by = 1$, for given $a$ and $b$.
+```python
+def extended_euclidean(a, b):
+    if b == 0:
+        return 1, 0, a
+    else:
+        x, y, gcd = extended_euclidean(b, a % b)
+        return y, x - (a // b) * y, gcd
+```
+[why this works](https://math.stackexchange.com/questions/747342/extended-euclidean-algorithm-for-modular-inverse)
+
+
+
+## Linear Congruence Equation
+## Chinese Remainder Theorem
+## Factorial modulo p
+## Discrete Log
+## Primitive Root
+## Discrete Root
+## Montgomery Multiplication
 #Number systems
 ## Balanced Ternary
 ## Gray code
