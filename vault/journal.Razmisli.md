@@ -5,6 +5,10 @@ desc: ''
 updated: 1682093820304
 created: 1658754729845
 ---
+
+Life is not a problem to be solved, it is an adventure to be experienced.
+
+
 # Actions
 These action items have arose after doing razmisli.
 - define clear dream
@@ -428,7 +432,6 @@ Meta
 # Getting in the zone with Pomodoro
 
 The technique uses a timer to break down work into intervals traditionally 25 minutes in length, separated by short breaks.
-
 
 
 There are five basic steps to implementing the technique:
