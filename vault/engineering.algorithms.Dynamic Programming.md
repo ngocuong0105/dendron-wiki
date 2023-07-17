@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1687984216251
+updated: 1689629701477
 created: 1664382766630
 ---
 
@@ -43,3 +43,4 @@ Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, se
 - [Longest arithmetic sequence](https://leetcode.com/problems/longest-arithmetic-subsequence/)
 - [First day](https://leetcode.com/problems/first-day-where-you-have-been-in-all-the-rooms/)
 - [Minuimum time to finish race](https://leetcode.com/problems/minimum-time-to-finish-the-race/)
+- [2742. Painting the Walls](https://leetcode.com/problems/painting-the-walls/)

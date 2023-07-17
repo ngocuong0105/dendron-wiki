@@ -2,7 +2,7 @@
 id: v2ww0oqwjzp0phcrt046f9p
 title: Self evaluation
 desc: ''
-updated: 1666691367418
+updated: 1689275560014
 created: 1666691366247
 ---
 
@@ -153,6 +153,8 @@ Given an array of size n and and integer k. We partition the array in k subarray
 of the elements in each subarray s1, s2, ... sk. Take the max. Among all partitionings minimize the max value.
 
 Multiway partitioning [problem](https://en.wikipedia.org/wiki/Multiway_number_partitioning#Dynamic_programming_solution)
+
+[Leetcode](https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/)
 
 NP-hard
 

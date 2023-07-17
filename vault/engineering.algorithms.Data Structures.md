@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1685439577871
+updated: 1689328235529
 created: 1664382752052
 ---
 
@@ -980,3 +980,8 @@ class LFUCache:
         self.cache[new_el[2]] = new_el 
 ```
 </details>
+
+
+# Problems using SortedList, SortedDict
+
+- []()

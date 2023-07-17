@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1681221172604
+updated: 1689344593880
 created: 1664446506779
 ---
 
@@ -381,3 +381,12 @@ def bs(nums=range(n)):
             l = m+1
     return l
 ```
+
+- [generators are slower than list comprehension](https://stackoverflow.com/questions/62975325/why-is-summing-list-comprehension-faster-than-generator-expression)
+
+check common characters in two strings A and B
+```python
+sum([ch in A for ch in B]) # fast
+sum(ch in A for ch in B) # slow
+```
+

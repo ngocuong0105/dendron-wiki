@@ -2,7 +2,7 @@
 id: 575nhoxd9zglbmn3y4gmcnz
 title: Algebra
 desc: ''
-updated: 1689162244719
+updated: 1689279533493
 created: 1664382729044
 ---
 # Fundamentals
@@ -237,8 +237,44 @@ def gray_to_dec(g):
     return res
 ```
 # Miscellaneous
-        Enumerating submasks of a bitmask
-        Arbitrary-Precision Arithmetic
-        Fast Fourier transform
-        Operations on polynomials and series
-        Continued fractions
+## Enumerating submasks of a bitmask
+Given a bitmask $m$, you want to efficiently iterate through all of its submasks, that is, masks $s$ in which only bits that were included in mask $m$ are set.
+
+Consider the implementation of this algorithm, based on tricks with bit operations:
+```python
+while sub:
+    print(sub)
+    sub = (sub-1) & m
+```
+
+The above code visits all submasks of $m$, without repetition, and in descending order. Suppose we have a current bitmask $s$, and we want to move on to the next bitmask. By subtracting from the mask $s$ one unit, we will remove the rightmost set bit and all bits to the right of it will become 1. Then we remove all the "extra" one bits that are not included in the mask $m$ and therefore can't be a part of a submask.
+
+
+**Iterating through all masks with their submasks. Complexity $O(3^n)$**
+
+In many problems, especially those that use bitmask dynamic programming, you want to iterate through all bitmasks and for each mask, iterate through all of its submasks:
+```cpp
+for (int m=0; m<(1<<n); ++m):
+    get_all_submasks(m)
+```
+
+Let's prove that the inner loop will execute a total of $O(3^n)$ iterations.
+
+**First proof**: Consider the $i$-th bit. There are exactly three options for it:
+
+1. it is not included in the mask $m$ (and therefore not included in submask $s$),
+2. it is included in $m$, but not included in $s$, or
+3. it is included in both $m$ and $s$.
+
+As there are a total of $n$ bits, there will be $3^n$ different combinations.
+
+**Second proof**: Note that if mask $m$ has $k$ enabled bits, then it will have $2^k$ submasks. As we have a total of $\binom{n}{k}$ masks with $k$ enabled bits (see [binomial coefficients](../combinatorics/binomial-coefficients.md)), then the total number of combinations for all masks will be:
+
+$$\sum_{k=0}^n \binom{n}{k} \cdot 2^k$$
+
+To calculate this number, note that the sum above is equal to the expansion of $(1+2)^n$ using the binomial theorem. Therefore, we have $3^n$ combinations, as we wanted to prove.
+
+## Arbitrary-Precision Arithmetic
+## Fast Fourier transform
+## Operations on polynomials and series
+## Continued fractions
