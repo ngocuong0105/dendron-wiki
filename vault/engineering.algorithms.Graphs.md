@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1687897538553
+updated: 1689756040029
 created: 1664382861926
 ---
 
@@ -108,6 +108,24 @@ def articulation_point(adj):
 
 ## Dijkstra - finding shortest paths from given vertex
 - [Cheapest flights within k stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/?envType=study-plan&id=level-3)
+
+- [Modify edges, SMART Dijkstra application](https://leetcode.com/problems/modify-graph-edge-weights/)
+
+```python
+def dijkstra(s):
+    h = [(0,s)]
+    dist,parent = {s:0},{}
+    while h:
+        d,s = heappop(h)
+        for u,du in adj[s]:
+            if dist.get(u,inf) > du+d:
+                dist[u] = du+d
+                parent[u] = s
+                heappush(h,(dist[u],u))
+    return dist,parent
+```
+
+**First loop on k, otherwise it will error. k is the phase count.**
 
 ## Dijkstra on sparse graphs
 ## Bellman-Ford - finding shortest paths with negative weights

@@ -2,7 +2,7 @@
 id: g81jrasfq5f0bqj0mxq1ybr
 title: Design and Analysis of Algorithms
 desc: ''
-updated: 1664523379753
+updated: 1689756013506
 created: 1660838818693
 ---
 # MIT 6.046
@@ -789,6 +789,8 @@ for k = 1 to n by 1
 </details>
 
 Run time $O(V^3)$
+
+**First loop on k, otherwise it will error. k is the phase count.**
 
 **Jonhson's algorithm**
 
