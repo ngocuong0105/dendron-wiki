@@ -44,3 +44,4 @@ Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, se
 - [First day](https://leetcode.com/problems/first-day-where-you-have-been-in-all-the-rooms/)
 - [Minuimum time to finish race](https://leetcode.com/problems/minimum-time-to-finish-the-race/)
 - [2742. Painting the Walls](https://leetcode.com/problems/painting-the-walls/)
+- [Count Stepping numbers](https://leetcode.com/problems/count-stepping-numbers-in-range/)
