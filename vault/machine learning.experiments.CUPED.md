@@ -23,3 +23,5 @@ And when you actually measure the sessions, you get:
 - guv B has 21 sessions (+1 from prediction),
 
 Then the variance, or the uncertainty, in your measurement can be calculated on the residuals of your predictions, rather than on the measurements themselves. This gives var([-1, +1]), rather than var([4, 21]), which is a great reduction.
+
+[notebook](https://drive.google.com/file/d/1YYSY9IgZzkp8q9U2ujPc2wuSRVtlgcqq/view?usp=drive_link)
