@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1687771240106
+updated: 1694082950846
 created: 1658695863781
 ---
 # Progress
@@ -62,6 +62,8 @@ Hit another milestone of **2405** problems solved. Only hard questions are left 
 **26.06.2023**
 Hit another milestone of **2500** problems solved.
 
+**07.09.2023**
+Hit another milestone of **2600** problems solved.
 
 
 # Plans for the future
