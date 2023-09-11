@@ -2,11 +2,12 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1689629701477
+updated: 1694294304127
 created: 1664382766630
 ---
 
 #Zadachi
+- [combination sum](https://leetcode.com/problems/combination-sum-iv)
 - [remove boxes](https://leetcode.com/problems/remove-boxes/)
 - [dungeon game](https://leetcode.com/problems/dungeon-game/)
 - [domino tromino](https://leetcode.com/problems/domino-and-tromino-tiling/)
@@ -43,5 +44,6 @@ Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, se
 - [Longest arithmetic sequence](https://leetcode.com/problems/longest-arithmetic-subsequence/)
 - [First day](https://leetcode.com/problems/first-day-where-you-have-been-in-all-the-rooms/)
 - [Minuimum time to finish race](https://leetcode.com/problems/minimum-time-to-finish-the-race/)
-- [2742. Painting the Walls](https://leetcode.com/problems/painting-the-walls/)
+- [Painting the Walls](https://leetcode.com/problems/painting-the-walls/)
 - [Count Stepping numbers](https://leetcode.com/problems/count-stepping-numbers-in-range/)
+- [Max profit as a salesman](https://leetcode.com/problems/maximize-the-profit-as-the-salesman/)
