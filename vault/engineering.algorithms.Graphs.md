@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1689756040029
+updated: 1694430306241
 created: 1664382861926
 ---
 
@@ -310,10 +310,20 @@ A Hamiltonian path or traceable path is a path that visits each vertex of the gr
 
 Whether Hamiltonian path exists in a graph or not is NP-complete problem.
 
-## Lowest Common Ancestor - Binary Lifting
-Binary tree lifting is also known as jump pointers. Idea: Number of powers of two is logarithmic. [Errihto](https://www.youtube.com/watch?v=oib-XsjFa-M&t=579s&ab_channel=Errichto).
+## Binary Lifting
 
-With Binary tree lifting you can answer questions such as given a tree, what is its k-th ancestor.
+![](assets/images/o(logn).png)
+
+With Binary tree lifting you can answer questions such as given a tree and a node inn the tree, what is its k-th ancestor.
+
+Brute force is to repeat $k$ times `v = parent[v]` -> complexity $O(Q * N)$ if we have $Q$ queries and the tree is very deep.
+
+Binary tree lifting is also known as jump pointers. [Errihto](https://www.youtube.com/watch?v=oib-XsjFa-M&t=579s&ab_channel=Errichto).
+
+**There are $log(n)$ powers of 2.**
+
+
+**Preprocessing**
 
 **Define** $u[v][j]$ is the $2^j$-th ancestor of v.
 
@@ -321,6 +331,9 @@ $u[v][j]$ is the $2^j$-th ancestor of v.
 $u[v][0] = parent[v]$ - that is my first parent
 $u[v][1] = u[u[v][0]][0]$ - what is my second parent? first parent of my first parent
 $u[v][2] = u[u[v][1]][1]$ - what is my fourth parent? second parent of my second parent
+
+`u` is a map that tells me for each node what is the 1st, 2nd, 4th, 8th ... ancestor.
+
 
 ```Python
 # parent[i] if the parent of node i
@@ -346,9 +359,12 @@ careful with for loops, you might need $parent[i] < i$ to do preprocessing (comp
 
 **Complexity:** $O(nlog(n))$ on preprocessing and $O(log(n))$ per query.
 
+## Lowest Common Ancestor - Binary Lifting
+
+
+
 
 **Lowest common ancestor**
-
 For queries with nodes $(u,v)$ we want to get the lowest common ancestor of $u$ and $v$.
 
 Idea: Run dfs, record for each nodes `timein` and `timeout`. This helps to answer if $u$ is ancestor ov $v$ or vice versa.
@@ -387,9 +403,13 @@ time,l = 0,20 # supports 2**19 nodes
 up,timein,timeout = {},{},{}
 dfs(root,root)
     
-print(lca(p,q)) # lowest common ancestor
+print(lca(p,q)) # lowest common ancestor in O(log(n))
 ```
 </details>
+
+Problem where you need to use optimised LCA:
+- [queries in tree](https://leetcode.com/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/)
+
 
 - [longest good segement](https://www.codechef.com/problems/LGSEG)
 
