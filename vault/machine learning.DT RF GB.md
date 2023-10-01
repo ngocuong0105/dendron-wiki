@@ -6,6 +6,10 @@ updated: 1681837957608
 created: 1673945350311
 ---
 
+
+![xgboost_obj.png](assets/images/dt_rf_boosting.png)
+
+
 To learn a decision tree model, we take a greedy approach:
 1. Start with an empty decision tree (undivided
 feature space)
@@ -44,12 +48,15 @@ Stop conditions:
 
 $Gain(R) = MSE(R) - (\dfrac{N_{1}}{N}) MSE(R_{1}) - \dfrac{N_2}{N}MSE(R_2)$ 
 
+***See section feature importance*
 
 ## Expressiveness of DT
 
-Classification trees approximate boundaries in the feature space that separate classes. Regression trees, on the other hand, define simple functions
-or step functions, functions that are defined on partitions of
-the feature space and are constant over each part.
+Classification trees approximate boundaries in the feature space that separate classes. 
+
+**Regression trees = composition and linear combinations of step functions.**
+
+Regression trees split the feature space into parts where each is a constant value.
 
 ![expr_dt.png](assets/images/expr_dt.png)
 
@@ -84,7 +91,7 @@ The bootstrap step in Bagging has small out of bag sample (with replacement samp
 
 
 1. Find all models (or trees, in the case of a random forest) that are not trained by the OOB instance.
-2. Take the majority vote(average fore regressions) of these models' result for the OOB instance, compared to the true value of the OOB instance.
+2. Take the majority vote(average for regressions) of these models' result for the OOB instance, compare it to the true value of the OOB instance.
 3. Compile the OOB error for all instances in the OOB dataset. Average out OOBs.
 
 ## Random forests
@@ -123,11 +130,11 @@ When the number of predictors is large, but the number of relevant predictors is
 
 In each split, the chances of selected a relevant predictor will be low and hence most trees in the ensemble will be weak models.
 
-On number of trees in enseble algo
+**On number of trees in enseble algo**
 
 Increasing the number of trees in the ensemble generally does not increase the risk of overfitting. Again, by decomposing the generalization error in terms of bias and variance, we see that increasing the number of trees produces a model that is at least as robust as a single tree.
 
-However, if the number of trees is too large, then the trees in the ensemble may become more correlated, increase the varianc
+However, if the number of trees is too large, then the trees in the ensemble may become more correlated, increase the variance.
 
 **Variable importance for RF**
 
@@ -168,6 +175,8 @@ Choosing $\lambda$
 
 # XGBoost
 
+[Tutorial](https://xgboost.readthedocs.io/en/latest/tutorials/model.html)
+
 XGBoost is a more regularized form of Gradient Boosting. XGBoost uses advanced regularization (L1 & L2), which improves model generalization capabilities. XGBoost delivers high performance as compared to Gradient Boosting. 
 
 Extreme grading boosting refers to pushing the limits of computation rather than modelling approach.
@@ -187,14 +196,43 @@ We add the trees $f_k$ additevely/iteratively. For example we learn $f_{t}$ by o
 
 ![xgboost_obj.png](assets/images/xgboost_obj.png)
 
-
 One important advantage of this definition is that the value of the objective function only depends on $g_i$ and $h_i$. This is how XGBoost support custom loss functions. 
+We can optimize every loss function, including logistic regression and pairwise ranking, using exactly the same solver that takes $g_i$ and $h_i$ and as input!
+
+Later they define $f_t(x)$ using $w_q(x)$ which are the scores= predictions in each leaf. So the goal becomes to find the best splits and the best scores in each leaf.
+
+**Remember** that our goal is to learn $f_t()$ at learning step $t$.
+
+
+**Model Complexity**
+
+Xgboost regularization term tries to minimize the number of leaves in tree as wells as the sum of scores in all leaves.
+
+SCORE of a leaf = prediction of a leaf!!! I read the definition from the paper and this is what it means. Also it can be seen in the tutorial as well as confirmed in [stackexchange](https://stats.stackexchange.com/questions/351872/understanding-regularization-in-xgboost)
+
+Essesntially the final prediction is the sum of predictions/scores of all different trees and xgboost wants to have small contribution by each of the trees. It penalizes when one tree have large prediction.
 
 
 ## XGBoost paper
 [Paper](https://drive.google.com/file/d/1wFl7VZuxz1_yPL8p3XNTNLfqNO2_h3EQ/view?usp=share_link)
 
-Tree boosting has been shown togive state-of-the-art resutls on many standard classification benchmarks. XGBoost is a scalable machine learning system for tree boosting.
+**Model definition**
+
+![](assets/images/xgboost_defn.png)
+
+![](assets/images/xgboost_loss.png)
+
+The regularized term balances between:
+- number of leaves in each tree $T$, the smaller number the larger values in each leaf
+- the sum of values in each leaf, the smaller the better (we do not want a tree which has very largerge values)
+
+![](assets/images/xgboost_derivation.png)
+Tree boosting has been shown to give state-of-the-art resutls on many standard classification benchmarks. XGBoost is a scalable machine learning system for tree boosting.
+
+This is how we compute the gain of a node:
+
+![Alt text](assets/images/xgboost_gain.png)
+
 
 XGBoost  major contributions:
 - highly scalable parallel end-to-end tree boosting system
@@ -209,6 +247,7 @@ There are in general two ways that you can control overfitting in XGBoost:
 
 - The first way is to directly control model complexity.
     - This includes max_depth, min_child_weight and gamma.
+    - max_depth, min_samples_leaf, min_samples_split in DecisionTreeClassifier in SkLearn (if you have just 1 sample in a leaf or split obviously you are overfitting)
 - The second way is to add randomness to make training robust to noise.
     - This includes subsample and colsample_bytree.
     - You can also reduce stepsize eta. Remember to increase num_round when you do so.
@@ -252,3 +291,27 @@ There are few implementations on boosting:
 - XGBoost: An efficient Gradient Boosting Decision 
 - LGBM: Light Gradient Boosted Machines. It is a library for training GBMs developed by Microsoft, and it competes with XGBoost 
 - CatBoost: A new library for Gradient Boosting Decision Trees, offering appropriate handling of categorical features
+
+
+# Feature importance
+
+[Article](https://towardsdatascience.com/decision-trees-explained-entropy-information-gain-gini-index-ccp-pruning-4d78070db36c) that explains how enthropy, information gain and decision splits are computed and chosen.
+
+This is a measure of how much each feature contributes to the model. It is all about coming up with a **Variable selection criterion**.
+
+Decision trees use a top-down, greedy method called recursive binary splitting. Starting from the top, they split the data into two at each step, creating branches. It's called "greedy" because it picks the best split at each step without thinking ahead for the overall tree.
+
+
+```
+Information gain of a node =  Entropy(parent) - Entropy(children)
+```
+
+```
+Information gain of a node =  f(parent) - f(children) 
+```
+
+`f` is a measure of impurity.
+
+`Entropy(node)` measures the impurity of a node. A node with only 1 class is pure and has entropy 0. A node with 50% of each class has entropy 1.
+
+`Entropy(children)` would be computed using weighted average of the entropies of each child node.

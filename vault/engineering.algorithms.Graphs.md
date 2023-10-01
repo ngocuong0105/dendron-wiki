@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1694430306241
+updated: 1694684065759
 created: 1664382861926
 ---
 
@@ -265,7 +265,7 @@ Euler path
 Eulerian Path is a path in a graph that visits every edge exactly once. 
 
 - [leetcode](https://leetcode.com/problems/valid-arrangement-of-pairs/)
-```{python}
+```Python
 def hierholzer_recursive(graph):
     def visit(vertex, circuit):
         while graph[vertex]:

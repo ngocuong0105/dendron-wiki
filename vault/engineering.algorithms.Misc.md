@@ -2,7 +2,7 @@
 id: 62fr2x24gm8h0m2x4c3r862
 title: Misc
 desc: ''
-updated: 1675238077826
+updated: 1695379055894
 created: 1664382870554
 ---
 # Sequences
@@ -244,6 +244,14 @@ class Solution:
 
 - [game of nim](https://leetcode.com/problems/game-of-nim/)
 - [chalkboard](https://leetcode.com/problems/chalkboard-xor-game/)
+
+## Hackenbush game
+
+[The game](https://en.wikipedia.org/wiki/Hackenbush)
+
+Uses Sprague-Grundy numbers
+
+-[Remove from fibonaci tree][https://leetcode.com/problems/subtree-removal-game-with-fibonacci-tree/description/)
 
 #QED
 
