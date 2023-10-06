@@ -2,7 +2,7 @@
 id: 9a4cf8g6ax04f7o71y2d627
 title: Practice and guide
 desc: ''
-updated: 1678354515765
+updated: 1696588056870
 created: 1677851804607
 ---
 
@@ -204,3 +204,54 @@ See folders:
 -  structured questions (System Design)
 
 [Crack Meta MLE interview](https://towardsdatascience.com/how-i-cracked-the-meta-machine-learning-engineering-interview-aa32f64b8e4b)
+
+
+
+# Misc
+
+I made the quiz based on FAANG interview exp here: https://github.com/khangich/machine-learning-interview
+
+https://www.linkedin.com/posts/yann-lecun_github-facebookresearchllama-inference-activity-7034956639526952960-B1-d?utm_source=share&utm_medium=member_android
+
+ motivational videos
+
+https://youtu.be/Lp7E973zozc
+
+Activation energy - try  set alarm early
+
+its your job to do the crap you need to do to become what you want 
+
+you will never feel it... you have to FORCE yourself
+
+Your brain has two states autopilot and emergency break. Whenever you do something different from your routine your brain would go EMERGENCY BREAK. You need to force yourself to overcome it.
+
+Its the routine is what is killing you. If you feel sad or dissatisfied it is a SIGNAL, that some of your basic need is not met. You need to FORCE yourself to do something different. Get out. Get ouside of your comfort zone.
+
+When you have an impulse you need to ACT. 5 secods rule, if you wait more than 5 sec you are unlikely to do anything.
+
+
+
+I know there are a lot of people out there affected by layoffs and I hope this post gives you some inspiration that the job market isnt as scary as people make it seem. I ended up with 2 offers:
+
+Netflix Senior SWE: 485k base salary (a bit low compared to what I’m seeing online but I’m happy)
+
+Tiktok: 250k base 25% avg bonus 100k sign on bonus split over 2 years and 400k in RSU (paper money)
+
+I still have an on-site left with Jump Trading which if it goes well I can assume tc above Netflix.
+
+Edit:
+Resources for those who need them:
+
+Referral site:
+Refer.me
+
+Resume ATS checker:
+Skillsyncer.com
+
+Resume generator:
+Https://resume.lol
+
+Mock interviews:
+Interview.io
+
+I have 6 YOE and my previous TC was 280k so I  very excited for what the future holds 😊 lmk if there are any questions I can answer as well
