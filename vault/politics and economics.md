@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics and Economics
 desc: ''
-updated: 1689077991346
+updated: 1696411963746
 created: 1658766097444
 ---
 
@@ -195,3 +195,39 @@ If there is a mojaorty winner they win. If not the lowest candidate is removed a
 # Questionier before voting
 
 Every time you vote you need to fill in the answers of 3 questions that parties have answered. This is a way so that people know what they have voted for.
+
+
+# Industrial Policy
+
+Idea: "Attempts to create competitive advantage through government direction and support"
+
+Example of success: "Intentional industrial policies likely played a critical role in creating the modern South Korean economy." In the 20 years after 1973 South Korean real gdp per head rose by 349%.
+
+“It is possible” that for the initial stages of industrialisation “government efforts had a significant role”
+
+Another example:  Under Xi Jinping and his “Made in China” project, the Chinese state has played an even more activist role in directing economic activity. The country now has a global monopoly in many industries. Subsidies have allowed firms to slash prices, putting foreign competitors out of business.
+
+
+**Problems:**
+
+- subsidies allow the survival of inefficient firms, making the industries they are in less competitive. Firms may focus on securing subsidies, which removes resources from productive use.
+- Total factor productivity (the amount of output per unit of labour and capital) across China has probably fallen under Mr Xi.
+- helping one firm with subsidies tends to harm others. 
+- misdirected transfer of public resources to large domestic and foreign firms
+
+Example problem:
+- India’s “production-linked incentives” (pli) scheme, which pays manufacturers a sum for every unit produced (say mobile phones).  Mobile exports soared. However imports soared too. Mayme producers were simply re-exporting phones via India to get another subsidy.
+
+
+
+# Homeland economics
+
+Homeland economics is a response to four big shocks:
+- the 2008 financial crisis (finance)
+- Covid (pandemic, finance)
+- US China trade war (geopolitical)
+- Russia's invasion of Ukraine (geopolitical, energy)
+
+**leads to high subsidieries**
+
+"Industrial policy and protectionism could endanger trade, without making Western economies safer"

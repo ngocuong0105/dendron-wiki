@@ -2,11 +2,11 @@
 id: p7q8tnzclqd4j6ri9o0dpwh
 title: Explainable AI - SHAP
 desc: ''
-updated: 1698308392955
+updated: 1698313147233
 created: 1697562950645
 ---
 
-# [A unified approach to interpreting model predictions](https://proceedings.neurips.cc/paper_files/paper/2017/file/8a20a8621978632d76c43dfd28b67767-Paper.pdf)
+# [A unified approach to interpreting model predictions](https://drive.google.com/file/d/16EB_r2xMpIwWTbmqSCzr_ajXOIg26oTb/view?usp=drive_link)
 
 [SHAP docs](https://shap.readthedocs.io/en/latest/example_notebooks/overviews/An%20introduction%20to%20explainable%20AI%20with%20Shapley%20values.html)
 
@@ -34,6 +34,28 @@ Paper important things:
 - Section 3 provides the solution to that theorem
 - main problem is to approximate SHAP values
 - SHAP values can be very complicated to compute (they are NP-hard in general)
+- The paper describes two model-agnostic approcimate methods to compute SHAP:
+    - Spaley sampling values (already known)
+    - Kernel SHAP (novel)
 
 
 One of the fundamental properties of Shapley values is that they always sum up to the difference between the game outcome when all players are present and the game outcome when no players are present.
+
+
+
+**SHAP Values:**
+
+SHAP (SHapley Additive exPlanations) values are a unified measure of feature importance in machine learning models. The key idea behind SHAP values is to distribute the prediction value among features, considering all possible feature combinations. Specifically, for a prediction $f(x)$ in a model, SHAP values allocate the contribution of each feature $i$ to the prediction by averaging over all possible feature combinations, taking into account their interactions. Mathematically, SHAP values are defined as:
+
+
+$$
+\phi_i(f) = \sum_{S \subseteq N \setminus \{i\}} \frac{{|S|!(|N|-|S|-1)!}}{{|N|!}} [f(S \cup \{i\}) - f(S)]
+$$
+
+where $\phi_i(f)$ represents the SHAP value of feature $i$ for the prediction function $f$, $N$ is the set of all features, and $S$ is a subset of features excluding feature $i$. The sum is taken over all possible subsets $S$.
+
+
+SHAP values provide a consistent, locally accurate, and globally fair attribution method, enabling interpretable analysis of complex machine learning models.
+
+
+# SHAP Values

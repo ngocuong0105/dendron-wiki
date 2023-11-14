@@ -1,3 +1,10 @@
+---
+id: yonznut0gv00jlkclk15lrn
+title: All in one
+desc: ''
+updated: 1699453298578
+created: 1696345069256
+---
 # Basics
 
 Experiments are created by **randomly** splitting your traffic into separate cohorts, where each cohort gets a different variation of a treatment. Experiments can establish causality because the randomly assigned cohorts are effectively the same except for the applied treatment, so any differences seen in metric results are a result of the applied treatment. However, because the cohorts are sampled, they may not be reflective of the entire population, which introduces uncertainty (this is where statistics comes in!). 
@@ -17,7 +24,6 @@ This is Yelp's platform to create experiments. You can create experiments in the
 - Bunsen (parameter-based)
 
 Both allow you to run experiments, the difference is that you manage and instantiate them in a different way. Bunsen tracks performing metrics automatically. RequestBucketer requires your own or third-party solution.
-
 
 
 ## A/B test
@@ -89,4 +95,9 @@ SEO A/B: A/B testing is a method of comparing multiple variants against each oth
 
 Guardrails are important company wide metrics that we aim to protect against while experimenting.
 
+
+
+# A/B Testing Intuition Busters
+
+[Paper](https://drive.google.com/file/d/1O0HxZprNGDpzD27Aiqjm5XxAp2FQigca/view?usp=drive_link)
 

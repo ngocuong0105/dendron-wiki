@@ -2,7 +2,7 @@
 id: nkefr7ipopudoxe89h53oy4
 title: DT RF GB
 desc: ''
-updated: 1681837957608
+updated: 1697830734891
 created: 1673945350311
 ---
 
@@ -266,6 +266,28 @@ Since it is intractable to enumerate all possible tree structures, we add one sp
 **NOTE!!!!**
 
 [Xgboost order of features MATTERS](https://beverly-wang0005.medium.com/pitfall-of-xgboost-order-of-features-e651628ab3b7)
+
+
+## Can Gradient Boosting Learn Simple Arithmetic? 
+
+[Article](https://forecastegy.com/posts/can-gradient-boosting-learn-simple-arithmetic/)
+
+See if xgboost can learn simple arithmetic: addition, subtraction, multiplication, division between 2 random variables.
+
+- Learns well addition and subtraction, but not multiplication and division.
+-  need any random disturbance, e.g., some noise or subsample=0.8 would help to kick it off the equilibrium and to start learning.
+- need to add some noise in the data to make it learn multiplication and division
+- if you know there is a strong interaction you need to explicitly add it as a feature, so that your model does not struggle to find thresholds and splits to capture the interaction.
+
+*"But it's a nice example of data with "perfect symmetry" with unstable balance. With such perfect dataset, when the algorithm is looking for a split, say in variable X1, the sums of residuals at each x1 location of it WRT X2 are always zero, thus it cannot find any split and is only able to approximate the total average."*
+
+
+# LightGBM
+[Paper](https://proceedings.neurips.cc/paper_files/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf)
+
+
+# Catboost
+
 
 # Adaboost
 
