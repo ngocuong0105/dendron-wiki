@@ -1,8 +1,8 @@
 ---
 id: ltvbyf1oqc8qx7khy58pby2
-title: Kaggle
+title: Kaggle Tricks
 desc: ''
-updated: 1696959840614
+updated: 1701813659735
 created: 1677947097369
 ---
 [Hands-on course in Kaggle](https://www.kaggle.com/learn)
@@ -182,11 +182,6 @@ Detect overfitting features
 
 Feature engineering is a bit of an art. Feature X and Feature Y might be good only if you use both (as they have interation).
 
-Powerful feature:
-
-`
-featureX - groupby(FeatureY)[FeatureX].mean()
-`
 
 
 If your model has many features (e.g xgboost) try using small colsubsample. Usually you would use 80-90%. But when having MANY features, this way your trees would be almost independent and not correlated.
@@ -214,4 +209,134 @@ NN are making feature engineering implicitly.
 
 [When averaging models in forecasting tasks help](https://www.kaggle.com/competitions/godaddy-microbusiness-density-forecasting/discussion/394975)
 
+# LB CV Scores
 
+- Compute correlation between LB and CV scores!
+- Local CV setup to be as close as possible to the Kaggle API.
+
+# Model augmentation
+- Bagging
+    - same model trained on different folds
+    - same model trained on different seeds (if data is very noisy)
+    - same model trained on different features
+    - same model trained on different hyperparameters
+    - different models take weighted average/mean (careful for MAE usually it hurts)
+- Stacking
+- Boosting: train on the errors
+- Use output of one model to be features of another model
+- Detrending
+
+
+# Powerful features
+
+- unbiased feature
+`
+featureX - groupby(FeatureY)[FeatureX].mean()
+`
+
+- previous FCT error feature (difference between FCT and TARGET), kind of boosting method
+- rolling aggregates - mean, median, min, max, quantiles, std, kurtosis, skew
+- intercept and slope instead of mean agreagate, that is run linear regression on past samples within a window and put the intercept and slope as features
+- random feature trick
+ 
+
+
+
+# Adversarial Validation
+
+Adversarial Validation is a very clever and very simple way to let us know if our test data and our training data are similar; we combine our train and test data, labeling them with say a 0 for the training data and a 1 for the test data, mix them up, then see if we are able to correctly re-identify them using a binary classifier.
+
+If we cannot correctly classify them, i.e. we obtain an area under the receiver operating characteristic curve (ROC) of 0.5 then they are indistinguishable and we are good to go.
+
+However, if we can classify them (ROC > 0.5) then we have a problem, either with the whole dataset or more likely with some features in particular, which are probably from different distributions in the test and train datasets. If we have a problem, we can look at the feature that was most out of place. The problem may be that there were values that were only seen in, say, training data, but not in the test data. If the contribution to the ROC is very high from one feature, it may well be a good idea to remove that feature from the model.
+
+
+[kaggle post](https://www.kaggle.com/code/carlmcbrideellis/what-is-adversarial-validation)
+
+
+
+# Check for covariate shift in train and test
+
+- adversarial validation
+- KS test for the features to see if they are from the same distribution
+
+# Check for target shift in train and test
+
+Good to understand th dynamics of the target variable. If the target variable is changing over time, then you need to be careful with the train/test split. You need to make sure the train and test are from the same time period.
+
+- KS Test
+- T-test for mean shift
+
+
+# Hypothesis Testing / Normality tests
+
+I think KS and normality tests are very sensistive for large datasets. If you have 10k+ observations, then you would get a very low p-value for any test. So you need to be careful with the p-value.
+
+Any small shifts would be detected and would reject the null hypothesis.
+
+So these tests are useful for small sample sizes. For large sample sizes you'd use the CLT and the t-test.
+
+
+# Kolmogorov-Smirnov test
+
+- The two sample Kolmogorov-Smirnov test is a  nonparametric test that compares the cumulative distributions of two data sets(1,2).
+- The test is nonparametric. It does not assume that data are sampled from Gaussian distributions (or any other defined distributions).
+
+
+## One sample Kolmogorov-Smirnov test
+
+It takes the difference between the empirical distribution of the sample and the theoretical distribution. Looks at the supremum which should converge to 0 almost surely.
+
+## Two sample Kolmogorov-Smirnov test
+It takes the difference between the empirical distributions of two samples. Looks at the supremum which should converge to 0 almost surely.
+
+Kolmogorov distribution shows the rate of this convergence.
+
+**In practice, the statistic requires a relatively large number of data points to properly reject the null hypothesis.**
+
+1k + points should be ok with error less than 1% (see wiki page).
+
+
+- caveat is that this test is very sensistive, if the median, varaince,shape changes it would have low p-value
+
+**Interpreting the P value**
+
+The P value is the answer to this question:
+
+If the two samples were randomly sampled from identical populations, what is the probability that the two cumulative frequency distributions would be as far apart as observed? More precisely, what is the chance that the value of the Komogorov-Smirnov D statistic would be as large or larger than observed?
+
+If the P value is small, conclude that the two groups were sampled from populations with different distributions. The populations may differ in median, variability or the shape of the distribution. 
+
+
+
+## T-test
+
+- parametric method, used when the samples satisfy the conditions of normality, equal variance and independence.
+
+This test assumes that the populations have identical variances by default.
+
+
+
+## Shapiro–Wilk test
+
+Normality test
+
+```python
+from scipy.stats import shapiro
+```
+
+The null-hypothesis of this test is that the population is normally distributed. Thus, if the p value is less than the chosen alpha level, then the null hypothesis is rejected and there is evidence that the data tested are not normally distributed.
+
+
+- Better than KS one sample test as there you need to know the parameters of the distribution i.e. mean and variance. Cannot standaradize the data, as you would be going into a circle. you can't standardize by using estimated parameters and test for standard normal; that's actually the same thing.
+- good with small sample sizes ~ 50 observations
+- has more power compared to other normality tests, meaning it can detect deviations from normality more effectively.
+- Not Sensitive to Outliers
+
+
+# Likelihood-ratio test
+
+
+# Change point detection in Time Series
+
+Change point detection marks the locations where the underlying properties (statistical characteristics e.g. mean and variance) of the time series shift abruptly.
