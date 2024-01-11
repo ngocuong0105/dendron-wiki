@@ -2,7 +2,7 @@
 id: yh0ww8ogawf7n4n2q2lnsus
 title: Graphs
 desc: ''
-updated: 1694684065759
+updated: 1704972450286
 created: 1664382861926
 ---
 
@@ -135,6 +135,9 @@ def dijkstra(s):
 
 # All-pairs shortest paths
 ## Floyd-Warshall - finding all shortest paths
+
+**NB: Order of the loops is important. MUST START WITH K that is the phase.**
+
 Given a directed or an undirected weighted graph $G$ with $n$ vertices.
 The task is to find the length of the shortest path $d_{ij}$ between each pair of vertices $i$ and $j$.
 
