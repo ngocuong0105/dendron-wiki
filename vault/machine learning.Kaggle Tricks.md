@@ -2,7 +2,7 @@
 id: ltvbyf1oqc8qx7khy58pby2
 title: Kaggle Tricks
 desc: ''
-updated: 1702541757116
+updated: 1702570100644
 created: 1677947097369
 ---
 [Hands-on course in Kaggle](https://www.kaggle.com/learn)
@@ -343,6 +343,7 @@ Obviously you should only do this if it helps your CV.
 - time consistency
 - train/test distribution analysis
 - random feature trick
+- remove low variance features
 
 One interesting trick called "time consistency" is to train a single model using a single feature (or small group of features) on the first month of train dataset and predict isFraud for the last month of train dataset. This evaluates whether a feature by itself is consistent over time. 95% were but we found 5% of columns hurt our models. They had training AUC around 0.60 and validation AUC 0.40. In other words some features found patterns in the present that did not exist in the future. Of course the possible of interactions complicates things but we double checked every test with other tests.
 
