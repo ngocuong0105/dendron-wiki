@@ -2,11 +2,7 @@
 id: 78ld05rlq10336r34dz8sxc
 title: Git
 desc: ''
-<<<<<<< HEAD
 updated: 1669241920793
-=======
-updated: 1677849923448
->>>>>>> 48207ec7c38b24dd1c1b68983a523a233cc5cdbe
 created: 1668288491690
 ---
 
