@@ -14,6 +14,7 @@ created: 1668288491690
 - [Learn Git Branching](https://learngitbranching.js.org/).
 - [Git reference common commands](https://git.github.io/git-reference/creating/#init)
 
+
 # Commits and branches
 
 A **commit** in a git repository records a snapshot of all the (tracked) files in your directory. It's like a giant copy and paste, but even better!
