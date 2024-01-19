@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1677940935378
+updated: 1705655587613
 created: 1658698186720
 ---
 
@@ -29,6 +29,7 @@ Interviewing has different stages. I have divided them in 3 main ones - core pre
 3. Prepare good CV (**3 days**)
     - one for engineering (for MLE)
     - one for data science (math + stats stuff)
+    - **before you apply for each position check in LinkdIN what people working at this position have in their CV**
     - this step often will improve through iteration, as you apply to companies and talk stuff you will add/change your CV
 
 4. Apply at bunch of companies (**2 weeks**)
