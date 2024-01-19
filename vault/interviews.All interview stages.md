@@ -21,7 +21,7 @@ Interviewing has different stages. I have divided them in 3 main ones - core pre
 
 2. Prepare for behavior questions + leadership principles (**2 weeks**)
     - stories for each of your jobs - starting point is your Job search folder
-    - lp principles file from stefan is good
+    - [lp principles file](https://drive.google.com/file/d/15UJ5RJvlf-jNZFzDw8Y5m6KoEBUgo1Il/view?usp=drive_link) from stefan is good
     - cracking the coding interview book
     - why you james reed book
     - [[interviews.Behaviour]]
