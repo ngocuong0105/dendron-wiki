@@ -2,7 +2,7 @@
 id: ufrcqzs753ifx67ttk5u303
 title: Cross Validation
 desc: ''
-updated: 1679514605384
+updated: 1712943465596
 created: 1679414225853
 ---
 "Trust your CV score in Kaggle competitions more than the public LB score."
@@ -13,7 +13,7 @@ created: 1679414225853
 - Leave-p-out
 - Stratified K-folds (useful for imbalanced datasets)
 - Repeated K-folds (pick 80/20 split data randomly k times, bad for imbalanced datasets)
-- Nested K-folds
+- Nested K-folds: need to implement mannually, good for hyperparameter tuning
 - Time series CV (deals with forwardlooking bias in TS data)
 
 [Description of CV techniques](https://neptune.ai/blog/cross-validation-in-machine-learning-how-to-do-it-right)
@@ -21,3 +21,6 @@ created: 1679414225853
 ```python
 from sklearn.model_selection import KFold, GroupKFold
 ```
+
+**Nested Cross Validation:**
+![alt text](./assets/images/nested_cv.png)

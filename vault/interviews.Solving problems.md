@@ -2,11 +2,14 @@
 id: 7a6xif2f07wd4le4d5fhuia
 title: Solving problems
 desc: ''
-updated: 1666704416315
+updated: 1711377169037
 created: 1664638436236
 ---
 
-# Steps
+# Algorithms
+
+**Steps**
+
 1.  Ask questions:
     1.1 about input (size, values, all constraints, sorted, duplicates)
     1.2 find solution -> chekcif there is input data for which the solution does not exist
@@ -92,3 +95,13 @@ oriented programming whose idea of message passing scales better?
 5. Binary Search problems often can be solved with Two pointers! They have the same underlying idea of restring the search space in a consistent way
 6. Loop invariant proofs of correctness
 7. Before using Tries - consider using rolling hash of the string
+
+
+# Probability, Brain teasers
+
+- Start with extreme numbers (either very small or very large).
+- Symmetry
+- Bayesian theorem
+- ask as many questions as you need, especially during technical interviews
+- break down approach into small manageable steps
+- 

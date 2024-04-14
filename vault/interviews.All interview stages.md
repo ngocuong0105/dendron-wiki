@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1705655587613
+updated: 1713105375247
 created: 1658698186720
 ---
 
@@ -68,7 +68,11 @@ Steps 3-5 (**warm-up stage + applications**) take about 2-4 weeks. This part is 
 
 Steps 6-10 (**interviewing + negotiation**) form the stage where you apply what you have been practicing for. These four steps are dynamic and less structured. Your goal is to finish them in the span of **1 to 2 months** (at most). Main goal is to have competing offers with similar deadlines. Key in this stage is that after doing lots of interviews you might get tired and will be tempted to accept the first descent offer you get. Be willing to put the extra effort to get competing offers as it could pay out pretty well for just a few weeks more of interviewing. Also accepting a job offer means you will be doing that at least a year, and cannot go back quickly to interview mode and increase TC.
 
+# Principles
 
+- Interviews are ultimately NOT about you. They'd ask lots of questions about you, but they are not interested in you. 
+- Job is about solving the problems of the employer. It is not for you to make money. It is for you to solve problems.
+- Interview is a chat between two human beings figuring out if they have common interests.
 
 **CV updates**
 - change Applied GBM to another verb
