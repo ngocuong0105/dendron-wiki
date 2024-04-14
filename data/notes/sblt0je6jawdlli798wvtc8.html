@@ -1,0 +1,17 @@
+<h1 id="organising-python-packages">Organising Python Packages<a aria-hidden="true" class="anchor-heading icon-link" href="#organising-python-packages"></a></h1>
+<p><a href="http://blog.habnab.it/blog/2013/07/21/python-packages-and-you/">blog</a></p>
+<pre><code>project_name/__init__.py
+project_name/__main__.py
+project_name/application.py
+project_name/test/__init__.py
+project_name/test/test_application.py
+project_name/test/util.py
+project_name/util.py
+</code></pre>
+<p><strong>Use absolute imports only (implcit relative imports in python 3 are NOT recommended)</strong></p>
+<p>In all your files in the project:</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> project_name<span class="token punctuation">.</span>util <span class="token keyword">import</span> <span class="token operator">*</span>
+</code></pre>
+<p><strong>Don’t modify sys.path from code in your package</strong></p>
+<p><strong>Don’t make your project root a package</strong></p>
+<p><strong>Don’t set PYTHONPATH to try to make it go</strong></p>

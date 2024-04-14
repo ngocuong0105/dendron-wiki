@@ -1,0 +1,129 @@
+<h1 id="capitalone">CapitalOne<a aria-hidden="true" class="anchor-heading icon-link" href="#capitalone"></a></h1>
+<h1 id="merging-feature">Merging Feature<a aria-hidden="true" class="anchor-heading icon-link" href="#merging-feature"></a></h1>
+<p>1.1 Summary points on merging feature:</p>
+<ul>
+<li>Given cashflows for diifferent products - aggregate them to get a summary report
+e.g NPV -> weighted mean on accounts
+e.g Discount rate -> harmonic mean
+<ul>
+<li>These reports are used in the decision making to decide which programs are
+worth  pursuing and which not </li>
+<li>Monitoring the risk the bank is taking when giving credits</li>
+</ul>
+</li>
+<li>It follows ETL process: extract data from parquet files; transform data by
+combination functions</li>
+<li>Load data in OneFlow workflow to produce automatic excel report</li>
+</ul>
+<p>1.2  We heavylift the database (parquet files), the dispatching manually in python. Not like Django Flask frameworks where everything is checked this is getting the correct request, is it from the write url etc. </p>
+<ul>
+<li>Created additive dispatching for computing 200+ fields each using different type of  combining function( yaml file combination  functions mapping field -> function) (name mapping algo tailor to Principles of Computer System Design Book) From book notes: Frequent name-mapping algorithms:</li>
+<li>Table lookup</li>
+<li>Recursive lookup</li>
+<li>Multiple lookup</li>
+</ul>
+<p>1.3 Main benefit is that they are additive no need for refactoring endless if else statements. When add in another Field or Dunction
+Read more about that in SICP Chapter 2 Python version page 52, Type dispatching. In your case the dispatching is the merging function for the different CFS and CRM fieldds
+1.4 Challenges: How to handle so many fields=business metrics -> scaled using static
+dispatch mapping and message passing.</p>
+<ul>
+<li>Unit tests did not prove enough covarege for the combination functions</li>
+<li>Integration tests with realistic data showed a lot of mismatches and errors in our combining functions. Though unit tests tried to capture edge cases etc, realistic data turned out to be much messier than we expected.</li>
+<li>Thus for T-C feature we will create the feature and do integration tests in parallel.</li>
+</ul>
+<h1 id="t-c-feature">T-C feature<a aria-hidden="true" class="anchor-heading icon-link" href="#t-c-feature"></a></h1>
+<p>2.1 Given  test and control data sets return reports of the differences between the two</p>
+<ul>
+<li>Used to test hypothesis , e.g. control data are logtime users test are new clients, see how
+they behave</li>
+</ul>
+<p>2.2 Created  Directory for Dispatiching (imrovement on the previous feature) yaml to paralize   </p>
+<p>when new dispatches and messegaes were created across different people
+This direcotry of dispatching grouped similar fields = summary statistics/business metrics!
+2.3 Introduced test driven developement, before relied only on unit tests, now create integration tests alongside the feature. Reasoning for using it is because OneFlow is a data tool and heavilyt relies on the data. If it is messy, tests fail more easily. Alot of edge cases to mke sure OneFlow does the right computation</p>
+<p>Benefits:
+reduced debugging effort – when test failures are detected, having smaller units aids in tracking down errors.</p>
+<p>2.4 applied Incremental developement:</p>
+<ul>
+<li>Unit testing : when you test a module in isolation, you can be confident that any bug you find is in that unit – or
+maybe in the test cases themselves.
+-Regression testing : when you’re adding a new feature to a big system, run the regression test suite as often as
+possible. If a test fails, the bug is probably in the code you just changed.</li>
+</ul>
+<h1 id="performance-improvements">Performance improvements<a aria-hidden="true" class="anchor-heading icon-link" href="#performance-improvements"></a></h1>
+<ul>
+<li>joblib parralel for program level runs</li>
+<li>numba improvements to targeted calculations (math decorator)</li>
+</ul>
+<h1 id="convocation">Convocation<a aria-hidden="true" class="anchor-heading icon-link" href="#convocation"></a></h1>
+<p>Organise Data all hands event for data uk. Fun fair theme with stalls. Increase team effectiveness. Outcome teams. Program increments.</p>
+<h1 id="other">Other<a aria-hidden="true" class="anchor-heading icon-link" href="#other"></a></h1>
+<ul>
+<li>
+<p>Data expo <a href="https://drive.google.com/drive/folders/1VT4c2V9zxzlYeKot3dV6I4j-HhLwcE7f">presentation</a> of OneFlow</p>
+</li>
+<li>
+<p>PUG talk, python users group ML <a href="https://drive.google.com/drive/folders/1VT4c2V9zxzlYeKot3dV6I4j-HhLwcE7f">presention</a></p>
+<p>Approaches when developing a feature:</p>
+</li>
+</ul>
+<ol>
+<li>develop feature + unit tests
+then create intergation test</li>
+<li>develop feature +unit test + create integration test ( Test-driven development
+parallelize inegration test while developing a feature
+Not realying only on unit tests only</li>
+<li>Github flow vs GitFlow we are moving from one to the other</li>
+<li>Docusourus tool for static web pages</li>
+<li>.env file lets you customize the individual working environment variables.
+Using environment variables  common practice during Development not a healthy
+practice to use with Production.
+<ul>
+<li>in .enf file: add secrets, passwords, FEATURE FLAGS
+E.g if sharing codebase with the users we can have our own local .env where the<br>
+feature flag is turned on. Hoever in production(the users) do not have this feature
+turned on.</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p>PM stuff:
+Follow Agile principles by using tools such as Jira and Confluence Enforcing the scrum rituals (sprint planning/retrospective, daily huddles, and customer demos). </p>
+</li>
+<li>
+<p>Building system: infrastructure, storage, network protocols</p>
+</li>
+</ul>
+<hr>
+<p><strong>Behave</strong> is a python library that enforces behaviour driven developement BDD which is an extension of TDD.</p>
+<p>As we all know in TDD we write tests first and then   develop  individual functions in the code</p>
+<p>BDD is the same but it acts on the level of features rather than functions.
+So in BDD users and developers writetest cases in English so  that non-programmers can understand.
+And only then developers start writing code</p>
+<p>Involves users/BA-s and non-technical people can participate in the implementation process</p>
+<p>Writes tests using normal language - allows users to write tests</p>
+<p>FEATURES files are written by users</p>
+<p>Advantages
+Allow users to be in the developement process + instead of writing feature spec and requirements, they write test directly. </p>
+<p>Disadvantage is that it might take more BA-s time and given that tehy are already quite busy it might not be optimal</p>
+<p>If we use behave it will probably worth it only for some integration tests
+and do not use it for all unit tests which</p>
+<hr>
+<p>Recoveries liquidation array = money we recover when our clients go in default</p>
+<p>I compute RLA for each account using only matrix operations avoiding loops.  After making 100 runs each with 3k account the speed up is 46\%. <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>N</mi><mn>3</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(N^3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span> problem I did using one loop and for each iteration of the loop I use matrix operations.</p>
+<pre class="language-python"><code class="language-python">liquid_array_per_id <span class="token operator">=</span>
+            np<span class="token punctuation">.</span>outer<span class="token punctuation">(</span>co_pop1<span class="token punctuation">,</span> padded_pop1_non_debt_sale<span class="token punctuation">)</span>
+            <span class="token operator">+</span> np<span class="token punctuation">.</span>outer<span class="token punctuation">(</span>co_pop2<span class="token punctuation">,</span> padded_pop2_non_debt_sale<span class="token punctuation">)</span>
+            <span class="token operator">+</span> np<span class="token punctuation">.</span>outer<span class="token punctuation">(</span>co_pop3<span class="token punctuation">,</span> padded_pop3_non_debt_sale<span class="token punctuation">)</span>
+            <span class="token operator">+</span> window_multiply<span class="token punctuation">(</span>debt_sale_prop <span class="token operator">*</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>co_pop1<span class="token punctuation">)</span><span class="token punctuation">,</span>sale_price<span class="token punctuation">)</span>
+</code></pre>
+<h4 id="time-complexity">Time complexity<a aria-hidden="true" class="anchor-heading icon-link" href="#time-complexity"></a></h4>
+<p>Assume we have <code>N</code> accounts, <code>S</code> statements and <code>CO</code> statements since charge off. The output contains for each account (<code>N</code> in total) and each statement (<code>S</code> in total) a liquidation array of size (<code>CO</code>). Hence the output is with dimension <code>N x S x CO</code> and just writing the output would require <code>O(N x S x CO)</code> runtime (i.e. that is the minimum runtime required).</p>
+<p>Our RLA computation as we saw above calls two main functions which have non-constant run time - <code>np.outer(co_pop1, padded_pop1_non_debt_sale)</code> and <code>window_multiply(debt_sale_prop * np.array(co_pop1), sale_price)</code></p>
+<p><code>co_pop1</code> is with dimension <code>S</code> and <code>padded_pop1_non_debt_sale</code> is with dimension <code>CO</code>,  hence  <code>np.outer(co_pop1, padded_pop1_non_debt_sale)</code> costs <code>O(S x CO)</code>.</p>
+<p><code>debt_sale_prop</code> is with dimension <code>CO</code> and hence <code>window_multiply(debt_sale_prop * np.array(co_pop1), sale_price)</code> costs <code>O(S x CO)</code></p>
+<p>Since we call these two functions <strong>for each account</strong>,  the total runtime is <code>O(N x S x CO)</code> which is the minimum achievable.
+Thus, in terms of orders of growth, this is the fastest possible computation. Note the old RLA version was also <code>O(N x S x CO)</code>  but had a very large constant factor because of using multiple nested for loops.</p>
+<h1 id="key-words">Key words<a aria-hidden="true" class="anchor-heading icon-link" href="#key-words"></a></h1>
+<p>numba, jit decorator, dask, docosaurous, Agile, behave driven developement, cash flows, valuations, </p>
