@@ -2,7 +2,7 @@
 id: 2m4of0ylaxbolagj8fov8br
 title: Razmisli
 desc: ''
-updated: 1682093820304
+updated: 1726609060174
 created: 1658754729845
 ---
 
@@ -428,6 +428,26 @@ Google
 Meta
 - 97 % from ads
 
+# Feeling a bit down
+It is  17th of Sept 2024 - Sofia holiday, but also trung thu hah! I can't believe I'm writing these things down. Haven't done actual journaling for a while... I'm a bit lost on what I should be doing. there are a lot of tasks that need to be done, both in personal developement (professional and emotional) and at work.
+
+I've been eating unhealthy the past months. A lot of tupchene and  just can't stop. I am not fat (yet) just about 77-78 kilos. Bought a flat three months ago and was exciting. My problem is that career-wise I haven't improved much. TC is okish at 160K annually and that is good.  But my problem is that the last 2 years there have been little progress both in terms of TC but also in terms of skills/learnings. I found a girl that I like but it is an LDR - kind of sucks. All is good with her and I feel good about it. There are some yellow/red-ish flags but only time will show if my concerns are unnecessary. I think I will give it a chance.
+
+Career-wise, my problem solving abilties are more or less the same as 2 years ago. OMG time flies so fast. I learned a bit of Kaggle, just slightly. Need to get back to speed with competitive programming. 
+
+Personal developement: I'm behind on reading lots of books, finance planning.
+
+## My principles to get back on track
+
+1. Do NOT over-eat, drink a lot of water strategy
+2. Regular sports
+3. Track your work/progress: Pomodoro and Jira
+4. Keep focused: turn off WiFi
+5. Personal development: property market, news, self-development books, financial planning
+6. Get enough sleep: sleep earl and get up early!
+
+
+
 
 # Getting in the zone with Pomodoro
 
@@ -440,3 +460,5 @@ There are five basic steps to implementing the technique:
 3. Work on the task until the timer rings; record with an x
 4. Take a short break (3–5 minutes)
 5. After four pomodoros, take a longer break (15–30 minutes)
+
+

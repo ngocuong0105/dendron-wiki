@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1713105375247
+updated: 1713107248014
 created: 1658698186720
 ---
 
@@ -73,6 +73,8 @@ Steps 6-10 (**interviewing + negotiation**) form the stage where you apply what 
 - Interviews are ultimately NOT about you. They'd ask lots of questions about you, but they are not interested in you. 
 - Job is about solving the problems of the employer. It is not for you to make money. It is for you to solve problems.
 - Interview is a chat between two human beings figuring out if they have common interests.
+- Show genuine interest in the company and the role. Ask Questions!
+- Talk with excitetment! Chris Deloit from Kaggle.
 
 **CV updates**
 - change Applied GBM to another verb

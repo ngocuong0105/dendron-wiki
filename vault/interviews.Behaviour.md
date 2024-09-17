@@ -2,7 +2,7 @@
 id: wyxv9icmv8mne5ldhpvptzr
 title: Behaviour
 desc: ''
-updated: 1677660619912
+updated: 1713105453503
 created: 1658698164037
 ---
 
@@ -14,7 +14,7 @@ Top questions:
 - Weakness/Strength
 - Why do you move companies so often (give specific reason for each), or better focus on why you want to join the new company rather than why you leave the old one. I want to work for you beacuse you are tech and currently I am in a bank. Find something that the new company has and the old one does not and just say it.
 
-**NB** prepare questions to ask them. Some questions might sound offensive careful. E.g Asking Atomico (venture capital) how they deal with crisis, recession, war, lower investements is not a very good question. It might imply you thing they are doing bad.
+**NB** prepare questions to ask them. Some questions might sound offensive careful. E.g Asking Atomico (venture capital) how they deal with crisis, recession, war, lower investements is not a very good question. It might imply k they are doing bad.
 
 LP principles from Stefan are pretty good stuff. You should do your own like these.
 
