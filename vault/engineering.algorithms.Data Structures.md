@@ -2,7 +2,7 @@
 id: rbnr57rs5a1y8goym1j1npl
 title: Data Structures
 desc: ''
-updated: 1689328235529
+updated: 1726661561900
 created: 1664382752052
 ---
 
@@ -285,6 +285,54 @@ class MRUQueue:
 ## Sparse Table
 
 # Trees
+
+## Trie - Prefix tree
+
+
+in a list of $n$ words $w_{1},w_{2}, ... w_{n}$ we check if the word t is a prefix of any of these words
+- $O(len(t))$ look up
+- $O(len(w))$ for insert
+
+```Python
+class Trie:
+
+    def __init__(self):
+        self.children = defaultdict(Trie)
+        self.is_end = False
+
+    def insert(self, word: str) -> None:
+        node = self
+        for ch in word:
+            node = node.children[ch]
+        node.is_end = True
+
+    def search(self, word: str) -> bool:
+        node = self
+        for ch in word:
+            if ch in node.children:
+                node = node.children[ch]
+            else:
+                 return False
+        return node.is_end
+
+    def startsWith(self, prefix: str) -> bool:
+        node = self
+        for ch in prefix:
+            if ch in node.children:
+                node = node.children[ch]
+            else:
+                 return False
+        return True
+        
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
+```
+
 ## Disjoint Set Union = DSU = Union Find
 - Complexity:
 - If we make $N$ requestis to the union method it would take
