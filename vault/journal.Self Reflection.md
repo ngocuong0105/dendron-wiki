@@ -2,13 +2,13 @@
 id: to77hi63vjht3s0yod30f19
 title: Self Reflection
 desc: ''
-updated: 1727044195659
+updated: 1727046054076
 created: 1727043845722
 ---
 
 Every week I self-reflect:
 - Things I did well and am happy about this week.
-- Imagine your ideal week ahead. What actions I need to take to make it happen?
+- Imagine your ideal week ahead. What actions do I need to take to make it happen?
 - What is my biggest waste of time? 
 - Write about a situation that didn’t go as planned. What could you do differently next time?
 - What relationships did I nurture or neglect?
