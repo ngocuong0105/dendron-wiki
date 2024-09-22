@@ -2,7 +2,7 @@
 id: tmyxaki17gpq6jb9xav1x3v
 title: String Processing
 desc: ''
-updated: 1670410135008
+updated: 1727027702039
 created: 1664382813257
 ---
 # Fundamentals
@@ -66,6 +66,8 @@ $pi$ is called prefix function = longest preffix suffix (LPS)
 
 **Problems**
 
+[Need creativity to come up with why you need KMP](https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-ii/description/)
+
 [Search for a substring in a string](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
 
 <details>
@@ -105,6 +107,9 @@ We take the string  $t = s + c$  and reverse it. Now the task is transformed
 
 Therefore the number of new substrings appearing when we add a new character  $c$  is  $|s| + 1 - \pi_{\text{max}}$ .
 </details>
+
+
+
 
 ## Z-function
 ## Suffix Array
