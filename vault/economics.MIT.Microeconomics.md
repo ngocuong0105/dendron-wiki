@@ -2,7 +2,7 @@
 id: u4kcnbzgra2tchqa2th1k16
 title: Microeconomics
 desc: ''
-updated: 1727129848672
+updated: 1727130098019
 created: 1727028599091
 ---
 
@@ -42,8 +42,7 @@ Why you would not let everything to be decided by the market? I.e. Why allowing 
 - Behavioral Econ, people make mistakes, they might have all the info but still make the wrong decision
 
 
-
-![](assets/images/image.png)
+![](assets/images/roses_supply_demand.png)
 
 # Lecture 2. Preferences and Utility Functions 
 
