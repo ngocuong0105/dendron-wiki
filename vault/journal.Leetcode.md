@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1727027821248
+updated: 1727081642157
 created: 1658695863781
 ---
 # Progress
@@ -88,8 +88,21 @@ Solved only 2 problems.
 - KMP returns an array that tells you 'what is the longest preffix that is also a suffix'
 
 
+## Weekly Contest 414
 
+Solved all 4 problems. 
 
+**What I learned?**
+- Problem 3 [3282](https://leetcode.com/contest/weekly-contest-414/problems/reach-end-of-array-with-max-score/)
+- Play around with example without looking at the expectedoutput. Just do it by yourself! Do no spoil the answer!
+- This way you will likely try out the wrong path and understand the logic for going through the correct path
+- In hindsight the problem looked like a DP, but in the end you were able to solve it using greedy. Often when problem constraints do not allow DP just think of Greedy approach
+
+- Problem 4 [3283](https://leetcode.com/contest/weekly-contest-414/problems/maximum-number-of-moves-to-kill-all-pawns/)
+- Two way DP function, where each DP depends on the other DP
+- Often can see this in game theory problems with two players
+- bitmasking, and just believe in yourself especially for problem 4
+- the proper mindset will help you push through
 
 
 # Plans for the future
