@@ -2,7 +2,7 @@
 id: u4kcnbzgra2tchqa2th1k16
 title: Microeconomics
 desc: ''
-updated: 1727129621977
+updated: 1727129848672
 created: 1727028599091
 ---
 
@@ -43,7 +43,7 @@ Why you would not let everything to be decided by the market? I.e. Why allowing 
 
 
 
-![alt text](assets/images/image.png)
+![](assets/images/image.png)
 
 # Lecture 2. Preferences and Utility Functions 
 
@@ -74,7 +74,7 @@ Properties of indifference curves:
 3. No two curves cross: transitivity will be violated
 4. There is a unique cruve between each set of indifferent points, oterwise completeness will be violated (you cannot know how you feel)
 
-![alt text](assets/images/indifference_curve.png)
+![](assets/images/indifference_curve.png)
 
 **Utility function**
 - Utility function is a way to rank consumer choices
@@ -91,7 +91,7 @@ willing to give up more cookies to get another slice of pizza
 - Example with Utility function = $sqrt(P*C)$
 
 
-![alt text](assets/images/mrs.png)
+![](assets/images/mrs.png)
 
 ## Example – Pricing of different sizes of goods
 
