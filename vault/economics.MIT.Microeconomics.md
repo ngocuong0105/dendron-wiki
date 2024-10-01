@@ -2,7 +2,7 @@
 id: u4kcnbzgra2tchqa2th1k16
 title: Microeconomics
 desc: ''
-updated: 1727130098019
+updated: 1727711093252
 created: 1727028599091
 ---
 
@@ -100,3 +100,23 @@ Starbucks tall coffee for $2.25 and the next one for 70 more cents. McDonald –
 
 This is related to packaging costs, but also buing in bulk from costco for many things is not much cheaper than buying seperately from supermarkets.
 Buing in bulk is cheaper but it is not as nearly as chaper as the staqrbucks and mcdonalds example. When utility diminishess less then they do not want to charge much less for multiple packages. Here we have the factor of parishable and non-parishable goods. When it is parishable then it has diminishing return when it is non-parishable you can 'reset' the utility.
+
+
+# Lecture 3. Budget Constraints and Constrained Choice 
+
+
+## Budget Constraints
+
+We assume budget contrain = income. We do not consider credit and borrowings.
+
+- MRT = marginal rate of transformation. Given a contrained budget (money) you can spend you can buy certain amount of pizzas and cookies. The more cookies you buy the less pizza you buy and vice verca.
+- Opportunity set = the set of amounts of pizzas and cookies you can buy given the market prices and your income
+- Given utility function you can draw many indiffrence curves
+- Given utility function and budget constraint the tangent indifference curve to the budget constraint is the best one
+- **MRS = MRT** is the main eqation of consumer choice!!!
+- you want the ratio of the benefits to be equal to the ratio of the costs
+- Marginal thinking is much easier than absolute things. Do I want the next pizza vs how many pizzas do I want?
+- Consumer theor is all about the balancing act between what you want and what the market costs allow you to do
+- MB = MC, marginal benefit is equalt to the marginal cost. What I want to do next should be exactly equal to what it costs.
+-
+![](assets/images/budget_constraint_indifference.png)

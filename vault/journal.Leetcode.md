@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1727081642157
+updated: 1727814241355
 created: 1658695863781
 ---
 # Progress
@@ -70,22 +70,17 @@ Hit another milestone of **2600** problems solved.
 
 - Goal is to become **Guardian rating**
 
-## Weekly Contest 415
 
-Solved only 2 problems. 
+## Weekly Contest 416
 
+- 30/10/2024
+- Solved all 4 problems (with help for the last 2)
 **What I learned?**
-
-- Problem 3 [3291](https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-i/description/)
-- I learned how to implement a trie without adding a new class but just using a dictonary.
-- I learned how to adhoc traverse the trie while I was solving the dp
-- I learned in order to traverse the trie on demand it was important how to define the dp problem and its subspace/subproblems
-- I learned that dp problems with string can be solved forward and backwards and they will result in different order of travering the problems. It turned out that going from right to left is better ad I could traverse the trie on demand character by character
+- Last two problems were sliding window dictionary
+- In order to solve this problem you really had to go through examples with hand
+- Before you write code, you better go thorugh examples with hand. When you rush into coding it actually becomes slowe
 
 
-- Problem 4 [3292](https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-ii/description/)
-- I learned that KMP aaplication is ussually not obvious. You need to think a bit to reach to it
-- KMP returns an array that tells you 'what is the longest preffix that is also a suffix'
 
 
 ## Weekly Contest 414
@@ -114,3 +109,20 @@ Ideally I would become a descent competitive programmer in 1-2 years (written in
 - start codeforces
 - join Google/Facebook coding jams
 
+
+## Weekly Contest 415
+
+Solved only 2 problems. 
+
+**What I learned?**
+
+- Problem 3 [3291](https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-i/description/)
+- I learned how to implement a trie without adding a new class but just using a dictonary.
+- I learned how to adhoc traverse the trie while I was solving the dp
+- I learned in order to traverse the trie on demand it was important how to define the dp problem and its subspace/subproblems
+- I learned that dp problems with string can be solved forward and backwards and they will result in different order of travering the problems. It turned out that going from right to left is better ad I could traverse the trie on demand character by character
+
+
+- Problem 4 [3292](https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-ii/description/)
+- I learned that KMP aaplication is ussually not obvious. You need to think a bit to reach to it
+- KMP returns an array that tells you 'what is the longest preffix that is also a suffix'
