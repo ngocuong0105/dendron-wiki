@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1727814241355
+updated: 1728129781313
 created: 1658695863781
 ---
 # Progress
@@ -19,6 +19,20 @@ questions are still impossible to solve alone, but can understand solutions
 some I am able to do by myself. Had one hard asked during interview and managed to finish in 40 minutes with working solution.
 
 In summary: for now I am on descent coding level for interviews. For competitive programming, its another story... In leetcode I manged to be in top 2% with 2000+ rating, but in codeforces I would be blown out by those guys.
+
+# Plans for the future
+Ideally I would become a descent competitive programmer in 1-2 years (written in August 2022). Need to:
+- do more leetcode competitions
+- learn more advanced topics in CLRS
+- take the MIT advance courses for algorithms and data structures
+- learn C++
+- start codeforces
+- join Google/Facebook coding jams
+
+
+Two years later Oct 2024 I haven't become a competitive programmer.
+- I've bruteforced Leetcode and focused on quantity over quantity [MISTAKE]
+- Now I'm trying to change that and I really spend time on solving hard problems, thiinking on them and solving them more than one time
 
 
 **23.07.2022**
@@ -70,24 +84,71 @@ Hit another milestone of **2600** problems solved.
 
 - Goal is to become **Guardian rating**
 
+## Recap: Best Learnings
+- The power of solving with pen and paper. The power of the hand.
+
+## Biweekly Contest 138
+- 04/10/2024
+- Solved 3 problems
+- Last problem you should have followed your intuition. You started with a small example of two numbers and tried to generalize it. but you made a mistake in the generalizaton. When you played with the example you used the concrete numbers and based on the pattern you tried to generalize. Rather you should have tried to formalize with letters (ti*dj < tj*di) and this would have helped you to come up with a formula for two numbers then this would inspire you to generalize the correct way.
+
+## Weekly Contest 413
+- 03/10/2024
+- Solved 3 problems
+
+**What do I learned?**
+- The third problem was a DP
+- By looking at the problem constrained I should have thought sooner that I must have e problem subspace that is defined on the cell values
+- [Fourth problem](https://leetcode.com/problems/maximum-xor-score-subarray-queries/description/). I was not able to solve it. I was on the right track and I should have looked at the drawing more. Again this problem could be solved only by hand first. Otherwise you'd not be able to solve it.
+
+
+## BiWeekly Contest 140
+- 02/10/2024
+- Solved 2 problems (last two were very hard, 3rd has 16% AR, last one had 9% Acceptance rate)
+
+**What do I learned?**
+- [Third Problem](https://leetcode.com/problems/find-the-lexicographically-smallest-valid-sequence/description/)
+- I tried solving the 3rd problem recursively going through all leaves of the tree. There was no way to DP the problem but I had clear idea of how to traverse the recursion tree
+- Managed to write working solution but it TLE-ed.
+- The reason I had to go from top to bottom of the tree is beacuse I needed forward looking information
+- At this moment I should have started thinking of ways to store such information and fail fast
+- Once I read the solution with the `last` array that stored the last chance of matching a letter in the target string, I could use this array (info) to **greedily** traverse the recursion tree
+- This problem taught me to really understand the examples and whenever there is a choice to be made to be able to clearly formulate the choice (ideally in a programatic way)
+
+
+## Weekly Contest 417
+
+- 01/10/2024
+- Solved all 4 problems
+
+**What do I learned?**
+- Don't be afraid of the hard. You solved the last hard problem without having any idea how to do it at first. You even thought about looking at the solution but you resisted the temptation.
+- [Last problem] When you see thingsdoubleing in a problem, you should immediately think about bit manipulation, binary tree liftin etc
+- [Third problem] writing down examples by hand was very powerful + writing the code etc. You should have this habbit, it will save you a lot of time. Don't just try it out in the code shell. This problem was a sliding window and it really helped to go with by hand.
+- it also helped to come up with extra examples!
 
 ## Weekly Contest 416
 
-- 30/10/2024
+- 30/09/2024
 - Solved all 4 problems (with help for the last 2)
-**What I learned?**
+
+
+**What do I learned?**
 - Last two problems were sliding window dictionary
 - In order to solve this problem you really had to go through examples with hand
 - Before you write code, you better go thorugh examples with hand. When you rush into coding it actually becomes slowe
-
-
-
+- For sliding windows it is very important to:
+    - get the indexing right
+    - define the window structure, is it just 1 integer?, map + integer,set? etc. 
+    - update the window structures correctly
+    - when/how to add to the result
+- come up with examples and WRITE DOWN WITH HAND
 
 ## Weekly Contest 414
 
 Solved all 4 problems. 
 
-**What I learned?**
+**What do I learned?**
 - Problem 3 [3282](https://leetcode.com/contest/weekly-contest-414/problems/reach-end-of-array-with-max-score/)
 - Play around with example without looking at the expectedoutput. Just do it by yourself! Do no spoil the answer!
 - This way you will likely try out the wrong path and understand the logic for going through the correct path
@@ -100,22 +161,11 @@ Solved all 4 problems.
 - the proper mindset will help you push through
 
 
-# Plans for the future
-Ideally I would become a descent competitive programmer in 1-2 years (written in August 2022). Need to:
-- do more leetcode competitions
-- learn more advanced topics in CLRS
-- take the MIT advance courses for algorithms and data structures
-- learn C++
-- start codeforces
-- join Google/Facebook coding jams
-
-
 ## Weekly Contest 415
 
 Solved only 2 problems. 
 
-**What I learned?**
-
+**What do I learned?**
 - Problem 3 [3291](https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-i/description/)
 - I learned how to implement a trie without adding a new class but just using a dictonary.
 - I learned how to adhoc traverse the trie while I was solving the dp

@@ -2,7 +2,7 @@
 id: u4kcnbzgra2tchqa2th1k16
 title: Microeconomics
 desc: ''
-updated: 1727711093252
+updated: 1727899757850
 created: 1727028599091
 ---
 
@@ -120,3 +120,8 @@ We assume budget contrain = income. We do not consider credit and borrowings.
 - MB = MC, marginal benefit is equalt to the marginal cost. What I want to do next should be exactly equal to what it costs.
 -
 ![](assets/images/budget_constraint_indifference.png)
+
+
+ # Lecture 4. Demand Curves and Income/Substitution Effects
+
+- Demand Curve shows the relationsip between the quantity demand and the price of a good
