@@ -2,7 +2,7 @@
 id: xwiyhc1f35y827bmc20m3vl
 title: Leetcode
 desc: ''
-updated: 1728129781313
+updated: 1728755110130
 created: 1658695863781
 ---
 # Progress
@@ -87,9 +87,32 @@ Hit another milestone of **2600** problems solved.
 ## Recap: Best Learnings
 - The power of solving with pen and paper. The power of the hand.
 
+## Biweekly Contest 141
+- 12/10/2024
+- Solved 3 problems
+
+**What do I learned**
+- Q4 was mathematical and I was rea;ly really close to solving it...
+- binom and comb functions from scipy are not exact for large numbers
+- `comb (exact = True)` !!
+- For the hard problems you will need to do bottom up dp
+- When I do competition I am much more focused and time flies quicker
+
+## Weekly Contest 412
+- 06/10/2024
+- Solved 3 problems
+
+**What do I learned?**
+- I should have pushed further on the idea for problem 3! Was on right track and I knew what was wrong. Instead of trying to fix it I thought that the whole approach is wrong. In hindsight I know that there should have been some repetitive (cycle) idea otherwise the time constraints would be violated. I should have asked myself: "What are the things that I should definitely use here?". And after that try ideas for the not definite parts.
+- 
+
+
 ## Biweekly Contest 138
 - 04/10/2024
 - Solved 3 problems
+
+**What do I learned?**
+
 - Last problem you should have followed your intuition. You started with a small example of two numbers and tried to generalize it. but you made a mistake in the generalizaton. When you played with the example you used the concrete numbers and based on the pattern you tried to generalize. Rather you should have tried to formalize with letters (ti*dj < tj*di) and this would have helped you to come up with a formula for two numbers then this would inspire you to generalize the correct way.
 
 ## Weekly Contest 413

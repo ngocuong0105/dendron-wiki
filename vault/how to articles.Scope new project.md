@@ -2,7 +2,7 @@
 id: 9tzvft6nfd4wx7nqc2andeo
 title: Scope new project
 desc: ''
-updated: 1696590664460
+updated: 1741600928271
 created: 1696590664460
 ---
 # Questions you need to figure out
@@ -16,3 +16,22 @@ created: 1696590664460
 - Macroeconomical statistics of the product
 - Understand the whole user journey of the product - from pitching/getting the user attention to actual buying and then usage.
 
+
+
+1. Background and Analysis
+- Executive summary
+- Key insights
+2. Project Overview
+3. Involved Parties
+- Editors  
+- Implementers
+- Reviewers or Stakeholders
+4. Project Governance
+- Project Governance plan
+- Project Tracker
+- Project Calendar
+5. Action Plan Deep Dive
+6. Deliverables
+7. Implementation
+8.Vision
+8. Decision Log

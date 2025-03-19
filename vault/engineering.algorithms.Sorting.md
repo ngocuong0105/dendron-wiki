@@ -2,9 +2,11 @@
 id: r9lucaraliyqanyxqrsetzu
 title: Sorting
 desc: ''
-updated: 1677661975588
+updated: 1741787763797
 created: 1677661832177
 ---
+
+Comparative vs non-comparative sorting algorithms
 
 # Quick Sort
 
@@ -23,3 +25,7 @@ def quick_sort(s,e):
     quick_sort(s,i)
     quick_sort(i+2,e)
 ```
+
+
+# Count Sort
+

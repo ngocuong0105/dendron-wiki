@@ -2,12 +2,14 @@
 id: 37ghcmfqsbumla66qt9qh4y
 title: System Design
 desc: ''
-updated: 1668961137444
+updated: 1742385692573
 created: 1658698150589
 ---
 # Resources
+
+- [System Design Interview An Insider’s Guide by Alex Xu ](https://github.com/mukul96/System-Design-AlexXu/blob/master/System%20Design%20Interview%20An%20Insider%E2%80%99s%20Guide%20by%20Alex%20Xu%20(z-lib.org).pdf)
+- [Notes on Alex Xu Book](https://imaginary-basket-cbb.notion.site/System-Design-Interview-By-Alex-Xu-Book-Summary-17d97a868610804dbaf7e81fa7582caa)
 - [System Design Primer](https://github.com/donnemartin/system-design-primer)
-- [System Design Interview - An Insider Interviw](https://github.com/ngocuong0105/algorithms/blob/main/Readings/Engineering/System%20Design%20Interview%20Insider%20Guide)
 - [Grokking the System Design Interview github notes](https://github.com/Jeevan-kumar-Raj/Grokking-System-Design)
 - drawing tool [escalidraw](https://excalidraw.com/)
 - [TechLead overview](https://www.youtube.com/watch?v=WV2Ed1QTst8)
@@ -185,7 +187,7 @@ Scaling stuff:
 Sharding your database (database partitioning) - horizontal (split rows) and vertical (split different columns) sharding
 Each shard goes to different server.
 
-You don't want to scale too early and put optimization in the beginning.
+You don't want to scale too early and put optimization in the begining.
 
 [Clement System Design interview example](https://www.youtube.com/watch?v=q0KGYwNbf-0)
 

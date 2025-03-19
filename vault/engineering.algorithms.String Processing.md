@@ -2,13 +2,15 @@
 id: tmyxaki17gpq6jb9xav1x3v
 title: String Processing
 desc: ''
-updated: 1727027702039
+updated: 1728155373851
 created: 1664382813257
 ---
 # Fundamentals
 ## String Hashing
 ## Rabin-Karp for String Matching
 - [longest duplicate string](https://leetcode.com/problems/longest-duplicate-substring/)
+
+
 ## Prefix function - Knuth-Morris-Pratt
 
 **Definition** You are given a string  $s$  of length  $n$ . The prefix function for this string is defined as an array  $\pi$  of length  $n$ , where  $\pi[i]$  is the length of the longest proper prefix of the substring  $s[0 \dots i]$  which is also a suffix of this substring.
@@ -16,11 +18,13 @@ created: 1664382813257
 $\pi[i] = \max_ {k = 0 \dots i} \{k : s[0:k] = s[i-k+1:i+1] \}$
 
 For example, prefix function of string "abcabcd" is  $[0, 0, 0, 1, 2, 3, 0]$ , and prefix function of string "aabaaab" is  $[0, 1, 0, 1, 2, 2, 3]$ 
+By definition $\pi[0] = 0$
 
 
 Brute force algo to compute $\pi$ is $O(n^3)$
 ```python
-def compute_prefix(s):
+# O(n^3)
+def kmp(s):
     pi = [0]*len(s)
     for i in range(len(s)):
         for k in range(i):
@@ -33,7 +37,20 @@ def compute_prefix(s):
 
 Observe $\pi(i+1)$ is at most 1 larger than $\pi(i)$. Thus when moving to the next position, the value of the prefix function can either **increase by one, stay the same, or decrease by some amount**. 
 
-Algo: In total the function can grow at most  $n$  steps, and therefore also only can decrease a total of  $n$  steps. This means we only have to perform  $O(n)$  string comparisons, and reach the complexity  $O(n^2)$ .
+Algo: In total the function can grow at most  $n$  steps (after all interations), and therefore also only can decrease a total of  $n$  steps. This means we only have to perform  $O(n)$  string comparisons, and reach the complexity  $O(n^2)$ .
+
+
+```python
+# O(n^2)
+def kmp(s):
+    pi = [0]*len(s)
+    for i in range(1,len(s)): # on each iteration, pi[i] increases at most with 1
+        for j in range(pi[i-1]+1,0,-1):
+            if s[:j] == s[i-j+1:i+1]: # hit this line at most n times during all iterations from the two loops above
+                pi[i] = j # here pi decreases or increases at most by 1
+                break
+    return pi
+```
 
 
 **Second optimization**
@@ -44,7 +61,7 @@ Let us compute $\pi[i]$. Notice that $\pi[i] = \pi[i-1] + 1$ iff $s[i] == s[\pi[
 
 $\underbrace{\overbrace{s_0 ~ s_1 ~ s_2}^{\pi[i]} ~ \overbrace{s_3}^{s_3 = s_{i+1}}}_{\pi[i+1] = \pi[i] + 1} ~ \dots ~ \underbrace{\overbrace{s_{i-2} ~ s_{i-1} ~ s_{i}}^{\pi[i]} ~ \overbrace{s_{i+1}}^{s_3 = s_{i + 1}}}_{\pi[i+1] = \pi[i] + 1}$
 
-goal is to find largest $j \leq \pi[i-1]$ such that $s[i] = s[j]$
+goal is to find largest $j \leq \pi[i-1]$ such that $s[0 \dots j-1] = s[i-j+1 \dots i]$
 
 $\overbrace{\underbrace{s_0 ~ s_1}_j ~ s_2 ~ s_3}^{\pi[i]} ~ \dots ~ \overbrace{s_{i-3} ~ s_{i-2} ~ \underbrace{s_{i-1} ~ s_{i}}_j}^{\pi[i]} ~ s_{i+1}$
 
@@ -55,9 +72,13 @@ def KMP(s):
         j = pi[i-1]
         while j > 0 and s[i] != s[j]:
             j = pi[j-1]
-        if s[i] == s[j]:
-            j += 1
-        pi[i] = j
+        if j == 0: 
+            pi[i] += s[i] == s[0]
+        else: 
+            pi[i] = j+1
+        # if s[i] == s[j]:
+        #     j += 1
+        # pi[i] = j
     return pi
 ```
 $O(n)$ complexity as we increase $pi[i]$ at most $n$ times and decrease it at most $n$ times. No string comparisons.
