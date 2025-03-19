@@ -1,0 +1,1 @@
+[Pattern Recognition and Machine Learning](https://drive.google.com/file/d/13kYvOT9wtHvlm33tf77F_0qUiygXiItl/view?usp=share_link) explains the mathematics behind the more popular and basic ML models.
