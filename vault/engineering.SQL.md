@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1668244176436
+updated: 1744126087604
 created: 1658698294975
 ---
 
@@ -624,6 +624,19 @@ and then read through the entire table to find the relevant rows.
 The most common type of index involves a single column, storing copies of the values from that column in a data structure, allowing fast lookups for the rows with the corresponding column values. The B-tree data structure lets the index quickly find a specific value, a set of values, or a range of values, corresponding to operators such as` =, >, ≤, BETWEEN, IN,` and so on, in a `WHERE` clause.
 
 ## Database design
+
+1. Understand the Data – Is it relational or document-based? Do you need to manage complex queries or just store simple key-value pairs?
+
+2. Scalability Is Key – High traffic? Complex joins?
+
+3. Consistency vs. Performance – Do you need strong consistency (ACID) or can you tolerate eventual consistency for better availability and partition tolerance? 
+
+4. Account for Future Evolution  – Can your database scale? Is it flexible enough for new features?
+
+5. Keep It Simple
+
+
+
 [Design by decomposition](https://www.youtube.com/watch?v=DFnAakJ4FDg&list=PL9ysvtVnryGpnIj9rcIqNDxakUn6v72Hm&index=31)
 - start with 'mega' relations containing everything
 - decompose into smaller, better relations with same info
@@ -661,6 +674,19 @@ Decide how to normalize your database by looking for:
 
 
 Maybe check this [youtube](https://www.youtube.com/watch?v=GFQaEYEc8_8&ab_channel=Decomplexify)
+
+
+## ORM
+
+SQL Alchemy
+
+ORM
+
+Relational Map, e.g. from SQL to Python
+
+leaky/soft abstraction
+
+
 
 # Problems
 [1285](https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/)

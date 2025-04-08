@@ -2,7 +2,7 @@
 id: 82lxbmwgtrgestyejv1wg2j
 title: All interview stages
 desc: ''
-updated: 1713107248014
+updated: 1744130620111
 created: 1658698186720
 ---
 
@@ -84,3 +84,22 @@ Steps 6-10 (**interviewing + negotiation**) form the stage where you apply what 
 - Built internal app
 - add ML as keywords in more places
 - data pipeline at Transmetrics (ML pipeline)
+
+
+
+
+# Google Prep
+
+
+One of my favorite (and slightly underrated) interview prep tricks? 
+
+Google.
+
+I’ll search for anything tied to the company—those that overlap with my area of work.
+
+If I’m prepping for an interview at Amazon, my search history will look something like: 
+-> “Amazon A/B testing”
+-> “Amazon experiments”
+-> “Amazon metrics”
+-> “Amazon data science”
+-> "Amazon business model"
