@@ -2,14 +2,14 @@
 id: j2cgo7b7djhmyfbykufs5q0
 title: LLMs
 desc: ''
-updated: 1741093315294
+updated: 1744221423484
 created: 1741085524865
 ---
 
 Here I put all my thoughts, my resarch, things I've learned and read about LLMs.
 
 # Resources
-- (Dario Modei Blog)[https://darioamodei.com/]
+- [Dario Modei Blog](https://darioamodei.com/)
 - 
 
 # Models

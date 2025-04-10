@@ -2,7 +2,7 @@
 id: 37ghcmfqsbumla66qt9qh4y
 title: System Design
 desc: ''
-updated: 1742385692573
+updated: 1744221312807
 created: 1658698150589
 ---
 # Resources
@@ -309,3 +309,51 @@ international coverage.
 • Monitor your system and use automation tools
 
 ![web_traffic.png](assets/images/web_traffic.png)
+
+
+
+System Design : https://bit.ly/41PTaAp  
+Winning System Design Case Studies: https://tinyurl.com/yfvyrjn7  
+Github : https://shorturl.at/hlow0  
+ML System Design Series : https://rb.gy/dd8dfe  
+Design Google Drive : https://bit.ly/3uXdQZ7  
+Design Messenger App : https://bit.ly/3DoAAXi  
+Design Instagram : https://bit.ly/3BFeHlh  
+Design Twitter : https://bit.ly/3qIG9Ih  
+Design Robinhood : https://bit.ly/3BFeHlh  
+Design Swiggy: https://bit.ly/3BFeHlh  
+Design CashApp : https://bit.ly/3BFeHlh  
+Design Kayak: https://bit.ly/3DoAAXi  
+Design Paytm : https://bit.ly/3qIG9Ih  
+Design ESPN Streaming : https://bit.ly/3qIG9Ih  
+Design Agoda : https://bit.ly/3xP078x  
+Design Razorpay : https://bit.ly/3xP078x  
+Design Apple Music : https://bit.ly/3xP078x  
+Design CricHD: https://bit.ly/3xP078x  
+Design Alibaba: https://bit.ly/3xP078x  
+Design Substack: https://bit.ly/3xP078x  
+Design TrueCaller: https://shorturl.at/pzABN  
+Design Stock exchange Design System: https://shorturl.at/svCK1  
+Design Distributed Cache : https://shorturl.at/fjBV6  
+Design Twilio : https://shorturl.at/uDJP7  
+Design Google Docs : https://tinyurl.com/mr4d9v83  
+Design Doordash : https://tinyurl.com/27nh5s7s  
+Design MS Docs : https://tinyurl.com/9fpa8jpc  
+Design Zomato : https://tinyurl.com/566t34ph  
+Design Linkedin : https://bit.ly/3OjXy7c  
+Design Google Maps : https://bit.ly/3BDdTwn  
+Design Telegram : https://bit.ly/42N5LW2  
+Design Snapchat : https://bit.ly/3pRP3pW  
+Design One Drive : https://bit.ly/438bAwZ  
+Design Quora : https://bit.ly/3FeD9dL  
+Design Tinder : https://bit.ly/3Mcyj3X  
+Design TikTok : https://bit.ly/3UUlKxP  
+Design Netflix : https://bit.ly/3GrAUG1  
+Design Uber : https://bit.ly/3fyvnlT  
+Design Youtube : https://bit.ly/3dFyvvy  
+Design Reddit : https://bit.ly/3OgGJrL  
+Design Facebook’s Newsfeed : https://bit.ly/3RldaW7  
+Design Amazon Prime Video : https://bit.ly/3hVpWP4  
+Design Dropbox : https://bit.ly/3SnhncU  
+Design Yelp: https://bit.ly/3E7IgO5  
+Design Whatspp : https://bit.ly/3M2GOhP  

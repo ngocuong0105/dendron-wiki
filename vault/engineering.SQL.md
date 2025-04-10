@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1744126087604
+updated: 1744221399446
 created: 1658698294975
 ---
 
@@ -701,3 +701,11 @@ leaky/soft abstraction
 [2228](https://leetcode.com/problems/users-with-two-purchases-within-seven-days/)
 [1285](https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/submissions/)
 [1369](https://leetcode.com/problems/get-the-second-most-recent-activity/)
+
+# Topics
+
+Space and Time Complexity intro to Queries: https://medium.com/learning-data/understanding-algorithmic-time-efficiency-in-sql-queries-616176a85d02  
+Basic (important!) Query Optimisation Techniques: https://medium.com/learning-sql/12-tips-for-optimizing-sql-queries-for-faster-performance-8c6c092d7af1  
+Advanced Topics in SQL: https://sqlpad.io/tutorial/advanced-sql/  
++ UNION, GROU[ BY (UNDERSTAND HOW IT WORKS), INDEXATION, PARTITION   
+B-TREE: https://builtin.com/data-science/b-tree-index (fundamental Database data structure! - connection to indexing!)  
