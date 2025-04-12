@@ -2,7 +2,7 @@
 id: auaqaucjcpjn6pxc6lpnvu5
 title: Dynamic Programming
 desc: ''
-updated: 1699555986891
+updated: 1744467945724
 created: 1664382766630
 ---
 
@@ -49,3 +49,5 @@ Fibonacci numbers in $O(log(n))$ - matrix multiplication, golden ratio ideas, se
 - [Max profit as a salesman](https://leetcode.com/problems/maximize-the-profit-as-the-salesman/)
 - [longest sequence](https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/description/)
 - [max profitable triplets](https://leetcode.com/problems/maximum-profitable-triplets-with-increasing-prices-i/description/)
+- [beautiful numbers, digit dp](https://leetcode.com/problems/count-beautiful-numbers/description/)
+- [beautiful numbers, digit dp](https://leetcode.com/problems/number-of-beautiful-integers-in-the-range/)
