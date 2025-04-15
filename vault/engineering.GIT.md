@@ -2,7 +2,7 @@
 id: 78ld05rlq10336r34dz8sxc
 title: Git
 desc: ''
-updated: 1669241920793
+updated: 1744623890061
 created: 1668288491690
 ---
 
@@ -287,6 +287,11 @@ git pull
 ```
 
 
-# Collaborative developement models
+# Collaborative development models
 
 [Shared repo model vs Fork and pull model](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models)
+
+
+In a shared repository model, developers work on a single repository. All contributors have write access and crete Pull Requests to merge into main. It is best when you work in smaller teams and private repo.
+
+In fork and pull model, developers for the main repository and can independently work on their fork. They can create branches, merge into the forked main and work independently. If they want to make changes to the upstream repo they will need to create a Pull Request. Only the maintainers of the repo have write access.

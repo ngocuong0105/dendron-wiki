@@ -2,7 +2,7 @@
 id: czrm1ittu9ne4dtqrsfceuy
 title: '2025-04-13'
 desc: ''
-updated: 1744579837514
+updated: 1744580182891
 created: 1744536747967
 traitIds:
   - journalNote
@@ -30,8 +30,8 @@ turn the betrayal into redemption.
 # Keeping the past in the past and setting boundaries
 
 I've been thinking a lot since you reached out. Hearing from you brought up a lot of emotions. 
-There's still a part of me that cares, but there's also a part 
-that remembers the pain, the betrayal, and the trust that was broken. 
+There's still a part of me that cares, but there's also a part that remembers the pain, the betrayal,
+and the trust that was broken. 
 
 I'm not angry. I'm not trying to rehash the past. But I've worked hard to heal, and 
 I need to protect that progress. If you're reaching out because you genuinely want to talk — 
