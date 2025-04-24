@@ -2,7 +2,7 @@
 id: 74fgu5s7z5g1pwgoox41sth
 title: '2025-04-23'
 desc: ''
-updated: 1745481929028
+updated: 1745481941942
 created: 1745407154411
 traitIds:
   - journalNote
@@ -29,7 +29,4 @@ Get away from screen during a break. Coding tasks usually require more time to g
 1. Leetcode Daily, Weekly problem + Pandas: **1 pomo**
 2. Leetcode Competition: **1h30min ~ 4 pomos**
 3. Recap Competition: **1 pomo**
-4. On point: **2 pomos**
-5. Daily Exposure documentation + setup co-pilot: **1 pomo**
-6. Jira planning + journal previous missed days: **1 pomo**
-7. Read & Journal Open AI blog + Read QuantCo dataframely article **1 pomo**
+
