@@ -2,7 +2,7 @@
 id: jgo06popz81qnmpz10ilpld
 title: '2025-04-18'
 desc: ''
-updated: 1745000603916
+updated: 1745532058050
 created: 1744999959816
 traitIds:
   - journalNote
@@ -20,3 +20,11 @@ traitIds:
 - 5x more expensive than non-reasoning models.
 - This tradeoff is tunable.  The longer you let the model reason, the more capable it is.
 - **Important** The reasoning models do NOT improve the capabilities for subjective tasks.  OpenAI even observed that people tend to prefer the text of gpt-4o vs o1.  The improved capabilities are just for when there are verifiably correct answers.
+
+# Hot Pot and Poke
+
+Newfounland viewing 536 flats, 97% occupancy, hey tea and zara.
+
+Hot Pot was disappointing. Poke was ok-ish - at least the salmon was good, chicken not great.
+
+Drank and had fun. Luckily not too drank. 
