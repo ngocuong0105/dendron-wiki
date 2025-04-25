@@ -1,0 +1,86 @@
+<h1 id="feature-engineering">Feature Engineering<a aria-hidden="true" class="anchor-heading icon-link" href="#feature-engineering"></a></h1>
+<p>Quick <a href="https://github.com/Yimeng-Zhang/feature-engineering-and-feature-selection/blob/master/A%20Short%20Guide%20for%20Feature%20Engineering%20and%20Feature%20Selection.md#451-recursive-feature-elimination">guide</a> for feature engineer and selection.</p>
+<h1 id="feature-engineering-1">Feature engineering<a aria-hidden="true" class="anchor-heading icon-link" href="#feature-engineering-1"></a></h1>
+<p><strong>TL;DR</strong></p>
+<ul>
+<li>transformation of current features (taking squares, log etc)</li>
+<li>apply interactions (multplication and ratio of two other features). When you make recipies it does make sense to add the ratio of the amounts of two ingredients</li>
+<li>group transforms (you get features that aggregate information across multiple rows grouped by some category, e.g. the average income of a person's state of residence)</li>
+<li>building-up and breaking-down features (ID 123-45-6789, addresses '8241 Kaggle Ln., Goose City, NV')</li>
+<li>K-means (use cluster as a categorical feature)</li>
+<li>cluster distane feature</li>
+<li>rescaling features (<code>preprocessing</code> module in scikit-learn )</li>
+<li>PCA</li>
+<li>target encoding for categorical features</li>
+<li>one-hot encoding (ok if you do not have many different values in a single category)</li>
+</ul>
+<p><strong>Feature importance</strong></p>
+<p>Rank features using a feature utility metric called "mutual information". The <strong>mutual information (MI)</strong> between two quantities is a measure of the extent to which knowledge of one quantity reduces uncertainty about the other. If you knew the value of a feature, how much more confident would you be about the target?</p>
+<p>Mutual information = entropy (amount of information learned).</p>
+<ul>
+<li>MI can help you to understand the relative potential of a feature as a predictor of the target, considered by itself.</li>
+<li>It's possible for a feature to be very informative when interacting with other features, but not so informative all alone. MI can't detect interactions between features. It is a univariate metric.</li>
+<li>The actual usefulness of a feature depends on the model you use it with. </li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> mutual_info_regression
+</code></pre>
+<p><strong>Interaction plots</strong> using the hue parameter in seaborn. These plots shows you interactions between pairwise features.</p>
+<p><strong>General tips:</strong></p>
+<ul>
+<li>Linear models learn sums and differences naturally, but can't learn anything more complex.</li>
+<li>Ratios seem to be difficult for most models to learn. Ratio combinations often lead to some easy performance gains.</li>
+<li>Linear models and neural nets generally do better with normalized features. Neural nets especially need features scaled to values not too far from 0. Tree-based models (like random forests and XGBoost) can sometimes benefit from normalization, but usually much less so.</li>
+<li>Tree models can learn to approximate almost any combination of features, but when a combination is especially important they can still benefit from having it explicitly created, especially when data is limited.</li>
+<li>Counts are especially helpful for tree models, since these models don't have a natural way of aggregating information across many features at once.</li>
+</ul>
+<h2 id="k-means">K-means<a aria-hidden="true" class="anchor-heading icon-link" href="#k-means"></a></h2>
+<p>The motivating idea for adding cluster labels is that the clusters will break up complicated relationships across features into simpler chunks. Our model can then just learn the simpler chunks one-by-one instead having to learn the complicated whole all at once. It's a "divide and conquer" strategy.</p>
+<p><strong>K means is sensitive to scale</strong>. Features with larger values will be weighted more heavily.</p>
+<p><strong>Cluster distance feature!</strong>
+The k-means algorithm offers an alternative way of creating features. Instead of labelling each feature with the nearest cluster centroid, it can measure the distance from a point to all the centroids and return those distances as features.</p>
+<h2 id="pca">PCA<a aria-hidden="true" class="anchor-heading icon-link" href="#pca"></a></h2>
+<p>Clustering is a partitioning of the dataset based on proximity, you could think of PCA as a partitioning of the variation in the data.</p>
+<p>PCA is typically applied to standardized data.</p>
+<p>The whole idea of PCA: instead of describing the data with the original features, we describe it with its axes of variation. The axes of variation become the new features.</p>
+<p>PCA makes this precise through each component's percent of explained variance.</p>
+<p>PCA is a linear dimensionality reduction technique.</p>
+<p>PCA use-cases:</p>
+<ul>
+<li>Dimensionality reduction: When your features are highly redundant (multicollinear, specifically), PCA will partition out the redundancy into one or more near-zero variance components, which you can then drop since they will contain little or no information.</li>
+<li>Anomaly detection: Unusual variation, not apparent from the original features, will often show up in the low-variance components. These components could be highly informative in an anomaly or outlier detection task.</li>
+<li>Noise reduction: A collection of sensor readings will often share some common background noise. PCA can sometimes collect the (informative) signal into a smaller number of features while leaving the noise alone, thus boosting the signal-to-noise ratio.</li>
+<li>Decorrelation: Some ML algorithms struggle with highly-correlated features. PCA transforms correlated features into uncorrelated components, which could be easier for your algorithm to work with.</li>
+</ul>
+<p><strong>PCA tips:</strong></p>
+<ul>
+<li>PCA only works with numeric features, like continuous quantities or counts.</li>
+<li>PCA is sensitive to scale. It's good practice to standardize your data before applying PCA, unless you know you have good reason not to.</li>
+<li>Consider removing or constraining outliers, since they can have an undue influence on the results.</li>
+</ul>
+<h2 id="categorical-features">Categorical features<a aria-hidden="true" class="anchor-heading icon-link" href="#categorical-features"></a></h2>
+<p>We need to encode categorical features into numerical features.</p>
+<ul>
+<li>group aggregation strategy (use aggregate of the y values to encode the categorical features) e.g. mean encoding</li>
+</ul>
+<p>This strategy is also known as <strong>target encoding</strong>. A target encoding derives numbers for the categories using the feature's most important property: its relationship with the target.</p>
+<p>Problem with aggregate encoding:</p>
+<ol>
+<li>missing categories in the test set need to be imputed somehow</li>
+<li>rare categories would have uncertain calculated aggregated statistics</li>
+</ol>
+<p><strong>Smoothing</strong> in encoding idea.</p>
+<p>The idea is to blend the in-category average with the overall average. Rare categories get less weight on their category average, while missing categories just get the overall average.</p>
+<pre><code>encoding = weight * in_category + (1 - weight) * overall
+</code></pre>
+<pre><code>weight = n / (n + m)
+</code></pre>
+<p>Use <strong>m-estimate</strong> to calculate the weight.  The parameter <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span></span> determines the "smoothing factor". Larger values of <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span></span> put more weight on the overall estimate, the smoother it is.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> category_encoders <span class="token keyword">import</span> MEstimateEncoder <span class="token comment"># scikit-learn-contrib package</span>
+</code></pre>
+<p><strong>Use Cases for Target Encoding</strong></p>
+<ul>
+<li>High-cardinality features: A feature with a large number of categories can be troublesome to encode: a one-hot encoding would generate too many features and alternatives, like a label encoding, might not be appropriate for that feature. A target encoding derives numbers for the categories using the feature's most important property: its relationship with the target.</li>
+<li>Domain-motivated features: From prior experience, you might suspect that a categorical feature should be important even if it scored poorly with a feature metric. A target encoding can help reveal a feature's true informativeness.</li>
+</ul>
+<p><strong>Tip</strong>
+When  using a target encoder it's very important to use separate data sets for training the encoder and training the model. Otherwise the results can be very disappointing!</p>
