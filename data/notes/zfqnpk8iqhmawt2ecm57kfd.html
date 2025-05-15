@@ -1,0 +1,28 @@
+<h1 id="curse-of-large-dimensionality">Curse of Large Dimensionality<a aria-hidden="true" class="anchor-heading icon-link" href="#curse-of-large-dimensionality"></a></h1>
+<p>Проклятието на големите размери...</p>
+<p>An increase in the dimensions can in theory, add more information to the data thereby improving the quality of data but practically increases the noise and redundancy during its analysis.</p>
+<h1 id="ballpark-estimate-for-number-of-data-points-required">Ballpark estimate for number of data points required<a aria-hidden="true" class="anchor-heading icon-link" href="#ballpark-estimate-for-number-of-data-points-required"></a></h1>
+<p>Say for the number of points required by ML model to learn any value of a feature is 10.</p>
+<ul>
+<li>1 binary feature: <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>1</mn></msup><mo>∗</mo><mn>10</mn><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">2^{1} * 10 = 10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span></span></span></span></span> data points</li>
+<li>2 binary features: <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>2</mn></msup><mo>∗</mo><mn>10</mn><mo>=</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">2^{2} * 10 = 40</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">40</span></span></span></span></span> data points</li>
+</ul>
+<p>...</p>
+<ul>
+<li>n binary features: <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>∗</mo><mn>10</mn><mo>=</mo></mrow><annotation encoding="application/x-tex">2^{n} * 10 =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span></span> many data points</li>
+</ul>
+<h1 id="recognize-cod">Recognize COD<a aria-hidden="true" class="anchor-heading icon-link" href="#recognize-cod"></a></h1>
+<ul>
+<li>Overfitting</li>
+<li>Sparse features</li>
+<li>Comptational complexity</li>
+</ul>
+<h1 id="techniques-to-avoid-cod">Techniques to avoid COD<a aria-hidden="true" class="anchor-heading icon-link" href="#techniques-to-avoid-cod"></a></h1>
+<ul>
+<li>Strict forward-feature selection (add feature only when you see marginal improvement in CV)</li>
+<li>Feature selection using permutation importance</li>
+<li>Feature extraction: PCA/t-SNE</li>
+<li>Regularization</li>
+<li>Model selection, choosing models that are less prone to overfitting</li>
+<li>Sample more data - bootstrapping</li>
+</ul>
