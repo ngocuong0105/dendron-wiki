@@ -2,7 +2,7 @@
 id: sbumi7y73tummx1u7z1vo6s
 title: SQL
 desc: ''
-updated: 1744221399446
+updated: 1749555121529
 created: 1658698294975
 ---
 
@@ -86,6 +86,56 @@ select
         date_format(date,'%d/%m/%Y') as formatted_date,
         least('2018-12-31',date),
         greatest(d1,d2)
+```
+- date_part, date operations in postgresql - give PART of the DATE
+- [leetcode](https://leetcode.com/problems/tasks-count-in-the-weekend/) you can test your functions here
+```sql
+select 
+DATE_PART('field', column_name) -- need to use these quotation marks ''
+SELECT DATE_PART('year', TIMESTAMP '2024-07-06 15:23:10');    -- 2024
+SELECT DATE_PART('day', DATE '2024-07-06');                   -- 6
+SELECT DATE_PART('month', now());                             -- current month as number
+SELECT DATE_PART('dow', DATE '2024-07-06');                   -- 6 (Saturday, 0 = Sunday)
+from t
+```
+- `field` can be 'year', 'month', 'day', 'dow', 'hour', 'minute', 'second'
+- 'dow' gives a number where 0 is Sunday and 6 is Saturday
+
+
+- date_trunc truncates the date column to the specified precision (beginning of month, year and so on)
+```sql
+SELECT DATE_TRUNC('month', TIMESTAMP '2024-07-06 15:23:10');   -- '2024-07-01 00:00:00'
+SELECT DATE_TRUNC('day', TIMESTAMP '2024-07-06 15:23:10');     -- '2024-07-06 00:00:00'
+SELECT DATE_TRUNC('year', now());                              -- start of this year
+```
+
+- TIMESTAMP, DATE, INTERVAL . they all convert string to date-like object
+
+- INTERVAL represents a unit of time that can be added or subtracted from dates
+```sql
+INTERVAL 'N unit' -- unit can be 'day', 'days', 'month', 'week', 'hour' etc
+```
+```sql
+SELECT TIMESTAMP '2025-05-01 15:45:01' + INTERVAL '10 minutes',
+TIMESTAMP '2025-05-01 15:45:01' - INTERVAL '10 minute' as a,
+TIMESTAMP '2025-05-01 15:45:01' + INTERVAL '1 week' as b
+```
+
+- casting in postgreSQL
+1.  Use ::typename or CAST(value AS typename)
+
+2. If in doubt, cast explicitly.
+```sql
+SELECT '2023-08-16'::date;                 -- 2023-08-16
+SELECT '2023-08-16 15:20'::timestamp;      -- 2023-08-16 15:20:00
+SELECT '123'::integer;       -- 123 (text to int)
+SELECT 123::text;            -- '123' (int to text)
+```
+
+- width_bucket
+```sql
+select width_bucket(column_name, min_value, max_value, number_of_buckets) -- max_value is the upper bound of the last bucket non-exclusive [)
+select width_bucket(score, 1, 101, 5) -- 5 buckets [1,20], [21- 40] ... 
 ```
 
 - subquery in select statement example [leetcode](https://leetcode.com/problems/percentage-of-users-attended-a-contest/)
