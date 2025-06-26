@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1689344593880
+updated: 1750273224765
 created: 1664446506779
 ---
 
@@ -13,6 +13,21 @@ created: 1664446506779
 mat = [(1,2,3),(4,5,6)]
 transpose_mat = list(zip((*mat)))
 ```
+
+- one star unpacks arguments
+```Python
+function(1,2,3) = function(*[1,2,3])
+
+args = [1,2,3]
+func(*args) #much nicer than
+func(args[0],args[1],args[2],...)
+```
+
+- two stars is for key worded arguments and is for maps
+```Python
+function(**dict) # keys are the arguments and values are the argument values
+```
+
 
 - cumulative sum,min,max,xor,gcd. Note sum and xor are semi-rings on $\Z$ (that is they have minus) - you can query subarrays in $O(1)$.
 ```Python
