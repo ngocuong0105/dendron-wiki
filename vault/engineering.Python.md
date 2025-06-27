@@ -2,7 +2,7 @@
 id: 7khpigcji0ufpuptuqozcft
 title: Python
 desc: ''
-updated: 1750956275489
+updated: 1751026341893
 created: 1750781063837
 ---
 
@@ -19,9 +19,6 @@ gc.collect() # still does not release memory
 - So in theory when you continue working in the python process you should be able to reclaim this memory with other python objects.
 - Yes but unfortunately mostly no... In practice data is fragmented and is not usable unless you close the process (close the interactive terminal)
 - Often you will have a *leak or fragmentation*
-
-
-- python library to trace memory allocations [tracemalloc](https://docs.python.org/3/library/tracemalloc.html)
 
 **Hacks**
 ```python
@@ -60,6 +57,11 @@ print(usage())
 Then the function is executed at a different process. When that process completes, the OS retakes all the resources it used. Python, pandas, the garbage collector
 - no one can do anything to stop that.
 
+# Tracing Python Memory
+
+#TODO
+
+- python library to trace memory allocations [tracemalloc](https://docs.python.org/3/library/tracemalloc.html)
 
 
 
@@ -146,3 +148,74 @@ Every object has identity (address of the place in memory), type and value. Only
 `id()` gives an integer representing the identity
 
 
+# Concurrency Models in Python
+
+Chapter 19 from "Fluent Python"
+
+Concurrency is about dealing with multiple things at once.
+
+Parallelism is about doing multiple things at once.
+
+Concurrency is about structure, Parallelism is about execution.
+
+A CPU with 4 cores can run 4 processes in parallel but 100s processes concurrently. 
+
+
+
+
+# Polars lazy API
+
+Write query plan first and run only when needed, i.e. collect()
+
+
+the lazy API:
+- has query optimizations like in (SQL). You tell it what to do not how to do it so it arranges the queries is the most optimal way
+- allows to work with larger than memory datasets using streaming
+- [list of optimizations](https://docs.pola.rs/user-guide/lazy/optimizations/) - all is related to optimal query planning
+- schema plays important role. The lazy API does type checking before running all expensive queries!
+- This Polars query optimizer MUST be able to infer the schema at every step of the query plan (hence .pivot() operation is not available - creates columns from values coming in one column). The optimizer does not know in advance these column names
+- visualize optimizations using `.show_graph()` read from bottom to top. sigma is (filtering rows), pi is projection (filtering columns) -> here you will see how polars does predicate pushdown and projection pushdown
+- Remember that LazyFrames are query plans i.e. a promise on computation and is not guaranteed to cache common subplans.
+- sinks - saving data to disk without the need to load the whole dataset in memory. Process data in batches/chunks. I.e. we are streaming the results to storage
+
+**Tricks**
+
+`pl.scan_csv` or `pl.scan_parquet`
+
+- read files larger than memory
+```python
+# With the default collect method Polars processes all of your data as one batch. This means that all the data has to fit into your available memory at the point of peak memory usage in your query.
+# So do: 
+.collect(engine='streaming') # to read datasets thar are larger than memory
+```
+
+- Sink
+```python
+# sink = streaming data to storage - saving in batches
+lf = scan_csv("my_dataset/*.csv").filter(pl.all().is_not_null())
+lf.sink_parquet(
+    pl.PartitionMaxSize(
+        "my_table_{part}.parquet"
+        max_size=512_000
+    )
+)
+
+# creates
+# my_table_0.parquet
+# my_table_1.parquet
+# ...
+# my_table_n.parquet
+```
+
+- diverging queries (kind of caching..)
+- [Multiplexing queries](https://docs.pola.rs/user-guide/lazy/multiplexing/)! (also group_by does not guarantee order)
+```python
+# Some expensive LazyFrame
+lf: LazyFrame
+
+lf_1 = LazyFrame.select(pl.all().sum())
+
+lf_2 = lf.some_other_computation()
+
+pl.collect_all([lf_1, lf_2]) # this will execute lf only once!
+```
