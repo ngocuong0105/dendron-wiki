@@ -1,0 +1,180 @@
+<h1 id="python">Python<a aria-hidden="true" class="anchor-heading icon-link" href="#python"></a></h1>
+<ul>
+<li><a href="https://docs.python.org/3/reference/datamodel.html">Python Language Reference</a></li>
+<li><a href="https://elmoukrie.com/wp-content/uploads/2022/05/luciano-ramalho-fluent-python_-clear-concise-and-effective-programming-oreilly-media-2022.pdf">Fluent Python Book</a></li>
+</ul>
+<h1 id="memory-management">Memory Management<a aria-hidden="true" class="anchor-heading icon-link" href="#memory-management"></a></h1>
+<pre class="language-python"><code class="language-python"><span class="token keyword">del</span> df <span class="token comment"># does not release memory to the OS</span>
+gc<span class="token punctuation">.</span>collect<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># still does not release memory</span>
+</code></pre>
+<ul>
+<li>Python objects have high-water mark. It is expensive to pull memory from OS so Python interpreter reserves it for future use so in <code>htop</code> it looks like memory is being used.</li>
+<li>So in theory when you continue working in the python process you should be able to reclaim this memory with other python objects.</li>
+<li>Yes but unfortunately mostly no... In practice data is fragmented and is not usable unless you close the process (close the interactive terminal)</li>
+<li>Often you will have a <em>leak or fragmentation</em></li>
+</ul>
+<p><strong>Hacks</strong></p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">huge_intermediate_calc</span><span class="token punctuation">(</span>something<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    huge_df <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">return</span> some_aggregate
+<span class="token keyword">import</span> multiprocessing
+
+result <span class="token operator">=</span> multiprocessing<span class="token punctuation">.</span>Pool<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span>huge_intermediate_calc<span class="token punctuation">,</span> <span class="token punctuation">[</span>something_<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+
+<span class="token keyword">with</span> multiprocessing<span class="token punctuation">.</span>Pool<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">as</span> pool<span class="token punctuation">:</span> 
+    result <span class="token operator">=</span> pool<span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span>huge_intermediate_calc<span class="token punctuation">,</span> <span class="token punctuation">[</span>something<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># However in a ipython environment (like jupyter notebook) I found that you need to .close() and .join() or .terminate() the pool to get rid of the spawned process.</span>
+
+
+<span class="token comment"># Tested example:</span>
+<span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    df <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_parquet<span class="token punctuation">(</span>TRAIN_DATA_PATH<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> df
+
+<span class="token keyword">with</span> concurrent<span class="token punctuation">.</span>futures<span class="token punctuation">.</span>ProcessPoolExecutor<span class="token punctuation">(</span>max_workers<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">as</span> executor<span class="token punctuation">:</span>
+    start_usage <span class="token operator">=</span> usage<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Start: '</span><span class="token punctuation">,</span> start_usage<span class="token punctuation">)</span>
+    result <span class="token operator">=</span> executor<span class="token punctuation">.</span>submit<span class="token punctuation">(</span>func<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">.</span>result<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'End: '</span><span class="token punctuation">,</span> usage<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment"># close process</span>
+    executor<span class="token punctuation">.</span>shutdown<span class="token punctuation">(</span>wait<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>usage<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+</code></pre>
+<p>Then the function is executed at a different process. When that process completes, the OS retakes all the resources it used. Python, pandas, the garbage collector</p>
+<ul>
+<li>no one can do anything to stop that.</li>
+</ul>
+<h1 id="tracing-python-memory">Tracing Python Memory<a aria-hidden="true" class="anchor-heading icon-link" href="#tracing-python-memory"></a></h1>
+<p><a class="color-tag" style="--tag-color: #fbdd7e;" href="/dendron-wiki/notes/q334c9dkrbs70eq5gujgcb3">#TODO</a></p>
+<ul>
+<li>python library to trace memory allocations <a href="https://docs.python.org/3/library/tracemalloc.html">tracemalloc</a></li>
+</ul>
+<h1 id="private-methods">Private methods<a aria-hidden="true" class="anchor-heading icon-link" href="#private-methods"></a></h1>
+<p>Private methods are those methods which can't be accessed in other class except the class in which they are declared.</p>
+<ul>
+<li>One underscore is to show it is a internal function: <code>_function_name()</code></li>
+<li>Two underscores: the idea is to use double <strong> to fully disclose methods as private so python will convert them form </strong>private_method to _Myclass__my_private_method and will not let a child class overwrite this method. </li>
+</ul>
+<h1 id="del-and-garbage-collection">del and Garbage Collection<a aria-hidden="true" class="anchor-heading icon-link" href="#del-and-garbage-collection"></a></h1>
+<p>"Objects are never explicitly destroyed; however when they become unreachable hey may be garbage-collected."</p>
+<pre class="language-python"><code class="language-python"><span class="token number">1</span> <span class="token operator">==</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment"># returns true</span>
+x <span class="token keyword">and</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> usually mean the same thing
+<span class="token keyword">del</span> x <span class="token comment"># this is a statement not a function</span>
+<span class="token keyword">del</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token comment"># would do the same thing</span>
+
+
+<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span> <span class="token comment"># tuple</span>
+</code></pre>
+<ul>
+<li><code>del</code> deletes the reference, not the object</li>
+</ul>
+<pre class="language-python"><code class="language-python">l1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token comment"># l1 reference to the object [1,2]</span>
+l2 <span class="token operator">=</span> l1 <span class="token comment"># l2 reference to the object</span>
+<span class="token keyword">del</span> l1 <span class="token comment"># deletes reference l1</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>l2<span class="token punctuation">)</span> <span class="token comment"># [1,2]</span>
+</code></pre>
+<pre class="language-python"><code class="language-python"><span class="token comment"># example of a life of an object</span>
+<span class="token keyword">import</span> weakref
+<span class="token keyword">def</span> <span class="token function">bye</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'... goodbye my lover'</span><span class="token punctuation">)</span>
+ender <span class="token operator">=</span> weakref<span class="token punctuation">.</span>finalize<span class="token punctuation">(</span>s1<span class="token punctuation">,</span> bye<span class="token punctuation">)</span>
+ender<span class="token punctuation">.</span>alive <span class="token comment"># True</span>
+<span class="token keyword">del</span> s1
+ender<span class="token punctuation">.</span>alive <span class="token comment"># True</span>
+s2 <span class="token operator">=</span> <span class="token string">''</span> <span class="token comment"># ... goodbye my lover</span>
+ender<span class="token punctuation">.</span>alive <span class="token comment"># False</span>
+</code></pre>
+<p>Objects may be deleted by the garbage collector once they become unreachable! In CPython When the reference count of an object reaches zero, the garbage collector disposes of it. </p>
+<h1 id="-vs-is">== vs <code>is</code><a aria-hidden="true" class="anchor-heading icon-link" href="#-vs-is"></a></h1>
+<ul>
+<li><code>==</code> compares values, <code>is</code> compares if it referencing to the same object</li>
+</ul>
+<pre class="language-python"><code class="language-python">l1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
+l2 <span class="token operator">=</span> l1<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token comment"># make copy</span>
+l2 <span class="token operator">==</span> l1 <span class="token comment"># true</span>
+l1 <span class="token keyword">is</span> l2 <span class="token comment"># false</span>
+
+l3 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
+
+l3 <span class="token operator">==</span> l2 <span class="token comment"># true</span>
+</code></pre>
+<p><strong>Garbage Collector</strong></p>
+<p>reference-counting - when it becomes zero it is unreachable and collected.</p>
+<p>CPython implementation detail: CPython currently uses a reference-counting scheme with (optional) delayed detection of cyclically linked garbage, which collects most objects as soon as they become unreachable,
+but is not guaranteed to collect garbage containing circular references.</p>
+<ul>
+<li>simple assignment does not create copies - references to the same object</li>
+<li>function parameters are passed as aliases, which means the function may change any mutable object received as an argument. Need to make local copy to prevent this.</li>
+<li>Using mutable objects as default values for function parameters is dangerous because if parameters are changed in-place, the default value is changed!</li>
+</ul>
+<h1 id="python-data-model">Python Data Model<a aria-hidden="true" class="anchor-heading icon-link" href="#python-data-model"></a></h1>
+<ul>
+<li><a href="https://docs.python.org/3/reference/datamodel.html">Data Model from Python Language Reference</a></li>
+</ul>
+<p>Every object has identity (address of the place in memory), type and value. Only value can be changed (for mutable objects). Immutable objects cannot have their value changed.</p>
+<p><code>is</code> operator compares the identity of two objects <code>==</code> compares their value.</p>
+<p><code>id()</code> gives an integer representing the identity</p>
+<h1 id="concurrency-models-in-python">Concurrency Models in Python<a aria-hidden="true" class="anchor-heading icon-link" href="#concurrency-models-in-python"></a></h1>
+<p>Chapter 19 from "Fluent Python"</p>
+<p>Concurrency is about dealing with multiple things at once.</p>
+<p>Parallelism is about doing multiple things at once.</p>
+<p>Concurrency is about structure, Parallelism is about execution.</p>
+<p>A CPU with 4 cores can run 4 processes in parallel but 100s processes concurrently. </p>
+<h1 id="polars-lazy-api">Polars lazy API<a aria-hidden="true" class="anchor-heading icon-link" href="#polars-lazy-api"></a></h1>
+<p>Write query plan first and run only when needed, i.e. collect()</p>
+<p>the lazy API:</p>
+<ul>
+<li>has query optimizations like in (SQL). You tell it what to do not how to do it so it arranges the queries is the most optimal way</li>
+<li>allows to work with larger than memory datasets using streaming</li>
+<li><a href="https://docs.pola.rs/user-guide/lazy/optimizations/">list of optimizations</a> - all is related to optimal query planning</li>
+<li>schema plays important role. The lazy API does type checking before running all expensive queries!</li>
+<li>This Polars query optimizer MUST be able to infer the schema at every step of the query plan (hence .pivot() operation is not available - creates columns from values coming in one column). The optimizer does not know in advance these column names</li>
+<li>visualize optimizations using <code>.show_graph()</code> read from bottom to top. sigma is (filtering rows), pi is projection (filtering columns) -> here you will see how polars does predicate pushdown and projection pushdown</li>
+<li>Remember that LazyFrames are query plans i.e. a promise on computation and is not guaranteed to cache common subplans.</li>
+<li>sinks - saving data to disk without the need to load the whole dataset in memory. Process data in batches/chunks. I.e. we are streaming the results to storage</li>
+</ul>
+<p><strong>Tricks</strong></p>
+<p><code>pl.scan_csv</code> or <code>pl.scan_parquet</code></p>
+<ul>
+<li>read files larger than memory</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token comment"># With the default collect method Polars processes all of your data as one batch. This means that all the data has to fit into your available memory at the point of peak memory usage in your query.</span>
+<span class="token comment"># So do: </span>
+<span class="token punctuation">.</span>collect<span class="token punctuation">(</span>engine<span class="token operator">=</span><span class="token string">'streaming'</span><span class="token punctuation">)</span> <span class="token comment"># to read datasets thar are larger than memory</span>
+</code></pre>
+<ul>
+<li>Sink</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token comment"># sink = streaming data to storage - saving in batches</span>
+lf <span class="token operator">=</span> scan_csv<span class="token punctuation">(</span><span class="token string">"my_dataset/*.csv"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">filter</span><span class="token punctuation">(</span>pl<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>is_not_null<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+lf<span class="token punctuation">.</span>sink_parquet<span class="token punctuation">(</span>
+    pl<span class="token punctuation">.</span>PartitionMaxSize<span class="token punctuation">(</span>
+        <span class="token string">"my_table_{part}.parquet"</span>
+        max_size<span class="token operator">=</span><span class="token number">512_000</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># creates</span>
+<span class="token comment"># my_table_0.parquet</span>
+<span class="token comment"># my_table_1.parquet</span>
+<span class="token comment"># ...</span>
+<span class="token comment"># my_table_n.parquet</span>
+</code></pre>
+<ul>
+<li>diverging queries (kind of caching..)</li>
+<li><a href="https://docs.pola.rs/user-guide/lazy/multiplexing/">Multiplexing queries</a>! (also group_by does not guarantee order)</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Some expensive LazyFrame</span>
+lf<span class="token punctuation">:</span> LazyFrame
+
+lf_1 <span class="token operator">=</span> LazyFrame<span class="token punctuation">.</span>select<span class="token punctuation">(</span>pl<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+lf_2 <span class="token operator">=</span> lf<span class="token punctuation">.</span>some_other_computation<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+pl<span class="token punctuation">.</span>collect_all<span class="token punctuation">(</span><span class="token punctuation">[</span>lf_1<span class="token punctuation">,</span> lf_2<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># this will execute lf only once!</span>
+</code></pre>

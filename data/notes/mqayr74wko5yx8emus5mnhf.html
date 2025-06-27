@@ -1,0 +1,94 @@
+<h1 id="binary-tree-traversal">Binary Tree Traversal<a aria-hidden="true" class="anchor-heading icon-link" href="#binary-tree-traversal"></a></h1>
+<p>Recursive traversals are easy. You do a DFS and depending on pre, in, post order you record the node values before, between or after visiting the two children.</p>
+<p>Iterative traversals are a bit trickier. A few principles you follow:</p>
+<ul>
+<li>use a stack (every recursive algorithm can be emulated using a stack)</li>
+<li>each iteration you pop the last node of the stack</li>
+<li>in in order and post order traversal you need to bring back the node in the stack you you haven't visited left or both children</li>
+<li>append to stack right and then left node to simulate DFS recursive</li>
+</ul>
+<p>Why would you want to do iterative vs recursive algos? Because in Python the max Call stack is like 1000 depth (unless you explicitly increase it).</p>
+<h1 id="pre-order">Pre order<a aria-hidden="true" class="anchor-heading icon-link" href="#pre-order"></a></h1>
+<ul>
+<li><a href="https://leetcode.com/problems/binary-tree-preorder-traversal/">leetcode</a></li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Node Left Right</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">preorderTraversal</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> root<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>TreeNode<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token keyword">not</span> root<span class="token punctuation">:</span> <span class="token keyword">return</span>
+            pre<span class="token punctuation">.</span>append<span class="token punctuation">(</span>root<span class="token punctuation">.</span>val<span class="token punctuation">)</span>
+            dfs<span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span>
+            dfs<span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span>
+        pre <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        dfs<span class="token punctuation">(</span>root<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> pre
+<span class="token comment"># opposed to post or in order you don't need to check if children were passed thorugh</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">preorderTraversal</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> root<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>TreeNode<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        pre <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        stack <span class="token operator">=</span> <span class="token punctuation">[</span>root<span class="token punctuation">]</span> <span class="token keyword">if</span> root <span class="token keyword">else</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">while</span> stack<span class="token punctuation">:</span>
+            node <span class="token operator">=</span> stack<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            pre<span class="token punctuation">.</span>append<span class="token punctuation">(</span>node<span class="token punctuation">.</span>val<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> node<span class="token punctuation">.</span>right<span class="token punctuation">:</span> stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> node<span class="token punctuation">.</span>left<span class="token punctuation">:</span> stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> pre
+</code></pre>
+<h1 id="in-order">In order<a aria-hidden="true" class="anchor-heading icon-link" href="#in-order"></a></h1>
+<p>-<a href="https://leetcode.com/problems/binary-tree-inorder-traversal/">leetcode</a></p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Left Node Right</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">inorderTraversal</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> root<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>TreeNode<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token keyword">not</span> root<span class="token punctuation">:</span> <span class="token keyword">return</span>
+            dfs<span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span>
+            in_order<span class="token punctuation">.</span>append<span class="token punctuation">(</span>root<span class="token punctuation">.</span>val<span class="token punctuation">)</span>
+            dfs<span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span>
+        in_order <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        dfs<span class="token punctuation">(</span>root<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> in_order
+
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">inorderTraversal</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> root<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>TreeNode<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        stack <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">if</span> root <span class="token keyword">else</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        in_order <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">while</span> stack<span class="token punctuation">:</span>
+            node<span class="token punctuation">,</span> visited_left <span class="token operator">=</span> stack<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> visited_left<span class="token punctuation">:</span>
+                in_order<span class="token punctuation">.</span>append<span class="token punctuation">(</span>node<span class="token punctuation">.</span>val<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> node<span class="token punctuation">.</span>right<span class="token punctuation">:</span> stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">,</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span> <span class="token comment"># visit left if you haven't</span>
+                stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>node<span class="token punctuation">,</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> node<span class="token punctuation">.</span>left<span class="token punctuation">:</span> stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">,</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> in_order
+</code></pre>
+<h1 id="post-order">Post order<a aria-hidden="true" class="anchor-heading icon-link" href="#post-order"></a></h1>
+<p>-<a href="https://leetcode.com/problems/binary-tree-postorder-traversal/">leetcode</a></p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Left Right Node</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">postorderTraversal</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> root<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>TreeNode<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token keyword">not</span> root<span class="token punctuation">:</span> <span class="token keyword">return</span>
+            dfs<span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span>
+            dfs<span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span>
+            post<span class="token punctuation">.</span>append<span class="token punctuation">(</span>root<span class="token punctuation">.</span>val<span class="token punctuation">)</span>
+        post <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        dfs<span class="token punctuation">(</span>root<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> post
+
+<span class="token comment"># definition of post order is to visit children first and then visit node</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">postorderTraversal</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> root<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>TreeNode<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        post <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        stack <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">if</span> root <span class="token keyword">else</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">while</span> stack<span class="token punctuation">:</span>
+            node<span class="token punctuation">,</span> visited_children <span class="token operator">=</span> stack<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> visited_children<span class="token punctuation">:</span>
+                post<span class="token punctuation">.</span>append<span class="token punctuation">(</span>node<span class="token punctuation">.</span>val<span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>node<span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> node<span class="token punctuation">.</span>right<span class="token punctuation">:</span> stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">,</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> node<span class="token punctuation">.</span>left<span class="token punctuation">:</span> stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">,</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> post
+</code></pre>
