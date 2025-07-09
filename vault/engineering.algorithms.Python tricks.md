@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1750273224765
+updated: 1751035062462
 created: 1664446506779
 ---
 
@@ -405,3 +405,11 @@ sum([ch in A for ch in B]) # fast
 sum(ch in A for ch in B) # slow
 ```
 
+
+- check if t is a subsequence of s using iterator trick
+```python
+def is_subsequence(t,s):
+    it = iter(s)
+    return all(ch in it for ch in t)
+# return all(ch in iter(t) for ch in s) fails, creates a new instance of iter(t) every time 
+```
