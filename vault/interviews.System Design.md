@@ -2,7 +2,7 @@
 id: 37ghcmfqsbumla66qt9qh4y
 title: System Design
 desc: ''
-updated: 1744221312807
+updated: 1751984689559
 created: 1658698150589
 ---
 # Resources
@@ -13,6 +13,7 @@ created: 1658698150589
 - [Grokking the System Design Interview github notes](https://github.com/Jeevan-kumar-Raj/Grokking-System-Design)
 - drawing tool [escalidraw](https://excalidraw.com/)
 - [TechLead overview](https://www.youtube.com/watch?v=WV2Ed1QTst8)
+- [Blog on System Design topics](https://www.systemdesignacademy.com/), one of its articles was liked by William (IMO best competitor)
 
 
 *Strategy prep*
