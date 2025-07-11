@@ -2,7 +2,7 @@
 id: x0cxhdz6m217jsrqw2pcwuk
 title: Python tricks
 desc: ''
-updated: 1751035062462
+updated: 1752082145773
 created: 1664446506779
 ---
 
@@ -399,7 +399,8 @@ def bs(nums=range(n)):
 
 - [generators are slower than list comprehension](https://stackoverflow.com/questions/62975325/why-is-summing-list-comprehension-faster-than-generator-expression)
 
-check common characters in two strings A and B
+-check common characters in two strings A and B
+
 ```python
 sum([ch in A for ch in B]) # fast
 sum(ch in A for ch in B) # slow
@@ -407,6 +408,7 @@ sum(ch in A for ch in B) # slow
 
 
 - check if t is a subsequence of s using iterator trick
+
 ```python
 def is_subsequence(t,s):
     it = iter(s)
