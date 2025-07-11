@@ -1,11 +1,26 @@
 ---
 id: h79jpatf2zw7a0qpq4asniw
-title: Linear Rgression
+title: Linear Regression
 desc: ''
-updated: 1751964740835
+updated: 1752221567894
 created: 1751960242840
 ---
-# On Multi-Collinear Features
+
+Here I discuss how violation of linear regression assumptions affect model explainability and foresting performance.
+It is a practical guide on the caveats of the Linear Model and how to deal with them - particularly useful in forecasting-focused
+settings like Kaggle. It is assumed the reader is familiar with the mathematics behind the model.
+
+Linear model's assumptions are:
+- The target variable is linear in the predictor variables. Violation is also known for mispecified model
+- The errors are normally distributed, independent, and homoscedastic (constant variance).
+- The errors are independent of the features (no endogeneity).
+- The features are not multi-collinear (not highly correlated).
+
+
+
+# Multi-Collinear Features
+
+- **Multicolinearity affects model interpretability and not so much forecasting performance.**
 
 Experiment:
 - Run LR `y ~ x1`
@@ -100,6 +115,12 @@ Notes:
 
 # High Leverage Points
 
+- identify outliers in the design matrix $X$ (not in target variable $y$)
+- Property of: Only the feature/design matrix X  
+- Definition: Measures how far an observation's x-values are from the mean of all x-values, i.e., how "unusual" its X-row is.
+- Mathematically: The diagonal elements $h_i$ of the “hat” matrix $H=X(X^TX)^{-1}X^T$.
+- Note: Leverage is completely independent of $y$.
+     
 - outliers in the design matrix $X$ can lead to the picture below:
 - if a row $x_i$ deviates from the mean of $X$ it will have large leverage and pull the regression line
 ![high_leverage_point](./assets/images/high_leverage_point.png)
@@ -181,3 +202,266 @@ Kurtosis:                       3.002   Cond. No.                         4.46
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 ```
+
+# Residuals and Cook's Distance
+
+- identify outliers in target variable $y$
+- Studentised residuals and cook's distance use leverage and residual error to find outliers in $y$
+
+
+![alt text](assets/images/y_outlier.png)
+
+# Homo or Hetero
+- Homoscedacity is the assumption that residuals are with equal variance. 
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+def generate_data(seed=42, n1=50, n2=50):
+    np.random.seed(seed)
+    x1 = np.linspace(0, 10, n1)
+    y1 = 2 * x1 + 1 + np.random.normal(0, 1, n1)
+    x2 = np.linspace(10, 20, n2)
+    y2 = 2 * x2 + 1 + np.random.normal(0, 69, n2) # High variance, Different mean
+    return x1, y1, x2, y2
+
+def fit_single_model(x, y):
+    model = LinearRegression().fit(x.reshape(-1, 1), y)
+    y_pred = model.predict(x.reshape(-1, 1))
+    return model, y_pred
+
+def fit_two_models(x1, y1, x2, y2):
+    model1 = LinearRegression().fit(x1.reshape(-1, 1), y1)
+    y1_pred = model1.predict(x1.reshape(-1, 1))
+    model2 = LinearRegression().fit(x2.reshape(-1, 1), y2)
+    y2_pred = model2.predict(x2.reshape(-1, 1))
+    return model1, y1_pred, model2, y2_pred
+
+def plot_results(x1, y1, x2, y2, X_all, y_pred_all, y1_pred, y2_pred):
+    plt.figure(figsize=(10, 6))
+    plt.scatter(x1, y1, label='Set 1 (Low variance)', color='blue')
+    plt.scatter(x2, y2, label='Set 2 (High variance)', color='red')
+    plt.plot(X_all, y_pred_all, label='Fit on all points', color='black', linewidth=2)
+    plt.plot(x1, y1_pred, label='Fit on Set 1', color='blue', linestyle='--')
+    plt.plot(x2, y2_pred, label='Fit on Set 2', color='red', linestyle='--')
+    plt.legend()
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title('Illustration of Heteroscedasticity')
+    plt.show()
+
+def calculate_mse(y_true, y_pred):
+    return mean_squared_error(y_true, y_pred)
+
+def main():
+    # Generate data
+    x1, y1, x2, y2 = generate_data()
+    X_all = np.concatenate([x1, x2]).reshape(-1, 1)
+    y_all = np.concatenate([y1, y2])
+
+    # Fit models
+    model_all, y_pred_all = fit_single_model(np.concatenate([x1, x2]), y_all)
+    model1, y1_pred, model2, y2_pred = fit_two_models(x1, y1, x2, y2)
+
+    # Plot
+    plot_results(x1, y1, x2, y2, np.concatenate([x1, x2]), y_pred_all, y1_pred, y2_pred)
+
+    # MSE calculations
+    mse_all = calculate_mse(y_all, y_pred_all)
+    y_sep_pred = np.concatenate([y1_pred, y2_pred])
+    mse_sep = calculate_mse(y_all, y_sep_pred)
+
+    print("MSE (fit to all data):", round(mse_all))
+    print("MSE (fit separately):", round(mse_sep))
+
+
+main()
+```
+</details>
+
+It reduces a bit the forecasting accuracy.
+
+![alt text](./assets/images/heteroscedacity.png)
+
+
+
+<details>
+<summary> <b>Summary of the results:</b> </summary>
+
+```
+=== Regression summary: All Data ===
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.059
+Model:                            OLS   Adj. R-squared:                  0.050
+Method:                 Least Squares   F-statistic:                     6.194
+Date:                Thu, 10 Jul 2025   Prob (F-statistic):             0.0145
+Time:                        08:37:53   Log-Likelihood:                -516.21
+No. Observations:                 100   AIC:                             1036.
+Df Residuals:                      98   BIC:                             1042.
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          3.2053      8.499      0.377      0.707     -13.661      20.072
+x1             1.8295      0.735      2.489      0.015       0.371       3.288
+==============================================================================
+Omnibus:                       21.818   Durbin-Watson:                   2.191
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               73.588
+Skew:                          -0.605   Prob(JB):                     1.05e-16
+Kurtosis:                       7.025   Cond. No.                         23.2
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+=== Regression summary: Set 1 (Low variance) ===
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.975
+Model:                            OLS   Adj. R-squared:                  0.975
+Method:                 Least Squares   F-statistic:                     1903.
+Date:                Thu, 10 Jul 2025   Prob (F-statistic):           2.81e-40
+Time:                        08:37:53   Log-Likelihood:                -66.142
+No. Observations:                  50   AIC:                             136.3
+Df Residuals:                      48   BIC:                             140.1
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          1.0644      0.258      4.120      0.000       0.545       1.584
+x1             1.9420      0.045     43.622      0.000       1.853       2.032
+==============================================================================
+Omnibus:                        0.453   Durbin-Watson:                   1.942
+Prob(Omnibus):                  0.798   Jarque-Bera (JB):                0.608
+Skew:                           0.156   Prob(JB):                        0.738
+Kurtosis:                       2.559   Cond. No.                         11.7
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+=== Regression summary: Set 2 (High variance) ===
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.000
+Model:                            OLS   Adj. R-squared:                 -0.021
+Method:                 Least Squares   F-statistic:                  0.001247
+Date:                Thu, 10 Jul 2025   Prob (F-statistic):              0.972
+Time:                        08:37:53   Log-Likelihood:                -275.16
+No. Observations:                  50   AIC:                             554.3
+Df Residuals:                      48   BIC:                             558.1
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         33.7690     44.502      0.759      0.452     -55.707     123.245
+x1            -0.1028      2.911     -0.035      0.972      -5.956       5.751
+==============================================================================
+Omnibus:                        4.219   Durbin-Watson:                   2.211
+Prob(Omnibus):                  0.121   Jarque-Bera (JB):                3.105
+Skew:                          -0.535   Prob(JB):                        0.212
+Kurtosis:                       3.587   Cond. No.                         79.7
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+```
+</details>
+
+These results show how when you fit one for all it has low $R^2$ mainly due to the large errors by high variance data. You will miss the signal in the low variance data (p-value for x1 is higher in the fit all model).
+
+# Loss Function, Likelihood, Pearson Correlation
+
+- Under normality and homoscedasticity assumptions, the OLS loss function is equivalent to the negative log-likelihood of the Gaussian distribution.
+- Also it is equivalent to the Pearson correlation coefficient between the predicted and actual values.
+
+
+# Independent Errors Assumption
+
+- The assumption that the errors are independent of each other.
+- statsmodels has a fix for p-values and varaince estimae (still fits normal OLS) but gives different summary results. 
+
+```python
+X_const = sm.add_constant(x)
+ols_model = sm.OLS(y_ar1, X_const).fit()
+robust_model = ols_model.get_robustcov_results(cov_type='HAC', maxlags=1)
+```
+
+
+
+# Computation and Optimization
+
+- $X(X^{T}X)^{-1} y$ is $O(p^3) + O(p^{2}*n)$ run time (matrix inversion is $O(p^3)$)
+- Using Gram-Schimdt + QR decomposition is $O(p^2*n)$
+- Gram-Smidth is doing regression on each feature one by one, orthogonally projecting the residuals onto the next feature.
+- Your book "Elements of Statistical Learning" has the exact algo.
+
+#TODO check how to implement Gram-Schmidt in numpy/scipy.
+
+I tested in practice, the Gram-schidt was slower, though.
+
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```python
+iimport numpy as np
+import time
+from numpy.linalg import inv, solve
+from scipy.linalg import qr
+
+# Function for normal equation (direct inversion)
+def normal_equation(X, y):
+    XtX = X.T @ X
+    Xty = X.T @ y
+    beta = inv(XtX) @ Xty
+    return beta
+
+# Function for QR decomposition
+def qr_solution(X, y):
+    Q, R = qr(X, mode='economic')
+    beta = solve(R, Q.T @ y)
+    return beta
+
+# Simulation parameters
+n = 50000   # number of samples (can increase for stress testing)
+p = 200    # number of features
+
+np.random.seed(0)
+X = np.random.randn(n, p)
+y = np.random.randn(n)
+
+# Run and time the normal equation
+start = time.time()
+beta_normal = normal_equation(X, y)
+time_normal = time.time() - start
+print(f"Normal Equation Time: {time_normal:.4f} seconds")
+
+# Run and time the QR decomposition
+start = time.time()
+beta_qr = qr_solution(X, y)
+time_qr = time.time() - start
+print(f"QR Decomposition Time: {time_qr:.4f} seconds")
+
+# Check the difference in solution (should be very small!)
+diff = np.linalg.norm(beta_normal - beta_qr) # sum(abs(diff))^(0.5)
+print(f"L2 norm of difference between solutions: {diff:.2e}")
+
+# Output
+'''
+Normal Equation Time: 0.0389 seconds
+QR Decomposition Time: 0.5719 seconds
+L2 norm of difference between solutions: 5.85e-16
+'''
+```
+</details>
