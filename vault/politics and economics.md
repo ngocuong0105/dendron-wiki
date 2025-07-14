@@ -2,7 +2,7 @@
 id: uy9u1co5ih1fokind8tg0eq
 title: Politics and Economics
 desc: ''
-updated: 1696411963746
+updated: 1752318731473
 created: 1658766097444
 ---
 
@@ -231,3 +231,16 @@ Homeland economics is a response to four big shocks:
 **leads to high subsidieries**
 
 "Industrial policy and protectionism could endanger trade, without making Western economies safer"
+
+# Federal republics
+
+- more equally distributed power and resources
+- more stable across the country
+- cities are more equally developed
+- Germany Switzerland, USA, Canada, Australia
+
+
+# Airlines Hub
+Hub and spoke model is a system of routing airline flights through a central hub airport. This allows airlines to consolidate their operations and offer more connections to passengers, while also reducing costs and increasing efficiency. The hub airport serves as a central point for flights to and from various destinations, allowing airlines to maximize their route networks and provide better service to customers.
+
+big airlines fly only to their hubs
