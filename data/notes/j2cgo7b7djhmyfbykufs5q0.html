@@ -1,0 +1,79 @@
+<h1 id="llms">LLMs<a aria-hidden="true" class="anchor-heading icon-link" href="#llms"></a></h1>
+<p>Here I put all my thoughts, my resarch, things I've learned and read about LLMs.</p>
+<h1 id="resources">Resources<a aria-hidden="true" class="anchor-heading icon-link" href="#resources"></a></h1>
+<ul>
+<li><a href="https://darioamodei.com/">Dario Modei Blog</a></li>
+<li></li>
+</ul>
+<h1 id="models">Models<a aria-hidden="true" class="anchor-heading icon-link" href="#models"></a></h1>
+<p>LLM models so far are decrtibed as reasoning and models that are good for creative tasks and agentic planning.</p>
+<ul>
+<li>DeepSeek-R1 chinese AI lab DeepSeek reasoning model</li>
+<li></li>
+</ul>
+<h1 id="openai">OpenAI<a aria-hidden="true" class="anchor-heading icon-link" href="#openai"></a></h1>
+<ul>
+<li>gpt models, flagship models for OpenAI</li>
+<li>o-series reasoning modeils</li>
+</ul>
+<p><a class="color-tag" style="--tag-color: #fbdd7e;" href="/dendron-wiki/notes/q334c9dkrbs70eq5gujgcb3">#TODO</a> <a href="https://platform.openai.com/docs/models#models-overview">https://platform.openai.com/docs/models#models-overview</a></p>
+<h1 id="deepseek">DeepSeek<a aria-hidden="true" class="anchor-heading icon-link" href="#deepseek"></a></h1>
+<h2 id="r1">R1<a aria-hidden="true" class="anchor-heading icon-link" href="#r1"></a></h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1">R1 HuggingFace model</a></li>
+</ul>
+<p>reasoning model with 671 billion parameters. Under MIT License.</p>
+<p><a class="color-tag" style="--tag-color: #fbdd7e;" href="/dendron-wiki/notes/q334c9dkrbs70eq5gujgcb3">#TODO</a> <a href="https://huggingface.co/deepseek-ai/DeepSeek-R1">https://huggingface.co/deepseek-ai/DeepSeek-R1</a></p>
+<h1 id="prompt-engineering">Prompt engineering<a aria-hidden="true" class="anchor-heading icon-link" href="#prompt-engineering"></a></h1>
+<p><a class="color-tag" style="--tag-color: #fbdd7e;" href="/dendron-wiki/notes/q334c9dkrbs70eq5gujgcb3">#TODO</a> <a href="https://platform.openai.com/docs/guides/prompt-engineering">https://platform.openai.com/docs/guides/prompt-engineering</a></p>
+<h1 id="dario-amodei">Dario Amodei<a aria-hidden="true" class="anchor-heading icon-link" href="#dario-amodei"></a></h1>
+<p><a href="https://darioamodei.com">https://darioamodei.com</a></p>
+<h1 id="three-dynamics-of-ai-development">Three Dynamics of AI Development<a aria-hidden="true" class="anchor-heading icon-link" href="#three-dynamics-of-ai-development"></a></h1>
+<ol>
+<li>Scaling laws</li>
+</ol>
+<ul>
+<li>$1M model might solve 20% of important coding tasks</li>
+<li>$10M model might solve 40%</li>
+<li>$100M model might solve 60% and so on</li>
+</ul>
+<p>Another factor of 10 might be the differene between an undergraduate and PhD skill level.</p>
+<ol start="2">
+<li>Shifting the curve</li>
+</ol>
+<ul>
+<li>improvement on model architecture (tweaks ontransforers that the the underlying of today's models)</li>
+<li>engineering improvements, finding a way to run the model more efficiently on the underlying hardware</li>
+<li>CM = "compute multiplier". Frontier AI companies are able to find those compute multiplers</li>
+</ul>
+<ol start="3">
+<li>Shifting the paradigm</li>
+</ol>
+<ul>
+<li>From 2020-2023 the main thing being scaled was pretrained models</li>
+<li>In 2024 the idea of using reinforecement learning to train models to generate chains of thought has become the new focus of scaling</li>
+<li>new paradigm involves starting with the ordinary type of pretrained models, and then as a second stage using RL to add the reasoning skills</li>
+<li>as of 2025 we are at a unique "crossover point" where thre is a powerful new paradigm that is early on the scaling curve and threfore can make big gains quickly.</li>
+</ul>
+<ul>
+<li><a href="https://darioamodei.com/on-deepseek-and-export-controls">read section after DeepSeek's Models</a></li>
+</ul>
+<h1 id="industry-impact">Industry impact<a aria-hidden="true" class="anchor-heading icon-link" href="#industry-impact"></a></h1>
+<p>The "developer loop" might change substantially.  I.e., today if you're doing a large task you might do something like:</p>
+<ol>
+<li>Work with your PM to figure out what they want</li>
+<li>Write some code</li>
+<li>Iterate with PM that you've built the thing they want</li>
+<li>Iterate on a WIP PR with your technical stakeholders</li>
+<li>Write some tests</li>
+<li>Do more iteration on PR</li>
+</ol>
+<p>Where in the future/soon/now it might be more like</p>
+<ol>
+<li>Work with PM (and maybe the AI) to figure out what they want</li>
+<li>Work with AI and your technical stakeholders to translate that PM plan to create a technical plan</li>
+<li>Have AI implement a large fraction of the technical plan via chaos coding</li>
+<li>Do some cleanup on the PR</li>
+</ol>
+<h1 id="pdoom">P(doom)<a aria-hidden="true" class="anchor-heading icon-link" href="#pdoom"></a></h1>
+<p>median 5% , 14.4% average from AI CEOs and researchers responses.</p>

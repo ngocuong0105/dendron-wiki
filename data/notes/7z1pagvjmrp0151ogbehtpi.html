@@ -1,0 +1,151 @@
+<h1 id="mit---introduction-to-deep-learning">MIT - Introduction to Deep Learning<a aria-hidden="true" class="anchor-heading icon-link" href="#mit---introduction-to-deep-learning"></a></h1>
+<h1 id="6s191--mit-introduction-to-deep-learning">6.S191 | MIT Introduction to Deep Learning<a aria-hidden="true" class="anchor-heading icon-link" href="#6s191--mit-introduction-to-deep-learning"></a></h1>
+<ul>
+<li><a href="https://introtodeeplearning.com/">Official Website</a></li>
+<li><a href="https://github.com/MITDeepLearning/introtodeeplearning/tree/master">GitHub Repo</a></li>
+</ul>
+<h1 id="key-words">Key words<a aria-hidden="true" class="anchor-heading icon-link" href="#key-words"></a></h1>
+<p>perceptron,feed forward neural network, activation function, weights and bias, sigmoid, relu, hyperbolic, gradient descent, stochastic gradient descent, backpropagation, chain rule, learning rates, adam, adaptive learning rates, overshoot or stuck at local minimum, overfitting, regularization, dropout, early stopping, sequence modeling, rnn, hidden states in rnn?, backpropagation through time, embedding = vectorization, exploding/vanishing gradient, transformer, attention is all you need, </p>
+<h1 id="lecture-1-introduction">Lecture 1: Introduction<a aria-hidden="true" class="anchor-heading icon-link" href="#lecture-1-introduction"></a></h1>
+<p>Deep Fake vide of Obama. MIT created 2 minutes deep video of OObama saying Welcome to MIT class. In 2020 ot costed 15K $</p>
+<p>Intelligence - the ability process information in order to inform some future decision or action</p>
+<p>Artificial Intelligence - make computers be able to learn to apply this process.</p>
+<p>Machine Learning is a subset of Artificial Intelligence.</p>
+<p>Make computers learn and execute tasks from the given data.</p>
+<h2 id="why-deep-learning">Why Deep Learning<a aria-hidden="true" class="anchor-heading icon-link" href="#why-deep-learning"></a></h2>
+<p>Classical ML works by defining features. For example in image detection we would start defining lines, edges, curves ,eyes, noses, face. We need to define the features from low level to high level. We can't detect faces directly. We built composite features. <strong>Feature Engineering</strong>.</p>
+<p>DL automates the process of <strong>feature engineering</strong>. DL has been around for a long time (decades). Why it became popular now?</p>
+<ul>
+<li>More data</li>
+<li>Compute power</li>
+<li>Libraries like tensorflow, pytorch</li>
+</ul>
+<h2 id="the-perceptron-forward-propagation">The perceptron: Forward propagation<a aria-hidden="true" class="anchor-heading icon-link" href="#the-perceptron-forward-propagation"></a></h2>
+<ul>
+<li>single neuron</li>
+<li>input vector <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span></span></li>
+<li>Linear sum using weights and a bias term</li>
+<li>non-linear activation function: sigmoid (good for probabilities), ReLu (piecewise linear, non linear at 0), hyperbolic function</li>
+</ul>
+<p>The point of the activation function is to introduce a non-linearity because real data in real world is heavily non-linear.</p>
+<p><span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>y</mi><mo>^</mo></mover><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mn>0</mn></msub><mo>+</mo><msup><mi>x</mi><mi>T</mi></msup><mi>w</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\hat{y} = g(w_{0} + x^{T}w)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1944em;"><span class="mord">^</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0913em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mclose">)</span></span></span></span></span> </p>
+<p><img src="/dendron-wiki/./assets/images/perceptron_simplified.png" alt="alt text"></p>
+<p><strong>dot product, add bias, apply non-linearity</strong></p>
+<h2 id="layer">Layer<a aria-hidden="true" class="anchor-heading icon-link" href="#layer"></a></h2>
+<p><img src="/dendron-wiki/./assets/images/one_hidden_layer.png" alt="alt text"></p>
+<h2 id="deep-network">Deep network<a aria-hidden="true" class="anchor-heading icon-link" href="#deep-network"></a></h2>
+<p>Has many hidden layers</p>
+<h2 id="loss">Loss<a aria-hidden="true" class="anchor-heading icon-link" href="#loss"></a></h2>
+<p>Empirical Loss</p>
+<p>Loss function = Cost function = Objective function</p>
+<p>Cross entropy loss, difference between probabilities. For Binary predictions.</p>
+<p>Mean Squared Errors, difference between us functions. For real number predictions.</p>
+<p>Our goal is to find a network that minimizes the loss on the given dataset.</p>
+<p>Goal is to find all weights.</p>
+<h2 id="loss-optimization">Loss optimization<a aria-hidden="true" class="anchor-heading icon-link" href="#loss-optimization"></a></h2>
+<p><img src="/dendron-wiki/./assets/images/loss_optimization.png" alt="alt text"></p>
+<h2 id="gradient-descent">Gradient Descent<a aria-hidden="true" class="anchor-heading icon-link" href="#gradient-descent"></a></h2>
+<p>Randomly initialize our weights. Randomly pick a point in our landscape (loss function). Compute the gradient and take the opposite direction of the gradient. Note this is <strong>local optimization</strong>. We go with a small step opposite to the gradient direction. Choosing learning rate = step size.</p>
+<p><img src="/dendron-wiki/./assets/images/gradient_descent_2.png" alt="alt text"></p>
+<p>How do we compute the gradient? the process of computing the gradient is called <strong>backpropagation</strong>.</p>
+<p>Derivatives, chain rule</p>
+<p>Neural networks are extremely complex functions with complex loss landscapes.</p>
+<h2 id="learning-rate">Learning rate<a aria-hidden="true" class="anchor-heading icon-link" href="#learning-rate"></a></h2>
+<p>You don't want to set it too small, because you will be stuck in local minimum.</p>
+<p>You don't want it to be too large as you will overshoot and diverge.</p>
+<h3 id="adaptive-learning-rates">Adaptive Learning Rates<a aria-hidden="true" class="anchor-heading icon-link" href="#adaptive-learning-rates"></a></h3>
+<p>Change the learning rate depending on the landscape</p>
+<ul>
+<li>how fast you are learning</li>
+<li>how steep</li>
+</ul>
+<h2 id="stochastic-gradient-descent">Stochastic Gradient Descent<a aria-hidden="true" class="anchor-heading icon-link" href="#stochastic-gradient-descent"></a></h2>
+<p>GD computes the gradient over the entire dataset which can be computationally expensive.</p>
+<p>SGD chooses a subset of the data to estimate the gradient</p>
+<p>Mini batch Gradient Descent (choose a batch of B data points) to calculate the gradient</p>
+<p>Larger batches means you can trust your gradient more and you can use larger learning rate.</p>
+<p>If you use 32 data points you can parallelize gradient computation over 32 processors.</p>
+<h2 id="overfitting">Overfitting<a aria-hidden="true" class="anchor-heading icon-link" href="#overfitting"></a></h2>
+<h2 id="regularization">Regularization<a aria-hidden="true" class="anchor-heading icon-link" href="#regularization"></a></h2>
+<p>To avoid overfitting.</p>
+<h3 id="dropout">Dropout<a aria-hidden="true" class="anchor-heading icon-link" href="#dropout"></a></h3>
+<p>sets some activation neurons to 0. Forces the network to learn a different pathway. Very power technique as it makes the model that does not rely too much on a fixed set of weights.</p>
+<p>Dropout nodes would not have any update, no gradient to compute.</p>
+<h3 id="early-stopping">Early stopping<a aria-hidden="true" class="anchor-heading icon-link" href="#early-stopping"></a></h3>
+<p>Stop the training model early.</p>
+<p>Training loss always go down.</p>
+<p><img src="/dendron-wiki/./asstes/images/early_stopping.png" alt="alt text"></p>
+<p><strong>In practice you can start plotting this curve and decide when to early stop!</strong></p>
+<p>Ideal Difference between train and test dataset is to be 0. Then you will not know when to stop. This usually happens in Large Language Models. The dataset is so big that the model itself finds it hard to memorize. So the difference between train and test will be almost always 0.</p>
+<p><strong>Language models usually does not the classical overfitting problems.</strong></p>
+<h1 id="lecture-2-recurrent-neural-networks-transformers-and-attention">Lecture 2: Recurrent Neural Networks, Transformers, and Attention<a aria-hidden="true" class="anchor-heading icon-link" href="#lecture-2-recurrent-neural-networks-transformers-and-attention"></a></h1>
+<h2 id="deep-sequence-modeling">Deep Sequence Modeling<a aria-hidden="true" class="anchor-heading icon-link" href="#deep-sequence-modeling"></a></h2>
+<p>How do we model time series or sequential data in Neural Networks?</p>
+<p><strong>Naive</strong>. We can have our standard feed-forward neural network and put input output <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>0</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo separator="true">,</mo><msub><mi>y</mi><mi>t</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x_0,y_0),(x_1,y_2)...(x_t,y_t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">...</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p><img src="/dendron-wiki/./assets/images/naive_sequence_modeling.png" alt="alt text"></p>
+<p>This approach does not take the sequence info, taking past history into the future.</p>
+<h2 id="rnn---recurrent-neural-networks">RNN - Recurrent Neural Networks<a aria-hidden="true" class="anchor-heading icon-link" href="#rnn---recurrent-neural-networks"></a></h2>
+<p>We will pass sequentially <strong>hidden state</strong> of the network. Hidden state is a vector that is passed.</p>
+<p><img src="/dendron-wiki/./assets/images/rnn_from_scratch.png" alt="alt text"></p>
+<p><img src="/dendron-wiki/./assets/images/rnn_computational_graph.png" alt="alt text"></p>
+<h2 id="sequence-modeling-requirements">Sequence Modeling Requirements<a aria-hidden="true" class="anchor-heading icon-link" href="#sequence-modeling-requirements"></a></h2>
+<ul>
+<li>Handle <strong>variable-length</strong> sequences. Sentences can be short or long. It is not fixed like image where it had high vs width pixels length</li>
+<li>Handle <strong>long-term</strong> dependency. You can short or long term dependency. Something at the very beginning might dictate the end of the sequence</li>
+<li>Maintain information about <strong>order</strong></li>
+<li><strong>Share parameters</strong> across sequence</li>
+</ul>
+<p>RNNs can handle the above requirements - though it needs a few upgrades. RNN are in the core of Sequence Modeling</p>
+<p>These requirements show why Sequence modeling is rich and complex.</p>
+<h2 id="example-predict-the-next-word">Example. Predict the next word.<a aria-hidden="true" class="anchor-heading icon-link" href="#example-predict-the-next-word"></a></h2>
+<ol>
+<li>We need to represent language to a neural network. We need to vectorize the words as numbers.</li>
+</ol>
+<ul>
+<li>Encode language to neural network</li>
+<li>Embedding: transforming words to vectors</li>
+<li>Vocabulary -> Indexing -> Embedding (one-hot-embedding)</li>
+</ul>
+<p>EMBEDDING = VECTORIZATION of words</p>
+<p><img src="/dendron-wiki/./assets/images/embedding.png" alt="alt text"></p>
+<p>learned embedding = lower dimensional representation of language</p>
+<h2 id="backpropagation-through-time">Backpropagation through time.<a aria-hidden="true" class="anchor-heading icon-link" href="#backpropagation-through-time"></a></h2>
+<p>Carry partial derivatives from errors late in the sequence to the very beginning. You will have to multiply matrices multiple times and multiply derivatives many times.</p>
+<p><img src="/dendron-wiki/./assets/images/back_through_time.png" alt="alt text"></p>
+<ul>
+<li>if there are many values > 1 you might have <strong>exploding gradient</strong></li>
+<li>if there are many values &#x3C; 1 you might have <strong>vanishing gradient</strong></li>
+</ul>
+<p>This problem exists in very deep feed forward neural networks. Having many layers mean you will multiply the partial derivatives many time.</p>
+<h3 id="unstable-gradients-makes-it-hard-to-lear-long-term-dependencies">Unstable gradients makes it hard to lear long term dependencies.<a aria-hidden="true" class="anchor-heading icon-link" href="#unstable-gradients-makes-it-hard-to-lear-long-term-dependencies"></a></h3>
+<p>We cannot pass information from late time steps into initial time steps to promote/update the weights.</p>
+<p>Current research upgrades RNN-s to be able to tackle this.</p>
+<h2 id="lstm-gru">LSTM, GRU<a aria-hidden="true" class="anchor-heading icon-link" href="#lstm-gru"></a></h2>
+<p>Ides: use <strong>gates</strong> to selectively add and remove information passed through hidden states. LSTM (long-short term memory) network uses gate cells to pass information throughout many time steps</p>
+<h2 id="limitations-of-rnns">Limitations of RNNs<a aria-hidden="true" class="anchor-heading icon-link" href="#limitations-of-rnns"></a></h2>
+<ul>
+<li>slow, no parallelization - need to compute derivatives sequentially</li>
+<li>rnn state (hidden state <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">h_{t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>) is of fixed size. Encoding bottleneck - we have cap on the information we can keep.</li>
+<li>not long term memory</li>
+</ul>
+<p>time-step by time-step processing.. brings this bottleneck</p>
+<p>Can we eliminate the need for recurrence? Squash all inputs into one vector and put it into one network. The naive approach does not work because it does not carry any time information. We've destroyed any notion of order.</p>
+<p><strong>Idea:</strong> Can we define a way to identify the import parts of a sequence and model out the </p>
+<p>Paper: <a href="https://arxiv.org/pdf/1706.03762">Attention is all you need</a></p>
+<p>This landmark paper defines what is a transformer.</p>
+<p><strong>GPT:</strong> The T stands for transformer.</p>
+<p>Attention: when we look at an image we do not go pixel by pixel and look which are the parts that we attend to.</p>
+<p>Finding the most important pixels is just a simple search.s</p>
+<h3 id="transformers-core-idea">Transformers core idea<a aria-hidden="true" class="anchor-heading icon-link" href="#transformers-core-idea"></a></h3>
+<p>Goal: Search and attend to the most important features in an input.</p>
+<ol>
+<li>Encode input (positional encoding) - didn't go into many details into that</li>
+<li>Compute query, key, value. Use three weight matrices to get each of those. {key:value} are features</li>
+<li>Compute similarity between query and all keys (dot product divided by scaling)</li>
+<li>Compute <strong>attention weighting</strong></li>
+<li>Extract values from important features</li>
+</ol>
+<p>Attention is the building block of transformers.</p>
+<p><img src="/dendron-wiki/./assets/images/transformers.png" alt="alt text"></p>
+<p>Self-attention to handle sequence modeling</p>
+<p>Self-attention is the basis of many larne language models.</p>
