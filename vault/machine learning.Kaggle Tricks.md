@@ -2,11 +2,46 @@
 id: ltvbyf1oqc8qx7khy58pby2
 title: Kaggle Tricks
 desc: ''
-updated: 1702570100644
+updated: 1752564755285
 created: 1677947097369
 ---
 [Hands-on course in Kaggle](https://www.kaggle.com/learn)
 
+
+
+
+# All is in the right scaling
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Make reproducible
+np.random.seed(42)
+
+# Generate data
+x = np.linspace(1, 100, 100)
+y = 2 * x + 5 + np.random.normal(0, 10, size=x.shape)
+
+# Add outlier
+y[50] += 30   # Outlier at index 50
+
+plt.figure(figsize=(10, 4))
+plt.subplot(1,2,1)
+plt.scatter(x, y, alpha=0.7, label='data')
+plt.title('Original')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+```
+**Can you catch the outlier?**
+
+![alt text](./assets/images/catch_out.png)
+
+
+**Same as above but with  np.log(y)**
+
+![alt text](./assets/images/catched_out.png)
 
 # Videos
 

@@ -1,10 +1,27 @@
 ---
-id: jzk1mddj0zb2oo0f086qr9i
-title: Parallel Computing
+id: 0364m0da0huw23ds7lo5wqk
+title: Concurrency and Parallelism
 desc: ''
-updated: 1677840523680
-created: 1676496034053
+updated: 1752649728068
+created: 1752649320880
 ---
+
+
+# Concurrency Models in Python
+
+Chapter 19 from "Fluent Python"
+
+Concurrency is about dealing with multiple things at once.
+
+Parallelism is about doing multiple things at once.
+
+Concurrency is about structure, Parallelism is about execution.
+
+A CPU with 4 cores can run 4 processes in parallel but 100s processes concurrently. 
+
+
+
+# Old notes
 
 - concurrent, multithreaded programming, [web crawler](https://leetcode.com/problems/web-crawler-multithreaded/)
 ```Python
