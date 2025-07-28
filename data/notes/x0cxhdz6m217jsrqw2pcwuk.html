@@ -1,0 +1,407 @@
+<h1 id="python-tricks">Python tricks<a aria-hidden="true" class="anchor-heading icon-link" href="#python-tricks"></a></h1>
+<ul>
+<li>transpose of a matrix</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token comment"># transpose with unzipping</span>
+mat <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+transpose_mat <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">zip</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>mat<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>one star unpacks arguments</li>
+</ul>
+<pre class="language-python"><code class="language-Python">function<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">=</span> function<span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+args <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token comment">#much nicer than</span>
+func<span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>two stars is for key worded arguments and is for maps</li>
+</ul>
+<pre class="language-python"><code class="language-Python">function<span class="token punctuation">(</span><span class="token operator">**</span><span class="token builtin">dict</span><span class="token punctuation">)</span> <span class="token comment"># keys are the arguments and values are the argument values</span>
+</code></pre>
+<ul>
+<li>cumulative sum,min,max,xor,gcd. Note sum and xor are semi-rings on <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">Z</mi></mrow><annotation encoding="application/x-tex">\Z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6889em;"></span><span class="mord mathbb">Z</span></span></span></span></span> (that is they have minus) - you can query subarrays in <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span>.</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token comment"># cumulative sum array, cdf</span>
+<span class="token keyword">from</span> itertools <span class="token keyword">import</span> accumulate
+nums <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span>
+cum <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>accumulate<span class="token punctuation">(</span>nums<span class="token punctuation">,</span>func <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">,</span>y<span class="token punctuation">:</span>x<span class="token operator">+</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># [1,3,6,10]</span>
+</code></pre>
+<ul>
+<li>xor cumulative</li>
+</ul>
+<pre class="language-python"><code class="language-python">xor_cum <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token builtin">list</span><span class="token punctuation">(</span>accumulate<span class="token punctuation">(</span>arr<span class="token punctuation">,</span><span class="token keyword">lambda</span> x<span class="token punctuation">,</span>y<span class="token punctuation">:</span>x<span class="token operator">^</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''returns xor subarray arr[l]^arr[l+1]^...^arr[r]'''</span>
+    xor_cum<span class="token punctuation">[</span>r<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">^</span>xor_cum<span class="token punctuation">[</span>l<span class="token punctuation">]</span>
+</code></pre>
+<ul>
+<li>flatten list with chain</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token comment"># flatten list</span>
+<span class="token keyword">from</span> itertools <span class="token keyword">import</span> chain
+equations <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token builtin">list</span><span class="token punctuation">(</span>chain<span class="token punctuation">(</span><span class="token operator">*</span>equations<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+</code></pre>
+<ul>
+<li>adjacency list</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> defaultdict
+adj <span class="token operator">=</span> defaultdict<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">)</span> <span class="token comment"># default dict takes a function</span>
+<span class="token keyword">for</span> u<span class="token punctuation">,</span>v <span class="token keyword">in</span> edges<span class="token punctuation">:</span>
+    adf<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+
+</code></pre>
+<ul>
+<li>Counter</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token comment"># Counter dict</span>
+<span class="token keyword">from</span> collections <span class="token keyword">import</span> Counter
+arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
+c <span class="token operator">=</span> Counter<span class="token punctuation">(</span>arr<span class="token punctuation">)</span>
+c<span class="token punctuation">.</span>most_common<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># returns tuple of all elements and counts in sorted order</span>
+</code></pre>
+<pre class="language-python"><code class="language-Python"><span class="token comment"># count occurrences of element in list</span>
+ls <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span>
+ls<span class="token punctuation">.</span>count<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li><a href="https://leetcode.com/problems/toeplitz-matrix/">Toeplitz Matrix</a>, diagonals have constant values</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">isToeplitzMatrix</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> matrix<span class="token punctuation">:</span> List<span class="token punctuation">[</span>List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">bool</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>matrix<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">!=</span> matrix<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token boolean">False</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span>
+    
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">isToeplitzMatrix</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> m<span class="token punctuation">:</span> List<span class="token punctuation">[</span>List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">bool</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">all</span><span class="token punctuation">(</span>m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> m<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">for</span> i<span class="token punctuation">,</span>j <span class="token keyword">in</span> product<span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>m<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">isToeplitzMatrix</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> m<span class="token punctuation">:</span> List<span class="token punctuation">[</span>List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">bool</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">all</span><span class="token punctuation">(</span>r1<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> r2<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token keyword">for</span> r1<span class="token punctuation">,</span>r2 <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span>m<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+</code></pre>
+<ul>
+<li>check if two intervals overlap</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token comment"># [a,b], [x,y]</span>
+<span class="token keyword">def</span> <span class="token function">overlap</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> a <span class="token operator">&#x3C;</span> y <span class="token keyword">and</span> x <span class="token operator">&#x3C;</span> b
+</code></pre>
+<ul>
+<li>max with key, array of arrays, return array of max length</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token builtin">max</span><span class="token punctuation">(</span>arrs<span class="token punctuation">,</span> key <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">)</span> <span class="token comment"># gives array of maximul length</span>
+</code></pre>
+<ul>
+<li>custom comparator in sorting, sorted(), sort, key, compare</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token keyword">from</span> functools <span class="token keyword">import</span> cmp_to_key
+<span class="token keyword">def</span> <span class="token function">compare</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> y<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+ 
+data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token builtin">sorted</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> key<span class="token operator">=</span>cmp_to_key<span class="token punctuation">(</span>compare<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>
+<p>python does not have tail <a href="https://stackoverflow.com/questions/13591970/does-python-optimize-tail-recursion">recursion</a> (unlike Lisp)</p>
+</li>
+<li>
+<p>get groups, groupby</p>
+</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> groupby
+s <span class="token operator">=</span> <span class="token string">'aaabbddca'</span>
+groups <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>ch<span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>g<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">for</span> ch<span class="token punctuation">,</span>g <span class="token keyword">in</span> groupby<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token comment"># [(a,3),(b,2),(d,2),(c,1),(a,1)]</span>
+</code></pre>
+<ul>
+<li>concurrent, multithreaded programming, <a href="https://leetcode.com/problems/web-crawler-multithreaded/">web crawler</a></li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token comment"># simple DFS</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">crawl</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> start<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> parser<span class="token punctuation">:</span> <span class="token string">'HtmlParser'</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        hostname <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+        visited<span class="token punctuation">,</span>stack<span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">[</span>start<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">[</span>start<span class="token punctuation">]</span>
+        <span class="token keyword">while</span> stack<span class="token punctuation">:</span>
+            s <span class="token operator">=</span> stack<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span> u <span class="token keyword">in</span> parser<span class="token punctuation">.</span>getUrls<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> u <span class="token keyword">not</span> <span class="token keyword">in</span> visited <span class="token keyword">and</span> hostname<span class="token punctuation">(</span>start<span class="token punctuation">)</span> <span class="token operator">==</span> hostname<span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    visited<span class="token punctuation">.</span>add<span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+                    stack<span class="token punctuation">.</span>append<span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> visited
+
+<span class="token comment"># concurrent DFS</span>
+<span class="token keyword">from</span> concurrent <span class="token keyword">import</span> futures
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">crawl</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> parser<span class="token punctuation">:</span> <span class="token string">'HtmlParser'</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        hostname <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+        visited <span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">with</span> futures<span class="token punctuation">.</span>ThreadPoolExecutor<span class="token punctuation">(</span>max_workers<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span> <span class="token keyword">as</span> executor<span class="token punctuation">:</span>
+            tasks <span class="token operator">=</span> <span class="token punctuation">[</span>executor<span class="token punctuation">.</span>submit<span class="token punctuation">(</span>parser<span class="token punctuation">.</span>getUrls<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">]</span>
+            <span class="token keyword">while</span> tasks<span class="token punctuation">:</span>
+                neigh <span class="token operator">=</span> tasks<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>result<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">for</span> u <span class="token keyword">in</span> neigh<span class="token punctuation">:</span>
+                    <span class="token keyword">if</span> u <span class="token keyword">not</span> <span class="token keyword">in</span> visited <span class="token keyword">and</span> hostname<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">==</span> hostname<span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        visited<span class="token punctuation">.</span>add<span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+                        tasks<span class="token punctuation">.</span>append<span class="token punctuation">(</span>executor<span class="token punctuation">.</span>submit<span class="token punctuation">(</span>parser<span class="token punctuation">.</span>getUrls<span class="token punctuation">,</span> u<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> visited
+</code></pre>
+<ul>
+<li>string operations/methods</li>
+</ul>
+<pre class="language-python"><code class="language-Python">char<span class="token punctuation">.</span>islower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+char<span class="token punctuation">.</span>isupper<span class="token punctuation">(</span><span class="token punctuation">)</span>
+char<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+char<span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ch<span class="token punctuation">.</span>isnumeric<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># is an integer</span>
+ch<span class="token punctuation">.</span>isalpha<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># is a character</span>
+</code></pre>
+<ul>
+<li>permutations</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> permutations
+nums <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> p <span class="token keyword">in</span> permutations<span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>is a string a rotated version of another string, is rotate</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Consider a string S="helloworld". Now, given another string T="lloworldhe", can we figure out if T is a rotated version of S? Yes, we can! We check if S is a substring of T+T.</span>
+<span class="token keyword">def</span> <span class="token function">is_rotate</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> s <span class="token keyword">in</span> t<span class="token operator">+</span>t
+</code></pre>
+<ul>
+<li>traverse squares quickly. If <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>a</mi><mo>∗</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">x = a*a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4653em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span></span> then <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>1</mn><mo>+</mo><mn>3</mn><mo>+</mo><mn>5...</mn></mrow><annotation encoding="application/x-tex">x = 1+3+5...</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">5...</span></span></span></span></span></li>
+</ul>
+<pre class="language-python"><code class="language-python">x<span class="token punctuation">,</span>n <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    x <span class="token operator">+=</span> n
+    n <span class="token operator">+=</span> <span class="token number">2</span>
+</code></pre>
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/12764670/are-there-any-bitwise-operator-laws">Binary operations laws</a></p>
+</li>
+<li>
+<p>Distributive of AND over XOR</p>
+</li>
+</ul>
+<pre><code>a &#x26; (b1 ^ b2) = (a &#x26; b1) ^ (a &#x26; b2)
+</code></pre>
+<ul>
+<li>bitwise tricks, binary operations</li>
+</ul>
+<pre class="language-python"><code class="language-Python"><span class="token keyword">class</span> <span class="token class-name">Binary</span><span class="token punctuation">:</span>
+
+    <span class="token triple-quoted-string string">"""
+    This is a class for basic manipulation methods for bits.
+    Arguments: Integer in base 10
+    Returns:
+    binary representation;
+    get, set, clear, update specific bits;
+    count number of bits;
+    least significant bit;
+    """</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>decimal <span class="token operator">=</span> num
+
+    <span class="token comment"># binary representation</span>
+    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">str</span><span class="token punctuation">:</span>
+        res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        num <span class="token operator">=</span> self<span class="token punctuation">.</span>decimal
+        <span class="token keyword">while</span> num <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
+            res<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>num <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            num <span class="token operator">//=</span> <span class="token number">2</span>
+        <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>decimal<span class="token punctuation">}</span></span><span class="token string"> has binary representation </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>res<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">"</span></span>
+
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">str</span><span class="token punctuation">:</span>
+        res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        num <span class="token operator">=</span> self<span class="token punctuation">.</span>decimal
+        <span class="token keyword">while</span> num <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
+            res<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>num <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            num <span class="token operator">//=</span> <span class="token number">2</span>
+        <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>res<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># get bit</span>
+    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> i<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        msk <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&#x3C;&#x3C;</span> i
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>decimal <span class="token operator">&#x26;</span> msk <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">1</span>
+        <span class="token keyword">return</span> <span class="token number">0</span>
+
+    <span class="token comment"># set bit</span>
+    <span class="token keyword">def</span> <span class="token function">set</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> i<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        msk <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&#x3C;&#x3C;</span> i
+        self<span class="token punctuation">.</span>num <span class="token operator">=</span> self<span class="token punctuation">.</span>decimal <span class="token operator">|</span> msk
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>decimal
+
+    <span class="token comment"># clear specific bit i</span>
+    <span class="token keyword">def</span> <span class="token function">clear</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> i<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        msk <span class="token operator">=</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&#x3C;&#x3C;</span> i<span class="token punctuation">)</span>  <span class="token comment"># ~ reverses bits, 0 -> 1 and 1 -> 0</span>
+        self<span class="token punctuation">.</span>decimal <span class="token operator">=</span> self<span class="token punctuation">.</span>decimal <span class="token operator">&#x26;</span> msk
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>decimal
+
+    <span class="token comment"># clear all bits from beginning to bit i</span>
+    <span class="token keyword">def</span> <span class="token function">clearFirstBits</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> i<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        msk <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&#x3C;&#x3C;</span> i<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span>
+        self<span class="token punctuation">.</span>decimal <span class="token operator">=</span> self<span class="token punctuation">.</span>decimal <span class="token operator">&#x26;</span> msk
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>decimal
+
+    <span class="token comment"># clear all bits from end to bit i</span>
+    <span class="token keyword">def</span> <span class="token function">clearEndBits</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> i<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        msk <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&#x3C;&#x3C;</span> <span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment"># note -1 is 11111..1</span>
+        self<span class="token punctuation">.</span>decimal <span class="token operator">=</span> self<span class="token punctuation">.</span>decimal <span class="token operator">&#x26;</span> msk
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>decimal
+
+    <span class="token comment"># update bit i to value val</span>
+    <span class="token keyword">def</span> <span class="token function">update</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> i<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span> val<span class="token punctuation">:</span> <span class="token builtin">bool</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        msk <span class="token operator">=</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&#x3C;&#x3C;</span> i<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>val <span class="token operator">&#x3C;&#x3C;</span> i<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>decimal <span class="token operator">=</span> self<span class="token punctuation">.</span>decimal <span class="token operator">&#x26;</span> msk
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>decimal
+
+    <span class="token comment"># returns number of bits</span>
+    <span class="token keyword">def</span> <span class="token function">countBits</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        res <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">while</span> self<span class="token punctuation">.</span>decimal <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token comment"># res+=self.decimal%2</span>
+            res <span class="token operator">+=</span> self<span class="token punctuation">.</span>decimal <span class="token operator">&#x26;</span> <span class="token number">1</span>
+            self<span class="token punctuation">.</span>decimal <span class="token operator">>></span><span class="token operator">=</span> <span class="token number">1</span>
+        <span class="token keyword">return</span> res
+
+    <span class="token comment"># least significant bit</span>
+    <span class="token keyword">def</span> <span class="token function">lsb</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        <span class="token comment"># negative numbers are represented as two's complement</span>
+        <span class="token comment"># two's complement = one's complement + 1</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>decimal <span class="token operator">&#x26;</span> <span class="token operator">-</span>self<span class="token punctuation">.</span>decimal
+</code></pre>
+<ul>
+<li>print + assignment</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token operator">:=</span><span class="token number">10</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>window multiply</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">window_multiply</span><span class="token punctuation">(</span>filter_window<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">,</span> target<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Example:filter_window = np.array([1,2,3]),  target = np.array([4,5,6,7,8,9,10]), 
+    out = [
+        [ 4, 10, 18],
+        [ 5, 12, 21],
+        [ 6, 14, 24],
+        [ 7, 16, 27],
+        [ 8, 18, 30]
+        ]
+    out[0] = [1*4, 2*5, 3*6] = [4, 10, 18]
+    out[1] = [1*5, 2*6, 3*7] = [5, 12, 21]
+    etc.
+    """</span>
+    w <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>filter_window<span class="token punctuation">)</span>
+    indices <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">-</span> w <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">]</span> <span class="token operator">+</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>w<span class="token punctuation">)</span>
+    out <span class="token operator">=</span> filter_window <span class="token operator">*</span> target<span class="token punctuation">[</span>indices<span class="token punctuation">]</span>
+    <span class="token keyword">return</span> out
+
+</code></pre>
+<ul>
+<li>itertools.groupby()</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token keyword">for</span> k<span class="token punctuation">,</span>v <span class="token keyword">in</span> groupby<span class="token punctuation">(</span><span class="token string">'aaabbcddd'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span><span class="token builtin">list</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># a, [a,a,a]</span>
+
+groups <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> k<span class="token punctuation">,</span>v <span class="token keyword">in</span> groupby<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    groups<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li><a href="https://math.stackexchange.com/questions/2592324/how-to-do-a-modular-arithmetic-with-negative-exponents">negative power modulus</a>. You can use it as of Python 3.8. Useful for solving linear Diophantine equality. First and third argument need to be coprime.</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token builtin">pow</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>binary to decimal</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token builtin">int</span><span class="token punctuation">(</span><span class="token string">'101'</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>careful with instantiation and constructor</li>
+</ul>
+<pre class="language-python"><code class="language-python">
+<span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>val<span class="token punctuation">,</span>children<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>val <span class="token operator">=</span> val
+        self<span class="token punctuation">.</span>children <span class="token operator">=</span> children
+
+a <span class="token operator">=</span> Node<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> Node<span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">)</span>
+a<span class="token punctuation">.</span>children<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>children<span class="token punctuation">)</span> <span class="token comment"># prints [12]</span>
+<span class="token comment"># modification on object a modifies b too, children is a class variable... if not set</span>
+</code></pre>
+<ul>
+<li>swapcase(), string, uppercase, lowercase swap</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token string">'aA'</span><span class="token punctuation">.</span>swapcase<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># gives 'Aa'</span>
+</code></pre>
+<ul>
+<li>(dangerous default values)[https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments]</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">append_to</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> to<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># mutable default arguments</span>
+    to<span class="token punctuation">.</span>append<span class="token punctuation">(</span>element<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> to
+
+my_list <span class="token operator">=</span> append_to<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>my_list<span class="token punctuation">)</span>
+
+my_other_list <span class="token operator">=</span> append_to<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>my_other_list<span class="token punctuation">)</span>
+
+<span class="token comment"># What you want:</span>
+<span class="token comment"># [12]</span>
+<span class="token comment"># [42]</span>
+
+<span class="token comment"># What actually happens:</span>
+<span class="token comment"># [12]</span>
+<span class="token comment"># [12, 42]</span>
+</code></pre>
+<ul>
+<li>key, custom bisect bisect_left</li>
+</ul>
+<pre><code>def poss:
+    """ returns True/False""
+bisect.bisect_left(range(n), x=True, key=poss)
+
+# equivalent to
+def bs(nums=range(n)):
+    l,r = 0,n
+    while l&#x3C;r:
+        m =l+r>>1
+        if poss(m):
+            r = m
+        else:
+            l = m+1
+    return l
+</code></pre>
+<ul>
+<li><a href="https://stackoverflow.com/questions/62975325/why-is-summing-list-comprehension-faster-than-generator-expression">generators are slower than list comprehension</a></li>
+</ul>
+<p>-check common characters in two strings A and B</p>
+<pre class="language-python"><code class="language-python"><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span>ch <span class="token keyword">in</span> A <span class="token keyword">for</span> ch <span class="token keyword">in</span> B<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># fast</span>
+<span class="token builtin">sum</span><span class="token punctuation">(</span>ch <span class="token keyword">in</span> A <span class="token keyword">for</span> ch <span class="token keyword">in</span> B<span class="token punctuation">)</span> <span class="token comment"># slow</span>
+</code></pre>
+<ul>
+<li>check if t is a subsequence of s using iterator trick</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">is_subsequence</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    it <span class="token operator">=</span> <span class="token builtin">iter</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token builtin">all</span><span class="token punctuation">(</span>ch <span class="token keyword">in</span> it <span class="token keyword">for</span> ch <span class="token keyword">in</span> t<span class="token punctuation">)</span>
+<span class="token comment"># return all(ch in iter(t) for ch in s) fails, creates a new instance of iter(t) every time </span>
+</code></pre>

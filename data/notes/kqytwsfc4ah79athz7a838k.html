@@ -1,0 +1,54 @@
+<h1 id="lazy-compute">Lazy Compute<a aria-hidden="true" class="anchor-heading icon-link" href="#lazy-compute"></a></h1>
+<h1 id="polars-lazy-api">Polars lazy API<a aria-hidden="true" class="anchor-heading icon-link" href="#polars-lazy-api"></a></h1>
+<p>Write query plan first and run only when needed, i.e. collect()</p>
+<p>the lazy API:</p>
+<ul>
+<li>has query optimizations like in (SQL). You tell it what to do not how to do it so it arranges the queries is the most optimal way</li>
+<li>allows to work with larger than memory datasets using streaming</li>
+<li><a href="https://docs.pola.rs/user-guide/lazy/optimizations/">list of optimizations</a> - all is related to optimal query planning</li>
+<li>schema plays important role. The lazy API does type checking before running all expensive queries!</li>
+<li>This Polars query optimizer MUST be able to infer the schema at every step of the query plan (hence .pivot() operation is not available - creates columns from values coming in one column). The optimizer does not know in advance these column names</li>
+<li>visualize optimizations using <code>.show_graph()</code> read from bottom to top. sigma is (filtering rows), pi is projection (filtering columns) -> here you will see how polars does predicate pushdown and projection pushdown</li>
+<li>Remember that LazyFrames are query plans i.e. a promise on computation and is not guaranteed to cache common subplans.</li>
+<li>sinks - saving data to disk without the need to load the whole dataset in memory. Process data in batches/chunks. I.e. we are streaming the results to storage</li>
+</ul>
+<p><strong>Tricks</strong></p>
+<p><code>pl.scan_csv</code> or <code>pl.scan_parquet</code></p>
+<ul>
+<li>read files larger than memory</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token comment"># With the default collect method Polars processes all of your data as one batch. This means that all the data has to fit into your available memory at the point of peak memory usage in your query.</span>
+<span class="token comment"># So do: </span>
+<span class="token punctuation">.</span>collect<span class="token punctuation">(</span>engine<span class="token operator">=</span><span class="token string">'streaming'</span><span class="token punctuation">)</span> <span class="token comment"># to read datasets thar are larger than memory</span>
+</code></pre>
+<ul>
+<li>Sink</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token comment"># sink = streaming data to storage - saving in batches</span>
+lf <span class="token operator">=</span> scan_csv<span class="token punctuation">(</span><span class="token string">"my_dataset/*.csv"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">filter</span><span class="token punctuation">(</span>pl<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>is_not_null<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+lf<span class="token punctuation">.</span>sink_parquet<span class="token punctuation">(</span>
+    pl<span class="token punctuation">.</span>PartitionMaxSize<span class="token punctuation">(</span>
+        <span class="token string">"my_table_{part}.parquet"</span>
+        max_size<span class="token operator">=</span><span class="token number">512_000</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># creates</span>
+<span class="token comment"># my_table_0.parquet</span>
+<span class="token comment"># my_table_1.parquet</span>
+<span class="token comment"># ...</span>
+<span class="token comment"># my_table_n.parquet</span>
+</code></pre>
+<ul>
+<li>diverging queries (kind of caching..)</li>
+<li><a href="https://docs.pola.rs/user-guide/lazy/multiplexing/">Multiplexing queries</a>! (also group_by does not guarantee order)</li>
+</ul>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Some expensive LazyFrame</span>
+lf<span class="token punctuation">:</span> LazyFrame
+
+lf_1 <span class="token operator">=</span> LazyFrame<span class="token punctuation">.</span>select<span class="token punctuation">(</span>pl<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+lf_2 <span class="token operator">=</span> lf<span class="token punctuation">.</span>some_other_computation<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+pl<span class="token punctuation">.</span>collect_all<span class="token punctuation">(</span><span class="token punctuation">[</span>lf_1<span class="token punctuation">,</span> lf_2<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># this will execute lf only once!</span>
+</code></pre>
