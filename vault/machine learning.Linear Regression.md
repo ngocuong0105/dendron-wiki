@@ -7,8 +7,7 @@ created: 1751960242840
 ---
 
 Here I discuss how violation of linear regression assumptions affect model explainability and foresting performance.
-It is a practical guide on the caveats of the Linear Model and how to deal with them - particularly useful in forecasting-focused
-settings like Kaggle. It is assumed the reader is familiar with the mathematics behind the model.
+It is a practical guide on the caveats of the Linear Model and how to deal with them - particularly useful in forecasting-focused settings like Kaggle. It is assumed the reader is familiar with the mathematics behind the model.
 
 Linear model's assumptions are:
 - The target variable is linear in the predictor variables. Violation is also known for mispecified model
