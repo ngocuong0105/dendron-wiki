@@ -1,0 +1,722 @@
+<h1 id="sql">SQL<a aria-hidden="true" class="anchor-heading icon-link" href="#sql"></a></h1>
+<p>Most notes here are from <a href="https://www.youtube.com/watch?v=Yceqbp_DKbA&#x26;list=PL9ysvtVnryGpnIj9rcIqNDxakUn6v72Hm&#x26;index=103">Stanford lectures</a> and leetcode.</p>
+<h1 id="buzzwords">Buzzwords<a aria-hidden="true" class="anchor-heading icon-link" href="#buzzwords"></a></h1>
+<p>relational algebra, relational data model, relational database, DBMS (database management system), PostgreSQL, MySQL, declarative, power of set theory, projection, persistent data (outlives program), schema (type) vs data(variables), DDL (data definition language) used to set up schema, DML (data manipulation language = query language), database = set of named relations, relation = table, columns = attributes of relation, rows = tuple, schema = structural description of relations in database, ACID properties, select = project operator, cross product, join, inner, outer, left, right, union, join = cross product + where, CTE = common table expression, subquery, normalization, denormalization, sharding, shards, transactions</p>
+<ul>
+<li>SQL is declarative - you say "what" you want but not how you want it</li>
+<li>SQL is not "Turing complete" = computationally universal (can do all stuff)</li>
+<li>basic SQL cannot run unbounded computations (no for loops)</li>
+</ul>
+<h1 id="code-snippets">Code snippets<a aria-hidden="true" class="anchor-heading icon-link" href="#code-snippets"></a></h1>
+<ul>
+<li>join</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> table1 t1
+<span class="token keyword">left</span> <span class="token keyword">join</span> table2 t2
+<span class="token keyword">on</span> t1<span class="token punctuation">.</span>id <span class="token operator">=</span> t2<span class="token punctuation">.</span>id
+
+<span class="token keyword">select</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> t1
+<span class="token keyword">left</span> <span class="token keyword">join</span> t2 <span class="token keyword">using</span><span class="token punctuation">(</span>product_id<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>no full outer join in MySQL. Emulate it by:</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> t1
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> t2 <span class="token keyword">ON</span> t1<span class="token punctuation">.</span>id <span class="token operator">=</span> t2<span class="token punctuation">.</span>id
+<span class="token keyword">UNION</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> t1
+<span class="token keyword">RIGHT</span> <span class="token keyword">JOIN</span> t2 <span class="token keyword">ON</span> t1<span class="token punctuation">.</span>id <span class="token operator">=</span> t2<span class="token punctuation">.</span>id
+</code></pre>
+<ul>
+<li>join on operations <a href="https://leetcode.com/problems/leetflex-banned-accounts/">leetcode</a></li>
+</ul>
+<pre><code>sometimes is smart to do joins on operations/conditions
+join on t1.id = t2.id-1
+</code></pre>
+<ul>
+<li>
+<p><strong>join is just a cross product with where statements</strong></p>
+</li>
+<li>
+<p>conditional statement case when else end</p>
+</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span>
+<span class="token punctuation">(</span><span class="token keyword">case</span>
+    <span class="token keyword">when</span> condition1 <span class="token keyword">then</span> result1
+    <span class="token keyword">when</span> condition2 <span class="token keyword">then</span> result2
+    <span class="token keyword">when</span> conditionN <span class="token keyword">then</span> resultN
+    <span class="token keyword">else</span> result <span class="token comment"># else can be dropped too</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token keyword">as</span> field
+<span class="token keyword">from</span> <span class="token keyword">table</span>
+</code></pre>
+<ul>
+<li>if conditional statement</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token keyword">if</span><span class="token punctuation">(</span>condition<span class="token punctuation">,</span> true_val<span class="token punctuation">,</span> false_val<span class="token punctuation">)</span> <span class="token keyword">as</span> field
+<span class="token keyword">from</span> <span class="token keyword">table</span>
+</code></pre>
+<ul>
+<li>least, greatest to take min,max of a row <a href="https://leetcode.com/problems/number-of-calls-between-two-persons/">leetcode</a></li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> least<span class="token punctuation">(</span>from_id<span class="token punctuation">,</span>to_id<span class="token punctuation">)</span> <span class="token keyword">as</span> person1<span class="token punctuation">,</span> greatest<span class="token punctuation">(</span>from_id<span class="token punctuation">,</span>to_id<span class="token punctuation">)</span> <span class="token keyword">as</span> person2<span class="token punctuation">,</span>
+        <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">as</span> call_count<span class="token punctuation">,</span> <span class="token function">sum</span><span class="token punctuation">(</span>duration<span class="token punctuation">)</span> <span class="token keyword">as</span> total_duration
+<span class="token keyword">from</span> calls
+<span class="token keyword">group</span> <span class="token keyword">by</span> person1<span class="token punctuation">,</span>person2
+</code></pre>
+<ul>
+<li>
+<p>partition by <a href="https://leetcode.com/problems/find-the-quiet-students-in-all-exams/discuss/1414605/Become-the-Master-of-Partition-By">leetcode</a></p>
+</li>
+<li>
+<p>window question <a href="https://leetcode.com/problems/biggest-window-between-visits/">leetcode</a></p>
+</li>
+<li>
+<p>date operations</p>
+</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> 
+        datediff<span class="token punctuation">(</span>date1<span class="token punctuation">,</span>date2<span class="token punctuation">)</span> <span class="token keyword">as</span> diff<span class="token punctuation">,</span> <span class="token comment">-- measred in days</span>
+        period_diff<span class="token punctuation">(</span><span class="token string">'202210'</span><span class="token punctuation">,</span><span class="token string">'202301'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> diff<span class="token punctuation">,</span> <span class="token comment">-- measured in months</span>
+        <span class="token keyword">month</span><span class="token punctuation">(</span>date1<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token keyword">month</span><span class="token punctuation">,</span>
+        date_add<span class="token punctuation">(</span><span class="token string">'2018-05-01'</span><span class="token punctuation">,</span><span class="token keyword">INTERVAL</span> <span class="token number">1</span> <span class="token keyword">DAY</span><span class="token punctuation">)</span> <span class="token keyword">as</span> next_day<span class="token punctuation">,</span>
+        dayofweek<span class="token punctuation">(</span><span class="token string">'2007-02-03'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> day_of_week <span class="token comment"># 1 to 7 (1 and 7 are weekend)</span>
+        dayofyear<span class="token punctuation">(</span><span class="token string">'2007-02-03'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> day_of_week<span class="token punctuation">,</span>
+        to_days<span class="token punctuation">(</span><span class="token string">'2008-01-01'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> date_number<span class="token punctuation">,</span>
+        date_format<span class="token punctuation">(</span><span class="token keyword">date</span><span class="token punctuation">,</span><span class="token string">'%d/%m/%Y'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> formatted_date<span class="token punctuation">,</span>
+        least<span class="token punctuation">(</span><span class="token string">'2018-12-31'</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        greatest<span class="token punctuation">(</span>d1<span class="token punctuation">,</span>d2<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>date_part, date operations in postgresql - give PART of the DATE</li>
+<li><a href="https://leetcode.com/problems/tasks-count-in-the-weekend/">leetcode</a> you can test your functions here</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> 
+DATE_PART<span class="token punctuation">(</span><span class="token string">'field'</span><span class="token punctuation">,</span> column_name<span class="token punctuation">)</span> <span class="token comment">-- need to use these quotation marks ''</span>
+<span class="token keyword">SELECT</span> DATE_PART<span class="token punctuation">(</span><span class="token string">'year'</span><span class="token punctuation">,</span> <span class="token keyword">TIMESTAMP</span> <span class="token string">'2024-07-06 15:23:10'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">-- 2024</span>
+<span class="token keyword">SELECT</span> DATE_PART<span class="token punctuation">(</span><span class="token string">'day'</span><span class="token punctuation">,</span> <span class="token keyword">DATE</span> <span class="token string">'2024-07-06'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                   <span class="token comment">-- 6</span>
+<span class="token keyword">SELECT</span> DATE_PART<span class="token punctuation">(</span><span class="token string">'month'</span><span class="token punctuation">,</span> <span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                             <span class="token comment">-- current month as number</span>
+<span class="token keyword">SELECT</span> DATE_PART<span class="token punctuation">(</span><span class="token string">'dow'</span><span class="token punctuation">,</span> <span class="token keyword">DATE</span> <span class="token string">'2024-07-06'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                   <span class="token comment">-- 6 (Saturday, 0 = Sunday)</span>
+<span class="token keyword">from</span> t
+</code></pre>
+<ul>
+<li><code>field</code> can be 'year', 'month', 'day', 'dow', 'hour', 'minute', 'second'</li>
+<li>'dow' gives a number where 0 is Sunday and 6 is Saturday</li>
+</ul>
+<ul>
+<li>date_trunc truncates the date column to the specified precision (beginning of month, year and so on)</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> DATE_TRUNC<span class="token punctuation">(</span><span class="token string">'month'</span><span class="token punctuation">,</span> <span class="token keyword">TIMESTAMP</span> <span class="token string">'2024-07-06 15:23:10'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">-- '2024-07-01 00:00:00'</span>
+<span class="token keyword">SELECT</span> DATE_TRUNC<span class="token punctuation">(</span><span class="token string">'day'</span><span class="token punctuation">,</span> <span class="token keyword">TIMESTAMP</span> <span class="token string">'2024-07-06 15:23:10'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">-- '2024-07-06 00:00:00'</span>
+<span class="token keyword">SELECT</span> DATE_TRUNC<span class="token punctuation">(</span><span class="token string">'year'</span><span class="token punctuation">,</span> <span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                              <span class="token comment">-- start of this year</span>
+</code></pre>
+<ul>
+<li>
+<p>TIMESTAMP, DATE, INTERVAL . they all convert string to date-like object</p>
+</li>
+<li>
+<p>INTERVAL represents a unit of time that can be added or subtracted from dates</p>
+</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">INTERVAL</span> <span class="token string">'N unit'</span> <span class="token comment">-- unit can be 'day', 'days', 'month', 'week', 'hour' etc</span>
+</code></pre>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">TIMESTAMP</span> <span class="token string">'2025-05-01 15:45:01'</span> <span class="token operator">+</span> <span class="token keyword">INTERVAL</span> <span class="token string">'10 minutes'</span><span class="token punctuation">,</span>
+<span class="token keyword">TIMESTAMP</span> <span class="token string">'2025-05-01 15:45:01'</span> <span class="token operator">-</span> <span class="token keyword">INTERVAL</span> <span class="token string">'10 minute'</span> <span class="token keyword">as</span> a<span class="token punctuation">,</span>
+<span class="token keyword">TIMESTAMP</span> <span class="token string">'2025-05-01 15:45:01'</span> <span class="token operator">+</span> <span class="token keyword">INTERVAL</span> <span class="token string">'1 week'</span> <span class="token keyword">as</span> b
+</code></pre>
+<ul>
+<li>casting in postgreSQL</li>
+</ul>
+<ol>
+<li>
+<p>Use ::typename or CAST(value AS typename)</p>
+</li>
+<li>
+<p>If in doubt, cast explicitly.</p>
+</li>
+</ol>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token string">'2023-08-16'</span>::<span class="token keyword">date</span><span class="token punctuation">;</span>                 <span class="token comment">-- 2023-08-16</span>
+<span class="token keyword">SELECT</span> <span class="token string">'2023-08-16 15:20'</span>::<span class="token keyword">timestamp</span><span class="token punctuation">;</span>      <span class="token comment">-- 2023-08-16 15:20:00</span>
+<span class="token keyword">SELECT</span> <span class="token string">'123'</span>::<span class="token keyword">integer</span><span class="token punctuation">;</span>       <span class="token comment">-- 123 (text to int)</span>
+<span class="token keyword">SELECT</span> <span class="token number">123</span>::<span class="token keyword">text</span><span class="token punctuation">;</span>            <span class="token comment">-- '123' (int to text)</span>
+</code></pre>
+<ul>
+<li>width_bucket</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> width_bucket<span class="token punctuation">(</span>column_name<span class="token punctuation">,</span> min_value<span class="token punctuation">,</span> max_value<span class="token punctuation">,</span> number_of_buckets<span class="token punctuation">)</span> <span class="token comment">-- max_value is the upper bound of the last bucket non-exclusive [)</span>
+<span class="token keyword">select</span> width_bucket<span class="token punctuation">(</span>score<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token comment">-- 5 buckets [1,20], [21- 40] ... </span>
+</code></pre>
+<ul>
+<li>subquery in select statement example <a href="https://leetcode.com/problems/percentage-of-users-attended-a-contest/">leetcode</a></li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> contest_id<span class="token punctuation">,</span> <span class="token function">round</span><span class="token punctuation">(</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">from</span> users<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">as</span> percentage
+<span class="token keyword">from</span> register
+<span class="token keyword">group</span> <span class="token keyword">by</span> contest_id
+<span class="token keyword">order</span> <span class="token keyword">by</span> percentage <span class="token keyword">desc</span><span class="token punctuation">,</span> contest_id <span class="token keyword">asc</span>
+</code></pre>
+<ul>
+<li>where clauses</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">where</span> field <span class="token operator">in</span> <span class="token punctuation">(</span><span class="token string">'string'</span><span class="token punctuation">,</span> <span class="token string">'string1'</span><span class="token punctuation">)</span>
+<span class="token keyword">where</span> a <span class="token operator">=</span> <span class="token number">6</span> <span class="token operator">or</span> a <span class="token operator">=</span> <span class="token number">9</span>
+<span class="token keyword">where</span> low <span class="token operator">&#x3C;</span> a <span class="token operator">and</span> a <span class="token operator">&#x3C;</span> high
+</code></pre>
+<ul>
+<li>not in operator with null values CAREFUL <a href="https://stackoverflow.com/questions/129077/null-values-inside-not-in-clause">stackoverflow</a> <a href="https://leetcode.com/problems/tree-node/submissions/">leetcode</a>
+<a href="https://leetcode.com/problems/find-customer-referee/">584</a></li>
+</ul>
+<pre><code>MySQL uses three-valued logic -- TRUE, FALSE and UNKNOWN. Anything compared to NULL evaluates to the third value: UNKNOWN. That “anything” includes NULL itself! That’s why MySQL provides the IS NULL and IS NOT NULL operators to specifically check for NULL.
+</code></pre>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> name
+<span class="token keyword">from</span> customer
+<span class="token keyword">where</span> referee_id <span class="token operator">!=</span> <span class="token number">2</span> <span class="token operator">or</span> referee_id <span class="token operator">is</span> <span class="token boolean">null</span>
+</code></pre>
+<ul>
+<li>filling in null values - use the IS operator</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">case</span>
+<span class="token keyword">when</span> field <span class="token operator">is</span> <span class="token boolean">null</span> <span class="token keyword">then</span> <span class="token number">0</span> <span class="token comment"># field = 0 would not work</span>
+<span class="token keyword">else</span> field <span class="token keyword">end</span>
+</code></pre>
+<pre class="language-sql"><code class="language-sql">IFNULL<span class="token punctuation">(</span>field<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> field
+</code></pre>
+<ul>
+<li>delete</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">DELETE</span> <span class="token keyword">FROM</span> table_name <span class="token keyword">WHERE</span> condition<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>delete <a href="https://leetcode.com/problems/delete-duplicate-emails/">problem</a>, cannot delete from referenced table and need to create a temporary copy</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token comment"># delete from person</span>
+<span class="token comment"># where id not in (select min(id) from person group by email) </span>
+
+<span class="token comment"># create temporary copy of table</span>
+<span class="token keyword">delete</span> <span class="token keyword">from</span> person
+<span class="token keyword">where</span> id <span class="token operator">not</span> <span class="token operator">in</span> <span class="token punctuation">(</span><span class="token keyword">select</span> t<span class="token punctuation">.</span>id <span class="token keyword">from</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">min</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token keyword">as</span> id <span class="token keyword">from</span> person <span class="token keyword">group</span> <span class="token keyword">by</span> email<span class="token punctuation">)</span> t<span class="token punctuation">)</span>
+
+</code></pre>
+<ul>
+<li>substring(col_name, start_index, length), length is optional</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"> <span class="token keyword">SELECT</span> SUBSTRING<span class="token punctuation">(</span><span class="token string">'SQL Tutorial'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> ExtractString<span class="token punctuation">;</span>
+
+</code></pre>
+<ul>
+<li>union, union all</li>
+</ul>
+<pre class="language-sql"><code class="language-sql">t1
+<span class="token keyword">union</span>
+t2 <span class="token comment"># duplicates are removed</span>
+
+t1
+<span class="token keyword">union</span> <span class="token keyword">all</span>
+t2 <span class="token comment"># duplicates are stacked</span>
+</code></pre>
+<ul>
+<li>between</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> column_name<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> table_name
+<span class="token keyword">WHERE</span> column_name <span class="token operator">BETWEEN</span> value1 <span class="token operator">AND</span> value2<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li><a href="https://leetcode.com/problems/change-null-values-in-a-table-to-the-previous-value/">2388</a> Change Null Values in a Table to the Previous Value</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">with</span> cte <span class="token keyword">as</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token operator">*</span><span class="token punctuation">,</span> row_number<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">over</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> row_num<span class="token punctuation">,</span> <span class="token keyword">if</span><span class="token punctuation">(</span>isnull<span class="token punctuation">(</span>drink<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">as</span> flag <span class="token keyword">from</span> coffeeshop<span class="token punctuation">)</span><span class="token punctuation">,</span>
+     cte2 <span class="token keyword">as</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token operator">*</span><span class="token punctuation">,</span> <span class="token function">sum</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span> <span class="token keyword">over</span><span class="token punctuation">(</span><span class="token keyword">order</span> <span class="token keyword">by</span> row_num<span class="token punctuation">)</span> <span class="token keyword">as</span> group_id <span class="token keyword">from</span> cte<span class="token punctuation">)</span>
+<span class="token keyword">select</span> id<span class="token punctuation">,</span> first_value<span class="token punctuation">(</span>drink<span class="token punctuation">)</span> <span class="token keyword">over</span><span class="token punctuation">(</span><span class="token keyword">partition</span> <span class="token keyword">by</span> group_id<span class="token punctuation">)</span> <span class="token keyword">as</span> drink
+<span class="token keyword">from</span> cte2
+</code></pre>
+<ul>
+<li>concatanete two strings</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> concat<span class="token punctuation">(</span>s1<span class="token punctuation">,</span>s2<span class="token punctuation">)</span> <span class="token keyword">as</span> combined 
+<span class="token keyword">from</span> t
+</code></pre>
+<ul>
+<li>lower case, upper case</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> lower<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> upper<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token keyword">from</span> t
+</code></pre>
+<ul>
+<li>functions in SQL <a href="https://leetcode.com/problems/nth-highest-salary/">leetcode</a></li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">FUNCTION</span> getNthHighestSalary<span class="token punctuation">(</span>N <span class="token keyword">INT</span><span class="token punctuation">)</span> <span class="token keyword">RETURNS</span> <span class="token keyword">INT</span>
+<span class="token keyword">BEGIN</span>
+  <span class="token keyword">RETURN</span> <span class="token punctuation">(</span>
+      <span class="token comment"># Write your MySQL query statement below.</span>
+
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">END</span>
+</code></pre>
+<p>-limit + offset <a href="https://leetcode.com/problems/nth-highest-salary/">leetcode</a></p>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span>
+    column_list
+<span class="token keyword">FROM</span>
+    table1
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> column_list
+<span class="token keyword">LIMIT</span> row_count <span class="token keyword">OFFSET</span> <span class="token keyword">offset</span><span class="token punctuation">;</span>
+
+<span class="token comment"># The LIMIT row_count determines the number of rows (row_count) returned by the query.</span>
+<span class="token comment"># The OFFSET offset clause skips the offset rows before beginning to return the rows.</span>
+<span class="token comment"># OFFSET is optional</span>
+</code></pre>
+<ul>
+<li>rank in over(partition by)</li>
+</ul>
+<pre class="language-sql"><code class="language-sql">RANK <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span> <span class="token punctuation">[</span> partition_by_clause <span class="token punctuation">]</span> order_by_clause <span class="token punctuation">)</span>  
+
+ProductID   Name                   LocationID   Quantity Rank  
+<span class="token comment">----------- ---------------------- ------------ -------- ----  </span>
+<span class="token number">494</span>         Paint <span class="token operator">-</span> Silver         <span class="token number">3</span>            <span class="token number">49</span>       <span class="token number">1</span>  
+<span class="token number">495</span>         Paint <span class="token operator">-</span> Blue           <span class="token number">3</span>            <span class="token number">49</span>       <span class="token number">1</span>  
+<span class="token number">493</span>         Paint <span class="token operator">-</span> Red            <span class="token number">3</span>            <span class="token number">41</span>       <span class="token number">3</span>  
+<span class="token number">496</span>         Paint <span class="token operator">-</span> Yellow         <span class="token number">3</span>            <span class="token number">30</span>       <span class="token number">4</span>
+</code></pre>
+<ul>
+<li>dense rank <a href="https://leetcode.com/problems/department-top-three-salaries/">leetcode</a></li>
+</ul>
+<pre class="language-sql"><code class="language-sql">DENSE_RANK <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span> <span class="token punctuation">[</span> <span class="token operator">&#x3C;</span>partition_by_clause<span class="token operator">></span> <span class="token punctuation">]</span> <span class="token operator">&#x3C;</span> order_by_clause <span class="token operator">></span> <span class="token punctuation">)</span>  
+ProductID   Name                               LocationID Quantity Rank  
+<span class="token comment">----------- ---------------------------------- ---------- -------- -----  </span>
+<span class="token number">494</span>         Paint <span class="token operator">-</span> Silver                     <span class="token number">3</span>          <span class="token number">49</span>       <span class="token number">1</span>  
+<span class="token number">495</span>         Paint <span class="token operator">-</span> Blue                       <span class="token number">3</span>          <span class="token number">49</span>       <span class="token number">1</span>  
+<span class="token number">493</span>         Paint <span class="token operator">-</span> Red                        <span class="token number">3</span>          <span class="token number">41</span>       <span class="token number">2</span>  
+<span class="token number">496</span>         Paint <span class="token operator">-</span> Yellow                     <span class="token number">3</span>          <span class="token number">30</span>       <span class="token number">3</span>  
+</code></pre>
+<ul>
+<li>cumulative total</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> Id<span class="token punctuation">,</span> StudentName<span class="token punctuation">,</span>  StudentAge<span class="token punctuation">,</span>
+<span class="token function">SUM</span> <span class="token punctuation">(</span>StudentAge<span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token keyword">ORDER</span> <span class="token keyword">BY</span> Id<span class="token punctuation">)</span> <span class="token keyword">AS</span> RunningAgeTotal
+<span class="token keyword">FROM</span> Students
+</code></pre>
+<ul>
+<li>rolling sum/average</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> visited_on<span class="token punctuation">,</span> 
+            <span class="token function">sum</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span> <span class="token keyword">over</span><span class="token punctuation">(</span><span class="token keyword">order</span> <span class="token keyword">by</span> visited_on <span class="token keyword">rows</span> <span class="token operator">between</span> <span class="token number">6</span> <span class="token keyword">preceding</span> <span class="token operator">and</span> <span class="token keyword">current</span> <span class="token keyword">row</span><span class="token punctuation">)</span> <span class="token keyword">as</span> amount<span class="token punctuation">,</span>
+            <span class="token function">avg</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span> <span class="token keyword">over</span><span class="token punctuation">(</span><span class="token keyword">order</span> <span class="token keyword">by</span> visited_on <span class="token keyword">rows</span> <span class="token operator">between</span> <span class="token number">6</span> <span class="token keyword">preceding</span> <span class="token operator">and</span> <span class="token keyword">current</span> <span class="token keyword">row</span><span class="token punctuation">)</span> <span class="token keyword">as</span> average_amount
+<span class="token keyword">from</span> customer
+</code></pre>
+<ul>
+<li>
+<p>window functions</p>
+<ul>
+<li>sum, avg, first, lead, lag, rank, dense_rank</li>
+</ul>
+</li>
+<li>
+<p>lag window function</p>
+</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span><span class="token punctuation">,</span> lag<span class="token punctuation">(</span>purchase_date<span class="token punctuation">)</span> <span class="token keyword">over</span><span class="token punctuation">(</span><span class="token keyword">partition</span> <span class="token keyword">by</span> user_id <span class="token keyword">order</span> <span class="token keyword">by</span> purchase_date<span class="token punctuation">)</span> <span class="token keyword">as</span> previous_date
+<span class="token keyword">from</span> purchases
+</code></pre>
+<ul>
+<li>lead, window function for value in the next row</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> dept_id<span class="token punctuation">,</span> last_name<span class="token punctuation">,</span> salary<span class="token punctuation">,</span>
+LEAD <span class="token punctuation">(</span>salary<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token keyword">ORDER</span> <span class="token keyword">BY</span> salary<span class="token punctuation">)</span> <span class="token keyword">AS</span> next_highest_salary
+<span class="token keyword">FROM</span> employees<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>like, search in substring, <a href="https://leetcode.com/problems/patients-with-a-condition/">patients</a></li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> col
+<span class="token keyword">from</span> <span class="token keyword">table</span>
+<span class="token keyword">where</span> col <span class="token operator">like</span> <span class="token string">'%KUR%'</span>
+</code></pre>
+<ul>
+<li>
+<p>to get island values (group of equal consecutive values in a column) use rank- rank trick, <a href="https://leetcode.com/problems/longest-winning-streak/">leetcode</a></p>
+</li>
+<li>
+<p>CAST to datatypes</p>
+</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token comment">-- For Sql server</span>
+<span class="token keyword">SELECT</span> CAST<span class="token punctuation">(</span><span class="token number">25.65</span> <span class="token keyword">AS</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">/*
+CAST(&#x3C;value_to_cast> AS &#x3C;data_type_to_cast_to>)
+*/</span>
+</code></pre>
+<ul>
+<li>put stuff in one cell table with group_concat</li>
+</ul>
+<pre><code>+------------+------------+
+| sell_date  | product     |
++------------+------------+
+| 2020-05-30 | Headphone  |
+| 2020-06-01 | Pencil     |
+| 2020-06-02 | Mask       |
+| 2020-05-30 | Basketball |
+| 2020-06-01 | Bible      |
++------------+------------+
+
+TO
+
++------------+----------+------------------------------+
+| sell_date  | num_sold | products                     |
++------------+----------+------------------------------+
+| 2020-05-30 | 3        | Basketball,Headphone,T-shirt |
+| 2020-06-01 | 2        | Bible,Pencil                 |
+| 2020-06-02 | 1        | Mask                         |
++------------+----------+------------------------------+
+</code></pre>
+<pre class="language-sql"><code class="language-sql"><span class="token comment"># Write your MySQL query statement below</span>
+<span class="token keyword">select</span> sell_date<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token keyword">distinct</span> product<span class="token punctuation">)</span> <span class="token keyword">as</span> num_sold<span class="token punctuation">,</span> 
+group_concat<span class="token punctuation">(</span><span class="token keyword">distinct</span> product <span class="token keyword">order</span> <span class="token keyword">by</span> product separator <span class="token string">','</span><span class="token punctuation">)</span> <span class="token keyword">as</span> products
+<span class="token keyword">from</span> activities
+<span class="token keyword">group</span> <span class="token keyword">by</span> sell_date
+</code></pre>
+<ul>
+<li>pivot trick <a href="https://leetcode.com/problems/students-report-by-geography/">student by geography</a></li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token comment"># Write your MySQL query statement below</span>
+<span class="token keyword">select</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> continent <span class="token operator">=</span> <span class="token string">'America'</span> <span class="token keyword">then</span> name <span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token keyword">as</span> America<span class="token punctuation">,</span>
+       <span class="token function">max</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> continent <span class="token operator">=</span> <span class="token string">'Asia'</span> <span class="token keyword">then</span> name <span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token keyword">as</span> Asia<span class="token punctuation">,</span>
+       <span class="token function">max</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> continent <span class="token operator">=</span> <span class="token string">'Europe'</span> <span class="token keyword">then</span> name <span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token keyword">as</span> Europe
+<span class="token keyword">from</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token operator">*</span><span class="token punctuation">,</span> row_number<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">over</span><span class="token punctuation">(</span><span class="token keyword">partition</span> <span class="token keyword">by</span> continent <span class="token keyword">order</span> <span class="token keyword">by</span> name<span class="token punctuation">)</span> <span class="token keyword">as</span> rn
+<span class="token keyword">from</span> student<span class="token punctuation">)</span> t
+<span class="token keyword">group</span> <span class="token keyword">by</span> rn
+</code></pre>
+<ul>
+<li><a href="https://leetcode.com/problems/dynamic-pivoting-of-a-table/">dynamic pivoting</a></li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token comment">-- static pivot</span>
+<span class="token comment">-- select product_id,</span>
+<span class="token comment">-- sum(case when store = "store1" then price end) as store1,</span>
+<span class="token comment">-- sum(case when store = "store"then price end) as store2,</span>
+<span class="token comment">-- ....</span>
+<span class="token comment">-- from products</span>
+<span class="token comment">-- group by product_id</span>
+
+
+<span class="token comment">-- this procedusre would concatenate all select statements in case_stmtsum(..)</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">PROCEDURE</span> PivotProducts<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">BEGIN</span>
+	<span class="token comment"># Write your MySQL query statement below.</span>
+    <span class="token keyword">SET</span> <span class="token keyword">SESSION</span> group_concat_max_len <span class="token operator">=</span> <span class="token number">1000000</span><span class="token punctuation">;</span>
+    <span class="token comment">--define case statement</span>
+    <span class="token keyword">select</span> group_concat<span class="token punctuation">(</span><span class="token keyword">distinct</span> concat<span class="token punctuation">(</span><span class="token string">'sum(case when store = "'</span><span class="token punctuation">,</span>store<span class="token punctuation">,</span><span class="token string">'" then price end) as '</span><span class="token punctuation">,</span> store<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">into</span> <span class="token variable">@case_stmt</span>
+    <span class="token keyword">from</span> products<span class="token punctuation">;</span>
+    <span class="token comment">-- get whole sql query</span>
+    <span class="token keyword">set</span> <span class="token variable">@sql_query</span> <span class="token operator">=</span> concat<span class="token punctuation">(</span><span class="token string">'select product_id, '</span><span class="token punctuation">,</span><span class="token variable">@case_stmt</span><span class="token punctuation">,</span> <span class="token string">' from products group by product_id'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">prepare</span> final_sql_query <span class="token keyword">from</span> <span class="token variable">@sql_query</span><span class="token punctuation">;</span>
+    <span class="token keyword">execute</span> final_sql_query<span class="token punctuation">;</span>
+    <span class="token keyword">deallocate</span> <span class="token keyword">prepare</span> final_sql_query<span class="token punctuation">;</span>
+<span class="token keyword">END</span>
+</code></pre>
+<ul>
+<li><a href="https://leetcode.com/problems/dynamic-unpivoting-of-a-table/">dynamic unpivoting</a></li>
+</ul>
+<ul>
+<li><a href="https://stackoverflow.com/questions/9917196/meaning-of-square-brackets-in-ms-sql-table-designer">delimit identifiers</a>, ignore special symbols, characters, spaces etc</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> <span class="token punctuation">[</span>my <span class="token keyword">table</span><span class="token punctuation">]</span>
+<span class="token keyword">where</span> <span class="token punctuation">[</span><span class="token keyword">order</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span>
+</code></pre>
+<ul>
+<li>index column</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> <span class="token punctuation">[</span><span class="token keyword">index</span> name<span class="token punctuation">]</span> <span class="token keyword">ON</span> <span class="token punctuation">[</span><span class="token keyword">table</span> name<span class="token punctuation">]</span> <span class="token punctuation">(</span> <span class="token punctuation">[</span><span class="token keyword">column</span> name<span class="token punctuation">]</span> <span class="token punctuation">)</span>
+</code></pre>
+<p>-transactions</p>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">BEGIN</span> <span class="token keyword">TRANSACTION</span>
+<span class="token keyword">BEGIN</span> TRY
+
+<span class="token keyword">UPDATE</span> table_name <span class="token keyword">SET</span> BAKIYE <span class="token operator">=</span> BAKIYE <span class="token operator">-</span> <span class="token number">1000</span>
+<span class="token keyword">WHERE</span> Name<span class="token operator">=</span><span class="token string">'Name'</span> <span class="token operator">AND</span> Surname<span class="token operator">=</span><span class="token string">'Surname'</span>
+
+<span class="token keyword">UPDATE</span> table_name <span class="token keyword">SET</span> BAKIYE <span class="token operator">=</span> BAKIYE <span class="token operator">+</span> <span class="token number">1000</span>
+<span class="token keyword">WHERE</span> Name<span class="token operator">=</span><span class="token string">'Name'</span> <span class="token operator">AND</span> Surname<span class="token operator">=</span><span class="token string">'Surname'</span>
+
+<span class="token keyword">update</span> salary <span class="token keyword">set</span> sex <span class="token operator">=</span> <span class="token keyword">if</span><span class="token punctuation">(</span>sex <span class="token operator">=</span><span class="token string">'f'</span><span class="token punctuation">,</span><span class="token string">'m'</span><span class="token punctuation">,</span><span class="token string">'f'</span><span class="token punctuation">)</span> 
+<span class="token comment">--  swap f to m and m to f in sex column</span>
+<span class="token keyword">COMMIT</span>
+<span class="token keyword">END</span> TRY
+<span class="token keyword">BEGIN</span> CATCH
+<span class="token keyword">ROLLBACK</span>
+<span class="token keyword">END</span> CATCH
+</code></pre>
+<h2 id="sql-variables">SQL Variables<a aria-hidden="true" class="anchor-heading icon-link" href="#sql-variables"></a></h2>
+<p>If we want to use a variable in SQL Server, we have to declare it using <code>DECLARE</code> statement.</p>
+<p>Local variable names have to start with an at (@) sign.</p>
+<ul>
+<li>declaring variables</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">DECLARE</span> <span class="token variable">@TestVariable</span> <span class="token keyword">AS</span> <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+<span class="token keyword">DECLARE</span> <span class="token variable">@TestVariable</span> <span class="token comment">-- NULL initialization</span>
+</code></pre>
+<ul>
+<li>assign values to variables</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token variable">@TestVariable</span> <span class="token operator">=</span> <span class="token string">'Save the Nature'</span> <span class="token comment">--single select line</span>
+
+<span class="token comment">--- ASSIGN LAST VALUE OF TABLE T</span>
+<span class="token keyword">select</span> <span class="token variable">@TestVariable</span> <span class="token operator">=</span> person_name
+<span class="token keyword">from</span> t
+<span class="token keyword">where</span> salary <span class="token operator">=</span> <span class="token number">100000</span>
+</code></pre>
+<ul>
+<li>assign variable value using set</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">DECLARE</span> <span class="token variable">@Variable1</span> <span class="token keyword">AS</span> <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+<span class="token keyword">DECLARE</span> <span class="token variable">@Variable2</span> <span class="token keyword">AS</span> UNIQUEIDENTIFIER
+<span class="token keyword">SET</span> <span class="token variable">@Variable1</span> <span class="token operator">=</span> <span class="token string">'Save Water Save Life'</span>
+<span class="token keyword">SET</span> <span class="token variable">@Variable2</span><span class="token operator">=</span> <span class="token string">'6D8446DE-68DA-4169-A2C5-4C0995C00CC1'</span>
+</code></pre>
+<ul>
+<li>assign many varaibles to values</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">DECLARE</span> <span class="token variable">@Variable1</span> <span class="token keyword">AS</span> <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token variable">@Variable2</span> <span class="token keyword">AS</span> UNIQUEIDENTIFIER
+<span class="token keyword">SELECT</span> <span class="token variable">@Variable1</span> <span class="token operator">=</span> <span class="token string">'Save Water Save Life'</span> <span class="token punctuation">,</span> <span class="token variable">@Variable2</span><span class="token operator">=</span> <span class="token string">'6D8446DE-68DA-4169-A2C5-4C0995C00CC1'</span>
+</code></pre>
+<ul>
+<li>end of batch, <code>GO</code> keyword</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">DECLARE</span> <span class="token variable">@TestVariable</span> <span class="token keyword">AS</span> <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+<span class="token keyword">SET</span> <span class="token variable">@TestVariable</span> <span class="token operator">=</span> <span class="token string">'Think Green'</span>
+GO
+<span class="token keyword">PRINT</span> <span class="token variable">@TestVariable</span> <span class="token comment">-- ERROR, varibale not declared</span>
+</code></pre>
+<ul>
+<li>PREPARE, EXECUTE and DEALLOCATE statement in MySQL</li>
+<li>running strings as statements</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SET</span> <span class="token variable">@s</span> <span class="token operator">=</span> <span class="token string">'SELECT ? + ? AS sumtable'</span><span class="token punctuation">;</span>
+<span class="token keyword">PREPARE</span> stmt1 <span class="token keyword">FROM</span> <span class="token variable">@s</span><span class="token punctuation">;</span>
+<span class="token keyword">SET</span> <span class="token variable">@a</span> <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token keyword">SET</span> <span class="token variable">@b</span> <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+<span class="token keyword">EXECUTE</span> stmt1 <span class="token keyword">USING</span> <span class="token variable">@a</span><span class="token punctuation">,</span> <span class="token variable">@b</span><span class="token punctuation">;</span>
+<span class="token keyword">DEALLOCATE</span> <span class="token keyword">PREPARE</span> stmt1<span class="token punctuation">;</span>
+</code></pre>
+<p>this would return</p>
+<pre><code>+----------+
+| sumtable |
++----------+
+|       10 |
++----------+
+</code></pre>
+<h2 id="sql-cte">SQL CTE<a aria-hidden="true" class="anchor-heading icon-link" href="#sql-cte"></a></h2>
+<p>CTE = Common Table Expression. These are temporary tables which act as variable that you can use through your code.
+<a href="https://leetcode.com/problems/change-null-values-in-a-table-to-the-previous-value/submissions/">Example problem</a></p>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">with</span> cte <span class="token keyword">as</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token operator">*</span><span class="token punctuation">,</span>rank<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">over</span><span class="token punctuation">(</span><span class="token keyword">order</span> <span class="token keyword">by</span> money<span class="token punctuation">)</span> <span class="token keyword">as</span> r <span class="token keyword">from</span> t<span class="token punctuation">)</span><span class="token punctuation">,</span>
+     cte2 <span class="token keyword">as</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token operator">*</span><span class="token punctuation">,</span><span class="token function">min</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token keyword">as</span> minn <span class="token keyword">from</span> cte2<span class="token punctuation">)</span><span class="token punctuation">,</span>
+     cte3 <span class="token keyword">as</span> <span class="token punctuation">(</span><span class="token keyword">select</span> student <span class="token keyword">from</span> cte2 <span class="token keyword">where</span> r <span class="token operator">=</span> minn<span class="token punctuation">)</span>
+<span class="token keyword">select</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> cte3
+</code></pre>
+<p>Avoid running lots of subqueries, joining, carrying tables around!</p>
+<h2 id="sql-recursion">SQL recursion<a aria-hidden="true" class="anchor-heading icon-link" href="#sql-recursion"></a></h2>
+<p>Basic SQL cannot express unbounded computations.</p>
+<p>Table: ParentOf</p>
+<pre><code>Parent |  Child
+Sue    |  Mary
+Bob    |  Mary
+Fred   |  Bob
+Jane   |  Bob
+</code></pre>
+<p>Tasks: Find Parent, Grandparent (two instances of ParentOf), Grand-grand parent(three instances of ParentOf)
+Note you need recursion</p>
+<p><code>With</code> construct exists in SQL by itself. It often used to have recursion in SQL.</p>
+<p><img src="/dendron-wiki/assets/images/with_statement.png" alt="with_statement.png" style="width:600px;"></p>
+<p>each relation R is the result of its corresponding query. Final result of the master LAST query. Can thing of <code>AS</code> to be an
+assignment for the realtions</p>
+<p>We can specify recursive statements using the <code>Recursive</code> keyword after <code>With</code></p>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">WITH</span> RECURSIVE cte_name <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+    initial_query  <span class="token comment">-- anchor member</span>
+    <span class="token keyword">UNION</span> <span class="token keyword">ALL</span>
+    recursive_query <span class="token comment">-- recursive member that references to the CTE name</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> cte_name<span class="token punctuation">;</span>
+</code></pre>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">WITH</span> RECURSIVE cte_count
+<span class="token keyword">AS</span> <span class="token punctuation">(</span>
+      <span class="token keyword">SELECT</span> <span class="token number">1</span> <span class="token keyword">as</span> n<span class="token comment">-- BASE CASE</span>
+      <span class="token keyword">UNION</span> <span class="token keyword">ALL</span> <span class="token comment"># might enter infinite loop, careful</span>
+      <span class="token keyword">SELECT</span> n <span class="token operator">+</span> <span class="token number">1</span>
+      <span class="token keyword">FROM</span> cte_count <span class="token comment">-- Recursive call, should dependt on the relation itself CTE_COUNT!</span>
+      <span class="token keyword">WHERE</span> n <span class="token operator">&#x3C;</span> <span class="token number">3</span>
+    <span class="token punctuation">)</span>
+<span class="token keyword">SELECT</span> n
+<span class="token keyword">FROM</span> cte_count<span class="token punctuation">;</span>
+</code></pre>
+<p><img src="/dendron-wiki/assets/images/recursion_example.png" alt="recursion_example.png" style="width:600px;"></p>
+<ul>
+<li>generate consecutive numbers</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">WITH</span> RECURSIVE seq <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+    <span class="token keyword">SELECT</span> <span class="token number">0</span> <span class="token keyword">AS</span> <span class="token keyword">value</span> <span class="token keyword">UNION</span> <span class="token keyword">ALL</span> <span class="token keyword">SELECT</span> <span class="token keyword">value</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token keyword">FROM</span> seq <span class="token keyword">WHERE</span> <span class="token keyword">value</span> <span class="token operator">&#x3C;</span> <span class="token number">100</span>
+    <span class="token punctuation">)</span>
+
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> seq<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>with statement <a href="https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company/">leetcode</a>
+Basic SQL cannot express unbounded computations. WITH construct is available in SQL without recursion. But this is the construct used to ADD recursion in SQL. CTE = common table expression. WITH is like a function in SQL</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">with</span> R1 <span class="token keyword">as</span> <span class="token punctuation">(</span>query <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+     R2 <span class="token keyword">as</span> <span class="token punctuation">(</span>query <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+     CTE <span class="token keyword">as</span> <span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">,</span>
+     
+ <span class="token operator">&#x3C;</span>query involving <span class="token keyword">all</span> R1<span class="token punctuation">,</span> R2 <span class="token punctuation">.</span><span class="token punctuation">.</span>Rn<span class="token punctuation">,</span> CTE <span class="token operator">+</span> other <span class="token keyword">tables</span><span class="token operator">></span> <span class="token comment"># return this last query</span>
+</code></pre>
+<ul>
+<li>recursion</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">WITH</span> RECURSIVE cte_name <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+    cte_query_definition <span class="token punctuation">(</span>the anchor member<span class="token punctuation">)</span>
+
+    <span class="token keyword">UNION</span> <span class="token keyword">ALL</span>
+
+    cte_query_definition <span class="token punctuation">(</span>the recursive member<span class="token punctuation">)</span> <span class="token comment"># often need where statement to stop</span>
+<span class="token punctuation">)</span>
+
+ 
+<span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span>   cte_name<span class="token punctuation">;</span>
+</code></pre>
+<p><img src="/dendron-wiki/assets/images/recursion_query.png" alt="recursion_query.png"></p>
+<p><img src="/dendron-wiki/assets/images/recursion.png" alt="recursion.png"></p>
+<ul>
+<li>classic family tree recursion <a href="https://leetcode.com/problems/all-people-report-to-the-given-manager/">problem</a></li>
+</ul>
+<h2 id="sql-indexing">SQL indexing<a aria-hidden="true" class="anchor-heading icon-link" href="#sql-indexing"></a></h2>
+<p><a href="https://www.youtube.com/watch?v=Y7Qlc7f_u0o">Stanford Lecture</a></p>
+<p>Index column B and you can ask questions such as show me the rows where elements in column B belong to certain interval
+is going to be faster.</p>
+<p><img src="/dendron-wiki/assets/images/indexing.png" alt="indexing.png" style="width:600px;"></p>
+<p>Users don't access indexes! They are used underneath by the query execution engine.</p>
+<p>Underlying data structures = type of indexes:</p>
+<ul>
+<li>hash allows only concrete checks such as table.A = val <strong>O(1)</strong></li>
+<li>B+ trees allows checks such as table.A = val, v1 &#x3C; table.A &#x3C;= v2 <strong>O(log(n))</strong></li>
+<li>R+ trees</li>
+</ul>
+<p>No indexes is <strong>O(n)</strong> time
+Many DBMS's build indexes automatically on <code>PRIMARY KEY</code> (and sometimes <code>UNIQUE</code>) attributes.</p>
+<p>Examples:</p>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> student_id
+<span class="token keyword">from</span> student
+<span class="token keyword">where</span> student_name <span class="token operator">=</span> <span class="token string">'Kuny'</span> <span class="token operator">and</span> gpa <span class="token operator">></span> <span class="token number">3.9</span>
+</code></pre>
+<ul>
+<li>index on student_name (hash-based index)</li>
+<li>index on gpa (tree-based)</li>
+<li>index on (student_name,gpa)</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">select</span> s_name<span class="token punctuation">,</span> c_name
+<span class="token keyword">from</span> student<span class="token punctuation">,</span> <span class="token keyword">apply</span>
+<span class="token keyword">where</span> student<span class="token punctuation">.</span>s_id <span class="token operator">=</span> <span class="token keyword">apply</span><span class="token punctuation">.</span>s_id
+</code></pre>
+<ul>
+<li>no indexing is <code>O(m*n)</code></li>
+<li>index student.s_id -> <code>O(n)</code></li>
+<li>index apply.s_id -> <code>O(m)</code></li>
+</ul>
+<p>Downsides of indexes:</p>
+<ul>
+<li>extra space (persistent data structure stored underneath the database) = marginal downside (ok-ish)</li>
+<li>index created = medium downside/initialization can be slow</li>
+<li>index maintenance, can offset benefits. If we modify often the const of maintaining the indexes (re-initialization)
+can be quite expensive. If you do lots of writes and less reads better not use indexes.</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">index</span> your_index_name <span class="token keyword">on</span> your_table_name<span class="token punctuation">(</span>your_column_name<span class="token punctuation">)</span> <span class="token keyword">using</span> <span class="token keyword">HASH</span><span class="token punctuation">;</span>
+<span class="token operator">or</span>
+<span class="token keyword">create</span> <span class="token keyword">index</span> your_index_name <span class="token keyword">on</span> your_table_name<span class="token punctuation">(</span>your_column_name<span class="token punctuation">)</span> <span class="token keyword">using</span> <span class="token keyword">BTREE</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The best way to improve the performance of SELECT operations is to create indexes on one or more of the columns that are tested in the query. The index entries act like pointers to the table rows, allowing the query to quickly determine which rows match a condition in the WHERE clause, and retrieve the other column values for those rows. All MySQL data types can be indexed.
+Indexes are used to find rows with specific column values quickly. Without an index, MySQL must begin with the first row
+and then read through the entire table to find the relevant rows.</p>
+<ul>
+<li>index columns used in <code>WHERE</code> clauses</li>
+</ul>
+<p><strong>Column Indexes</strong>
+The most common type of index involves a single column, storing copies of the values from that column in a data structure, allowing fast lookups for the rows with the corresponding column values. The B-tree data structure lets the index quickly find a specific value, a set of values, or a range of values, corresponding to operators such as<code> =, >, ≤, BETWEEN, IN,</code> and so on, in a <code>WHERE</code> clause.</p>
+<h2 id="database-design">Database design<a aria-hidden="true" class="anchor-heading icon-link" href="#database-design"></a></h2>
+<ol>
+<li>
+<p>Understand the Data – Is it relational or document-based? Do you need to manage complex queries or just store simple key-value pairs?</p>
+</li>
+<li>
+<p>Scalability Is Key – High traffic? Complex joins?</p>
+</li>
+<li>
+<p>Consistency vs. Performance – Do you need strong consistency (ACID) or can you tolerate eventual consistency for better availability and partition tolerance? </p>
+</li>
+<li>
+<p>Account for Future Evolution  – Can your database scale? Is it flexible enough for new features?</p>
+</li>
+<li>
+<p>Keep It Simple</p>
+</li>
+</ol>
+<p><a href="https://www.youtube.com/watch?v=DFnAakJ4FDg&#x26;list=PL9ysvtVnryGpnIj9rcIqNDxakUn6v72Hm&#x26;index=31">Design by decomposition</a></p>
+<ul>
+<li>start with 'mega' relations containing everything</li>
+<li>decompose into smaller, better relations with same info</li>
+<li>can do decomosition automatically
+<strong>Final set of relations satisfies normal form</strong> (normalization of a database) = no redundant data, updates are easier to be made.</li>
+</ul>
+<p>Denormalised database example:</p>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">Apply</span><span class="token punctuation">(</span>SSN<span class="token punctuation">,</span> student_name<span class="token punctuation">,</span> college_name<span class="token punctuation">,</span> high_school<span class="token punctuation">,</span> city<span class="token punctuation">,</span> hobby<span class="token punctuation">)</span>
+</code></pre>
+<p><em>Apply</em> is a table with all columns (ssn = social security number) stored in one place.
+To record Ann with SSN = 123 from Sofia, studied at SMG and 125, plays tennis and trumpet and applied at Stanford, Berkeley, MIT
+we need 12 different rows! Studied at SMG will be repeated 6 times, applied at MIT will be repeated 4 times.
+<strong>Redundancy</strong> in the database.</p>
+<p>Normalised database:</p>
+<pre><code>Student(SSN, student_name)
+Apply(SSN, college_name)
+HighSchool(SSN, high_school)
+Located(high_school, city)
+Hobbies(SSN, hobby)
+</code></pre>
+<p>Decide how to normalize your database by looking for:</p>
+<ul>
+<li>functional dependencies</li>
+<li>multivalued dependencies</li>
+</ul>
+<p><em>Buzz word</em> If you see Functional Dependency  use Boyce-Codd Normal Form (decompose your table)</p>
+<p><img src="/dendron-wiki/assets/images/functional_dep.png" alt="functional_dep.png" style="width:600px;"></p>
+<p><em>Buzz word</em> If you see multivalued Dependency  use Boyce-Codd Normal Form (decompose your table)</p>
+<p><img src="/dendron-wiki/assets/images/multivalued_dep.png" alt="multivalued_dep.png" style="width:600px;"></p>
+<p>Maybe check this <a href="https://www.youtube.com/watch?v=GFQaEYEc8_8&#x26;ab_channel=Decomplexify">youtube</a></p>
+<h2 id="orm">ORM<a aria-hidden="true" class="anchor-heading icon-link" href="#orm"></a></h2>
+<p>SQL Alchemy</p>
+<p>ORM</p>
+<p>Relational Map, e.g. from SQL to Python</p>
+<p>leaky/soft abstraction</p>
+<h1 id="problems">Problems<a aria-hidden="true" class="anchor-heading icon-link" href="#problems"></a></h1>
+<p><a href="https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/">1285</a>
+<a href="https://leetcode.com/problems/nth-highest-salary/">177</a>
+<a href="https://leetcode.com/problems/find-median-given-frequency-of-numbers/submissions/">571</a>
+<a href="https://leetcode.com/problems/biggest-window-between-visits/">1709</a>
+<a href="https://leetcode.com/problems/all-people-report-to-the-given-manager/">1270</a>
+<a href="https://leetcode.com/problems/find-the-missing-ids/">1613</a>
+<a href="https://leetcode.com/problems/median-employee-salary/">569</a>
+<a href="https://leetcode.com/problems/tree-node/submissions/">608</a>
+<a href="https://leetcode.com/problems/arrange-table-by-gender/">2308</a>
+<a href="https://leetcode.com/problems/users-with-two-purchases-within-seven-days/">2228</a>
+<a href="https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/submissions/">1285</a>
+<a href="https://leetcode.com/problems/get-the-second-most-recent-activity/">1369</a></p>
+<h1 id="topics">Topics<a aria-hidden="true" class="anchor-heading icon-link" href="#topics"></a></h1>
+<p>Space and Time Complexity intro to Queries: <a href="https://medium.com/learning-data/understanding-algorithmic-time-efficiency-in-sql-queries-616176a85d02">https://medium.com/learning-data/understanding-algorithmic-time-efficiency-in-sql-queries-616176a85d02</a><br>
+Basic (important!) Query Optimisation Techniques: <a href="https://medium.com/learning-sql/12-tips-for-optimizing-sql-queries-for-faster-performance-8c6c092d7af1">https://medium.com/learning-sql/12-tips-for-optimizing-sql-queries-for-faster-performance-8c6c092d7af1</a><br>
+Advanced Topics in SQL: <a href="https://sqlpad.io/tutorial/advanced-sql/">https://sqlpad.io/tutorial/advanced-sql/</a>  </p>
+<ul>
+<li>UNION, GROU[ BY (UNDERSTAND HOW IT WORKS), INDEXATION, PARTITION<br>
+B-TREE: <a href="https://builtin.com/data-science/b-tree-index">https://builtin.com/data-science/b-tree-index</a> (fundamental Database data structure! - connection to indexing!)  </li>
+</ul>
