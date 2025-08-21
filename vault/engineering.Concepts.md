@@ -1,6 +1,6 @@
 ---
 id: 7khpigcji0ufpuptuqozcft
-title: All Programming Concepts via Python
+title: Concepts
 desc: ''
 updated: 1752649893662
 created: 1750781063837

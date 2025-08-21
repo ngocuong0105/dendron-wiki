@@ -2,7 +2,7 @@
 id: 03gbxiq9kwvv3tq2zpwbjjo
 title: S3 vs DL vs Redshift
 desc: ''
-updated: 1753106549992
+updated: 1755693377299
 created: 1753101111100
 ---
 # S3 (Simple Storage Service)
@@ -38,6 +38,11 @@ created: 1753101111100
     - This means data is stored column by column, which is highly efficient for analytical queries (scanning/aggregating specific columns in very large datasets).
 
 See [[engineering.AWS.How does Yelp store data?]] or practical usage
+
+## Note on parquet vs csv
+- parquet files are columnar, meaning they store data in columns rather than rows.
+- This is different from CSV files, which are row-based.
+
 
 # Bottom line
 
