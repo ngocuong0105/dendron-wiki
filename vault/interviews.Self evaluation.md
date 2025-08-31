@@ -2,7 +2,7 @@
 id: v2ww0oqwjzp0phcrt046f9p
 title: Self evaluation
 desc: ''
-updated: 1689275560014
+updated: 1756646691067
 created: 1666691366247
 ---
 
@@ -38,11 +38,10 @@ They did not make me quant dev offer and wanted to interview me for quant resear
 - Mistakes: On final round they asked what problems would you expect to have when developing a trading strategy and
 implementing it in practice. Quant devs take care of that. Data problem, services, notifications the whole pipeline.
 I did not know this stuff.
-- Reject reason: For QR they asked me about linear regression and how points affect the line. Larger Residuals have larger i
-mpact (squared error)... Also the x-axis position of he point matter as well. The farer you are from the mean the larger
-impact you have on the regression line.
-Question about optimization problems: Linear regression with beta<5 (yes) is that a convex problem. abs(beta) < 5 is that
-a convex problem (no - you might be on the wrong side of the parabolla).
+- Reject reason: For QR they asked me about linear regression and how points affect the line. Larger Residuals have larger impact (squared error)... Also the x-axis position of he point matter as well. The farer you are from the mean the larger impact you have on the regression line.
+
+Question about optimization problems: Linear regression with beta<5 (yes) is that a convex problem. abs(beta) < 5 is that a convex problem (no - you might be on the wrong side of the parabola).
+
 Dual problems, how to know you are on global minimum - maximize your dual problem = minimizing your loss
 
 - Questions: Agile, SQL, Python, Linear regression, Optimization problems

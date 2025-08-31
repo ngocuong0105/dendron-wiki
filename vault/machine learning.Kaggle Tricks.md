@@ -2,7 +2,7 @@
 id: ltvbyf1oqc8qx7khy58pby2
 title: Kaggle Tricks
 desc: ''
-updated: 1752564755285
+updated: 1756646790205
 created: 1677947097369
 ---
 [Hands-on course in Kaggle](https://www.kaggle.com/learn)
@@ -244,7 +244,7 @@ featureX - groupby(FeatureY)[FeatureX].mean()
 
 - previous FCT error feature (difference between FCT and TARGET), kind of boosting method
 - rolling aggregates - mean, median, min, max, quantiles, std, kurtosis, skew
-- intercept and slope instead of mean agreagate, that is run linear regression on past samples within a window and put the intercept and slope as features
+- intercept and slope instead of mean aggregate, that is run linear regression on past samples within a window and put the intercept and slope as features
 - random feature trick
 - neighbors_target_mean_500: The mean TARGET value of the 500 closest neighbors of each row
 
