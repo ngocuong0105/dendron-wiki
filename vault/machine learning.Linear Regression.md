@@ -2,7 +2,7 @@
 id: h79jpatf2zw7a0qpq4asniw
 title: Linear Regression
 desc: ''
-updated: 1752221567894
+updated: 1756648846962
 created: 1751960242840
 ---
 
@@ -14,6 +14,14 @@ Linear model's assumptions are:
 - The errors are normally distributed, independent, and homoscedastic (constant variance).
 - The errors are independent of the features (no endogeneity).
 - The features are not multi-collinear (not highly correlated).
+
+
+Example when each of these assumptions is violated:
+- Non-linear relationship: $y = 2x^2 + noise$
+- Correlated errors: time series data with autocorrelated residuals
+- Heteroscedasticity: variance of errors increases with the value of x (leverage effect, further from mean pull the line more)
+- Endogeneity: omitted variable that affects that affects both x and y
+
 
 
 
@@ -92,7 +100,7 @@ Notes:
 
 **Insights:**
 - Forecasts of both model are good and in practice you don't need to drop the correlated features if you care about forecasts
-- Remember that the forecast $\hat{y}$ is the orthogonal projection of the real value y on the subspace spanned by the design matrix $X$. If the deign matrix has correlated features there are multiple ways to express the same $\hat{y}$. Hence different values for the $\hat{beta}$ would give the same forecast.  
+- Remember that the forecast $\hat{y}$ is the orthogonal projection of the real value y on the subspace spanned by the design matrix $X$. If the design matrix has correlated features there are multiple ways to express the same $\hat{y}$. Hence different values for the $\hat{beta}$ would give the same forecast.  
 - When there are correlated features you will see large variance in the beta estimates, also mathematically $var(\hat{beta})=(XX^{T})^{-1}\sigma$ will just be very large when the inside matrix is not positive definite.
 - large beta variance, means low t-statistic, which means high p-value
 - hence with correlated features the model is not interpretable but the sum is good forecasts.
