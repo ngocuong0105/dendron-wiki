@@ -2,7 +2,7 @@
 id: h79jpatf2zw7a0qpq4asniw
 title: Linear Regression
 desc: ''
-updated: 1756648846962
+updated: 1756756294152
 created: 1751960242840
 ---
 
@@ -408,14 +408,41 @@ robust_model = ols_model.get_robustcov_results(cov_type='HAC', maxlags=1)
 
 # Computation and Optimization
 
+**Solving `Ax = b`**
+
+## Direct Inverse
+- Strict inverse using QR decomposition, Q is orthogonal matrix, R is upper triangular.
+You can solve $Rx = Q^{T}b$ using back substitution. Recursively solving for each element of x starting from the last row up to the first row.
 - $X(X^{T}X)^{-1} y$ is $O(p^3) + O(p^{2}*n)$ run time (matrix inversion is $O(p^3)$)
-- Using Gram-Schimdt + QR decomposition is $O(p^2*n)$
-- Gram-Smidth is doing regression on each feature one by one, orthogonally projecting the residuals onto the next feature.
+- Use Gram-Schmidt  to build QR decomposition 
+- $O(p^2*n)$ run time
+- Gram-Schmidt is doing regression on each feature one by one, orthogonally projecting the residuals onto the next feature.
 - Your book "Elements of Statistical Learning" has the exact algo.
+
+- In theory you can use Gaussian Elimination to calculate the inverse of A. 
+This is when you "attach" the identity matrix to A and do row operations to convert A to identity matrix, the identity matrix will become A inverse.
+These operations are echelon form and are $O(p^3)$ run time.
+
+## Pseudo Inverse
+- Produces more stable results and is strictly better than direct inverse in terms of forecasts
+- The big-O run time could be larger for well-defined invertible matrices, but in practice it is faster.
+- pseudoinverse instead of blowing up values close to 0 it suppresses them naturally giving stable results
+- **SVD*** decomposition is used to compute the pseudoinverse
+- `A = U @ SIGMA @ V^T -> A^+ = V @ SIGMA^+ @ U^T`
+- U and V are orthonormal matrices
+
+
+### Decomposition Methods
+- LU decomposition: $A=LU$ where L is lower triangular and U is upper triangular. Used to solve Ax=b by solving Ly=b and then Ux=y (simpler than taking the inverse directly)
+- Cholesky decomposition (subcase of LU decomposition): $A=LL^T$ for symmetric positive definite matrices.
+- QR decomposition: $A=QR$ where Q is orthogonal and R is upper triangular. Used to solve Ax=b by solving Rx=Q^Tb.
+- SVD decomposition: $A=U\Sigma V^T$ where U and V are orthogonal and Σ is diagonal. Used for pseudoinverse and dimensionality reduction.
+
+
 
 #TODO check how to implement Gram-Schmidt in numpy/scipy.
 
-I tested in practice, the Gram-schidt was slower, though.
+I tested in practice, the Gram-Schmidt was slower, though.
 
 
 <details>
@@ -472,3 +499,5 @@ L2 norm of difference between solutions: 5.85e-16
 '''
 ```
 </details>
+
+
