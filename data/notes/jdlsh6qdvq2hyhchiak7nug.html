@@ -1,0 +1,20 @@
+<h1 id="diff-and-diff-analysis">Diff and diff analysis<a aria-hidden="true" class="anchor-heading icon-link" href="#diff-and-diff-analysis"></a></h1>
+<h1 id="diff-in-diff-difference-in-differences">Diff-in-Diff (Difference-in-Differences)<a aria-hidden="true" class="anchor-heading icon-link" href="#diff-in-diff-difference-in-differences"></a></h1>
+<p>Why?</p>
+<p>Diff-in-diff is used to estimate the causal effect of a treatment when the treatment is not implemented as a randomized control trial (e.g. A/B testing).</p>
+<p>Within Ad Market Dynamics we primarily use Diff-in-Diff to measure the impact of geo experiments.</p>
+<p>When to use Diff-in-Diff
+Treatment is not randomly assigned (e.g. Geo experiment ✅  A/B testing ❌)
+Other things were happening while treatment was in effect
+You can't control for all the potential confounders
+Assumptions for Diff-in-Diff
+Trend in control group approximates what would have happened in the treatment group in the absence of the treatment
+i.e. if the treatment was not implemented, then the two groups would have experienced the same changes. 
+How to calculate Diff-in-Diff</p>
+<p>An Example:</p>
+<p>Diff-in-Diff for the treatment is calculated as follows: result is 15. </p>
+<p>Reference</p>
+<ul>
+<li>Amazing Youtube video on Diff-in-Diff</li>
+<li>Blog post with examples and case studies using Diff-in-Diff</li>
+</ul>

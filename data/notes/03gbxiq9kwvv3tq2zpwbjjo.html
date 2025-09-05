@@ -1,0 +1,93 @@
+<h1 id="s3-vs-dl-vs-redshift">S3 vs DL vs Redshift<a aria-hidden="true" class="anchor-heading icon-link" href="#s3-vs-dl-vs-redshift"></a></h1>
+<h1 id="s3-simple-storage-service">S3 (Simple Storage Service)<a aria-hidden="true" class="anchor-heading icon-link" href="#s3-simple-storage-service"></a></h1>
+<ul>
+<li>pure storage, no SQL or any analytics</li>
+<li><strong>Object</strong> Storage. <strong>NOT</strong> columnar, log-structured(LSM), or B-trees</li>
+<li>S3 does not understand tables, rows, columns, indexes, or trees.</li>
+<li>All structuring is defined by how you write/read files (e.g., CSV, Parquet, JSON), not by S3 itself!</li>
+<li>stores objects within buckets</li>
+<li>an object is a file and any metadata that describes the file</li>
+<li>a bucket is a container for objects</li>
+</ul>
+<h1 id="datalake">DataLake<a aria-hidden="true" class="anchor-heading icon-link" href="#datalake"></a></h1>
+<ul>
+<li>Still Object Storage (in S3)</li>
+<li>Built on top of S3</li>
+<li>An architectural concept or solution—not a product or "service".</li>
+<li>Centralizes and organizes data (usually on S3)</li>
+<li>in AWS you will go to S3 service and you will have many buckets. Some buckets might be data lakes</li>
+<li>DLs often support query tools (Athena/Databricks) for direct analytics!</li>
+</ul>
+<h2 id="note-on-s3dl-storage">Note on S3/DL storage<a aria-hidden="true" class="anchor-heading icon-link" href="#note-on-s3dl-storage"></a></h2>
+<ul>
+<li>DL and S3 are object storages. The objects (files) within might have structure, for example columnar format like <strong>Parquet, Avro</strong> and you can define schema on them.</li>
+<li><strong>But:</strong> The underlying object store (S3) remains ignorant of the structure; it just stores files. The columnar "magic" happens inside the files themselves.</li>
+<li>you can not have B-trees, LSM-tree storage indexing in S3/DL - you need to use full fledged database management system. </li>
+</ul>
+<h1 id="redshift">Redshift<a aria-hidden="true" class="anchor-heading icon-link" href="#redshift"></a></h1>
+<ul>
+<li>Amazon Redshift is a fully managed cloud <strong>data warehouse</strong> service </li>
+<li>It is not just storage - it is a ful featured SQL analytics database</li>
+<li><strong>Columnar Storage:</strong>
+<ul>
+<li>Redshift stores table data in a columnar format (not row-based, not LSM, not B-tree).</li>
+<li>This means data is stored column by column, which is highly efficient for analytical queries (scanning/aggregating specific columns in very large datasets).</li>
+</ul>
+</li>
+</ul>
+<p>See <a href="/dendron-wiki/notes/0xdyjxuetx8at7o7eafrfzb">How does Yelp store data?</a> or practical usage</p>
+<h2 id="note-on-parquet-vs-csv">Note on parquet vs csv<a aria-hidden="true" class="anchor-heading icon-link" href="#note-on-parquet-vs-csv"></a></h2>
+<ul>
+<li>parquet files are columnar, meaning they store data in columns rather than rows.</li>
+<li>This is different from CSV files, which are row-based.</li>
+</ul>
+<h1 id="bottom-line">Bottom line<a aria-hidden="true" class="anchor-heading icon-link" href="#bottom-line"></a></h1>
+<ul>
+<li>S3 = object storage, NO index/tree, NO enforced schema, NO columnar unless your files are.</li>
+<li>Data Lake = organization + schema/catalog on S3; columnar if files are (e.g., Parquet); NO B-tree/LSM tree.</li>
+<li>Databases (like Redshift) = implement B-trees/columnar engines internally as part of their design for querying rows and columns efficiently.</li>
+</ul>
+<h1 id="pricing">Pricing<a aria-hidden="true" class="anchor-heading icon-link" href="#pricing"></a></h1>
+<p><strong>Data Lake</strong></p>
+<ul>
+<li>Athena and Spark charge based on the amount of <strong>data scanned</strong>, so inefficient queries or large raw datasets can quickly increase costs.</li>
+<li>No infrastructure to manage: You don’t pay for servers or clusters—just for the queries you run.</li>
+<li>Best for
+<ul>
+<li>Ad hoc queries</li>
+<li>Infrequent or unpredictable workloads</li>
+</ul>
+</li>
+</ul>
+<p><strong>Redshift</strong></p>
+<ul>
+<li>Provisioned clusters: Pay for reserved compute/storage capacity (hourly, regardless of usage). OR
+<ul>
+<li>Yelp has 4 clusters!!</li>
+</ul>
+</li>
+<li>Serverless: Pay for compute seconds used per query, plus storage.</li>
+<li>Best for:
+<ul>
+<li>Frequent, complex analytics</li>
+<li>Large-scale, repeated reporting</li>
+<li>BI dashboards and heavy workloads</li>
+</ul>
+</li>
+</ul>
+<h1 id="example-optimization">Example optimization<a aria-hidden="true" class="anchor-heading icon-link" href="#example-optimization"></a></h1>
+<p>Hey! After some experiment runs I've updated and chose these spark parameters</p>
+<pre><code>    spark.executor.memory: 28g
+    spark.executor.memoryOverhead: 3g
+    spark.executor.cores: 4
+    spark.dynamicAllocation.initialExecutors: 8
+    spark.dynamicAllocation.minExecutors: 8
+    spark.dynamicAllocation.maxExecutors: 32
+    spark.driver.memory: 28g
+</code></pre>
+<p>Run log</p>
+<p>Run time 360 seconds, cost 1.41$ (previously it was 7$)</p>
+<p>CPU average usage by the whole Pod is~30-40%. I won't decrease more the amount of executors since 8 to 32 dynamically allocated is already low compared to other jobs in this service.</p>
+<p>Memory average usage by the whole Pod is 50-65% - this is ok since we want some room left</p>
+<p>I use dynamic number of executors instead of fixed since CAPI has variable size input (as we onboard/churn clients num conversions can change a lot, matches data also depends a lot on the quality of the conversion client send to us which can vary over time). Also there are a few joins/groupbys in the DQS job that require variate amount of resources</p>
+<p>Spark recommends memoryOverhead of executor to be about 6-10% of the container size = spark.executor.memory + spark.executor.memoryOverhead. I chose ~10% to be on the safe size</p>

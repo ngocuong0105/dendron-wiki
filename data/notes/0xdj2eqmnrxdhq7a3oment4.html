@@ -1,0 +1,31 @@
+<h1 id="s3-redshift-mysql">S3 Redshift MySQL<a aria-hidden="true" class="anchor-heading icon-link" href="#s3-redshift-mysql"></a></h1>
+<p>When you build a data infrastructure system you will consider tradeoffs between cost, efficiency, pattern accessability (online va offline, key:value pair vs relational), volume.</p>
+<h1 id="technologies">Technologies<a aria-hidden="true" class="anchor-heading icon-link" href="#technologies"></a></h1>
+<p>AWS has S3 (e.g DataLake), Redshift, MySQL, Cassandra, ElasticSearch</p>
+<h2 id="s3">S3<a aria-hidden="true" class="anchor-heading icon-link" href="#s3"></a></h2>
+<p>AWS service. Cloud storage. Structured (csv, parquet, csv) and Unstructured (images,videos, documents, parquets) data</p>
+<ul>
+<li>Offline availability</li>
+<li>Best for logs, historical data, backup - the defacto option for archives</li>
+<li>Benefits: extremely low $ cost, essentially infinite storage capacity, scales horizontally</li>
+<li>Disadvantages: no built-in query. Need to load it in some other data store to work with the data</li>
+<li>S3 is basically a filesystem (buckets instead of folders)</li>
+</ul>
+<p>Can query using additional services like Athena, or you load in spark.</p>
+<h2 id="redshift">Redshift<a aria-hidden="true" class="anchor-heading icon-link" href="#redshift"></a></h2>
+<p>AWS service. Columnar data storage, fully manged data warehouse service. Relational db design. Structured data only (tables schemas)</p>
+<p>Stores data in clusters.</p>
+<ul>
+<li>Offline availability</li>
+<li>Best for analytics, data exploration and analysis</li>
+<li>Benefits: good options for doing expensive joins. SQL based quering.</li>
+<li>Disadvantages: high cost</li>
+</ul>
+<h2 id="mysql">MySQL<a aria-hidden="true" class="anchor-heading icon-link" href="#mysql"></a></h2>
+<p>Relational database. Used for structured data and transactions, such as user profiles and reviews. Transaction is a row/tuple in sQL table.</p>
+<ul>
+<li>Offline and Online (e.g when Yelp user searches something/ send a message it is directly stored and accessed) availability </li>
+<li>ACID compliance provides strongest form of data reliability</li>
+</ul>
+<h2 id="casandra">Casandra<a aria-hidden="true" class="anchor-heading icon-link" href="#casandra"></a></h2>
+<h2 id="elasticsearch">ElasticSearch<a aria-hidden="true" class="anchor-heading icon-link" href="#elasticsearch"></a></h2>
