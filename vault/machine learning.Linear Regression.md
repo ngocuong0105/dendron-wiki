@@ -2,7 +2,7 @@
 id: h79jpatf2zw7a0qpq4asniw
 title: Linear Regression
 desc: ''
-updated: 1756756294152
+updated: 1756808618267
 created: 1751960242840
 ---
 
@@ -404,8 +404,6 @@ ols_model = sm.OLS(y_ar1, X_const).fit()
 robust_model = ols_model.get_robustcov_results(cov_type='HAC', maxlags=1)
 ```
 
-
-
 # Computation and Optimization
 
 **Solving `Ax = b`**
@@ -501,3 +499,47 @@ L2 norm of difference between solutions: 5.85e-16
 </details>
 
 
+# Feature Selection
+- Forward or backward selection methods are O(n^2)
+- Can use regularization for feature selection
+- In practice if you have many features that are noisy or collinear, regularization will help with forecasting performance.
+- however if you choose the **top correlated** with the target features that could outperform fitting regularized LR on all features,
+since you'd try to fit noise. Lasso might remove the noisy features but it still struggles.
+
+# Regularization
+
+Regularization can be used in two ways: 
+- to reduce the variance of the model
+- to perform feature selection
+
+Feature selection and regularization can be connected
+- They can be seen as L0 regularization (penalizing the number of non-zero coefficients)
+- L1 and L2 regularization are convex problems. The loss with regularization is a SUM OF CONVEX functions!
+- Minimizing the loss functions is equivalent to solving a 
+constrained optimization problem = minimizing OLS + L1/L2 constraint on the coefficients.
+- when you think of the constrained problems you can draw the OLS loss and the L1/L2 constraints and see where they intersect.
+- L2 constraint is a circle, L1 is a diamond. 
+The corners of the diamond are more likely to intersect with the OLS loss contours leading to sparse solutions.
+In multiple dimensions the L1 constraint is a hypercube with many corners.
+
+**Solutions:**
+
+If X is orthonormal, then the solutions to lasso and ridge are:
+- lasso: sign(beta) * max(|beta|-lambda,0)  where beta is the solution to OLS
+- ridge: beta / (1+lambda)
+
+## Ridge
+- Ridge (L2) regularization is a scaling regularization (divides the OLS solution by a factor (1+lambda))
+- Ridge regularization is PCA regression with soft-threshold. It shrinks the coefficients of the principal components.
+It shrinks more the coefficients with low variance (less important components)
+- Ridge is equivalent to maximizing the posterior mean with prior beta ~ Normal(0,rho). then lambda = sigma/rho (sigma is the error variance)
+
+
+## Lasso
+- Lasso (L1) regularization 
+- sparse solutions (think of the constraint problem is a diamond)
+- convex problem - no closed form solution - use coordinate descent, stochastic descent or LARS
+- Lasso is equivalent to maximizing the posterior mode with prior beta ~ Laplace(0,b). then lambda = sigma/b (sigma is the error variance)
+
+
+Say you have MSE with constraint |beta| > 5, then this is NOT convex - you could be on the wrong side of the parabola.
