@@ -2,7 +2,7 @@
 id: h79jpatf2zw7a0qpq4asniw
 title: Linear Regression
 desc: ''
-updated: 1756808618267
+updated: 1759517902964
 created: 1751960242840
 ---
 
@@ -543,3 +543,56 @@ It shrinks more the coefficients with low variance (less important components)
 
 
 Say you have MSE with constraint |beta| > 5, then this is NOT convex - you could be on the wrong side of the parabola.
+
+
+
+# Log Scale
+
+Make better visualizations when there is an outlier in the target variable.
+
+Note how the y axis does not have equally distributed points. from 10^1 to 10^2 is the same length as from 10^2  to 10^3 
+
+<details>
+<summary> <b>CODE</b> </summary>
+
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Sample data: 20 points lying roughly on a line, plus one big outlier
+np.random.seed(0)
+x = np.arange(1, 21)
+y = 2 * x + 1 + np.random.normal(scale=2, size=x.size)
+y[-1] = 1000  # outlier
+df = pd.DataFrame({'x': x, 'y': y})
+
+fig, axs = plt.subplots(1, 2, figsize=(12, 5))
+
+# Linear scale scatter plot
+sns.scatterplot(x='x', y='y', data=df, ax=axs[0], color='b', marker='o')
+axs[0].set_title("Linear scale")
+axs[0].set_xlabel("x")
+axs[0].set_ylabel("y")
+
+# Log scale scatter plot
+sns.scatterplot(x='x', y='y', data=df, ax=axs[1], color='r', marker='o')
+axs[1].set_yscale('log')
+# equivalent to:
+# axs[1].scatter(df['x'], np.log(df['y']), color='r')
+
+axs[1].set_title("Log scale (y-axis)")
+axs[1].set_xlabel("x")
+axs[1].set_ylabel("y (log scale)")
+
+plt.tight_layout()
+plt.show()
+```
+</details>
+
+- When all points are close together (except for the outlier), the outlier dominates the linear y-range, which squeezes the other data against the axis.
+- With log scale, both the regular points and the outlier are shown in proportion, so you can see ALL points—even values that differ by orders of magnitude.
+
+
+![alt text](./assets/images/log_scale_viz.png)

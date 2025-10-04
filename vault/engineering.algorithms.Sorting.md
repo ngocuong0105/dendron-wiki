@@ -2,11 +2,26 @@
 id: r9lucaraliyqanyxqrsetzu
 title: Sorting
 desc: ''
-updated: 1759502888201
+updated: 1759524939491
 created: 1677661832177
 ---
 
 - [leetcode](https://leetcode.com/problems/sort-an-array/)
+
+
+Comparison sort algorithms determine the order of elements based on pairwise comparison between elements. Insertion sort, bubble sort, quick sort, and merge sort are all examples of comparison sort algorithms.
+
+
+Count, bucket, radix sort are examples of non-comparison sort algorithms. They do not compare elements directly but instead use the properties of the elements (like their range or digits) to sort them.
+
+# Quick Sort
+- Expected time complexity $O(nlogn)$, worse case $O(n^2)$.
+
+# Merge Sort
+- Time complexity $O(nlogn)$ - always
+
+
+# Examples
 
 ```python
 '''
@@ -101,15 +116,13 @@ Randomised Quick Sort
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
         def partition(l,r):
-            
             idx = random.randint(l,r)
-            # randomized
-            nums[idx],nums[r] = nums[r],nums[idx]
-            pivot = nums[idx]
+            nums[r],nums[idx] = nums[idx],nums[r]
+            pivot = nums[r]
             i = l-1
             for j in range(l,r):
                 #fix the case when there are many equal numbers, want to have more balanced split
-                if random.randint(1,2) ==  1:
+                if j%2:
                     if nums[j] < pivot:
                         i += 1
                         nums[i],nums[j] = nums[j],nums[i]
@@ -117,13 +130,12 @@ class Solution:
                     if nums[j] <= pivot:
                         i += 1
                         nums[i],nums[j] = nums[j],nums[i]
-
                 
             nums[i+1],nums[r] = nums[r],nums[i+1]
             return i+1
 
         def quick_sort(l,r):
-            if l >= r: return
+            if l >= r: return None
             q = partition(l,r)
             quick_sort(l,q-1)
             quick_sort(q+1,r)
@@ -135,24 +147,84 @@ class Solution:
 
 Comparative vs non-comparative sorting algorithms
 
-# Quick Sort
-
-In-place quick sort. Expected time complexity $O(nlogn)$, worse case $O(n^2)$.
-```python
-def quick_sort(s,e):
-    if s>e: return
-    idx = random.randint(s,e)
-    nums[idx],nums[e] = nums[e],nums[idx]
-    x,i = nums[e],s-1
-    for j in range(s,e):
-        if nums[j] <= x:
-            i += 1
-            nums[i],nums[j] = nums[j],nums[i]
-    nums[i+1],nums[e] = nums[e],nums[i+1]
-    quick_sort(s,i)
-    quick_sort(i+2,e)
-```
 
 
 # Count Sort
+- $O(n+k)$ where all numbers in nums are in the range (0,k)
+- count array such that arr[i] is the count of element i
 
+# Bucket Sort
+- put numbers in buckets, sort each bucket using comparison sort (usually insertion), as buckets are relatively small
+
+
+
+
+# K-th order statistic
+
+## Quick Select
+
+- [leetcode](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+- Expected run time $O(n)$. Note it is as if we search for min and max. The reason for this is because unlike in quick_sort where we solve both branches of subproblems here we solve only the branch that contains the k-th order statistic element.
+
+
+```python
+
+# Quick Select (Not sure if it is called like this). Could be called Merge Sort Select?
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        def quick_select(nums,k):
+            pivot = nums[random.randint(0,len(nums)-1)]
+            smaller,equal,greater = [],[],[]
+            for i in range(len(nums)):
+                if nums[i] < pivot:
+                    smaller.append(nums[i])
+                elif nums[i] == pivot:
+                    equal.append(nums[i])
+                else:
+                    greater.append(nums[i])
+            if len(smaller)+len(equal) < k:
+                return quick_select(greater,k-len(smaller)-len(equal))
+            elif len(smaller) >= k:
+                return quick_select(smaller,k)
+            return pivot
+
+        nums = [-num for num in nums]
+        return -quick_select(nums,k)
+
+# Quick Select, but no xtra memory
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        def partition(l,r):
+            idx = random.randint(l,r)
+            pivot = nums[r]
+            nums[idx],nums[r] = nums[idx],nums[r]
+            i = l-1
+            for j in range(l,r):
+                if j %2:
+                    if nums[j] < pivot:
+                        i += 1
+                        nums[i],nums[j] = nums[j],nums[i]
+                else:
+                    if nums[j] <= pivot:
+                        i += 1
+                        nums[i],nums[j] = nums[j],nums[i]
+
+            nums[i+1],nums[r] = nums[r],nums[i+1]
+            return i+1
+
+        def quick_select(l,r,k):
+            if l == r: return nums[l]
+            q = partition(l,r)
+            # q is index between l,r
+            # k is count!, it is the first element in array[l:r+1]
+            # q-l+1 becomes a count
+            if q-l+1 == k: return nums[q]
+            if k < q-l+1:
+                return quick_select(l,q-1,k)
+            else:
+                return quick_select(q+1,r,k-(q-l+1)) # WTF
+
+        nums = [-num for num in nums]
+        return -quick_select(0,len(nums)-1,k)
+
+```
