@@ -2,7 +2,7 @@
 id: r9lucaraliyqanyxqrsetzu
 title: Sorting
 desc: ''
-updated: 1759524939491
+updated: 1759579417801
 created: 1677661832177
 ---
 
@@ -92,13 +92,13 @@ class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
         def partition(l,r):
             pivot = nums[r]
-            i = l-1
+            i = l
             for j in range(l,r):
                 if nums[j] < pivot:
-                    i += 1
                     nums[j],nums[i] = nums[i],nums[j]
-            nums[i+1],nums[r] = nums[r],nums[i+1]
-            return i+1
+                    i += 1
+            nums[i],nums[r] = nums[r],nums[i]
+            return i
 
         def quick_sort(l,r):
             if l >= r: return
@@ -117,9 +117,10 @@ class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
         def partition(l,r):
             idx = random.randint(l,r)
-            nums[r],nums[idx] = nums[idx],nums[r]
-            pivot = nums[r]
-            i = l-1
+            # randomized
+            nums[idx],nums[r] = nums[r],nums[idx]
+            pivot = nums[idx]
+            i = l-1 # weird implementation see above. This one comes from the Intro to Algo book, but mine is a bit clearer
             for j in range(l,r):
                 #fix the case when there are many equal numbers, want to have more balanced split
                 if j%2:
@@ -143,6 +144,23 @@ class Solution:
         quick_sort(0,len(nums)-1)
         return nums
 
+"""
+Quick Sort - not implace but easy to remember
+"""
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def quick_sort(nums):
+            if len(nums) <= 1: return nums
+            pivot = nums[random.randint(0,len(nums)-1)]
+            smaller, equal, greater = [],[],[]
+            for num in nums:
+                if num < pivot: smaller.append(num)
+                elif num > pivot: greater.append(num)
+                else: equal.append(num)
+
+            return quick_sort(smaller) + equal + quick_sort(greater)
+
+        return quick_sort(nums)
 ```
 
 Comparative vs non-comparative sorting algorithms
