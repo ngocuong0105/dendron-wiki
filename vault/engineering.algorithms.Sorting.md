@@ -131,6 +131,23 @@ class Solution:
         quick_sort(0,len(nums)-1)
         return nums
 
+"""
+Quick Sort - not implace but easy to remember
+"""
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def quick_sort(nums):
+            if len(nums) <= 1: return nums
+            pivot = nums[random.randint(0,len(nums)-1)]
+            smaller, equal, greater = [],[],[]
+            for num in nums:
+                if num < pivot: smaller.append(num)
+                elif num > pivot: greater.append(num)
+                else: equal.append(num)
+
+            return quick_sort(smaller) + equal + quick_sort(greater)
+
+        return quick_sort(nums)
 ```
 
 Comparative vs non-comparative sorting algorithms
