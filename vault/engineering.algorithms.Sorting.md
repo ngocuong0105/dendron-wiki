@@ -77,13 +77,13 @@ class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
         def partition(l,r):
             pivot = nums[r]
-            i = l-1
+            i = l
             for j in range(l,r):
                 if nums[j] < pivot:
-                    i += 1
                     nums[j],nums[i] = nums[i],nums[j]
-            nums[i+1],nums[r] = nums[r],nums[i+1]
-            return i+1
+                    i += 1
+            nums[i],nums[r] = nums[r],nums[i]
+            return i
 
         def quick_sort(l,r):
             if l >= r: return
@@ -106,7 +106,7 @@ class Solution:
             # randomized
             nums[idx],nums[r] = nums[r],nums[idx]
             pivot = nums[idx]
-            i = l-1
+            i = l-1 # weird implementation see above. This one comes from the Intro to Algo book, but mine is a bit clearer
             for j in range(l,r):
                 #fix the case when there are many equal numbers, want to have more balanced split
                 if random.randint(1,2) ==  1:
