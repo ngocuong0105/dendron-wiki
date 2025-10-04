@@ -2,7 +2,7 @@
 id: r9lucaraliyqanyxqrsetzu
 title: Sorting
 desc: ''
-updated: 1759579417801
+updated: 1759579472539
 created: 1677661832177
 ---
 
@@ -163,7 +163,60 @@ class Solution:
         return quick_sort(nums)
 ```
 
-Comparative vs non-comparative sorting algorithms
+# Heap Sort
+```
+
+- Heap is a nearly complete binary tree represented using an array
+- Root = i, parent = i//2, left = 2*i, right = 2*i+1
+- Root has value greater than its children
+- max_heapify(arr,i) fixes i, pushes it down to its place, maintains the heap property
+- build_max_heapify(arr)
+- heapsort(arr)
+- Heap size variable! The heap part is not sorted, the rest is.
+
+
+"""
+Heap Sort
+
+Heap is a data structure that uses an array to represent a nearly complete binary tree
+1-indexed array, root = i, parent is i//2, left child = 2*i, right child is 2*i+1
+"""
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+
+        def max_heapify(nums,i,size):
+            l,r = 2*i,2*i+1
+            i -= 1
+            l -= 1
+            r -= 1
+            largest = i
+            if l<size and nums[i] < nums[l]:
+                largest = l
+            if r<size and nums[largest] < nums[r]:
+                largest = r
+
+            if largest != i:
+                nums[largest],nums[i] = nums[i],nums[largest]
+                max_heapify(nums,largest+1,size)
+                
+        def build_max_heap(nums): # O(n) lol
+            for i in range(len(nums)-1,-1,-1):
+                max_heapify(nums,i+1,len(nums))
+        
+        def heap_sort(nums):
+            size = len(nums) # SUPER IMPORTANT
+            for i in range(len(nums)-1,-1,-1):
+                nums[i],nums[0] = nums[0],nums[i]
+                size -= 1
+                max_heapify(nums,1,size)
+        
+        build_max_heap(nums)
+        heap_sort(nums)
+        return nums
+
+
+```
+
 
 
 
