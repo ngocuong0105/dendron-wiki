@@ -174,47 +174,48 @@ class Solution:
 - heapsort(arr)
 - Heap size variable! The heap part is not sorted, the rest is.
 
-
 """
-Heap Sort
+heap is a 1-indexed array that represents a nearly complete binary tree
+par(i) = i // 2
+i -> 2*i, 2*i+1
+ max_heapify(i)
+ checks if i is less than any of the childs and swaps with it, pushes down the tree 
 
-Heap is a data structure that uses an array to represent a nearly complete binary tree
-1-indexed array, root = i, parent is i//2, left child = 2*i, right child is 2*i+1
 """
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
-
-        def max_heapify(nums,i,size):
+        def max_heapify(i,size):
             l,r = 2*i,2*i+1
-            i -= 1
-            l -= 1
-            r -= 1
+            i,l,r = i-1,l-1,r-1
             largest = i
-            if l<size and nums[i] < nums[l]:
+            if l < size and nums[largest] < nums[l]:
                 largest = l
-            if r<size and nums[largest] < nums[r]:
+            if r < size and nums[largest] < nums[r]:
                 largest = r
-
             if largest != i:
                 nums[largest],nums[i] = nums[i],nums[largest]
-                max_heapify(nums,largest+1,size)
+                max_heapify(largest+1,size)
                 
-        def build_max_heap(nums): # O(n) lol
-            for i in range(len(nums)-1,-1,-1):
-                max_heapify(nums,i+1,len(nums))
-        
-        def heap_sort(nums):
-            size = len(nums) # SUPER IMPORTANT
+
+        def heapsort():
+            size = len(nums)
+            # note heapsort is after max_heapify.
+            # first element has the largest value!
+            # we put it at th end and fix the root.
             for i in range(len(nums)-1,-1,-1):
                 nums[i],nums[0] = nums[0],nums[i]
                 size -= 1
-                max_heapify(nums,1,size)
+                max_heapify(1,size)
+
+        def heapify():
+            n = len(nums)
+            for i in range(n,0,-1):
+                max_heapify(i, n)
+
         
-        build_max_heap(nums)
-        heap_sort(nums)
+        heapify()
+        heapsort()
         return nums
-
-
 ```
 
 
