@@ -2,7 +2,7 @@
 id: t0xvuftusxbozb7la786f9d
 title: Distributed Computing
 desc: ''
-updated: 1759741154899
+updated: 1759744985124
 created: 1752649602765
 ---
 
@@ -40,6 +40,34 @@ created: 1752649602765
 
 # PySpark
 
+## Properties
+
+- To start a spark session you need to pass a SparkConf file in the SparkContext
+
+**Driver**
+
+- spark.driver.memory = 16g Memory for the driver process (the "main program")
+- spark.driver.cores = 4 Number of CPU cores for the driver process
+
+**Executor**
+- spark.executor.memory = 28g. Amount of memory for each executor process.
+- spark.executor.cores = 4 Number of CPU cores for each executor. Each core can handle up to 7g data in memory
+- spark.cores.max = 36. total number of cores in the cluster. So you can have 9 executors with 4 cores each
+- spark.executor.instances 0. Static executors to launch. 0 means not set—dynamic allocation will control.
+
+**Executor Dynamic Allocation**
+- spark.dynamicAllocation.enabled = true. Let spark dynamically allocate executors based on workload
+- spark.dynamicAllocation.maxExecutors = 9 Max number of executors Spark will request dynamically.
+spark.dynamicAllocation.executorAllocationRatio
+- spark.dynamicAllocation.executorAllocationRatio = 0.8. Allocate fraction of the estimated required executors. Controls aggressiveness to avoid overloading the cluster.
+Say you have 100 tasks and an executer on averages executes 4 tasks. So we will need 25 tasks. If we set ratio 0.8, spark will allocate 0.8*25=20 executors
+
+**SQL**
+- spark.sql.autoBroadcastJoinThreshold = 134217728 (128MB). If a table is smaller than this, Spark will broadcast it to avoid shuffles in joins.
+- spark.sql.shuffle.partitions = 200. After a shuffle operation (e.g join, groupby) Spark will output the data in chunks (number of output partitions)
+- Too low number, some executors will be overloaded with large partitions, leadint to slow or skewed jobs or even OOM errors
+- Too high number, will lead to scheduling overhead and many small tasks, increasing job time
+- A good value is usually 2–4 × total executor cores in your cluster, but it depends on **data size and job characteristics.**
 
 [Notebook](https://drive.google.com/file/d/1Dz5x9OPOYFs0nczzfeR7QBNY_tbB11v8/view?usp=drive_link)
 
@@ -80,7 +108,13 @@ Example spark configs:
 - node can have multiple executors running on it.
 - each executor has its own memory and CPU resources allocated to it, which are used to execute tasks in **parallel**.
 - **executor.cores**: each executor can have multiple cores (i.e threads) that can execute tasks **concurrently**.
-- **executor instances (spark.executor.instances)**: total number of executors (processes) launched on all worker nodes in the cluster.
+- **executor instances (spark.executor.instances)**: total number of executors (processes) launched on all worker nodes in the clust
+- If using dynamic allocation, leave spark.executor.instances unset or set min/max via:
+```
+spark.dynamicAllocation.enabled=true
+spark.dynamicAllocation.minExecutors
+spark.dynamicAllocation.maxExecutors
+```
 
 
 **Why to choose dynamic allocation?**
