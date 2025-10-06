@@ -2,7 +2,7 @@
 id: 03gbxiq9kwvv3tq2zpwbjjo
 title: S3 vs DL vs Redshift
 desc: ''
-updated: 1757069695480
+updated: 1759739942457
 created: 1753101111100
 ---
 # S3 (Simple Storage Service)
@@ -70,25 +70,17 @@ See [[engineering.AWS.How does Yelp store data?]] or practical usage
     - Large-scale, repeated reporting
     - BI dashboards and heavy workloads
 
-# Example optimization
 
-Hey! After some experiment runs I've updated and chose these spark parameters
+# HDFS
 
-        spark.executor.memory: 28g
-        spark.executor.memoryOverhead: 3g
-        spark.executor.cores: 4
-        spark.dynamicAllocation.initialExecutors: 8
-        spark.dynamicAllocation.minExecutors: 8
-        spark.dynamicAllocation.maxExecutors: 32
-        spark.driver.memory: 28g
-Run log
+Hadoop Distributed File System. Like S3 it is used to store large amounts of data.
 
-Run time 360 seconds, cost 1.41$ (previously it was 7$)
+- Distributed file system that runs on lusters of computers
+- Data stored in HDFS can be of any type, but the system automatically splits these files and stores them redundantly across many machines
+- HDFS is faster than S3 (no network latency)
+- HDFS is a distributed file system you run and maintain on your own cluster, primarily for on-prem or managed Hadoop/Spark environments.
 
-CPU average usage by the whole Pod is~30-40%. I won't decrease more the amount of executors since 8 to 32 dynamically allocated is already low compared to other jobs in this service.
+- S3 is not a file system, it is object storage. S3 is a manged service by AWS. HDFS is open source and you have to manage it yourself. It runs on a cluster of connected servers.
 
-Memory average usage by the whole Pod is 50-65% - this is ok since we want some room left
-
-I use dynamic number of executors instead of fixed since CAPI has variable size input (as we onboard/churn clients num conversions can change a lot, matches data also depends a lot on the quality of the conversion client send to us which can vary over time). Also there are a few joins/groupbys in the DQS job that require variate amount of resources
-
-Spark recommends memoryOverhead of executor to be about 6-10% of the container size = spark.executor.memory + spark.executor.memoryOverhead. I chose ~10% to be on the safe size
+- Legacy/On-prem-focused orgs: More likely to use HDFS.
+- Cloud/data-driven orgs (most modern tech): Strongly favor S3.
