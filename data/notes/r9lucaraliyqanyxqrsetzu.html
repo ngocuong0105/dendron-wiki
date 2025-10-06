@@ -1,0 +1,281 @@
+<h1 id="sorting">Sorting<a aria-hidden="true" class="anchor-heading icon-link" href="#sorting"></a></h1>
+<ul>
+<li><a href="https://leetcode.com/problems/sort-an-array/">leetcode</a></li>
+</ul>
+<p>Comparison sort algorithms determine the order of elements based on pairwise comparison between elements. Insertion sort, bubble sort, quick sort, and merge sort are all examples of comparison sort algorithms.</p>
+<p>Count, bucket, radix sort are examples of non-comparison sort algorithms. They do not compare elements directly but instead use the properties of the elements (like their range or digits) to sort them.</p>
+<h1 id="quick-sort">Quick Sort<a aria-hidden="true" class="anchor-heading icon-link" href="#quick-sort"></a></h1>
+<ul>
+<li>Expected time complexity <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span>, worse case <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span>.</li>
+</ul>
+<h1 id="merge-sort">Merge Sort<a aria-hidden="true" class="anchor-heading icon-link" href="#merge-sort"></a></h1>
+<ul>
+<li>Time complexity <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span> - always</li>
+</ul>
+<h1 id="examples">Examples<a aria-hidden="true" class="anchor-heading icon-link" href="#examples"></a></h1>
+<pre class="language-python"><code class="language-python"><span class="token triple-quoted-string string">'''
+Insertion Sort, inplace O(n^2)
+get the min, swap place
+'''</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">sortArray</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            min_idx <span class="token operator">=</span> i
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&#x3C;</span> nums<span class="token punctuation">[</span>min_idx<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    min_idx <span class="token operator">=</span> j
+            nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>min_idx<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>min_idx<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">return</span> nums
+
+<span class="token triple-quoted-string string">'''
+Bubble Sort - Inplace O(n^2)
+keep nums[:j] sorted
+'''</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">sortArray</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">while</span> i <span class="token keyword">and</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&#x3C;</span> nums<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+                nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+                i <span class="token operator">-=</span> <span class="token number">1</span>
+        <span class="token keyword">return</span> nums
+
+<span class="token triple-quoted-string string">'''
+Merge Sort O(nlogn)
+sort(nums[:mid]) sort(nums[mid:])
+merge()
+'''</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">sortArray</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">merge_sort</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span> <span class="token keyword">return</span> nums
+            mid <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">//</span><span class="token number">2</span>
+            left<span class="token punctuation">,</span> right <span class="token operator">=</span> merge_sort<span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token punctuation">:</span>mid<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> merge_sort<span class="token punctuation">(</span>nums<span class="token punctuation">[</span>mid<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            merged <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+            i<span class="token punctuation">,</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>
+            <span class="token keyword">while</span> i<span class="token operator">&#x3C;</span><span class="token builtin">len</span><span class="token punctuation">(</span>left<span class="token punctuation">)</span> <span class="token keyword">or</span> j<span class="token operator">&#x3C;</span><span class="token builtin">len</span><span class="token punctuation">(</span>right<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                l <span class="token operator">=</span> left<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">if</span> i <span class="token operator">&#x3C;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>left<span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token builtin">float</span><span class="token punctuation">(</span><span class="token string">'inf'</span><span class="token punctuation">)</span>
+                r <span class="token operator">=</span> right<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token keyword">if</span> j <span class="token operator">&#x3C;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>right<span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token builtin">float</span><span class="token punctuation">(</span><span class="token string">'inf'</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> l <span class="token operator">&#x3C;</span> r<span class="token punctuation">:</span>
+                    merged<span class="token punctuation">.</span>append<span class="token punctuation">(</span>left<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                    i <span class="token operator">+=</span> <span class="token number">1</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    merged<span class="token punctuation">.</span>append<span class="token punctuation">(</span>right<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                    j <span class="token operator">+=</span> <span class="token number">1</span>
+            <span class="token keyword">return</span> merged
+        
+        <span class="token keyword">return</span> merge_sort<span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
+
+
+<span class="token triple-quoted-string string">'''
+Quick Sort
+pivot + merge
+worse case is O(n^2), every time we hit a bad split (imbalnces, 1 vs n-1)
+average case is O(nlogn). Intuiton bad splits and good splits cancel each other. Draw a tree with depth 2 one bad and one good split. the sized of your remaining arrays is like you had 1 good split.
+
+good split is when it is balanced
+
+
+O(n^2) worst case reached when array is decreasing or all elements are eqaul
+'''</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">sortArray</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">partition</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            pivot <span class="token operator">=</span> nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span>
+            i <span class="token operator">=</span> l
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&#x3C;</span> pivot<span class="token punctuation">:</span>
+                    nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+                    i <span class="token operator">+=</span> <span class="token number">1</span>
+            nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            <span class="token keyword">return</span> i
+
+        <span class="token keyword">def</span> <span class="token function">quick_sort</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> l <span class="token operator">>=</span> r<span class="token punctuation">:</span> <span class="token keyword">return</span>
+            q <span class="token operator">=</span> partition<span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span>
+            quick_sort<span class="token punctuation">(</span>l<span class="token punctuation">,</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+            quick_sort<span class="token punctuation">(</span>q<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span>
+
+        quick_sort<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> nums
+
+<span class="token triple-quoted-string string">'''
+Randomised Quick Sort
+'''</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">sortArray</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">partition</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            idx <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span>
+            <span class="token comment"># randomized</span>
+            nums<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
+            pivot <span class="token operator">=</span> nums<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
+            i <span class="token operator">=</span> l<span class="token operator">-</span><span class="token number">1</span> <span class="token comment"># weird implementation see above. This one comes from the Intro to Algo book, but mine is a bit clearer</span>
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token comment">#fix the case when there are many equal numbers, want to have more balanced split</span>
+                <span class="token keyword">if</span> j<span class="token operator">%</span><span class="token number">2</span><span class="token punctuation">:</span>
+                    <span class="token keyword">if</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&#x3C;</span> pivot<span class="token punctuation">:</span>
+                        i <span class="token operator">+=</span> <span class="token number">1</span>
+                        nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token keyword">if</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&#x3C;=</span> pivot<span class="token punctuation">:</span>
+                        i <span class="token operator">+=</span> <span class="token number">1</span>
+                        nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+                
+            nums<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">return</span> i<span class="token operator">+</span><span class="token number">1</span>
+
+        <span class="token keyword">def</span> <span class="token function">quick_sort</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> l <span class="token operator">>=</span> r<span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token boolean">None</span>
+            q <span class="token operator">=</span> partition<span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span>
+            quick_sort<span class="token punctuation">(</span>l<span class="token punctuation">,</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+            quick_sort<span class="token punctuation">(</span>q<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span>
+        
+        quick_sort<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> nums
+
+<span class="token triple-quoted-string string">"""
+Quick Sort - not implace but easy to remember
+"""</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">sortArray</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">quick_sort</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span> <span class="token operator">&#x3C;=</span> <span class="token number">1</span><span class="token punctuation">:</span> <span class="token keyword">return</span> nums
+            pivot <span class="token operator">=</span> nums<span class="token punctuation">[</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+            smaller<span class="token punctuation">,</span> equal<span class="token punctuation">,</span> greater <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+            <span class="token keyword">for</span> num <span class="token keyword">in</span> nums<span class="token punctuation">:</span>
+                <span class="token keyword">if</span> num <span class="token operator">&#x3C;</span> pivot<span class="token punctuation">:</span> smaller<span class="token punctuation">.</span>append<span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+                <span class="token keyword">elif</span> num <span class="token operator">></span> pivot<span class="token punctuation">:</span> greater<span class="token punctuation">.</span>append<span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span> equal<span class="token punctuation">.</span>append<span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+
+            <span class="token keyword">return</span> quick_sort<span class="token punctuation">(</span>smaller<span class="token punctuation">)</span> <span class="token operator">+</span> equal <span class="token operator">+</span> quick_sort<span class="token punctuation">(</span>greater<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> quick_sort<span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
+</code></pre>
+<h1 id="heap-sort">Heap Sort<a aria-hidden="true" class="anchor-heading icon-link" href="#heap-sort"></a></h1>
+<pre><code>
+- Heap is a nearly complete binary tree represented using an array
+- Root = i, parent = i//2, left = 2*i, right = 2*i+1
+- Root has value greater than its children
+- max_heapify(arr,i) fixes i, pushes it down to its place, maintains the heap property
+- build_max_heapify(arr)
+- heapsort(arr)
+- Heap size variable! The heap part is not sorted, the rest is.
+
+"""
+heap is a 1-indexed array that represents a nearly complete binary tree
+par(i) = i // 2
+i -> 2*i, 2*i+1
+ max_heapify(i)
+ checks if i is less than any of the childs and swaps with it, pushes down the tree 
+
+"""
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def max_heapify(i,size):
+            l,r = 2*i,2*i+1
+            i,l,r = i-1,l-1,r-1
+            largest = i
+            if l &#x3C; size and nums[largest] &#x3C; nums[l]:
+                largest = l
+            if r &#x3C; size and nums[largest] &#x3C; nums[r]:
+                largest = r
+            if largest != i:
+                nums[largest],nums[i] = nums[i],nums[largest]
+                max_heapify(largest+1,size)
+                
+
+        def heapsort():
+            size = len(nums)
+            # note heapsort is after max_heapify.
+            # first element has the largest value!
+            # we put it at th end and fix the root.
+            for i in range(len(nums)-1,-1,-1):
+                nums[i],nums[0] = nums[0],nums[i]
+                size -= 1
+                max_heapify(1,size)
+
+        def heapify():
+            n = len(nums)
+            for i in range(n,0,-1):
+                max_heapify(i, n)
+
+        
+        heapify()
+        heapsort()
+        return nums
+</code></pre>
+<h1 id="count-sort">Count Sort<a aria-hidden="true" class="anchor-heading icon-link" href="#count-sort"></a></h1>
+<ul>
+<li><span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n+k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span></span> where all numbers in nums are in the range (0,k)</li>
+<li>count array such that arr[i] is the count of element i</li>
+</ul>
+<h1 id="bucket-sort">Bucket Sort<a aria-hidden="true" class="anchor-heading icon-link" href="#bucket-sort"></a></h1>
+<ul>
+<li>put numbers in buckets, sort each bucket using comparison sort (usually insertion), as buckets are relatively small</li>
+</ul>
+<h1 id="k-th-order-statistic">K-th order statistic<a aria-hidden="true" class="anchor-heading icon-link" href="#k-th-order-statistic"></a></h1>
+<h2 id="quick-select">Quick Select<a aria-hidden="true" class="anchor-heading icon-link" href="#quick-select"></a></h2>
+<ul>
+<li><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/">leetcode</a></li>
+<li>Expected run time <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span>. Note it is as if we search for min and max. The reason for this is because unlike in quick_sort where we solve both branches of subproblems here we solve only the branch that contains the k-th order statistic element.</li>
+</ul>
+<pre class="language-python"><code class="language-python">
+<span class="token comment"># Quick Select (Not sure if it is called like this). Could be called Merge Sort Select?</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">findKthLargest</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">,</span> k<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">quick_select</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            pivot <span class="token operator">=</span> nums<span class="token punctuation">[</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+            smaller<span class="token punctuation">,</span>equal<span class="token punctuation">,</span>greater <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&#x3C;</span> pivot<span class="token punctuation">:</span>
+                    smaller<span class="token punctuation">.</span>append<span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token keyword">elif</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> pivot<span class="token punctuation">:</span>
+                    equal<span class="token punctuation">.</span>append<span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    greater<span class="token punctuation">.</span>append<span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>smaller<span class="token punctuation">)</span><span class="token operator">+</span><span class="token builtin">len</span><span class="token punctuation">(</span>equal<span class="token punctuation">)</span> <span class="token operator">&#x3C;</span> k<span class="token punctuation">:</span>
+                <span class="token keyword">return</span> quick_select<span class="token punctuation">(</span>greater<span class="token punctuation">,</span>k<span class="token operator">-</span><span class="token builtin">len</span><span class="token punctuation">(</span>smaller<span class="token punctuation">)</span><span class="token operator">-</span><span class="token builtin">len</span><span class="token punctuation">(</span>equal<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">elif</span> <span class="token builtin">len</span><span class="token punctuation">(</span>smaller<span class="token punctuation">)</span> <span class="token operator">>=</span> k<span class="token punctuation">:</span>
+                <span class="token keyword">return</span> quick_select<span class="token punctuation">(</span>smaller<span class="token punctuation">,</span>k<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> pivot
+
+        nums <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">-</span>num <span class="token keyword">for</span> num <span class="token keyword">in</span> nums<span class="token punctuation">]</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span>quick_select<span class="token punctuation">(</span>nums<span class="token punctuation">,</span>k<span class="token punctuation">)</span>
+
+<span class="token comment"># Quick Select, but no xtra memory</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">findKthLargest</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">,</span> k<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">partition</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            idx <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span>
+            pivot <span class="token operator">=</span> nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span>
+            nums<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span>
+            i <span class="token operator">=</span> l<span class="token operator">-</span><span class="token number">1</span>
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> j <span class="token operator">%</span><span class="token number">2</span><span class="token punctuation">:</span>
+                    <span class="token keyword">if</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&#x3C;</span> pivot<span class="token punctuation">:</span>
+                        i <span class="token operator">+=</span> <span class="token number">1</span>
+                        nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token keyword">if</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&#x3C;=</span> pivot<span class="token punctuation">:</span>
+                        i <span class="token operator">+=</span> <span class="token number">1</span>
+                        nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+
+            nums<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">return</span> i<span class="token operator">+</span><span class="token number">1</span>
+
+        <span class="token keyword">def</span> <span class="token function">quick_select</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> l <span class="token operator">==</span> r<span class="token punctuation">:</span> <span class="token keyword">return</span> nums<span class="token punctuation">[</span>l<span class="token punctuation">]</span>
+            q <span class="token operator">=</span> partition<span class="token punctuation">(</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span>
+            <span class="token comment"># q is index between l,r</span>
+            <span class="token comment"># k is count!, it is the first element in array[l:r+1]</span>
+            <span class="token comment"># q-l+1 becomes a count</span>
+            <span class="token keyword">if</span> q<span class="token operator">-</span>l<span class="token operator">+</span><span class="token number">1</span> <span class="token operator">==</span> k<span class="token punctuation">:</span> <span class="token keyword">return</span> nums<span class="token punctuation">[</span>q<span class="token punctuation">]</span>
+            <span class="token keyword">if</span> k <span class="token operator">&#x3C;</span> q<span class="token operator">-</span>l<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> quick_select<span class="token punctuation">(</span>l<span class="token punctuation">,</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> quick_select<span class="token punctuation">(</span>q<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">,</span>k<span class="token operator">-</span><span class="token punctuation">(</span>q<span class="token operator">-</span>l<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># WTF</span>
+
+        nums <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">-</span>num <span class="token keyword">for</span> num <span class="token keyword">in</span> nums<span class="token punctuation">]</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span>quick_select<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token punctuation">)</span>
+
+</code></pre>

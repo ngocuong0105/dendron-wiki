@@ -1,0 +1,39 @@
+<h1 id="imbalanced-dataset">Imbalanced dataset<a aria-hidden="true" class="anchor-heading icon-link" href="#imbalanced-dataset"></a></h1>
+<h1 id="implications">Implications<a aria-hidden="true" class="anchor-heading icon-link" href="#implications"></a></h1>
+<ol>
+<li>If the train and test sets are both imbalanced with the same imbalance ratio, you do not need to balance your train data.</li>
+<li>If the train set is imbalanced and the test set is balanced, balancing your train data using oversampling would improve your model.</li>
+<li>Undersample the majority class when working with an imbalanced dataset only if you want to train faster. Bear in mind that your model score would decrease.</li>
+<li>If you decide to change the balance ratio of your train set, then MAE and MSE errors would be almost constant, whereas F1 scores, precision, and recall can vary up to 2%.</li>
+<li>Use F1 score <strong>macro-averaged</strong> to give equal weight to all classes in your data.</li>
+<li>The default F1 score metric in scikit-learn gives big weight to the majority class, resulting in overoptimistic predictions when working with an imbalanced dataset.</li>
+</ol>
+<p>Common pitfalls</p>
+<ul>
+<li>Never test on the oversampled or undersampled dataset.</li>
+<li>If we want to implement cross validation, remember to oversample or undersample your training data during cross-validation, not before!</li>
+<li>Don't use <strong>accuracy score</strong> as a metric with imbalanced datasets (will be usually high and misleading), instead use f1-score, precision/recall score or confusion matrix</li>
+</ul>
+<p>Imbalanced dataset techniques:</p>
+<ul>
+<li>random under-sampling = get small subsample of the overrepresented class. Main risk is of great infromation loss.</li>
+<li>SMOTE (synthetic minority over-sampling technique)</li>
+<li>cost-sensitive loss function</li>
+</ul>
+<h1 id="what-is-the-imbalanced-dataset-problem">What is the imbalanced dataset problem?<a aria-hidden="true" class="anchor-heading icon-link" href="#what-is-the-imbalanced-dataset-problem"></a></h1>
+<p>Without loss of generality, we assume that the minority or rare class is the positive class, and the majority class is the negative class. If we apply most traditional (cost-insensitive) classifiers on the dataset, they will likely to predict everything as negative (the majority class). This was often regarded as a problem in learning from highly imbalanced datasets.</p>
+<p>Creating a traditional-cost-insensitive classifier has two assumptions:</p>
+<ul>
+<li>goal is to maximize accuracy/minimize loss</li>
+<li>train and test datasets have the same distributions</li>
+</ul>
+<p><strong>Under these assumtions, predicting everything negative is the correct thing to do.</strong></p>
+<p>Thus, the imbalanced class problem becomes meaningful only if one or both of the two assumptions above are not true:</p>
+<ul>
+<li>the cost of different types of error is not the same/missclasification cost is not equal</li>
+<li>the train and test data are different</li>
+</ul>
+<h2 id="when-changing-the-cost-function-works">When changing the cost-function works<a aria-hidden="true" class="anchor-heading icon-link" href="#when-changing-the-cost-function-works"></a></h2>
+<p>In the case when the misclassification cost is not equal, it is usually more expensive to misclassify a minority (positive) example into the majority (negative) class, than a majority example into the minority class (otherwise it is more plausible to predict everything as negative). That is, FN > FP. In this case you should have a loss function which penalizes FN more than FP.</p>
+<h2 id="when-overundersampling-works">When over/undersampling works<a aria-hidden="true" class="anchor-heading icon-link" href="#when-overundersampling-works"></a></h2>
+<p>In case the class distributions of training and test datasets are different (for example, if the training data is highly imbalanced but the test data is more balanced), an obvious approach is to sample the training data such that its class distribution is the same as the test data (by oversampling the minority class and/or undersampling the majority class).</p>
