@@ -2,7 +2,7 @@
 id: ltvbyf1oqc8qx7khy58pby2
 title: Kaggle Tricks
 desc: ''
-updated: 1756646790205
+updated: 1763279864416
 created: 1677947097369
 ---
 [Hands-on course in Kaggle](https://www.kaggle.com/learn)
@@ -459,3 +459,11 @@ One way to handle this is to cluster features that are correlated and only keep 
 # 2 submisssions = bet both on heads and tails
 
 [tricks on Jane Street comp](https://www.kaggle.com/competitions/jane-street-market-prediction/discussion/224079)
+
+
+# Random forecast
+- produce ranomized forecasts multiple time. This is your baseline on what noise is in the competition.
+
+
+# Correlation Screening
+- compute correlation of each feature with the target
