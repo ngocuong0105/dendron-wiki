@@ -1,0 +1,93 @@
+<h1 id="data-storage">Data Storage<a aria-hidden="true" class="anchor-heading icon-link" href="#data-storage"></a></h1>
+<p>When you build a data infrastructure system you will consider tradeoffs between cost, efficiency, pattern accessability (online va offline, key:value pair vs relational), volume.</p>
+<h1 id="data-storage-technologies">Data Storage Technologies<a aria-hidden="true" class="anchor-heading icon-link" href="#data-storage-technologies"></a></h1>
+<p>AWS has S3 (e.g DataLake), Redshift, MySQL, Cassandra, ElasticSearch.</p>
+<h2 id="s3">S3<a aria-hidden="true" class="anchor-heading icon-link" href="#s3"></a></h2>
+<p>AWS service. Cloud storage. Structured (csv, parquet, csv) and Unstructured (images,videos, documents, parquets) data</p>
+<ul>
+<li>Offline availability</li>
+<li>Best for logs, historical data, backup - the defacto option for archives</li>
+<li>Benefits: extremely low $ cost, essentially infinite storage capacity, scales horizontally</li>
+<li>Disadvantages: no built-in query. Need to load it in some other data store to work with the data</li>
+<li>S3 is basically a filesystem (buckets instead of folders)</li>
+</ul>
+<p>Can query using additional services like Athena, or you load in spark.</p>
+<h2 id="datalake">Datalake<a aria-hidden="true" class="anchor-heading icon-link" href="#datalake"></a></h2>
+<p>AWS service. Claud storage. Built on top of S3. Structured and Unstructured data. Allows to query data using ATHENA (SQL quering engine for S3)</p>
+<h2 id="redshift">Redshift<a aria-hidden="true" class="anchor-heading icon-link" href="#redshift"></a></h2>
+<p>AWS service. Columnar data storage, fully manged data warehouse service. Relational db design. Structured data only (tables schemas)</p>
+<p>Stores data in clusters.</p>
+<ul>
+<li>Offline availability</li>
+<li>Best for analytics, data exploration and analysis</li>
+<li>Benefits: good options for doing expensive joins. SQL based quering.</li>
+<li>Disadvantages: high cost</li>
+</ul>
+<h2 id="mysql">MySQL<a aria-hidden="true" class="anchor-heading icon-link" href="#mysql"></a></h2>
+<p>Relational database. Used for structured data and transactions, such as user profiles and reviews. Transaction is a row/tuple in sQL table.</p>
+<ul>
+<li>Offline and Online (e.g when Yelp user searches something/ send a message it is directly stored and accessed) availability </li>
+<li>ACID compliance provides strongest form of data reliability</li>
+</ul>
+<h2 id="casandra">Casandra<a aria-hidden="true" class="anchor-heading icon-link" href="#casandra"></a></h2>
+<h2 id="elasticsearch">ElasticSearch<a aria-hidden="true" class="anchor-heading icon-link" href="#elasticsearch"></a></h2>
+<h2 id="hdf5">HDF5<a aria-hidden="true" class="anchor-heading icon-link" href="#hdf5"></a></h2>
+<p>Susquehanna uses this.</p>
+<ul>
+<li></li>
+</ul>
+<h1 id="data-catalog">Data Catalog<a aria-hidden="true" class="anchor-heading icon-link" href="#data-catalog"></a></h1>
+<p>This is a catalog service =  metadata layer that describes data not the data itself.</p>
+<p>Data catalog technologies offer another layer of abstraction on top of data storage technologies. They help you discover, manage and govern your data assets. </p>
+<h2 id="aws-glue">AWS Glue<a aria-hidden="true" class="anchor-heading icon-link" href="#aws-glue"></a></h2>
+<p>AWS Glue is a centralized metadata catalog that allows:</p>
+<ul>
+<li>schema management, track schema versions, schema evolution, register schemas.</li>
+<li>metadata management - catalog of what data exists and where</li>
+<li>data discovery layer - search and discover datasets, and querable by downstream engines.</li>
+</ul>
+<h2 id="apache-iceberg">Apache Iceberg<a aria-hidden="true" class="anchor-heading icon-link" href="#apache-iceberg"></a></h2>
+<p>Apache is a open source foundation project. Iceberg is a table format for huge analytic datasets. It is designed to improve on the limitations of other table formats like Hive.</p>
+<p>Iceberg is supported in AWS. You can create Iceberg tables. For example in CAPI you had to migrate from normal tables in DataLave v1 to DataLake v2 (these are Yelp related datalakes). DLv2 uses Iceberg table format. It allows you to have:</p>
+<ul>
+<li>ACID transactions (marketing)</li>
+<li>Time travel and rollback via its integrated snapshots tooling.</li>
+<li>Multi-partioned tables (dt=2024-01-01/client_id=sephora). More control over partitioning strategies. When you run a backfill you could select which data to change based on partition filters.</li>
+<li>No need for physical deletes (use DELETE statements that mark data as deleted without physically removing it right away)</li>
+<li>tracks schema evolution</li>
+</ul>
+<p>Multipartitioning: </p>
+<ul>
+<li>isolation whenever you insert/update/delete data. Before updating data for one client meant you need to rerun for all.</li>
+<li></li>
+</ul>
+<h3 id="yelp-dlv1-to-dlv2">Yelp DLv1 to DLv2<a aria-hidden="true" class="anchor-heading icon-link" href="#yelp-dlv1-to-dlv2"></a></h3>
+<p>Since 2017 Yelp's data lake has used the Hive table format. Since then, Apache Iceberg has gained significant adoption in the industry -- proving to be Hive's successor -- and brings many enhancements.</p>
+<p>Like Hive, Iceberg stores Parquet files in S3 and metadata in AWS Glue. Iceberg tables exist in the AWS Glue catalog and work with Spark, Athena, and Redshift just as Hive tables do, but with extra features.</p>
+<p><a href="https://iceberg.apache.org/spec/#version-1-analytic-data-tables">ICEBERG Tech Spec</a></p>
+<p>One of Iceberg's design goals is to present a data lake table that works as a SQL table does without any surprises, so is not required to know these concepts, however some Iceberg users may be curious to understand them.</p>
+<p>Iceberg metadata is stored in a tree structure. The image below may look complicated at first glance, but users of Iceberg do not need to understand it in order to use an Iceberg table.</p>
+<h4 id="acid-transactions">ACID transactions<a aria-hidden="true" class="anchor-heading icon-link" href="#acid-transactions"></a></h4>
+<p>Hive tables have many areas of undefined behavior which introduce data inconsistencies and data quality issues, especially when multiple processes are reading and writing to a table. Iceberg's provides ACID transactions and guarantees about behaviors for reads and writes.</p>
+<p>Iceberg's tables store the S3 path of the current metadata on the Glue table as a table property. This is the basis for the below behaviors.</p>
+<ul>
+<li>
+<p>Atomic Operations: Data files are added or removed in a single, complete operation, ensuring that writes are never partially visible. Iceberg writes data to S3 and commits changes by updating a metadata reference in the Glue table, which supports atomic updates.</p>
+</li>
+<li>
+<p>Consistency &#x26; Isolation: Iceberg provides optimistic concurrency and serializable isolation. Readers only access commited data and will see a consistent and correct view of data even while a writer concurrently commits to the table. Serializable isolation ensures that multiple writers will not introduce inconsistent states by ensuring that only one process writes to a table at a time. In some cases serializable isolation can impede workflows, see Iceberg Known Issues and Limitations for alternatives (parallel backfills can be tricky).</p>
+</li>
+</ul>
+<p>-Durable: Once a transaction is committed, it will not be lost. Durability is provided by S3 similarly to Hive tables. </p>
+<h1 id="hdf5-1">HDF5<a aria-hidden="true" class="anchor-heading icon-link" href="#hdf5-1"></a></h1>
+<p>SIG uses this data format (<code>.hdf5</code>). Another technology to manage data.</p>
+<ul>
+<li>HDF5 is a data software library, data management service and storage forhererogeneous data. Built in with fast "I/O" processing.</li>
+<li>storing scientific numerical data</li>
+</ul>
+<p>What is HDF5?</p>
+<ul>
+<li>A file specification and associated data model</li>
+<li>A standard library with API access for C++, Python, Java, etc.</li>
+<li>A software ecosystem consisting of client applications using HDF5 and analysis platforms like MATLAB, Python</li>
+</ul>

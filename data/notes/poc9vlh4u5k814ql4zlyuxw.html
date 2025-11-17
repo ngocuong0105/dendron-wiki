@@ -1,0 +1,136 @@
+<h1 id="aws">AWS<a aria-hidden="true" class="anchor-heading icon-link" href="#aws"></a></h1>
+<h2 id="aws-certified-practitioner-course">AWS Certified Practitioner Course<a aria-hidden="true" class="anchor-heading icon-link" href="#aws-certified-practitioner-course"></a></h2>
+<p>How do websistes work?
+Client (your computer)- ---- Network ------- Server (data base system)</p>
+<p>Network = routes packets(data from the server) </p>
+<p>Clients and Servers have IP address to find each other</p>
+<p>Server send to Client (for client perspestive they get response from server)</p>
+<p>What is a server? Server contains:</p>
+<ul>
+<li>CPU (computetion), </li>
+<li>RAM (temporary memory), </li>
+<li>Storage data (permanent memory),</li>
+<li>Database (structured data)</li>
+<li>Network (routers, switch, DNS server)</li>
+</ul>
+<p>Router forwads pachets between computers in the network
+Switch knows where to send these packets in the server.</p>
+<p>The cloud gives you all these things above ON DEMAND (scalable).
+No need for big servers in data centers and on prem.</p>
+<ol start="3">
+<li>What is Cloud Computing?</li>
+</ol>
+<p>Cloud Computing is the on-demand delivery of servers which do the things in prev note.</p>
+<p>Allows you to choose the right TYPE and SIZE of computing you need.
+Access to these resources Instantly.</p>
+<p>AWS owns and maintains the network-connected HARDWARE. You use only the web application.</p>
+<p>Cloud Types/Models</p>
+<ul>
+<li>private cloud (cloud service used by a single organization)</li>
+<li>public cloud (service delivered over the Internet)</li>
+<li>hybrid cloud</li>
+</ul>
+<p>Problems solved by the cloud:</p>
+<ul>
+<li>time flexibility (instant resource access)</li>
+<li>cost-effective (pay as you go)</li>
+<li>scalability (no need buy servers and maintain them)</li>
+<li>elasticity (scale out and scale in when needed)</li>
+<li>availability and fault-tolerance (build across indepenedent data centers)</li>
+<li>agility - rapidly develop, test and launch software</li>
+</ul>
+<p>Managing servers see page 4 picture!:</p>
+<p>On prem - care about EVERYTHING</p>
+<p>Cloud computing service types:</p>
+<ul>
+<li>Infrastructure as a Service (IaaS) - - care about OS, Runtime,Middleware, Data, Application</li>
+<li>Platform as a Service (PaaS) - care about Data, Applications</li>
+<li>Software as a Service (SaaS) - just use it</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>IaaS -> Amazon EC2 instance (Virtual machine on AWS)</li>
+<li>PaaS -> Heroku, (Elastic Beanstalk on AWS)</li>
+<li>SaaS -> (Zoom, Dropbox, Gmail, Rekognition on AWS)</li>
+</ul>
+<p>AWS services can be any of the cloud computing types.</p>
+<p>Pricing on the cloud:</p>
+<ul>
+<li>pay for compute time</li>
+<li>pay for amount of data stored on the cloud</li>
+<li>pay for data transfer out of the cloud</li>
+</ul>
+<ol start="4">
+<li>AWS overview</li>
+</ol>
+<p>Global infrastructure:</p>
+<ul>
+<li>AWS Regions</li>
+<li>AWS Availability zones</li>
+<li>AWS Data Centers</li>
+<li>AWS Edge Locations/Points of presence</li>
+</ul>
+<p>AWS Region e.g eu-west-2
+A region is a cluster of data centers
+Use AWS region close to you to have low latency</p>
+<p>AWS services are region scoped! The same service ran in different regions runs it 2 times</p>
+<p>How to choose AWS region?</p>
+<ul>
+<li>compliance (data govenrnance and legal requirements)</li>
+<li>proximity (low latency)</li>
+<li>available services in region</li>
+<li>pricing in region</li>
+</ul>
+<p>AWS zones are SUBSET of AWS regions. AWS zone = AWS availability zone is one or more discrete data centers with their own power, networking and connectivity</p>
+<p>Shared responsibility Model
+Customer is responsible for the security IN the cloud
+AWS is responsible for the security OF the cloud</p>
+<ol start="5">
+<li>IAM = Identity and Access Management global service</li>
+</ol>
+<p>Provides access control across all of AWS.
+With IAM you can specify who can access which services and resources.</p>
+<p>IAM policies you manage permissions to other people.
+Access is denied by default and is granted only if you specify Allow.</p>
+<p>Root account is created by default when you register in AWS.
+Should NOT be shared or used when developing applications.</p>
+<p>How users access AWS:</p>
+<ul>
+<li>AWS Management Console (screen on the web app - protected by password + MFA(optional))</li>
+<li>AWS CLI (protected by access keys)</li>
+<li>AWS SDK (for code protected by access keys)</li>
+</ul>
+<p>Access keys are like passsowrds generated through the AWS Console (screen on the web app)</p>
+<p>An IAM user group is a collection of IAM users.
+User groups let you specify permissions for multiple users.</p>
+<p>E.g. For a group called Admins  any user in that user group automatically has Admins group permissions</p>
+<p>An IAM role is an IAM identity that you can create in your account that has specific permissions.
+IAM role vs IAM groups
+Short answer for googlers: you can't assign role to user but can assign group to user.
+group is a bunch of users with the same policies
+role is a preset of policies for service(s)</p>
+<p>Best practices:</p>
+<ul>
+<li>dont use root account except for AWS account setup</li>
+<li>One physical user = One AWS user</li>
+<li>assign users t groups and assign permissions to groups</li>
+<li>never share IAM users and access keys</li>
+<li>Audit permissions of you account with the IAM credentials report</li>
+</ul>
+<ol start="6">
+<li>Amazon EC2 = Amazon Elastic Compute Cloud = Virtual machine</li>
+</ol>
+<p>Amazon EC2 is a service allowing you to:</p>
+<ul>
+<li>rent virtual machines (EC2 instances)</li>
+<li>storing data on virtual drives (EBS = elastic block storage)</li>
+<li>distribution across machines (ELB = elastic load balancing)</li>
+<li>scaliing services using auto-scaling group (ASG)</li>
+</ul>
+<p>AWS EC2 is about renting compute/memory on demand (basically what AWS is about).</p>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/dendron-wiki/notes/0xdyjxuetx8at7o7eafrfzb">How does Yelp store data?</a></li>
+<li><a href="/dendron-wiki/notes/03gbxiq9kwvv3tq2zpwbjjo">S3 vs DL vs Redshift</a></li>
+</ol>

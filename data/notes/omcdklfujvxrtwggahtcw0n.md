@@ -1,0 +1,1 @@
+Classic textbook, very heavy on math and recommended by most quants. Not much practicalities though. However if you are able to deeply understand the algorithms you will come up with ideas.

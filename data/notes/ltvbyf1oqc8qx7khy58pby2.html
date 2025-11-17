@@ -1,0 +1,373 @@
+<h1 id="kaggle-tricks">Kaggle Tricks<a aria-hidden="true" class="anchor-heading icon-link" href="#kaggle-tricks"></a></h1>
+<p><a href="https://www.kaggle.com/learn">Hands-on course in Kaggle</a></p>
+<h1 id="all-is-in-the-right-scaling">All is in the right scaling<a aria-hidden="true" class="anchor-heading icon-link" href="#all-is-in-the-right-scaling"></a></h1>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+
+<span class="token comment"># Make reproducible</span>
+np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Generate data</span>
+x <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> <span class="token number">2</span> <span class="token operator">*</span> x <span class="token operator">+</span> <span class="token number">5</span> <span class="token operator">+</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> size<span class="token operator">=</span>x<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+
+<span class="token comment"># Add outlier</span>
+y<span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">30</span>   <span class="token comment"># Outlier at index 50</span>
+
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>scatter<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> alpha<span class="token operator">=</span><span class="token number">0.7</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">'data'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Original'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'x'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'y'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>Can you catch the outlier?</strong></p>
+<p><img src="/dendron-wiki/./assets/images/catch_out.png" alt="alt text"></p>
+<p><strong>Same as above but with  np.log(y)</strong></p>
+<p><img src="/dendron-wiki/./assets/images/catched_out.png" alt="alt text"></p>
+<h1 id="videos">Videos<a aria-hidden="true" class="anchor-heading icon-link" href="#videos"></a></h1>
+<p><a href="https://www.kaggle.com/competitions/godaddy-microbusiness-density-forecasting/discussion/372629">Kaggle Grandmaster Interviews</a></p>
+<hr>
+<p><a href="https://www.youtube.com/watch?v=QGCvycOXs2M">Chris Deotte interview</a></p>
+<p>There is alwasy a data property, barrier - breakthrough in the competition which makes the difference in the leaderboard. Find a feature which could change your modelling approach.</p>
+<p>To do very very good you need to make a breakthrough. To have a breakthrough the secret is in the EDA. Make lots of plots, check correlation between things and eventually you get an intuition. It is all about the data.</p>
+<p>Key components in Kaggle competitions:</p>
+<ul>
+<li>have a fast pipeline where you can run experiments (need to set a good local validation)</li>
+<li>RIGID EDA, to get intuition of the data</li>
+</ul>
+<p>See something in the plots and you add a feature, split your model, modify the feature.</p>
+<hr>
+<p><a href="https://www.youtube.com/watch?v=gdyuCqmLMUg&#x26;t=944">Beyond Feature Selection</a></p>
+<p><strong>Is more features better? should I just get more and more features?</strong></p>
+<p>More features is generally better. As long as your features bring novel information it is good.</p>
+<p>Decision trees have built in Feature Selection. for each split you choose the best split - it is a feature selection algorithm.</p>
+<p><strong>So do we really need FS when training Decision Trees (LGBM, XGBOOST)</strong>. The answer is yes. You still need. It does happen your model on the sample data might pick up noisy feature. So you still need FS.</p>
+<p>Feature selection can reduce the number of features and you can get your AUC/Score up by a few points.</p>
+<p><code>scikit-learn</code></p>
+<ul>
+<li>Univariate analysis: 
+<ul>
+<li>variance threshold</li>
+<li>F-test (ANOVA)</li>
+<li>Forward selection in simple Ridge regression</li>
+</ul>
+</li>
+<li>RFE (recursive feature elimination) a Kaggler says it works well</li>
+</ul>
+<p>There is some bias in the feature selection. If you do FS for Xgboost, then the features you et woud be good for the xgboost but might not be for Neaural Nets</p>
+<p><code>Beyond scikit-learn</code></p>
+<ul>
+<li>Boruta
+<ul>
+<li>Wrapper</li>
+<li>Loss based</li>
+<li>Subset</li>
+</ul>
+</li>
+<li>ReliefF
+<ul>
+<li>Filter method</li>
+<li>Distance based</li>
+<li>Ranking</li>
+</ul>
+</li>
+</ul>
+<p><strong>Characteristics of Feature Selection Algorithms</strong></p>
+<ul>
+<li>Feature space
+<ul>
+<li>Univariate F-Score</li>
+<li>Multivariate (RFE, L1-based, Tree-based)</li>
+</ul>
+</li>
+<li>Direction
+<ul>
+<li>Forward</li>
+<li>Backward</li>
+<li>Ranking: F-score, L1-based</li>
+</ul>
+</li>
+</ul>
+<p><strong>Most of the time in Kaggle competitons I spent 90% of the time on FS, FE, prepping the data.</strong></p>
+<p><strong>Feature engineering is usually better that Feature Selection</strong></p>
+<hr>
+<p><a href="https://www.youtube.com/watch?v=VC8Jc9_lNoY&#x26;t=408s">CPMP talk</a></p>
+<p>Target Engineering - transform the target and make predictions on it to match the competition metric.</p>
+<p>SMAPE for example is assymetric metric. If you transfor the target with log, you get a metric which is almost like MAE.</p>
+<p>Understand the problem that is being solved. Understand the metric. Understand the data.</p>
+<p>How good a feature is depends on the competition metric!!! Feature importance, correlations, etc. are not that important.</p>
+<p>Setup good Cross validation local setup. You CV score should correlate with the public LB.</p>
+<p><strong>Track the Train-Test error GAP</strong> Large gap indicates overfit. When your CV score is increasing and the gap is not incrasing a lot, then you are not overfitting.</p>
+<p>For xgboost/LGBM no need to worry about one hot encoding, or nan values. They handle it well.</p>
+<hr>
+<p><a href="https://www.slideshare.net/HJvanVeen/feature-engineering-72376750">Feature engineering deck</a></p>
+<p>Categorical features:</p>
+<ul>
+<li>large cardinality creates sparse data</li>
+<li>one hot encoding</li>
+<li>hash encoding (deals with new varaibles, may introduce collisions), avoids extremely sparse data</li>
+<li>label encoding (for every categorical variable give a unique numerical ID)</li>
+<li>count encoding (sensitive to outliers, may add log transform, replace unseen varaibles with 1)</li>
+<li>LabelCount encoding (rank categorical varaibles by count in the train set, no collisions)</li>
+<li>target encoding - encode cat varaibles by their ratio of target (becareful to avoid overfit, nested CV)</li>
+<li>use NN to create dense embeddings from categorical variables</li>
+<li>give NaN valies an explicit encoding instead of ignoring  (use them only when train and test NANs are coused by the same, or your local CV proves it holds signal)</li>
+<li>expansion encoding (create multiple categorical varaibles from a single variable)</li>
+</ul>
+<p>Numerical features:</p>
+<ul>
+<li>round numerical variables (form of lossy compression, retain most significant features of the data)</li>
+<li>sometimes too much precision is just noise</li>
+<li>binning (by quantiles, plot data to log for good interval binning)</li>
+<li>scaling (standard Z, MinMax, Root, Log scaling)</li>
+<li>impute missing (mean, median (robust to outliers), KNN,) add boolean column</li>
+<li>interactions (substraction, addition, multiplication, divison) Ignore human intuition!, weird interactions can give significant improvement</li>
+<li>create statistic on a row of data (number of NaNs, Number of 0s, Number of negative values, Mean, Max, Min, Skewness, etc)</li>
+<li>temporal variables (dates, needs backtesting)</li>
+<li>turn single features, like day_of_week into two coordinates on a circle</li>
+<li>for TS, instead of total spend, encoed things like spend in last week, month, etc</li>
+<li>hardcode categorical features like: date_3_days_before_holidays: 1</li>
+<li>spacial variables (find closeness between big hubs)</li>
+</ul>
+<p>Neural Networks &#x26; DL</p>
+<ul>
+<li>NN claim end-to-end automatic feature engineering</li>
+<li>FE dying field? No - moves the focus to architecture engineering</li>
+<li>encode order of samples in dataset</li>
+</ul>
+<p><em>Applied Machine Learning is basically feature engineering, Andrew Ng</em></p>
+<hr>
+<p><a href="https://www.youtube.com/watch?v=XBJ2f68LuO4&#x26;t=38s">Winning gold is easy</a></p>
+<p>A LOT OF TIPS AND TRICKS in this video.</p>
+<p>If something does not work, does not stick to it.</p>
+<p>to get a gold model you need to try crazy ideas. Most would not work, but if you get one good one you can get the gold.</p>
+<p>Trick for feature engineering:</p>
+<ul>
+<li>add 1 noisy features</li>
+<li>compute feature importance for all features</li>
+<li>features which have higher rank than the noisy feature should generally be good features</li>
+<li>if your noisy feature is too high in rank, your model is overfitting on noisy features and gives them high rank</li>
+<li>you need to go through the top ranked features and see which of them your model is overfitting </li>
+</ul>
+<p><strong>Feature importance</strong></p>
+<p>Detect overfitting features</p>
+<ul>
+<li>remove the feature and if CV is not hurt your are good</li>
+<li>if removing the feature hurts CV, then use transformation on the feature</li>
+</ul>
+<p>Feature engineering is a bit of an art. Feature X and Feature Y might be good only if you use both (as they have interation).</p>
+<p>If your model has many features (e.g xgboost) try using small colsample. Usually you would use 80-90%. But when having MANY features, this way your trees would be almost independent and not correlated.</p>
+<p>Working with NN or linear models, when a feature you have NAN, add additional boolean column.</p>
+<p>NN are making feature engineering implicitly.</p>
+<hr>
+<p><a href="https://www.youtube.com/watch?v=RtqtM1UJfZc&#x26;t">Giba talk, tips for feature engineering and selection</a></p>
+<hr>
+<p><a href="https://www.youtube.com/watch?v=A8oBphPOliM">Kaggle Grandmaster and startup</a></p>
+<ul>
+<li>CPU/RAM management is 1st priority</li>
+<li>Work on a single model as long as you can (1 week for other models)</li>
+<li>ML is just function approximation of the real world</li>
+<li>Tree methods ARE sensitive to noisy/useless features (spend enough time in Feature selection...)</li>
+<li>In kaggle you do not always have CV LB correlation (you have absolute noise in the LB, or the dataset is very small)</li>
+<li>Every time the dataset is small - you can do 5 Fold CV, repeated with 20 different CV splits. Models bagged 20 times - 2000 models in total to train just 1 model.</li>
+</ul>
+<hr>
+<p><a href="https://www.kaggle.com/competitions/godaddy-microbusiness-density-forecasting/discussion/394975">When averaging models in forecasting tasks help</a></p>
+<h1 id="lb-cv-scores">LB CV Scores<a aria-hidden="true" class="anchor-heading icon-link" href="#lb-cv-scores"></a></h1>
+<ul>
+<li>Compute correlation between LB and CV scores!</li>
+<li>Local CV setup to be as close as possible to the Kaggle API.</li>
+</ul>
+<h1 id="model-augmentation">Model augmentation<a aria-hidden="true" class="anchor-heading icon-link" href="#model-augmentation"></a></h1>
+<ul>
+<li>Bagging
+<ul>
+<li>same model trained on different folds</li>
+<li>same model trained on different seeds (if data is very noisy)</li>
+<li>same model trained on different features</li>
+<li>same model trained on different hyperparameters</li>
+<li>different models take weighted average/mean (careful for MAE usually it hurts)</li>
+</ul>
+</li>
+<li>Stacking</li>
+<li>Boosting: train on the errors</li>
+<li>Use output of one model to be features of another model</li>
+<li>Detrending</li>
+</ul>
+<h1 id="powerful-features">Powerful features<a aria-hidden="true" class="anchor-heading icon-link" href="#powerful-features"></a></h1>
+<ul>
+<li>
+<p>unbiased feature
+<code>featureX - groupby(FeatureY)[FeatureX].mean()</code></p>
+</li>
+<li>
+<p>previous FCT error feature (difference between FCT and TARGET), kind of boosting method</p>
+</li>
+<li>
+<p>rolling aggregates - mean, median, min, max, quantiles, std, kurtosis, skew</p>
+</li>
+<li>
+<p>intercept and slope instead of mean aggregate, that is run linear regression on past samples within a window and put the intercept and slope as features</p>
+</li>
+<li>
+<p>random feature trick</p>
+</li>
+<li>
+<p>neighbors_target_mean_500: The mean TARGET value of the 500 closest neighbors of each row</p>
+</li>
+</ul>
+<h1 id="adversarial-validation">Adversarial Validation<a aria-hidden="true" class="anchor-heading icon-link" href="#adversarial-validation"></a></h1>
+<p>Adversarial Validation is a very clever and very simple way to let us know if our test data and our training data are similar; we combine our train and test data, labeling them with say a 0 for the training data and a 1 for the test data, mix them up, then see if we are able to correctly re-identify them using a binary classifier.</p>
+<p>If we cannot correctly classify them, i.e. we obtain an area under the receiver operating characteristic curve (ROC) of 0.5 then they are indistinguishable and we are good to go.</p>
+<p>However, if we can classify them (ROC > 0.5) then we have a problem, either with the whole dataset or more likely with some features in particular, which are probably from different distributions in the test and train datasets. If we have a problem, we can look at the feature that was most out of place. The problem may be that there were values that were only seen in, say, training data, but not in the test data. If the contribution to the ROC is very high from one feature, it may well be a good idea to remove that feature from the model.</p>
+<p><a href="https://www.kaggle.com/code/carlmcbrideellis/what-is-adversarial-validation">kaggle post</a></p>
+<h1 id="check-for-covariate-shift-in-train-and-test">Check for covariate shift in train and test<a aria-hidden="true" class="anchor-heading icon-link" href="#check-for-covariate-shift-in-train-and-test"></a></h1>
+<ul>
+<li>adversarial validation</li>
+<li>KS test for the features to see if they are from the same distribution</li>
+</ul>
+<h1 id="check-for-target-shift-in-train-and-test">Check for target shift in train and test<a aria-hidden="true" class="anchor-heading icon-link" href="#check-for-target-shift-in-train-and-test"></a></h1>
+<p>Good to understand th dynamics of the target variable. If the target variable is changing over time, then you need to be careful with the train/test split. You need to make sure the train and test are from the same time period.</p>
+<ul>
+<li>KS Test</li>
+<li>T-test for mean shift</li>
+</ul>
+<h1 id="hypothesis-testing--normality-tests">Hypothesis Testing / Normality tests<a aria-hidden="true" class="anchor-heading icon-link" href="#hypothesis-testing--normality-tests"></a></h1>
+<p>I think KS and normality tests are very sensistive for large datasets. If you have 10k+ observations, then you would get a very low p-value for any test. So you need to be careful with the p-value.</p>
+<p>Any small shifts would be detected and would reject the null hypothesis.</p>
+<p>So these tests are useful for small sample sizes. For large sample sizes you'd use the CLT and the t-test.</p>
+<h1 id="kolmogorov-smirnov-test">Kolmogorov-Smirnov test<a aria-hidden="true" class="anchor-heading icon-link" href="#kolmogorov-smirnov-test"></a></h1>
+<ul>
+<li>The two sample Kolmogorov-Smirnov test is a  nonparametric test that compares the cumulative distributions of two data sets(1,2).</li>
+<li>The test is nonparametric. It does not assume that data are sampled from Gaussian distributions (or any other defined distributions).</li>
+</ul>
+<h2 id="one-sample-kolmogorov-smirnov-test">One sample Kolmogorov-Smirnov test<a aria-hidden="true" class="anchor-heading icon-link" href="#one-sample-kolmogorov-smirnov-test"></a></h2>
+<p>It takes the difference between the empirical distribution of the sample and the theoretical distribution. Looks at the supremum which should converge to 0 almost surely.</p>
+<h2 id="two-sample-kolmogorov-smirnov-test">Two sample Kolmogorov-Smirnov test<a aria-hidden="true" class="anchor-heading icon-link" href="#two-sample-kolmogorov-smirnov-test"></a></h2>
+<p>It takes the difference between the empirical distributions of two samples. Looks at the supremum which should converge to 0 almost surely.</p>
+<p>Kolmogorov distribution shows the rate of this convergence.</p>
+<p><strong>In practice, the statistic requires a relatively large number of data points to properly reject the null hypothesis.</strong></p>
+<p>1k + points should be ok with error less than 1% (see wiki page).</p>
+<ul>
+<li>caveat is that this test is very sensistive, if the median, varaince,shape changes it would have low p-value</li>
+</ul>
+<p><strong>Interpreting the P value</strong></p>
+<p>The P value is the answer to this question:</p>
+<p>If the two samples were randomly sampled from identical populations, what is the probability that the two cumulative frequency distributions would be as far apart as observed? More precisely, what is the chance that the value of the Komogorov-Smirnov D statistic would be as large or larger than observed?</p>
+<p>If the P value is small, conclude that the two groups were sampled from populations with different distributions. The populations may differ in median, variability or the shape of the distribution. </p>
+<h2 id="t-test">T-test<a aria-hidden="true" class="anchor-heading icon-link" href="#t-test"></a></h2>
+<ul>
+<li>parametric method, used when the samples satisfy the conditions of normality, equal variance and independence.</li>
+</ul>
+<p>This test assumes that the populations have identical variances by default.</p>
+<h2 id="shapirowilk-test">Shapiro–Wilk test<a aria-hidden="true" class="anchor-heading icon-link" href="#shapirowilk-test"></a></h2>
+<p>Normality test</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> scipy<span class="token punctuation">.</span>stats <span class="token keyword">import</span> shapiro
+</code></pre>
+<p>The null-hypothesis of this test is that the population is normally distributed. Thus, if the p value is less than the chosen alpha level, then the null hypothesis is rejected and there is evidence that the data tested are not normally distributed.</p>
+<ul>
+<li>Better than KS one sample test as there you need to know the parameters of the distribution i.e. mean and variance. Cannot standaradize the data, as you would be going into a circle. you can't standardize by using estimated parameters and test for standard normal; that's actually the same thing.</li>
+<li>good with small sample sizes ~ 50 observations</li>
+<li>has more power compared to other normality tests, meaning it can detect deviations from normality more effectively.</li>
+<li>Not Sensitive to Outliers</li>
+</ul>
+<h1 id="likelihood-ratio-test">Likelihood-ratio test<a aria-hidden="true" class="anchor-heading icon-link" href="#likelihood-ratio-test"></a></h1>
+<h1 id="change-point-detection-in-time-series">Change point detection in Time Series<a aria-hidden="true" class="anchor-heading icon-link" href="#change-point-detection-in-time-series"></a></h1>
+<p>Change point detection marks the locations where the underlying properties (statistical characteristics e.g. mean and variance) of the time series shift abruptly.</p>
+<ul>
+<li>target engineering and prediction switching</li>
+<li>target splitting, find its components</li>
+</ul>
+<h1 id="lgbm-xgbm--catboost">LGBM, XGBM , CATBOOST<a aria-hidden="true" class="anchor-heading icon-link" href="#lgbm-xgbm--catboost"></a></h1>
+<ul>
+<li>important hyperparams are usually: learning_rate, num_iterations, colsample, sample, max_depth, n_leaves, early_stopping,  device type</li>
+<li>feature importance: use num_splits to select features, used as a guide for useful and overfitting features</li>
+<li>plot correlation between features</li>
+<li>get_split_value_histogram for each feature (lgbm): do that for the most important features</li>
+<li>get_leaf_output</li>
+<li>feature binning of continuous features (max_bin)</li>
+</ul>
+<h1 id="feature-selection">Feature Selection<a aria-hidden="true" class="anchor-heading icon-link" href="#feature-selection"></a></h1>
+<p>Obviously you should only do this if it helps your CV.</p>
+<p><strong>All tricks by Chris Deotte:</strong></p>
+<ul>
+<li>forward feature selection (using single or groups of features)</li>
+<li>recursive feature elimination (using single or groups of features)</li>
+<li>permutation importance</li>
+<li>adversarial validation</li>
+<li>correlation analysis</li>
+<li>time consistency</li>
+<li>train/test distribution analysis</li>
+<li>random feature trick</li>
+<li>remove low variance features</li>
+</ul>
+<p>One interesting trick called "time consistency" is to train a single model using a single feature (or small group of features) on the first month of train dataset and predict isFraud for the last month of train dataset. This evaluates whether a feature by itself is consistent over time. 95% were but we found 5% of columns hurt our models. They had training AUC around 0.60 and validation AUC 0.40. In other words some features found patterns in the present that did not exist in the future. Of course the possible of interactions complicates things but we double checked every test with other tests.</p>
+<p>Whatever feature selection you do <strong>you should separete feature selection from model training.</strong> This avoid data leakage. First do model selection and then model training.</p>
+<p><strong>Wrapper methods</strong>: these are model dependent</p>
+<ul>
+<li>forward selection</li>
+<li>backward selection</li>
+<li>recursive feature elimination (greedy optimization)</li>
+</ul>
+<p><strong>Filter methods</strong>: these are model independent, and involve preprocessing</p>
+<ul>
+<li>Pearson correlation</li>
+<li>LDA - linear discriminant analysis</li>
+<li>ANOVA</li>
+<li>Chi-Square</li>
+</ul>
+<p>These methods does not remove multicollinearity.</p>
+<p><strong>Embedded methods</strong>: regularization</p>
+<ul>
+<li>Ridge, Lasso</li>
+</ul>
+<h2 id="recursive-feature-elimination">Recursive Feature Elimination<a aria-hidden="true" class="anchor-heading icon-link" href="#recursive-feature-elimination"></a></h2>
+<ol>
+<li>Rank the features according to their importance</li>
+<li>Remove one/or more features - the least important - and build a machine learning algorithm utilizing the remaining features.</li>
+<li>Calculate a performance metric of your choice</li>
+<li>If the metric decreases by more of an arbitrarily set threshold, then that feature is important and should be kept. Otherwise, we can remove that feature.
+Can run permutation importance on held out test set <a href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_regression.html">scikit-learn</a></li>
+</ol>
+<p>Repeat steps 2-4 until all features have been removed (and therefore evaluated) and the drop in performance assessed.</p>
+<h2 id="mdi">MDI<a aria-hidden="true" class="anchor-heading icon-link" href="#mdi"></a></h2>
+<p>Tree-based models provide an alternative measure of feature importances based on the mean decrease in impurity (MDI). Impurity is quantified by the splitting criterion of the decision trees (Gini, Log Loss or Mean Squared Error). However, this method can give high importance to features that may not be predictive on unseen data when the model is overfitting Permutation-based feature importance, on the other hand, avoids this issue, since it can be computed on unseen data.</p>
+<p>Furthermore, impurity-based feature importance for trees are strongly biased and favor high cardinality features (typically numerical features) over low cardinality features such as binary features or categorical variables with a small number of possible categories.</p>
+<p>This problem stems from two limitations of impurity-based feature importances:</p>
+<ul>
+<li>impurity-based importances are biased towards high cardinality features;</li>
+<li>impurity-based importances are computed on training set statistics and therefore do not reflect the ability of feature to be useful to make predictions that generalize to the test set (when the model has enough capacity).</li>
+</ul>
+<h2 id="permutation-importance">Permutation importance<a aria-hidden="true" class="anchor-heading icon-link" href="#permutation-importance"></a></h2>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>inspection <span class="token keyword">import</span> permutation_importance
+</code></pre>
+<p>Permutation importance does not reflect to the intrinsic predictive value of a feature by itself but how important this feature is <strong>for a particular model.</strong></p>
+<p>We measure the importance of a feature by calculating the increase in the model’s prediction error after permuting the feature. A feature is “important” if shuffling its values increases the model <strong>error</strong>, because in this case the model relied on the feature for the prediction. A feature is “unimportant” if shuffling its values leaves the model error unchanged, because in this case the model ignored the feature for the prediction. </p>
+<p>To highlight which features contribute the most to the generalization power of the inspected model permutation importance should be computed on validation set.</p>
+<p>Sklearn permutation_importance takes as input a fitted model. Thus based on the selected features/weights during training it computes the importance of the features. These features importance show how good are these features for this particular model. </p>
+<p><strong>Another take on feature importance is: to do permutation importance before model training.</strong> This should be done manually (I don't know about a library)
+Advatange is that is more acurate, disadvantage is that you loose a lot of time in training.</p>
+<p><strong>NB</strong>
+When two features are correlated and one of the features is permuted, the model will still have access to the feature through its correlated feature. This will result in a lower importance value for both features, where they might actually be important.</p>
+<p>One way to handle this is to cluster features that are correlated and only keep one feature from each cluster.</p>
+<h2 id="model-class-reliance">Model Class Reliance<a aria-hidden="true" class="anchor-heading icon-link" href="#model-class-reliance"></a></h2>
+<p><a href="https://arxiv.org/pdf/1801.01489.pdf">Paper</a></p>
+<h1 id="dynamic-label-smoothing">Dynamic label smoothing<a aria-hidden="true" class="anchor-heading icon-link" href="#dynamic-label-smoothing"></a></h1>
+<h1 id="throw-complex-models-on-high-weight-data">Throw complex models on high weight data<a aria-hidden="true" class="anchor-heading icon-link" href="#throw-complex-models-on-high-weight-data"></a></h1>
+<h1 id="2-submisssions--bet-both-on-heads-and-tails">2 submisssions = bet both on heads and tails<a aria-hidden="true" class="anchor-heading icon-link" href="#2-submisssions--bet-both-on-heads-and-tails"></a></h1>
+<p><a href="https://www.kaggle.com/competitions/jane-street-market-prediction/discussion/224079">tricks on Jane Street comp</a></p>
+<h1 id="random-forecast">Random forecast<a aria-hidden="true" class="anchor-heading icon-link" href="#random-forecast"></a></h1>
+<ul>
+<li>produce ranomized forecasts multiple time. This is your baseline on what noise is in the competition.</li>
+</ul>
+<h1 id="correlation-screening">Correlation Screening<a aria-hidden="true" class="anchor-heading icon-link" href="#correlation-screening"></a></h1>
+<ul>
+<li>compute correlation of each feature with the target</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/dendron-wiki/notes/2b5bwf46z6v132wu7xghvrp">Machine Learning</a></li>
+</ul>

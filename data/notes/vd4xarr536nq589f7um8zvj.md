@@ -1,0 +1,1 @@
+- Great book to learn advanced Python concepts and idioms.
