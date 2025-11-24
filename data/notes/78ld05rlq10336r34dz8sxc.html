@@ -1,0 +1,194 @@
+<h1 id="git">Git<a aria-hidden="true" class="anchor-heading icon-link" href="#git"></a></h1>
+<h1 id="resources">Resources:<a aria-hidden="true" class="anchor-heading icon-link" href="#resources"></a></h1>
+<ul>
+<li><a href="https://learngitbranching.js.org/">Learn Git Branching</a>.</li>
+<li><a href="https://git.github.io/git-reference/creating/#init">Git reference common commands</a></li>
+</ul>
+<h1 id="commits-and-branches">Commits and branches<a aria-hidden="true" class="anchor-heading icon-link" href="#commits-and-branches"></a></h1>
+<p>A <strong>commit</strong> in a git repository records a snapshot of all the (tracked) files in your directory. It's like a giant copy and paste, but even better!</p>
+<p><strong>commit = snapshot of the project = lightweight safe of project state</strong> </p>
+<p>Commits can be visually represented as nodes.</p>
+<ul>
+<li>create a commit</li>
+</ul>
+<pre class="language-s"><code class="language-s">git commit -m 'commit message'
+</code></pre>
+<p><strong>Branches = pointer to a specific commit</strong></p>
+<p><em>'branch early, and branch often'</em></p>
+<p>Branches are super lightweight and have no storage/memory overhead</p>
+<p>Branches are pointers. To get yourself to a branch you need to <em>checkout</em> there</p>
+<ul>
+<li>create a new branch</li>
+</ul>
+<pre class="language-s"><code class="language-s">git branch new_branch
+</code></pre>
+<ul>
+<li>go to the branch</li>
+</ul>
+<pre class="language-s"><code class="language-s">git checkout new_branch
+</code></pre>
+<ul>
+<li>shortcut</li>
+</ul>
+<pre class="language-s"><code class="language-s">git checkout -b new_branch
+</code></pre>
+<h1 id="merge">Merge<a aria-hidden="true" class="anchor-heading icon-link" href="#merge"></a></h1>
+<p><strong>Merge</strong> = combining work from two different branches together.</p>
+<p>Merging in Git creates a special commit that has two unique parents.</p>
+<p><img src="/dendron-wiki/assets/images/before_merge.png" alt="before_merge.png"></p>
+<p><img src="/dendron-wiki/assets/images/after_merge.png" alt="after_merge.png"></p>
+<p>Above we merge bugFix into main and main contains all the work.</p>
+<ul>
+<li>merge</li>
+</ul>
+<pre class="language-s"><code class="language-s">git checkout -b bugFix
+git commit -m 'Blah'
+git checkout main
+git merge bugFix
+</code></pre>
+<h1 id="rebase">Rebase<a aria-hidden="true" class="anchor-heading icon-link" href="#rebase"></a></h1>
+<p>The second way of combining work between branches is <strong>rebasing</strong>. Rebasing essentially takes a set of commits, "copies" them, and plops them down somewhere else.</p>
+<p>Rebasing makes a nice linear sqauce of commits. Commit log of the repo will be cleaner.</p>
+<p><img src="/dendron-wiki/assets/images/before_rebase.png" alt="before_rebase.png"></p>
+<p><img src="/dendron-wiki/assets/images/after_rebase.png" alt="after_rebase.png"></p>
+<p>Here we have two branches yet again; note that the bugFix branch is currently selected (note the asterisk)</p>
+<p>We would like to move our work from bugFix directly onto the work from main. That way it would look like these two features were developed sequentially, when in reality they were developed in parallel.</p>
+<p>C3 still exists, and the rebase creates a copy C3'</p>
+<ul>
+<li><strong>rebase</strong></li>
+</ul>
+<pre class="language-s"><code class="language-s">git checkout -b bugFix
+git commit -m 'Blah'
+git checkout main
+git commit
+git checkout bugFix
+git rebase main
+</code></pre>
+<ul>
+<li>interactive rebase (can squash commits)</li>
+</ul>
+<pre class="language-s"><code class="language-s">git rebase -i main
+</code></pre>
+<h1 id="head">HEAD<a aria-hidden="true" class="anchor-heading icon-link" href="#head"></a></h1>
+<p><strong>HEAD</strong> is the symbolic name for the currently checked out commit -- it's essentially what commit you're working on top of.</p>
+<p>HEAD is hiding underneath our work on the repo/branches.</p>
+<p>HEAD normally point to the branch you are currently working on</p>
+<p><strong>Detaching</strong> HEAD just means attaching it to a commit instead of a branch.</p>
+<p>Example: on main branch with one commit:</p>
+<p>HEAD -> main -> C1</p>
+<p><code>git checkout C1 </code> makes HEAD ->  C1</p>
+<p>To checkout to a commit you need to use its hash (C1)</p>
+<p>To see commits hashes:</p>
+<pre class="language-s"><code class="language-s">git log
+</code></pre>
+<h1 id="moving-around-git">Moving around git<a aria-hidden="true" class="anchor-heading icon-link" href="#moving-around-git"></a></h1>
+<p>OPERATORS <code>^ ~</code></p>
+<p>Specifying commits by their hash isn't the most convenient thing ever, which is why Git has relative refs</p>
+<p>saying <strong>main^</strong> is equivalent to "the first parent of main</p>
+<ul>
+<li>go to parent commit</li>
+</ul>
+<pre class="language-s"><code class="language-s">git checkout main^
+</code></pre>
+<p>You can also reference HEAD as a relative ref</p>
+<pre class="language-s"><code class="language-s">git checkout HEAD^
+</code></pre>
+<ul>
+<li>go to previous commit, if current commit is C4, the one below will go to C0</li>
+</ul>
+<pre class="language-s"><code class="language-s">git checkout HEAD~4
+</code></pre>
+<p><strong>Advanced moving when there is a merge</strong></p>
+<p><img src="/dendron-wiki/assets/images/move_up_adv_0.png" alt="move_up_adv_0.png">
+<img src="/dendron-wiki/assets/images/move_up_adv.png" alt="move_up_adv.png"></p>
+<h1 id="branch-forcing">Branch forcing<a aria-hidden="true" class="anchor-heading icon-link" href="#branch-forcing"></a></h1>
+<p>One of the most common ways I use relative refs is to move branches around. You can directly r<strong>eassign a branch to a commit</strong> with the -f option</p>
+<pre class="language-s"><code class="language-s">git branch -f main HEAD~3
+</code></pre>
+<p><img src="/dendron-wiki/assets/images/before_force.png" alt="before_force.png"></p>
+<p><img src="/dendron-wiki/assets/images/after_force.png" alt="after_force.png"></p>
+<h1 id="reversing-changes-in-git">Reversing changes in Git<a aria-hidden="true" class="anchor-heading icon-link" href="#reversing-changes-in-git"></a></h1>
+<p><code>git reset</code> reverses changes by moving a branch reference backwards in time to an older commit. In this sense you can think of it as "rewriting history;" <code>git reset</code>will move a branch backwards as if the commit had never been made in the first place.</p>
+<p><img src="/dendron-wiki/assets/images/before_reset.png" alt="before_reset.png"></p>
+<p><img src="/dendron-wiki/assets/images/after_reset.png" alt="after_reset.png"></p>
+<pre class="language-s"><code class="language-s">git reset HEAD~1
+</code></pre>
+<p>reset does not work for remote branches. Need to use</p>
+<pre class="language-s"><code class="language-s">git revert HEAD
+</code></pre>
+<h1 id="moving-work-around">Moving Work Around<a aria-hidden="true" class="anchor-heading icon-link" href="#moving-work-around"></a></h1>
+<p>You know how to move around the source tree using reference operators <code>^ ~</code>.</p>
+<p>The next concept we're going to cover is "moving work around" -- in other words, it's a way for developers to say "I want this work here and that work there"</p>
+<ul>
+<li><strong> pick</strong></li>
+</ul>
+<pre class="language-s"><code class="language-s">git cherry-pick &#x3C;Commit1>&#x3C;Commit2>
+</code></pre>
+<p>says that you would like to copy a series of commits below your current location (HEAD).</p>
+<ul>
+<li><strong>interactive rebase</strong></li>
+</ul>
+<pre class="language-s"><code class="language-s">git rebase -i branch_name
+</code></pre>
+<p>Your current HEAD would copy from branch_name and do a rebase.</p>
+<p>In interactive rebase you can <strong>reorder, omit, squash, change commit messages</strong>.</p>
+<p>alternatively using references:</p>
+<pre class="language-s"><code class="language-s">git rebase -i HEAD~3
+</code></pre>
+<p>Juggle commits: Say you want to make changes to an older commit but still keep the order. </p>
+<p>Trick: Interactive rebase, then reorder, then make changes, reorder again.   </p>
+<h1 id="git-tags">Git Tags<a aria-hidden="true" class="anchor-heading icon-link" href="#git-tags"></a></h1>
+<p>Branches are easily mutated, often temporary, and always changing. You can move them around and refer to different commits. We use <strong>tags</strong> to permanently mark historical points in your project's history - major releases and big merges.</p>
+<p>Tags never move, even if you create new commits.</p>
+<pre class="language-s"><code class="language-s">git tag v1 commit_hash
+</code></pre>
+<p>tags serve as an anchor point:</p>
+<pre class="language-s"><code class="language-s">git checkout v1
+</code></pre>
+<p><strong>git describe</strong></p>
+<p>Because tags serve as such great "anchors" in the codebase, git has a command to describe where you are relative to the closest "anchor" (aka tag). And that command is called git describe</p>
+<pre class="language-s"><code class="language-s">git describe &#x3C;ref>
+</code></pre>
+<p>Where <code>&#x3C;ref></code> is anything git can resolve into a commit. If you don't specify a ref, git just uses where you're checked out right now (<code>HEAD</code>).</p>
+<p>The output of the command looks like:</p>
+<p><code>&#x3C;tag>_&#x3C;numCommits>_g&#x3C;hash></code></p>
+<p>Where <code>tag</code> is the closest ancestor tag in history, <code>numCommits</code> is how many commits away that tag is, and <code>&#x3C;hash></code> is the hash of the commit being described.</p>
+<h1 id="git-remotes">Git Remotes<a aria-hidden="true" class="anchor-heading icon-link" href="#git-remotes"></a></h1>
+<p>Git remotes are actually just copies of your repository on another computer. You can typically talk to this other computer through the Internet, which allows you to transfer commits back and forth.</p>
+<ul>
+<li>
+<p>remotes serve as a great backup</p>
+</li>
+<li>
+<p>remotes make coding social</p>
+</li>
+<li>
+<p>create local copy of remote repositories</p>
+</li>
+</ul>
+<pre><code>git clone
+</code></pre>
+<p>on your local you iwll have branches: <code>main</code> and <code>origin/main</code> (the remote branch)</p>
+<p>Remote branches reflect the state of remote repositories</p>
+<p>Remote branches have the special property that when you check them out, you are put into detached <code>HEAD</code> mode. <strong>Git does this on purpose because you can't work on these branches directly.</strong></p>
+<pre><code>git fetch
+</code></pre>
+<p>git fetch performs two main steps, and two main steps:</p>
+<ul>
+<li>downloads the commits that the remote has but are missing from our local</li>
+<li>updates where our remote branches point</li>
+</ul>
+<p>NB: fetch does <strong>not</strong> update branches</p>
+<p>To reflect those changes  -- once you have new commits available locally you can do git merge <code>o/main</code></p>
+<p>These two steps are incorporated in</p>
+<pre><code>git pull
+</code></pre>
+<h1 id="collaborative-development-models">Collaborative development models<a aria-hidden="true" class="anchor-heading icon-link" href="#collaborative-development-models"></a></h1>
+<p><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models">Shared repo model vs Fork and pull model</a></p>
+<p>In a shared repository model, developers work on a single repository. All contributors have write access and crete Pull Requests to merge into main. It is best when you work in smaller teams and private repo.</p>
+<p>In fork and pull model, developers for the main repository and can independently work on their fork. They can create branches, merge into the forked main and work independently. If they want to make changes to the upstream repo they will need to create a Pull Request. Only the maintainers of the repo have write access.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/dendron-wiki/notes/4vzvi1b96nq3mqii7jmjwpp">How was Yelp built?</a></li>
+</ul>

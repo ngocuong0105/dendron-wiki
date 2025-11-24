@@ -1,0 +1,379 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><link rel="icon" href="/dendron-wiki/favicon.ico"/><title>System Design</title><meta name="robots" content="index,follow"/><meta name="googlebot" content="index,follow"/><meta name="description" content="Personal knowledge space"/><meta property="og:title" content="System Design"/><meta property="og:description" content="Personal knowledge space"/><meta property="og:url" content="https://ngocuong0105.github.io/dendron-wiki/notes/37ghcmfqsbumla66qt9qh4y/"/><meta property="og:type" content="article"/><meta property="article:published_time" content="7/24/2022"/><meta property="article:modified_time" content="7/8/2025"/><link rel="canonical" href="https://ngocuong0105.github.io/dendron-wiki/notes/37ghcmfqsbumla66qt9qh4y/"/><meta name="next-head-count" content="14"/><link rel="preload" href="/dendron-wiki/_next/static/css/73bff7fc08ed1d26.css" as="style"/><link rel="stylesheet" href="/dendron-wiki/_next/static/css/73bff7fc08ed1d26.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/dendron-wiki/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/dendron-wiki/_next/static/chunks/webpack-5a49f804ab2869ab.js" defer=""></script><script src="/dendron-wiki/_next/static/chunks/framework-28c999baf2863c3d.js" defer=""></script><script src="/dendron-wiki/_next/static/chunks/main-2a75a40d33729b12.js" defer=""></script><script src="/dendron-wiki/_next/static/chunks/pages/_app-47f94d7e2ed9c5e2.js" defer=""></script><script src="/dendron-wiki/_next/static/chunks/935-4dee79e80b8641c6.js" defer=""></script><script src="/dendron-wiki/_next/static/chunks/6-50972def09142ee2.js" defer=""></script><script src="/dendron-wiki/_next/static/chunks/pages/notes/%5Bid%5D-78d472fa3b924116.js" defer=""></script><script src="/dendron-wiki/_next/static/AZXonBxzXDJ7mmxS9Br0O/_buildManifest.js" defer=""></script><script src="/dendron-wiki/_next/static/AZXonBxzXDJ7mmxS9Br0O/_ssgManifest.js" defer=""></script></head><body><div id="__next" data-reactroot=""><section class="ant-layout" style="width:100%;min-height:100%"><header class="ant-layout-header" style="position:fixed;isolation:isolate;z-index:1;width:100%;border-bottom:1px solid #d4dadf;height:64px;padding:0 24px 0 2px"><div class="ant-row ant-row-center" style="max-width:992px;justify-content:space-between;margin:0 auto"><div style="display:flex" class="ant-col ant-col-xs-20 ant-col-sm-4"></div><div class="ant-col gutter-row ant-col-xs-0 ant-col-sm-20 ant-col-md-20 ant-col-lg-19"><div class="ant-select ant-select-lg ant-select-auto-complete ant-select-single ant-select-allow-clear ant-select-show-search" style="width:100%"><div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" autoComplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="undefined_list" aria-autocomplete="list" aria-controls="undefined_list" aria-activedescendant="undefined_list_0" value=""/></span><span class="ant-select-selection-placeholder">For full text search please use the &#x27;?&#x27; prefix. e.g. ? Onboarding</span></div></div></div><div style="display:none;align-items:center;justify-content:center" class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-0 ant-col-lg-0"><span role="img" aria-label="menu" style="font-size:24px" tabindex="-1" class="anticon anticon-menu"><svg viewBox="64 64 896 896" focusable="false" data-icon="menu" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"></path></svg></span></div></div></header><section class="ant-layout" style="margin-top:64px;display:flex;flex-direction:row"><div class="site-layout-sidebar" style="flex:0 0 auto;width:calc(max((100% - 992px) / 2, 0px) + 200px);min-width:200px;padding-left:calc((100% - 992px) / 2)"><aside class="ant-layout-sider ant-layout-sider-dark" style="position:fixed;overflow:auto;height:calc(100vh - 64px);background-color:transparent;flex:0 0 200px;max-width:200px;min-width:200px;width:200px"><div class="ant-layout-sider-children"></div></aside></div><main class="ant-layout-content side-layout-main" style="max-width:1200px;min-width:0;display:block"><div style="padding:0 24px"><div class="main-content" role="main"><div class="ant-row"><div class="ant-col ant-col-24"><div class="ant-row" style="margin-left:-10px;margin-right:-10px"><div style="padding-left:10px;padding-right:10px" class="ant-col ant-col-xs-24 ant-col-md-18"><div><h1 id="system-design">System Design<a aria-hidden="true" class="anchor-heading icon-link" href="#system-design"></a></h1>
+<h1 id="resources">Resources<a aria-hidden="true" class="anchor-heading icon-link" href="#resources"></a></h1>
+<ul>
+<li><a href="https://github.com/mukul96/System-Design-AlexXu/blob/master/System%20Design%20Interview%20An%20Insider%E2%80%99s%20Guide%20by%20Alex%20Xu%20(z-lib.org).pdf">System Design Interview An Insider’s Guide by Alex Xu </a></li>
+<li><a href="https://imaginary-basket-cbb.notion.site/System-Design-Interview-By-Alex-Xu-Book-Summary-17d97a868610804dbaf7e81fa7582caa">Notes on Alex Xu Book</a></li>
+<li><a href="https://github.com/donnemartin/system-design-primer">System Design Primer</a></li>
+<li><a href="https://github.com/Jeevan-kumar-Raj/Grokking-System-Design">Grokking the System Design Interview github notes</a></li>
+<li>drawing tool <a href="https://excalidraw.com/">escalidraw</a></li>
+<li><a href="https://www.youtube.com/watch?v=WV2Ed1QTst8">TechLead overview</a></li>
+<li><a href="https://www.systemdesignacademy.com/">Blog on System Design topics</a>, one of its articles was liked by William (IMO best competitor)</li>
+</ul>
+<p><em>Strategy prep</em></p>
+<ul>
+<li>read this notes</li>
+<li>Anki notes and questions (you have an app)</li>
+<li>System Design Primer github repo</li>
+<li>System Design Interview insider book</li>
+</ul>
+<p><em>Tackle the problem by doing it just like you would at work.</em></p>
+<p>A 4-step process for effective system design interview:</p>
+<p><strong>1. Understand the problem and establish design scope</strong></p>
+<p>Goal: Gather requirements and clarify assumptions. WRITE THEM DOWN.
+Never start start designing before understanding <strong>requirements</strong>.</p>
+<p>Example questions: Product question -> technical question</p>
+<pre><code>DESIGN QUESTIONS
+</code></pre>
+<p><strong>Feature/Functional requirements</strong></p>
+<ul>
+<li>What are the required features for the system? -> Main <strong>functionalities</strong>?</li>
+<li>Who are my clients (external, internal, quants, mobile, web, international)?</li>
+<li>How are they going to use it? -> What <strong>services</strong> clients want to run? (determine API-s functions)</li>
+<li>Have we built this service before, or I am building it for the first time?</li>
+<li>What do we want to optimize with our design -> Determine logging metrics</li>
+</ul>
+<p><strong>Non-functional requirements</strong></p>
+<ul>
+<li>How many users are there? -> Horizontal vs Vertical Scalability</li>
+<li>Whats the traffic volume, DAU? -> Single Server setup or MultiServer Setup?</li>
+<li>Internal or External or Global system? -> Do we need high availability?</li>
+<li>Available or Consistent data storage? -> Determine tradeoff in CAP theorem</li>
+<li>How fast do we want to answer requests? -> Latency vs Consistency?</li>
+<li>How many requests per second do we expect?</li>
+<li>What is the scale of the system? Is it built for a startup or a big company with a large user base? -> Scalability?</li>
+<li>Scale of the system such as requests per second (<strong>RPS</strong>), requests types, data written per second, data read per second)</li>
+<li>Automatic scaling? The addition/deletion of servers should be automatic based on traffic?</li>
+</ul>
+<pre><code>DATA QUESTIONS
+</code></pre>
+<ul>
+<li>What are the <strong>I/O</strong> of the system? <strong>Data Flow</strong></li>
+<li><strong>Data Volumes</strong>(if need horizontal scaling use consistent hashing)</li>
+<li>What <strong>type of data</strong> would I need to store? Just text, or images videos? Static Dynamic content?</li>
+<li>What is the expected <strong>read to write ratio</strong>, read or write oriented.? (Master-Master, or Master-Slave database)</li>
+<li>If we need to horizontally scale do we have <strong>evenly distributed data</strong>? Celebrity problem?</li>
+<li>How long we need to keep the data?</li>
+<li>If we do historical loads how much back in time should they be?</li>
+<li>What's the distribution of accessing data? Is a long tail one (suitable for caching popular content).</li>
+<li>Do we need to our data store to be agile? Change and process in real time?</li>
+<li>On-prem or in the cloud?</li>
+<li>What are my endpoints of different parts what APIs would I need?</li>
+</ul>
+<pre><code>Implementation questions
+</code></pre>
+<ul>
+<li>Building from scratch? Can we use Third-Party API-s.</li>
+<li>Can we leverage some of the existing cloud infrastructures provided by Amazon, Google, or Microsoft?</li>
+</ul>
+<p><strong>2. Propose high-level design and engage interviewer</strong></p>
+<p>Goal: Propose blueprint of initial design. Ask for feedback.</p>
+<p>"Does that seem like a sensible strategy?"</p>
+<p>Tasks:</p>
+<ul>
+<li>Do back-of-the-envelope calculations to evaluate if your blueprint fits the scale constraints
+Commonly asked back-of-the-envelope estimations: QPS, peak QPS, storage, cache, number of servers
+QPS = queries per second. 1 day ~ 80,000 seconds</li>
+<li>Draw box diagrams with key components (Clients (user) mobile/web), APIs, web servers, data stores, cache, CDN, message queue.</li>
+</ul>
+<p><strong>3. Design deep dive</strong>
+Once you agree with your interviewer on the blueprint, go into details on each component. <em>Design the most critical components first.</em> This part is specific to the interview and interviewer.</p>
+<p><strong>4. Wrap up</strong>
+Interviewer asks follow up questions. Or you can do some further discussion.
+Topics:</p>
+<ul>
+<li>Monitoring your solution (analytics to decide whether the solution is good).</li>
+<li>Performance optimization - e.g do we need multi data center setup using clouod provider</li>
+<li>Identify system bottlenecks and discuss potential improvements</li>
+<li><strong>Recap your design</strong></li>
+<li>Error cases (server failure, network loss, etc.) are interesting to talk about.</li>
+<li>Operation issues are worth mentioning. How do you monitor metrics and error logs?</li>
+<li>Scale the design - load balancer, horizontal scaling, caching, database sharding</li>
+<li>Discuss trade-offs:</li>
+</ul>
+<pre><code>Performance vs scalability
+Latency vs throughput
+Availability vs consistency
+</code></pre>
+<h2 id="general-tips">General tips<a aria-hidden="true" class="anchor-heading icon-link" href="#general-tips"></a></h2>
+<ul>
+<li>gather requirement and write them down (don't be afraid to ask stupid questions)</li>
+<li>start with simplest possible setup (single server, single database, single storage)</li>
+<li>iterate, improve crucial parts (database (sharding,replication); storage(AWS S3, replicated buckets); load balancer)</li>
+<li>make improvements on more important parts first (database usually goes down before server)</li>
+</ul>
+<h2 id="horizontal-scaling-improvements">Horizontal scaling improvements<a aria-hidden="true" class="anchor-heading icon-link" href="#horizontal-scaling-improvements"></a></h2>
+<p>CCARRF</p>
+<ul>
+<li>loose consistency</li>
+<li>loose complexity</li>
+<li>win availability</li>
+<li>win reliability</li>
+<li>win redundancy</li>
+<li>win failover (no SPOF)</li>
+</ul>
+<h2 id="buzz-words">Buzz words<a aria-hidden="true" class="anchor-heading icon-link" href="#buzz-words"></a></h2>
+<p>horizontal, vertical scaling, availability, failover, reliability, redundancy, consistency, maintainability, load balancer, message queue, asynchronism, workers, data streaming services, database partitioning (split incoming data into different databases based on data rule e.g a-n, n-z), database replication (master-slaves, master-master), sharding, synchronization, parallel computing, SHA code, cache, CDN, Availability Zones (Data Centers), SQL = relational, NoSQL = non relational databases, celebrity problem (in data bases), reads >> writes usually (use cache), volatile memory = temporary memory, memcache (caching SQL) = <a title="Private" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank" class="private">@cache (Private)</a> in python, MongoDB = document database, DynamoDB = key-value store, stateless vs stateful web tier, user session data, VPS(Virtual Private Server) = your own ubunto (EC2 instance) vs shared hosts, hypervisors, sharded database (shards), normalized and de-normalized databases, high cohesion low coupling (scale independently), single point of failure SPOF, Disk slower than In-memory database slower than In-memory cache, ACID properties of a relational database, Transaction, CAP theorem, PACELC theorem (high availability=data replication -> tradeoff between consistency and latency) BLOB (binary large object), BLOB cache, TTL, weak/eventual/strong consistency, cache-aside, cache write-through, cache-write-through, cache-write-back, cache-refresh-ahead, distributed system, multi-server setup, micro-services, database transaction, begin->select-> commit/rollback</p>
+<h1 id="youtube">Youtube<a aria-hidden="true" class="anchor-heading icon-link" href="#youtube"></a></h1>
+<p><a href="https://www.youtube.com/watch?v=-W9F__D3oY4">Harvard Scalability lecture</a></p>
+<p>When looking for host providers:</p>
+<ul>
+<li>FTP vs SFTP (secured file transfer protocol)</li>
+<li>VPS (virtual private server) vs shared hosts(many users use same server)</li>
+<li>VPS are your EC2 instances in AWS (your own ubunto) safe from other users but still susceptible to the provider</li>
+<li>VPS uses hypervisors. A hypervisor, also known as a virtual machine monitor or VMM, is software that creates and runs virtual machines (VMs).</li>
+</ul>
+<p>Load balancer strategies to balance:</p>
+<ul>
+<li>based on work load, least busy servers take the work</li>
+<li>dedicated servers for specific jobs (html server, Python server etc.)</li>
+<li>job i is taken by server i % N (problem might not have uniformly distributed workload)</li>
+</ul>
+<p>Load balancer problem? Single Point of Failure.</p>
+<ul>
+<li>buy 2 load balancers (pretty expensive 100k)</li>
+</ul>
+<p>RAID technology is a virtualization of data memory - data many disks put into "one" and keep copy/backups to be safe.</p>
+<p>Stateless architecture to have easier horizontal scaling on the web tier. Keep session data in NoSQL/SQL database shared by all servers (SPOF), better replicate it.</p>
+<p>MySQL caches queries, the same query running more than once is cached.
+memcache is like <a title="Private" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank" class="private">@cache (Private)</a> in Python</p>
+<p>Database replication - Master-Master, Master Slaves</p>
+<p>Database partitioning - partition incoming data using some rule (a-n, n-z) and split into different databases</p>
+<p><a href="https://www.youtube.com/watch?v=REB_eGHK_P4">Tech lead</a></p>
+<p>Load balancing help to distribute traffic to many different servers. Helps scalability, latency, throughput.</p>
+<p>NGINX is a load balancing software service.
+Can do DNS load balancing. Make the DNS returns you different ip addresses for same domain distributing to different servers.</p>
+<p>Throughput is a measure of how many units of information a system can process in a given amount of time.</p>
+<p>Caching - e.b often you'd hitting the database (reads) you need to setup cache.
+Cache services Memcached, Redis, Cassandra</p>
+<p>CDN-s store static data, global network which caches your content.</p>
+<p>In interview might be asked to design a database schema:</p>
+<ul>
+<li>what are the primary keys</li>
+<li>what are your indecies</li>
+</ul>
+<p>Indecies in a database make it fast - no need to do linear search in WHERE clause, indecing gives you random access.
+Indexing your table improves the joins - nee to index the column on which you join.</p>
+<p>Database optimizations:</p>
+<ul>
+<li>replication (master slaves) </li>
+<li>indexing</li>
+</ul>
+<p>Scaling stuff:</p>
+<ul>
+<li>Webservers - use load balancers to do horizontal scaling</li>
+<li>Image server - CDN, cache</li>
+<li>Database server - cache, replication (solves reads)</li>
+<li>Database server writes - Sharding</li>
+</ul>
+<p>Sharding your database (database partitioning) - horizontal (split rows) and vertical (split different columns) sharding
+Each shard goes to different server.</p>
+<p>You don't want to scale too early and put optimization in the begining.</p>
+<p><a href="https://www.youtube.com/watch?v=q0KGYwNbf-0">Clement System Design interview example</a></p>
+<h1 id="databases">Databases<a aria-hidden="true" class="anchor-heading icon-link" href="#databases"></a></h1>
+<h2 id="differences-between-sql-and-nosql">Differences between SQL and NoSQL<a aria-hidden="true" class="anchor-heading icon-link" href="#differences-between-sql-and-nosql"></a></h2>
+<h3 id="storage">Storage<a aria-hidden="true" class="anchor-heading icon-link" href="#storage"></a></h3>
+<ul>
+<li>SQL: store data in tables.</li>
+<li>NoSQL: have different data storage models.</li>
+</ul>
+<h3 id="schema">Schema<a aria-hidden="true" class="anchor-heading icon-link" href="#schema"></a></h3>
+<ul>
+<li>SQL
+<ul>
+<li>Each record conforms to a fixed schema.</li>
+<li>Schema can be altered, but it requires modifying the whole database.</li>
+</ul>
+</li>
+<li>NoSQL:
+<ul>
+<li>Schemas are dynamic.</li>
+</ul>
+</li>
+</ul>
+<h3 id="querying">Querying<a aria-hidden="true" class="anchor-heading icon-link" href="#querying"></a></h3>
+<ul>
+<li>SQL
+<ul>
+<li>Use SQL (structured query language) for defining and manipulating the data.</li>
+</ul>
+</li>
+<li>NoSQL
+<ul>
+<li>Queries are focused on a collection of documents.</li>
+<li>UnQL (unstructured query language).</li>
+<li>Different databases have different syntax.</li>
+</ul>
+</li>
+</ul>
+<h3 id="scalability">Scalability<a aria-hidden="true" class="anchor-heading icon-link" href="#scalability"></a></h3>
+<ul>
+<li>SQL
+<ul>
+<li>Vertically scalable (by increasing the horsepower: memory, CPU, etc) and expensive.</li>
+<li>Horizontally scalable (across multiple servers); but it can be challenging and time-consuming.</li>
+</ul>
+</li>
+<li>NoSQL
+<ul>
+<li>Horizontablly scalable (by adding more servers) and cheap.</li>
+</ul>
+</li>
+</ul>
+<h3 id="acid">ACID<a aria-hidden="true" class="anchor-heading icon-link" href="#acid"></a></h3>
+<ul>
+<li>Atomicity, consistency, isolation, durability</li>
+<li>SQL
+<ul>
+<li>ACID compliant</li>
+<li>Data reliability</li>
+<li>Gurantee of transactions</li>
+</ul>
+</li>
+<li>NoSQL
+<ul>
+<li>Most sacrifice ACID compliance for performance and scalability.</li>
+</ul>
+</li>
+</ul>
+<h2 id="which-one-to-use">Which one to use?<a aria-hidden="true" class="anchor-heading icon-link" href="#which-one-to-use"></a></h2>
+<h3 id="sql">SQL<a aria-hidden="true" class="anchor-heading icon-link" href="#sql"></a></h3>
+<ul>
+<li>Ensure ACID compliance.
+<ul>
+<li>Reduce anomalies.</li>
+<li>Protect database integrity.</li>
+</ul>
+</li>
+<li>Data is structured and unchanging.</li>
+</ul>
+<h3 id="nosql">NoSQL<a aria-hidden="true" class="anchor-heading icon-link" href="#nosql"></a></h3>
+<ul>
+<li>Data has little or no structure.</li>
+<li>Make the most of cloud computing and storage.
+<ul>
+<li>Cloud-based storage requires data to be easily spread across multiple servers to scale up.</li>
+</ul>
+</li>
+<li>Rapid development.
+<ul>
+<li>Frequent updates to the data structure.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Reasons for SQL:</strong></p>
+<ul>
+<li>Structured data</li>
+<li>Strict schema</li>
+<li>Relational data</li>
+<li>Need for complex joins</li>
+<li>Transactions</li>
+<li>Clear patterns for scaling</li>
+<li>More established: developers, community, code, tools, etc</li>
+<li>Lookups by index are very fast</li>
+</ul>
+<p><strong>Reasons for NoSQL:</strong></p>
+<ul>
+<li>Semi-structured data</li>
+<li>Dynamic or flexible schema</li>
+<li>Non-relational data</li>
+<li>No need for complex joins</li>
+<li>Store many TB (or PB) of data</li>
+<li>Very data intensive workload</li>
+<li>Very high throughput for IOPS</li>
+</ul>
+<h2 id="common-types-of-nosql">Common types of NoSQL<a aria-hidden="true" class="anchor-heading icon-link" href="#common-types-of-nosql"></a></h2>
+<h3 id="key-value-stores">Key-value stores<a aria-hidden="true" class="anchor-heading icon-link" href="#key-value-stores"></a></h3>
+<ul>
+<li>Array of key-value pairs. The "key" is an attribute name.</li>
+<li>Redis, Vodemort, Dynamo.</li>
+</ul>
+<h3 id="document-databases">Document databases<a aria-hidden="true" class="anchor-heading icon-link" href="#document-databases"></a></h3>
+<ul>
+<li>KeyValue, but values are documents.</li>
+<li>Documents are grouped in collections.</li>
+<li>Each document can have an entirely different structure.</li>
+<li>CouchDB, MongoDB , Dynamo</li>
+</ul>
+<h3 id="wide-column--columnar-databases">Wide-column / columnar databases<a aria-hidden="true" class="anchor-heading icon-link" href="#wide-column--columnar-databases"></a></h3>
+<ul>
+<li>Column families - containers for rows.</li>
+<li>No need to know all the columns up front.</li>
+<li>Each row can have different number of columns.</li>
+<li>Cassandra, HBase.</li>
+</ul>
+<h3 id="graph-database">Graph database<a aria-hidden="true" class="anchor-heading icon-link" href="#graph-database"></a></h3>
+<ul>
+<li>Data is stored in graph structures
+<ul>
+<li>Nodes: entities</li>
+<li>Properties: information about the entities</li>
+<li>Lines: connections between the entities</li>
+</ul>
+</li>
+<li>Neo4J, InfiniteGraph</li>
+</ul>
+<h1 id="system-design-interview---an-insider-guide">System Design Interview - An Insider Guide<a aria-hidden="true" class="anchor-heading icon-link" href="#system-design-interview---an-insider-guide"></a></h1>
+<h2 id="chapter-1---scale-from-zero-to-million-users">Chapter 1 - Scale from zero to million users<a aria-hidden="true" class="anchor-heading icon-link" href="#chapter-1---scale-from-zero-to-million-users"></a></h2>
+<p>This chapter discusses the process of scaling from a single web server to an architecture with:
+User, DNS, CDN, Load Balancer, Web tier (Stateless servers), Data Tier (Sharded Databases + Replication), Cache,
+NoSQL database to keep user session data (stateless servers), message queue, logging and metric tools, Data Centers for
+international coverage.</p>
+<p>• Keep web tier stateless \
+• Build redundancy at every tier \
+• Cache data as much as you can \
+• Support multiple data centers \
+• Host static assets in CDN \
+• Scale your data tier by sharding \
+• Split tiers into individual services \
+• Monitor your system and use automation tools</p>
+<p><img src="/dendron-wiki/assets/images/web_traffic.png" alt="web_traffic.png"></p>
+<p>System Design : <a href="https://bit.ly/41PTaAp">https://bit.ly/41PTaAp</a><br>
+Winning System Design Case Studies: <a href="https://tinyurl.com/yfvyrjn7">https://tinyurl.com/yfvyrjn7</a><br>
+Github : <a href="https://shorturl.at/hlow0">https://shorturl.at/hlow0</a><br>
+ML System Design Series : <a href="https://rb.gy/dd8dfe">https://rb.gy/dd8dfe</a><br>
+Design Google Drive : <a href="https://bit.ly/3uXdQZ7">https://bit.ly/3uXdQZ7</a><br>
+Design Messenger App : <a href="https://bit.ly/3DoAAXi">https://bit.ly/3DoAAXi</a><br>
+Design Instagram : <a href="https://bit.ly/3BFeHlh">https://bit.ly/3BFeHlh</a><br>
+Design Twitter : <a href="https://bit.ly/3qIG9Ih">https://bit.ly/3qIG9Ih</a><br>
+Design Robinhood : <a href="https://bit.ly/3BFeHlh">https://bit.ly/3BFeHlh</a><br>
+Design Swiggy: <a href="https://bit.ly/3BFeHlh">https://bit.ly/3BFeHlh</a><br>
+Design CashApp : <a href="https://bit.ly/3BFeHlh">https://bit.ly/3BFeHlh</a><br>
+Design Kayak: <a href="https://bit.ly/3DoAAXi">https://bit.ly/3DoAAXi</a><br>
+Design Paytm : <a href="https://bit.ly/3qIG9Ih">https://bit.ly/3qIG9Ih</a><br>
+Design ESPN Streaming : <a href="https://bit.ly/3qIG9Ih">https://bit.ly/3qIG9Ih</a><br>
+Design Agoda : <a href="https://bit.ly/3xP078x">https://bit.ly/3xP078x</a><br>
+Design Razorpay : <a href="https://bit.ly/3xP078x">https://bit.ly/3xP078x</a><br>
+Design Apple Music : <a href="https://bit.ly/3xP078x">https://bit.ly/3xP078x</a><br>
+Design CricHD: <a href="https://bit.ly/3xP078x">https://bit.ly/3xP078x</a><br>
+Design Alibaba: <a href="https://bit.ly/3xP078x">https://bit.ly/3xP078x</a><br>
+Design Substack: <a href="https://bit.ly/3xP078x">https://bit.ly/3xP078x</a><br>
+Design TrueCaller: <a href="https://shorturl.at/pzABN">https://shorturl.at/pzABN</a><br>
+Design Stock exchange Design System: <a href="https://shorturl.at/svCK1">https://shorturl.at/svCK1</a><br>
+Design Distributed Cache : <a href="https://shorturl.at/fjBV6">https://shorturl.at/fjBV6</a><br>
+Design Twilio : <a href="https://shorturl.at/uDJP7">https://shorturl.at/uDJP7</a><br>
+Design Google Docs : <a href="https://tinyurl.com/mr4d9v83">https://tinyurl.com/mr4d9v83</a><br>
+Design Doordash : <a href="https://tinyurl.com/27nh5s7s">https://tinyurl.com/27nh5s7s</a><br>
+Design MS Docs : <a href="https://tinyurl.com/9fpa8jpc">https://tinyurl.com/9fpa8jpc</a><br>
+Design Zomato : <a href="https://tinyurl.com/566t34ph">https://tinyurl.com/566t34ph</a><br>
+Design Linkedin : <a href="https://bit.ly/3OjXy7c">https://bit.ly/3OjXy7c</a><br>
+Design Google Maps : <a href="https://bit.ly/3BDdTwn">https://bit.ly/3BDdTwn</a><br>
+Design Telegram : <a href="https://bit.ly/42N5LW2">https://bit.ly/42N5LW2</a><br>
+Design Snapchat : <a href="https://bit.ly/3pRP3pW">https://bit.ly/3pRP3pW</a><br>
+Design One Drive : <a href="https://bit.ly/438bAwZ">https://bit.ly/438bAwZ</a><br>
+Design Quora : <a href="https://bit.ly/3FeD9dL">https://bit.ly/3FeD9dL</a><br>
+Design Tinder : <a href="https://bit.ly/3Mcyj3X">https://bit.ly/3Mcyj3X</a><br>
+Design TikTok : <a href="https://bit.ly/3UUlKxP">https://bit.ly/3UUlKxP</a><br>
+Design Netflix : <a href="https://bit.ly/3GrAUG1">https://bit.ly/3GrAUG1</a><br>
+Design Uber : <a href="https://bit.ly/3fyvnlT">https://bit.ly/3fyvnlT</a><br>
+Design Youtube : <a href="https://bit.ly/3dFyvvy">https://bit.ly/3dFyvvy</a><br>
+Design Reddit : <a href="https://bit.ly/3OgGJrL">https://bit.ly/3OgGJrL</a><br>
+Design Facebook’s Newsfeed : <a href="https://bit.ly/3RldaW7">https://bit.ly/3RldaW7</a><br>
+Design Amazon Prime Video : <a href="https://bit.ly/3hVpWP4">https://bit.ly/3hVpWP4</a><br>
+Design Dropbox : <a href="https://bit.ly/3SnhncU">https://bit.ly/3SnhncU</a><br>
+Design Yelp: <a href="https://bit.ly/3E7IgO5">https://bit.ly/3E7IgO5</a><br>
+Design Whatspp : <a href="https://bit.ly/3M2GOhP">https://bit.ly/3M2GOhP</a>  </p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/dendron-wiki/notes/82lxbmwgtrgestyejv1wg2j">All interview stages</a></li>
+</ul></div></div><div style="padding-left:10px;padding-right:10px" class="ant-col ant-col-xs-0 ant-col-md-6"><div><div class=""><div class="ant-anchor-wrapper dendron-toc" style="max-height:calc(100vh - 64px);z-index:1"><div class="ant-anchor"><div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#resources" title="Resources">Resources</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#general-tips" title="General tips">General tips</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#horizontal-scaling-improvements" title="Horizontal scaling improvements">Horizontal scaling improvements</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#buzz-words" title="Buzz words">Buzz words</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#youtube" title="Youtube">Youtube</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#databases" title="Databases">Databases</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#differences-between-sql-and-nosql" title="Differences between SQL and NoSQL">Differences between SQL and NoSQL</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#storage" title="Storage">Storage</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#schema" title="Schema">Schema</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#querying" title="Querying">Querying</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#scalability" title="Scalability">Scalability</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#acid" title="ACID">ACID</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#which-one-to-use" title="Which one to use?">Which one to use?</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#sql" title="SQL">SQL</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#nosql" title="NoSQL">NoSQL</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#common-types-of-nosql" title="Common types of NoSQL">Common types of NoSQL</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#key-value-stores" title="Key-value stores">Key-value stores</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#document-databases" title="Document databases">Document databases</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#wide-column--columnar-databases" title="Wide-column / columnar databases">Wide-column / columnar databases</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#graph-database" title="Graph database">Graph database</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#system-design-interview---an-insider-guide" title="System Design Interview - An Insider Guide">System Design Interview - An Insider Guide</a></div><div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#chapter-1---scale-from-zero-to-million-users" title="Chapter 1 - Scale from zero to million users">Chapter 1 - Scale from zero to million users</a></div></div></div></div></div></div></div></div></div></div></div><div class="ant-divider ant-divider-horizontal" role="separator"></div><footer class="ant-layout-footer" style="padding:0 24px 24px"></footer></main></section></section></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"note":{"id":"37ghcmfqsbumla66qt9qh4y","title":"System Design","desc":"","updated":1751984689559,"created":1658698150589,"custom":{},"fname":"interviews.System Design","type":"note","vault":{"fsPath":"vault"},"contentHash":"56d3f5be86fc59b529be0d84a01bcdc1","links":[{"type":"wiki","from":{"fname":"interviews.System Design","id":"37ghcmfqsbumla66qt9qh4y","vaultName":"vault"},"value":"user.cache","alias":"@cache","position":{"start":{"line":117,"column":632,"offset":6303},"end":{"line":117,"column":638,"offset":6309},"indent":[]},"xvault":false,"to":{"fname":"user.cache"}},{"type":"wiki","from":{"fname":"interviews.System Design","id":"37ghcmfqsbumla66qt9qh4y","vaultName":"vault"},"value":"user.cache","alias":"@cache","position":{"start":{"line":142,"column":18,"offset":8404},"end":{"line":142,"column":24,"offset":8410},"indent":[]},"xvault":false,"to":{"fname":"user.cache"}},{"from":{"fname":"interviews.All interview stages","id":"82lxbmwgtrgestyejv1wg2j","vaultName":"vault"},"type":"backlink","position":{"start":{"line":8,"column":22,"offset":578},"end":{"line":8,"column":50,"offset":606},"indent":[]},"value":"interviews.System Design"}],"anchors":{"resources":{"type":"header","text":"Resources","value":"resources","line":7,"column":0,"depth":1},"general-tips":{"type":"header","text":"General tips","value":"general-tips","line":106,"column":0,"depth":2},"horizontal-scaling-improvements":{"type":"header","text":"Horizontal scaling improvements","value":"horizontal-scaling-improvements","line":113,"column":0,"depth":2},"buzz-words":{"type":"header","text":"Buzz words","value":"buzz-words","line":122,"column":0,"depth":2},"youtube":{"type":"header","text":"Youtube","value":"youtube","line":125,"column":0,"depth":1},"databases":{"type":"header","text":"Databases","value":"databases","line":195,"column":0,"depth":1},"differences-between-sql-and-nosql":{"type":"header","text":"Differences between SQL and NoSQL","value":"differences-between-sql-and-nosql","line":197,"column":0,"depth":2},"storage":{"type":"header","text":"Storage","value":"storage","line":198,"column":0,"depth":3},"schema":{"type":"header","text":"Schema","value":"schema","line":202,"column":0,"depth":3},"querying":{"type":"header","text":"Querying","value":"querying","line":209,"column":0,"depth":3},"scalability":{"type":"header","text":"Scalability","value":"scalability","line":217,"column":0,"depth":3},"acid":{"type":"header","text":"ACID","value":"acid","line":224,"column":0,"depth":3},"which-one-to-use":{"type":"header","text":"Which one to use?","value":"which-one-to-use","line":233,"column":0,"depth":2},"sql":{"type":"header","text":"SQL","value":"sql","line":234,"column":0,"depth":3},"nosql":{"type":"header","text":"NoSQL","value":"nosql","line":240,"column":0,"depth":3},"common-types-of-nosql":{"type":"header","text":"Common types of NoSQL","value":"common-types-of-nosql","line":268,"column":0,"depth":2},"key-value-stores":{"type":"header","text":"Key-value stores","value":"key-value-stores","line":269,"column":0,"depth":3},"document-databases":{"type":"header","text":"Document databases","value":"document-databases","line":273,"column":0,"depth":3},"wide-column--columnar-databases":{"type":"header","text":"Wide-column / columnar databases","value":"wide-column--columnar-databases","line":279,"column":0,"depth":3},"graph-database":{"type":"header","text":"Graph database","value":"graph-database","line":285,"column":0,"depth":3},"system-design-interview---an-insider-guide":{"type":"header","text":"System Design Interview - An Insider Guide","value":"system-design-interview---an-insider-guide","line":293,"column":0,"depth":1},"chapter-1---scale-from-zero-to-million-users":{"type":"header","text":"Chapter 1 - Scale from zero to million users","value":"chapter-1---scale-from-zero-to-million-users","line":295,"column":0,"depth":2}},"children":[],"parent":"9r5ym61dkwap92fvbte1jkq","data":{}},"body":"\u003ch1 id=\"system-design\"\u003eSystem Design\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#system-design\"\u003e\u003c/a\u003e\u003c/h1\u003e\n\u003ch1 id=\"resources\"\u003eResources\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#resources\"\u003e\u003c/a\u003e\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/mukul96/System-Design-AlexXu/blob/master/System%20Design%20Interview%20An%20Insider%E2%80%99s%20Guide%20by%20Alex%20Xu%20(z-lib.org).pdf\"\u003eSystem Design Interview An Insider’s Guide by Alex Xu \u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://imaginary-basket-cbb.notion.site/System-Design-Interview-By-Alex-Xu-Book-Summary-17d97a868610804dbaf7e81fa7582caa\"\u003eNotes on Alex Xu Book\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/donnemartin/system-design-primer\"\u003eSystem Design Primer\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/Jeevan-kumar-Raj/Grokking-System-Design\"\u003eGrokking the System Design Interview github notes\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003edrawing tool \u003ca href=\"https://excalidraw.com/\"\u003eescalidraw\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.youtube.com/watch?v=WV2Ed1QTst8\"\u003eTechLead overview\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.systemdesignacademy.com/\"\u003eBlog on System Design topics\u003c/a\u003e, one of its articles was liked by William (IMO best competitor)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cem\u003eStrategy prep\u003c/em\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eread this notes\u003c/li\u003e\n\u003cli\u003eAnki notes and questions (you have an app)\u003c/li\u003e\n\u003cli\u003eSystem Design Primer github repo\u003c/li\u003e\n\u003cli\u003eSystem Design Interview insider book\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cem\u003eTackle the problem by doing it just like you would at work.\u003c/em\u003e\u003c/p\u003e\n\u003cp\u003eA 4-step process for effective system design interview:\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e1. Understand the problem and establish design scope\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eGoal: Gather requirements and clarify assumptions. WRITE THEM DOWN.\nNever start start designing before understanding \u003cstrong\u003erequirements\u003c/strong\u003e.\u003c/p\u003e\n\u003cp\u003eExample questions: Product question -\u003e technical question\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eDESIGN QUESTIONS\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003eFeature/Functional requirements\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eWhat are the required features for the system? -\u003e Main \u003cstrong\u003efunctionalities\u003c/strong\u003e?\u003c/li\u003e\n\u003cli\u003eWho are my clients (external, internal, quants, mobile, web, international)?\u003c/li\u003e\n\u003cli\u003eHow are they going to use it? -\u003e What \u003cstrong\u003eservices\u003c/strong\u003e clients want to run? (determine API-s functions)\u003c/li\u003e\n\u003cli\u003eHave we built this service before, or I am building it for the first time?\u003c/li\u003e\n\u003cli\u003eWhat do we want to optimize with our design -\u003e Determine logging metrics\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eNon-functional requirements\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eHow many users are there? -\u003e Horizontal vs Vertical Scalability\u003c/li\u003e\n\u003cli\u003eWhats the traffic volume, DAU? -\u003e Single Server setup or MultiServer Setup?\u003c/li\u003e\n\u003cli\u003eInternal or External or Global system? -\u003e Do we need high availability?\u003c/li\u003e\n\u003cli\u003eAvailable or Consistent data storage? -\u003e Determine tradeoff in CAP theorem\u003c/li\u003e\n\u003cli\u003eHow fast do we want to answer requests? -\u003e Latency vs Consistency?\u003c/li\u003e\n\u003cli\u003eHow many requests per second do we expect?\u003c/li\u003e\n\u003cli\u003eWhat is the scale of the system? Is it built for a startup or a big company with a large user base? -\u003e Scalability?\u003c/li\u003e\n\u003cli\u003eScale of the system such as requests per second (\u003cstrong\u003eRPS\u003c/strong\u003e), requests types, data written per second, data read per second)\u003c/li\u003e\n\u003cli\u003eAutomatic scaling? The addition/deletion of servers should be automatic based on traffic?\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003eDATA QUESTIONS\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003eWhat are the \u003cstrong\u003eI/O\u003c/strong\u003e of the system? \u003cstrong\u003eData Flow\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eData Volumes\u003c/strong\u003e(if need horizontal scaling use consistent hashing)\u003c/li\u003e\n\u003cli\u003eWhat \u003cstrong\u003etype of data\u003c/strong\u003e would I need to store? Just text, or images videos? Static Dynamic content?\u003c/li\u003e\n\u003cli\u003eWhat is the expected \u003cstrong\u003eread to write ratio\u003c/strong\u003e, read or write oriented.? (Master-Master, or Master-Slave database)\u003c/li\u003e\n\u003cli\u003eIf we need to horizontally scale do we have \u003cstrong\u003eevenly distributed data\u003c/strong\u003e? Celebrity problem?\u003c/li\u003e\n\u003cli\u003eHow long we need to keep the data?\u003c/li\u003e\n\u003cli\u003eIf we do historical loads how much back in time should they be?\u003c/li\u003e\n\u003cli\u003eWhat's the distribution of accessing data? Is a long tail one (suitable for caching popular content).\u003c/li\u003e\n\u003cli\u003eDo we need to our data store to be agile? Change and process in real time?\u003c/li\u003e\n\u003cli\u003eOn-prem or in the cloud?\u003c/li\u003e\n\u003cli\u003eWhat are my endpoints of different parts what APIs would I need?\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003eImplementation questions\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003eBuilding from scratch? Can we use Third-Party API-s.\u003c/li\u003e\n\u003cli\u003eCan we leverage some of the existing cloud infrastructures provided by Amazon, Google, or Microsoft?\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e2. Propose high-level design and engage interviewer\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eGoal: Propose blueprint of initial design. Ask for feedback.\u003c/p\u003e\n\u003cp\u003e\"Does that seem like a sensible strategy?\"\u003c/p\u003e\n\u003cp\u003eTasks:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eDo back-of-the-envelope calculations to evaluate if your blueprint fits the scale constraints\nCommonly asked back-of-the-envelope estimations: QPS, peak QPS, storage, cache, number of servers\nQPS = queries per second. 1 day ~ 80,000 seconds\u003c/li\u003e\n\u003cli\u003eDraw box diagrams with key components (Clients (user) mobile/web), APIs, web servers, data stores, cache, CDN, message queue.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e3. Design deep dive\u003c/strong\u003e\nOnce you agree with your interviewer on the blueprint, go into details on each component. \u003cem\u003eDesign the most critical components first.\u003c/em\u003e This part is specific to the interview and interviewer.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e4. Wrap up\u003c/strong\u003e\nInterviewer asks follow up questions. Or you can do some further discussion.\nTopics:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eMonitoring your solution (analytics to decide whether the solution is good).\u003c/li\u003e\n\u003cli\u003ePerformance optimization - e.g do we need multi data center setup using clouod provider\u003c/li\u003e\n\u003cli\u003eIdentify system bottlenecks and discuss potential improvements\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eRecap your design\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eError cases (server failure, network loss, etc.) are interesting to talk about.\u003c/li\u003e\n\u003cli\u003eOperation issues are worth mentioning. How do you monitor metrics and error logs?\u003c/li\u003e\n\u003cli\u003eScale the design - load balancer, horizontal scaling, caching, database sharding\u003c/li\u003e\n\u003cli\u003eDiscuss trade-offs:\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003ePerformance vs scalability\nLatency vs throughput\nAvailability vs consistency\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"general-tips\"\u003eGeneral tips\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#general-tips\"\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003egather requirement and write them down (don't be afraid to ask stupid questions)\u003c/li\u003e\n\u003cli\u003estart with simplest possible setup (single server, single database, single storage)\u003c/li\u003e\n\u003cli\u003eiterate, improve crucial parts (database (sharding,replication); storage(AWS S3, replicated buckets); load balancer)\u003c/li\u003e\n\u003cli\u003emake improvements on more important parts first (database usually goes down before server)\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"horizontal-scaling-improvements\"\u003eHorizontal scaling improvements\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#horizontal-scaling-improvements\"\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003cp\u003eCCARRF\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eloose consistency\u003c/li\u003e\n\u003cli\u003eloose complexity\u003c/li\u003e\n\u003cli\u003ewin availability\u003c/li\u003e\n\u003cli\u003ewin reliability\u003c/li\u003e\n\u003cli\u003ewin redundancy\u003c/li\u003e\n\u003cli\u003ewin failover (no SPOF)\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"buzz-words\"\u003eBuzz words\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#buzz-words\"\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003cp\u003ehorizontal, vertical scaling, availability, failover, reliability, redundancy, consistency, maintainability, load balancer, message queue, asynchronism, workers, data streaming services, database partitioning (split incoming data into different databases based on data rule e.g a-n, n-z), database replication (master-slaves, master-master), sharding, synchronization, parallel computing, SHA code, cache, CDN, Availability Zones (Data Centers), SQL = relational, NoSQL = non relational databases, celebrity problem (in data bases), reads \u003e\u003e writes usually (use cache), volatile memory = temporary memory, memcache (caching SQL) = \u003ca title=\"Private\" href=\"https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html\" target=\"_blank\" class=\"private\"\u003e@cache (Private)\u003c/a\u003e in python, MongoDB = document database, DynamoDB = key-value store, stateless vs stateful web tier, user session data, VPS(Virtual Private Server) = your own ubunto (EC2 instance) vs shared hosts, hypervisors, sharded database (shards), normalized and de-normalized databases, high cohesion low coupling (scale independently), single point of failure SPOF, Disk slower than In-memory database slower than In-memory cache, ACID properties of a relational database, Transaction, CAP theorem, PACELC theorem (high availability=data replication -\u003e tradeoff between consistency and latency) BLOB (binary large object), BLOB cache, TTL, weak/eventual/strong consistency, cache-aside, cache write-through, cache-write-through, cache-write-back, cache-refresh-ahead, distributed system, multi-server setup, micro-services, database transaction, begin-\u003eselect-\u003e commit/rollback\u003c/p\u003e\n\u003ch1 id=\"youtube\"\u003eYoutube\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#youtube\"\u003e\u003c/a\u003e\u003c/h1\u003e\n\u003cp\u003e\u003ca href=\"https://www.youtube.com/watch?v=-W9F__D3oY4\"\u003eHarvard Scalability lecture\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eWhen looking for host providers:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eFTP vs SFTP (secured file transfer protocol)\u003c/li\u003e\n\u003cli\u003eVPS (virtual private server) vs shared hosts(many users use same server)\u003c/li\u003e\n\u003cli\u003eVPS are your EC2 instances in AWS (your own ubunto) safe from other users but still susceptible to the provider\u003c/li\u003e\n\u003cli\u003eVPS uses hypervisors. A hypervisor, also known as a virtual machine monitor or VMM, is software that creates and runs virtual machines (VMs).\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eLoad balancer strategies to balance:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ebased on work load, least busy servers take the work\u003c/li\u003e\n\u003cli\u003ededicated servers for specific jobs (html server, Python server etc.)\u003c/li\u003e\n\u003cli\u003ejob i is taken by server i % N (problem might not have uniformly distributed workload)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eLoad balancer problem? Single Point of Failure.\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ebuy 2 load balancers (pretty expensive 100k)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eRAID technology is a virtualization of data memory - data many disks put into \"one\" and keep copy/backups to be safe.\u003c/p\u003e\n\u003cp\u003eStateless architecture to have easier horizontal scaling on the web tier. Keep session data in NoSQL/SQL database shared by all servers (SPOF), better replicate it.\u003c/p\u003e\n\u003cp\u003eMySQL caches queries, the same query running more than once is cached.\nmemcache is like \u003ca title=\"Private\" href=\"https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html\" target=\"_blank\" class=\"private\"\u003e@cache (Private)\u003c/a\u003e in Python\u003c/p\u003e\n\u003cp\u003eDatabase replication - Master-Master, Master Slaves\u003c/p\u003e\n\u003cp\u003eDatabase partitioning - partition incoming data using some rule (a-n, n-z) and split into different databases\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.youtube.com/watch?v=REB_eGHK_P4\"\u003eTech lead\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eLoad balancing help to distribute traffic to many different servers. Helps scalability, latency, throughput.\u003c/p\u003e\n\u003cp\u003eNGINX is a load balancing software service.\nCan do DNS load balancing. Make the DNS returns you different ip addresses for same domain distributing to different servers.\u003c/p\u003e\n\u003cp\u003eThroughput is a measure of how many units of information a system can process in a given amount of time.\u003c/p\u003e\n\u003cp\u003eCaching - e.b often you'd hitting the database (reads) you need to setup cache.\nCache services Memcached, Redis, Cassandra\u003c/p\u003e\n\u003cp\u003eCDN-s store static data, global network which caches your content.\u003c/p\u003e\n\u003cp\u003eIn interview might be asked to design a database schema:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ewhat are the primary keys\u003c/li\u003e\n\u003cli\u003ewhat are your indecies\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eIndecies in a database make it fast - no need to do linear search in WHERE clause, indecing gives you random access.\nIndexing your table improves the joins - nee to index the column on which you join.\u003c/p\u003e\n\u003cp\u003eDatabase optimizations:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ereplication (master slaves) \u003c/li\u003e\n\u003cli\u003eindexing\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eScaling stuff:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eWebservers - use load balancers to do horizontal scaling\u003c/li\u003e\n\u003cli\u003eImage server - CDN, cache\u003c/li\u003e\n\u003cli\u003eDatabase server - cache, replication (solves reads)\u003c/li\u003e\n\u003cli\u003eDatabase server writes - Sharding\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eSharding your database (database partitioning) - horizontal (split rows) and vertical (split different columns) sharding\nEach shard goes to different server.\u003c/p\u003e\n\u003cp\u003eYou don't want to scale too early and put optimization in the begining.\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.youtube.com/watch?v=q0KGYwNbf-0\"\u003eClement System Design interview example\u003c/a\u003e\u003c/p\u003e\n\u003ch1 id=\"databases\"\u003eDatabases\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#databases\"\u003e\u003c/a\u003e\u003c/h1\u003e\n\u003ch2 id=\"differences-between-sql-and-nosql\"\u003eDifferences between SQL and NoSQL\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#differences-between-sql-and-nosql\"\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003ch3 id=\"storage\"\u003eStorage\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#storage\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eSQL: store data in tables.\u003c/li\u003e\n\u003cli\u003eNoSQL: have different data storage models.\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"schema\"\u003eSchema\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#schema\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eSQL\n\u003cul\u003e\n\u003cli\u003eEach record conforms to a fixed schema.\u003c/li\u003e\n\u003cli\u003eSchema can be altered, but it requires modifying the whole database.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eNoSQL:\n\u003cul\u003e\n\u003cli\u003eSchemas are dynamic.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"querying\"\u003eQuerying\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#querying\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eSQL\n\u003cul\u003e\n\u003cli\u003eUse SQL (structured query language) for defining and manipulating the data.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eNoSQL\n\u003cul\u003e\n\u003cli\u003eQueries are focused on a collection of documents.\u003c/li\u003e\n\u003cli\u003eUnQL (unstructured query language).\u003c/li\u003e\n\u003cli\u003eDifferent databases have different syntax.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"scalability\"\u003eScalability\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#scalability\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eSQL\n\u003cul\u003e\n\u003cli\u003eVertically scalable (by increasing the horsepower: memory, CPU, etc) and expensive.\u003c/li\u003e\n\u003cli\u003eHorizontally scalable (across multiple servers); but it can be challenging and time-consuming.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eNoSQL\n\u003cul\u003e\n\u003cli\u003eHorizontablly scalable (by adding more servers) and cheap.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"acid\"\u003eACID\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#acid\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eAtomicity, consistency, isolation, durability\u003c/li\u003e\n\u003cli\u003eSQL\n\u003cul\u003e\n\u003cli\u003eACID compliant\u003c/li\u003e\n\u003cli\u003eData reliability\u003c/li\u003e\n\u003cli\u003eGurantee of transactions\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eNoSQL\n\u003cul\u003e\n\u003cli\u003eMost sacrifice ACID compliance for performance and scalability.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"which-one-to-use\"\u003eWhich one to use?\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#which-one-to-use\"\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003ch3 id=\"sql\"\u003eSQL\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#sql\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eEnsure ACID compliance.\n\u003cul\u003e\n\u003cli\u003eReduce anomalies.\u003c/li\u003e\n\u003cli\u003eProtect database integrity.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eData is structured and unchanging.\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"nosql\"\u003eNoSQL\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#nosql\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eData has little or no structure.\u003c/li\u003e\n\u003cli\u003eMake the most of cloud computing and storage.\n\u003cul\u003e\n\u003cli\u003eCloud-based storage requires data to be easily spread across multiple servers to scale up.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eRapid development.\n\u003cul\u003e\n\u003cli\u003eFrequent updates to the data structure.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eReasons for SQL:\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eStructured data\u003c/li\u003e\n\u003cli\u003eStrict schema\u003c/li\u003e\n\u003cli\u003eRelational data\u003c/li\u003e\n\u003cli\u003eNeed for complex joins\u003c/li\u003e\n\u003cli\u003eTransactions\u003c/li\u003e\n\u003cli\u003eClear patterns for scaling\u003c/li\u003e\n\u003cli\u003eMore established: developers, community, code, tools, etc\u003c/li\u003e\n\u003cli\u003eLookups by index are very fast\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eReasons for NoSQL:\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eSemi-structured data\u003c/li\u003e\n\u003cli\u003eDynamic or flexible schema\u003c/li\u003e\n\u003cli\u003eNon-relational data\u003c/li\u003e\n\u003cli\u003eNo need for complex joins\u003c/li\u003e\n\u003cli\u003eStore many TB (or PB) of data\u003c/li\u003e\n\u003cli\u003eVery data intensive workload\u003c/li\u003e\n\u003cli\u003eVery high throughput for IOPS\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"common-types-of-nosql\"\u003eCommon types of NoSQL\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#common-types-of-nosql\"\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003ch3 id=\"key-value-stores\"\u003eKey-value stores\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#key-value-stores\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eArray of key-value pairs. The \"key\" is an attribute name.\u003c/li\u003e\n\u003cli\u003eRedis, Vodemort, Dynamo.\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"document-databases\"\u003eDocument databases\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#document-databases\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eKeyValue, but values are documents.\u003c/li\u003e\n\u003cli\u003eDocuments are grouped in collections.\u003c/li\u003e\n\u003cli\u003eEach document can have an entirely different structure.\u003c/li\u003e\n\u003cli\u003eCouchDB, MongoDB , Dynamo\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"wide-column--columnar-databases\"\u003eWide-column / columnar databases\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#wide-column--columnar-databases\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eColumn families - containers for rows.\u003c/li\u003e\n\u003cli\u003eNo need to know all the columns up front.\u003c/li\u003e\n\u003cli\u003eEach row can have different number of columns.\u003c/li\u003e\n\u003cli\u003eCassandra, HBase.\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"graph-database\"\u003eGraph database\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#graph-database\"\u003e\u003c/a\u003e\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eData is stored in graph structures\n\u003cul\u003e\n\u003cli\u003eNodes: entities\u003c/li\u003e\n\u003cli\u003eProperties: information about the entities\u003c/li\u003e\n\u003cli\u003eLines: connections between the entities\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eNeo4J, InfiniteGraph\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1 id=\"system-design-interview---an-insider-guide\"\u003eSystem Design Interview - An Insider Guide\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#system-design-interview---an-insider-guide\"\u003e\u003c/a\u003e\u003c/h1\u003e\n\u003ch2 id=\"chapter-1---scale-from-zero-to-million-users\"\u003eChapter 1 - Scale from zero to million users\u003ca aria-hidden=\"true\" class=\"anchor-heading icon-link\" href=\"#chapter-1---scale-from-zero-to-million-users\"\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003cp\u003eThis chapter discusses the process of scaling from a single web server to an architecture with:\nUser, DNS, CDN, Load Balancer, Web tier (Stateless servers), Data Tier (Sharded Databases + Replication), Cache,\nNoSQL database to keep user session data (stateless servers), message queue, logging and metric tools, Data Centers for\ninternational coverage.\u003c/p\u003e\n\u003cp\u003e• Keep web tier stateless \\\n• Build redundancy at every tier \\\n• Cache data as much as you can \\\n• Support multiple data centers \\\n• Host static assets in CDN \\\n• Scale your data tier by sharding \\\n• Split tiers into individual services \\\n• Monitor your system and use automation tools\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"/dendron-wiki/assets/images/web_traffic.png\" alt=\"web_traffic.png\"\u003e\u003c/p\u003e\n\u003cp\u003eSystem Design : \u003ca href=\"https://bit.ly/41PTaAp\"\u003ehttps://bit.ly/41PTaAp\u003c/a\u003e\u003cbr\u003e\nWinning System Design Case Studies: \u003ca href=\"https://tinyurl.com/yfvyrjn7\"\u003ehttps://tinyurl.com/yfvyrjn7\u003c/a\u003e\u003cbr\u003e\nGithub : \u003ca href=\"https://shorturl.at/hlow0\"\u003ehttps://shorturl.at/hlow0\u003c/a\u003e\u003cbr\u003e\nML System Design Series : \u003ca href=\"https://rb.gy/dd8dfe\"\u003ehttps://rb.gy/dd8dfe\u003c/a\u003e\u003cbr\u003e\nDesign Google Drive : \u003ca href=\"https://bit.ly/3uXdQZ7\"\u003ehttps://bit.ly/3uXdQZ7\u003c/a\u003e\u003cbr\u003e\nDesign Messenger App : \u003ca href=\"https://bit.ly/3DoAAXi\"\u003ehttps://bit.ly/3DoAAXi\u003c/a\u003e\u003cbr\u003e\nDesign Instagram : \u003ca href=\"https://bit.ly/3BFeHlh\"\u003ehttps://bit.ly/3BFeHlh\u003c/a\u003e\u003cbr\u003e\nDesign Twitter : \u003ca href=\"https://bit.ly/3qIG9Ih\"\u003ehttps://bit.ly/3qIG9Ih\u003c/a\u003e\u003cbr\u003e\nDesign Robinhood : \u003ca href=\"https://bit.ly/3BFeHlh\"\u003ehttps://bit.ly/3BFeHlh\u003c/a\u003e\u003cbr\u003e\nDesign Swiggy: \u003ca href=\"https://bit.ly/3BFeHlh\"\u003ehttps://bit.ly/3BFeHlh\u003c/a\u003e\u003cbr\u003e\nDesign CashApp : \u003ca href=\"https://bit.ly/3BFeHlh\"\u003ehttps://bit.ly/3BFeHlh\u003c/a\u003e\u003cbr\u003e\nDesign Kayak: \u003ca href=\"https://bit.ly/3DoAAXi\"\u003ehttps://bit.ly/3DoAAXi\u003c/a\u003e\u003cbr\u003e\nDesign Paytm : \u003ca href=\"https://bit.ly/3qIG9Ih\"\u003ehttps://bit.ly/3qIG9Ih\u003c/a\u003e\u003cbr\u003e\nDesign ESPN Streaming : \u003ca href=\"https://bit.ly/3qIG9Ih\"\u003ehttps://bit.ly/3qIG9Ih\u003c/a\u003e\u003cbr\u003e\nDesign Agoda : \u003ca href=\"https://bit.ly/3xP078x\"\u003ehttps://bit.ly/3xP078x\u003c/a\u003e\u003cbr\u003e\nDesign Razorpay : \u003ca href=\"https://bit.ly/3xP078x\"\u003ehttps://bit.ly/3xP078x\u003c/a\u003e\u003cbr\u003e\nDesign Apple Music : \u003ca href=\"https://bit.ly/3xP078x\"\u003ehttps://bit.ly/3xP078x\u003c/a\u003e\u003cbr\u003e\nDesign CricHD: \u003ca href=\"https://bit.ly/3xP078x\"\u003ehttps://bit.ly/3xP078x\u003c/a\u003e\u003cbr\u003e\nDesign Alibaba: \u003ca href=\"https://bit.ly/3xP078x\"\u003ehttps://bit.ly/3xP078x\u003c/a\u003e\u003cbr\u003e\nDesign Substack: \u003ca href=\"https://bit.ly/3xP078x\"\u003ehttps://bit.ly/3xP078x\u003c/a\u003e\u003cbr\u003e\nDesign TrueCaller: \u003ca href=\"https://shorturl.at/pzABN\"\u003ehttps://shorturl.at/pzABN\u003c/a\u003e\u003cbr\u003e\nDesign Stock exchange Design System: \u003ca href=\"https://shorturl.at/svCK1\"\u003ehttps://shorturl.at/svCK1\u003c/a\u003e\u003cbr\u003e\nDesign Distributed Cache : \u003ca href=\"https://shorturl.at/fjBV6\"\u003ehttps://shorturl.at/fjBV6\u003c/a\u003e\u003cbr\u003e\nDesign Twilio : \u003ca href=\"https://shorturl.at/uDJP7\"\u003ehttps://shorturl.at/uDJP7\u003c/a\u003e\u003cbr\u003e\nDesign Google Docs : \u003ca href=\"https://tinyurl.com/mr4d9v83\"\u003ehttps://tinyurl.com/mr4d9v83\u003c/a\u003e\u003cbr\u003e\nDesign Doordash : \u003ca href=\"https://tinyurl.com/27nh5s7s\"\u003ehttps://tinyurl.com/27nh5s7s\u003c/a\u003e\u003cbr\u003e\nDesign MS Docs : \u003ca href=\"https://tinyurl.com/9fpa8jpc\"\u003ehttps://tinyurl.com/9fpa8jpc\u003c/a\u003e\u003cbr\u003e\nDesign Zomato : \u003ca href=\"https://tinyurl.com/566t34ph\"\u003ehttps://tinyurl.com/566t34ph\u003c/a\u003e\u003cbr\u003e\nDesign Linkedin : \u003ca href=\"https://bit.ly/3OjXy7c\"\u003ehttps://bit.ly/3OjXy7c\u003c/a\u003e\u003cbr\u003e\nDesign Google Maps : \u003ca href=\"https://bit.ly/3BDdTwn\"\u003ehttps://bit.ly/3BDdTwn\u003c/a\u003e\u003cbr\u003e\nDesign Telegram : \u003ca href=\"https://bit.ly/42N5LW2\"\u003ehttps://bit.ly/42N5LW2\u003c/a\u003e\u003cbr\u003e\nDesign Snapchat : \u003ca href=\"https://bit.ly/3pRP3pW\"\u003ehttps://bit.ly/3pRP3pW\u003c/a\u003e\u003cbr\u003e\nDesign One Drive : \u003ca href=\"https://bit.ly/438bAwZ\"\u003ehttps://bit.ly/438bAwZ\u003c/a\u003e\u003cbr\u003e\nDesign Quora : \u003ca href=\"https://bit.ly/3FeD9dL\"\u003ehttps://bit.ly/3FeD9dL\u003c/a\u003e\u003cbr\u003e\nDesign Tinder : \u003ca href=\"https://bit.ly/3Mcyj3X\"\u003ehttps://bit.ly/3Mcyj3X\u003c/a\u003e\u003cbr\u003e\nDesign TikTok : \u003ca href=\"https://bit.ly/3UUlKxP\"\u003ehttps://bit.ly/3UUlKxP\u003c/a\u003e\u003cbr\u003e\nDesign Netflix : \u003ca href=\"https://bit.ly/3GrAUG1\"\u003ehttps://bit.ly/3GrAUG1\u003c/a\u003e\u003cbr\u003e\nDesign Uber : \u003ca href=\"https://bit.ly/3fyvnlT\"\u003ehttps://bit.ly/3fyvnlT\u003c/a\u003e\u003cbr\u003e\nDesign Youtube : \u003ca href=\"https://bit.ly/3dFyvvy\"\u003ehttps://bit.ly/3dFyvvy\u003c/a\u003e\u003cbr\u003e\nDesign Reddit : \u003ca href=\"https://bit.ly/3OgGJrL\"\u003ehttps://bit.ly/3OgGJrL\u003c/a\u003e\u003cbr\u003e\nDesign Facebook’s Newsfeed : \u003ca href=\"https://bit.ly/3RldaW7\"\u003ehttps://bit.ly/3RldaW7\u003c/a\u003e\u003cbr\u003e\nDesign Amazon Prime Video : \u003ca href=\"https://bit.ly/3hVpWP4\"\u003ehttps://bit.ly/3hVpWP4\u003c/a\u003e\u003cbr\u003e\nDesign Dropbox : \u003ca href=\"https://bit.ly/3SnhncU\"\u003ehttps://bit.ly/3SnhncU\u003c/a\u003e\u003cbr\u003e\nDesign Yelp: \u003ca href=\"https://bit.ly/3E7IgO5\"\u003ehttps://bit.ly/3E7IgO5\u003c/a\u003e\u003cbr\u003e\nDesign Whatspp : \u003ca href=\"https://bit.ly/3M2GOhP\"\u003ehttps://bit.ly/3M2GOhP\u003c/a\u003e  \u003c/p\u003e\n\u003chr\u003e\n\u003cstrong\u003eBacklinks\u003c/strong\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"/dendron-wiki/notes/82lxbmwgtrgestyejv1wg2j\"\u003eAll interview stages\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e","noteIndex":{"id":"wn8PE1RhG0znK1alrGFYv","title":"Root","desc":"","updated":1763992060664,"created":1631901573363,"custom":{"nav_order":0,"permalink":"/"},"fname":"root","type":"note","vault":{"fsPath":"vault"},"contentHash":"dc095b340c158394d643b84f8585ff0c","links":[],"anchors":{},"children":["dgcsvcwea8scgdegrk9tfni","xig93vo47ou1bkr7s4w1wb2","ro9bbyftsutm88mxw6r16p5","ypia1zmywsklpicmcgrzlz1","w7iitlako61ppm27mym400a","6bx5plramu4hksomqc1n55z","4nki3bedlvs3mnkixj3a07k","9r5ym61dkwap92fvbte1jkq","849u97nrsuyekmr4a1r92ux","2b5bwf46z6v132wu7xghvrp","dygp5h2vzw4mkromwmofynb","7h50s7ga5ziiyblmoctsqmw","pglaolxcge4xfvgoph3je89","uy9u1co5ih1fokind8tg0eq","jc23ggp8iiu92kpnzo721to","f1u2a47guuw70olv36bzf66","c1bs7wsjfbhb0zipaywqv1","2av385tcj2cbumxprsauff3","lw1b4r6ykimvj9208nkgzps"],"parent":null,"data":{},"body":"\nZdr bebce kp ;)\n\nThis is my knowledge base, additionally I keep [daily journal](https://docs.google.com/document/d/1m8Npu0-t8RweyKiHCjLL1PPDYzbebqm3OZDHH8IVsb8/edit?tab=t.rj0kvkrm7zpr)."},"collectionChildren":null,"customHeadContent":null,"config":{"version":5,"dev":{"enablePreviewV2":true},"commands":{"lookup":{"note":{"selectionMode":"extract","confirmVaultOnCreate":false,"leaveTrace":false,"bubbleUpCreateNew":true,"fuzzThreshold":0.2,"vaultSelectionModeOnCreate":"smart"}},"insertNote":{"initialValue":"templates"},"insertNoteLink":{"aliasMode":"none","enableMultiSelect":false},"insertNoteIndex":{"enableMarker":false},"randomNote":{},"copyNoteLink":{"aliasMode":"title"},"templateHierarchy":"template"},"workspace":{"vaults":[{"fsPath":"vault"}],"journal":{"dailyDomain":"daily","name":"journal","dateFormat":"y.MM.dd","addBehavior":"childOfDomain"},"scratch":{"name":"scratch","dateFormat":"y.MM.dd.HHmmss","addBehavior":"asOwnDomain"},"graph":{"zoomSpeed":1,"createStub":false},"enableAutoCreateOnDefinition":false,"enableXVaultWikiLink":false,"enableRemoteVaultInit":true,"workspaceVaultSyncMode":"noCommit","enableAutoFoldFrontmatter":true,"maxPreviewsCached":10,"maxNoteLength":204800,"task":{"name":"","dateFormat":"","addBehavior":"childOfCurrent","statusSymbols":{"":" ","wip":"w","done":"x","assigned":"a","moved":"m","blocked":"b","delegated":"l","dropped":"d","pending":"y"},"prioritySymbols":{"H":"high","M":"medium","L":"low"},"todoIntegration":false,"createTaskSelectionType":"selection2link","taskCompleteStatus":["done","x"]},"enableUserTags":true,"enableHashTags":true,"dendronVersion":"0.95.0","enableEditorDecorations":true,"enableFullHierarchyNoteTitle":false,"templateHierarchy":"template"},"preview":{"enableFMTitle":true,"enableNoteTitleForLink":true,"enablePrettyRefs":true,"enableKatex":true,"automaticallyShowPreview":false,"enableFrontmatterTags":true,"enableHashesForFMTags":false},"publishing":{"enableFMTitle":true,"enableNoteTitleForLink":true,"enablePrettyRefs":true,"enableKatex":true,"copyAssets":true,"siteHierarchies":["root"],"writeStubs":false,"siteRootDir":"docs","seo":{"title":"Dendron","description":"Personal knowledge space"},"github":{"enableEditLink":true,"editLinkText":"Edit this page on GitHub","editBranch":"main","editViewMode":"tree"},"enableSiteLastModified":true,"enableFrontmatterTags":true,"enableHashesForFMTags":false,"enableRandomlyColoredTags":true,"enableTaskNotes":true,"enablePrettyLinks":true,"searchMode":"lookup","assetsPrefix":"/dendron-wiki","siteUrl":"https://ngocuong0105.github.io","duplicateNoteBehavior":{"action":"useVault","payload":["vault"]},"theme":"light","templateVersion":"0.97.0","ga":{"tracking":"G-W5DRRLQ1N7"},"siteFaviconPath":"favicon.ico","siteIndex":"root"}}},"__N_SSG":true},"page":"/notes/[id]","query":{"id":"37ghcmfqsbumla66qt9qh4y"},"buildId":"AZXonBxzXDJ7mmxS9Br0O","assetPrefix":"/dendron-wiki","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

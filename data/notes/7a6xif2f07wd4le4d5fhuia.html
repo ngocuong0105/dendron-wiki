@@ -1,0 +1,111 @@
+<h1 id="solving-problems">Solving problems<a aria-hidden="true" class="anchor-heading icon-link" href="#solving-problems"></a></h1>
+<h1 id="algorithms">Algorithms<a aria-hidden="true" class="anchor-heading icon-link" href="#algorithms"></a></h1>
+<p><strong>Steps</strong></p>
+<ol>
+<li>Ask questions:
+1.1 about input (size, values, all constraints, sorted, duplicates)
+1.2 find solution -> chekcif there is input data for which the solution does not exist</li>
+<li>Play around with a examples (Visualize problem)
+2.1 Think edge cases (especially linked lists)
+TTD Write tests before writing code!!!</li>
+<li>Get brute force solution</li>
+<li>Write all steps of the algorithm before actually writing it.
+4.1 Write interface functions first each, then implement!
+4.2 Power of abstraction, encapsulate your code by naming
+different  logics - get your spell!</li>
+<li>Test code in you head out loud without running it</li>
+</ol>
+<p>When you are asked about another solution to the problem:</p>
+<ul>
+<li>recursion vs iteration</li>
+<li>mention call stack, python is 10000 </li>
+<li>recursion smart way to procastinate work to be done later</li>
+<li>recursion cannot control memory</li>
+<li>can do tail recursion in compiled languages (C, C++, Lisp) reduce memory from O(n) -> O(1)</li>
+<li>Online vs Offline (Given input upfront vs Data Stream) often for Online you'd use Balanced Binary Search Tree</li>
+</ul>
+<h1 id="strategies">Strategies:<a aria-hidden="true" class="anchor-heading icon-link" href="#strategies"></a></h1>
+<ul>
+<li>directly writing code is BAD, think conceptually first- not like you do leetcodede!!!!</li>
+<li>strategy of wishful thinking- when using Data Structures that are not implemented yet just image you have them, solve the problem and only after that design them</li>
+<li>linked list questions modularize functions!! <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/submissions/">see power</a></li>
+<li>linked list often use two pointers</li>
+<li>finding good examples and playing around them</li>
+<li>for monotonic stack problems better go through example and write steps before that</li>
+</ul>
+<h1 id="topics">Topics<a aria-hidden="true" class="anchor-heading icon-link" href="#topics"></a></h1>
+<ul>
+<li>BST delete procedure picture of cases from Intro to algo book page 297, dbabichev recursive!</li>
+<li>power of 2 table 1KB,1MB..</li>
+<li>latency table in System Design book An insider guide</li>
+<li>BIT visualization</li>
+<li>Manachers Algorithm + example to go through + exaplnation of O(n)</li>
+<li>Morris Traversal of a tree O(1) memory! no stack or recursion</li>
+<li>Popular questions like Median of two sorted lists, REgular expression matching
+see in leetcode popular questions for the company you are interviewing</li>
+<li>Palindrome question patterns: around center check, Manacher, DP (dp(i,j) usually), rolling hash</li>
+<li>Stream processing (one way to have conventional interface)
+[enumerate] ---- [map] ------ [filter] ------- [accumulate]
+range(n)<br>
+stream creation------ map(fib,stream)------ filter(isodd,stream)-------sum(stream), tuple(stream)</li>
+<li>Trie Implementation</li>
+</ul>
+<h1 id="knowledge">Knowledge<a aria-hidden="true" class="anchor-heading icon-link" href="#knowledge"></a></h1>
+<ul>
+<li>OOP > Function programming,  Message passing and dispatch is much neater?
+oriented programming whose idea of message passing scales better?</li>
+<li>Functional programming > OOP as it is mathematical. No assingment in Functional
+and this does not break mathematics. In OOP we use environmenta model of
+computation to understand the process of program execution. Can be messy.</li>
+<li>DP two key ingredients: Optimal substructure + Overlapping subproblems.</li>
+</ul>
+<ol>
+<li>Determine subproblem space + choice -> See if there is Optimal substructure
+ie if an optimal solution to the problem contains within it optimal solutions t subproblems.
+<ul>
+<li>To characterize the space of subproblems, a good rule of thumb says to try to
+keep the space as simple as possible and then expand it as necessary.</li>
+</ul>
+</li>
+<li>Recursive equation</li>
+<li>Reconstruct solution by keeping extra decision table in point 2</li>
+</ol>
+<ul>
+<li>Top- down(Memo) vs Bottom up:
+if all subproblems must be solved at least once, a bottom-up
+dynamic-programming algorithm usually outperforms the corresponding top-down
+memoized algorithm by a constant factor, because the bottom-up algorithm has no
+overhead for recursion and less overhead for maintaining the table. Moreover, for
+some problems we can exploit the regular pattern of table accesses in the dynamic-
+programming algorithm to reduce time or space requirements even further. Alter-
+natively, if some subproblems in the subproblem space need not be solved at all,
+the memoized solution has the advantage of solving only those subproblems that
+are deﬁnitely required.</li>
+<li>Greedy. How can we tell whether a greedy algorithm will solve a particular
+optimization problem? No way works all the time, but the greedy-choice property
+and optimal substructure are the two key ingredients.</li>
+</ul>
+<ol start="4">
+<li>Dnamyc bindings in python environmental model
+4.1 def modify(ls,m):
+ls[0]= 1
+m += 1
+ls= [222,3]
+m = 0 # m not changed
+ls = [3,2,1] # changes ls[0] to 1 but does not assign ls, argument  passed by value
+where the value is a copy of the reference. Similar thing in Java!
+objects are passed by copy of reference, primitive types ae copy of themselves
+modify(ls,m)</li>
+<li>Binary Search problems often can be solved with Two pointers! They have the same underlying idea of restring the search space in a consistent way</li>
+<li>Loop invariant proofs of correctness</li>
+<li>Before using Tries - consider using rolling hash of the string</li>
+</ol>
+<h1 id="probability-brain-teasers">Probability, Brain teasers<a aria-hidden="true" class="anchor-heading icon-link" href="#probability-brain-teasers"></a></h1>
+<ul>
+<li>Start with extreme numbers (either very small or very large).</li>
+<li>Symmetry</li>
+<li>Bayesian theorem</li>
+<li>ask as many questions as you need, especially during technical interviews</li>
+<li>break down approach into small manageable steps</li>
+<li></li>
+</ul>

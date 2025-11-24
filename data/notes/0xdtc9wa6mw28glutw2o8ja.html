@@ -1,0 +1,167 @@
+<h1 id="cuped">CUPED<a aria-hidden="true" class="anchor-heading icon-link" href="#cuped"></a></h1>
+<h1 id="experiment-setup">Experiment setup<a aria-hidden="true" class="anchor-heading icon-link" href="#experiment-setup"></a></h1>
+<p>goal is to estimate the <code>delta = mean(Y_c) - mean(Y_t)</code></p>
+<p><img src="/dendron-wiki/assets/images/exp_setup1.png"></p>
+<p><img src="/dendron-wiki/assets/images/exp_setup2.png"></p>
+<p>We want this estimate to have small varaince and to be unbiased.</p>
+<p><em>In this framework, the key to variance reduction for the difference in mean lies in reducing the variance of the means
+themselves.</em></p>
+<h1 id="what-is-cuped">What is CUPED?<a aria-hidden="true" class="anchor-heading icon-link" href="#what-is-cuped"></a></h1>
+<p>CUPED is a well-established variance reduction technique for experiments <a href="https://www.exp-platform.com/Documents/2013-02-CUPED-ImprovingSensitivityOfControlledExperiments.pdf">paper</a></p>
+<p>Unlike methods like outlier removal or winsorization, it doesn’t sacrifice any data integrity.</p>
+<p>It can be used together with winsorization, which enhances its effectiveness.</p>
+<p>It requires pre-experimentation data - which we generally have in Bunsen.</p>
+<p>For a rather unpredictable event like ad clicks, we get ~5% reduction in standard deviation (which is ~10% reduction in variance, and experiment run time). For something like sessions, that 5% can increase to something like 30%.</p>
+<h1 id="predicted-uncertainty-is-not-uncertainty">Predicted uncertainty is not uncertainty.<a aria-hidden="true" class="anchor-heading icon-link" href="#predicted-uncertainty-is-not-uncertainty"></a></h1>
+<p>So the variance in your experiment metric should only take into account the unpredictable part of your measurement. If you predict that:</p>
+<ul>
+<li>guv A will have 5 sessions during the experiment, and </li>
+<li>guv B will have 20 sessions,</li>
+</ul>
+<p>And when you actually measure the sessions, you get:</p>
+<ul>
+<li>guv A has 4 sessions (-1 from prediction)</li>
+<li>guv B has 21 sessions (+1 from prediction),</li>
+</ul>
+<p>Then the variance, or the uncertainty, in your measurement can be calculated on the residuals of your predictions, rather than on the measurements themselves. This gives var([-1, +1]), rather than var([4, 21]), which is a great reduction.</p>
+<p><a href="https://drive.google.com/file/d/1YYSY9IgZzkp8q9U2ujPc2wuSRVtlgcqq/view?usp=drive_link">notebook</a></p>
+<p><a href="https://docs.google.com/presentation/d/1_ae5aQ12v0ykqCLF3JB3urdgHeZuwags/edit#slide=id.p1">presentation</a></p>
+<h1 id="control-variates">Control Variates<a aria-hidden="true" class="anchor-heading icon-link" href="#control-variates"></a></h1>
+<p>From paper:</p>
+<p><img src="/dendron-wiki/assets/images/control_variates.png"></p>
+<p><img src="/dendron-wiki/assets/images/control_variates_1.png"></p>
+<h1 id="control-variates-in-online-experiments">Control Variates in online experiments<a aria-hidden="true" class="anchor-heading icon-link" href="#control-variates-in-online-experiments"></a></h1>
+<p><strong>The difficulty of applying it boils down to finding a control variate <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span></span></span> that is highly correlated with <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span></span> and at the same time has known <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">E(X)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span></span></span>.</strong></p>
+<p><img src="/dendron-wiki/assets/images/control_variates_2.png"></p>
+<p><img src="/dendron-wiki/assets/images/control_variates_3.png"></p>
+<p><em>cv</em> stands for control varaites</p>
+<h1 id="control-variates-vs-stratification">Control Variates vs Stratification<a aria-hidden="true" class="anchor-heading icon-link" href="#control-variates-vs-stratification"></a></h1>
+<p>See <a href="/dendron-wiki/notes/mmuubhdt9s3sxgwzk15ch3n">Stratification</a></p>
+<p>These are two techniques that both utilize covariates to achieve variance reduction. The stratification approach uses the covariates to construct strata while the control variates approach uses them as regression variables.</p>
+<p>The former uses discrete (or discretized) covariates, whereas control variates seem more naturally to be continuous variables.</p>
+<p>Control Variates is an extension of stratification, where the covariate can be an indicator variable showing the belonging of a sample to a stratum.</p>
+<p>While these two techniques are well connected mathematically, they provide different insights into understanding why and how to achieve variance reduction. The stratification formulation has a nice analogy with mixture models, where each stratum is one component of the mixture model. Stratification is equivalent to separating samples according to their component memberships, effectively removing the between-component variance and achieving a reduced variance. A better covariate is hence the one that can better classify the samples and align with their underlying structure. On the other hand, the control variates formulation quantifies the amount of variance reduction as a function of the correlation between the covariates and the variable itself. It is mathematically simpler and more elegant. Clearly, a better covariate should be the one with larger (absolute) correlation.</p>
+<h1 id="cuped-in-practice">CUPED IN PRACTICE<a aria-hidden="true" class="anchor-heading icon-link" href="#cuped-in-practice"></a></h1>
+<p>A simple yet effective way to implement CUPED is to use the same variable from the pre-experiment period as the covariate. You need to have pre-experiment data (have not applied treatment), not good when you work with new users.</p>
+<p>The more correlated covariate with the target the larger variance reduction.</p>
+<p>Across a large class of metrics, our results consistently showed that using the same variable from the pre-experiment period as the covariate tends to give the best variance reduction. In addition, the lengths of the pre-experiment and the experiment periods also play a role. Given the same pre-experiment period, extending the length of the experiment does not necessarily improve the variance reduction rate. On the other hand, a longer pre-period tends to give a higher reduction for the same experiment period.</p>
+<ul>
+<li>margarida's implementation</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token comment">-- winsorization 90th %tile + CUPED</span>
+
+  <span class="token keyword">WITH</span> bucketed_assignment_log <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+      <span class="token comment">-- macro assign_cohorts start</span>
+      <span class="token keyword">SELECT</span> cohort_id<span class="token punctuation">,</span>
+             user_id_encid<span class="token punctuation">,</span>
+             <span class="token function">MIN</span><span class="token punctuation">(</span>first_assignment_time<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token keyword">INTERVAL</span> <span class="token string">'5 SECOND'</span> <span class="token keyword">AS</span> first_assignment_time
+        <span class="token keyword">FROM</span> dl_bunsen_filtered<span class="token punctuation">.</span>assignment_log_metric_analysis_v2
+       <span class="token keyword">WHERE</span> experiment_run_id <span class="token operator">=</span> <span class="token number">11052</span>
+         <span class="token operator">AND</span> <span class="token punctuation">(</span>is_bot <span class="token operator">=</span> <span class="token boolean">FALSE</span> <span class="token operator">OR</span> is_bot <span class="token operator">IS</span> <span class="token boolean">NULL</span><span class="token punctuation">)</span>
+         <span class="token operator">AND</span> first_assignment_time <span class="token operator">BETWEEN</span> <span class="token string">'2023-07-25'</span> <span class="token comment">-- wildcards are timestamp strings, e.g. '2022-07-28 12:00:00'</span>
+           <span class="token operator">AND</span> <span class="token string">'2023-09-25'</span> <span class="token comment">-- note that the single quotes are required</span>
+       <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span>
+      <span class="token comment">-- macro assign_cohorts end</span>
+  <span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+       connections_data <span class="token keyword">AS</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> connections<span class="token punctuation">.</span>user_id_encid<span class="token punctuation">,</span>
+                                   connections<span class="token punctuation">.</span>object_id<span class="token punctuation">,</span>
+                                   datapipe_timestamp <span class="token keyword">AS</span> event_time
+                              <span class="token keyword">FROM</span> dl_bunsen_mad<span class="token punctuation">.</span>connections_sessionized_bot_labeled <span class="token keyword">AS</span> connections
+                             <span class="token keyword">WHERE</span> <span class="token keyword">TIMESTAMP</span> <span class="token string">'epoch'</span> <span class="token operator">+</span> datapipe_event_time <span class="token operator">/</span> <span class="token number">1000000</span> <span class="token operator">*</span> <span class="token keyword">INTERVAL</span> <span class="token string">'1 second'</span> <span class="token operator">BETWEEN</span> <span class="token string">'2023-07-25'</span>
+                                 <span class="token operator">AND</span> <span class="token string">'2023-09-25'</span>
+                               <span class="token operator">AND</span> connections<span class="token punctuation">.</span>dt <span class="token operator">BETWEEN</span> <span class="token punctuation">(</span>DATE_TRUNC<span class="token punctuation">(</span><span class="token string">'day'</span><span class="token punctuation">,</span> <span class="token string">'2023-07-25'</span>::<span class="token keyword">TIMESTAMP</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token keyword">INTERVAL</span> <span class="token string">'1 DAY'</span><span class="token punctuation">)</span>
+                                 <span class="token operator">AND</span> <span class="token punctuation">(</span>DATE_TRUNC<span class="token punctuation">(</span><span class="token string">'day'</span><span class="token punctuation">,</span> <span class="token string">'2023-09-25'</span>::<span class="token keyword">TIMESTAMP</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">INTERVAL</span> <span class="token string">'1 DAY'</span><span class="token punctuation">)</span>
+                               <span class="token operator">AND</span> connection_type <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'photo_uploaded'</span><span class="token punctuation">)</span>
+                               <span class="token operator">AND</span> is_bot <span class="token operator">=</span> <span class="token string">'false'</span>
+                             <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+       sum_per_day_per_user <span class="token keyword">AS</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> cohort_id<span class="token punctuation">,</span>
+                                       bucketed_assignment_log<span class="token punctuation">.</span>user_id_encid<span class="token punctuation">,</span>
+                                       first_assignment_time<span class="token punctuation">,</span>
+                                       <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token keyword">DISTINCT</span> object_id<span class="token punctuation">)</span> <span class="token keyword">AS</span> sum_per_day_per_user
+                                  <span class="token keyword">FROM</span> bucketed_assignment_log
+                                  <span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> connections_data
+                                      <span class="token keyword">ON</span> bucketed_assignment_log<span class="token punctuation">.</span>user_id_encid <span class="token operator">=</span> connections_data<span class="token punctuation">.</span>user_id_encid
+                                          <span class="token operator">AND</span>
+                                         connections_data<span class="token punctuation">.</span>event_time <span class="token operator">BETWEEN</span> bucketed_assignment_log<span class="token punctuation">.</span>first_assignment_time
+                                             <span class="token operator">AND</span> <span class="token string">'2023-09-25'</span>
+                                 <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+       percentile_reviews <span class="token keyword">AS</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> user_id_encid<span class="token punctuation">,</span>
+                                     sum_per_day_per_user<span class="token punctuation">,</span>
+                                     PERCENTILE_CONT<span class="token punctuation">(</span><span class="token number">0.90</span><span class="token punctuation">)</span> <span class="token keyword">WITHIN</span> <span class="token keyword">GROUP</span> <span class="token punctuation">(</span><span class="token keyword">ORDER</span> <span class="token keyword">BY</span> sum_per_day_per_user<span class="token punctuation">)</span>
+                                     <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> percentile_90
+                                <span class="token keyword">FROM</span> sum_per_day_per_user<span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+       censored_photos <span class="token keyword">AS</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> user_id_encid<span class="token punctuation">,</span>
+                                  <span class="token keyword">CASE</span>
+                                      <span class="token keyword">WHEN</span> sum_per_day_per_user <span class="token operator">&#x3C;=</span> percentile_90 <span class="token keyword">THEN</span> sum_per_day_per_user
+                                      <span class="token keyword">ELSE</span> percentile_90
+                                      <span class="token keyword">END</span> <span class="token keyword">AS</span> photos_censored
+                             <span class="token keyword">FROM</span> percentile_reviews<span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+       sum_per_user <span class="token keyword">AS</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> cohort_id<span class="token punctuation">,</span>
+                               user_id_encid<span class="token punctuation">,</span>
+                               first_assignment_time<span class="token punctuation">,</span>
+                               <span class="token keyword">COALESCE</span><span class="token punctuation">(</span>photos_censored<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">/</span>
+                               <span class="token punctuation">(</span>DATEDIFF<span class="token punctuation">(</span>SEC<span class="token punctuation">,</span>
+                                         TO_DATE<span class="token punctuation">(</span><span class="token string">'2023-07-25'</span><span class="token punctuation">,</span> <span class="token string">'YYYY-MM-DD'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                         TO_DATE<span class="token punctuation">(</span><span class="token string">'2023-09-25'</span><span class="token punctuation">,</span> <span class="token string">'YYYY-MM-DD'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">86400.</span>
+                                   <span class="token punctuation">)</span>::<span class="token keyword">FLOAT</span> <span class="token keyword">AS</span> avg_sum_per_user
+                          <span class="token keyword">FROM</span> bucketed_assignment_log
+                          <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> censored_photos
+                              <span class="token keyword">USING</span> <span class="token punctuation">(</span>user_id_encid<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+       get_theta <span class="token keyword">AS</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> cohort_id<span class="token punctuation">,</span>
+                            user_id_encid<span class="token punctuation">,</span>
+                            X<span class="token punctuation">,</span>
+                            Y<span class="token punctuation">,</span>
+                            avg_X<span class="token punctuation">,</span>
+                            avg_Y<span class="token punctuation">,</span>
+                            var_X<span class="token punctuation">,</span>
+                            <span class="token function">SUM</span><span class="token punctuation">(</span><span class="token punctuation">(</span>X <span class="token operator">-</span> avg_X<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>Y <span class="token operator">-</span> avg_Y<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>N <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> cov_XY<span class="token punctuation">,</span>
+                            cov_XY <span class="token operator">/</span> var_X                                   <span class="token keyword">AS</span> theta
+                       <span class="token keyword">FROM</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> cohort_id<span class="token punctuation">,</span>
+                                    sum_per_user<span class="token punctuation">.</span>user_id_encid<span class="token punctuation">,</span>
+                                    <span class="token keyword">COALESCE</span><span class="token punctuation">(</span>num_photos_in_last_year<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> X<span class="token punctuation">,</span>
+                                    avg_sum_per_user                     <span class="token keyword">AS</span> Y<span class="token punctuation">,</span>
+                                    <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>                     <span class="token keyword">AS</span> N<span class="token punctuation">,</span>
+                                    <span class="token function">AVG</span><span class="token punctuation">(</span>X<span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>                       <span class="token keyword">AS</span> avg_X<span class="token punctuation">,</span>
+                                    <span class="token function">AVG</span><span class="token punctuation">(</span>Y<span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>                       <span class="token keyword">AS</span> avg_Y<span class="token punctuation">,</span>
+                                    VARIANCE<span class="token punctuation">(</span>X<span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>                  <span class="token keyword">AS</span> var_X
+                               <span class="token keyword">FROM</span> sum_per_user
+                               <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> data_science<span class="token punctuation">.</span>contribution_summary
+                                   <span class="token keyword">ON</span> sum_per_user<span class="token punctuation">.</span>user_id_encid <span class="token operator">=</span> contribution_summary<span class="token punctuation">.</span>user_id_encid
+                                       <span class="token operator">AND</span> contribution_summary<span class="token punctuation">.</span>dt <span class="token operator">=</span>
+                                           <span class="token punctuation">(</span><span class="token keyword">SELECT</span> <span class="token function">MAX</span><span class="token punctuation">(</span>dt<span class="token punctuation">)</span> <span class="token keyword">FROM</span> data_science<span class="token punctuation">.</span>contribution_summary<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> aux
+                      <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> cohort_id<span class="token punctuation">,</span>
+                               user_id_encid<span class="token punctuation">,</span>
+                               X<span class="token punctuation">,</span>
+                               Y<span class="token punctuation">,</span>
+                               avg_X<span class="token punctuation">,</span>
+                               var_X<span class="token punctuation">,</span>
+                               avg_Y<span class="token punctuation">,</span>
+                               N<span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+       get_Y_cuped <span class="token keyword">AS</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> cohort_id<span class="token punctuation">,</span>
+                              user_id_encid<span class="token punctuation">,</span>
+                              Y <span class="token operator">-</span> theta <span class="token operator">*</span> <span class="token punctuation">(</span>X <span class="token operator">-</span> avg_X<span class="token punctuation">)</span> <span class="token keyword">AS</span> Y_cuped
+                         <span class="token keyword">FROM</span> get_theta
+                        <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> cohort_id<span class="token punctuation">,</span>
+                                 user_id_encid<span class="token punctuation">,</span>
+                                 X<span class="token punctuation">,</span>
+                                 Y<span class="token punctuation">,</span>
+                                 avg_X<span class="token punctuation">,</span>
+                                 theta<span class="token punctuation">)</span>
+
+<span class="token keyword">SELECT</span> cohort_id<span class="token punctuation">,</span>
+       <span class="token function">COUNT</span><span class="token punctuation">(</span>user_id_encid<span class="token punctuation">)</span> <span class="token keyword">AS</span> sample_size<span class="token punctuation">,</span>
+       <span class="token function">AVG</span><span class="token punctuation">(</span>Y_cuped<span class="token punctuation">)</span>         <span class="token keyword">AS</span> metric_value<span class="token punctuation">,</span>
+       STDDEV<span class="token punctuation">(</span>Y_cuped<span class="token punctuation">)</span>      <span class="token keyword">AS</span> standard_deviation
+  <span class="token keyword">FROM</span> get_Y_cuped
+ <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> cohort_id
+ <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> cohort_id<span class="token punctuation">;</span>
+
+
+</code></pre>

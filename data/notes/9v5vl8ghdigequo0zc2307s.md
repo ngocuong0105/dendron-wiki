@@ -1,0 +1,1 @@
+Seller start with high asking price and lowers until any buyer agrees. Strategically similar to first-price bid-sealed auction.

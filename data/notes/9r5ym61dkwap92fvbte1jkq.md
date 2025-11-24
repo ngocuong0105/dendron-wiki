@@ -1,0 +1,1 @@
+A whole end-to-end interview cycle lasts about 5 months. Check [[interviews.All interview stages]]

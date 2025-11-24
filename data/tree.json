@@ -1,0 +1,2223 @@
+{
+  "roots": [
+    {
+      "key": "dgcsvcwea8scgdegrk9tfni",
+      "title": "Books",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "gbxul0671ee21ditqjwyuej",
+          "title": "Causal Inteference in Python",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "df26zllhnkl58ny2ll9j6re",
+          "title": "Clean Code",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "t41hqm8foucdvihm32nnuqh",
+          "title": "Computer Networking A Top Down Approach",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "wax32g3upeq39p1w511z9vg",
+          "title": "DDIA",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "omcdklfujvxrtwggahtcw0n",
+          "title": "Elements of Statistical Learning",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "vd4xarr536nq589f7um8zvj",
+          "title": "Fluent Python",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "m8dwcgks2r1xvuh60jrvi5s",
+          "title": "Introduction to algorithms",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "ehpl3lgbgz4yapx3t3ds904",
+          "title": "Maths",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "0p7tqicqfkte4fjwcbr34nj",
+          "title": "Principles For Navigating Big Debt Crisis",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "q0rpvxqiupch8f6ny9pqtuj",
+          "title": "Statistical Methods in Online AB Testing",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "hua4umphpmj3ffjn0i6dxco",
+          "title": "The Lean Startup",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "yj7dt97nnpbz93ph0p0ro5b",
+          "title": "The Mathematics of Poker",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "ut3njqkrs23e6cmfbb8vkvx",
+          "title": "The Money Machine",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "11pukag8z7np6b0j7yao29h",
+          "title": "Theory of Poker",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "pn4b2d4br8xn0y2dh1sgor4",
+          "title": "Trustworthy Online Controlled Experiments",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "ii3l6ksq4m77c0qscqqgjy0",
+          "title": "When Genius Failed - The Rise and Fall of LTCM",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "lnlmtj97rph7u229nbs26s1",
+          "title": "Engineering",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "lpbqdwcndbbefehmafw3jkx",
+              "title": "SCIP",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "xua895ovpt9guws7q3ia36l",
+          "title": "Всичко може да се договори",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "4574wlejf2f0759kyxk2phg",
+          "title": "Как да печелим приятели и влияем на другите",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "9btqkovhmsg0841fsv8osdi",
+          "title": "Какво би направил Кейнс",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "kywqtilicmt4h0sefcwzrqj",
+          "title": "Психология на убеждаването",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "qaxivq0jcgma9cf9stndlns",
+          "title": "Тънкото изкуство да не ти пука",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "xig93vo47ou1bkr7s4w1wb2",
+      "title": "Business",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": []
+    },
+    {
+      "key": "lw1b4r6ykimvj9208nkgzps",
+      "title": "Daily",
+      "icon": "plusOutlined",
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "nmh5vxdsv7jm4q206ycjvgh",
+          "title": "Journal",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "zxzxj8a25mjycwplt62fnue",
+              "title": "2025",
+              "icon": "plusOutlined",
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": [
+                {
+                  "key": "7c03eia7s8pahhorpcygg1d",
+                  "title": "04",
+                  "icon": "plusOutlined",
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "vault",
+                  "children": [
+                    {
+                      "key": "fbujtnoojgs6pgolsw36p3j",
+                      "title": "2025-04-09",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "mfwc7ybhvigmzzxrncrsbhs",
+                      "title": "2025-04-10",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "wr3qv0bnlhg1usn814aumze",
+                      "title": "2025-04-11",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "z13d3yxmij9uauskmdf98eg",
+                      "title": "2025-04-12",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "czrm1ittu9ne4dtqrsfceuy",
+                      "title": "2025-04-13",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "fgnwekd2hzifa58rpz8przb",
+                      "title": "2025-04-14",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "vh4nk7anolei6ph11tgtgam",
+                      "title": "2025-04-15",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "cjlpywud51t69xcv6hxsqt2",
+                      "title": "2025-04-16",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "sdyhwc8o216ts8dwrufvcfh",
+                      "title": "2025-04-17",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "jgo06popz81qnmpz10ilpld",
+                      "title": "2025-04-18",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "ej0hrkv09x7ifpvuqs56t75",
+                      "title": "2025-04-19",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "ven2pcvxf74414uha993vum",
+                      "title": "2025-04-20",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "w04hvwtnmav7q10sr1zi13f",
+                      "title": "2025-04-21",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "9h2f4niry3d8womsldkneuq",
+                      "title": "2025-04-22",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "74fgu5s7z5g1pwgoox41sth",
+                      "title": "2025-04-23",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "e8z0igkivnd09u3u2e4hxce",
+                      "title": "2025-04-24",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "65kfdxv9ue0c6aaf9nshe9t",
+                      "title": "2025-04-25",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "ken3t63cirzvlxd8m0sx916",
+                      "title": "2025-04-26",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "l00sw091ec6ovilrn1ek4zp",
+                      "title": "2025-04-27",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "l0uy1d68eiclw0egq54apao",
+                      "title": "2025-04-30",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "key": "g3vwf5nv5pu7lwrynif0r1q",
+                  "title": "05",
+                  "icon": "plusOutlined",
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "vault",
+                  "children": [
+                    {
+                      "key": "g05cgbrbojumvpxooxte6rs",
+                      "title": "2025-05-01",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "2hfpqgffi3wa9yp3f8mlw0q",
+                      "title": "2025-05-02",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "jxr4xqs6arnmf2efn7ot9j8",
+                      "title": "2025-05-06",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "b06elhdrikzf8b1m9e75w10",
+                      "title": "2025-05-12",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "8ouwcpw9itoulclshfsch0l",
+                      "title": "2025-05-13",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "7fxfqfuil92yaxpe1ufylu7",
+                      "title": "2025-05-14",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "whck2zr3c26hw9o9gfk861f",
+                      "title": "2025-05-15",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "95ixzy96oivh6lzz98wx03r",
+                      "title": "2025-05-29",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "key": "5iw2hhx1tf2530yk6x8qpmx",
+                  "title": "06",
+                  "icon": "plusOutlined",
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "vault",
+                  "children": [
+                    {
+                      "key": "6msyb376bbbe451iz44wfjk",
+                      "title": "2025-06-03",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "53inja4s2pfoqcelfelnuwb",
+                      "title": "2025-06-05",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "zsa7ea539wjj9k2hhcdfz6p",
+                      "title": "2025-06-06",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    },
+                    {
+                      "key": "y2cenk9z49xesjez7llqili",
+                      "title": "2025-06-09",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "vault",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ro9bbyftsutm88mxw6r16p5",
+      "title": "Deep Learning",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "xfq7qpcvdkdjakeed07yyru",
+          "title": "Coursera",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "ccipbaguot0vjojpl58x55h",
+              "title": "Improving Deep Neural Netwo",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "bqhzqbmfabklt1gjbb8yfy1",
+              "title": "Neural Networks and Deep Learning",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "7z1pagvjmrp0151ogbehtpi",
+          "title": "MIT - Introduction to Deep Learning",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "6eb6qm06u6vpwbpxckyzkem",
+          "title": "Stanford CS230: Deep Learning",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "ypia1zmywsklpicmcgrzlz1",
+      "title": "Doctrines",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": []
+    },
+    {
+      "key": "w7iitlako61ppm27mym400a",
+      "title": "Economics",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "5q8wlujc6ld5csym97x3vds",
+          "title": "MIT",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "u4kcnbzgra2tchqa2th1k16",
+              "title": "Microeconomics",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "6bx5plramu4hksomqc1n55z",
+      "title": "Engineering",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "poc9vlh4u5k814ql4zlyuxw",
+          "title": "AWS",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "0xdyjxuetx8at7o7eafrfzb",
+              "title": "How does Yelp store data?",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "03gbxiq9kwvv3tq2zpwbjjo",
+              "title": "S3 vs DL vs Redshift",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "bl9er9re77b2x0rms4e20ye",
+          "title": "Agile",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "m9idp6d1idq2c8b2g7s6a0x",
+          "title": "Bash",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "rj9hthmcqwafl15q749f92z",
+          "title": "C++",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "7khpigcji0ufpuptuqozcft",
+          "title": "Concepts",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "y660ulvr06vgpnb52e5b2ig",
+              "title": "Asynchronous Programming",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "0364m0da0huw23ds7lo5wqk",
+              "title": "Concurrency and Parallelism",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "vl59xstqw0sfbuhf9vthk7n",
+              "title": "Data Storage",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "t0xvuftusxbozb7la786f9d",
+              "title": "Distributed Computing",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "kqytwsfc4ah79athz7a838k",
+              "title": "Lazy Compute",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "6eu14fdycujs978onqr7jof",
+              "title": "Memory Management",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "5zq8pw19ast6ovp2zfkekld",
+              "title": "Network and Internet",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "kt3ykdwyad5n264s7wlatlv",
+              "title": "Private Methods",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "52wto1xcmhqo5e3qtle92x9",
+              "title": "Python Data Model",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "78ld05rlq10336r34dz8sxc",
+          "title": "Git",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "j2cgo7b7djhmyfbykufs5q0",
+          "title": "LLMs",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "qqoll92c4irbmy88nn30mwt",
+          "title": "MIT",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "g81jrasfq5f0bqj0mxq1ybr",
+              "title": "Design and Analysis of Algorithms",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "rm5bxh7rj0vlcnfhxeohm9w",
+              "title": "Introduction to Algorithms",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "2ic3ljkold03g223cujfbjz",
+              "title": "Programming for the Puzzled",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "4zi4qofkrezc5kh9pmh88g9",
+              "title": "SCIP",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "sblt0je6jawdlli798wvtc8",
+          "title": "Organising Python Packages",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "sbumi7y73tummx1u7z1vo6s",
+          "title": "SQL",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "iical2cu1kzajq2gjqnpoto",
+          "title": "Shortcuts",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "b0goywxuw2nfzx29vpc5tj6",
+          "title": "Tools",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "7m3gais9ll8mlmzqlw08s7g",
+          "title": "Algorithms",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "575nhoxd9zglbmn3y4gmcnz",
+              "title": "Algebra",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "mqayr74wko5yx8emus5mnhf",
+              "title": "Binary Tree Traversal",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "ir1ackxqkv78ji3gmn520o0",
+              "title": "Combinatorics",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "rbnr57rs5a1y8goym1j1npl",
+              "title": "Data Structures",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "auaqaucjcpjn6pxc6lpnvu5",
+              "title": "Dynamic Programming",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "bvywezxe342ge7lrslfg9ue",
+              "title": "Geometry",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "yh0ww8ogawf7n4n2q2lnsus",
+              "title": "Graphs",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "p7vx6lc1ir36n6kbxd5d5kw",
+              "title": "Linear Algebra",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "62fr2x24gm8h0m2x4c3r862",
+              "title": "Misc",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "9zx5nyqk02g5n5la41dkf4v",
+              "title": "Numerical Methods",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "x0cxhdz6m217jsrqw2pcwuk",
+              "title": "Python tricks",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "r9lucaraliyqanyxqrsetzu",
+              "title": "Sorting",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "tmyxaki17gpq6jb9xav1x3v",
+              "title": "String Processing",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "4nki3bedlvs3mnkixj3a07k",
+      "title": "How to Articles",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "9tzvft6nfd4wx7nqc2andeo",
+          "title": "Scope new project",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "9r5ym61dkwap92fvbte1jkq",
+      "title": "Interviews",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "trfz4nj0urgqr0p7he02mmc",
+          "title": "Algorithms",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "82lxbmwgtrgestyejv1wg2j",
+          "title": "All interview stages",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "wyxv9icmv8mne5ldhpvptzr",
+          "title": "Behaviour",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "pzhask090u97aku2zrcyedw",
+          "title": "Engineer levelling",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "gxz2hn9s3ikpsyg9vcxxruq",
+          "title": "Leave Job",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "07xzknxgjl2wgtuls4jwtp6",
+          "title": "ML System Design",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "7gvqmnpgid74pmbrww8z1oh",
+          "title": "Machine Learning",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "wq47kompa7e6bb61ovt4rug",
+          "title": "Negotiation",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "9a4cf8g6ax04f7o71y2d627",
+          "title": "Practice and guide",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "qp9xsm1hzapfna9v76c8tt6",
+          "title": "Probability and Statistics",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "v2ww0oqwjzp0phcrt046f9p",
+          "title": "Self evaluation",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "7a6xif2f07wd4le4d5fhuia",
+          "title": "Solving problems",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "kskivq5xkj2354np8b5xq3u",
+          "title": "Stories",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "37ghcmfqsbumla66qt9qh4y",
+          "title": "System Design",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "glv0vbftqrvbhvlbavf5bn9",
+          "title": "Talk with recruiters",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "x1j0gqwugz3w88z8t9zv7my",
+          "title": "The anatomy of the Perfect Technical Interview",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "849u97nrsuyekmr4a1r92ux",
+      "title": "Journal",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "xwiyhc1f35y827bmc20m3vl",
+          "title": "Leetcode",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "2m4of0ylaxbolagj8fov8br",
+          "title": "Razmisli",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "to77hi63vjht3s0yod30f19",
+          "title": "Self Reflection",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "maki4i54gl6bqto8uf29d2n",
+          "title": "USACO",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "2b5bwf46z6v132wu7xghvrp",
+      "title": "Machine Learning",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "ok7s53lhgu6s0eislk3pb0p",
+          "title": "Casual Impact",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "r70jjp3vympzneaerdgdoey",
+          "title": "Code ML from scratch",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "7bnhuaoqchmbkluk5lhldvs",
+          "title": "Comprehensive maths behind ML",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "ufrcqzs753ifx67ttk5u303",
+          "title": "Cross Validation",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "zfqnpk8iqhmawt2ecm57kfd",
+          "title": "Curse of Large Dimensionality",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "nkefr7ipopudoxe89h53oy4",
+          "title": "DT RF GB",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "bjd507r3q0ft6zvvkik31ok",
+          "title": "Deep Learning",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "jdlsh6qdvq2hyhchiak7nug",
+          "title": "Diff and diff analysis",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "pc1mkj2gp1dfypmvprtqeo5",
+          "title": "Feature Engineering",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "619exdki1mbha7z20razdxm",
+          "title": "Google Rules of Machine Learning",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "tfv2mbp7pm72fjssn0eijec",
+          "title": "Imbalanced dataset",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "ltvbyf1oqc8qx7khy58pby2",
+          "title": "Kaggle Tricks",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "tggevcehu7fihdxxlhabv7x",
+          "title": "Kaggle winning solutions",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "h79jpatf2zw7a0qpq4asniw",
+          "title": "Linear Regression",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "1qig9jqzoq1t8nocwttq9qj",
+          "title": "Logistic Regression",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "gyqbfvh6v046yobrtn4rjh4",
+          "title": "Loss Functions",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "4to49a2jwhv8s6kap9e4jps",
+          "title": "Metrics",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "q06yegd2gxq72jqf5aib8em",
+          "title": "Outliers",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "p7q8tnzclqd4j6ri9o0dpwh",
+          "title": "Explainable AI - SHAP",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "emh1886qozogbsvvgwjf3ec",
+          "title": "Time Series",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "oyof8xpxyxbquaqceaox78o",
+          "title": "Experiments",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "yonznut0gv00jlkclk15lrn",
+              "title": "All in one",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "0xdtc9wa6mw28glutw2o8ja",
+              "title": "CUPED",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "mmuubhdt9s3sxgwzk15ch3n",
+              "title": "Stratification",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "dygp5h2vzw4mkromwmofynb",
+      "title": "Math",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "cwyld090vuachjjihvhsd2y",
+          "title": "Oxford",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "px3dm5mt91ake86zy68lymu",
+              "title": "PartA",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": [
+                {
+                  "key": "3ecgdrzmxv653whgpx6jb5g",
+                  "title": "Probability",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "vault",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "ce98eqmfmelwtal02h5qqqn",
+              "title": "PartB",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "zgwwnvhykud3r6hj5z9j93o",
+              "title": "PartC",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            },
+            {
+              "key": "dyz9r3xjpaym0k1luoc0flq",
+              "title": "Prelims",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": [
+                {
+                  "key": "cvh7mmdz9aimup06f4amn9j",
+                  "title": "Linear Algebra",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "vault",
+                  "children": []
+                },
+                {
+                  "key": "l43x81u3glk8skg6v8kfowo",
+                  "title": "Linear Algebra II",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "vault",
+                  "children": []
+                },
+                {
+                  "key": "277avtfwyyjz54xolamqn91",
+                  "title": "Probability",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "vault",
+                  "children": []
+                },
+                {
+                  "key": "q7gonhx2ncjvh8vr9qpwlaq",
+                  "title": "Statistics",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "vault",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "vtfhu5rr66g2u6nf15fgx3p",
+          "title": "Probability puzzles",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "7h50s7ga5ziiyblmoctsqmw",
+      "title": "Mental Health",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "u4varm4fn4w1kar2y26o9ry",
+          "title": "Brain Tricks",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "pglaolxcge4xfvgoph3je89",
+      "title": "Papers",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "p3mfj8skfhqi46ei7dmscrj",
+          "title": "Greedy Function Approximation GBM",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "nmgi4d4e9sggc3zkhb1bjr8",
+          "title": "In-Shuffle algorithm",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "gmbykhbaudu0maxy3q7d9pt",
+          "title": "Intention-to-treat concept",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "lxaqy0rqb4x7h1zdupxiu9l",
+          "title": "Squaring the plane",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "uy9u1co5ih1fokind8tg0eq",
+      "title": "Politics and Economics",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "1tjkzwve85uiys497315q1g",
+          "title": "Economic cycles",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "lgts9l30945pp66gpv7u9di",
+          "title": "Fossil fuel",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "yjpfr8860xvezhix7qo61x6",
+          "title": "Global warming",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "fj7d46ios55ojp0tuzdcxne",
+          "title": "Globalisation",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "kufa52n643p22vdmb6qaedi",
+          "title": "Green deal",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "vhfjiu3he4rsaqtxcaazpa1",
+          "title": "Holocaust",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "c76kf5z6v34u39i3klvlxox",
+          "title": "Israel Palestine conflict",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "711122k77dq78uws9d1ywzt",
+          "title": "Japan lost decade",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "hvg3dk6z1h0w4pey1k1269q",
+              "title": "Japan's lost decade",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "fh9fdpslsrgrt57uctz1a9q",
+          "title": "UK Political System",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "xdljgn0hazxcem9wt8zc5vp",
+          "title": "US politics",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "bxfrm88cpdl7rhpojpzq27o",
+          "title": "WW1",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "psu86fajuuaoonyq037ru81",
+          "title": "WW2",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "y9apn1gcidpq75h9lk1e9fp",
+          "title": "Economics",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "2r1xopkh4bzsbgzzn32j58j",
+              "title": "Random Concepts",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "jc23ggp8iiu92kpnzo721to",
+      "title": "Random",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "a9h84kg8ulry1ch7fgurz1b",
+          "title": "Bayesian game",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "9v5vl8ghdigequo0zc2307s",
+          "title": "Dutch Auction",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "tgidpm56ycm7jnj8dl44wfw",
+          "title": "First-Price Sealed-Bid Auction",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "51h2yuknintumjd2ci2uzur",
+          "title": "Horizontal vs Vertical Scaling",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "ryhqnu561xhsh57077d3q28",
+          "title": "Latency vs Throughput",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "9y9xx3g5m34va97bublk8pa",
+          "title": "Second Price Auction",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "f1u2a47guuw70olv36bzf66",
+      "title": "Tags",
+      "icon": "numberOutlined",
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "jcbadkzec97t7sa62s5q49c",
+          "title": "AI",
+          "icon": null,
+          "hasTitleNumberOutlined": true,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "2pzhpouodnn9fn9451isbr6",
+          "title": "QED",
+          "icon": null,
+          "hasTitleNumberOutlined": true,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "q334c9dkrbs70eq5gujgcb3",
+          "title": "TODO",
+          "icon": null,
+          "hasTitleNumberOutlined": true,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "yee0akilojq0gnoske9jphs",
+          "title": "Zadachi",
+          "icon": null,
+          "hasTitleNumberOutlined": true,
+          "vaultName": "vault",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "c1bs7wsjfbhb0zipaywqv1",
+      "title": "Tutorial",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": []
+    },
+    {
+      "key": "2av385tcj2cbumxprsauff3",
+      "title": "Work",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "vault",
+      "children": [
+        {
+          "key": "t5gsbpgz9ynlt4cduxak5hl",
+          "title": "CapitalOne",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "vc9t6o8as6s6lqjsp3r286f",
+          "title": "SIG",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "s1gnurrss4i9qpghqauq2mh",
+          "title": "Transmetrics",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": []
+        },
+        {
+          "key": "g9en4ty6ob9xalprtiz2d16",
+          "title": "Yelp",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "vault",
+          "children": [
+            {
+              "key": "4vzvi1b96nq3mqii7jmjwpp",
+              "title": "How was Yelp built?",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "vault",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "child2parent": {
+    "dgcsvcwea8scgdegrk9tfni": null,
+    "gbxul0671ee21ditqjwyuej": "dgcsvcwea8scgdegrk9tfni",
+    "df26zllhnkl58ny2ll9j6re": "dgcsvcwea8scgdegrk9tfni",
+    "t41hqm8foucdvihm32nnuqh": "dgcsvcwea8scgdegrk9tfni",
+    "wax32g3upeq39p1w511z9vg": "dgcsvcwea8scgdegrk9tfni",
+    "omcdklfujvxrtwggahtcw0n": "dgcsvcwea8scgdegrk9tfni",
+    "vd4xarr536nq589f7um8zvj": "dgcsvcwea8scgdegrk9tfni",
+    "m8dwcgks2r1xvuh60jrvi5s": "dgcsvcwea8scgdegrk9tfni",
+    "ehpl3lgbgz4yapx3t3ds904": "dgcsvcwea8scgdegrk9tfni",
+    "0p7tqicqfkte4fjwcbr34nj": "dgcsvcwea8scgdegrk9tfni",
+    "q0rpvxqiupch8f6ny9pqtuj": "dgcsvcwea8scgdegrk9tfni",
+    "hua4umphpmj3ffjn0i6dxco": "dgcsvcwea8scgdegrk9tfni",
+    "yj7dt97nnpbz93ph0p0ro5b": "dgcsvcwea8scgdegrk9tfni",
+    "ut3njqkrs23e6cmfbb8vkvx": "dgcsvcwea8scgdegrk9tfni",
+    "11pukag8z7np6b0j7yao29h": "dgcsvcwea8scgdegrk9tfni",
+    "pn4b2d4br8xn0y2dh1sgor4": "dgcsvcwea8scgdegrk9tfni",
+    "ii3l6ksq4m77c0qscqqgjy0": "dgcsvcwea8scgdegrk9tfni",
+    "lnlmtj97rph7u229nbs26s1": "dgcsvcwea8scgdegrk9tfni",
+    "lpbqdwcndbbefehmafw3jkx": "lnlmtj97rph7u229nbs26s1",
+    "xua895ovpt9guws7q3ia36l": "dgcsvcwea8scgdegrk9tfni",
+    "4574wlejf2f0759kyxk2phg": "dgcsvcwea8scgdegrk9tfni",
+    "9btqkovhmsg0841fsv8osdi": "dgcsvcwea8scgdegrk9tfni",
+    "kywqtilicmt4h0sefcwzrqj": "dgcsvcwea8scgdegrk9tfni",
+    "qaxivq0jcgma9cf9stndlns": "dgcsvcwea8scgdegrk9tfni",
+    "xig93vo47ou1bkr7s4w1wb2": null,
+    "lw1b4r6ykimvj9208nkgzps": null,
+    "nmh5vxdsv7jm4q206ycjvgh": "lw1b4r6ykimvj9208nkgzps",
+    "zxzxj8a25mjycwplt62fnue": "nmh5vxdsv7jm4q206ycjvgh",
+    "7c03eia7s8pahhorpcygg1d": "zxzxj8a25mjycwplt62fnue",
+    "fbujtnoojgs6pgolsw36p3j": "7c03eia7s8pahhorpcygg1d",
+    "mfwc7ybhvigmzzxrncrsbhs": "7c03eia7s8pahhorpcygg1d",
+    "wr3qv0bnlhg1usn814aumze": "7c03eia7s8pahhorpcygg1d",
+    "z13d3yxmij9uauskmdf98eg": "7c03eia7s8pahhorpcygg1d",
+    "czrm1ittu9ne4dtqrsfceuy": "7c03eia7s8pahhorpcygg1d",
+    "fgnwekd2hzifa58rpz8przb": "7c03eia7s8pahhorpcygg1d",
+    "vh4nk7anolei6ph11tgtgam": "7c03eia7s8pahhorpcygg1d",
+    "cjlpywud51t69xcv6hxsqt2": "7c03eia7s8pahhorpcygg1d",
+    "sdyhwc8o216ts8dwrufvcfh": "7c03eia7s8pahhorpcygg1d",
+    "jgo06popz81qnmpz10ilpld": "7c03eia7s8pahhorpcygg1d",
+    "ej0hrkv09x7ifpvuqs56t75": "7c03eia7s8pahhorpcygg1d",
+    "ven2pcvxf74414uha993vum": "7c03eia7s8pahhorpcygg1d",
+    "w04hvwtnmav7q10sr1zi13f": "7c03eia7s8pahhorpcygg1d",
+    "9h2f4niry3d8womsldkneuq": "7c03eia7s8pahhorpcygg1d",
+    "74fgu5s7z5g1pwgoox41sth": "7c03eia7s8pahhorpcygg1d",
+    "e8z0igkivnd09u3u2e4hxce": "7c03eia7s8pahhorpcygg1d",
+    "65kfdxv9ue0c6aaf9nshe9t": "7c03eia7s8pahhorpcygg1d",
+    "ken3t63cirzvlxd8m0sx916": "7c03eia7s8pahhorpcygg1d",
+    "l00sw091ec6ovilrn1ek4zp": "7c03eia7s8pahhorpcygg1d",
+    "l0uy1d68eiclw0egq54apao": "7c03eia7s8pahhorpcygg1d",
+    "g3vwf5nv5pu7lwrynif0r1q": "zxzxj8a25mjycwplt62fnue",
+    "g05cgbrbojumvpxooxte6rs": "g3vwf5nv5pu7lwrynif0r1q",
+    "2hfpqgffi3wa9yp3f8mlw0q": "g3vwf5nv5pu7lwrynif0r1q",
+    "jxr4xqs6arnmf2efn7ot9j8": "g3vwf5nv5pu7lwrynif0r1q",
+    "b06elhdrikzf8b1m9e75w10": "g3vwf5nv5pu7lwrynif0r1q",
+    "8ouwcpw9itoulclshfsch0l": "g3vwf5nv5pu7lwrynif0r1q",
+    "7fxfqfuil92yaxpe1ufylu7": "g3vwf5nv5pu7lwrynif0r1q",
+    "whck2zr3c26hw9o9gfk861f": "g3vwf5nv5pu7lwrynif0r1q",
+    "95ixzy96oivh6lzz98wx03r": "g3vwf5nv5pu7lwrynif0r1q",
+    "5iw2hhx1tf2530yk6x8qpmx": "zxzxj8a25mjycwplt62fnue",
+    "6msyb376bbbe451iz44wfjk": "5iw2hhx1tf2530yk6x8qpmx",
+    "53inja4s2pfoqcelfelnuwb": "5iw2hhx1tf2530yk6x8qpmx",
+    "zsa7ea539wjj9k2hhcdfz6p": "5iw2hhx1tf2530yk6x8qpmx",
+    "y2cenk9z49xesjez7llqili": "5iw2hhx1tf2530yk6x8qpmx",
+    "ro9bbyftsutm88mxw6r16p5": null,
+    "xfq7qpcvdkdjakeed07yyru": "ro9bbyftsutm88mxw6r16p5",
+    "ccipbaguot0vjojpl58x55h": "xfq7qpcvdkdjakeed07yyru",
+    "bqhzqbmfabklt1gjbb8yfy1": "xfq7qpcvdkdjakeed07yyru",
+    "7z1pagvjmrp0151ogbehtpi": "ro9bbyftsutm88mxw6r16p5",
+    "6eb6qm06u6vpwbpxckyzkem": "ro9bbyftsutm88mxw6r16p5",
+    "ypia1zmywsklpicmcgrzlz1": null,
+    "w7iitlako61ppm27mym400a": null,
+    "5q8wlujc6ld5csym97x3vds": "w7iitlako61ppm27mym400a",
+    "u4kcnbzgra2tchqa2th1k16": "5q8wlujc6ld5csym97x3vds",
+    "6bx5plramu4hksomqc1n55z": null,
+    "poc9vlh4u5k814ql4zlyuxw": "6bx5plramu4hksomqc1n55z",
+    "0xdyjxuetx8at7o7eafrfzb": "poc9vlh4u5k814ql4zlyuxw",
+    "03gbxiq9kwvv3tq2zpwbjjo": "poc9vlh4u5k814ql4zlyuxw",
+    "bl9er9re77b2x0rms4e20ye": "6bx5plramu4hksomqc1n55z",
+    "m9idp6d1idq2c8b2g7s6a0x": "6bx5plramu4hksomqc1n55z",
+    "rj9hthmcqwafl15q749f92z": "6bx5plramu4hksomqc1n55z",
+    "7khpigcji0ufpuptuqozcft": "6bx5plramu4hksomqc1n55z",
+    "y660ulvr06vgpnb52e5b2ig": "7khpigcji0ufpuptuqozcft",
+    "0364m0da0huw23ds7lo5wqk": "7khpigcji0ufpuptuqozcft",
+    "vl59xstqw0sfbuhf9vthk7n": "7khpigcji0ufpuptuqozcft",
+    "t0xvuftusxbozb7la786f9d": "7khpigcji0ufpuptuqozcft",
+    "kqytwsfc4ah79athz7a838k": "7khpigcji0ufpuptuqozcft",
+    "6eu14fdycujs978onqr7jof": "7khpigcji0ufpuptuqozcft",
+    "5zq8pw19ast6ovp2zfkekld": "7khpigcji0ufpuptuqozcft",
+    "kt3ykdwyad5n264s7wlatlv": "7khpigcji0ufpuptuqozcft",
+    "52wto1xcmhqo5e3qtle92x9": "7khpigcji0ufpuptuqozcft",
+    "78ld05rlq10336r34dz8sxc": "6bx5plramu4hksomqc1n55z",
+    "j2cgo7b7djhmyfbykufs5q0": "6bx5plramu4hksomqc1n55z",
+    "qqoll92c4irbmy88nn30mwt": "6bx5plramu4hksomqc1n55z",
+    "g81jrasfq5f0bqj0mxq1ybr": "qqoll92c4irbmy88nn30mwt",
+    "rm5bxh7rj0vlcnfhxeohm9w": "qqoll92c4irbmy88nn30mwt",
+    "2ic3ljkold03g223cujfbjz": "qqoll92c4irbmy88nn30mwt",
+    "4zi4qofkrezc5kh9pmh88g9": "qqoll92c4irbmy88nn30mwt",
+    "sblt0je6jawdlli798wvtc8": "6bx5plramu4hksomqc1n55z",
+    "sbumi7y73tummx1u7z1vo6s": "6bx5plramu4hksomqc1n55z",
+    "iical2cu1kzajq2gjqnpoto": "6bx5plramu4hksomqc1n55z",
+    "b0goywxuw2nfzx29vpc5tj6": "6bx5plramu4hksomqc1n55z",
+    "7m3gais9ll8mlmzqlw08s7g": "6bx5plramu4hksomqc1n55z",
+    "575nhoxd9zglbmn3y4gmcnz": "7m3gais9ll8mlmzqlw08s7g",
+    "mqayr74wko5yx8emus5mnhf": "7m3gais9ll8mlmzqlw08s7g",
+    "ir1ackxqkv78ji3gmn520o0": "7m3gais9ll8mlmzqlw08s7g",
+    "rbnr57rs5a1y8goym1j1npl": "7m3gais9ll8mlmzqlw08s7g",
+    "auaqaucjcpjn6pxc6lpnvu5": "7m3gais9ll8mlmzqlw08s7g",
+    "bvywezxe342ge7lrslfg9ue": "7m3gais9ll8mlmzqlw08s7g",
+    "yh0ww8ogawf7n4n2q2lnsus": "7m3gais9ll8mlmzqlw08s7g",
+    "p7vx6lc1ir36n6kbxd5d5kw": "7m3gais9ll8mlmzqlw08s7g",
+    "62fr2x24gm8h0m2x4c3r862": "7m3gais9ll8mlmzqlw08s7g",
+    "9zx5nyqk02g5n5la41dkf4v": "7m3gais9ll8mlmzqlw08s7g",
+    "x0cxhdz6m217jsrqw2pcwuk": "7m3gais9ll8mlmzqlw08s7g",
+    "r9lucaraliyqanyxqrsetzu": "7m3gais9ll8mlmzqlw08s7g",
+    "tmyxaki17gpq6jb9xav1x3v": "7m3gais9ll8mlmzqlw08s7g",
+    "4nki3bedlvs3mnkixj3a07k": null,
+    "9tzvft6nfd4wx7nqc2andeo": "4nki3bedlvs3mnkixj3a07k",
+    "9r5ym61dkwap92fvbte1jkq": null,
+    "trfz4nj0urgqr0p7he02mmc": "9r5ym61dkwap92fvbte1jkq",
+    "82lxbmwgtrgestyejv1wg2j": "9r5ym61dkwap92fvbte1jkq",
+    "wyxv9icmv8mne5ldhpvptzr": "9r5ym61dkwap92fvbte1jkq",
+    "pzhask090u97aku2zrcyedw": "9r5ym61dkwap92fvbte1jkq",
+    "gxz2hn9s3ikpsyg9vcxxruq": "9r5ym61dkwap92fvbte1jkq",
+    "07xzknxgjl2wgtuls4jwtp6": "9r5ym61dkwap92fvbte1jkq",
+    "7gvqmnpgid74pmbrww8z1oh": "9r5ym61dkwap92fvbte1jkq",
+    "wq47kompa7e6bb61ovt4rug": "9r5ym61dkwap92fvbte1jkq",
+    "9a4cf8g6ax04f7o71y2d627": "9r5ym61dkwap92fvbte1jkq",
+    "qp9xsm1hzapfna9v76c8tt6": "9r5ym61dkwap92fvbte1jkq",
+    "v2ww0oqwjzp0phcrt046f9p": "9r5ym61dkwap92fvbte1jkq",
+    "7a6xif2f07wd4le4d5fhuia": "9r5ym61dkwap92fvbte1jkq",
+    "kskivq5xkj2354np8b5xq3u": "9r5ym61dkwap92fvbte1jkq",
+    "37ghcmfqsbumla66qt9qh4y": "9r5ym61dkwap92fvbte1jkq",
+    "glv0vbftqrvbhvlbavf5bn9": "9r5ym61dkwap92fvbte1jkq",
+    "x1j0gqwugz3w88z8t9zv7my": "9r5ym61dkwap92fvbte1jkq",
+    "849u97nrsuyekmr4a1r92ux": null,
+    "xwiyhc1f35y827bmc20m3vl": "849u97nrsuyekmr4a1r92ux",
+    "2m4of0ylaxbolagj8fov8br": "849u97nrsuyekmr4a1r92ux",
+    "to77hi63vjht3s0yod30f19": "849u97nrsuyekmr4a1r92ux",
+    "maki4i54gl6bqto8uf29d2n": "849u97nrsuyekmr4a1r92ux",
+    "2b5bwf46z6v132wu7xghvrp": null,
+    "ok7s53lhgu6s0eislk3pb0p": "2b5bwf46z6v132wu7xghvrp",
+    "r70jjp3vympzneaerdgdoey": "2b5bwf46z6v132wu7xghvrp",
+    "7bnhuaoqchmbkluk5lhldvs": "2b5bwf46z6v132wu7xghvrp",
+    "ufrcqzs753ifx67ttk5u303": "2b5bwf46z6v132wu7xghvrp",
+    "zfqnpk8iqhmawt2ecm57kfd": "2b5bwf46z6v132wu7xghvrp",
+    "nkefr7ipopudoxe89h53oy4": "2b5bwf46z6v132wu7xghvrp",
+    "bjd507r3q0ft6zvvkik31ok": "2b5bwf46z6v132wu7xghvrp",
+    "jdlsh6qdvq2hyhchiak7nug": "2b5bwf46z6v132wu7xghvrp",
+    "pc1mkj2gp1dfypmvprtqeo5": "2b5bwf46z6v132wu7xghvrp",
+    "619exdki1mbha7z20razdxm": "2b5bwf46z6v132wu7xghvrp",
+    "tfv2mbp7pm72fjssn0eijec": "2b5bwf46z6v132wu7xghvrp",
+    "ltvbyf1oqc8qx7khy58pby2": "2b5bwf46z6v132wu7xghvrp",
+    "tggevcehu7fihdxxlhabv7x": "2b5bwf46z6v132wu7xghvrp",
+    "h79jpatf2zw7a0qpq4asniw": "2b5bwf46z6v132wu7xghvrp",
+    "1qig9jqzoq1t8nocwttq9qj": "2b5bwf46z6v132wu7xghvrp",
+    "gyqbfvh6v046yobrtn4rjh4": "2b5bwf46z6v132wu7xghvrp",
+    "4to49a2jwhv8s6kap9e4jps": "2b5bwf46z6v132wu7xghvrp",
+    "q06yegd2gxq72jqf5aib8em": "2b5bwf46z6v132wu7xghvrp",
+    "p7q8tnzclqd4j6ri9o0dpwh": "2b5bwf46z6v132wu7xghvrp",
+    "emh1886qozogbsvvgwjf3ec": "2b5bwf46z6v132wu7xghvrp",
+    "oyof8xpxyxbquaqceaox78o": "2b5bwf46z6v132wu7xghvrp",
+    "yonznut0gv00jlkclk15lrn": "oyof8xpxyxbquaqceaox78o",
+    "0xdtc9wa6mw28glutw2o8ja": "oyof8xpxyxbquaqceaox78o",
+    "mmuubhdt9s3sxgwzk15ch3n": "oyof8xpxyxbquaqceaox78o",
+    "dygp5h2vzw4mkromwmofynb": null,
+    "cwyld090vuachjjihvhsd2y": "dygp5h2vzw4mkromwmofynb",
+    "px3dm5mt91ake86zy68lymu": "cwyld090vuachjjihvhsd2y",
+    "3ecgdrzmxv653whgpx6jb5g": "px3dm5mt91ake86zy68lymu",
+    "ce98eqmfmelwtal02h5qqqn": "cwyld090vuachjjihvhsd2y",
+    "zgwwnvhykud3r6hj5z9j93o": "cwyld090vuachjjihvhsd2y",
+    "dyz9r3xjpaym0k1luoc0flq": "cwyld090vuachjjihvhsd2y",
+    "cvh7mmdz9aimup06f4amn9j": "dyz9r3xjpaym0k1luoc0flq",
+    "l43x81u3glk8skg6v8kfowo": "dyz9r3xjpaym0k1luoc0flq",
+    "277avtfwyyjz54xolamqn91": "dyz9r3xjpaym0k1luoc0flq",
+    "q7gonhx2ncjvh8vr9qpwlaq": "dyz9r3xjpaym0k1luoc0flq",
+    "vtfhu5rr66g2u6nf15fgx3p": "dygp5h2vzw4mkromwmofynb",
+    "7h50s7ga5ziiyblmoctsqmw": null,
+    "u4varm4fn4w1kar2y26o9ry": "7h50s7ga5ziiyblmoctsqmw",
+    "pglaolxcge4xfvgoph3je89": null,
+    "p3mfj8skfhqi46ei7dmscrj": "pglaolxcge4xfvgoph3je89",
+    "nmgi4d4e9sggc3zkhb1bjr8": "pglaolxcge4xfvgoph3je89",
+    "gmbykhbaudu0maxy3q7d9pt": "pglaolxcge4xfvgoph3je89",
+    "lxaqy0rqb4x7h1zdupxiu9l": "pglaolxcge4xfvgoph3je89",
+    "uy9u1co5ih1fokind8tg0eq": null,
+    "1tjkzwve85uiys497315q1g": "uy9u1co5ih1fokind8tg0eq",
+    "lgts9l30945pp66gpv7u9di": "uy9u1co5ih1fokind8tg0eq",
+    "yjpfr8860xvezhix7qo61x6": "uy9u1co5ih1fokind8tg0eq",
+    "fj7d46ios55ojp0tuzdcxne": "uy9u1co5ih1fokind8tg0eq",
+    "kufa52n643p22vdmb6qaedi": "uy9u1co5ih1fokind8tg0eq",
+    "vhfjiu3he4rsaqtxcaazpa1": "uy9u1co5ih1fokind8tg0eq",
+    "c76kf5z6v34u39i3klvlxox": "uy9u1co5ih1fokind8tg0eq",
+    "711122k77dq78uws9d1ywzt": "uy9u1co5ih1fokind8tg0eq",
+    "hvg3dk6z1h0w4pey1k1269q": "711122k77dq78uws9d1ywzt",
+    "fh9fdpslsrgrt57uctz1a9q": "uy9u1co5ih1fokind8tg0eq",
+    "xdljgn0hazxcem9wt8zc5vp": "uy9u1co5ih1fokind8tg0eq",
+    "bxfrm88cpdl7rhpojpzq27o": "uy9u1co5ih1fokind8tg0eq",
+    "psu86fajuuaoonyq037ru81": "uy9u1co5ih1fokind8tg0eq",
+    "y9apn1gcidpq75h9lk1e9fp": "uy9u1co5ih1fokind8tg0eq",
+    "2r1xopkh4bzsbgzzn32j58j": "y9apn1gcidpq75h9lk1e9fp",
+    "jc23ggp8iiu92kpnzo721to": null,
+    "a9h84kg8ulry1ch7fgurz1b": "jc23ggp8iiu92kpnzo721to",
+    "9v5vl8ghdigequo0zc2307s": "jc23ggp8iiu92kpnzo721to",
+    "tgidpm56ycm7jnj8dl44wfw": "jc23ggp8iiu92kpnzo721to",
+    "51h2yuknintumjd2ci2uzur": "jc23ggp8iiu92kpnzo721to",
+    "ryhqnu561xhsh57077d3q28": "jc23ggp8iiu92kpnzo721to",
+    "9y9xx3g5m34va97bublk8pa": "jc23ggp8iiu92kpnzo721to",
+    "f1u2a47guuw70olv36bzf66": null,
+    "jcbadkzec97t7sa62s5q49c": "f1u2a47guuw70olv36bzf66",
+    "2pzhpouodnn9fn9451isbr6": "f1u2a47guuw70olv36bzf66",
+    "q334c9dkrbs70eq5gujgcb3": "f1u2a47guuw70olv36bzf66",
+    "yee0akilojq0gnoske9jphs": "f1u2a47guuw70olv36bzf66",
+    "c1bs7wsjfbhb0zipaywqv1": null,
+    "2av385tcj2cbumxprsauff3": null,
+    "t5gsbpgz9ynlt4cduxak5hl": "2av385tcj2cbumxprsauff3",
+    "vc9t6o8as6s6lqjsp3r286f": "2av385tcj2cbumxprsauff3",
+    "s1gnurrss4i9qpghqauq2mh": "2av385tcj2cbumxprsauff3",
+    "g9en4ty6ob9xalprtiz2d16": "2av385tcj2cbumxprsauff3",
+    "4vzvi1b96nq3mqii7jmjwpp": "g9en4ty6ob9xalprtiz2d16"
+  },
+  "notesLabelById": {
+    "dgcsvcwea8scgdegrk9tfni": "Books",
+    "gbxul0671ee21ditqjwyuej": "Causal Inteference in Python",
+    "df26zllhnkl58ny2ll9j6re": "Clean Code",
+    "t41hqm8foucdvihm32nnuqh": "Computer Networking A Top Down Approach",
+    "wax32g3upeq39p1w511z9vg": "DDIA",
+    "omcdklfujvxrtwggahtcw0n": "Elements of Statistical Learning",
+    "vd4xarr536nq589f7um8zvj": "Fluent Python",
+    "m8dwcgks2r1xvuh60jrvi5s": "Introduction to algorithms",
+    "ehpl3lgbgz4yapx3t3ds904": "Maths",
+    "0p7tqicqfkte4fjwcbr34nj": "Principles For Navigating Big Debt Crisis",
+    "q0rpvxqiupch8f6ny9pqtuj": "Statistical Methods in Online AB Testing",
+    "hua4umphpmj3ffjn0i6dxco": "The Lean Startup",
+    "yj7dt97nnpbz93ph0p0ro5b": "The Mathematics of Poker",
+    "ut3njqkrs23e6cmfbb8vkvx": "The Money Machine",
+    "11pukag8z7np6b0j7yao29h": "Theory of Poker",
+    "pn4b2d4br8xn0y2dh1sgor4": "Trustworthy Online Controlled Experiments",
+    "ii3l6ksq4m77c0qscqqgjy0": "When Genius Failed - The Rise and Fall of LTCM",
+    "lnlmtj97rph7u229nbs26s1": "Engineering",
+    "lpbqdwcndbbefehmafw3jkx": "SCIP",
+    "xua895ovpt9guws7q3ia36l": "Всичко може да се договори",
+    "4574wlejf2f0759kyxk2phg": "Как да печелим приятели и влияем на другите",
+    "9btqkovhmsg0841fsv8osdi": "Какво би направил Кейнс",
+    "kywqtilicmt4h0sefcwzrqj": "Психология на убеждаването",
+    "qaxivq0jcgma9cf9stndlns": "Тънкото изкуство да не ти пука",
+    "xig93vo47ou1bkr7s4w1wb2": "Business",
+    "lw1b4r6ykimvj9208nkgzps": "Daily",
+    "nmh5vxdsv7jm4q206ycjvgh": "Journal",
+    "zxzxj8a25mjycwplt62fnue": "2025",
+    "7c03eia7s8pahhorpcygg1d": "04",
+    "fbujtnoojgs6pgolsw36p3j": "2025-04-09",
+    "mfwc7ybhvigmzzxrncrsbhs": "2025-04-10",
+    "wr3qv0bnlhg1usn814aumze": "2025-04-11",
+    "z13d3yxmij9uauskmdf98eg": "2025-04-12",
+    "czrm1ittu9ne4dtqrsfceuy": "2025-04-13",
+    "fgnwekd2hzifa58rpz8przb": "2025-04-14",
+    "vh4nk7anolei6ph11tgtgam": "2025-04-15",
+    "cjlpywud51t69xcv6hxsqt2": "2025-04-16",
+    "sdyhwc8o216ts8dwrufvcfh": "2025-04-17",
+    "jgo06popz81qnmpz10ilpld": "2025-04-18",
+    "ej0hrkv09x7ifpvuqs56t75": "2025-04-19",
+    "ven2pcvxf74414uha993vum": "2025-04-20",
+    "w04hvwtnmav7q10sr1zi13f": "2025-04-21",
+    "9h2f4niry3d8womsldkneuq": "2025-04-22",
+    "74fgu5s7z5g1pwgoox41sth": "2025-04-23",
+    "e8z0igkivnd09u3u2e4hxce": "2025-04-24",
+    "65kfdxv9ue0c6aaf9nshe9t": "2025-04-25",
+    "ken3t63cirzvlxd8m0sx916": "2025-04-26",
+    "l00sw091ec6ovilrn1ek4zp": "2025-04-27",
+    "l0uy1d68eiclw0egq54apao": "2025-04-30",
+    "g3vwf5nv5pu7lwrynif0r1q": "05",
+    "g05cgbrbojumvpxooxte6rs": "2025-05-01",
+    "2hfpqgffi3wa9yp3f8mlw0q": "2025-05-02",
+    "jxr4xqs6arnmf2efn7ot9j8": "2025-05-06",
+    "b06elhdrikzf8b1m9e75w10": "2025-05-12",
+    "8ouwcpw9itoulclshfsch0l": "2025-05-13",
+    "7fxfqfuil92yaxpe1ufylu7": "2025-05-14",
+    "whck2zr3c26hw9o9gfk861f": "2025-05-15",
+    "95ixzy96oivh6lzz98wx03r": "2025-05-29",
+    "5iw2hhx1tf2530yk6x8qpmx": "06",
+    "6msyb376bbbe451iz44wfjk": "2025-06-03",
+    "53inja4s2pfoqcelfelnuwb": "2025-06-05",
+    "zsa7ea539wjj9k2hhcdfz6p": "2025-06-06",
+    "y2cenk9z49xesjez7llqili": "2025-06-09",
+    "ro9bbyftsutm88mxw6r16p5": "Deep Learning",
+    "xfq7qpcvdkdjakeed07yyru": "Coursera",
+    "ccipbaguot0vjojpl58x55h": "Improving Deep Neural Netwo",
+    "bqhzqbmfabklt1gjbb8yfy1": "Neural Networks and Deep Learning",
+    "7z1pagvjmrp0151ogbehtpi": "MIT - Introduction to Deep Learning",
+    "6eb6qm06u6vpwbpxckyzkem": "Stanford CS230: Deep Learning",
+    "ypia1zmywsklpicmcgrzlz1": "Doctrines",
+    "w7iitlako61ppm27mym400a": "Economics",
+    "5q8wlujc6ld5csym97x3vds": "MIT",
+    "u4kcnbzgra2tchqa2th1k16": "Microeconomics",
+    "6bx5plramu4hksomqc1n55z": "Engineering",
+    "poc9vlh4u5k814ql4zlyuxw": "AWS",
+    "0xdyjxuetx8at7o7eafrfzb": "How does Yelp store data?",
+    "03gbxiq9kwvv3tq2zpwbjjo": "S3 vs DL vs Redshift",
+    "bl9er9re77b2x0rms4e20ye": "Agile",
+    "m9idp6d1idq2c8b2g7s6a0x": "Bash",
+    "rj9hthmcqwafl15q749f92z": "C++",
+    "7khpigcji0ufpuptuqozcft": "Concepts",
+    "y660ulvr06vgpnb52e5b2ig": "Asynchronous Programming",
+    "0364m0da0huw23ds7lo5wqk": "Concurrency and Parallelism",
+    "vl59xstqw0sfbuhf9vthk7n": "Data Storage",
+    "t0xvuftusxbozb7la786f9d": "Distributed Computing",
+    "kqytwsfc4ah79athz7a838k": "Lazy Compute",
+    "6eu14fdycujs978onqr7jof": "Memory Management",
+    "5zq8pw19ast6ovp2zfkekld": "Network and Internet",
+    "kt3ykdwyad5n264s7wlatlv": "Private Methods",
+    "52wto1xcmhqo5e3qtle92x9": "Python Data Model",
+    "78ld05rlq10336r34dz8sxc": "Git",
+    "j2cgo7b7djhmyfbykufs5q0": "LLMs",
+    "qqoll92c4irbmy88nn30mwt": "MIT",
+    "g81jrasfq5f0bqj0mxq1ybr": "Design and Analysis of Algorithms",
+    "rm5bxh7rj0vlcnfhxeohm9w": "Introduction to Algorithms",
+    "2ic3ljkold03g223cujfbjz": "Programming for the Puzzled",
+    "4zi4qofkrezc5kh9pmh88g9": "SCIP",
+    "sblt0je6jawdlli798wvtc8": "Organising Python Packages",
+    "sbumi7y73tummx1u7z1vo6s": "SQL",
+    "iical2cu1kzajq2gjqnpoto": "Shortcuts",
+    "b0goywxuw2nfzx29vpc5tj6": "Tools",
+    "7m3gais9ll8mlmzqlw08s7g": "Algorithms",
+    "575nhoxd9zglbmn3y4gmcnz": "Algebra",
+    "mqayr74wko5yx8emus5mnhf": "Binary Tree Traversal",
+    "ir1ackxqkv78ji3gmn520o0": "Combinatorics",
+    "rbnr57rs5a1y8goym1j1npl": "Data Structures",
+    "auaqaucjcpjn6pxc6lpnvu5": "Dynamic Programming",
+    "bvywezxe342ge7lrslfg9ue": "Geometry",
+    "yh0ww8ogawf7n4n2q2lnsus": "Graphs",
+    "p7vx6lc1ir36n6kbxd5d5kw": "Linear Algebra",
+    "62fr2x24gm8h0m2x4c3r862": "Misc",
+    "9zx5nyqk02g5n5la41dkf4v": "Numerical Methods",
+    "x0cxhdz6m217jsrqw2pcwuk": "Python tricks",
+    "r9lucaraliyqanyxqrsetzu": "Sorting",
+    "tmyxaki17gpq6jb9xav1x3v": "String Processing",
+    "4nki3bedlvs3mnkixj3a07k": "How to Articles",
+    "9tzvft6nfd4wx7nqc2andeo": "Scope new project",
+    "9r5ym61dkwap92fvbte1jkq": "Interviews",
+    "trfz4nj0urgqr0p7he02mmc": "Algorithms",
+    "82lxbmwgtrgestyejv1wg2j": "All interview stages",
+    "wyxv9icmv8mne5ldhpvptzr": "Behaviour",
+    "pzhask090u97aku2zrcyedw": "Engineer levelling",
+    "gxz2hn9s3ikpsyg9vcxxruq": "Leave Job",
+    "07xzknxgjl2wgtuls4jwtp6": "ML System Design",
+    "7gvqmnpgid74pmbrww8z1oh": "Machine Learning",
+    "wq47kompa7e6bb61ovt4rug": "Negotiation",
+    "9a4cf8g6ax04f7o71y2d627": "Practice and guide",
+    "qp9xsm1hzapfna9v76c8tt6": "Probability and Statistics",
+    "v2ww0oqwjzp0phcrt046f9p": "Self evaluation",
+    "7a6xif2f07wd4le4d5fhuia": "Solving problems",
+    "kskivq5xkj2354np8b5xq3u": "Stories",
+    "37ghcmfqsbumla66qt9qh4y": "System Design",
+    "glv0vbftqrvbhvlbavf5bn9": "Talk with recruiters",
+    "x1j0gqwugz3w88z8t9zv7my": "The anatomy of the Perfect Technical Interview",
+    "849u97nrsuyekmr4a1r92ux": "Journal",
+    "xwiyhc1f35y827bmc20m3vl": "Leetcode",
+    "2m4of0ylaxbolagj8fov8br": "Razmisli",
+    "to77hi63vjht3s0yod30f19": "Self Reflection",
+    "maki4i54gl6bqto8uf29d2n": "USACO",
+    "2b5bwf46z6v132wu7xghvrp": "Machine Learning",
+    "ok7s53lhgu6s0eislk3pb0p": "Casual Impact",
+    "r70jjp3vympzneaerdgdoey": "Code ML from scratch",
+    "7bnhuaoqchmbkluk5lhldvs": "Comprehensive maths behind ML",
+    "ufrcqzs753ifx67ttk5u303": "Cross Validation",
+    "zfqnpk8iqhmawt2ecm57kfd": "Curse of Large Dimensionality",
+    "nkefr7ipopudoxe89h53oy4": "DT RF GB",
+    "bjd507r3q0ft6zvvkik31ok": "Deep Learning",
+    "jdlsh6qdvq2hyhchiak7nug": "Diff and diff analysis",
+    "pc1mkj2gp1dfypmvprtqeo5": "Feature Engineering",
+    "619exdki1mbha7z20razdxm": "Google Rules of Machine Learning",
+    "tfv2mbp7pm72fjssn0eijec": "Imbalanced dataset",
+    "ltvbyf1oqc8qx7khy58pby2": "Kaggle Tricks",
+    "tggevcehu7fihdxxlhabv7x": "Kaggle winning solutions",
+    "h79jpatf2zw7a0qpq4asniw": "Linear Regression",
+    "1qig9jqzoq1t8nocwttq9qj": "Logistic Regression",
+    "gyqbfvh6v046yobrtn4rjh4": "Loss Functions",
+    "4to49a2jwhv8s6kap9e4jps": "Metrics",
+    "q06yegd2gxq72jqf5aib8em": "Outliers",
+    "p7q8tnzclqd4j6ri9o0dpwh": "Explainable AI - SHAP",
+    "emh1886qozogbsvvgwjf3ec": "Time Series",
+    "oyof8xpxyxbquaqceaox78o": "Experiments",
+    "yonznut0gv00jlkclk15lrn": "All in one",
+    "0xdtc9wa6mw28glutw2o8ja": "CUPED",
+    "mmuubhdt9s3sxgwzk15ch3n": "Stratification",
+    "dygp5h2vzw4mkromwmofynb": "Math",
+    "cwyld090vuachjjihvhsd2y": "Oxford",
+    "px3dm5mt91ake86zy68lymu": "PartA",
+    "3ecgdrzmxv653whgpx6jb5g": "Probability",
+    "ce98eqmfmelwtal02h5qqqn": "PartB",
+    "zgwwnvhykud3r6hj5z9j93o": "PartC",
+    "dyz9r3xjpaym0k1luoc0flq": "Prelims",
+    "cvh7mmdz9aimup06f4amn9j": "Linear Algebra",
+    "l43x81u3glk8skg6v8kfowo": "Linear Algebra II",
+    "277avtfwyyjz54xolamqn91": "Probability",
+    "q7gonhx2ncjvh8vr9qpwlaq": "Statistics",
+    "vtfhu5rr66g2u6nf15fgx3p": "Probability puzzles",
+    "7h50s7ga5ziiyblmoctsqmw": "Mental Health",
+    "u4varm4fn4w1kar2y26o9ry": "Brain Tricks",
+    "pglaolxcge4xfvgoph3je89": "Papers",
+    "p3mfj8skfhqi46ei7dmscrj": "Greedy Function Approximation GBM",
+    "nmgi4d4e9sggc3zkhb1bjr8": "In-Shuffle algorithm",
+    "gmbykhbaudu0maxy3q7d9pt": "Intention-to-treat concept",
+    "lxaqy0rqb4x7h1zdupxiu9l": "Squaring the plane",
+    "uy9u1co5ih1fokind8tg0eq": "Politics and Economics",
+    "1tjkzwve85uiys497315q1g": "Economic cycles",
+    "lgts9l30945pp66gpv7u9di": "Fossil fuel",
+    "yjpfr8860xvezhix7qo61x6": "Global warming",
+    "fj7d46ios55ojp0tuzdcxne": "Globalisation",
+    "kufa52n643p22vdmb6qaedi": "Green deal",
+    "vhfjiu3he4rsaqtxcaazpa1": "Holocaust",
+    "c76kf5z6v34u39i3klvlxox": "Israel Palestine conflict",
+    "711122k77dq78uws9d1ywzt": "Japan lost decade",
+    "hvg3dk6z1h0w4pey1k1269q": "Japan's lost decade",
+    "fh9fdpslsrgrt57uctz1a9q": "UK Political System",
+    "xdljgn0hazxcem9wt8zc5vp": "US politics",
+    "bxfrm88cpdl7rhpojpzq27o": "WW1",
+    "psu86fajuuaoonyq037ru81": "WW2",
+    "y9apn1gcidpq75h9lk1e9fp": "Economics",
+    "2r1xopkh4bzsbgzzn32j58j": "Random Concepts",
+    "jc23ggp8iiu92kpnzo721to": "Random",
+    "a9h84kg8ulry1ch7fgurz1b": "Bayesian game",
+    "9v5vl8ghdigequo0zc2307s": "Dutch Auction",
+    "tgidpm56ycm7jnj8dl44wfw": "First-Price Sealed-Bid Auction",
+    "51h2yuknintumjd2ci2uzur": "Horizontal vs Vertical Scaling",
+    "ryhqnu561xhsh57077d3q28": "Latency vs Throughput",
+    "9y9xx3g5m34va97bublk8pa": "Second Price Auction",
+    "f1u2a47guuw70olv36bzf66": "Tags",
+    "jcbadkzec97t7sa62s5q49c": "AI",
+    "2pzhpouodnn9fn9451isbr6": "QED",
+    "q334c9dkrbs70eq5gujgcb3": "TODO",
+    "yee0akilojq0gnoske9jphs": "Zadachi",
+    "c1bs7wsjfbhb0zipaywqv1": "Tutorial",
+    "2av385tcj2cbumxprsauff3": "Work",
+    "t5gsbpgz9ynlt4cduxak5hl": "CapitalOne",
+    "vc9t6o8as6s6lqjsp3r286f": "SIG",
+    "s1gnurrss4i9qpghqauq2mh": "Transmetrics",
+    "g9en4ty6ob9xalprtiz2d16": "Yelp",
+    "4vzvi1b96nq3mqii7jmjwpp": "How was Yelp built?"
+  }
+}

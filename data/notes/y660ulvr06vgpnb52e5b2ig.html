@@ -1,0 +1,89 @@
+<h1 id="asynchronous-programming">Asynchronous Programming<a aria-hidden="true" class="anchor-heading icon-link" href="#asynchronous-programming"></a></h1>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> asyncio
+<span class="token keyword">import</span> time
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">five_sec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Test asyncio.as_completed
+    this takes 5 seconds to complete
+    """</span>
+    t1 <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">'5sec'</span><span class="token punctuation">)</span>
+    t2 <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'2sec'</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> t <span class="token keyword">in</span> asyncio<span class="token punctuation">.</span>as_completed<span class="token punctuation">(</span><span class="token punctuation">[</span>t1<span class="token punctuation">,</span>t2<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token keyword">await</span> t<span class="token punctuation">)</span>
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">one_sec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Test asyncio.as_completed
+    this takes 1 second to complete
+    """</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token keyword">await</span> asyncio<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'1sec'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">six_sec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token keyword">await</span> one_sec<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token keyword">await</span> five_sec<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">five_sec_and_one_sec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Test asyncio.gather
+    this takes 5 seconds to complete
+    """</span>
+    <span class="token keyword">await</span> asyncio<span class="token punctuation">.</span>gather<span class="token punctuation">(</span>one_sec<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> five_sec<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">create_one_sec_task</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Test asyncio.create_task
+    this takes 1 second to complete
+    """</span>
+    <span class="token keyword">return</span> asyncio<span class="token punctuation">.</span>create_task<span class="token punctuation">(</span>one_sec<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">create_five_sec_task</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Test asyncio.create_task
+    this takes 5 seconds to complete
+    """</span>
+    <span class="token keyword">return</span> asyncio<span class="token punctuation">.</span>create_task<span class="token punctuation">(</span>five_sec<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">main_five_sec_total</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Test asyncio.gather
+    this takes 5 seconds to complete
+    """</span>
+    t2 <span class="token operator">=</span> create_one_sec_task<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    t1 <span class="token operator">=</span> create_five_sec_task<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">await</span> t2
+    <span class="token keyword">await</span> t1
+    
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">producer</span><span class="token punctuation">(</span>queue<span class="token punctuation">:</span> asyncio<span class="token punctuation">.</span>Queue<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Producer putting </span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">await</span> queue<span class="token punctuation">.</span>put<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+        <span class="token keyword">await</span> asyncio<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span>  <span class="token comment"># simulate work</span>
+
+    <span class="token keyword">await</span> queue<span class="token punctuation">.</span>put<span class="token punctuation">(</span><span class="token boolean">None</span><span class="token punctuation">)</span>  <span class="token comment"># Sentinel to tell the consumer to finish</span>
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">consumer</span><span class="token punctuation">(</span>queue<span class="token punctuation">:</span> asyncio<span class="token punctuation">.</span>Queue<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        item <span class="token operator">=</span> <span class="token keyword">await</span> queue<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> item <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Consumer got sentinel, exiting."</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Consumer got </span><span class="token interpolation"><span class="token punctuation">{</span>item<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">await</span> asyncio<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment"># simulate processing</span>
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">main_queue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    queue <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>Queue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">await</span> asyncio<span class="token punctuation">.</span>gather<span class="token punctuation">(</span>
+        producer<span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        consumer<span class="token punctuation">(</span>queue<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    end <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Time taken: </span><span class="token interpolation"><span class="token punctuation">{</span>end <span class="token operator">-</span> start<span class="token punctuation">}</span></span><span class="token string"> seconds"</span></span><span class="token punctuation">)</span>
+
+</code></pre>

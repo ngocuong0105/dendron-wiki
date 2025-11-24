@@ -1,0 +1,17 @@
+<h1 id="cross-validation">Cross Validation<a aria-hidden="true" class="anchor-heading icon-link" href="#cross-validation"></a></h1>
+<p>"Trust your CV score in Kaggle competitions more than the public LB score."</p>
+<ul>
+<li>Hold-out (standard one 80/20 split)</li>
+<li>K-folds (split data into k folds and each fold would be a validation set)</li>
+<li>Leave-one-out (extreme K-folds)</li>
+<li>Leave-p-out</li>
+<li>Stratified K-folds (useful for imbalanced datasets)</li>
+<li>Repeated K-folds (pick 80/20 split data randomly k times, bad for imbalanced datasets)</li>
+<li>Nested K-folds: need to implement mannually, good for hyperparameter tuning</li>
+<li>Time series CV (deals with forwardlooking bias in TS data)</li>
+</ul>
+<p><a href="https://neptune.ai/blog/cross-validation-in-machine-learning-how-to-do-it-right">Description of CV techniques</a></p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> KFold<span class="token punctuation">,</span> GroupKFold
+</code></pre>
+<p><strong>Nested Cross Validation:</strong>
+<img src="/dendron-wiki/./assets/images/nested_cv.png" alt="alt text"></p>

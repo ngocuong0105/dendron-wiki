@@ -1,0 +1,45 @@
+<h1 id="organising-python-packages">Organising Python Packages<a aria-hidden="true" class="anchor-heading icon-link" href="#organising-python-packages"></a></h1>
+<p><a href="http://blog.habnab.it/blog/2013/07/21/python-packages-and-you/">blog</a></p>
+<pre><code>project_name/__init__.py
+project_name/__main__.py
+project_name/application.py
+project_name/test/__init__.py
+project_name/test/test_application.py
+project_name/test/util.py
+project_name/util.py
+</code></pre>
+<p><strong>Use absolute imports only (implcit relative imports in python 3 are NOT recommended)</strong></p>
+<p>In all your files in the project:</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> project_name<span class="token punctuation">.</span>util <span class="token keyword">import</span> <span class="token operator">*</span>
+</code></pre>
+<p><strong>Don’t modify sys.path from code in your package</strong></p>
+<p><strong>Don’t make your project root a package</strong></p>
+<p><strong>Don’t set PYTHONPATH to try to make it go</strong></p>
+<h1 id="creating-packages">Creating packages<a aria-hidden="true" class="anchor-heading icon-link" href="#creating-packages"></a></h1>
+<ul>
+<li>use the src layout</li>
+</ul>
+<pre><code>bulquant/
+  src/
+    bulquant/
+      ...code...
+  tests/
+  examples/
+  docs/
+  setup.py
+</code></pre>
+<ul>
+<li>flat layout</li>
+</ul>
+<pre><code>bulquant/
+  bulquant/      # Module/package code here
+  tests/
+  examples/
+  docs/
+</code></pre>
+<ol>
+<li>Prevents Import Bugs in Development With a flat layout, if you run pytest or scripts from the project root, Python can "find" your package accidentally because it's in the same dir as your test file, not because it's correctly installed via pip.</li>
+</ol>
+<p>From the top-level (bulquant/), run:
+<code>pip install -e src</code></p>
+<p>then you can import bulquant</p>

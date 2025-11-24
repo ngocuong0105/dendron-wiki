@@ -1,0 +1,1 @@
+[Data Science from scratch](https://drive.google.com/file/d/13uxFuAwgTGjAwPiKqyBjCz-CVoSXAx_i/view?usp=share_link) has Python implementation of all basic ML/DS models from scratch.

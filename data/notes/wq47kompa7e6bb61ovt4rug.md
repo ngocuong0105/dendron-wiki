@@ -1,0 +1,1 @@
+[Negotiation tips](https://docs.google.com/document/d/1JIUyI-aGgK6x5arfvcOLgddqenLGEyvAd4OcJvc-B2Q/edit?usp=share_link)
